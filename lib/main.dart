@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import 'Detail/DetailsScreen.dart';
 import 'Favourite/FavouriteScreen.dart';
 import 'LoginSinupScreen/ChangePasswordScreen.dart';
 import 'LoginSinupScreen/LoginScreen.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: ProfileScreen(),
+            home: DetailsScreen(),
             builder: EasyLoading.init(),
           ),
         );

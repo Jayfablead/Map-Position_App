@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Const.dart';
@@ -41,26 +43,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              Row(
-                children: [
-                  Container(
-                    height: 10.w,
-                    width: 10.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: secondary,
-                    ),
-                    child: Padding(
+              InkWell(
+                onTap: (){
+                  Get.back();
+                },
+                child: Row(
+                  children: [
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       child: Icon(
                         Icons.arrow_back_ios,
-                        color: primary,
-                        size: 15.sp,
+                        color:blackback,
+                        size: 25.sp,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(
                 height: 10.h,
@@ -74,7 +72,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: primary,
+                      color: blackback,
                     ),
                     child: Transform.rotate(
                         angle: pi / 3,
@@ -86,6 +84,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               height: 25.w,
                               width: 25.w,
                               fit: BoxFit.cover,
+                              color: bgcolor,
                             ),
                           ],
                         )),
@@ -101,7 +100,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   Text('Change Password',
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 22.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),

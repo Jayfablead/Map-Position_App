@@ -46,7 +46,7 @@ class _SinupScreenState extends State<SinupScreen> {
                   Text("Create An Account",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 25.sp,
                           fontWeight: FontWeight.w400,
                           fontFamily: "volken")),
@@ -76,7 +76,7 @@ class _SinupScreenState extends State<SinupScreen> {
                     height: 1.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: Colors.grey,
+                      color: Colors.black54,
                     ),
                     child: Row(
                       children: [
@@ -89,8 +89,8 @@ class _SinupScreenState extends State<SinupScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.pink.shade300,
-                                Colors.deepPurpleAccent.shade100
+                                Colors.grey,
+                                Colors.white,
                               ],
                             ),
                           ),
@@ -104,7 +104,7 @@ class _SinupScreenState extends State<SinupScreen> {
                   Text("First Name : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -137,7 +137,7 @@ class _SinupScreenState extends State<SinupScreen> {
                   Text("Last Name : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -170,7 +170,7 @@ class _SinupScreenState extends State<SinupScreen> {
                   Text("Email : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -222,7 +222,7 @@ class _SinupScreenState extends State<SinupScreen> {
                           "Already have account?",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: secondary,
+                              color: Colors.grey,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken"),
@@ -237,7 +237,7 @@ class _SinupScreenState extends State<SinupScreen> {
                           "Login",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: primary,
+                              color: blackback,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken"),

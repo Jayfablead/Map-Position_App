@@ -51,7 +51,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                   Text("Create An Account",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 25.sp,
                           fontWeight: FontWeight.w400,
                           fontFamily: "volken")),
@@ -81,7 +81,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                     height: 1.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: Colors.grey,
+                      color: Colors.black54,
                     ),
                     child: Row(
                       children: [
@@ -94,8 +94,8 @@ class _SinupScreen2State extends State<SinupScreen2> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.pink.shade300,
-                                Colors.deepPurpleAccent.shade100
+                                Colors.grey,
+                                Colors.white,
                               ],
                             ),
                           ),
@@ -109,7 +109,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                   Text("Phone : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -144,7 +144,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                   Text("Password : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -201,7 +201,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                   Text("Confirm Password : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -278,7 +278,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                           "Already have account?",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: secondary,
+                              color: Colors.grey,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken"),
@@ -293,7 +293,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                           "Login",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: primary,
+                              color: blackback,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken"),

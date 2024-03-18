@@ -1,10 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
+import 'package:mapposition/LoginSinupScreen/ChangePasswordScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
+import 'EditProfileScreen.dart';
+import 'ViewProfileScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -85,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text("Henry Matavic",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: primary,
+                              color: Colors.white,
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken")),
@@ -101,51 +106,111 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 3.h,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
-                        border: Border.all(color: Colors.white, width: 0.5.sp)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Boxbg,
-                              ),
-                              child: Icon(
-                                Icons.person,
-                                color: primary,
-                                size: 18.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text("Edit Profile",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: primary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
+                  InkWell(
+                      onTap: (){
+                        Get.to(EditProfileScreen());
+                      },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                           color: primary,
-                          size: 18.sp,
-                        )
-                      ],
+                          border: Border.all(color: primary, width:1.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.person,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Text("Edit Profile",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Get.to(ViewPRofileScreen());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: primary,
+                          border: Border.all(color: primary, width:1.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.person,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Text("View Profile",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -158,8 +223,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
-                        border: Border.all(color: Colors.white, width: 0.5.sp)),
+                        color: primary,
+                        border: Border.all(color: primary, width:1.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -170,57 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 10.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Boxbg,
-                              ),
-                              child: Icon(
-                                Icons.person,
-                                color: primary,
-                                size: 18.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text("View Profile",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: primary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: primary,
-                          size: 18.sp,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
-                        border: Border.all(color: Colors.white, width: 0.5.sp)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Boxbg,
+                                color: blackback,
                               ),
                               child: Icon(
                                 Icons.favorite,
@@ -234,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text("My Favourites",
                                 style: TextStyle(
                                     letterSpacing: 1,
-                                    color: primary,
+                                    color: secondary,
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
@@ -242,10 +257,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
-                          color: primary,
+                          color: blackback,
                           size: 18.sp,
                         )
                       ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                      onTap: (){
+                        Get.to(ChangePasswordScreen());
+                      },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: primary,
+                          border: Border.all(color: primary, width:1.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.password,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Text("Change Password",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -258,8 +328,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
-                        border: Border.all(color: Colors.white, width: 0.5.sp)),
+                        color: primary,
+                        border: Border.all(color: primary, width:1.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -270,61 +340,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 10.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Boxbg,
-                              ),
-                              child: Icon(
-                                Icons.password,
-                                color: primary,
-                                size: 18.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text("Change Password",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: primary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: primary,
-                          size: 18.sp,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
-                        border: Border.all(color: Colors.white, width: 0.5.sp)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Boxbg,
+                                color: blackback,
                               ),
                               child: Icon(
                                 Icons.paid,
-                                color: primary,
+                                color: bgcolor,
                                 size: 18.sp,
                               ),
                             ),
@@ -334,7 +354,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text("Payment Method",
                                 style: TextStyle(
                                     letterSpacing: 1,
-                                    color: primary,
+                                    color: secondary,
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
@@ -342,7 +362,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
-                          color: primary,
+                          color: blackback,
                           size: 18.sp,
                         )
                       ],

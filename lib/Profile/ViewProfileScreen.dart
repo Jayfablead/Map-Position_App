@@ -9,16 +9,16 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+class ViewPRofileScreen extends StatefulWidget {
+  const ViewPRofileScreen({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<ViewPRofileScreen> createState() => _ViewPRofileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
 
   ImagePicker picker = ImagePicker();
   File? selectedimage = null;
@@ -54,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 50.h,
+              height: 45.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Boxbg,
@@ -91,16 +91,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           child: selectedimage != null
                               ? Image.file(selectedimage!,fit: BoxFit.cover,)
                               : CachedNetworkImage(
-                                  imageUrl:
-                                      'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
-                                  fit: BoxFit.cover,
-                                  progressIndicatorBuilder:
-                                      (context, url, progress) =>
-                                          CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(Default_Profile,
-                                          fit: BoxFit.cover),
-                                ),
+                            imageUrl:
+                            'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, progress) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Image.asset(Default_Profile,
+                                    fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                     ],
@@ -135,27 +135,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               fontFamily: "volken")),
                     ],
                   ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      batan(
-                          title: "Upload Photo",
-                          route: () async {
-                            final XFile? photo = await picker.pickImage(
-                                source: ImageSource.gallery);
-                            setState(() {
-                              selectedimage = File(photo!.path);
-                              print(selectedimage);
-                            });
-                          },
-                          hight: 5.h,
-                          width: 35.w,
-                          txtsize: 12.sp)
-                    ],
-                  ),
+
                 ],
               ),
             ),
@@ -179,23 +159,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 1.h,
                   ),
                   Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                     width: MediaQuery.of(context).size.width,
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(color: Colors.white),
-                      controller: _firstname,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please Enter First Name";
-                        }
-                        return null;
-                      },
-                      decoration: inputDecoration(
-                          hintText: "Enter Your First Name",
-                          icon: Icon(
-                            Icons.person,
-                            color: secondary,
-                          )),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: primary,
+                        border: Border.all(color: primary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("Henry",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -212,23 +207,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 1.h,
                   ),
                   Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                     width: MediaQuery.of(context).size.width,
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.white),
-                      controller: _lastname,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please Enter Last Name";
-                        }
-                        return null;
-                      },
-                      decoration: inputDecoration(
-                          hintText: "Enter Your Last Name",
-                          icon: Icon(
-                            Icons.person,
-                            color: secondary,
-                          )),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: primary,
+                        border: Border.all(color: primary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("Matavic",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -246,32 +256,46 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 1.h,
                   ),
                   Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                     width: MediaQuery.of(context).size.width,
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(color: Colors.white),
-                      controller: _phone,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please Enter Phone";
-                        }
-                        return null;
-                      },
-                      decoration: inputDecoration(
-                          hintText: "Enter Your Phone",
-                          icon: Icon(
-                            Icons.phone_android,
-                            color: secondary,
-                          )),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: primary,
+                        border: Border.all(color: primary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("9724824359",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
                     ),
                   ),
-
                   SizedBox(
-                    height: 2.h,
+                    height: 3.5.h,
                   ),
                   // Password
 
-                  batan(title: "Save", route: (){},hight: 6.h,
+                  batan(title: "Edit Profile", route: (){},hight: 6.h,
                       width: MediaQuery.of(context).size.width,
                       txtsize: 18.sp),
                   SizedBox(

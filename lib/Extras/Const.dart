@@ -17,10 +17,12 @@ Future<bool> checkInternet() async {
 }
 
 // for all Background color Use this
-Color bgcolor = Color(0xff000000);
+Color bgcolor =Color(0xffffffff);
+
 
 // for all Primary color Use this
-Color primary = Color(0xffffffff);
+Color primary = Colors.grey.withOpacity(0.06);
+Color blackback = Color(0xff000000);
 
 // for all Secondary color Use this
 Color secondary = Color(0xff808080);
@@ -48,14 +50,7 @@ InkWell batan({
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.pink.shade300,
-            Colors.deepPurpleAccent.shade100
-          ], // Gradient colors
-        ),
+        color: blackback,
       ),
       child: Text(
         title.toString(),
@@ -141,10 +136,10 @@ InputDecoration inputDecoration({
         fontWeight: FontWeight.w500,
         fontSize: 12.5.sp,
         letterSpacing: 1),
-    fillColor: Boxbg,
+    fillColor: primary,
     filled: true,
     disabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: secondary),
+      borderSide: BorderSide(color: primary),
       borderRadius: BorderRadius.circular(10),
     ),
     errorBorder: OutlineInputBorder(
@@ -152,7 +147,7 @@ InputDecoration inputDecoration({
       borderRadius: BorderRadius.circular(10),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: secondary),
+      borderSide: BorderSide(color: primary),
       borderRadius: BorderRadius.circular(10),
     ),
     focusedBorder: OutlineInputBorder(
@@ -160,7 +155,7 @@ InputDecoration inputDecoration({
       borderRadius: BorderRadius.circular(10),
     ),
     border: OutlineInputBorder(
-      borderSide: BorderSide(color: secondary),
+      borderSide: BorderSide(color: primary),
       borderRadius: BorderRadius.circular(10),
     ),
   );

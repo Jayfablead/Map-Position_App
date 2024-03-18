@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sizer/sizer.dart';
 
+import 'Const.dart';
 import 'Databasehandler.dart';
 
 DatabaseHelper databaseHelper = DatabaseHelper();
@@ -19,7 +20,7 @@ Widget header({
           Get.back();
         },
         icon: Icon(Icons.arrow_back_ios_new_rounded,
-            color: Colors.white, size: 23.sp),
+            color: blackback, size: 23.sp),
       ),
       Text(
         text,
@@ -27,7 +28,7 @@ Widget header({
           fontSize: 20.sp,
           fontFamily: 'sofi',
           letterSpacing: 1,
-          color: Colors.white,
+          color: blackback,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -41,7 +42,7 @@ Widget header({
                   onPressed: callback1,
                   icon: Icon(
                     Icons.menu_rounded,
-                    color: Colors.white,
+                    color: blackback,
                     size: 23.sp,
                   )),
             ],

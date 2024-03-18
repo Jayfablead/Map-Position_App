@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:sizer/sizer.dart';
 
@@ -32,26 +34,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              Row(
-                children: [
-                  Container(
-                    height: 10.w,
-                    width: 10.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: secondary,
-                    ),
-                    child: Padding(
+              InkWell(
+                onTap: (){Get.back();},
+                child: Row(
+                  children: [
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       child: Icon(
                         Icons.arrow_back_ios,
-                        color: primary,
-                        size: 15.sp,
+                        color: blackback,
+                        size: 25.sp,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(
                 height: 15.h,
@@ -65,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: primary,
+                      color:blackback,
                     ),
                     child: Transform.rotate(
                         angle: pi / 3,
@@ -76,6 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               "assets/lagan.png",
                               height: 25.w,
                               width: 25.w,
+                              color: Colors.white,
                               fit: BoxFit.cover,
                             ),
                           ],
@@ -92,7 +89,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Text('Forgot Password',
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 22.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),

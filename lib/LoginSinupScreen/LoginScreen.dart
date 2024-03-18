@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text("Login",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 25.sp,
                           fontWeight: FontWeight.w400,
                           fontFamily: "volken")),
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text("Email : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text("Password : ",
                       style: TextStyle(
                           letterSpacing: 1,
-                          color: primary,
+                          color: blackback,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           fontFamily: "volken")),
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text("Forgot Password?",
                             style: TextStyle(
                                 letterSpacing: 1,
-                                color: primary,
+                                color: blackback,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.normal,
                                 fontFamily: "volken")),
@@ -220,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Sign Up",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: primary,
+                              color: blackback,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken"),

@@ -136,10 +136,10 @@ InputDecoration inputDecoration({
         fontWeight: FontWeight.w500,
         fontSize: 12.5.sp,
         letterSpacing: 1),
-    fillColor: primary,
+    fillColor: bgcolor,
     filled: true,
     disabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: primary),
+      borderSide: BorderSide(color: secondary),
       borderRadius: BorderRadius.circular(10),
     ),
     errorBorder: OutlineInputBorder(
@@ -147,7 +147,7 @@ InputDecoration inputDecoration({
       borderRadius: BorderRadius.circular(10),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: primary),
+      borderSide: BorderSide(color: secondary),
       borderRadius: BorderRadius.circular(10),
     ),
     focusedBorder: OutlineInputBorder(
@@ -155,7 +155,7 @@ InputDecoration inputDecoration({
       borderRadius: BorderRadius.circular(10),
     ),
     border: OutlineInputBorder(
-      borderSide: BorderSide(color: primary),
+      borderSide: BorderSide(color: secondary),
       borderRadius: BorderRadius.circular(10),
     ),
   );

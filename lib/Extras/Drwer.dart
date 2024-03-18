@@ -6,6 +6,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:sizer/sizer.dart';
 
+import '../LoginSinupScreen/ChangePasswordScreen.dart';
 import '../Profile/ProfileScreen.dart';
 import '../serachmap.dart';
 import 'Const.dart';
@@ -266,7 +267,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-
+Get.to(ChangePasswordScreen());
                   },
                   child: Container(
                     child: Row(

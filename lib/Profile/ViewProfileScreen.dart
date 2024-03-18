@@ -165,8 +165,8 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: primary,
-                        border: Border.all(color: primary, width:1.sp)),
+                        color: bgcolor,
+                        border: Border.all(color: primary, width:2.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -213,8 +213,8 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: primary,
-                        border: Border.all(color: primary, width:1.sp)),
+                        color: bgcolor,
+                        border: Border.all(color: primary, width:2.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -262,15 +262,15 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: primary,
-                        border: Border.all(color: primary, width:1.sp)),
+                        color: bgcolor,
+                        border: Border.all(color: primary, width:2.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             Icon(
-                              Icons.person,
+                              Icons.phone,
                               color: secondary,
                               size: 18.sp,
                             ),

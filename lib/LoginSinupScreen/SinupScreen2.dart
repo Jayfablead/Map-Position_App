@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -43,8 +45,37 @@ class _SinupScreen2State extends State<SinupScreen2> {
           child: Column(
             children: [
               SizedBox(
-                height: 20.h,
+                height: 10.h,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 35.w,
+                    height: 35.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color:blackback,
+                    ),
+                    child: Transform.rotate(
+                        angle: pi / 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/lagan.png",
+                              height: 25.w,
+                              width: 25.w,
+                              color: Colors.white,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
+              SizedBox(height: 1.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

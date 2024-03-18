@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
@@ -41,8 +43,37 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 22.h,
+                height: 10.h,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 35.w,
+                    height: 35.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color:blackback,
+                    ),
+                    child: Transform.rotate(
+                        angle: pi / 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/lagan.png",
+                              height: 25.w,
+                              width: 25.w,
+                              color: Colors.white,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
+              SizedBox(height: 1.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -240,11 +271,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         batan(
-                            title: "Skip..",
+                            title: "Go to MainPage",
                             route: () {},
                             hight: 4.h,
-                            width: 30.w,
-                            txtsize: 15.sp),
+                            width: 45.w,
+                            txtsize: 12.sp),
                       ],
                     ),
                   ),

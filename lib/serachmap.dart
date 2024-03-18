@@ -11,17 +11,17 @@ class serachscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MapScreen(),
+      home: HomeScreen(),
     );
   }
 }
 
-class MapScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
   Set<Marker> _markers = {};
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position

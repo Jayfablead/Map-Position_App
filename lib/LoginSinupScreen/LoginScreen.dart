@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/serachmap.dart';
 import 'package:sizer/sizer.dart';
 
 import 'ForgotPasswordScreen.dart';
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _email,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -124,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       obscureText: visible,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color:secondary),
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -191,7 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Login
                   batan(
                       title: "Login",
-                      route: () {},
+                      route: () {
+                        Get.to(HomeScreen());
+                      },
                       hight: 6.h,
                       width: MediaQuery.of(context).size.width,
                       txtsize: 18.sp),
@@ -217,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Get.to(SinupScreen());
                         },
                         child: Text(
-                          "Sign Up",
+                          " Sign Up",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,
@@ -241,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             route: () {},
                             hight: 4.h,
                             width: 30.w,
-                            txtsize: 18.sp),
+                            txtsize: 15.sp),
                       ],
                     ),
                   ),

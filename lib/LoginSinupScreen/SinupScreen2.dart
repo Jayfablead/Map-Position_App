@@ -120,7 +120,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _phone,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -155,7 +155,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       obscureText: visible,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -225,7 +225,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                         return null;
                       },
                       keyboardType: TextInputType.visiblePassword,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _confrompassword,
                       decoration: inputDecoration(
                         hintText: "Enter Confirm Password ",
@@ -290,7 +290,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
                           Get.to(LoginScreen());
                         },
                         child: Text(
-                          "Login",
+                          " Login",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,

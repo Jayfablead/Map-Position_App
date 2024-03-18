@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mapposition/Extras/Const.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(serachscreen());
@@ -105,9 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Map with Search'),
-      ),
+
       body: Stack(
         children: [
           GoogleMap(
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
             compassEnabled: true,
           ),
           Positioned(
-            top: 10,
+            top: 5.h,
             left: 10,
             right: 10,
             child: Container(
@@ -156,10 +156,10 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 180,
             right: 20,
             child: FloatingActionButton(
-              onPressed: () {
+backgroundColor: blackback,              onPressed: () {
                 _focusOnLiveLocation();
               },
-              child: Icon(Icons.location_on),
+              child: Icon(Icons.my_location,color: Colors.white),
             ),
           ),
           Positioned(
@@ -167,7 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 20,
             child: FloatingActionButton(
               onPressed: _toggleMapType,
-              child: Icon(_isSatellite ? Icons.map : Icons.satellite),
+              backgroundColor: blackback,
+              child: Icon(_isSatellite ? Icons.map_outlined : Icons.map,color: Colors.white),
             ),
           ),
         ],

@@ -132,7 +132,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   obscureText: visible,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color:secondary),
                   keyboardType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -179,7 +179,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   obscureText: visible1,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color:secondary),
                   keyboardType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -240,7 +240,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     return null;
                   },
                   keyboardType: TextInputType.visiblePassword,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color:secondary),
                   controller: _confrompassword,
                   decoration: inputDecoration(
                     hintText: "Enter Confirm Password ",

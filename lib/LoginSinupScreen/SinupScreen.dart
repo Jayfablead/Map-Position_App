@@ -115,7 +115,7 @@ class _SinupScreenState extends State<SinupScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color:secondary),
                       controller: _firstname,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -148,7 +148,7 @@ class _SinupScreenState extends State<SinupScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _lastname,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -181,7 +181,7 @@ class _SinupScreenState extends State<SinupScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _email,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -234,7 +234,7 @@ class _SinupScreenState extends State<SinupScreen> {
                           Get.to(LoginScreen());
                         },
                         child: Text(
-                          "Login",
+                          " Login",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,

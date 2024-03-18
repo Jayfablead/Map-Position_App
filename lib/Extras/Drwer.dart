@@ -80,7 +80,7 @@ class _drawer1State extends State<drawer1> {
                         Text("Henry Matavic",
                             style: TextStyle(
                                 letterSpacing: 1,
-                                color: Colors.black,
+                                color: secondary,
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.normal,
                                 fontFamily: "volken")),

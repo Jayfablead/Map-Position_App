@@ -124,7 +124,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: secondary),
                       controller: _email,
                       validator: (value) {
                         if (value!.isEmpty) {

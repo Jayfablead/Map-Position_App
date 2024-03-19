@@ -108,14 +108,70 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 3.h,
                   ),
+
                   InkWell(
-                      onTap: (){
-                        Get.to(EditProfileScreen());
-                      },
+                    onTap: (){
+                      Get.to(ViewPRofileScreen());
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       padding:
                           EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: bgcolor,
+                          border: Border.all(color: primary, width:2.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.person,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Text("View Profile",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Get.to(EditProfileScreen());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -165,12 +221,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      Get.to(ViewPRofileScreen());
+                      Get.to(EditProfileScreen());
                     },
                     child: Container(
                       alignment: Alignment.center,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -197,13 +253,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text("View Profile",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("User Detail",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken")),
+                                  SizedBox(
+                                    width: 60.w,
+                                    child: Text("(Add Your Social Media Information)",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: secondary,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           Icon(
@@ -378,6 +449,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
+            SizedBox(height: 10.h,),
           ],
         ),
       ),

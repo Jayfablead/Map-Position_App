@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import '../LoginSinupScreen/ChangePasswordScreen.dart';
 import '../Profile/ProfileScreen.dart';
-import '../serachmap.dart';
+import '../HomeScreen/HomeScreen.dart';
 import 'Const.dart';
 
 class drawer1 extends StatefulWidget {

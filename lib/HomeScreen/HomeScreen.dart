@@ -484,7 +484,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               batan(
-                                  title: "Save",
+                                  title: "Save Next",
                                   route: () {
                                     Get.back();
                                     addmarker();
@@ -802,7 +802,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   batan(
-                                      title: "Save",
+                                      title: "Save Next",
                                       route: () {
                                         Get.back();
                                         addmapadd();
@@ -1203,7 +1203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         batan(
-                                            title: "Save",
+                                            title: "Save Next",
                                             route: () {
                                               Get.back();
                                               nearbuy();
@@ -1606,7 +1606,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         batan(
-                                            title: "Save",
+                                            title: "Save Next",
                                             route: () {
                                               Get.back();
                                               Commentpop();
@@ -1754,7 +1754,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   batan(
-                                      title: "Save",
+                                      title: "Save Next",
                                       route: () {
                                         Get.back();
                                         imagepop();
@@ -1982,7 +1982,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       batan(
-                                          title: "Save",
+                                          title: "Save Next",
                                           route: () {
                                             Get.back();
                                             Scessfully();
@@ -2099,7 +2099,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Position Successfully Saved",
+                                      Text("Position Successfully Save Nextd",
                                           style: TextStyle(
                                               letterSpacing: 1,
                                               color: Colors.black,
@@ -2117,7 +2117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   batan(
-                                      title: "Save",
+                                      title: "Save Next",
                                       route: () {
                                         Get.back();
 

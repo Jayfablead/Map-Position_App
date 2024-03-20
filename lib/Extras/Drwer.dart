@@ -7,6 +7,7 @@ import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../LoginSinupScreen/ChangePasswordScreen.dart';
+import '../PrimiumPayments/PremiumScreen.dart';
 import '../Profile/ProfileScreen.dart';
 import '../HomeScreen/HomeScreen.dart';
 import 'Const.dart';
@@ -324,7 +325,9 @@ Get.to(ChangePasswordScreen());
                   height: 2.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(PremiumScreen());
+                  },
                   child: Container(
                     child: Row(
                       children: [
@@ -346,17 +349,19 @@ Get.to(ChangePasswordScreen());
                                       borderRadius: BorderRadius.circular(10),
                                       color: blackback,
                                     ),
-                                    child: Icon(
-                                        Icons.paid,
-                                      color: bgcolor,
-                                      size: 18.sp,
+                                    child:  Image.asset(
+                                      "assets/lagan.png",
+                                      height: 8.w,
+                                      width: 8.w,
+                                      color: Colors.white,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
 
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Payment Method",
+                                  Text("Navily Premium",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

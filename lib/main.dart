@@ -9,6 +9,7 @@ import 'Detail/DetailsScreen.dart';
 import 'Favourite/FavouriteScreen.dart';
 import 'LoginSinupScreen/ChangePasswordScreen.dart';
 import 'LoginSinupScreen/LoginScreen.dart';
+import 'Marina/AddMarinaScreen.dart';
 import 'Profile/EditProfileScreen.dart';
 import 'Profile/ProfileScreen.dart';
 import 'Profile/ViewProfileScreen.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: HomeScreen(),
+            home: AddMarinaScreen(),
             builder: EasyLoading.init(),
           ),
         );

@@ -65,10 +65,12 @@ dependencies:
   share_plus:
   url_launcher:
   flutter_inappwebview:
-  webview_flutter:
   permission_handler:
   video_player: ^2.8.3
   persistent_bottom_nav_bar:
+
+
+
 
 
 

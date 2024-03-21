@@ -19,7 +19,6 @@ class _PremiumScreenState extends State<PremiumScreen> {
       backgroundColor: Colors.white,
       extendBody: true,
       bottomNavigationBar: Bottombar(select_tab: 1),
-
       body: SingleChildScrollView(
         child: Padding(
           padding:EdgeInsets.symmetric(horizontal: 2.w),
@@ -157,7 +156,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10.h,),
+              SizedBox(height: 5.h,),
               batan(title: "Subscribe for \$200.00", route: (){}, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],
           ),

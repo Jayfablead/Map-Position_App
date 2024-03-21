@@ -204,6 +204,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                 ),
                               ],
                             ),
+
                           ]),
                     ),
                     i == 0 || i == 2
@@ -253,7 +254,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             )),
                   ],
                 ),
-              ]
+              ],
+              SizedBox(height: 15.h,),
             ],
           ),
         ),

@@ -9,6 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
@@ -82,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double long = position.longitude;
     LatLng location = LatLng(lat, long);
     setState(() {
+
       _currentPosition1 = location;
     });
   }
@@ -104,13 +106,28 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getLocation();
+    getLocation().then((_) {
+
+      setState(()async {
+        _markers.add(Marker(
+          markerId: MarkerId('Current Location'),
+            icon: await BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(devicePixelRatio: 2.5,size: Size(1000.sp, 1000.sp)),
+          'assets/morning.png',
+        ),
+          position: _currentPosition1,
+        ));
+      });
+    });
     print("livelocation:-${_currentPosition1}");
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: Bottombar(select_tab: 2),
       key: _scaffoldKeyProductlistpage,
+
       drawer: drawer1(),
       body: Stack(
         children: [

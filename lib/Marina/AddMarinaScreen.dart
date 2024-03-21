@@ -1918,7 +1918,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       fontWeight: FontWeight.bold,
                       fontFamily: "volken")),
 
-
                 ],
               ),
               SizedBox(height: 2.h,),

@@ -7,6 +7,8 @@ import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../LoginSinupScreen/ChangePasswordScreen.dart';
+import '../Marina/AddMarinaScreen.dart';
+import '../Marina/MyMarinaListScreen.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
 import '../Profile/ProfileScreen.dart';
 import '../HomeScreen/HomeScreen.dart';
@@ -262,6 +264,64 @@ class _drawer1State extends State<drawer1> {
                       ],
                     ),
                   ),
+                ), SizedBox(
+                  height: 2.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.to(AddMarinaScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child: Icon(
+                                      Icons.directions_boat,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("Add New Marina",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 2.h,
@@ -326,6 +386,65 @@ Get.to(ChangePasswordScreen());
                 ),
                 InkWell(
                   onTap: () {
+                    Get.to(MyMarinaListScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child: Icon(
+                                      Icons.directions_boat,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("My Marina",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                InkWell(
+                  onTap: () {
                     Get.to(PremiumScreen());
                   },
                   child: Container(
@@ -349,12 +468,10 @@ Get.to(ChangePasswordScreen());
                                       borderRadius: BorderRadius.circular(10),
                                       color: blackback,
                                     ),
-                                    child:  Image.asset(
-                                      "assets/lagan.png",
-                                      height: 8.w,
-                                      width: 8.w,
-                                      color: Colors.white,
-                                      fit: BoxFit.cover,
+                                    child:  Icon(
+                                      Icons.paid,
+                                      color: bgcolor,
+                                      size: 18.sp,
                                     ),
                                   ),
 

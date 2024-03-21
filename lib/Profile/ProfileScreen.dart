@@ -8,7 +8,10 @@ import 'package:mapposition/LoginSinupScreen/ChangePasswordScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
+import '../Extras/bottombar.dart';
 import '../Favourite/FavouriteScreen.dart';
+import '../Marina/AddMarinaScreen.dart';
+import '../Marina/MyMarinaListScreen.dart';
 import 'EditProfileScreen.dart';
 import 'ViewProfileScreen.dart';
 
@@ -26,6 +29,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: Bottombar(select_tab: 4),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
@@ -221,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      Get.to(EditProfileScreen());
+                      Get.to(AddMarinaScreen());
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -245,7 +250,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: blackback,
                                 ),
                                 child: Icon(
-                                  Icons.person,
+                                  Icons.directions_boat,
                                   color: bgcolor,
                                   size: 18.sp,
                                 ),
@@ -256,23 +261,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("User Detail",
+                                  Text("Add New Marina",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.normal,
                                           fontFamily: "volken")),
-                                  SizedBox(
-                                    width: 60.w,
-                                    child: Text("(Add Your Social Media Information)",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                  ),
+
                                 ],
                               ),
                             ],
@@ -330,6 +326,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.normal,
                                       fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Get.to(MyMarinaListScreen());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: bgcolor,
+                          border: Border.all(color: primary, width:2.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.directions_boat,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("My Marina",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken")),
+
+                                ],
+                              ),
                             ],
                           ),
                           Icon(
@@ -429,7 +486,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("Payment Method",
+                            Text("Navily Premium",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,

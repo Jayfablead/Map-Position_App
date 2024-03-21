@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Extras/bottombar.dart';
+
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
 
@@ -15,6 +17,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      extendBody: true,
+      bottomNavigationBar: Bottombar(select_tab: 1),
+
       body: SingleChildScrollView(
         child: Padding(
           padding:EdgeInsets.symmetric(horizontal: 2.w),

@@ -3,11 +3,14 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Detail/DetailsScreen.dart';
 import '../Extras/Const.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
+import '../Extras/bottombar.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({super.key});
@@ -23,6 +26,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: Bottombar(select_tab: 0),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
@@ -93,7 +98,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                           MainAxisAlignment.center,
                                       children: [
                                         SizedBox(
-                                          height: 4.h,
+                                          height: 1.h,
                                         ),
                                         SizedBox(
                                           width: 46.w,
@@ -187,7 +192,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                         ),
                                         batan(
                                             title: "View Details",
-                                            route: () {},
+                                            route: () {
+                                              Get.to(DetailsScreen());
+                                            },
                                             hight: 6.h,
                                             width: 40.w,
                                             txtsize: 15.sp)
@@ -211,7 +218,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                   alignment: Alignment.center,
                                   padding: EdgeInsetsDirectional.all(2.2.w),
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.25),
+                                    color: Colors.grey.withOpacity(0.25),
                                     borderRadius: BorderRadius.circular(900),
                                   ),
                                   child: Icon(

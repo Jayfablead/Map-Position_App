@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../Invoice/MyInvoiceScreen.dart';
 import '../Invoice/ViewInvoiceScreen.dart';
 import '../LoginSinupScreen/ChangePasswordScreen.dart';
+import '../LoginSinupScreen/LoginScreen.dart';
 import '../Marina/AddMarinaScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
@@ -563,7 +564,9 @@ Get.to(ChangePasswordScreen());
                   height: 2.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    showbootomsheetremove();
+                  },
                   child: Container(
                     child: Row(
                       children: [
@@ -634,7 +637,7 @@ Get.to(ChangePasswordScreen());
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(10),
                       topLeft: Radius.circular(10)),
-                  color: Boxbg),
+                  color: Colors.white),
               height: 15.h,
               width: double.infinity,
               // Customize the bottom sheet content here
@@ -654,7 +657,7 @@ Get.to(ChangePasswordScreen());
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 14.sp,
-                              color: primary,
+                              color: Colors.black,
                               fontFamily: 'volken'),
                         ),
                       ],
@@ -682,7 +685,7 @@ Get.to(ChangePasswordScreen());
                                 "Cancel",
                                 style: TextStyle(
                                     fontSize: 13.sp,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontFamily: "volken",
                                     fontWeight: FontWeight.normal),
                               )),
@@ -690,6 +693,7 @@ Get.to(ChangePasswordScreen());
                         batan(
                             title: "Logout",
                             route: () {
+                              Get.to(LoginScreen());
                               // setState(() async {
                               //   await SaveDataLocal.clearUserData();
                               //   loginmodal =

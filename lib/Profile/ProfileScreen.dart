@@ -12,6 +12,7 @@ import '../Extras/bottombar.dart';
 import '../Favourite/FavouriteScreen.dart';
 import '../Marina/AddMarinaScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
+import '../PrimiumPayments/PremiumScreen.dart';
 import 'EditProfileScreen.dart';
 import 'ViewProfileScreen.dart';
 
@@ -42,7 +43,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 45.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: Boxbg,
+                color: Colors.grey.shade200,
+                border: Border.all(
+                  width: 1.sp,
+                  color: secondary,
+                )
               ),
               child: Column(
                 children: [
@@ -67,8 +72,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
-                            color: bgcolor, // Border color
-                            width: 2.sp, // Border width
+                            color: secondary, // Border color
+                            width: 1.sp, // Border width
                           ),
                         ),
                         child: ClipRRect(
@@ -96,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text("Henry Matavic",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: Colors.white,
+                              color: secondary,
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken"),
@@ -126,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
+                          border: Border.all(color: secondary, width:1.sp)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -181,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
+                          border: Border.all(color: secondary, width:1.sp)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -236,8 +241,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
-                      child: Row(
+                          border: Border.all(color: secondary, width:1.sp))
+                      ,child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -297,8 +302,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
-                      child: Row(
+                          border: Border.all(color: secondary, width:1.sp))
+                      ,child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -352,8 +357,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
-                      child: Row(
+                          border: Border.all(color: secondary, width:1.sp))
+                      ,child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -413,8 +418,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
-                          border: Border.all(color: primary, width:2.sp)),
-                      child: Row(
+                          border: Border.all(color: secondary, width:1.sp))
+                      ,child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -456,53 +461,147 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: bgcolor,
-                        border: Border.all(color: primary, width:2.sp)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: blackback,
+                  InkWell(
+                    onTap: (){
+                      Get.to(PremiumScreen());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: bgcolor,
+                          border: Border.all(color: secondary, width:1.sp)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10.w,
+                                height: 10.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback,
+                                ),
+                                child: Icon(
+                                  Icons.paid,
+                                  color: bgcolor,
+                                  size: 18.sp,
+                                ),
                               ),
-                              child: Icon(
-                                Icons.paid,
-                                color: bgcolor,
-                                size: 18.sp,
+                              SizedBox(
+                                width: 5.w,
                               ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text("Navily Premium",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: blackback,
-                          size: 18.sp,
-                        )
-                      ],
+                              Text("Navily Premium",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: blackback,
+                            size: 18.sp,
+                          )
+                        ],
+                      ),
                     ),
                   ),
+                  SizedBox(height: 2.h,),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text("My Invoice : -",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: secondary,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: "volken")),
+                          SizedBox(height: 2.h,),
+                          Container(
+                          alignment: Alignment.center,
+
+                            padding: EdgeInsets.all(2.w),
+                            height: 12.h,
+                            width: 95.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: secondary,
+                                    width: 1.sp
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(900),
+                                            ),
+                                            height: 12.w,
+                                            width: 13.w,
+                                            // padding: EdgeInsets.all(1.w),
+                                            child:
+                                            Image.asset("assets/Upload .png")),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Invoice File.pdf",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontFamily: 'pop',
+                                                color: blackback,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13.sp,
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                            SizedBox(height: 1.h),
+                                            Text(
+                                              "Safe Boat",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontFamily: 'pop',
+                                                color: Colors.black.withOpacity(0.8),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13.sp,
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    ],
+                  )
                 ],
               ),
             ),

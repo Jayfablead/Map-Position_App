@@ -57,7 +57,11 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
               height: 45.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: Boxbg,
+                  color: Colors.grey.shade200,
+                  border: Border.all(
+                    width: 1.sp,
+                    color: secondary,
+                  )
               ),
               child: Column(
                 children: [
@@ -82,8 +86,8 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
-                            color: bgcolor, // Border color
-                            width: 2.sp, // Border width
+                            color: secondary, // Border color
+                            width: 1.sp, // Border width
                           ),
                         ),
                         child: ClipRRect(
@@ -114,7 +118,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                       Text("Henry Matavic",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: Colors.white,
+                              color:secondary,
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken")),
@@ -129,7 +133,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                       Text("Henry@gmail.com",
                           style: TextStyle(
                               letterSpacing: 1,
-                              color: Colors.white,
+                              color: secondary,
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken")),

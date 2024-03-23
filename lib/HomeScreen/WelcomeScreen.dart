@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
 import 'package:sizer/sizer.dart';
-
-
-
 import '../Extras/Const.dart';
 import '../Extras/sharedpreferance.dart';
 
@@ -27,9 +24,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     getdata();
     Timer(
         Duration(seconds: 5),
-            () =>  Get.offAll(LoginScreen(
+            () =>  Get.offAll(LoginScreen()
 
-            )
+
             // (loginmodal == null)
             // ? Get.offAll(LoginPage())
             // : 

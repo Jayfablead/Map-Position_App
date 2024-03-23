@@ -2,6 +2,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
+
+import '../Modal/SinupMpdal.dart';
 // ************  Base url ************** //
 
 const String baseUrl = 'https://hassan-mart.com/';
@@ -34,6 +36,8 @@ Color btn = Color(0xffffd45f);
 Color Boxbg = Color(0xff353535);
 const String Default_Profile = 'assets/defaultprofile.png';
 
+
+SinupMpdal? sinupmpdal;
 // Custom Button
 InkWell batan({
   required String? title,

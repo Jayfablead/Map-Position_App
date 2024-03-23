@@ -170,7 +170,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: bgcolor,
-                        border: Border.all(color: primary, width:2.sp)),
+                        border: Border.all(color: secondary, width:1.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -218,7 +218,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: bgcolor,
-                        border: Border.all(color: primary, width:2.sp)),
+                        border: Border.all(color: secondary, width:1.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -267,7 +267,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: bgcolor,
-                        border: Border.all(color: primary, width:2.sp)),
+                        border: Border.all(color: secondary, width:1.sp)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

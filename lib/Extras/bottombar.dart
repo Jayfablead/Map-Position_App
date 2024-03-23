@@ -64,6 +64,7 @@ class _BottombarState extends State<Bottombar> {
           left: 0,
           right: 0,
           child: AnimatedNotchBottomBar(
+            color: Colors.white,
             notchBottomBarController: _controller!,
             showLabel: true,
             notchColor: Colors.black,

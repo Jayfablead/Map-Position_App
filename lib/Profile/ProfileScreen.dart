@@ -514,9 +514,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(height: 2.h,),
-                  Row(
+                  Row(mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("My Invoice : -",
                               style: TextStyle(
@@ -529,9 +530,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                           alignment: Alignment.center,
 
-                            padding: EdgeInsets.all(2.w),
+
                             height: 12.h,
                             width: 95.w,
+
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: secondary,
@@ -544,51 +546,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(900),
-                                            ),
-                                            height: 12.w,
-                                            width: 13.w,
-                                            // padding: EdgeInsets.all(1.w),
-                                            child:
-                                            Image.asset("assets/Upload .png")),
-                                        SizedBox(
-                                          width: 2.w,
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(900),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Invoice File.pdf",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                fontFamily: 'pop',
-                                                color: blackback,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13.sp,
-                                                letterSpacing: 1,
-                                              ),
-                                            ),
-                                            SizedBox(height: 1.h),
-                                            Text(
-                                              "Safe Boat",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                fontFamily: 'pop',
-                                                color: Colors.black.withOpacity(0.8),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13.sp,
-                                                letterSpacing: 1,
-                                              ),
-                                            ),
-                                          ],
+                                        height: 12.w,
+                                        width: 13.w,
+                                        // padding: EdgeInsets.all(1.w),
+                                        child:
+                                        Image.asset("assets/Upload .png")),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Invoice File.pdf",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontFamily: 'pop',
+                                            color: blackback,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13.sp,
+                                            letterSpacing: 1,
+                                          ),
+                                        ),
+                                        SizedBox(height: 1.h),
+                                        Text(
+                                          "Safe Boat",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontFamily: 'pop',
+                                            color: Colors.black.withOpacity(0.8),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13.sp,
+                                            letterSpacing: 1,
+                                          ),
                                         ),
                                       ],
                                     ),

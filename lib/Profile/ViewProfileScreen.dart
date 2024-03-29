@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,6 +9,10 @@ import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
+import '../Extras/Loader.dart';
+import '../Extras/buildErrorDialog.dart';
+import '../Modal/ViewProfileModal.dart';
+import '../Provider/Authprovider.dart';
 
 class ViewPRofileScreen extends StatefulWidget {
   const ViewPRofileScreen({super.key});
@@ -32,7 +37,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
   bool visible = true;
   bool visible1 = true;
 
-
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -41,15 +46,20 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
     _lastname.clear();
     _email.clear();
     _phone.clear();
+    Viewprofile();
   }
 
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  commanScreen(
+        isLoading: isLoading,
+        scaffold:Scaffold(
       backgroundColor: bgcolor,
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
-      body: SingleChildScrollView(
+      body:  isLoading
+    ? Container()
+        :SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -92,11 +102,9 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: selectedimage != null
-                              ? Image.file(selectedimage!,fit: BoxFit.cover,)
-                              : CachedNetworkImage(
+                          child:CachedNetworkImage(
                             imageUrl:
-                            'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                            viewprofilemodal?.userDetails?.profileImage ?? "",
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
@@ -115,7 +123,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Henry Matavic",
+                      Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
                           style: TextStyle(
                               letterSpacing: 1,
                               color:secondary,
@@ -130,7 +138,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Henry@gmail.com",
+                      Text(viewprofilemodal?.userDetails?.userEmail==""||viewprofilemodal?.userDetails?.userEmail==null?"N/A":viewprofilemodal?.userDetails?.userEmail ?? "",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: secondary,
@@ -184,7 +192,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("Henry",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.firstName ==""||viewprofilemodal?.userDetails?.userMeta?.firstName ==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.firstName ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,
@@ -232,7 +240,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("Matavic",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.lastName ==""||viewprofilemodal?.userDetails?.userMeta?.lastName ==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.lastName ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,
@@ -281,7 +289,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("9724824359",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.phone ==""||viewprofilemodal?.userDetails?.userMeta?.phone ==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.phone ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,
@@ -311,6 +319,32 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
           ],
         ),
       ),
-    );
+    ));
+  }
+  Viewprofile() {
+    final Map<String, String> data = {};
+    data['id'] = (loginmodal?.userId).toString();
+
+    print("printData${data}");
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewprofileapi(data).then((response) async {
+          viewprofilemodal = ViewProfileModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && viewprofilemodal?.success == true) {
+            print("Successs123456");
+            setState(() {
+              isLoading=false;
+            });
+          } else {
+
+            setState(() {
+              isLoading=false;
+            });
+          }
+        });
+      } else {
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

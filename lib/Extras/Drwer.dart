@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:mapposition/Extras/sharedpreferance.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,10 +15,13 @@ import '../LoginSinupScreen/ChangePasswordScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Marina/AddMarinaScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
+import '../Modal/ViewProfileModal.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
 import '../Profile/ProfileScreen.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../Provider/Authprovider.dart';
 import 'Const.dart';
+import 'buildErrorDialog.dart';
 
 class drawer1 extends StatefulWidget {
   const drawer1({Key? key}) : super(key: key);
@@ -34,6 +40,7 @@ class _drawer1State extends State<drawer1> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Viewprofile();
   }
 
   Widget build(BuildContext context) {
@@ -70,7 +77,7 @@ class _drawer1State extends State<drawer1> {
                         borderRadius: BorderRadius.circular(15),
                         child: CachedNetworkImage(
                           imageUrl:
-                          'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                          viewprofilemodal?.userDetails?.profileImage ?? "",
                           fit: BoxFit.cover,
                           progressIndicatorBuilder:
                               (context, url, progress) =>
@@ -84,7 +91,7 @@ class _drawer1State extends State<drawer1> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Henry Matavic",
+                        Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
@@ -636,14 +643,14 @@ Get.to(ChangePasswordScreen());
                             title: "Logout",
                             route: () {
                               Get.to(LoginScreen());
-                              // setState(() async {
-                              //   await SaveDataLocal.clearUserData();
-                              //   loginmodal =
-                              //       await SaveDataLocal.getDataFromLocal();
-                              //   Get.to(LoginPage());
-                              //   databaseHelper.clearCartItems();
-                              // });
-                              // Navigator.of(context).pop();
+                              setState(() async {
+                                await SaveDataLocal.clearUserData();
+                                loginmodal =
+                                    await SaveDataLocal.getDataFromLocal();
+                                Get.to(LoginScreen());
+
+                              });
+                              Navigator.of(context).pop();
                             },
                             hight: 5.h,
                             width: 35.w,
@@ -673,6 +680,32 @@ Get.to(ChangePasswordScreen());
         );
       },
     );
+  }
+  Viewprofile() {
+    final Map<String, String> data = {};
+    data['id'] = (loginmodal?.userId).toString();
+
+    print("printData${data}");
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewprofileapi(data).then((response) async {
+          viewprofilemodal = ViewProfileModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && viewprofilemodal?.success == true) {
+            print("Successs123456");
+            setState(() {
+              isLoading=false;
+            });
+          } else {
+
+            setState(() {
+              isLoading=false;
+            });
+          }
+        });
+      } else {
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 
   TextStyle textStyle = TextStyle(

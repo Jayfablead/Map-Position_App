@@ -1,21 +1,18 @@
-class SinupMpdal {
+class ChangePasswordModal {
   bool? success;
   String? message;
-  int? userId;
 
-  SinupMpdal({this.success, this.message, this.userId});
+  ChangePasswordModal({this.success, this.message});
 
-  SinupMpdal.fromJson(Map<String, dynamic> json) {
+  ChangePasswordModal.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    userId = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
     data['message'] = this.message;
-    data['user_id'] = this.userId;
     return data;
   }
 }

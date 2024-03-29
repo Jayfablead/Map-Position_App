@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Modal/SinupMpdal.dart';
+import '../Modal/ChangePasswordModal.dart';
+import '../Modal/ForgotPasswordModal.dart';
+import '../Modal/LoginModal.dart';
+import '../Modal/SinupModal.dart';
+import '../Modal/ViewProfileModal.dart';
 // ************  Base url ************** //
 
 const String baseUrl = 'https://hassan-mart.com/';
@@ -37,7 +41,11 @@ Color Boxbg = Color(0xff353535);
 const String Default_Profile = 'assets/defaultprofile.png';
 
 
-SinupMpdal? sinupmpdal;
+SinupModal? sinupmodal;
+LoginModal? loginmodal;
+ChangePasswordModal? changepasswordmodal;
+ForgotPasswordModal? forgotpasswordmodal;
+ViewProfileModal? viewprofilemodal;
 // Custom Button
 InkWell batan({
   required String? title,

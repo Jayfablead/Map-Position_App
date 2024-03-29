@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mapposition/HomeScreen/HomeScreen.dart';
 import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Const.dart';
@@ -20,22 +21,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getdata();
     Timer(
-        Duration(seconds: 5),
-            () =>  Get.offAll(LoginScreen()
-
-
-            // (loginmodal == null)
-            // ? Get.offAll(LoginPage())
-            // : 
-           ));
+      Duration(seconds: 5),
+          () =>
+      (loginmodal == null) ? Get.offAll(LoginScreen()) : Get.offAll(HomeScreen()),
+    );
+    super.initState();
   }
 
   getdata() async {
-    // loginmodal = await SaveDataLocal.getDataFromLocal();
+    loginmodal = await SaveDataLocal.getDataFromLocal();
   }
+
+
 
   @override
   Widget build(BuildContext context) {

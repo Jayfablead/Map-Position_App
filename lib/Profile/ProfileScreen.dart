@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -8,11 +10,15 @@ import 'package:mapposition/LoginSinupScreen/ChangePasswordScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
+import '../Extras/Loader.dart';
 import '../Extras/bottombar.dart';
+import '../Extras/buildErrorDialog.dart';
 import '../Favourite/FavouriteScreen.dart';
 import '../Marina/AddMarinaScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
+import '../Modal/ViewProfileModal.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
+import '../Provider/Authprovider.dart';
 import 'EditProfileScreen.dart';
 import 'ViewProfileScreen.dart';
 
@@ -26,16 +32,25 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
       GlobalKey<ScaffoldState>();
-
+  bool isLoading = true;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Viewprofile();
+  }
   Widget build(BuildContext context) {
-    return Scaffold(
+    return commanScreen(
+        isLoading: isLoading,
+        scaffold:Scaffold(
       extendBody: true,
       bottomNavigationBar: Bottombar(select_tab: 4),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
-      body: SingleChildScrollView(
+      body: isLoading
+    ? Container()
+        : SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -80,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           borderRadius: BorderRadius.circular(15),
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                            viewprofilemodal?.userDetails?.profileImage ?? "",
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
@@ -98,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Henry Matavic",
+                      Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: secondary,
@@ -106,6 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken"),
                       ),
+
                     ],
                   ),
                 ],
@@ -605,6 +621,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-    );
+
+    ));
+  } Viewprofile() {
+    final Map<String, String> data = {};
+    data['id'] = (loginmodal?.userId).toString();
+
+    print("printData${data}");
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewprofileapi(data).then((response) async {
+          viewprofilemodal = ViewProfileModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && viewprofilemodal?.success == true) {
+            print("Successs123456");
+            setState(() {
+              isLoading=false;
+            });
+          } else {
+
+            setState(() {
+              isLoading=false;
+            });
+          }
+        });
+      } else {
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
+
 }

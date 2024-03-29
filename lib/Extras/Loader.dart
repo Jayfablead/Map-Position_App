@@ -11,9 +11,9 @@ void configLoading() {
     ..loadingStyle = EasyLoadingStyle.dark
     ..indicatorSize = 45.0
     ..radius = 10.0
-    ..progressColor = Colors.yellow
+    ..progressColor = Colors.white
     ..backgroundColor = Colors.green
-    ..indicatorColor = Colors.yellow
+    ..indicatorColor = Colors.black
     ..textColor = Colors.yellow
     ..maskColor = Colors.blue.withOpacity(0.5)
     ..userInteractions = true
@@ -35,7 +35,7 @@ Widget spinKit = Container(
   width: 90.0,
   height: 90.0,
   child: SpinKitChasingDots(
-    color: Color(0xffAD8109),
+    color:Colors.white,
     size: 40.0,
   ),
 );

@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:custom_map_markers/custom_map_markers.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,6 +17,10 @@ import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
+import '../Extras/Loader.dart';
+import '../Extras/buildErrorDialog.dart';
+import '../Modal/ShoAllMarkerModal.dart';
+import '../Provider/Authprovider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _positionname = TextEditingController();
   TextEditingController _comments = TextEditingController();
   Set<Marker> _markers = {};
+  List<MarkerData> _customMarkers = [];
+
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
       CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
@@ -102,48 +112,107 @@ class _HomeScreenState extends State<HomeScreen> {
   Color secondary2 = Color(0xff808080);
   Color secondary3 = Color(0xff808080);
   Color secondary4 = Color(0xff808080);
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     getLocation().then((_) {
-      setState(() async {
-        _markers.add(Marker(
-          markerId: MarkerId('Current Location'),
-          icon: await BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(
-                devicePixelRatio: 2.5, size: Size(1000.sp, 1000.sp)),
-            'assets/morning.png',
-          ),
-          position: _currentPosition1,
-        ));
-      });
+      // setState(() async {
+      //   _markers.add(Marker(
+      //     markerId: MarkerId((shoallmarkermodal?.id).toString()),
+      //     // icon: await BitmapDescriptor.fromAssetImage(
+      //     //   ImageConfiguration(
+      //     //       devicePixelRatio: 2.5, size: Size(1000.sp, 1000.sp)),
+      //     //   'assets/morning.png',
+      //     // ),
+      //     position: LatLng(
+      //       double.parse(shoallmarkermodal?.latitude ?? '0'), // Parsing latitude as double
+      //       double.parse(shoallmarkermodal?.longitude ?? '0'), // Parsing longitude as double
+      //     ),
+      //   ));
+      //
+      // });
     });
     print("livelocation:-${_currentPosition1}");
+    showmarker();
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  commanScreen(
+      isLoading: isLoading,
+      scaffold:Scaffold(
       extendBody: true,
       bottomNavigationBar: Bottombar(select_tab: 2),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
-      body: Stack(
+      body: isLoading
+    ? Container()
+        : Stack(
         children: [
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _currentPosition1,
-              // You can set your initial position here
-              zoom: 12.0,
-            ),
-            mapType: _isSatellite ? MapType.satellite : MapType.normal,
-            markers: _markers,
-            myLocationButtonEnabled: false,
-            myLocationEnabled: true,
-            zoomControlsEnabled: true,
-            compassEnabled: true,
+          CustomGoogleMapMarkerBuilder(
+            //screenshotDelay: const Duration(seconds: 4),
+            customMarkers: _customMarkers,
+            builder: (BuildContext context, Set<Marker>? markers) {
+              if (markers == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return GoogleMap(
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: _currentPosition1,
+                  // You can set your initial position here
+                  zoom: 12.0,
+                ),
+                gestureRecognizers: Set()
+                ..add(Factory<OneSequenceGestureRecognizer>(
+                      () => EagerGestureRecognizer(),
+                )),
+                scrollGesturesEnabled: true,
+
+                // initialCameraPosition: _currentPosition != null
+                //     ? CameraPosition(
+                //   target: LatLng(
+                //     _currentPosition!.latitude,
+                //     _currentPosition!.longitude,
+                //   ),
+                //   zoom: 12.0,
+                // )
+                //     : CameraPosition(
+                //   target: LatLng(0, 0),
+                //   zoom: 1.0,
+                // ),
+                // onMapCreated: (GoogleMapController controller) {
+                //   setState(() {
+                //     mapController = controller;
+                //   });
+                // },
+                mapToolbarEnabled: true,
+                mapType: MapType.normal,
+                markers: markers,
+                myLocationButtonEnabled: false,
+                myLocationEnabled: true,
+                zoomControlsEnabled: false,
+
+                compassEnabled: true,
+              );
+            },
           ),
+          // GoogleMap(
+          //   onMapCreated: _onMapCreated,
+          //   initialCameraPosition: CameraPosition(
+          //     target: _currentPosition1,
+          //     // You can set your initial position here
+          //     zoom: 12.0,
+          //   ),
+          //   mapType: _isSatellite ? MapType.satellite : MapType.normal,
+          //   markers: _markers,
+          //   myLocationButtonEnabled: false,
+          //   myLocationEnabled: true,
+          //   zoomControlsEnabled: true,
+          //   compassEnabled: true,
+          // ),
           Positioned(
             top: 4.h,
             left: 10,
@@ -422,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-    );
+    ));
   }
 
   void _focusOnLiveLocation() {
@@ -2658,4 +2727,530 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+  showmarker() {
+    print("dtadone");
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().showmarker().then((response) async {
+          shoallmarkermodal = ShoAllMarkerModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200) {
+            print("api calling done");
+            for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
+              print("allMarkerLength${shoallmarkermodal?.positions?.length ?? 0}");
+              var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0]?.toString();
+              var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1]?.toString();
+
+              if (latitudeString != null && longitudeString != null) {
+                try {
+                  double latitude = double.parse(latitudeString);
+                  double longitude = double.parse(longitudeString);
+                  setState(() {
+                    _customMarkers.add(
+                      MarkerData(
+                        marker: Marker(
+                          onTap: () {
+                            print("jdkc");
+                            setState(() {
+                              select = index;
+                            });
+
+                            // alert();
+
+                          },
+                          markerId:
+                          MarkerId('id-$index'), // Use a unique identifier
+                          position: LatLng(latitude, longitude),
+                           // Use the correct position
+                        ),
+                        child: shoallmarkermodal?.positions?[index].properties?.imgURL==null||shoallmarkermodal?.positions?[index].properties?.imgURL==""?Icon(Icons.location_on,color: Colors.green,size: 15.sp,):Image.network((shoallmarkermodal?.positions?[index].properties?.imgURL)
+                            .toString(),width: 50.w,height: 50.w),
+                      
+                      ),
+
+                    );
+                  });
+
+                  // _markers.add(Marker(
+                  //   markerId: MarkerId((shoallmarkermodal?.positions?[index].properties?.postId).toString()),
+                  //   position: LatLng(latitude, longitude),
+                  //
+                  // ));
+                } catch (e) {
+                  print("Error parsing coordinates: $e");
+                }
+              } else {
+                print("Latitude or longitude is null");
+              }
+            }
+
+
+
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
+  // alert() {
+  //   return showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         insetPadding: EdgeInsets.all(15),
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(16),
+  //         ),
+  //         backgroundColor: Colors.black.withOpacity(0.4),
+  //         child: GestureDetector(
+  //           onTap: () {
+  //             // Get.to(Tenth(
+  //             //   id: mapexplorationmodal?.data?[select!].ideaId,
+  //             // ));
+  //           },
+  //           child: Container(
+  //             width: MediaQuery.of(context).size.width,
+  //             padding: EdgeInsets.all(20),
+  //             decoration: BoxDecoration(
+  //               color: Colors.black.withOpacity(0.4),
+  //               borderRadius: BorderRadius.circular(16),
+  //             ),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 SizedBox(
+  //                   height: 3.h,
+  //                 ),
+  //                 InkWell(onTap: (){
+  //                   // Get.to(Tenth(
+  //                   //   id: mapexplorationmodal?.data?[select!].ideaId,
+  //                   // ));
+  //                 },
+  //                   child: Text(
+  //                     mapexplorationmodal?.data?[select!].eventTitle == "" ||
+  //                         mapexplorationmodal?.data?[select!].eventTitle ==
+  //                             null
+  //                         ? "N/A"
+  //                         : (mapexplorationmodal?.data?[select!].eventTitle)
+  //                         .toString(),
+  //                     style: TextStyle(
+  //                       fontFamily: "simsan",
+  //                       color: Colors.white,
+  //                       fontSize: 18.sp,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Text(
+  //                   "已体验：" +
+  //                       (mapexplorationmodal?.data?[select!].noOfExperienced)
+  //                           .toString() +
+  //                       "| 已收藏：" +
+  //                       (mapexplorationmodal?.data?[select!].noOfCollected)
+  //                           .toString(),
+  //                   style: TextStyle(
+  //                     fontFamily: "simsan",
+  //                     color: Colors.white,
+  //                     fontSize: 14.sp,
+  //                     fontWeight: FontWeight.normal,
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Row(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                   children: [
+  //                     Row(
+  //                       children: [
+  //                         Container(
+  //                             height: 30.0,
+  //                             width: 30.0,
+  //                             decoration: BoxDecoration(
+  //                               shape: BoxShape.circle,
+  //                               color: Colors.white,
+  //                             ),
+  //                             child: Icon(
+  //                               Icons.currency_yen,
+  //                               color: Colors.black,
+  //                             )),
+  //                         SizedBox(
+  //                           width: 3.h,
+  //                         ),
+  //                         Text(
+  //                           mapexplorationmodal?.data?[select!].eventFees ==
+  //                               null ||
+  //                               mapexplorationmodal
+  //                                   ?.data?[select!].eventFees ==
+  //                                   ""
+  //                               ? "N/A"
+  //                               : (mapexplorationmodal
+  //                               ?.data?[select!].eventFees)
+  //                               .toString(),
+  //                           style: TextStyle(
+  //                             fontFamily: "simsan",
+  //                             color: Colors.white,
+  //                             fontSize: 14.sp,
+  //                             fontWeight: FontWeight.bold,
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                     // Row(
+  //                     //   crossAxisAlignment: CrossAxisAlignment.start,
+  //                     //   children: [
+  //                     //     InkWell(
+  //                     //       onTap: (){
+  //                     //         Navigator.of(context).pop();
+  //                     //         print("1111111111111111111111111111111");
+  //                     //         alert1();
+  //                     //       },
+  //                     //       child:Icon(
+  //                     //         Icons.check_circle_outline,
+  //                     //         color: Colors.grey,
+  //                     //       )
+  //                     //     ),
+  //                     //     SizedBox(
+  //                     //       width: 3.h,
+  //                     //     ),
+  //                     //     Text(
+  //                     //       "已休验",
+  //                     //       style: TextStyle(
+  //                     //         fontFamily: "simsan",
+  //                     //         color: Color(0xffbA8A8A8),
+  //                     //         fontSize: 14.sp,
+  //                     //         fontWeight: FontWeight.normal,
+  //                     //       ),
+  //                     //     ),
+  //                     //     SizedBox(
+  //                     //       width: 10.h,
+  //                     //     ),
+  //                     //     InkWell(
+  //                     //       onTap: (){
+  //                     //         Navigator.of(context).pop();
+  //                     //         print("22222222222222222222222222222222");
+  //                     //         alert2();
+  //                     //       },
+  //                     //       child:Icon(
+  //                     //         Icons.favorite,
+  //                     //         color: Colors.red.shade900,
+  //                     //       ),
+  //                     //     ),
+  //                     //     SizedBox(
+  //                     //       width: 3.h,
+  //                     //     ),
+  //                     //     Text(
+  //                     //       "收藏",
+  //                     //       style: TextStyle(
+  //                     //         fontFamily: "simsan",
+  //                     //         color: Color(0xffbA8A8A8),
+  //                     //         fontSize: 14.sp,
+  //                     //         fontWeight: FontWeight.normal,
+  //                     //       ),
+  //                     //     ),
+  //                     //   ],
+  //                     // ),
+  //                     Row(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         GestureDetector(
+  //                           onTap: () {
+  //
+  //                             setState(
+  //                                     () {
+  //
+  //                                   sel =
+  //                                       select;
+  //                                 });
+  //                             Navigator.of(context).pop();
+  //                             // print("1111111111111");
+  //                             // alert1();
+  //                           },
+  //                           child: (mapexplorationmodal?.data?[select!].buttonExperience.toString() ==
+  //                               "1")
+  //                               ? GestureDetector(
+  //                             onTap:
+  //                                 () {
+  //                               mapexplorationmodal?.data?[select!].ideaId.toString();
+  //                             },
+  //                             child:
+  //                             Icon(
+  //                               Icons.check_circle_rounded,
+  //                               color: Color(0xffbEBEAEA),
+  //
+  //                             ),
+  //                           )
+  //                               : GestureDetector(
+  //                             onTap:
+  //                                 () {
+  //                               experincebuttonap(mapexplorationmodal?.data?[select!].ideaId.toString());
+  //                             },
+  //                             child:
+  //                             Icon(
+  //                               Icons.check_circle_outline,
+  //                               color: Color(0xffb777777),
+  //
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         SizedBox(
+  //                           width: 5.w,
+  //                         ),
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             setState(
+  //                                     () {
+  //                                   sel =
+  //                                       select;
+  //                                 });
+  //                             experincebuttonap(mapexplorationmodal?.data?[select!].ideaId.toString());
+  //                           },
+  //                           child: Text(
+  //                             "已体验",
+  //                             style:
+  //                             TextStyle(
+  //                               color: Color(
+  //                                   0xffbA8A8A8),
+  //                               fontSize: 14.sp,
+  //
+  //                               fontFamily:
+  //                               "simsan",
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         SizedBox(
+  //                           width: 5.w,
+  //                         ),
+  //                         GestureDetector(
+  //                             onTap:
+  //                                 () async{
+  //                               setState(
+  //                                       () {
+  //                                     COLLSEL =
+  //                                         select;
+  //                                   });
+  //                               // Navigator.of(context).pop();
+  //                               // print("222222222");
+  //                               // alert2();
+  //                             },
+  //                             child: mapexplorationmodal?.data?[select!].buttonCollected ==
+  //                                 "1"
+  //                                 ? GestureDetector(
+  //                               onTap: () {
+  //                                 collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
+  //                               },
+  //                               child: Icon(
+  //                                 Icons.favorite,
+  //                                 color: Color(0xffbD05454),
+  //
+  //                               ),
+  //                             )
+  //                                 : GestureDetector(
+  //                               onTap: () {
+  //                                 collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
+  //                               },
+  //                               child: Icon(
+  //                                 Icons.favorite_border,
+  //                                 color: Color(0xffb777777),
+  //
+  //                               ),
+  //                             )),
+  //                         SizedBox(
+  //                           width: 5.w,
+  //                         ),
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             setState(
+  //                                     () {
+  //                                   COLLSEL =
+  //                                       select;
+  //                                 });
+  //                             collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
+  //                           },
+  //                           child: Text(
+  //                             "收藏",
+  //                             style:
+  //                             TextStyle(
+  //                               color: Color(
+  //                                   0xffbA8A8A8),
+  //                               fontSize: 14.sp,
+  //
+  //                               fontFamily:
+  //                               "simsan",
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     )
+  //                   ],
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Row(
+  //                   children: [
+  //                     Container(
+  //                       // height: 30.0,
+  //                       // width: 30.0,
+  //                         decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //                         ),
+  //                         child: Icon(
+  //                           Icons.watch_later,
+  //                           color: Colors.white,
+  //                         )),
+  //                     SizedBox(
+  //                       width: 3.h,
+  //                     ),
+  //                     Text(
+  //                       "开始时间",
+  //                       style: TextStyle(
+  //                         fontFamily: "simsan",
+  //                         color: Colors.white,
+  //                         fontSize: 14.sp,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Text(
+  //                   mapexplorationmodal?.data?[select!].eventStartDate ==
+  //                       null ||
+  //                       mapexplorationmodal
+  //                           ?.data?[select!].eventStartDate ==
+  //                           ""
+  //                       ? "N/A"
+  //                       : (mapexplorationmodal?.data?[select!].eventStartDate)
+  //                       .toString() +
+  //                       (mapexplorationmodal?.data?[select!].eventStartTime)
+  //                           .toString(),
+  //                   style: TextStyle(
+  //                     fontFamily: "simsan",
+  //                     color: Colors.white,
+  //                     fontSize: 14.sp,
+  //                     fontWeight: FontWeight.normal,
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Row(
+  //                   children: [
+  //                     Container(
+  //                         height: 30.0,
+  //                         width: 30.0,
+  //                         child: Icon(
+  //                           Icons.watch_later_outlined,
+  //                           color: Colors.white,
+  //                         )),
+  //                     Text(
+  //                       "体验时长",
+  //                       style: TextStyle(
+  //                         fontFamily: "simsan",
+  //                         color: Colors.white,
+  //                         fontSize: 14.sp,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Text(
+  //                   "15分钟",
+  //                   style: TextStyle(
+  //                     fontFamily: "simsan",
+  //                     color: Colors.white,
+  //                     fontSize: 16.sp,
+  //                     fontWeight: FontWeight.normal,
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 Row(
+  //                   children: [
+  //                     Container(
+  //                         height: 30.0,
+  //                         width: 30.0,
+  //                         child: Icon(
+  //                           Icons.location_on,
+  //                           color: Colors.white,
+  //                         )),
+  //                     Text(
+  //                       "体验地点",
+  //                       style: TextStyle(
+  //                         fontFamily: "simsan",
+  //                         color: Colors.white,
+  //                         fontSize: 14.sp,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 SizedBox(
+  //                   height: 5.h,
+  //                 ),
+  //                 // Text(
+  //                 //   "中国 陕西西安 桃园南路21号公园天下小",
+  //                 //   style: TextStyle(
+  //                 //     fontFamily: "simsan",
+  //                 //       color: Colors.white,
+  //                 //       fontSize: 14.sp,
+  //                 //       fontWeight: FontWeight.bold,
+  //                 //       ),
+  //                 // ),
+  //                 Text(
+  //                   mapexplorationmodal?.data?[select!].address == null ||
+  //                       mapexplorationmodal?.data?[select!].address == ""
+  //                       ? "N/A"
+  //                       : (mapexplorationmodal?.data?[select!].address)
+  //                       .toString() +
+  //                       " | " +
+  //                       (mapexplorationmodal?.data?[select!]
+  //                           .distanceToCurrentPlace ==
+  //                           null ||
+  //                           mapexplorationmodal?.data?[select!]
+  //                               .distanceToCurrentPlace ==
+  //                               ""
+  //                           ? "N/A"
+  //                           : (mapexplorationmodal?.data?[select!].distanceToCurrentPlace)
+  //                           .toString()),
+  //                   style: TextStyle(
+  //                     fontFamily: "simsan",
+  //                     color: Colors.white,
+  //                     fontSize: 14.sp,
+  //                     fontWeight: FontWeight.bold,
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
 }

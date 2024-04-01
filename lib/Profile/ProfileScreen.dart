@@ -20,6 +20,7 @@ import '../Modal/ViewProfileModal.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
 import '../Provider/Authprovider.dart';
 import 'EditProfileScreen.dart';
+import 'SubscriptionAlarmScreen.dart';
 import 'ViewProfileScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -301,6 +302,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )
                         ],
                       ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Get.to(SubscriptionAlarmScreen());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: bgcolor,
+                          border: Border.all(color: secondary, width:1.sp))
+                      ,child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 10.w,
+                              height: 10.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: blackback,
+                              ),
+                              child: Icon(
+                                Icons.alarm,
+                                color: bgcolor,
+                                size: 18.sp,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Subscription Alarm",
+                                    style: TextStyle(
+                                        letterSpacing: 1,
+                                        color: secondary,
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken")),
+
+                              ],
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: blackback,
+                          size: 18.sp,
+                        )
+                      ],
+                    ),
                     ),
                   ),
                   SizedBox(

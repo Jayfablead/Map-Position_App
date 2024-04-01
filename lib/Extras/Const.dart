@@ -6,7 +6,10 @@ import 'package:sizer/sizer.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
+import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
+import '../Modal/UpdateAlaramModal.dart';
+import '../Modal/UpdateProfileModal.dart';
 import '../Modal/ViewProfileModal.dart';
 // ************  Base url ************** //
 
@@ -46,6 +49,9 @@ LoginModal? loginmodal;
 ChangePasswordModal? changepasswordmodal;
 ForgotPasswordModal? forgotpasswordmodal;
 ViewProfileModal? viewprofilemodal;
+UpdateProfileModal? updateprofilemodal;
+UpdateAlaramModal? updatealarammodal;
+ShoAllMarkerModal? shoallmarkermodal;
 // Custom Button
 InkWell batan({
   required String? title,

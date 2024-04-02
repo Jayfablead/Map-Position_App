@@ -183,4 +183,46 @@ class authprovider with ChangeNotifier {
     print("printAlldata${response.body}");
     return responseJson;
   }
+
+  Future<http.Response> addpositionapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}add-anchorage';
+    // const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/update-user-details';
+    var responseJson;
+    if (bodyData['upload_pictures'] != "") {
+      try {
+        final imageUploadRequest =
+        http.MultipartRequest('POST', Uri.parse(url));
+        imageUploadRequest.headers.addAll(headers);
+        if (bodyData['upload_pictures']?.isNotEmpty ?? false) {
+          final file = await http.MultipartFile.fromPath(
+              'upload_pictures', bodyData['upload_pictures'] ?? '');
+          imageUploadRequest.files.add(file);
+        }
+        imageUploadRequest.fields.addAll(bodyData);
+        print(imageUploadRequest.files);
+        final streamResponse = await imageUploadRequest.send();
+        print(streamResponse.statusCode);
+        responseJson =
+            responses(await http.Response.fromStream(streamResponse));
+        print(responseJson);
+      } on SocketException {
+        throw FetchDataException('No Internet connection');
+      }
+      return responseJson;
+    } else {
+      print("a helllooo");
+      final response = await http
+          .post(Uri.parse(url), body: bodyData, headers: headers)
+          .timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw const SocketException('Something went wrong');
+        },
+      );
+      print(response.statusCode);
+      responseJson = responses(response);
+      print(responseJson);
+      return responseJson;
+    }
+  }
 }

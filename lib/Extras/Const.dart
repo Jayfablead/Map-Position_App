@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Modal/AddPositionModal.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
@@ -52,6 +53,7 @@ ViewProfileModal? viewprofilemodal;
 UpdateProfileModal? updateprofilemodal;
 UpdateAlaramModal? updatealarammodal;
 ShoAllMarkerModal? shoallmarkermodal;
+AddPositionModal? addpositionmodal;
 // Custom Button
 InkWell batan({
   required String? title,

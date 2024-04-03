@@ -4,6 +4,7 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Modal/AddPositionModal.dart';
+import '../Modal/AddWaringmodal.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
@@ -54,6 +55,7 @@ UpdateProfileModal? updateprofilemodal;
 UpdateAlaramModal? updatealarammodal;
 ShoAllMarkerModal? shoallmarkermodal;
 AddPositionModal? addpositionmodal;
+AddWaringmodal? addwaringmodal;
 // Custom Button
 InkWell batan({
   required String? title,

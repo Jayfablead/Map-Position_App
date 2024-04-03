@@ -24,6 +24,7 @@ import '../Extras/buildErrorDialog.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Provider/Authprovider.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
-  TextEditingController _positionname = TextEditingController();
+  TextEditingController _name = TextEditingController();
   TextEditingController _comments = TextEditingController();
   Set<Marker> _markers = {};
   List<MarkerData> _customMarkers = [];
@@ -389,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // NW1 = false;
                         // NW2 = false;
                         //  NW3 = false;
-                        Get.to(AddAchoragePositionScreen());
+                        Get.offAll(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),));
                       },
                       child: Row(
                         children: [
@@ -700,7 +701,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: TextFormField(
                           keyboardType: TextInputType.text,
                           style: TextStyle(color: secondary),
-                          controller: _positionname,
+                          controller: _name,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Your Position Name";
@@ -3060,7 +3061,7 @@ color: anchor
                                 title: "Save Next",
                                 route: () {
                                   Get.back();
-                                  addanchorage();
+                                  // addanchorage();
 
                                 },
                                 hight: 6.h,
@@ -3628,17 +3629,18 @@ color: anchor
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().showmarker().then((response) async {
+        authprovider().showmarkerapi().then((response) async {
           shoallmarkermodal = ShoAllMarkerModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200) {
             print("api calling done");
 
             // Clear existing markers
-            _customMarkers.clear();
+            // _customMarkers.clear();
 
             for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
-              var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0]?.toString();
-              var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1]?.toString();
+              print("markerlength${shoallmarkermodal?.positions?.length}");
+              var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1]?.toString();
+              var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0]?.toString();
 
               if (latitudeString != null && longitudeString != null) {
                 // Validate latitude and longitude strings
@@ -3650,12 +3652,15 @@ color: anchor
                       MarkerData(
                         marker: Marker(
                           onTap: () {
+                            print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
                             setState(() {
                               select = index;
                             });
                           },
-                          markerId: MarkerId('id-$index'),
+                          markerId: MarkerId('id-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
+
                           position: LatLng(latitude, longitude),
+
                         ),
                         child: shoallmarkermodal?.positions?[index].properties?.imgURL == null || shoallmarkermodal?.positions?[index].properties?.imgURL == ""
                             ? Icon(Icons.location_on, color: Colors.green, size: 15.sp,)
@@ -3671,6 +3676,7 @@ color: anchor
               } else {
                 print("Latitude or longitude is null");
               }
+
             }
 
             // Update the state with new markers
@@ -3691,6 +3697,10 @@ color: anchor
       }
     });
   }
+
+
+
+
 
   bool _isValidDouble(String value) {
     if (value == null) return false;
@@ -4147,75 +4157,75 @@ color: anchor
   //   );
   // }
 
-  addanchorage() async {
-    print(selectedimage?.path);
-    EasyLoading.show(status: 'Please Wait ...');
-    final Map<String, String> data = {};
-    data['user_id'] = (loginmodal?.userId).toString();
-    data['positionName'] = _positionname.text.trim().toString();
-    data['comment'] = _comments.text.trim().toString();
-    data['m_lat'] = lat1.toString();
-    data['m_lng'] = lng1.toString();
-    data['n1'] =N1.toString();
-    data['n2'] =N2.toString();
-    data['n3'] =N3.toString();
-    data['ne1'] =NE1.toString();
-    data['ne2'] =NE2.toString();
-    data['ne3'] =NE3.toString();
-    data['e1'] =E1.toString();
-    data['e2'] =E2.toString();
-    data['e3'] =E3.toString();
-    data['se1'] =SE1.toString();
-    data['se2'] =SE2.toString();
-    data['se3'] =SE3.toString();
-    data['s1'] =S1.toString();
-    data['s2'] =S2.toString();
-    data['s3'] =S3.toString();
-    data['sw1'] =SW1.toString();
-    data['sw2'] =SW2.toString();
-    data['sw3'] =SW3.toString();
-    data['w1'] =W1.toString();
-    data['w2'] =W2.toString();
-    data['w3'] =W3.toString();
-    data['nw1'] =NW1.toString();
-    data['nw2'] =NW2.toString();
-    data['nw3'] =NW3.toString();
-    data['own_anchor'] =anchor.toString();
-    data['buoys'] =buoys.toString();
-    data['mountain_wedges'] =mountain.toString();
-    data['own_lines'] = ownlines.toString();
-    data['sand'] =sand.toString();
-    data['mud'] =pano.toString();
-    data['clay'] =clay.toString();
-    data['coral'] =coral.toString();
-    data['rocks'] =rocks.toString();
-    data['groceries'] =groceries.toString();
-    data['water'] =water.toString();
-    data['alcohol'] =alcohol.toString();
-    data['pharmacy'] =pharmacy.toString();
-    data['restaurant'] =restaurant.toString();
-    data['upload_pictures'] =
-    selectedimage?.path == null ? '' : selectedimage?.path ?? "";
-    print("Printapivalue${data}");
-    checkInternet().then((internet) async {
-      if (internet) {
-        authprovider().addpositionapi(data).then((response) async {
-          addpositionmodal =
-              AddPositionModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 && addpositionmodal?.success==true) {
-            print("admin chalu karo bhai");
-            EasyLoading.showSuccess(addpositionmodal?.message ?? "");
-            Scessfully();
-          } else {
-            EasyLoading.showError(addpositionmodal?.message ?? "");
-            setState(() {
-            });
-          }
-        });
-      } else {
-        buildErrorDialog(context, 'Error', "Internet Required");
-      }
-    });
-  }
+  // addanchorage() async {
+  //   print(selectedimage?.path);
+  //   EasyLoading.show(status: 'Please Wait ...');
+  //   final Map<String, String> data = {};
+  //   data['user_id'] = (loginmodal?.userId).toString();
+  //   data['positionName'] = _name.text.trim().toString();
+  //   data['comment'] = _comments.text.trim().toString();
+  //   data['m_lat'] = lat1.toString();
+  //   data['m_lng'] = lng1.toString();
+  //   data['n1'] =N1.toString();
+  //   data['n2'] =N2.toString();
+  //   data['n3'] =N3.toString();
+  //   data['ne1'] =NE1.toString();
+  //   data['ne2'] =NE2.toString();
+  //   data['ne3'] =NE3.toString();
+  //   data['e1'] =E1.toString();
+  //   data['e2'] =E2.toString();
+  //   data['e3'] =E3.toString();
+  //   data['se1'] =SE1.toString();
+  //   data['se2'] =SE2.toString();
+  //   data['se3'] =SE3.toString();
+  //   data['s1'] =S1.toString();
+  //   data['s2'] =S2.toString();
+  //   data['s3'] =S3.toString();
+  //   data['sw1'] =SW1.toString();
+  //   data['sw2'] =SW2.toString();
+  //   data['sw3'] =SW3.toString();
+  //   data['w1'] =W1.toString();
+  //   data['w2'] =W2.toString();
+  //   data['w3'] =W3.toString();
+  //   data['nw1'] =NW1.toString();
+  //   data['nw2'] =NW2.toString();
+  //   data['nw3'] =NW3.toString();
+  //   data['own_anchor'] =anchor.toString();
+  //   data['buoys'] =buoys.toString();
+  //   data['mountain_wedges'] =mountain.toString();
+  //   data['own_lines'] = ownlines.toString();
+  //   data['sand'] =sand.toString();
+  //   data['mud'] =pano.toString();
+  //   data['clay'] =clay.toString();
+  //   data['coral'] =coral.toString();
+  //   data['rocks'] =rocks.toString();
+  //   data['groceries'] =groceries.toString();
+  //   data['water'] =water.toString();
+  //   data['alcohol'] =alcohol.toString();
+  //   data['pharmacy'] =pharmacy.toString();
+  //   data['restaurant'] =restaurant.toString();
+  //   data['upload_pictures'] =
+  //   selectedimage?.path == null ? '' : selectedimage?.path ?? "";
+  //   print("Printapivalue${data}");
+  //   checkInternet().then((internet) async {
+  //     if (internet) {
+  //       authprovider().addpositionapi(data,imagePaths).then((response) async {
+  //         addpositionmodal =
+  //             AddPositionModal.fromJson(json.decode(response.body));
+  //         if (response.statusCode == 200 && addpositionmodal?.success==true) {
+  //           print("admin chalu karo bhai");
+  //           EasyLoading.showSuccess(addpositionmodal?.message ?? "");
+  //           Scessfully();
+  //         } else {
+  //           EasyLoading.showError(addpositionmodal?.message ?? "");
+  //           setState(() {
+  //           });
+  //         }
+  //       });
+  //     } else {
+  //       buildErrorDialog(context, 'Error', "Internet Required");
+  //     }
+  //   });
+  // }
 
 }

@@ -151,12 +151,12 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
-  Future<http.Response> showallmarkerapi() async {
-    String url = '${apiUrl}all_properties';
+  Future<http.Response> showmarkerapi() async {
+    String url = "https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties";
     print(url);
     var responseJson;
     final response = await http
-        .get(Uri.parse(url), headers: headers)
+        .post(Uri.parse(url),  headers: headers)
         .timeout(
       const Duration(seconds: 60),
       onTimeout: () {
@@ -172,7 +172,7 @@ class authprovider with ChangeNotifier {
     print(url);
     var responseJson;
     final response = await http
-        .get(Uri.parse(url),)
+        .post(Uri.parse(url),)
         .timeout(
       const Duration(seconds: 60),
       onTimeout: () {

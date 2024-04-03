@@ -53,6 +53,7 @@ class Positions {
 
 class Properties {
   int? postId;
+  String? postImage;
   String? title;
   String? description;
   String? icon;
@@ -63,6 +64,7 @@ class Properties {
 
   Properties(
       {this.postId,
+        this.postImage,
         this.title,
         this.description,
         this.icon,
@@ -73,6 +75,7 @@ class Properties {
 
   Properties.fromJson(Map<String, dynamic> json) {
     postId = json['post_id'];
+    postImage = json['post_image'];
     title = json['title'];
     description = json['description'];
     icon = json['icon'];
@@ -85,6 +88,7 @@ class Properties {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['post_id'] = this.postId;
+    data['post_image'] = this.postImage;
     data['title'] = this.title;
     data['description'] = this.description;
     data['icon'] = this.icon;

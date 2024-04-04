@@ -330,12 +330,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       data['last_name'] = _lastname.text.trim().toString();
       data['phone'] = _phone.text.trim().toString();
       data['skype'] ="";
-      data['profile_img[]'] =jsonEncode(imagePaths);
-
+      data['profile_img'] =(selectedimage?.path).toString();
       print("Printapivalue${data}");
       checkInternet().then((internet) async {
         if (internet) {
-          authprovider().editprofile(data,imagePaths).then((response) async {
+          authprovider().editprofile1(data).then((response) async {
             updateprofilemodal =
                 UpdateProfileModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && updateprofilemodal?.success==true) {

@@ -81,7 +81,7 @@ class UserMeta {
   String? instagram;
   String? website;
   String? phone;
-  String? skype;
+  Null? skype;
   String? title;
   String? myLat;
   String? myLng;

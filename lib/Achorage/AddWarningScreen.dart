@@ -20,7 +20,9 @@ import '../Provider/Authprovider.dart';
 class AddWarningScreen extends StatefulWidget {
   String? lat;
   String? lng;
- AddWarningScreen({super.key,required this.lat,required this.lng});
+  String? postid;
+
+ AddWarningScreen({super.key,required this.lat,required this.lng,this.postid});
 
   @override
   State<AddWarningScreen> createState() => _AddWarningScreenState();

@@ -331,4 +331,26 @@ class authprovider with ChangeNotifier {
     // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
+  Future<http.Response> updatecastompostionapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}add-custom-position';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'post_images',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
 }

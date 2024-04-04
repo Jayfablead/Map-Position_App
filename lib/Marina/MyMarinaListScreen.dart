@@ -3,11 +3,16 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mapposition/Extras/Drwer.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Achorage/AddAchoragePositionScreen.dart';
+import '../Achorage/AddOtherPositionScreen.dart';
+import '../Achorage/AddWarningScreen.dart';
 import '../Detail/DetailsScreen.dart';
 import '../Extras/Const.dart';
 import '../Extras/Headerwidget.dart';
@@ -17,6 +22,7 @@ import '../Extras/buildErrorDialog.dart';
 import '../Modal/DeletePositionModal.dart';
 import '../Modal/MyMarinaViewModal.dart';
 import '../Provider/Authprovider.dart';
+import 'AddMarinaScreen.dart';
 
 class MyMarinaListScreen extends StatefulWidget {
   const MyMarinaListScreen({super.key});
@@ -40,7 +46,25 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
     htmlString = '';
     plainText = '';
   }
+  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
+  double? lat1,lng1;
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1=lat;
+      lng1=long;
+      isLoading=false;
 
+    });
+
+  }
   Widget build(BuildContext context) {
     return commanScreen(
         isLoading: isLoading,
@@ -324,7 +348,28 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                             color: Colors.white, size: 15.sp),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  Positioned(
+                                    left: 84.w,
+                                    top: 8.h,
+                                    child: InkWell(
+                                      onTap: () {
+                                        // deleteposition((mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "");
+                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),)): mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),)): mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(AddWarningScreen(lat:lat1.toString(),lng: lng1.toString(),)):Get.to(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),));
+                                      },
+                                      child: Container(
+                                        width: 10.w,
+                                        height: 10.w,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Colors.black,
+                                        ),
+                                        child: Icon(Icons.edit,
+                                            color: Colors.white, size: 15.sp),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               );
                             },

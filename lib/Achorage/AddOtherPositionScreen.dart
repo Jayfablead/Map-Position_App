@@ -19,7 +19,8 @@ import '../Provider/Authprovider.dart';
 class AddOtherPositionScreen extends StatefulWidget {
   String? lat;
   String? lng;
-  AddOtherPositionScreen({super.key,required this.lat,required this.lng});
+  String? postid;
+  AddOtherPositionScreen({super.key,required this.lat,required this.lng,this.postid});
 
   @override
   State<AddOtherPositionScreen> createState() => _AddOtherPositionScreenState();

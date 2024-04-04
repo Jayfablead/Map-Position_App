@@ -9,6 +9,7 @@ import '../Modal/AddWaringmodal.dart';
 import '../Modal/CastomPositionMarinaModal.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/DeletePositionModal.dart';
+import '../Modal/EditCasotamMarinaModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
 import '../Modal/MyMarinaViewModal.dart';
@@ -64,6 +65,7 @@ AddOtherPositionModal? addotherpositionmodal;
 MyMarinaViewModal? mymarinaviewmodal;
 DeletePositionModal? deletepositionmodal;
 CastomPositionMarinaModal? castompositionmarinamodal;
+EditCasotamMarinaModal? editcasotammarinamodal;
 // Custom Button
 InkWell batan({
   required String? title,

@@ -21,7 +21,9 @@ import '../Provider/Authprovider.dart';
 class AddAchoragePositionScreen extends StatefulWidget {
   String? lat;
   String? lng;
-  AddAchoragePositionScreen({super.key,required this.lat,required this.lng});
+  String? postid;
+
+  AddAchoragePositionScreen({super.key,required this.lat,required this.lng,this.postid});
 
   @override
   State<AddAchoragePositionScreen> createState() => _AddAchoragePositionScreenState();

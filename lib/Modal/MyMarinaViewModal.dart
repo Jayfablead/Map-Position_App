@@ -61,6 +61,7 @@ class Properties {
   int? imageIndex;
   String? imgURL;
   int? onlyAvg;
+  String? termName;
 
   Properties(
       {this.postId,
@@ -71,7 +72,8 @@ class Properties {
         this.catId,
         this.imageIndex,
         this.imgURL,
-        this.onlyAvg});
+        this.onlyAvg,
+        this.termName});
 
   Properties.fromJson(Map<String, dynamic> json) {
     postId = json['post_id'];
@@ -83,6 +85,7 @@ class Properties {
     imageIndex = json['image_index'];
     imgURL = json['imgURL'];
     onlyAvg = json['only_avg'];
+    termName = json['term_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -96,6 +99,7 @@ class Properties {
     data['image_index'] = this.imageIndex;
     data['imgURL'] = this.imgURL;
     data['only_avg'] = this.onlyAvg;
+    data['term_name'] = this.termName;
     return data;
   }
 }

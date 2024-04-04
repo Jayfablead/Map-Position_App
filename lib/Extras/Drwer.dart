@@ -106,7 +106,7 @@ class _drawer1State extends State<drawer1> {
                Divider(color: Colors.grey,thickness: 0.8.sp),
                 InkWell(
                   onTap: () {
-                    Get.to(HomeScreen());
+                    Get.offAll(HomeScreen());
                   },
                   child: Container(
                     child: Row(
@@ -164,7 +164,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ProfileScreen());
+                    Get.offAll(ProfileScreen());
                   },
                   child: Container(
                     child: Row(
@@ -222,7 +222,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(FavouriteScreen());
+                    Get.offAll(FavouriteScreen());
                   },
                   child: Container(
                     child: Row(
@@ -279,7 +279,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(AddMarinaScreen());
+                    Get.offAll(AddMarinaScreen());
                   },
                   child: Container(
                     child: Row(
@@ -338,7 +338,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-Get.to(ChangePasswordScreen());
+Get.offAll(ChangePasswordScreen());
                   },
                   child: Container(
                     child: Row(
@@ -396,7 +396,7 @@ Get.to(ChangePasswordScreen());
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(MyMarinaListScreen());
+                    Get.offAll(MyMarinaListScreen());
                   },
                   child: Container(
                     child: Row(
@@ -456,7 +456,7 @@ Get.to(ChangePasswordScreen());
 
                 InkWell(
                   onTap: () {
-                    Get.to(PremiumScreen());
+                    Get.offAll(PremiumScreen());
                   },
                   child: Container(
                     child: Row(

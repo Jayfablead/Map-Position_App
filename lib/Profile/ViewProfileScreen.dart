@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:sizer/sizer.dart';
@@ -13,6 +14,7 @@ import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../Modal/ViewProfileModal.dart';
 import '../Provider/Authprovider.dart';
+import 'EditProfileScreen.dart';
 
 class ViewPRofileScreen extends StatefulWidget {
   const ViewPRofileScreen({super.key});
@@ -307,7 +309,9 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                   ),
                   // Password
 
-                  batan(title: "Edit Profile", route: (){},hight: 6.h,
+                  batan(title: "Edit Profile", route: (){
+                    Get.to(EditProfileScreen());
+                  },hight: 6.h,
                       width: MediaQuery.of(context).size.width,
                       txtsize: 18.sp),
                   SizedBox(

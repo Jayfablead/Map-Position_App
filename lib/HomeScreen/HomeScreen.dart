@@ -17,11 +17,13 @@ import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 import '../Achorage/AddAchoragePositionScreen.dart';
+import '../Achorage/AddOtherPositionScreen.dart';
 import '../Achorage/AddWarningScreen.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../Marina/AddMarinaScreen.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Provider/Authprovider.dart';
@@ -465,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     PopupMenuDivider(),
                     PopupMenuItem(
                       onTap: () {
-                        showratingpop();
+                        Get.offAll(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),));
                       },
                       child: Row(
                         children: [
@@ -500,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     PopupMenuDivider(),
                     PopupMenuItem(
                       onTap: () {
-                        showratingpop();
+                       Get.offAll(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),));
                       },
                       child: Row(
                         children: [

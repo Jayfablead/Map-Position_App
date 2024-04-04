@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
@@ -8,9 +10,15 @@ import 'package:mapposition/Extras/Drwer.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Headerwidget.dart';
+import '../Extras/buildErrorDialog.dart';
+import '../Modal/CastomPositionMarinaModal.dart';
+import '../Provider/Authprovider.dart';
 
 class AddMarinaScreen extends StatefulWidget {
-  const AddMarinaScreen({super.key});
+  String? lat;
+  String? lng;
+  AddMarinaScreen({super.key,this.lat,this.lng});
+
 
   @override
   State<AddMarinaScreen> createState() => _AddMarinaScreenState();
@@ -82,9 +90,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   bool Water = false;
   bool Restaurant = false;
   bool Alcohol = false;
-
   ImagePicker picker = ImagePicker();
-  File? selectedimage = null;
+  List<XFile>? resultList;
+  List<XFile>? resultList1;
+  List<File> selectedImages = [];
+  List<String> imagePaths = [];
+  List<XFile> imagesList = <XFile>[];
+  String _error = 'No Error Dectected';
+  List<String> imageNames = [];
+  ImagePicker _picker = ImagePicker();
+  int maxImageLimit = 9;
+  File? selectedimage;
+  List<String> networkImageUrls = [];
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -2050,4 +2069,82 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       ),
     );
   }
+  addanchorage() async {
+    if (_formKey.currentState!.validate()) {
+      print(selectedimage?.path);
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['user_id'] = (loginmodal?.userId).toString();
+      data['title'] = _title.text.trim().toString();
+      data['content'] = _descripation.text.trim().toString();
+      data['m_lat'] = widget.lat.toString();
+      data['m_lng'] = widget.lng.toString();
+      data['n1'] =N1.toString();
+      data['n2'] =N2.toString();
+      data['n3'] =N3.toString();
+      data['ne1'] =NE1.toString();
+      data['ne2'] =NE2.toString();
+      data['ne3'] =NE3.toString();
+      data['e1'] =E1.toString();
+      data['e2'] =E2.toString();
+      data['e3'] =E3.toString();
+      data['se1'] =SE1.toString();
+      data['se2'] =SE2.toString();
+      data['se3'] =SE3.toString();
+      data['s1'] =S1.toString();
+      data['s2'] =S2.toString();
+      data['s3'] =S3.toString();
+      data['sw1'] =SW1.toString();
+      data['sw2'] =SW2.toString();
+      data['sw3'] =SW3.toString();
+      data['w1'] =W1.toString();
+      data['w2'] =W2.toString();
+      data['w3'] =W3.toString();
+      data['nw1'] =NW1.toString();
+      data['nw2'] =NW2.toString();
+      data['nw3'] =NW3.toString();
+      data['own_anchor'] =Use.toString();
+      data['buoys'] =Fixed.toString();
+      data['mountain_wedges'] =mountain.toString();
+      data['own_lines'] = ashore.toString();
+      data['sand'] =Sand.toString();
+      data['mud'] =Mud.toString();
+      data['clay'] =Clay.toString();
+      data['coral'] =Coral.toString();
+      data['rocks'] =Rocks.toString();
+      data['groceries'] =Groceries.toString();
+      data['water'] =Water.toString();
+      data['alcohol'] =Alcohol.toString();
+      data['pharmacy'] =Pharmacy.toString();
+      data['restaurant'] =Restaurant.toString();
+      data['post_category'] =selectedvalue.toString();
+
+      print(imagePaths);
+      data['post_images[]'] =jsonEncode(imagePaths);
+      data['meta[]'] =jsonEncode(imagePaths);
+      print("Printapivalue${data}");
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().maltiplephotoaddapi(data,imagePaths).then((response) async {
+            castompositionmarinamodal =
+                CastomPositionMarinaModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && castompositionmarinamodal?.success==true) {
+              print("admin chalu karo bhai");
+              EasyLoading.showSuccess(castompositionmarinamodal?.message ?? "");
+
+              ;
+            } else {
+              EasyLoading.showError(castompositionmarinamodal?.message ?? "");
+              setState(() {
+              });
+            }
+          });
+        } else {
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
+
+  }
+
 }

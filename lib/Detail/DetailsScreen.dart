@@ -11,7 +11,8 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  String? postid;
+  DetailsScreen({super.key,this.postid});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();

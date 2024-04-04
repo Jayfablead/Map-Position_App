@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Modal/AddOtherPositionModal.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/AddWaringmodal.dart';
+import '../Modal/CastomPositionMarinaModal.dart';
 import '../Modal/ChangePasswordModal.dart';
+import '../Modal/DeletePositionModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
+import '../Modal/MyMarinaViewModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
 import '../Modal/UpdateAlaramModal.dart';
@@ -56,6 +60,10 @@ UpdateAlaramModal? updatealarammodal;
 ShoAllMarkerModal? shoallmarkermodal;
 AddPositionModal? addpositionmodal;
 AddWaringmodal? addwaringmodal;
+AddOtherPositionModal? addotherpositionmodal;
+MyMarinaViewModal? mymarinaviewmodal;
+DeletePositionModal? deletepositionmodal;
+CastomPositionMarinaModal? castompositionmarinamodal;
 // Custom Button
 InkWell batan({
   required String? title,

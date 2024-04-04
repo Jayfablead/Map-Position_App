@@ -94,8 +94,29 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
-
-  Future<http.Response> editprofile(Map<String, String> bodyData) async {
+  Future<http.Response> editprofile(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}update-user-details';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'upload_pictures',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
+  Future<http.Response> editprofile1(Map<String, String> bodyData) async {
     String url = '${apiUrl}update-user-details';
     // const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/update-user-details';
     var responseJson;
@@ -185,47 +206,7 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
-  Future<http.Response> addpositionapi(Map<String, String> bodyData) async {
-    String url = '${apiUrl}add-anchorage';
-    // const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/update-user-details';
-    var responseJson;
-    if (bodyData['upload_pictures'] != "") {
-      try {
-        final imageUploadRequest =
-        http.MultipartRequest('POST', Uri.parse(url));
-        imageUploadRequest.headers.addAll(headers);
-        if (bodyData['upload_pictures']?.isNotEmpty ?? false) {
-          final file = await http.MultipartFile.fromPath(
-              'upload_pictures', bodyData['upload_pictures'] ?? '');
-          imageUploadRequest.files.add(file);
-        }
-        imageUploadRequest.fields.addAll(bodyData);
-        print(imageUploadRequest.files);
-        final streamResponse = await imageUploadRequest.send();
-        print(streamResponse.statusCode);
-        responseJson =
-            responses(await http.Response.fromStream(streamResponse));
-        print(responseJson);
-      } on SocketException {
-        throw FetchDataException('No Internet connection');
-      }
-      return responseJson;
-    } else {
-      print("a helllooo");
-      final response = await http
-          .post(Uri.parse(url), body: bodyData, headers: headers)
-          .timeout(
-        const Duration(seconds: 30),
-        onTimeout: () {
-          throw const SocketException('Something went wrong');
-        },
-      );
-      print(response.statusCode);
-      responseJson = responses(response);
-      print(responseJson);
-      return responseJson;
-    }
-  }
+
   Future<http.Response> maltiplephotoaddapi(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}add-anchorage';
     var responseJson;
@@ -270,6 +251,84 @@ class authprovider with ChangeNotifier {
     // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
+  Future<http.Response> addotherpositionapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}add-other';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'upload_pictures',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
+
+  Future<http.Response> mymerinaviewapi(Map<String, String> bodyData) async {
+    const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
+  Future<http.Response> deletepositionapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}delete-position';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
 
 
+
+  Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}add-custom-position';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'post_images',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
 }

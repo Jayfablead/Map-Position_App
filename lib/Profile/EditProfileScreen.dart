@@ -12,8 +12,10 @@ import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
+import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../Modal/UpdateProfileModal.dart';
+import '../Modal/ViewProfileModal.dart';
 import '../Provider/Authprovider.dart';
 import 'ViewProfileScreen.dart';
 
@@ -39,7 +41,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool secure = false;
   bool visible = true;
   bool visible1 = true;
+  bool isLoading = true;
 
+  List<XFile>? resultList;
+  List<XFile>? resultList1;
+  List<File> selectedImages = [];
+  List<String> imagePaths = [];
+  List<XFile> imagesList = <XFile>[];
+  String _error = 'No Error Dectected';
+  List<String> imageNames = [];
+  ImagePicker _picker = ImagePicker();
+  int maxImageLimit = 9;
+  List<String> networkImageUrls = [];
 
   @override
   void initState() {
@@ -49,17 +62,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _lastname.clear();
     _email.clear();
     _phone.clear();
+    Viewprofile();
   }
 
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return commanScreen(
+        isLoading: isLoading,
+        scaffold:Scaffold(
       backgroundColor: bgcolor,
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
+        child: isLoading ? Container():SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -106,7 +122,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ? Image.file(selectedimage!,fit: BoxFit.cover,)
                                 : CachedNetworkImage(
                                     imageUrl:
-                                        'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                                    viewprofilemodal?.userDetails?.profileImage ?? "",
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder:
                                         (context, url, progress) =>
@@ -125,7 +141,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Henry Matavic",
+                        Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
@@ -140,7 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Henry@gmail.com",
+                        Text(viewprofilemodal?.userDetails?.userEmail==""||viewprofilemodal?.userDetails?.userEmail==null?"N/A":viewprofilemodal?.userDetails?.userEmail ?? "",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
@@ -301,7 +317,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ),
-    );
+        ));
   }
 
   EditProfileapp() async {
@@ -314,20 +330,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       data['last_name'] = _lastname.text.trim().toString();
       data['phone'] = _phone.text.trim().toString();
       data['skype'] ="";
-      data['profile_img'] =
-      selectedimage?.path == null ? '' : selectedimage?.path ?? "";
+      data['profile_img[]'] =jsonEncode(imagePaths);
+
       print("Printapivalue${data}");
       checkInternet().then((internet) async {
         if (internet) {
-          authprovider().editprofile(data).then((response) async {
+          authprovider().editprofile(data,imagePaths).then((response) async {
             updateprofilemodal =
                 UpdateProfileModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && updateprofilemodal?.success==true) {
               EasyLoading.showSuccess(updateprofilemodal?.message ?? "");
               Get.to(ViewPRofileScreen());
+              setState(() {
+                isLoading=false;
+              });
             } else {
               EasyLoading.showError(updateprofilemodal?.message ?? "");
               setState(() {
+                isLoading=false;
               });
             }
           });
@@ -336,5 +356,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }
       });
     }
+  }
+  Viewprofile() {
+    final Map<String, String> data = {};
+    data['id'] = (loginmodal?.userId).toString();
+
+    print("printData${data}");
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewprofileapi(data).then((response) async {
+          viewprofilemodal = ViewProfileModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && viewprofilemodal?.success == true) {
+            print("Successs123456");
+            _firstname.text=(viewprofilemodal?.userDetails?.userMeta?.firstName).toString();
+            _lastname.text=(viewprofilemodal?.userDetails?.userMeta?.lastName).toString();
+            _phone.text=(viewprofilemodal?.userDetails?.userMeta?.phone).toString();
+            setState(() {
+              isLoading=false;
+            });
+          } else {
+
+            setState(() {
+              isLoading=false;
+            });
+          }
+        });
+      } else {
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

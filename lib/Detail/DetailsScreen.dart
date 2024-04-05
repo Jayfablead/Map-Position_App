@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:readmore/readmore.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';`
 
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';

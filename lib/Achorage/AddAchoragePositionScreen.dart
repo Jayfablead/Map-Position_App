@@ -16,6 +16,7 @@ import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../Modal/AddPositionModal.dart';
+import '../Modal/UpdateanchorgeModal.dart';
 import '../Provider/Authprovider.dart';
 
 class AddAchoragePositionScreen extends StatefulWidget {
@@ -2198,7 +2199,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                   batan(
                       title: "Save Next",
                       route: () {
-                        addanchorage();
+                        widget.postid==null?addanchorage():updateancorage();
                       },
                       hight: 6.h,
                       width: 40.w,
@@ -2214,6 +2215,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
       ),
     );
   }
+  //AddAncregenewposition
   addanchorage() async {
     if (_formKey.currentState!.validate()) {
       print(selectedimage?.path);
@@ -2288,137 +2290,83 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
     }
 
   }
+  //updateAncregenewposition
+  updateancorage() async {
+    if (_formKey.currentState!.validate()) {
+      print(selectedimage?.path);
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['post_id'] =widget.postid.toString();
+      data['positionName'] = _name.text==null?"":_name.text.trim().toString();
+      data['comment'] = _comments.text==null?"":_comments.text.trim().toString();
+      data['m_lat'] = widget.lat.toString();
+      data['m_lng'] = widget.lng.toString();
+      data['n1'] =N1.toString();
+      data['n2'] =N2.toString();
+      data['n3'] =N3.toString();
+      data['ne1'] =NE1.toString();
+      data['ne2'] =NE2.toString();
+      data['ne3'] =NE3.toString();
+      data['e1'] =E1.toString();
+      data['e2'] =E2.toString();
+      data['e3'] =E3.toString();
+      data['se1'] =SE1.toString();
+      data['se2'] =SE2.toString();
+      data['se3'] =SE3.toString();
+      data['s1'] =S1.toString();
+      data['s2'] =S2.toString();
+      data['s3'] =S3.toString();
+      data['sw1'] =SW1.toString();
+      data['sw2'] =SW2.toString();
+      data['sw3'] =SW3.toString();
+      data['w1'] =W1.toString();
+      data['w2'] =W2.toString();
+      data['w3'] =W3.toString();
+      data['nw1'] =NW1.toString();
+      data['nw2'] =NW2.toString();
+      data['nw3'] =NW3.toString();
+      data['own_anchor'] =anchor.toString();
+      data['buoys'] =buoys.toString();
+      data['mountain_wedges'] =mountain.toString();
+      data['own_lines'] = ownlines.toString();
+      data['sand'] =sand.toString();
+      data['mud'] =pano.toString();
+      data['clay'] =clay.toString();
+      data['coral'] =coral.toString();
+      data['rocks'] =rocks.toString();
+      data['groceries'] =groceries.toString();
+      data['water'] =water.toString();
+      data['alcohol'] =alcohol.toString();
+      data['pharmacy'] =pharmacy.toString();
+      data['restaurant'] =restaurant.toString();
+      print(imagePaths);
+      data['upload_pictures[]'] =jsonEncode(imagePaths);
+      print("Printapivalue${data}");
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().maltiplephotoaddapi(data,imagePaths).then((response) async {
+            updateanchorgemodal =
+                UpdateanchorgeModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && updateanchorgemodal?.success==true) {
+              print("admin chalu karo bhai");
+              EasyLoading.showSuccess(updateanchorgemodal?.message ?? "");
+              Get.to(HomeScreen());
+
+            } else {
+              EasyLoading.showError(updateanchorgemodal?.message ?? "");
+              setState(() {
+              });
+            }
+          });
+        } else {
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
 
   }
-  // Scessfully() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //           insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.circular(10.0),
-  //           ),
-  //           // backgroundColor: Colors.transparent,
-  //           child: SingleChildScrollView(
-  //             child: Column(mainAxisSize: MainAxisSize.min, children: [
-  //               Container(
-  //                 padding: EdgeInsets.symmetric(horizontal: 3.w),
-  //                 // height:  MediaQuery.of(context).size.height,
-  //                 width: MediaQuery.of(context).size.width,
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(10),
-  //                   color: bgcolor,
-  //                 ),
-  //                 child: Column(children: [
-  //                   SizedBox(
-  //                     height: 2.h,
-  //                   ),
-  //                   Row(
-  //                     mainAxisAlignment: MainAxisAlignment.end,
-  //                     children: [
-  //                       Container(
-  //                         height: 7.w,
-  //                         width: 7.w,
-  //                         decoration: BoxDecoration(
-  //                             borderRadius: BorderRadius.circular(100),
-  //                             color: blackback),
-  //                         child: InkWell(
-  //                             onTap: () {
-  //                               Get.back();
-  //                             },
-  //                             child: Icon(
-  //                               Icons.close,
-  //                               color: Colors.white,
-  //                               size: 17.sp,
-  //                             )),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   SizedBox(
-  //                     height: 2.h,
-  //                   ),
-  //                   Column(
-  //                     children: [
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: [
-  //                           Container(
-  //                             width: 20.w,
-  //                             height: 20.w,
-  //                             decoration: BoxDecoration(
-  //                               borderRadius: BorderRadius.circular(100),
-  //                               color: Colors.black,
-  //                             ),
-  //                             child: Icon(
-  //                               Icons.check_circle,
-  //                               color: Colors.white,
-  //                               size: 20.sp,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       SizedBox(
-  //                         height: 2.h,
-  //                       ),
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: [
-  //                           Text("Well Done!",
-  //                               style: TextStyle(
-  //                                   letterSpacing: 1,
-  //                                   color: Colors.black,
-  //                                   fontSize: 15.sp,
-  //                                   fontWeight: FontWeight.bold,
-  //                                   fontFamily: "volken")),
-  //                           SizedBox(
-  //                             height: 2.h,
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       SizedBox(
-  //                         height: 1.h,
-  //                       ),
-  //                       Row(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: [
-  //                           Text("Position Successfully Save Nextd",
-  //                               style: TextStyle(
-  //                                   letterSpacing: 1,
-  //                                   color: Colors.black,
-  //                                   fontSize: 15.sp,
-  //                                   fontWeight: FontWeight.normal,
-  //                                   fontFamily: "volken")),
-  //                         ],
-  //                       )
-  //                     ],
-  //                   ),
-  //                   SizedBox(
-  //                     height: 3.h,
-  //                   ),
-  //                   Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.center,
-  //                     mainAxisSize: MainAxisSize.min,
-  //                     children: [
-  //                       batan(
-  //                           title: "Save Next",
-  //                           route: () {
-  //                             Get.back();
-  //                           },
-  //                           hight: 6.h,
-  //                           width: 40.w,
-  //                           txtsize: 15.sp),
-  //                     ],
-  //                   ),
-  //                   SizedBox(
-  //                     height: 3.h,
-  //                   ),
-  //                 ]),
-  //               ),
-  //             ]),
-  //           ));
-  //     },
-  //   );
-  // }
+
+  }
+
 
 

@@ -273,6 +273,28 @@ class authprovider with ChangeNotifier {
     // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
+  Future<http.Response> updateotherapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}update-other-position';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'upload_pictures',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
 
   Future<http.Response> mymerinaviewapi(Map<String, String> bodyData) async {
     const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties';
@@ -332,7 +354,55 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
   Future<http.Response> updatecastompostionapi(Map<String, String> bodyData, List<String> imagePaths) async {
-    String url = '${apiUrl}add-custom-position';
+    String url = '${apiUrl}update-custom-position';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'post_images',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
+
+
+  Future<http.Response> updateanchorageapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}update-anchorage-position';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'post_images',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
+    return responseJson;
+  }
+
+
+  Future<http.Response> updatawarnignapi(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}update-warning-position';
     var responseJson;
     final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
     imageUploadRequest.headers.addAll(headers);

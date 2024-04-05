@@ -14,6 +14,7 @@ import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddOtherPositionModal.dart';
+import '../Modal/UpdateOtherPositionModal.dart';
 import '../Provider/Authprovider.dart';
 
 class AddOtherPositionScreen extends StatefulWidget {
@@ -105,7 +106,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
                     height: 5.h,
                   ),
                   header(
-                      text: "Warning",
+                      text: "Other",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState?.openDrawer();
                       }),
@@ -588,7 +589,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
                       batan(
                           title: "Save Next",
                           route: () {
-                            addother();
+                            widget.postid==null?addother(): updatepositionother();
                           },
                           hight: 6.h,
                           width: 40.w,
@@ -604,6 +605,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
       ),
     );
   }
+  //newaddotherpostion
   addother() async {
     if (_formKey.currentState!.validate()) {
       print(selectedimage?.path);
@@ -614,7 +616,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
       data['comment'] = _comments.text.trim().toString();
       data['m_lat'] = widget.lat.toString();
       data['m_lng'] = widget.lng.toString();
-      data['category'] = "Warning";
+      data['category'] = "Other";
       print(imagePaths);
       data['upload_pictures[]'] =jsonEncode(imagePaths);
       print("Printapivalue${data}");
@@ -639,6 +641,42 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
         }
       });
     }
-
+  }
+  //updateotherposition
+  updatepositionother() async {
+    if (_formKey.currentState!.validate()) {
+      print(selectedimage?.path);
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['post_id'] = widget.postid.toString();
+      data['positionName'] = _name.text.trim().toString();
+      data['comment'] = _comments.text.trim().toString();
+      data['m_lat'] = widget.lat.toString();
+      data['m_lng'] = widget.lng.toString();
+      data['category'] = "Other";
+      print(imagePaths);
+      data['upload_pictures[]'] =jsonEncode(imagePaths);
+      print("Printapivalue${data}");
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().updateotherapi(data,imagePaths).then((response) async {
+            updateotherpositionmodal =
+                UpdateOtherPositionModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && updateotherpositionmodal?.success==true) {
+              print("admin chalu karo bhai");
+              EasyLoading.showSuccess(updateotherpositionmodal?.message ?? "");
+              Get.to(HomeScreen());
+              ;
+            } else {
+              EasyLoading.showError(updateotherpositionmodal?.message ?? "");
+              setState(() {
+              });
+            }
+          });
+        } else {
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
   }
 }

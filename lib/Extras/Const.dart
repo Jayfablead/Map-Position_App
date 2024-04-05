@@ -16,7 +16,10 @@ import '../Modal/MyMarinaViewModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
 import '../Modal/UpdateAlaramModal.dart';
+import '../Modal/UpdateOtherPositionModal.dart';
 import '../Modal/UpdateProfileModal.dart';
+import '../Modal/UpdateWarningModal.dart';
+import '../Modal/UpdateanchorgeModal.dart';
 import '../Modal/ViewProfileModal.dart';
 // ************  Base url ************** //
 
@@ -66,6 +69,9 @@ MyMarinaViewModal? mymarinaviewmodal;
 DeletePositionModal? deletepositionmodal;
 CastomPositionMarinaModal? castompositionmarinamodal;
 EditCasotamMarinaModal? editcasotammarinamodal;
+UpdateanchorgeModal? updateanchorgemodal;
+UpdateWarningModal? updatewarningmodal;
+UpdateOtherPositionModal? updateotherpositionmodal;
 // Custom Button
 InkWell batan({
   required String? title,

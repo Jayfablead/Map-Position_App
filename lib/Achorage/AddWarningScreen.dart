@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,6 +17,7 @@ import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddWaringmodal.dart';
+import '../Modal/UpdateWarningModal.dart';
 import '../Provider/Authprovider.dart';
 
 class AddWarningScreen extends StatefulWidget {
@@ -88,7 +91,33 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
+  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
+
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1=lat;
+      lng1=long;
+
+    });
+  }
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("posid;-${widget.postid.toString()}");
+    print("lat;-${widget.lat.toString()}");
+    print("lag;-${widget.lng.toString()}");
+    getLocation();
+    print("lagetlocationwaringt;-${lat1.toString()}");
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -588,9 +617,9 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       batan(
-                          title: "Save Next",
+                          title: "Submit",
                           route: () {
-                            addwaring();
+                            widget.postid==null? addwaring():updatewaring() ;
                           },
                           hight: 6.h,
                           width: 40.w,
@@ -606,6 +635,7 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
       ),
     );
   }
+  //addnewpositionwarning
   addwaring() async {
     if (_formKey.currentState!.validate()) {
       print(selectedimage?.path);
@@ -632,6 +662,44 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
               ;
             } else {
               EasyLoading.showError(addwaringmodal?.message ?? "");
+              setState(() {
+              });
+            }
+          });
+        } else {
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
+
+  }
+  //updatewarningposition
+  updatewaring() async {
+    if (_formKey.currentState!.validate()) {
+      print(selectedimage?.path);
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['post_id'] = widget.postid.toString();
+      data['positionName'] = _name.text==null?"":_name.text.trim().toString();
+      data['comment'] = _comments.text==null?"":_comments.text.trim().toString();
+      data['m_lat'] = widget.lat.toString();
+      data['m_lng'] = widget.lng.toString();
+      data['category'] = "Warning";
+      print(imagePaths);
+      data['upload_pictures[]'] =jsonEncode(imagePaths);
+      print("Printapivalue${data}");
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().updatawarnignapi(data,imagePaths).then((response) async {
+            updatewarningmodal =
+                UpdateWarningModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && updatewarningmodal?.success==true) {
+              print("admin chalu karo bhai");
+              EasyLoading.showSuccess(updatewarningmodal?.message ?? "");
+              Get.to(HomeScreen());
+
+            } else {
+              EasyLoading.showError(updatewarningmodal?.message ?? "");
               setState(() {
               });
             }

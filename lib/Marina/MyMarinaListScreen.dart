@@ -38,14 +38,6 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
   bool isLoading = true;
   String htmlString = '';
   String plainText = '';
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    viewmymarina();
-    htmlString = '';
-    plainText = '';
-  }
   late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
   double? lat1,lng1;
   getLocation() async {
@@ -61,10 +53,18 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
       lat1=lat;
       lng1=long;
       isLoading=false;
-
     });
-
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    viewmymarina();
+    htmlString = '';
+    plainText = '';
+    getLocation();
+  }
+
   Widget build(BuildContext context) {
     return commanScreen(
         isLoading: isLoading,
@@ -355,7 +355,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                     child: InkWell(
                                       onTap: () {
                                         // deleteposition((mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "");
-                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),)): mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),)): mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(AddWarningScreen(lat:lat1.toString(),lng: lng1.toString(),)):Get.to(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),));
+                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)): mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)): mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(AddWarningScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,));
                                       },
                                       child: Container(
                                         width: 10.w,

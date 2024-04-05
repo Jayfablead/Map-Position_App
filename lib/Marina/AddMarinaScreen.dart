@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Drwer.dart';
@@ -50,6 +52,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   TextEditingController _MaxVesselLOA =TextEditingController();
   TextEditingController _MaaSlipLength =TextEditingController();
   TextEditingController _MaaSlipwidth =TextEditingController();
+  TextEditingController _pricelebal1 =TextEditingController();
   String? selectedvalue="Anchorages";
   String? services;
   String? gas;
@@ -107,8 +110,29 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
+  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
+  double? lat1,lng1;
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1=lat;
+      lng1=long;
 
+    });
+  }
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLocation();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -196,7 +220,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     },
                     decoration: inputDecoration(
                         hintText: "Enter Your Description",
-
                     ),
                   ),
                 ),
@@ -287,7 +310,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
-                    controller: _pricelebal,
+                    controller: _pricelebal1,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please Enter Before Price Label";
@@ -787,7 +810,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Container(
                   width:MediaQuery.of(context).size.width,
                   child: TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
                     controller: _zipcode,
                     validator: (value) {
@@ -943,7 +966,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Container(
                   width:MediaQuery.of(context).size.width,
                   child: TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
                     controller: _minimumapproachdepth ,
                     validator: (value) {
@@ -975,7 +998,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Container(
                   width:MediaQuery.of(context).size.width,
                   child: TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
                     controller: _meanlowwaterdockdepth ,
                     validator: (value) {
@@ -2264,13 +2287,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     batan(title: "Add Marina", route: (){
-                      castommapposition();
+                      widget.postid==null?castommapposition():updatecasotammarina();
                     }, hight: 6.h, width: 70.w, txtsize: 20.sp),
                   ],
                 ),
                 SizedBox(height: 5.h,),
-
-
               ],
             ),
           ),
@@ -2278,35 +2299,35 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       ),
     );
   }
+  //AddNewPositionapifuncation
   castommapposition() async {
     if (_formKey.currentState!.validate()) {
-
       print(selectedimage?.path);
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
-      final Map<String, dynamic> meta = {
-        "property_address": _address.text.trim().toString(),
-        "property_city": _city.text.trim().toString(),
+      var meta = {
+        "property_address":  _address.text==null?"":_address.text.trim().toString(),
+        "property_city": _city.text==null?"":_city.text.trim().toString(),
         "property_area": _neighborthood.text.trim().toString(),
-        "property_zip": _zipcode.text.trim().toString(),
-        "property_country": _country.text.trim().toString(),
-        "property_latitude": widget.lat.toString(),
-        "property_longitude": widget.lng.toString(),
+        "property_zip":  _zipcode.text==null?"":_zipcode.text.trim().toString(),
+        "property_country": _country.text==null?"":_country.text.trim().toString(),
+        "property_latitude": widget.lat==null?lat1.toString():widget.lat.toString(),
+        "property_longitude": widget.lng==null?lng1.toString():widget.lng.toString(),
         "text_slips": _slips.text.trim().toString(),
-        "text_minimumapproachdepth": _minimumapproachdepth.text.trim()
+        "text_minimumapproachdepth": _minimumapproachdepth.text==null?"":_minimumapproachdepth.text.trim()
             .toString(),
-        "text_meanlowwaterdockdepth": _meanlowwaterdockdepth.text.trim()
+        "text_meanlowwaterdockdepth": _meanlowwaterdockdepth.text==null?"":_meanlowwaterdockdepth.text.trim()
             .toString(),
-        "text_minimumchanneldepth": _feet.text.trim().toString(),
-        "text_meanhighwaterclearance": _meanhighwaterclearance.text.trim()
+        "text_minimumchanneldepth": _feet.text==null?"":_feet.text.trim().toString(),
+        "text_meanhighwaterclearance": _meanhighwaterclearance.text==null?"":_meanhighwaterclearance.text.trim()
             .toString(),
         "text_fueldock": services,
         "text_gas": gas,
         "text_transientstorage": TransientStorage,
         "text_longtermstorage": longtermstorage,
         "text_maxvesselloa": maxvesselloa,
-        "text_maxsliplength": _MaaSlipLength.text.trim().toString(),
-        "text_maxslipwidth": _MaaSlipwidth.text.trim().toString(),
+        "text_maxsliplength": _MaaSlipLength.text==null?"":_MaaSlipLength.text.trim().toString(),
+        "text_maxslipwidth": _MaaSlipwidth.text==null?"":_MaaSlipwidth.text.trim().toString(),
         "n1": N1,
         "n2": N2,
         "n3": N3,
@@ -2345,16 +2366,18 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "water": Water,
         "restaurant": Restaurant,
         "alcohol": Alcohol
+        // add other meta fields here
       };
+      meta.forEach((key, value) {
+        data['meta[$key]'] = value.toString();
+      });
       data['user_id'] = (loginmodal?.userId).toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
       data['post_category'] = selectedvalue.toString();
       data['post_images[]'] = jsonEncode(imagePaths);
-      data['meta'] = meta.toString();
-
+      // data['meta'] = meta.toString();
       print("Printapivalue $data");
-
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().updatecastompostionapi(data,imagePaths).then((response) async {
@@ -2374,34 +2397,35 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       });
     }
   }
+  //updatepositionfuncation
   updatecasotammarina() async {
     if (_formKey.currentState!.validate()) {
       print(selectedimage?.path);
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
-      final Map<String, dynamic> meta = {
-        "property_address": _address.text.trim().toString(),
-        "property_city": _city.text.trim().toString(),
+      var meta = {
+        "property_address":  _address.text==null?"":_address.text.trim().toString(),
+        "property_city": _city.text==null?"":_city.text.trim().toString(),
         "property_area": _neighborthood.text.trim().toString(),
-        "property_zip": _zipcode.text.trim().toString(),
-        "property_country": _country.text.trim().toString(),
-        "property_latitude": widget.lat.toString(),
-        "property_longitude": widget.lng.toString(),
+        "property_zip":  _zipcode.text==null?"":_zipcode.text.trim().toString(),
+        "property_country": _country.text==null?"":_country.text.trim().toString(),
+        "property_latitude": widget.lat==null?lat1.toString():widget.lat.toString(),
+        "property_longitude": widget.lng==null?lng1.toString():widget.lng.toString(),
         "text_slips": _slips.text.trim().toString(),
-        "text_minimumapproachdepth": _minimumapproachdepth.text.trim()
+        "text_minimumapproachdepth": _minimumapproachdepth.text==null?"":_minimumapproachdepth.text.trim()
             .toString(),
-        "text_meanlowwaterdockdepth": _meanlowwaterdockdepth.text.trim()
+        "text_meanlowwaterdockdepth": _meanlowwaterdockdepth.text==null?"":_meanlowwaterdockdepth.text.trim()
             .toString(),
-        "text_minimumchanneldepth": _feet.text.trim().toString(),
-        "text_meanhighwaterclearance": _meanhighwaterclearance.text.trim()
+        "text_minimumchanneldepth": _feet.text==null?"":_feet.text.trim().toString(),
+        "text_meanhighwaterclearance": _meanhighwaterclearance.text==null?"":_meanhighwaterclearance.text.trim()
             .toString(),
         "text_fueldock": services,
         "text_gas": gas,
         "text_transientstorage": TransientStorage,
         "text_longtermstorage": longtermstorage,
         "text_maxvesselloa": maxvesselloa,
-        "text_maxsliplength": _MaaSlipLength.text.trim().toString(),
-        "text_maxslipwidth": _MaaSlipwidth.text.trim().toString(),
+        "text_maxsliplength": _MaaSlipLength.text==null?"":_MaaSlipLength.text.trim().toString(),
+        "text_maxslipwidth": _MaaSlipwidth.text==null?"":_MaaSlipwidth.text.trim().toString(),
         "n1": N1,
         "n2": N2,
         "n3": N3,
@@ -2440,20 +2464,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "water": Water,
         "restaurant": Restaurant,
         "alcohol": Alcohol
+        // add other meta fields here
       };
-      data['user_id'] = (loginmodal?.userId).toString();
+      meta.forEach((key, value) {
+        data['meta[$key]'] = value.toString();
+      });
+      data['post_id'] =widget.postid.toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
       data['post_category'] = selectedvalue.toString();
       data['post_images[]'] = jsonEncode(imagePaths);
-      data['meta'] = meta.toString();
-
-
       print("Printapivalue $data");
-
       checkInternet().then((internet) async {
         if (internet) {
-          authprovider().addmarinacastomapi(data,imagePaths).then((response) async {
+          authprovider().updatecastompostionapi(data,imagePaths).then((response) async {
             editcasotammarinamodal =EditCasotamMarinaModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && editcasotammarinamodal?.success==true) {
               print("admin chalu karo bhai");
@@ -2470,6 +2494,5 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       });
     }
   }
-
 
 }

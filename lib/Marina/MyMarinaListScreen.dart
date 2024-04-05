@@ -317,6 +317,13 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                                       ?.postId)
                                                                   ?.toString() ??
                                                               ""));
+                                                      print("Postidgo${(mymarinaviewmodal
+                                                          ?.positions?[
+                                                      i]
+                                                          .properties
+                                                          ?.postId)
+                                                          ?.toString() ??
+                                                          ""}");
                                                     },
                                                     hight: 6.h,
                                                     width: 40.w,

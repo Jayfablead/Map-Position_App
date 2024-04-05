@@ -423,4 +423,43 @@ class authprovider with ChangeNotifier {
     // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
+
+
+  Future<http.Response> viewsinganalpositionviewapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}view-position';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
+
+
+
+
+  Future<http.Response> addreviewapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}add-review';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
+
 }

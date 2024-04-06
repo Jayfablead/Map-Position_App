@@ -6,7 +6,9 @@ import 'package:sizer/sizer.dart';
 import '../Modal/AddOtherPositionModal.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/AddReviewModal.dart';
+import '../Modal/AddViewOtherModal.dart';
 import '../Modal/AddWaringmodal.dart';
+import '../Modal/AddviewWarningModal.dart';
 import '../Modal/CastomPositionMarinaModal.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/DeletePositionModal.dart';
@@ -76,6 +78,9 @@ UpdateWarningModal? updatewarningmodal;
 UpdateOtherPositionModal? updateotherpositionmodal;
 OnwViewPostionModal? onwViewpostionmodal;
 AddReviewModal? addreviewmodal;
+AddViewOtherModal? addviewothermodal;
+AddviewWarningModal? addviewwarningmodal;
+
 // Custom Button
 InkWell batan({
   required String? title,

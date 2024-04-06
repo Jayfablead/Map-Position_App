@@ -13,7 +13,9 @@ import 'package:sizer/sizer.dart';
 import '../Achorage/AddAchoragePositionScreen.dart';
 import '../Achorage/AddOtherPositionScreen.dart';
 import '../Achorage/AddWarningScreen.dart';
+import '../Detail/DetailsOtherScreen.dart';
 import '../Detail/DetailsScreen.dart';
+import '../Detail/OtherWarningDetailsScreen.dart';
 import '../Extras/Const.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/Loader.dart';
@@ -309,21 +311,22 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                 batan(
                                                     title: "View Details",
                                                     route: () {
-                                                      Get.to(DetailsScreen(
+                                                      mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
                                                           postid: (mymarinaviewmodal
                                                                       ?.positions?[
                                                                           i]
                                                                       .properties
                                                                       ?.postId)
                                                                   ?.toString() ??
+                                                              "")):Get.to(DetailsScreen(
+                                                          postid: (mymarinaviewmodal
+                                                              ?.positions?[
+                                                          i]
+                                                              .properties
+                                                              ?.postId)
+                                                              ?.toString() ??
                                                               ""));
-                                                      print("Postidgo${(mymarinaviewmodal
-                                                          ?.positions?[
-                                                      i]
-                                                          .properties
-                                                          ?.postId)
-                                                          ?.toString() ??
-                                                          ""}");
+
                                                     },
                                                     hight: 6.h,
                                                     width: 40.w,
@@ -516,7 +519,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                         //                                     bottom: 0.5.h),
                         //                                 child: Text(
                         //                                   '⭐️',
-                        //                                   maxLines: 1,
+                        //                                   maxLines: 1,4
                         //                                   style: TextStyle(
                         //                                     overflow:
                         //                                     TextOverflow.ellipsis,

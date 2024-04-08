@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Detail/CategorywiseViewScreen.dart';
 import '../Detail/DetailsOtherScreen.dart';
 import '../Detail/DetailsScreen.dart';
@@ -232,19 +230,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                                 route: () {
                                                   viewfouritemodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(viewfouritemodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):viewfouritemodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(viewfouritemodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):viewfouritemodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
                                                       postid: (viewfouritemodal
-                                                          ?.positions?[
-                                                      i]
-                                                          .properties
-                                                          ?.postId)
-                                                          ?.toString() ??
-                                                          "")):Get.to(CategoryWiseViewScreen(
-                                                      postid: (viewfouritemodal
-                                                          ?.positions?[
-                                                      i]
-                                                          .properties
-                                                          ?.postId)
-                                                          ?.toString() ??
-                                                          ""));
+                                                          ?.positions?[i].properties ?.postId) ?.toString() ??"")):
+                                                  Get.to(CategoryWiseViewScreen(postid:(viewfouritemodal?.positions?[i].properties?.postId) ?.toString() ??""));
                                                 },
                                                 hight: 6.h,
                                                 width: 40.w,
@@ -355,7 +342,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           if (response.statusCode == 200 &&
               addfavouritepositionmodal?.success == true) {
             EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
-
             viewFavourite();
             print('details screen api call');
             setState(() {});

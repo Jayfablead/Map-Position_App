@@ -26,6 +26,7 @@ import '../Modal/UpdateProfileModal.dart';
 import '../Modal/UpdateWarningModal.dart';
 import '../Modal/UpdateanchorgeModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
+import '../Modal/ViewFouriteModal.dart';
 import '../Modal/ViewProfileModal.dart';
 // ************  Base url ************** //
 
@@ -84,6 +85,7 @@ AddViewOtherModal? addviewothermodal;
 AddviewWarningModal? addviewwarningmodal;
 ViewCategoryWiseviewDetailModal? viewcategorywisevieweetailmodal;
 AddFavouritePositionModal? addfavouritepositionmodal;
+ViewFouriteModal? viewfouritemodal;
 
 // Custom Button
 InkWell batan({

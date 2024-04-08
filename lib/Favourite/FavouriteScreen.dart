@@ -112,7 +112,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                           fit: BoxFit.fill,
                                           progressIndicatorBuilder:
                                               (context, url, progress) =>
-                                              CircularProgressIndicator(),
+                                              Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
                                           errorWidget: (context, url, error) =>
                                               Image.asset(Default_Profile),
                                         ),

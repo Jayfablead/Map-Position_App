@@ -54,7 +54,7 @@ class _drawer1State extends State<drawer1> {
         height: MediaQuery.of(context).size.height,
         width: widthDrawer,
         color: bgcolor,
-        child: ListView(
+        child: isLoading? Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator(),),):ListView(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +81,7 @@ class _drawer1State extends State<drawer1> {
                           fit: BoxFit.cover,
                           progressIndicatorBuilder:
                               (context, url, progress) =>
-                              CircularProgressIndicator(),
+                              Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
                           errorWidget: (context, url, error) =>
                               Image.asset(Default_Profile,
                                   fit: BoxFit.cover),

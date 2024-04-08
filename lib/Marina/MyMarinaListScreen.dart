@@ -175,7 +175,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                                 progress) =>
-                                                            CircularProgressIndicator(),
+                                                            Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
                                                     errorWidget:
                                                         (context, url, error) =>
                                                             Image.asset(

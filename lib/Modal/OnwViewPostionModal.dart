@@ -142,9 +142,6 @@ class MetaFields {
   List<String>? restaurant;
   List<String>? propertyLatitude;
   List<String>? propertyLongitude;
-  List<String>? wpestateTotalViews;
-  List<String>? wpestateDetailedViews;
-  List<String>? lEditLock;
 
   MetaFields(
       {this.originalAuthor,
@@ -187,10 +184,7 @@ class MetaFields {
         this.pharmacy,
         this.restaurant,
         this.propertyLatitude,
-        this.propertyLongitude,
-        this.wpestateTotalViews,
-        this.wpestateDetailedViews,
-        this.lEditLock});
+        this.propertyLongitude});
 
   MetaFields.fromJson(Map<String, dynamic> json) {
     originalAuthor = json['original_author'].cast<String>();
@@ -234,9 +228,6 @@ class MetaFields {
     restaurant = json['restaurant'].cast<String>();
     propertyLatitude = json['property_latitude'].cast<String>();
     propertyLongitude = json['property_longitude'].cast<String>();
-    wpestateTotalViews = json['wpestate_total_views'].cast<String>();
-    wpestateDetailedViews = json['wpestate_detailed_views'].cast<String>();
-    lEditLock = json['_edit_lock'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -282,9 +273,6 @@ class MetaFields {
     data['restaurant'] = this.restaurant;
     data['property_latitude'] = this.propertyLatitude;
     data['property_longitude'] = this.propertyLongitude;
-    data['wpestate_total_views'] = this.wpestateTotalViews;
-    data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['_edit_lock'] = this.lEditLock;
     return data;
   }
 }

@@ -1,4 +1,4 @@
-class OnwViewPostionModal {
+class ViewCategoryWiseviewDetailModal {
   bool? success;
   String? message;
   Data? data;
@@ -6,7 +6,7 @@ class OnwViewPostionModal {
   List<NearbyPosts>? nearbyPosts;
   List<Reviews>? reviews;
 
-  OnwViewPostionModal(
+  ViewCategoryWiseviewDetailModal(
       {this.success,
         this.message,
         this.data,
@@ -14,7 +14,7 @@ class OnwViewPostionModal {
         this.nearbyPosts,
         this.reviews});
 
-  OnwViewPostionModal.fromJson(Map<String, dynamic> json) {
+  ViewCategoryWiseviewDetailModal.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
@@ -102,6 +102,25 @@ class Data {
 
 class MetaFields {
   List<String>? originalAuthor;
+  List<String>? propertyAddress;
+  List<String>? propertyCity;
+  List<String>? propertyArea;
+  List<String>? propertyZip;
+  List<String>? propertyCountry;
+  List<String>? propertyLatitude;
+  List<String>? propertyLongitude;
+  List<String>? textSlips;
+  List<String>? textMinimumapproachdepth;
+  List<String>? textMeanlowwaterdockdepth;
+  List<String>? textMinimumchanneldepth;
+  List<String>? textMeanhighwaterclearance;
+  List<String>? textFueldock;
+  List<String>? textGas;
+  List<String>? textTransientstorage;
+  List<String>? textLongtermstorage;
+  List<String>? textMaxvesselloa;
+  List<String>? textMaxsliplength;
+  List<String>? textMaxslipwidth;
   List<String>? n1;
   List<String>? n2;
   List<String>? n3;
@@ -136,18 +155,35 @@ class MetaFields {
   List<String>? coral;
   List<String>? rocks;
   List<String>? groceries;
-  List<String>? water;
-  List<String>? alcohol;
   List<String>? pharmacy;
+  List<String>? water;
   List<String>? restaurant;
-  List<String>? propertyLatitude;
-  List<String>? propertyLongitude;
+  List<String>? alcohol;
+  List<String>? lThumbnailId;
   List<String>? wpestateTotalViews;
   List<String>? wpestateDetailedViews;
-  List<String>? lEditLock;
 
   MetaFields(
       {this.originalAuthor,
+        this.propertyAddress,
+        this.propertyCity,
+        this.propertyArea,
+        this.propertyZip,
+        this.propertyCountry,
+        this.propertyLatitude,
+        this.propertyLongitude,
+        this.textSlips,
+        this.textMinimumapproachdepth,
+        this.textMeanlowwaterdockdepth,
+        this.textMinimumchanneldepth,
+        this.textMeanhighwaterclearance,
+        this.textFueldock,
+        this.textGas,
+        this.textTransientstorage,
+        this.textLongtermstorage,
+        this.textMaxvesselloa,
+        this.textMaxsliplength,
+        this.textMaxslipwidth,
         this.n1,
         this.n2,
         this.n3,
@@ -182,18 +218,37 @@ class MetaFields {
         this.coral,
         this.rocks,
         this.groceries,
-        this.water,
-        this.alcohol,
         this.pharmacy,
+        this.water,
         this.restaurant,
-        this.propertyLatitude,
-        this.propertyLongitude,
+        this.alcohol,
+        this.lThumbnailId,
         this.wpestateTotalViews,
-        this.wpestateDetailedViews,
-        this.lEditLock});
+        this.wpestateDetailedViews});
 
   MetaFields.fromJson(Map<String, dynamic> json) {
     originalAuthor = json['original_author'].cast<String>();
+    propertyAddress = json['property_address'].cast<String>();
+    propertyCity = json['property_city'].cast<String>();
+    propertyArea = json['property_area'].cast<String>();
+    propertyZip = json['property_zip'].cast<String>();
+    propertyCountry = json['property_country'].cast<String>();
+    propertyLatitude = json['property_latitude'].cast<String>();
+    propertyLongitude = json['property_longitude'].cast<String>();
+    textSlips = json['text_slips'].cast<String>();
+    textMinimumapproachdepth = json['text_minimumapproachdepth'].cast<String>();
+    textMeanlowwaterdockdepth =
+        json['text_meanlowwaterdockdepth'].cast<String>();
+    textMinimumchanneldepth = json['text_minimumchanneldepth'].cast<String>();
+    textMeanhighwaterclearance =
+        json['text_meanhighwaterclearance'].cast<String>();
+    textFueldock = json['text_fueldock'].cast<String>();
+    textGas = json['text_gas'].cast<String>();
+    textTransientstorage = json['text_transientstorage'].cast<String>();
+    textLongtermstorage = json['text_longtermstorage'].cast<String>();
+    textMaxvesselloa = json['text_maxvesselloa'].cast<String>();
+    textMaxsliplength = json['text_maxsliplength'].cast<String>();
+    textMaxslipwidth = json['text_maxslipwidth'].cast<String>();
     n1 = json['n1'].cast<String>();
     n2 = json['n2'].cast<String>();
     n3 = json['n3'].cast<String>();
@@ -228,20 +283,37 @@ class MetaFields {
     coral = json['coral'].cast<String>();
     rocks = json['rocks'].cast<String>();
     groceries = json['groceries'].cast<String>();
-    water = json['water'].cast<String>();
-    alcohol = json['alcohol'].cast<String>();
     pharmacy = json['pharmacy'].cast<String>();
+    water = json['water'].cast<String>();
     restaurant = json['restaurant'].cast<String>();
-    propertyLatitude = json['property_latitude'].cast<String>();
-    propertyLongitude = json['property_longitude'].cast<String>();
+    alcohol = json['alcohol'].cast<String>();
+    lThumbnailId = json['_thumbnail_id'].cast<String>();
     wpestateTotalViews = json['wpestate_total_views'].cast<String>();
     wpestateDetailedViews = json['wpestate_detailed_views'].cast<String>();
-    lEditLock = json['_edit_lock'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['original_author'] = this.originalAuthor;
+    data['property_address'] = this.propertyAddress;
+    data['property_city'] = this.propertyCity;
+    data['property_area'] = this.propertyArea;
+    data['property_zip'] = this.propertyZip;
+    data['property_country'] = this.propertyCountry;
+    data['property_latitude'] = this.propertyLatitude;
+    data['property_longitude'] = this.propertyLongitude;
+    data['text_slips'] = this.textSlips;
+    data['text_minimumapproachdepth'] = this.textMinimumapproachdepth;
+    data['text_meanlowwaterdockdepth'] = this.textMeanlowwaterdockdepth;
+    data['text_minimumchanneldepth'] = this.textMinimumchanneldepth;
+    data['text_meanhighwaterclearance'] = this.textMeanhighwaterclearance;
+    data['text_fueldock'] = this.textFueldock;
+    data['text_gas'] = this.textGas;
+    data['text_transientstorage'] = this.textTransientstorage;
+    data['text_longtermstorage'] = this.textLongtermstorage;
+    data['text_maxvesselloa'] = this.textMaxvesselloa;
+    data['text_maxsliplength'] = this.textMaxsliplength;
+    data['text_maxslipwidth'] = this.textMaxslipwidth;
     data['n1'] = this.n1;
     data['n2'] = this.n2;
     data['n3'] = this.n3;
@@ -276,15 +348,13 @@ class MetaFields {
     data['coral'] = this.coral;
     data['rocks'] = this.rocks;
     data['groceries'] = this.groceries;
-    data['water'] = this.water;
-    data['alcohol'] = this.alcohol;
     data['pharmacy'] = this.pharmacy;
+    data['water'] = this.water;
     data['restaurant'] = this.restaurant;
-    data['property_latitude'] = this.propertyLatitude;
-    data['property_longitude'] = this.propertyLongitude;
+    data['alcohol'] = this.alcohol;
+    data['_thumbnail_id'] = this.lThumbnailId;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['_edit_lock'] = this.lEditLock;
     return data;
   }
 }

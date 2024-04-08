@@ -130,30 +130,42 @@ class MetaFields {
 }
 
 class NearbyPosts {
+  String? postCategory;
   int? id;
   String? title;
   String? latitude;
   String? longitude;
   String? thumbnail;
+  bool? isFavorite;
 
   NearbyPosts(
-      {this.id, this.title, this.latitude, this.longitude, this.thumbnail});
+      {this.postCategory,
+        this.id,
+        this.title,
+        this.latitude,
+        this.longitude,
+        this.thumbnail,
+        this.isFavorite});
 
   NearbyPosts.fromJson(Map<String, dynamic> json) {
+    postCategory = json['post_category'];
     id = json['id'];
     title = json['title'];
     latitude = json['latitude'];
     longitude = json['longitude'];
     thumbnail = json['thumbnail'];
+    isFavorite = json['is_favorite'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['post_category'] = this.postCategory;
     data['id'] = this.id;
     data['title'] = this.title;
     data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;
     data['thumbnail'] = this.thumbnail;
+    data['is_favorite'] = this.isFavorite;
     return data;
   }
 }

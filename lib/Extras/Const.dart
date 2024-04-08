@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddOtherPositionModal.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/AddReviewModal.dart';
@@ -24,6 +25,7 @@ import '../Modal/UpdateOtherPositionModal.dart';
 import '../Modal/UpdateProfileModal.dart';
 import '../Modal/UpdateWarningModal.dart';
 import '../Modal/UpdateanchorgeModal.dart';
+import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../Modal/ViewProfileModal.dart';
 // ************  Base url ************** //
 
@@ -80,6 +82,8 @@ OnwViewPostionModal? onwViewpostionmodal;
 AddReviewModal? addreviewmodal;
 AddViewOtherModal? addviewothermodal;
 AddviewWarningModal? addviewwarningmodal;
+ViewCategoryWiseviewDetailModal? viewcategorywisevieweetailmodal;
+AddFavouritePositionModal? addfavouritepositionmodal;
 
 // Custom Button
 InkWell batan({

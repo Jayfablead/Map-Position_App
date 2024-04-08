@@ -14,10 +14,14 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/AddViewOtherModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Provider/Authprovider.dart';
+import 'CategorywiseViewScreen.dart';
+import 'DetailsScreen.dart';
+import 'OtherWarningDetailsScreen.dart';
 
 class DetailsOtherScreen extends StatefulWidget {
   String? postid;
@@ -109,21 +113,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               ),
                               Row(
                                 children: [
-                                  Container(
-                                    height: 9.w,
-                                    width: 9.w,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsetsDirectional.all(2.2.w),
-                                    decoration: BoxDecoration(
-                                      color: blackback,
-                                      borderRadius: BorderRadius.circular(900),
-                                    ),
-                                    child: Icon(
-                                      CupertinoIcons.heart_fill,
-                                      color: Colors.white,
-                                      size: 15.sp,
-                                    ),
-                                  ),
+
                                   IconButton(
                                       onPressed: () {
                                         _scaffoldKeyProductlistpage.currentState
@@ -400,19 +390,36 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       Positioned(
                                         top: 0.2.h,
                                         left: 34.w,
-                                        child: Container(
-                                          height: 9.w,
-                                          width: 9.w,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsetsDirectional.all(2.2.w),
-                                          decoration: BoxDecoration(
-                                            color: blackback,
-                                            borderRadius: BorderRadius.circular(900),
-                                          ),
-                                          child: Icon(
-                                            CupertinoIcons.heart_fill,
-                                            color: Colors.white,
-                                            size: 15.sp,
+                                        child: InkWell(
+                                          onTap: (){
+                                            print("datavalye${addviewothermodal?.nearbyPosts?[index].isFavorite}");
+                                            addfevorite( (addviewothermodal?.nearbyPosts?[index].isFavorite)!,(addviewothermodal
+                                                ?.nearbyPosts?[
+                                            index]
+                                                .id
+                                            )
+                                                ?.toString() ??
+                                                "");
+                                            print("abc");
+                                          },
+                                          child: Container(
+                                            height: 9.w,
+                                            width: 9.w,
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsetsDirectional.all(2.2.w),
+                                            decoration: BoxDecoration(
+                                              color: blackback,
+                                              borderRadius: BorderRadius.circular(900),
+                                            ),
+                                            child: addviewothermodal?.nearbyPosts?[index].isFavorite==true?Icon(
+                                              CupertinoIcons.heart_fill,
+                                              color: Colors.white,
+                                              size: 15.sp,
+                                            ) :Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.white,
+                                              size: 15.sp,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -445,8 +452,54 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   batan(
                                       title: "View Details",
                                       route: () {
-                                        Get.back();
-                                        Get.to(DetailsOtherScreen(postid: onwViewpostionmodal?.nearbyPosts?[index].id.toString(),));
+                                        if (addviewothermodal
+                                            ?.nearbyPosts?[index]
+                                            .postCategory ==
+                                            "Warning") {
+                                          Get.back();
+                                          Get.to(DetailsWarningDetailsScreen(
+                                            postid: (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .id)
+                                                ?.toString() ??
+                                                "",
+                                          ));
+                                        } else if (addviewothermodal
+                                            ?.nearbyPosts?[index]
+                                            .postCategory ==
+                                            "Other") {
+                                          Get.back();
+                                          Get.to(DetailsOtherScreen(
+                                            postid: (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .id)
+                                                ?.toString() ??
+                                                "",
+                                          ));
+                                        } else if (addviewothermodal
+                                            ?.nearbyPosts?[index]
+                                            .postCategory ==
+                                            "Anchorages") {
+                                          Get.back();
+                                          Get.to(DetailsScreen(
+                                              postid: (addviewothermodal
+                                                  ?.nearbyPosts?[
+                                              index]
+                                                  .id)
+                                                  ?.toString() ??
+                                                  ""));
+                                        } else
+                                              () {
+                                            Get.back();
+                                            Get.to(CategoryWiseViewScreen(
+                                                postid: (addviewothermodal
+                                                    ?.nearbyPosts?[
+                                                index]
+                                                    .id)
+                                                    ?.toString() ??
+                                                    ""));
+                                          };
+
                                       },
                                       hight: 5.h,
                                       width: 30.w,
@@ -612,6 +665,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
   viewposition() {
     final Map<String, String> data = {};
     data['post_id'] =widget.postid.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
     print(data);
     checkInternet().then((internet) async {
       if (internet) {
@@ -620,7 +674,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
               AddViewOtherModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && addviewothermodal?.success == true) {
 
-
+            print("otherwiseapicall");
             setState(() {
               isLoading = false;
               print(plainText);
@@ -878,5 +932,36 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
         );
       },
     );
+  }
+  addfevorite(bool value,id) {
+
+    EasyLoading.show(status: 'Please Wait ...');
+    final Map<String, String> data = {};
+    data['post_id'] = id.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
+    data['isFavorite'] =value?'0':'1' ;
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().addfevouriteapi(data).then((response) async {
+          addfavouritepositionmodal =
+              AddFavouritePositionModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && addfavouritepositionmodal?.success == true) {
+            EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
+            // viewposition();
+            viewposition();
+            print('very good');
+            setState(() {});
+          } else {
+            EasyLoading.showError(addreviewmodal?.message ?? '');
+            setState(() {});
+          }
+        });
+      } else {
+        EasyLoading.showError(addreviewmodal?.message ?? '');
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

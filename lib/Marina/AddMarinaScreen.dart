@@ -2380,7 +2380,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       print("Printapivalue $data");
       checkInternet().then((internet) async {
         if (internet) {
-          authprovider().updatecastompostionapi(data,imagePaths).then((response) async {
+          authprovider().addmarinacastomapi(data,imagePaths).then((response) async {
             castompositionmarinamodal =CastomPositionMarinaModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && castompositionmarinamodal?.success==true) {
               print("admin chalu karo bhai");

@@ -14,9 +14,13 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Provider/Authprovider.dart';
+import 'CategorywiseViewScreen.dart';
+import 'DetailsOtherScreen.dart';
+import 'OtherWarningDetailsScreen.dart';
 
 class DetailsScreen extends StatefulWidget {
   String? postid;
@@ -128,22 +132,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 9.w,
-                                      width: 9.w,
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsetsDirectional.all(2.2.w),
-                                      decoration: BoxDecoration(
-                                        color: blackback,
-                                        borderRadius:
-                                            BorderRadius.circular(900),
-                                      ),
-                                      child: Icon(
-                                        CupertinoIcons.heart_fill,
-                                        color: Colors.white,
-                                        size: 15.sp,
-                                      ),
-                                    ),
                                     IconButton(
                                         onPressed: () {
                                           _scaffoldKeyProductlistpage
@@ -306,13 +294,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         // SizedBox(
                         //   height: 1.h,
                         // ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : Row(
+
+                        Row(
                                 children: [
                                   onwViewpostionmodal?.data?.metaFields
                                                   ?.water?[0] ==
@@ -330,7 +313,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   ?.restaurant?[0] ==
                                               "false"
                                       ? Container()
-                                      : Text("Facilities Nearby :-",
+                                      :
+                                  Text("Facilities Nearby :-",
                                           style: TextStyle(
                                               letterSpacing: 1,
                                               color: Colors.black,
@@ -339,11 +323,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               fontFamily: "volken")),
                                 ],
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning" ||
+
                                 onwViewpostionmodal
                                         ?.data?.metaFields?.water?[0] ==
                                     "false" ||
@@ -360,14 +340,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ?.data?.metaFields?.restaurant?[0] ==
                                     "false"
                             ? Container()
-                            : SizedBox(
+                            :
+                        SizedBox(
                                 height: 2.h,
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning" ||
+
                                 onwViewpostionmodal
                                         ?.data?.metaFields?.water?[0] ==
                                     "false" ||
@@ -384,7 +361,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ?.data?.metaFields?.restaurant?[0] ==
                                     "false"
                             ? Container()
-                            : Container(
+                            :
+                        Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 2.w, vertical: 1.h),
                                 decoration: BoxDecoration(
@@ -393,16 +371,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Column(
                                   children: [
-                                    onwViewpostionmodal?.data?.metaFields
-                                                    ?.pharmacy?[0] ==
-                                                "false" ||
-                                            onwViewpostionmodal
-                                                    ?.data
-                                                    ?.metaFields
-                                                    ?.groceries?[0] ==
-                                                "false"
-                                        ? Container()
-                                        : Row(
+
+                                   Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
@@ -562,16 +532,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         : SizedBox(
                                             height: 1.h,
                                           ),
-                                    onwViewpostionmodal?.data?.metaFields
-                                                    ?.alcohol?[0] ==
-                                                "false" ||
-                                            onwViewpostionmodal
-                                                    ?.data
-                                                    ?.metaFields
-                                                    ?.restaurant?[0] ==
-                                                "false"
-                                        ? Container()
-                                        : Row(
+
+                                    Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
@@ -581,7 +543,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                           ?.alcohol?[0] ==
                                                       "false"
                                                   ? Container()
-                                                  : Row(
+                                                  :
+                                              Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .start,
@@ -705,16 +668,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     )
                                             ],
                                           ),
-                                    onwViewpostionmodal?.data?.metaFields
-                                                    ?.alcohol?[0] ==
-                                                "false" ||
-                                            onwViewpostionmodal
-                                                    ?.data
-                                                    ?.metaFields
-                                                    ?.restaurant?[0] ==
-                                                "false"
-                                        ? Container()
-                                        : SizedBox(
+
+                                    onwViewpostionmodal
+                                        ?.data?.metaFields?.water?[0] ==
+                                        "false"
+                                        ? Container():SizedBox(
                                             height: 1.h,
                                           ),
                                     onwViewpostionmodal
@@ -868,22 +826,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               fontFamily: "volken"))
                                 ],
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : SizedBox(
+                       SizedBox(
                                 height: 1.h,
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : Row(
+                         Row(
                                 children: [
                                   onwViewpostionmodal?.data?.metaFields
                                                   ?.ownAnchor?[0] ==
@@ -995,40 +941,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           )),
                                 ],
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : SizedBox(
+                      SizedBox(
                                 height: 1.h,
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : Row(
+                         Row(
                                 children: [
-                                  onwViewpostionmodal?.data?.metaFields
-                                                  ?.sand?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal
-                                                  ?.data?.metaFields?.mud?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.clay?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.coral?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.rocks?[0] ==
-                                              "false"
-                                      ? Container()
-                                      : Container(
+                                   Container(
                                           width: 95.w,
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 3.w, vertical: 1.h),
@@ -1077,23 +995,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               SizedBox(
                                                 height: 1.h,
                                               ),
-                                              onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.clay?[0] ==
-                                                          "false" ||
-                                                      onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.mud?[0] ==
-                                                          "false" ||
-                                                      onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.sand?[0] ==
-                                                          "false"
-                                                  ? Container()
-                                                  : Row(
+                                              Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceBetween,
@@ -1164,13 +1066,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   ),
                                                                 ],
                                                               ),
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.mud?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Column(
+                                                        Column(
                                                                 children: [
                                                                   InkWell(
                                                                     onTap: () {
@@ -1296,37 +1192,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               ),
                                                       ],
                                                     ),
-                                              onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.clay?[0] ==
-                                                          "false" ||
-                                                      onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.mud?[0] ==
-                                                          "false" ||
-                                                      onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.sand?[0] ==
-                                                          "false"
-                                                  ? Container()
-                                                  : SizedBox(
+                                               SizedBox(
                                                       height: 1.h,
                                                     ),
-                                              onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.coral?[0] ==
-                                                          "false" ||
-                                                      onwViewpostionmodal
-                                                              ?.data
-                                                              ?.metaFields
-                                                              ?.rocks?[0] ==
-                                                          "false"
-                                                  ? Container()
-                                                  : Row(
+                                              Row(
                                                       children: [
                                                         onwViewpostionmodal
                                                                     ?.data
@@ -1471,28 +1340,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           )),
                                 ],
                               ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.clay?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.mud?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.sand?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.coral?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.rocks?[0] ==
-                                    "false"
-                            ? Container()
-                            : SizedBox(
+                         SizedBox(
                                 height: 1.h,
                               ),
                         Row(
@@ -1556,21 +1404,48 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         Positioned(
                                           top: 0.2.h,
                                           left: 34.w,
-                                          child: Container(
-                                            height: 9.w,
-                                            width: 9.w,
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsetsDirectional.all(
-                                                2.2.w),
-                                            decoration: BoxDecoration(
-                                              color: blackback,
-                                              borderRadius:
-                                                  BorderRadius.circular(900),
-                                            ),
-                                            child: Icon(
-                                              CupertinoIcons.heart_fill,
-                                              color: Colors.white,
-                                              size: 15.sp,
+                                          child: InkWell(
+                                            onTap: () {
+                                              print(
+                                                  "datavalye${onwViewpostionmodal?.nearbyPosts?[index].isFavorite}");
+                                              addfevorite(
+                                                  (onwViewpostionmodal
+                                                      ?.nearbyPosts?[index]
+                                                      .isFavorite)!,
+                                                  (onwViewpostionmodal
+                                                              ?.nearbyPosts?[
+                                                                  index]
+                                                              .id)
+                                                          ?.toString() ??
+                                                      "");
+                                              print("abc");
+                                            },
+                                            child: Container(
+                                              height: 9.w,
+                                              width: 9.w,
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  EdgeInsetsDirectional.all(
+                                                      2.2.w),
+                                              decoration: BoxDecoration(
+                                                color: blackback,
+                                                borderRadius:
+                                                    BorderRadius.circular(900),
+                                              ),
+                                              child: onwViewpostionmodal
+                                                          ?.nearbyPosts?[index]
+                                                          .isFavorite ==
+                                                      true
+                                                  ? Icon(
+                                                      CupertinoIcons.heart_fill,
+                                                      color: Colors.white,
+                                                      size: 15.sp,
+                                                    )
+                                                  : Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.white,
+                                                      size: 15.sp,
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -1581,26 +1456,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          onwViewpostionmodal
-                                                          ?.nearbyPosts?[index]
-                                                          .title ==
-                                                      "" ||
-                                                  onwViewpostionmodal
-                                                          ?.nearbyPosts?[index]
-                                                          .title ==
-                                                      null
-                                              ? "N/A"
-                                              : (onwViewpostionmodal
-                                                      ?.nearbyPosts?[index]
-                                                      .title)
-                                                  .toString(),
-                                          style: TextStyle(
-                                            fontFamily: "Volkan",
-                                            letterSpacing: 1.2,
-                                            color: secondary,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20.sp,
+                                        SizedBox(
+                                          width: 25.w,
+                                          child: Text(
+                                            onwViewpostionmodal
+                                                            ?.nearbyPosts?[
+                                                                index]
+                                                            .title ==
+                                                        "" ||
+                                                    onwViewpostionmodal
+                                                            ?.nearbyPosts?[
+                                                                index]
+                                                            .title ==
+                                                        null
+                                                ? "N/A"
+                                                : (onwViewpostionmodal
+                                                        ?.nearbyPosts?[index]
+                                                        .title)
+                                                    .toString(),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontFamily: "Volkan",
+                                              letterSpacing: 1.2,
+                                              color: secondary,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.sp,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -1611,12 +1493,53 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     batan(
                                         title: "View Details",
                                         route: () {
-                                          Get.back();
-                                          Get.to(DetailsScreen(
-                                            postid: onwViewpostionmodal
-                                                ?.nearbyPosts?[index].id
-                                                .toString(),
-                                          ));
+                                          if (onwViewpostionmodal
+                                                  ?.nearbyPosts?[index]
+                                                  .postCategory ==
+                                              "Warning") {
+                                            Get.back();
+                                            Get.to(DetailsWarningDetailsScreen(
+                                              postid: (onwViewpostionmodal
+                                                          ?.nearbyPosts?[index]
+                                                          .id)
+                                                      ?.toString() ??
+                                                  "",
+                                            ));
+                                          } else if (onwViewpostionmodal
+                                                  ?.nearbyPosts?[index]
+                                                  .postCategory ==
+                                              "Other") {
+                                            Get.back();
+                                            Get.to(DetailsOtherScreen(
+                                              postid: (onwViewpostionmodal
+                                                          ?.nearbyPosts?[index]
+                                                          .id)
+                                                      ?.toString() ??
+                                                  "",
+                                            ));
+                                          } else if (onwViewpostionmodal
+                                                  ?.nearbyPosts?[index]
+                                                  .postCategory ==
+                                              "Anchorages") {
+                                            Get.back();
+                                            Get.to(DetailsScreen(
+                                                postid: (onwViewpostionmodal
+                                                            ?.nearbyPosts?[
+                                                                index]
+                                                            .id)
+                                                        ?.toString() ??
+                                                    ""));
+                                          } else
+                                            () {
+                                              Get.back();
+                                              Get.to(CategoryWiseViewScreen(
+                                                  postid: (onwViewpostionmodal
+                                                              ?.nearbyPosts?[
+                                                                  index]
+                                                              .id)
+                                                          ?.toString() ??
+                                                      ""));
+                                            };
                                         },
                                         hight: 5.h,
                                         width: 30.w,
@@ -1655,178 +1578,223 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ],
                         ),
-                        for (int i = 0;
-                            i < (onwViewpostionmodal?.reviews?.length ?? 0);
-                            i++) ...[
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.w),
-                            child: Container(
-                              margin: EdgeInsets.symmetric(vertical: 0.5.h),
-                              padding: EdgeInsets.symmetric(
-                                vertical: 0.5.h,
-                              ),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade400, width: 0.5),
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Stack(
+                        onwViewpostionmodal?.reviews?.length == null ||
+                                onwViewpostionmodal?.reviews?.length == '' ||
+                                onwViewpostionmodal?.reviews?.length == 0
+                            ? Container()
+                            : Column(
                                 children: [
-                                  Column(children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: 20.w,
-                                          width: 20.w,
-                                          padding: EdgeInsets.all(1.w),
-                                          child: ClipRRect(
+                                  for (int i = 0;
+                                      i <
+                                          (onwViewpostionmodal
+                                                  ?.reviews?.length ??
+                                              0);
+                                      i++) ...[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 2.w),
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 0.5.h),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 0.5.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey.shade400,
+                                                width: 0.5),
+                                            color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(90),
-                                            child: CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: onwViewpostionmodal
-                                                        ?.reviews?[i].userImg ??
-                                                    "",
-                                                progressIndicatorBuilder: (context,
-                                                        url, progress) =>
-                                                    Center(
-                                                        child:
-                                                            CircularProgressIndicator()),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(
-                                                          Icons.person,
-                                                          size: 15.w,
-                                                          color: Colors.white,
-                                                        )),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                BorderRadius.circular(10)),
+                                        child: Stack(
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  width: 60.w,
-                                                  child: Text(
-                                                    onwViewpostionmodal
-                                                                    ?.reviews?[
-                                                                        i]
-                                                                    .name ==
-                                                                "" ||
-                                                            onwViewpostionmodal
-                                                                    ?.reviews?[
-                                                                        i]
-                                                                    .name ==
-                                                                null
-                                                        ? "N/A"
-                                                        : (onwViewpostionmodal
-                                                                ?.reviews?[i]
-                                                                .name)
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      fontFamily: "volken",
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      letterSpacing: 1,
-                                                      color: Colors.black,
+                                            Column(children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 20.w,
+                                                    width: 20.w,
+                                                    padding:
+                                                        EdgeInsets.all(1.w),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              90),
+                                                      child: CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl:
+                                                              onwViewpostionmodal
+                                                                      ?.reviews?[
+                                                                          i]
+                                                                      .userImg ??
+                                                                  "",
+                                                          progressIndicatorBuilder:
+                                                              (context, url,
+                                                                      progress) =>
+                                                                  Center(
+                                                                      child:
+                                                                          CircularProgressIndicator()),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Icon(
+                                                                Icons.person,
+                                                                size: 15.w,
+                                                                color: Colors
+                                                                    .white,
+                                                              )),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 0.5.h),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
-                                                  size: 14.sp,
-                                                ),
-                                                Text(
-                                                  onwViewpostionmodal
-                                                                  ?.reviews?[i]
-                                                                  .reviewerRating ==
-                                                              "" ||
-                                                          onwViewpostionmodal
-                                                                  ?.reviews?[i]
-                                                                  .reviewerRating ==
-                                                              null
-                                                      ? "0"
-                                                      : (onwViewpostionmodal
-                                                              ?.reviews?[i]
-                                                              .reviewerRating)
-                                                          .toString(),
-                                                  style: TextStyle(
-                                                    fontFamily: "volken",
-                                                    fontWeight: FontWeight.bold,
-                                                    letterSpacing: 0.5,
-                                                    color: secondary
-                                                        .withOpacity(0.45),
+                                                  SizedBox(
+                                                    width: 2.w,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 0.5.h,
-                                            ),
-                                            SizedBox(
-                                              width: 65.w,
-                                              child: Text(
-                                                onwViewpostionmodal
-                                                                ?.reviews?[i]
-                                                                .reviewSummary
-                                                                ?.xsReviwSummery ==
-                                                            "" ||
-                                                        onwViewpostionmodal
-                                                                ?.reviews?[i]
-                                                                .reviewSummary
-                                                                ?.xsReviwSummery ==
-                                                            null
-                                                    ? "N/A"
-                                                    : (onwViewpostionmodal
-                                                            ?.reviews?[i]
-                                                            .reviewSummary
-                                                            ?.xsReviwSummery)
-                                                        .toString(),
-                                                style: TextStyle(
-                                                  fontFamily: "volken",
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 0.5,
-                                                  color: secondary
-                                                      .withOpacity(0.45),
-                                                ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 60.w,
+                                                            child: Text(
+                                                              onwViewpostionmodal
+                                                                              ?.reviews?[
+                                                                                  i]
+                                                                              .name ==
+                                                                          "" ||
+                                                                      onwViewpostionmodal
+                                                                              ?.reviews?[
+                                                                                  i]
+                                                                              .name ==
+                                                                          null
+                                                                  ? "N/A"
+                                                                  : (onwViewpostionmodal
+                                                                          ?.reviews?[
+                                                                              i]
+                                                                          .name)
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                fontSize: 12.sp,
+                                                                fontFamily:
+                                                                    "volken",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                letterSpacing:
+                                                                    1,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 0.5.h),
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.star,
+                                                            color: Colors.amber,
+                                                            size: 14.sp,
+                                                          ),
+                                                          Text(
+                                                            onwViewpostionmodal
+                                                                            ?.reviews?[
+                                                                                i]
+                                                                            .reviewerRating ==
+                                                                        "" ||
+                                                                    onwViewpostionmodal
+                                                                            ?.reviews?[
+                                                                                i]
+                                                                            .reviewerRating ==
+                                                                        null
+                                                                ? "0"
+                                                                : (onwViewpostionmodal
+                                                                        ?.reviews?[
+                                                                            i]
+                                                                        .reviewerRating)
+                                                                    .toString(),
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  "volken",
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              letterSpacing:
+                                                                  0.5,
+                                                              color: secondary
+                                                                  .withOpacity(
+                                                                      0.45),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 0.5.h,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 65.w,
+                                                        child: Text(
+                                                          onwViewpostionmodal
+                                                                          ?.reviews?[
+                                                                              i]
+                                                                          .reviewSummary
+                                                                          ?.xsReviwSummery ==
+                                                                      "" ||
+                                                                  onwViewpostionmodal
+                                                                          ?.reviews?[
+                                                                              i]
+                                                                          .reviewSummary
+                                                                          ?.xsReviwSummery ==
+                                                                      null
+                                                              ? "N/A"
+                                                              : (onwViewpostionmodal
+                                                                      ?.reviews?[
+                                                                          i]
+                                                                      .reviewSummary
+                                                                      ?.xsReviwSummery)
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "volken",
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            letterSpacing: 0.5,
+                                                            color: secondary
+                                                                .withOpacity(
+                                                                    0.45),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                ],
                                               ),
-                                            ),
+                                            ]),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
+                                      ),
+                                    )
+                                  ]
                                 ],
                               ),
-                            ),
-                          )
-                        ]
                       ]),
                     )
                   ],
@@ -1839,6 +1807,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   viewposition() {
     final Map<String, String> data = {};
     data['post_id'] = widget.postid.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
     print(data);
     checkInternet().then((internet) async {
       if (internet) {
@@ -1847,6 +1816,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               OnwViewPostionModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 &&
               onwViewpostionmodal?.success == true) {
+            print("anchioirapicall");
             setState(() {
               isLoading = false;
               print(plainText);
@@ -2097,5 +2067,37 @@ class _DetailsScreenState extends State<DetailsScreen> {
         );
       },
     );
+  }
+
+  addfevorite(bool value, id) {
+    EasyLoading.show(status: 'Please Wait ...');
+    final Map<String, String> data = {};
+    data['post_id'] = id.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
+    data['isFavorite'] = value ? '0' : '1';
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().addfevouriteapi(data).then((response) async {
+          addfavouritepositionmodal =
+              AddFavouritePositionModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 &&
+              addfavouritepositionmodal?.success == true) {
+            EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
+            // viewposition();
+            viewposition();
+            print('details screen api call');
+            setState(() {});
+          } else {
+            EasyLoading.showError(addreviewmodal?.message ?? '');
+            setState(() {});
+          }
+        });
+      } else {
+        EasyLoading.showError(addreviewmodal?.message ?? '');
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

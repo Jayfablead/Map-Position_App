@@ -462,4 +462,23 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
+
+
+  Future<http.Response> addfevouriteapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}add-remove-fav';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
+
 }

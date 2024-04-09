@@ -106,7 +106,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                               "volken",
                               letterSpacing: 1), ),),
                         ):Container(
-                          height: 100.h,
+                          height: 78.h,
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             itemCount: mymarinaviewmodal?.positions?.length ?? 0,
@@ -401,6 +401,9 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
                                 ],
                               );
                             },
@@ -574,9 +577,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                         //       ),
                         //
                         //     ],
-                        SizedBox(
-                          height: 10.h,
-                        ),
+
                       ],
                     ),
                   ),

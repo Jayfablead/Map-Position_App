@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,10 @@ import 'Profile/ViewProfileScreen.dart';
 import 'Provider/Authprovider.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = "pk_test_51NGDspApypsYW3yfKSmVlCibT0P3t5DmevEATpP8Dwke1gY19RbEtv5yihCFp2AW5CXTXzvrFPb8ep1Et9OGtuSx00CzY90Rvt";
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

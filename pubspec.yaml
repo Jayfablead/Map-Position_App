@@ -69,6 +69,8 @@ dependencies:
   video_player: ^2.8.3
   persistent_bottom_nav_bar:
   http_parser:
+  flutter_stripe: ^7.0.0
+
 
 
 

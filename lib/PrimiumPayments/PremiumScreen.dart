@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:http/http.dart'as http;
 import '../Extras/bottombar.dart';
 
 class PremiumScreen extends StatefulWidget {
@@ -13,6 +16,9 @@ class PremiumScreen extends StatefulWidget {
 }
 
 class _PremiumScreenState extends State<PremiumScreen> {
+  Map<String,dynamic>?  paymentIntent;
+
+  get gpay => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,11 +163,78 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
               ),
               SizedBox(height: 5.h,),
-              batan(title: "Subscribe for \$200.00", route: (){}, hight: 6.h, width: 85.w, txtsize: 20.sp),
+              batan(title: "Subscribe for \$200.00", route: (){
+                makePayment();
+              }, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],
           ),
         ),
       ),
     );
   }
+
+  Future<void> makePayment() async {
+    try {
+      paymentIntent = await createPaymentIntent('10000', 'GBP');
+
+      var gpay = PaymentSheetGooglePay(merchantCountryCode: "GB",
+          currencyCode: "GBP",
+          testEnv: true);
+
+      //STEP 2: Initialize Payment Sheet
+      await Stripe.instance
+          .initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: paymentIntent![
+              'sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe'], //Gotten from payment intent
+              style: ThemeMode.light,
+              merchantDisplayName: 'Abhi',
+              googlePay: gpay))
+          .then((value) {});
+
+      //STEP 3: Display Payment sheet
+      displayPaymentSheet();
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        print("Payment Successfully");
+      });
+    } catch (e) {
+      print('$e');
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': '200',
+        'currency':"Us",
+      };
+
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization': 'Bearer sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+      return json.decode(response.body);
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+
 }
+
+
+
+
+
+

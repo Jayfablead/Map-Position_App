@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
@@ -15,6 +17,7 @@ import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Provider/Authprovider.dart';
 
@@ -224,8 +227,8 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                                             //   ),
                                             // ),
                                             Container(
-                                              height: 15.w,
-                                              width: 15.w,
+                                              height: 6.5.h,
+                                              width: 10.w,
                                               child: ClipRRect(
                                                 borderRadius:
                                                 BorderRadius.circular(15),
@@ -243,8 +246,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                                                       Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
                                                   errorWidget:
                                                       (context, url, error) =>
-                                                      Image.asset(
-                                                          Default_Profile),
+                                                          Image.asset(Default_Profile),
                                                 ),
                                               ),
                                             ),
@@ -347,8 +349,52 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                             ),
                           ),
                         ),
-                     
-                       
+
+                        // Positioned(
+                        //     right: 3.w,
+                        //     top: 1.5.h,
+                        //     child: Row(
+                        //       children: [
+                        //         InkWell(
+                        //           onTap: (){
+                        //             print(
+                        //                 "datavalye${shoallmarkermodal?.positions?[i].properties?.isFavorite }");
+                        //             addfevorite(
+                        //                 (shoallmarkermodal
+                        //                     ?.positions?[i]?.properties?.isFavorite )!,
+                        //                 (shoallmarkermodal
+                        //                     ?.positions?[
+                        //                 i]?.properties?.postId
+                        //                 )
+                        //                     ?.toString() ??
+                        //                     "");
+                        //             print("abc");
+                        //           },
+                        //           child: Container(
+                        //             height: 9.w,
+                        //             width: 9.w,
+                        //             alignment: Alignment.center,
+                        //             padding: EdgeInsetsDirectional.all(2.2.w),
+                        //             decoration: BoxDecoration(
+                        //               color: blackback,
+                        //               borderRadius: BorderRadius.circular(900),
+                        //             ),
+                        //             child:shoallmarkermodal?.positions?[i]?.properties?.isFavorite==true
+                        //
+                        //                 ? Icon(
+                        //               CupertinoIcons.heart_fill,
+                        //               color: Colors.white,
+                        //               size: 15.sp,
+                        //             )
+                        //                 : Icon(
+                        //               Icons.favorite_border,
+                        //               color: Colors.white,
+                        //               size: 15.sp,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     )),
                       ],
                     );
                   },
@@ -562,5 +608,36 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
   String removeHtmlTags(String htmlString) {
     // Use a regular expression to remove HTML tags
     return htmlString.replaceAll(RegExp(r'<[^>]*>|\"'), '');
+  }
+  addfevorite(bool value, id) {
+    EasyLoading.show(status: 'Please Wait ...');
+    final Map<String, String> data = {};
+    data['post_id'] = id.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
+    data['isFavorite'] = value ? '0' : '1';
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().addfevouriteapi(data).then((response) async {
+          addfavouritepositionmodal =
+              AddFavouritePositionModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 &&
+              addfavouritepositionmodal?.success == true) {
+            EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
+
+            showmarker();
+            print('details screen api call');
+            setState(() {});
+          } else {
+            EasyLoading.showError(addreviewmodal?.message ?? '');
+            setState(() {});
+          }
+        });
+      } else {
+        EasyLoading.showError(addreviewmodal?.message ?? '');
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

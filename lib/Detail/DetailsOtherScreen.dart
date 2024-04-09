@@ -387,7 +387,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                               ),
                                         ),
                                       ),
-                                      Positioned(
+                                      loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
                                         top: 0.2.h,
                                         left: 34.w,
                                         child: InkWell(
@@ -523,7 +523,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "volken")),
-                          InkWell(
+                          loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
                             onTap: () {
                               Get.back();
                               showratingpop1();

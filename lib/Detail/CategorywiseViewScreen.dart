@@ -1544,7 +1544,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           ),
                                     ),
                                   ),
-                                  Positioned(
+                                  loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
                                     top: 0.2.h,
                                     left: 34.w,
                                     child: InkWell(
@@ -2125,7 +2125,7 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                               SizedBox(
                                 height: 2.h,
                               ),
-                              batan(
+                              loginmodal?.userId==""||loginmodal?.userId==null?Container():batan(
                                   title: "Add Review",
                                   route: () {
                                     if (_rating == 0) {

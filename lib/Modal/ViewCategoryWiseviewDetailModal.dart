@@ -79,6 +79,7 @@ class Data {
     latitude = json['latitude'];
     longitude = json['longitude'];
     thumbnail = json['thumbnail'];
+
     metaFields = json['meta_fields'] != null
         ? new MetaFields.fromJson(json['meta_fields'])
         : null;

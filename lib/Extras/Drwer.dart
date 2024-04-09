@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:mapposition/AllPosition/AllPositionScreen.dart';
 import 'package:mapposition/Extras/sharedpreferance.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:sizer/sizer.dart';
@@ -256,6 +257,63 @@ class _drawer1State extends State<drawer1> {
                                     width: 2.w,
                                   ),
                                   Text("Favourite",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ), SizedBox(
+                  height: 2.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offAll(AllPositionScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child: Icon(
+                                      Icons.add_location,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("All Marina",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

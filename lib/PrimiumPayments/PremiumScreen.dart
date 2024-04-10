@@ -16,9 +16,7 @@ class PremiumScreen extends StatefulWidget {
 }
 
 class _PremiumScreenState extends State<PremiumScreen> {
-  Map<String,dynamic>?  paymentIntent;
-
-  get gpay => null;
+  Map<String, dynamic>? paymentIntentData;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,66 +170,97 @@ class _PremiumScreenState extends State<PremiumScreen> {
       ),
     );
   }
-
   Future<void> makePayment() async {
     try {
-      paymentIntent = await createPaymentIntent('10000', 'GBP');
-
-      var gpay = PaymentSheetGooglePay(merchantCountryCode: "GB",
-          currencyCode: "GBP",
-          testEnv: true);
-
-      //STEP 2: Initialize Payment Sheet
+      paymentIntentData =
+      await createPaymentIntent('20', 'USD'); //json.decode(response.body);
+      // print('Response body==>${response.body.toString()}');
       await Stripe.instance
           .initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
-              paymentIntentClientSecret: paymentIntent![
-              'sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe'], //Gotten from payment intent
-              style: ThemeMode.light,
-              merchantDisplayName: 'Abhi',
-              googlePay: gpay))
+              setupIntentClientSecret: 'sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe',
+              paymentIntentClientSecret:
+              paymentIntentData!['client_secret'],
+              //applePay: PaymentSheetApplePay.,
+              //googlePay: true,
+              //testEnv: true,
+              customFlow: true,
+              style: ThemeMode.dark,
+              // merchantCountryCode: 'US',
+              merchantDisplayName: 'Kashif'))
           .then((value) {});
 
-      //STEP 3: Display Payment sheet
+      ///now finally display payment sheeet
       displayPaymentSheet();
-    } catch (err) {
-      print(err);
+    } catch (e, s) {
+      print('Payment exception:$e$s');
     }
   }
 
   displayPaymentSheet() async {
     try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
-        print("Payment Successfully");
+      await Stripe.instance
+          .presentPaymentSheet(
+        //       parameters: PresentPaymentSheetParameters(
+        // clientSecret: paymentIntentData!['client_secret'],
+        // confirmPayment: true,
+        // )
+      )
+          .then((newValue) {
+        print('payment intent' + paymentIntentData!['id'].toString());
+        print(
+            'payment intent' + paymentIntentData!['client_secret'].toString());
+        print('payment intent' + paymentIntentData!['amount'].toString());
+        print('payment intent' + paymentIntentData.toString());
+        //orderPlaceApi(paymentIntentData!['id'].toString());
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("paid successfully")));
+
+        paymentIntentData = null;
+      }).onError((error, stackTrace) {
+        print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
       });
+    } on StripeException catch (e) {
+      print('Exception/DISPLAYPAYMENTSHEET==> $e');
+      showDialog(
+          context: context,
+          builder: (_) => const AlertDialog(
+            content: Text("Cancelled "),
+          ));
     } catch (e) {
       print('$e');
     }
   }
 
+  //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {
-        'amount': '200',
-        'currency':"Us",
+        'amount': calculateAmount('20'),
+        'currency': currency,
+        'payment_method_types[]': 'card',
       };
-
+      print(body);
       var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/payment_intents'),
-        headers: {
-          'Authorization': 'Bearer sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body,
-      );
-      return json.decode(response.body);
+          Uri.parse('https://api.stripe.com/v1/payment_intents'),
+          body: body,
+          headers: {
+            'Authorization': 'Bearer sk_test_51NGDspApypsYW3yfXLprQvykRwRaYXamREtHblnecFz181E2Q0tJTplizGRtA4QuIaARyslkqmeyZCTl38POj0UL00Oa34nBFe',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          });
+      print('Create Intent reponse ===> ${response.body.toString()}');
+      return jsonDecode(response.body);
     } catch (err) {
-      throw Exception(err.toString());
+      print('err charging user: ${err.toString()}');
     }
   }
 
-
+  calculateAmount(String amount) {
+    final a = (int.parse(amount)) * 100;
+    return a.toString();
+  }
 }
+
 
 
 

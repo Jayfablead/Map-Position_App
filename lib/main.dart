@@ -20,7 +20,7 @@ import 'Provider/Authprovider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Stripe.publishableKey = "pk_test_51NGDspApypsYW3yfKSmVlCibT0P3t5DmevEATpP8Dwke1gY19RbEtv5yihCFp2AW5CXTXzvrFPb8ep1Et9OGtuSx00CzY90Rvt";
+  Stripe.publishableKey = "pk_test_51NGDspApypsYW3yfKSmVlCibT0P3t5DmevEATpP8Dwke1gY19RbEtv5yihCFp2AW5CXTXzvrFPb8ep1Et9OGtuSx00CzY90Rvt ";
 
   runApp(const MyApp());
 }

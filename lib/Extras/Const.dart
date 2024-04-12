@@ -20,6 +20,7 @@ import '../Modal/MyMarinaViewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
+import '../Modal/StripePaymentsModal.dart';
 import '../Modal/UpdateAlaramModal.dart';
 import '../Modal/UpdateOtherPositionModal.dart';
 import '../Modal/UpdateProfileModal.dart';
@@ -86,6 +87,7 @@ AddviewWarningModal? addviewwarningmodal;
 ViewCategoryWiseviewDetailModal? viewcategorywisevieweetailmodal;
 AddFavouritePositionModal? addfavouritepositionmodal;
 ViewFouriteModal? viewfouritemodal;
+StripePaymentsModal? stripepaymentsmodal;
 
 // Custom Button
 InkWell batan({

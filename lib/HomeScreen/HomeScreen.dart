@@ -26,6 +26,8 @@ import '../Extras/buildErrorDialog.dart';
 import '../Marina/AddMarinaScreen.dart';
 import '../Modal/AddPositionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
+import '../PrimiumPayments/home_screen.dart';
+import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,6 +38,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
+  final PositionController positionController = Get.put(PositionController());
   TextEditingController _name = TextEditingController();
   TextEditingController _comments = TextEditingController();
   Set<Marker> _markers = {};
@@ -210,21 +213,28 @@ class _HomeScreenState extends State<HomeScreen> {
             customMarkers: _customMarkers,
             builder: (BuildContext context, Set<Marker>? markers) {
               if (markers == null) {
-                return  GoogleMap(
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(
-                    target: _currentPosition1,
-                    // You can set your initial position here
-                    zoom: 12.0,
-                  ),
-                  mapType:  MapType.normal,
-                  markers: _markers,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: true,
-                  zoomControlsEnabled: true,
-                  compassEnabled: true,
-                  scrollGesturesEnabled: true,
-                );
+                return Obx(() {
+                  if (positionController.isLoading.value) {
+                  return  GoogleMap(
+                      onMapCreated: _onMapCreated,
+                      initialCameraPosition: CameraPosition(
+                        target: _currentPosition1,
+                        // You can set your initial position here
+                        zoom: 12.0,
+                      ),
+                      mapType:  MapType.normal,
+                      markers: _markers,
+                      myLocationButtonEnabled: false,
+                      myLocationEnabled: true,
+                      zoomControlsEnabled: true,
+                      compassEnabled: true,
+                      scrollGesturesEnabled: true,
+                    );
+                  } else {
+                    return Center(child: Container(height: 100,width: 100, child: CircularProgressIndicator()));
+                  }
+                }) ;
+
               }
               return GoogleMap(
                 onMapCreated: _onMapCreated,
@@ -239,23 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
                 scrollGesturesEnabled: true,
 
-                // initialCameraPosition: _currentPosition != null
-                //     ? CameraPosition(
-                //   target: LatLng(
-                //     _currentPosition!.latitude,
-                //     _currentPosition!.longitude,
-                //   ),
-                //   zoom: 12.0,
-                // )
-                //     : CameraPosition(
-                //   target: LatLng(0, 0),
-                //   zoom: 1.0,
-                // ),
-                // onMapCreated: (GoogleMapController controller) {
-                //   setState(() {
-                //     mapController = controller;
-                //   });
-                // },
+
                 mapToolbarEnabled: true,
                 mapType: MapType.normal,
                 markers: markers,
@@ -267,20 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          // GoogleMap(
-          //   onMapCreated: _onMapCreated,
-          //   initialCameraPosition: CameraPosition(
-          //     target: _currentPosition1,
-          //     // You can set your initial position here
-          //     zoom: 12.0,
-          //   ),
-          //   mapType: _isSatellite ? MapType.satellite : MapType.normal,
-          //   markers: _markers,
-          //   myLocationButtonEnabled: false,
-          //   myLocationEnabled: true,
-          //   zoomControlsEnabled: true,
-          //   compassEnabled: true,
-          // ),
+
           Positioned(
             top: 4.h,
             left: 10,
@@ -356,43 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return <PopupMenuEntry>[
                     PopupMenuItem(
                       onTap: () {
-                        // anchor=false;
-                        //  buoys=false;
-                        //  mountain=false;
-                        //  ownlines=false;
-                        //  sand=false;
-                        //  coral=false;
-                        //  rocks=false;
-                        //  clay=false;
-                        // pano=false;
-                        //  groceries=false;
-                        //  pharmacy=false;
-                        //  alcohol=false;
-                        //  restaurant=false;
-                        // water=false;
-                        //  N1 = false;
-                        //  N2 = false;
-                        //  N3 = false;
-                        //  NE1 = false;
-                        //  NE2 = false;
-                        //  NE3 = false;
-                        // E1 = false;
-                        // E2 = false;
-                        //  E3 = false;
-                        //  SE1 = false;
-                        //  SE2 = false;
-                        //  SE3 = false;
-                        // S1 = false;
-                        //  S2 = false;
-                        // S3 = false; SW1 = false;
-                        //  SW2 = false;
-                        //  SW3 = false;
-                        //  W1 = false;
-                        //  W2 = false;
-                        // W3 = false;
-                        // NW1 = false;
-                        // NW2 = false;
-                        //  NW3 = false;
+
                         Get.offAll(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),));
                       },
                       child: Row(
@@ -590,8 +535,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FloatingActionButton(
               onPressed: _toggleMapType,
               backgroundColor: blackback,
-              child: Icon(_isSatellite ? Icons.map_outlined : Icons.map,
-                  color: Colors.white),
+              child:
+              InkWell(
+                onTap: (){
+                  Get.offAll(OtherPage());
+                },
+                child: Icon(_isSatellite ? Icons.map_outlined : Icons.map,
+                    color: Colors.white),
+              ),
             ),
           ),
         ],

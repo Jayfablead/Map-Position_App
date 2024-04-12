@@ -7,6 +7,7 @@ import 'package:mapposition/Extras/Const.dart';
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart'as http;
 import '../Extras/bottombar.dart';
+import '../Payments/PaymentsScreen.dart';
 
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
@@ -162,7 +163,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               ),
               SizedBox(height: 5.h,),
               batan(title: "Subscribe for \$200.00", route: (){
-                makePayment();
+               Get.to(PaymentsScreen());
               }, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],
           ),

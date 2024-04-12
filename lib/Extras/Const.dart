@@ -29,6 +29,7 @@ import '../Modal/UpdateanchorgeModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../Modal/ViewFouriteModal.dart';
 import '../Modal/ViewProfileModal.dart';
+import '../Modal/postionModel.dart';
 // ************  Base url ************** //
 
 const String baseUrl = 'https://hassan-mart.com/';
@@ -88,6 +89,7 @@ ViewCategoryWiseviewDetailModal? viewcategorywisevieweetailmodal;
 AddFavouritePositionModal? addfavouritepositionmodal;
 ViewFouriteModal? viewfouritemodal;
 StripePaymentsModal? stripepaymentsmodal;
+PostionModel? position;
 
 // Custom Button
 InkWell batan({

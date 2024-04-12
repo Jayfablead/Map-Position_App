@@ -3647,6 +3647,90 @@ color: anchor
         setState(() {
           isLoading = false;
         });
+        for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
+          print("markerlength${shoallmarkermodal?.positions?.length}");
+          var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1].toString();
+          var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0].toString();
+
+          if (latitudeString != null && longitudeString != null) {
+            // Validate latitude and longitude strings
+            if (_isValidDouble(latitudeString) && _isValidDouble(longitudeString)) {
+              try {
+                double latitude = double.parse(latitudeString);
+                double longitude = double.parse(longitudeString);
+                _customMarkers.add(
+                  MarkerData(
+                    marker: Marker(
+                      onTap: () {
+                        print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                        setState(() {
+                          select = index;
+                        });
+                      },
+                      markerId: MarkerId('id-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
+
+                      position: LatLng(latitude, longitude),
+
+                    ),
+                    child: shoallmarkermodal?.positions?[index].properties?.imgURL == null || shoallmarkermodal?.positions?[index].properties?.imgURL == ""
+                        ? Icon(Icons.location_on, color: Colors.green, size: 15.sp,)
+                        : Image.network((shoallmarkermodal?.positions?[index].properties?.imgURL).toString(), width: 50.w, height: 50.w),
+                  ),
+                );
+              } catch (e) {
+                print("Error parsing coordinates: $e");
+              }
+            } else {
+              print("Invalid latitude or longitude format");
+            }
+          } else {
+            print("Latitude or longitude is null");
+          }
+
+        }
+        for (int index = 0; index < (position?.positions.length ?? 0); index++) {
+          print("markerlength${shoallmarkermodal?.positions?.length}");
+          var latitudeString = position?.positions[index].geometry.coordinates[1].toString();
+          var longitudeString = position?.positions[index].geometry.coordinates[0].toString();
+
+          if (latitudeString != null && longitudeString != null) {
+            // Validate latitude and longitude strings
+            if (_isValidDouble(latitudeString) && _isValidDouble(longitudeString)) {
+              try {
+                double latitude = double.parse(latitudeString);
+                double longitude = double.parse(longitudeString);
+                _customMarkers.add(
+                  MarkerData(
+                    marker: Marker(
+                      onTap: () {
+                        print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                        setState(() {
+                          select = index;
+                        });
+                      },
+                      markerId: MarkerId('id-${position?.positions[index].properties.postId.toString()}'),
+
+                      position: LatLng(latitude, longitude),
+
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: (position?.positions?[index].properties.imgUrl).toString(),height: 50.w,width: 50.w,
+                      placeholder: (context, url) => CircularProgressIndicator(), // Placeholder widget while the image is loading
+                      errorWidget: (context, url, error) => Text("data"), // Widget to display when an error occurs
+                    ),
+                  ),
+                );
+              } catch (e) {
+                print("Error parsing coordinates: $e");
+              }
+            } else {
+              print("Invalid latitude or longitude format");
+            }
+          } else {
+            print("Latitude or longitude is null");
+          }
+
+        }
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });

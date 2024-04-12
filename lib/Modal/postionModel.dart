@@ -81,7 +81,7 @@ class Properties {
   String? postImage;
   String title;
   String description;
-  Icon icon;
+
   int catId;
   int imageIndex;
   String? imgUrl;
@@ -94,7 +94,7 @@ class Properties {
     required this.postImage,
     required this.title,
     required this.description,
-    required this.icon,
+
     required this.catId,
     required this.imageIndex,
     required this.imgUrl,
@@ -108,7 +108,7 @@ class Properties {
     postImage: json["post_image"],
     title: json["title"],
     description: json["description"],
-    icon: iconValues.map[json["icon"]]!,
+
     catId: json["cat_id"],
     imageIndex: json["image_index"],
     imgUrl: json["imgURL"],
@@ -122,7 +122,7 @@ class Properties {
     "post_image": postImage,
     "title": title,
     "description": description,
-    "icon": iconValues.reverse[icon],
+
     "cat_id": catId,
     "image_index": imageIndex,
     "imgURL": imgUrl,
@@ -132,17 +132,6 @@ class Properties {
   };
 }
 
-enum Icon {
-  AIRPORT_15,
-  EMPTY,
-  TOWN_HALL_15
-}
-
-final iconValues = EnumValues({
-  "airport-15": Icon.AIRPORT_15,
-  "": Icon.EMPTY,
-  "town-hall-15": Icon.TOWN_HALL_15
-});
 
 enum TermName {
   ANCHORAGES,

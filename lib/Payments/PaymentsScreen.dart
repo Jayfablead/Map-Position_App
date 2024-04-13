@@ -237,7 +237,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       data['expiry_year'] = _ey.text.trim().toString();
       data['cvv'] = _cvv.text.trim().toString();
       data['amount'] = "200";
-
       print(data);
       checkInternet().then((internet) async {
         if (internet) {
@@ -246,7 +245,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
               Get.offAll(HomeScreen());
-
               setState(() {
                _name.clear();
                _cvv.clear();

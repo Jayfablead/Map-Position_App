@@ -63,7 +63,7 @@ class PositionController extends GetxController {
           isLoading.value = true;
           print('Success: ${response.body}');
           position = postionModelFromJson(response.body);
-          print(" it is ${position}");
+          print(" it is my position  ${position?.positions.length}");
 
           // Store data in SharedPreferences
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -90,6 +90,7 @@ class PositionController extends GetxController {
       String? jsonData = prefs.getString('positionData');
       if (jsonData != null) {
         position = postionModelFromJson(jsonData);
+        print(" it is my position  ${position?.positions.length}");
         isLoading.value = true;
       }
     }

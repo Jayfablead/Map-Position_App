@@ -22,6 +22,7 @@ class OtherPage extends StatelessWidget {
         // }, child: Text("data"))],
       ),
       body: Obx(() {
+        positionController.fetchPositionData();
         if (positionController.isLoading.value) {
           return buildPositionListView(positionController.position);
         } else {

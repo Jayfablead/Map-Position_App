@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ImagePicker picker = ImagePicker();
   File? selectedimage = null;
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =GlobalKey<ScaffoldState>();
-
+  List<String> _imagePaths = [];
   @override
   void dispose() {
     searchController.dispose();
@@ -172,8 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getLocation();
+    positionController?.fetchPositionData();
+    super.initState();
+
     // getLocation().then((_) {
     //   // setState(() async {
     //   //   _markers.add(Marker(
@@ -208,14 +210,17 @@ class _HomeScreenState extends State<HomeScreen> {
     ? Container()
         : Stack(
         children: [
-          CustomGoogleMapMarkerBuilder(
-            //screenshotDelay: const Duration(seconds: 4),
-            customMarkers: _customMarkers,
-            builder: (BuildContext context, Set<Marker>? markers) {
-              if (markers == null) {
-                return Obx(() {
-                  if (positionController.isLoading.value) {
-                  return  GoogleMap(
+          Obx(() {
+            if(positionController.isLoading.value)
+             {
+               return   CustomGoogleMapMarkerBuilder(
+                 //screenshotDelay: const Duration(seconds: 4),
+                 customMarkers: _customMarkers,
+                 builder: (BuildContext context, Set<Marker>? markers) {
+
+                   if (markers == null) {
+                     print("online");
+                    return GoogleMap(
                       onMapCreated: _onMapCreated,
                       initialCameraPosition: CameraPosition(
                         target: _currentPosition1,
@@ -230,37 +235,53 @@ class _HomeScreenState extends State<HomeScreen> {
                       compassEnabled: true,
                       scrollGesturesEnabled: true,
                     );
-                  } else {
-                    return Center(child: Container(height: 100,width: 100, child: CircularProgressIndicator()));
-                  }
-                }) ;
 
+                   }
+                   return GoogleMap(
+
+                     onMapCreated: _onMapCreated,
+                     initialCameraPosition: CameraPosition(
+                       target: _currentPosition1,
+                       // You can set your initial position here
+                       zoom: 12.0,
+                     ),
+                     gestureRecognizers: Set()
+                       ..add(Factory<OneSequenceGestureRecognizer>(
+                             () => EagerGestureRecognizer(),
+                       )),
+                     scrollGesturesEnabled: true,
+                     mapToolbarEnabled: true,
+                     mapType: MapType.normal,
+                     markers: markers,
+                     myLocationButtonEnabled: false,
+                     myLocationEnabled: true,
+                     zoomControlsEnabled: false,
+
+                     compassEnabled: true,
+                   );
+                 },
+               );
+             }
+            else
+              {
+                return GoogleMap(
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                    target: _currentPosition1,
+                    // You can set your initial position here
+                    zoom: 12.0,
+                  ),
+                  mapType:  MapType.normal,
+                  markers: _markers,
+                  myLocationButtonEnabled: false,
+                  myLocationEnabled: true,
+                  zoomControlsEnabled: true,
+                  compassEnabled: true,
+                  scrollGesturesEnabled: true,
+                );
               }
-              return GoogleMap(
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: _currentPosition1,
-                  // You can set your initial position here
-                  zoom: 12.0,
-                ),
-                gestureRecognizers: Set()
-                ..add(Factory<OneSequenceGestureRecognizer>(
-                      () => EagerGestureRecognizer(),
-                )),
-                scrollGesturesEnabled: true,
+          }),
 
-
-                mapToolbarEnabled: true,
-                mapType: MapType.normal,
-                markers: markers,
-                myLocationButtonEnabled: false,
-                myLocationEnabled: true,
-                zoomControlsEnabled: false,
-
-                compassEnabled: true,
-              );
-            },
-          ),
 
           Positioned(
             top: 4.h,
@@ -3583,6 +3604,8 @@ color: anchor
 
     checkInternet().then((internet) async {
       if (internet) {
+        positionController?.fetchPositionData();
+
         authprovider().showmarkerapi().then((response) async {
           shoallmarkermodal = ShoAllMarkerModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200) {
@@ -3647,10 +3670,13 @@ color: anchor
         setState(() {
           isLoading = false;
         });
-        for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
-          print("markerlength${shoallmarkermodal?.positions?.length}");
-          var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1].toString();
-          var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0].toString();
+
+        for (int index = 0; index < (positionController.position?.positions.length ?? 0); index++) {
+          print("offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
+          print("offlinemappositionlength${positionController.position?.positions.length}");
+          var latitudeString = positionController.position?.positions[index].geometry.coordinates[1].toString();
+          var longitudeString = positionController.position?.positions[index].geometry.coordinates[0].toString();
+
 
           if (latitudeString != null && longitudeString != null) {
             // Validate latitude and longitude strings
@@ -3662,59 +3688,18 @@ color: anchor
                   MarkerData(
                     marker: Marker(
                       onTap: () {
-                        print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+
                         setState(() {
                           select = index;
                         });
                       },
-                      markerId: MarkerId('id-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
-
-                      position: LatLng(latitude, longitude),
-
-                    ),
-                    child: shoallmarkermodal?.positions?[index].properties?.imgURL == null || shoallmarkermodal?.positions?[index].properties?.imgURL == ""
-                        ? Icon(Icons.location_on, color: Colors.green, size: 15.sp,)
-                        : Image.network((shoallmarkermodal?.positions?[index].properties?.imgURL).toString(), width: 50.w, height: 50.w),
-                  ),
-                );
-              } catch (e) {
-                print("Error parsing coordinates: $e");
-              }
-            } else {
-              print("Invalid latitude or longitude format");
-            }
-          } else {
-            print("Latitude or longitude is null");
-          }
-
-        }
-        for (int index = 0; index < (position?.positions.length ?? 0); index++) {
-          print("markerlength${shoallmarkermodal?.positions?.length}");
-          var latitudeString = position?.positions[index].geometry.coordinates[1].toString();
-          var longitudeString = position?.positions[index].geometry.coordinates[0].toString();
-
-          if (latitudeString != null && longitudeString != null) {
-            // Validate latitude and longitude strings
-            if (_isValidDouble(latitudeString) && _isValidDouble(longitudeString)) {
-              try {
-                double latitude = double.parse(latitudeString);
-                double longitude = double.parse(longitudeString);
-                _customMarkers.add(
-                  MarkerData(
-                    marker: Marker(
-                      onTap: () {
-                        print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
-                        setState(() {
-                          select = index;
-                        });
-                      },
-                      markerId: MarkerId('id-${position?.positions[index].properties.postId.toString()}'),
+                      markerId: MarkerId('id-${positionController.position?.positions[index].properties.postId.toString()}'),
 
                       position: LatLng(latitude, longitude),
 
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: (position?.positions?[index].properties.imgUrl).toString(),height: 50.w,width: 50.w,
+                      imageUrl: (positionController.position?.positions[index].properties.imgUrl).toString(),height: 50.w,width: 50.w,
                       placeholder: (context, url) => CircularProgressIndicator(), // Placeholder widget while the image is loading
                       errorWidget: (context, url, error) => Text("data"), // Widget to display when an error occurs
                     ),

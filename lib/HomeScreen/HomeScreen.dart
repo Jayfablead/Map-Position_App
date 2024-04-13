@@ -56,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
   GoogleMapController? _mapController;
   ImagePicker picker = ImagePicker();
   File? selectedimage = null;
-  final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
+      GlobalKey<ScaffoldState>();
   List<String> _imagePaths = [];
   @override
   void dispose() {
@@ -67,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-  castommarker()async{
+
+  castommarker() async {
     await showmarker();
   }
 
@@ -107,12 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
     LatLng location = LatLng(lat, long);
     setState(() {
       _currentPosition1 = location;
-      lat1=lat;
-      lng1=long;
-      isLoading=false;
-
-    });await showmarker();
-
+      lat1 = lat;
+      lng1 = long;
+      isLoading = false;
+    });
+    await showmarker();
   }
 
   MapType _mapType = MapType.satellite;
@@ -125,25 +126,26 @@ class _HomeScreenState extends State<HomeScreen> {
       _mapType = _isSatellite ? MapType.satellite : MapType.normal;
     });
   }
-  double? lat1,lng1;
+
+  double? lat1, lng1;
   Color secondary1 = Color(0xff808080); // Initial color for the first InkWell
   Color secondary2 = Color(0xff808080);
   Color secondary3 = Color(0xff808080);
   Color secondary4 = Color(0xff808080);
-  bool anchor=false;
-  bool buoys=false;
-  bool mountain=false;
-  bool ownlines=false;
-  bool sand=false;
-  bool coral=false;
-  bool rocks=false;
-  bool clay=false;
-  bool pano=false;
-  bool groceries=false;
-  bool pharmacy=false;
-  bool alcohol=false;
-  bool restaurant=false;
-  bool water=false;
+  bool anchor = false;
+  bool buoys = false;
+  bool mountain = false;
+  bool ownlines = false;
+  bool sand = false;
+  bool coral = false;
+  bool rocks = false;
+  bool clay = false;
+  bool pano = false;
+  bool groceries = false;
+  bool pharmacy = false;
+  bool alcohol = false;
+  bool restaurant = false;
+  bool water = false;
   bool N1 = false;
   bool N2 = false;
   bool N3 = false;
@@ -198,377 +200,386 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget build(BuildContext context) {
-    return  commanScreen(
-      isLoading: isLoading,
-      scaffold:Scaffold(
-        resizeToAvoidBottomInset: false,
-      extendBody: true,
-      bottomNavigationBar: Bottombar(select_tab: 2),
-      key: _scaffoldKeyProductlistpage,
-      drawer: drawer1(),
-      body: isLoading
-    ? Container()
-        : Stack(
-        children: [
-          Obx(() {
-            if(positionController.isLoading.value)
-             {
-               return   CustomGoogleMapMarkerBuilder(
-                 //screenshotDelay: const Duration(seconds: 4),
-                 customMarkers: _customMarkers,
-                 builder: (BuildContext context, Set<Marker>? markers) {
-
-                   if (markers == null) {
-                     print("online");
-                    return GoogleMap(
-                      onMapCreated: _onMapCreated,
-                      initialCameraPosition: CameraPosition(
-                        target: _currentPosition1,
-                        // You can set your initial position here
-                        zoom: 12.0,
-                      ),
-                      mapType:  MapType.normal,
-                      markers: _markers,
-                      myLocationButtonEnabled: false,
-                      myLocationEnabled: true,
-                      zoomControlsEnabled: true,
-                      compassEnabled: true,
-                      scrollGesturesEnabled: true,
-                    );
-
-                   }
-                   return GoogleMap(
-
-                     onMapCreated: _onMapCreated,
-                     initialCameraPosition: CameraPosition(
-                       target: _currentPosition1,
-                       // You can set your initial position here
-                       zoom: 12.0,
-                     ),
-                     gestureRecognizers: Set()
-                       ..add(Factory<OneSequenceGestureRecognizer>(
-                             () => EagerGestureRecognizer(),
-                       )),
-                     scrollGesturesEnabled: true,
-                     mapToolbarEnabled: true,
-                     mapType: MapType.normal,
-                     markers: markers,
-                     myLocationButtonEnabled: false,
-                     myLocationEnabled: true,
-                     zoomControlsEnabled: false,
-
-                     compassEnabled: true,
-                   );
-                 },
-               );
-             }
-            else
-              {
-                return GoogleMap(
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(
-                    target: _currentPosition1,
-                    // You can set your initial position here
-                    zoom: 12.0,
-                  ),
-                  mapType:  MapType.normal,
-                  markers: _markers,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: true,
-                  zoomControlsEnabled: true,
-                  compassEnabled: true,
-                  scrollGesturesEnabled: true,
-                );
-              }
-          }),
-
-
-          Positioned(
-            top: 4.h,
-            left: 10,
-            right: 10,
-            child: SizedBox(
-              width: 85.w,
-              child: header(
-                  text: "Home",
-                  callback1: () {
-                    _scaffoldKeyProductlistpage.currentState?.openDrawer();
-                  }),
-            ),
-          ),
-          Positioned(
-            top: 10.h,
-            left: 10,
-            right: 10,
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: searchController,
-                    decoration: inputDecoration(
-                        hintText: "Search....",
-                        icon: Icon(
-                          Icons.search,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  width: 1.w,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: blackback),
-                  child: IconButton(
-                    icon: Icon(Icons.search, color: Colors.white, size: 20.sp),
-                    onPressed: _searchAndNavigate,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 20.h,
-            left: 55.w,
-            child: PopupMenuButton(
-                color: bgcolor,
-                elevation: 00,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: secondary),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Container(
-                    alignment: Alignment.center,
-                    width: 40.w,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: blackback),
-                    child: Text(
-                      "+ Add Position",
-                      style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Volkan"),
-                    )),
-                itemBuilder: (BuildContext context) {
-                  return <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () {
-
-                        Get.offAll(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),));
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 8.w,
-                            height: 8.w,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: blackback,
-                            ),
-                            child: Image.asset(
-                              "assets/lagan.png",
-                              height: 25.w,
-                              width: 25.w,
-                              color: Colors.white,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            'Anchorage',
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "Volkan"),
-                          ),
-                        ],
-                      ),
-                      value: 'Anchorage',
-                    ),
-                    PopupMenuDivider(),
-                    PopupMenuItem(
-                      onTap: () {
-                        Get.offAll(AddWarningScreen(lat:lat1.toString(),lng: lng1.toString()));
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 8.w,
-                              height: 8.w,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: blackback,
-                              ),
-                              child: Icon(
-                                Icons.warning_amber_outlined,
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            'Warning',
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "Volkan"),
-                          ),
-                        ],
-                      ),
-                      value: 'Warning',
-                    ),
-                    PopupMenuDivider(),
-                    PopupMenuItem(
-                      onTap: () {
-                        Get.offAll(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),));
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 8.w,
-                              height: 8.w,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: blackback,
-                              ),
-                              child: Icon(
-                                Icons.devices_other_sharp,
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            'Other',
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "Volkan"),
-                          ),
-                        ],
-                      ),
-                      value: 'Warning',
-                    ),
-                    PopupMenuDivider(),
-                    PopupMenuItem(
-                      onTap: () {
-                       Get.offAll(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),));
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 8.w,
-                              height: 8.w,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: blackback,
-                              ),
-                              child: Icon(Icons.directions_boat,
-                                  color: Colors.white)),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            'Marina',
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "Volkan"),
-                          ),
-                        ],
-                      ),
-                      value: 'Warning',
-                    ),
-                  ];
-                },
-                onSelected: (value) {
-                  print('Selected: $value');
-                }),
-          ),
-          Positioned(
-            bottom: 250,
-            right: 20,
-            child: InkWell(
-              onTap: () {
-                legend();
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: blackback,
-                ),
-                child: Row(
+    return commanScreen(
+        isLoading: isLoading,
+        scaffold: Scaffold(
+          resizeToAvoidBottomInset: false,
+          extendBody: true,
+          bottomNavigationBar: Bottombar(select_tab: 2),
+          key: _scaffoldKeyProductlistpage,
+          drawer: drawer1(),
+          body: isLoading
+              ? Container()
+              : Stack(
                   children: [
-                    Icon(
-                      Icons.fmd_good,
-                      color: Colors.white,
+                    Obx(() {
+                      if (positionController.isLoading.value) {
+                        return CustomGoogleMapMarkerBuilder(
+                          //screenshotDelay: const Duration(seconds: 4),
+                          customMarkers: _customMarkers,
+                          builder:
+                              (BuildContext context, Set<Marker>? markers) {
+                            if (markers == null) {
+                              print("online");
+                              return GoogleMap(
+                                onMapCreated: _onMapCreated,
+                                initialCameraPosition: CameraPosition(
+                                  target: _currentPosition1,
+                                  // You can set your initial position here
+                                  zoom: 12.0,
+                                ),
+                                mapType: MapType.normal,
+                                markers: _markers,
+                                myLocationButtonEnabled: false,
+                                myLocationEnabled: true,
+                                zoomControlsEnabled: true,
+                                compassEnabled: true,
+                                scrollGesturesEnabled: true,
+                              );
+                            }
+                            return GoogleMap(
+                              onMapCreated: _onMapCreated,
+                              initialCameraPosition: CameraPosition(
+                                target: _currentPosition1,
+                                // You can set your initial position here
+                                zoom: 12.0,
+                              ),
+                              gestureRecognizers: Set()
+                                ..add(Factory<OneSequenceGestureRecognizer>(
+                                  () => EagerGestureRecognizer(),
+                                )),
+                              scrollGesturesEnabled: true,
+                              mapToolbarEnabled: true,
+                              mapType: MapType.normal,
+                              markers: markers,
+                              myLocationButtonEnabled: false,
+                              myLocationEnabled: true,
+                              zoomControlsEnabled: false,
+                              compassEnabled: true,
+                            );
+                          },
+                        );
+                      } else {
+                        return GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: _currentPosition1,
+                            // You can set your initial position here
+                            zoom: 12.0,
+                          ),
+                          mapType: MapType.normal,
+                          markers: _markers,
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: true,
+                          zoomControlsEnabled: true,
+                          compassEnabled: true,
+                          scrollGesturesEnabled: true,
+                        );
+                      }
+                    }),
+                    Positioned(
+                      top: 4.h,
+                      left: 10,
+                      right: 10,
+                      child: SizedBox(
+                        width: 85.w,
+                        child: header(
+                            text: "Home",
+                            callback1: () {
+                              _scaffoldKeyProductlistpage.currentState
+                                  ?.openDrawer();
+                            }),
+                      ),
                     ),
-                    SizedBox(
-                      width: 2.w,
+                    Positioned(
+                      top: 10.h,
+                      left: 10,
+                      right: 10,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: searchController,
+                              decoration: inputDecoration(
+                                  hintText: "Search....",
+                                  icon: Icon(
+                                    Icons.search,
+                                    color: secondary,
+                                  )),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: blackback),
+                            child: IconButton(
+                              icon: Icon(Icons.search,
+                                  color: Colors.white, size: 20.sp),
+                              onPressed: _searchAndNavigate,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text("Legend",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.white,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: "volken")),
+                    Positioned(
+                      top: 20.h,
+                      left: 55.w,
+                      child: PopupMenuButton(
+                          color: bgcolor,
+                          elevation: 00,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(color: secondary),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Container(
+                              alignment: Alignment.center,
+                              width: 40.w,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 2.w, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: blackback),
+                              child: Text(
+                                "+ Add Position",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Volkan"),
+                              )),
+                          itemBuilder: (BuildContext context) {
+                            return <PopupMenuEntry>[
+                              PopupMenuItem(
+                                onTap: () {
+                                  Get.offAll(AddAchoragePositionScreen(
+                                    lat: lat1.toString(),
+                                    lng: lng1.toString(),
+                                  ));
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 8.w,
+                                      height: 8.w,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: blackback,
+                                      ),
+                                      child: Image.asset(
+                                        "assets/lagan.png",
+                                        height: 25.w,
+                                        width: 25.w,
+                                        color: Colors.white,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'Anchorage',
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan"),
+                                    ),
+                                  ],
+                                ),
+                                value: 'Anchorage',
+                              ),
+                              PopupMenuDivider(),
+                              PopupMenuItem(
+                                onTap: () {
+                                  Get.offAll(AddWarningScreen(
+                                      lat: lat1.toString(),
+                                      lng: lng1.toString()));
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        width: 8.w,
+                                        height: 8.w,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: blackback,
+                                        ),
+                                        child: Icon(
+                                          Icons.warning_amber_outlined,
+                                          color: Colors.white,
+                                        )),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'Warning',
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan"),
+                                    ),
+                                  ],
+                                ),
+                                value: 'Warning',
+                              ),
+                              PopupMenuDivider(),
+                              PopupMenuItem(
+                                onTap: () {
+                                  Get.offAll(AddOtherPositionScreen(
+                                    lat: lat1.toString(),
+                                    lng: lng1.toString(),
+                                  ));
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        width: 8.w,
+                                        height: 8.w,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: blackback,
+                                        ),
+                                        child: Icon(
+                                          Icons.devices_other_sharp,
+                                          color: Colors.white,
+                                        )),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'Other',
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan"),
+                                    ),
+                                  ],
+                                ),
+                                value: 'Warning',
+                              ),
+                              PopupMenuDivider(),
+                              PopupMenuItem(
+                                onTap: () {
+                                  Get.offAll(AddMarinaScreen(
+                                    lat: lat1.toString(),
+                                    lng: lng1.toString(),
+                                  ));
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        width: 8.w,
+                                        height: 8.w,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: blackback,
+                                        ),
+                                        child: Icon(Icons.directions_boat,
+                                            color: Colors.white)),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text(
+                                      'Marina',
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan"),
+                                    ),
+                                  ],
+                                ),
+                                value: 'Warning',
+                              ),
+                            ];
+                          },
+                          onSelected: (value) {
+                            print('Selected: $value');
+                          }),
+                    ),
+                    Positioned(
+                      bottom: 250,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () {
+                          legend();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 1.h, horizontal: 5.w),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: blackback,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.fmd_good,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text("Legend",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: Colors.white,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 180,
+                      right: 20,
+                      child: FloatingActionButton(
+                        backgroundColor: blackback,
+                        onPressed: () {
+                          _focusOnLiveLocation();
+                        },
+                        child: Icon(Icons.my_location, color: Colors.white),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 110,
+                      right: 20,
+                      child: FloatingActionButton(
+                        onPressed: _toggleMapType,
+                        backgroundColor: blackback,
+                        child: InkWell(
+                          onTap: () {
+                            Get.offAll(OtherPage());
+                          },
+                          child: Icon(
+                              _isSatellite ? Icons.map_outlined : Icons.map,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 180,
-            right: 20,
-            child: FloatingActionButton(
-              backgroundColor: blackback,
-              onPressed: () {
-                _focusOnLiveLocation();
-              },
-              child: Icon(Icons.my_location, color: Colors.white),
-            ),
-          ),
-          Positioned(
-            bottom: 110,
-            right: 20,
-            child: FloatingActionButton(
-              onPressed: _toggleMapType,
-              backgroundColor: blackback,
-              child:
-              InkWell(
-                onTap: (){
-                  Get.offAll(OtherPage());
-                },
-                child: Icon(_isSatellite ? Icons.map_outlined : Icons.map,
-                    color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 
   void _focusOnLiveLocation() {
@@ -717,7 +728,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   addmarker() {
     showDialog(
       context: context,
@@ -803,15 +813,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                anchor=!anchor;// Change to any color you desire
+                                anchor =
+                                    !anchor; // Change to any color you desire
                               });
                             },
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-color: anchor
-    ? Colors.black
-    : Colors.white,
+                                  color: anchor ? Colors.black : Colors.white,
                                   border: Border.all(
                                       color: secondary1, width: 1.sp)),
                               child: Row(
@@ -827,9 +836,8 @@ color: anchor
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTAaMkDgX6jts8zrbrgdKCKcvv1Ej797yziRZa8zanKbmTlYUA4",
-                                        progressIndicatorBuilder: (context,
-                                                url, progress) =>
-                                            Center(
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) => Center(
                                                 child:
                                                     CircularProgressIndicator()),
                                         errorWidget: (context, url, error) =>
@@ -843,10 +851,7 @@ color: anchor
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 13.sp,
-
-                                      color: anchor
-                                          ? Colors.white
-                                          : secondary,
+                                      color: anchor ? Colors.white : secondary,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: "volken",
                                       letterSpacing: 1,
@@ -862,15 +867,14 @@ color: anchor
                           InkWell(
                             onTap: () {
                               setState(() {
-                                buoys=!buoys; // Change to any color you desire
+                                buoys =
+                                    !buoys; // Change to any color you desire
                               });
                             },
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: buoys
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color: buoys ? Colors.black : Colors.white,
                                   border: Border.all(
                                       color: secondary2, width: 1.sp)),
                               child: Row(
@@ -886,9 +890,8 @@ color: anchor
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRaBKeK6wNXC0miPo0xPySQB7KlfFschpuEE36RHM9mVUTwSxb0",
-                                        progressIndicatorBuilder: (context,
-                                                url, progress) =>
-                                            Center(
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) => Center(
                                                 child:
                                                     CircularProgressIndicator()),
                                         errorWidget: (context, url, error) =>
@@ -902,9 +905,7 @@ color: anchor
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 13.sp,
-                                      color: buoys
-                                          ? Colors.white
-                                          : secondary,
+                                      color: buoys ? Colors.white : secondary,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: "volken",
                                       letterSpacing: 1,
@@ -920,15 +921,13 @@ color: anchor
                           InkWell(
                             onTap: () {
                               setState(() {
-                                mountain=!mountain;
+                                mountain = !mountain;
                               });
                             },
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: mountain
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color: mountain ? Colors.black : Colors.white,
                                   border: Border.all(
                                       color: secondary3, width: 1.sp)),
                               child: Row(
@@ -944,9 +943,8 @@ color: anchor
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRsuOEAeqfLBWmOiHFKl3b7qNF1kbRZSkNNiIuTI1la2P_1Ckgu",
-                                        progressIndicatorBuilder: (context,
-                                                url, progress) =>
-                                            Center(
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) => Center(
                                                 child:
                                                     CircularProgressIndicator()),
                                         errorWidget: (context, url, error) =>
@@ -960,9 +958,8 @@ color: anchor
                                       "Fixed Mountain Wedges available",
                                       style: TextStyle(
                                         fontSize: 12.sp,
-                                        color: mountain
-                                            ? Colors.white
-                                            : secondary,
+                                        color:
+                                            mountain ? Colors.white : secondary,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "volken",
                                         letterSpacing: 1,
@@ -979,15 +976,14 @@ color: anchor
                           InkWell(
                             onTap: () {
                               setState(() {
-                                ownlines=!ownlines; // Change to any color you desire
+                                ownlines =
+                                    !ownlines; // Change to any color you desire
                               });
                             },
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: ownlines
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color: ownlines ? Colors.black : Colors.white,
                                   border: Border.all(
                                       color: secondary4, width: 1.sp)),
                               child: Row(
@@ -1003,9 +999,8 @@ color: anchor
                                         fit: BoxFit.cover,
                                         imageUrl:
                                             "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQT2drB7N17HmLqx4UzFHxuXWnQ8O2KRxoRx3Wp2vnDMNEcbCyf",
-                                        progressIndicatorBuilder: (context,
-                                                url, progress) =>
-                                            Center(
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) => Center(
                                                 child:
                                                     CircularProgressIndicator()),
                                         errorWidget: (context, url, error) =>
@@ -1019,9 +1014,8 @@ color: anchor
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 13.sp,
-                                      color: ownlines
-                                          ? Colors.white
-                                          : secondary,
+                                      color:
+                                          ownlines ? Colors.white : secondary,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: "volken",
                                       letterSpacing: 1,
@@ -1153,7 +1147,7 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        sand=!sand;
+                                        sand = !sand;
                                         // Change to any color you desire
                                       });
                                     },
@@ -1165,16 +1159,14 @@ color: anchor
                                               ? Colors.black
                                               : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1182,12 +1174,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVM_V8qDAZB0zcdTh_ab6TVb4_7xMvEXtSNYO7m7PGX2kdPNo5",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1223,7 +1214,7 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        pano=!pano;
+                                        pano = !pano;
                                       });
                                     },
                                     child: Container(
@@ -1234,16 +1225,14 @@ color: anchor
                                               ? Colors.black
                                               : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1251,12 +1240,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSe0dP7c4doZOnbn5eWQCdiv1hn2cg4visMGff3p7T46c5_HEB0",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1271,8 +1259,8 @@ color: anchor
                                               overflow: TextOverflow.ellipsis,
                                               fontSize: 13.sp,
                                               color: pano
-                                              ? Colors.white
-                                              : secondary,
+                                                  ? Colors.white
+                                                  : secondary,
                                               fontWeight: FontWeight.w500,
                                               fontFamily: "volken",
                                               letterSpacing: 1,
@@ -1292,27 +1280,26 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        clay=!clay; // Change to any color you desire
+                                        clay =
+                                            !clay; // Change to any color you desire
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-          color: clay
-          ? Colors.black
-              : Colors.white,
+                                          color: clay
+                                              ? Colors.black
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1320,12 +1307,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQcTjDNEoMZGc-8fD9iEjGO-_TFILg0FNmsGV8BiL2WWLkmHxbr",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1365,7 +1351,7 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        coral=!coral;
+                                        coral = !coral;
                                       });
                                     },
                                     child: Container(
@@ -1376,16 +1362,14 @@ color: anchor
                                               ? Colors.black
                                               : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1393,12 +1377,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS9uACGi1F5UMGPlL_1Crtjf3E0joc_PXvwaB_5UTO3tdZzTbTa",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1437,7 +1420,7 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                   rocks=!rocks;
+                                        rocks = !rocks;
                                       });
                                     },
                                     child: Container(
@@ -1448,16 +1431,14 @@ color: anchor
                                               ? Colors.black
                                               : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1465,12 +1446,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRV6ZHxdZ3zrFnId6sOl1xhuovMAQvC0IV6IHc3BSGO-SPRHglK",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1622,27 +1602,26 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        groceries=!groceries; // Change to any color you desire
+                                        groceries =
+                                            !groceries; // Change to any color you desire
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color:groceries
+                                          color: groceries
                                               ? Colors.black
-                                              : Colors.white ,
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1650,12 +1629,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtRIWAWJ82MIU3sZz_G753lnqYMkP6MBq6ly1FUtoCaAW9tsUl",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1691,27 +1669,26 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        pharmacy=!pharmacy; // Change to any color you desire
+                                        pharmacy =
+                                            !pharmacy; // Change to any color you desire
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color:pharmacy
+                                          color: pharmacy
                                               ? Colors.black
-                                              : Colors.white ,
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1719,12 +1696,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuoa863jQHob2mOU5heotg6KO4Af4JcqDcgwfZ4yzPt_DvntQA",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1760,27 +1736,25 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                        alcohol=!alcohol;
+                                        alcohol = !alcohol;
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color:alcohol
+                                          color: alcohol
                                               ? Colors.black
-                                              : Colors.white ,
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1788,12 +1762,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ-Ny6we7GlTTn8xMrp9v4RAh6iUVUGDfKoJfeMX-Gddc6YYK3",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1833,27 +1806,25 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                       restaurant=!restaurant;
+                                        restaurant = !restaurant;
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color:restaurant
+                                          color: restaurant
                                               ? Colors.black
-                                              : Colors.white ,
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1861,12 +1832,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4UP0P6tKJ1DQG4Q6DI5TferlLPkz9xiKMp0UGWvfXIxeJweQm",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1905,27 +1875,26 @@ color: anchor
                                   InkWell(
                                     onTap: () {
                                       setState(() {
-                                       water=!water; // Change to any color you desire
+                                        water =
+                                            !water; // Change to any color you desire
                                       });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color:water
+                                          color: water
                                               ? Colors.black
-                                              : Colors.white ,
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: secondary1,
-                                              width: 1.sp)),
+                                              color: secondary1, width: 1.sp)),
                                       child: Column(
                                         children: [
                                           Container(
                                             height: 25.w,
                                             width: 25.w,
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w,
-                                                vertical: 1.w),
+                                                horizontal: 2.w, vertical: 1.w),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(90),
@@ -1933,12 +1902,11 @@ color: anchor
                                                 fit: BoxFit.cover,
                                                 imageUrl:
                                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgAT9tkJyYp2ai141ZTuPOYa1h0MpXg06Tq1y_ZeiIss-2Tg2O",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            progress) =>
-                                                        Center(
-                                                            child:
-                                                                CircularProgressIndicator()),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Image.asset(
@@ -1999,12 +1967,13 @@ color: anchor
       },
     );
   }
+
   n1n2n3() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
-          return  Dialog(
+          return Dialog(
               insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -2012,7 +1981,6 @@ color: anchor
               // backgroundColor: Colors.transparent,
               child: SingleChildScrollView(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
-
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 3.w),
                     // height:  MediaQuery.of(context).size.height,
@@ -2082,24 +2050,25 @@ color: anchor
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Wind Rose",style: TextStyle(
+                          Text("Wind Rose",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken")),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                        ],
+                      ),
+                      Text("North (N) : -",
+                          style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-
-                        ],
-                      ),
-                      Text("North (N) : -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2113,12 +2082,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("N1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("N1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2131,12 +2101,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("N2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("N2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2149,25 +2120,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("N3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("N3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
                       ),
-                      SizedBox(height: 1.h,),
-                      Text("Northeast (NE) : -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("Northeast (NE) : -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2181,15 +2154,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NE1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NE1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2200,12 +2173,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NE2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NE2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2218,25 +2192,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NE3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NE3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
                       ),
-                      SizedBox(height: 1.h,),
-                      Text("East (E) : -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("East (E) : -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2250,15 +2226,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("E1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("E1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2269,12 +2245,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("E2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("E2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2287,24 +2264,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("E3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("E3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
-                      ),SizedBox(height: 1.h,),
-                      Text("Southeast (SE): -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("Southeast (SE): -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2318,15 +2298,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SE1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SE1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2337,12 +2317,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SE2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SE2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2355,24 +2336,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SE3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SE3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
-                      ),SizedBox(height: 1.h,),
-                      Text("South (S): -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("South (S): -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2386,15 +2370,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("S1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("S1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2405,12 +2389,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("S2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("S2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2423,24 +2408,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("S3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("S3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
-                      ),SizedBox(height: 1.h,),
-                      Text("Southwest (SW): -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("Southwest (SW): -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2454,15 +2442,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SW1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SW1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2473,12 +2461,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SW2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SW2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2491,24 +2480,27 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("SW3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("SW3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
-                      ),SizedBox(height: 1.h,),
-                      Text("West (W): -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("West (W): -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2522,31 +2514,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("W1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: W2,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    W2 = value!;
-                                  });
-                                },
-                              ),
-                              Text("W2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("W1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2559,24 +2533,46 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("W2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("W2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: W2,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    W2 = value!;
+                                  });
+                                },
+                              ),
+                              Text("W2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
                         ],
-                      ),SizedBox(height: 1.h,),
-                      Text("Northwest (NW): -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken")),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text("Northwest (NW): -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -2590,15 +2586,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NW1",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NW1",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
                           Row(
                             children: [
                               Checkbox(
@@ -2609,12 +2605,13 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NW2",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NW2",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
                           Row(
@@ -2627,16 +2624,15 @@ color: anchor
                                   });
                                 },
                               ),
-                              Text("NW3",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                              Text("NW3",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
                             ],
                           ),
-
-
                         ],
                       ),
                       SizedBox(
@@ -2665,7 +2661,6 @@ color: anchor
                 ]),
               ));
         });
-
       },
     );
   }
@@ -3037,7 +3032,6 @@ color: anchor
                                 route: () {
                                   Get.back();
                                   // addanchorage();
-
                                 },
                                 hight: 6.h,
                                 width: 40.w,
@@ -3191,7 +3185,6 @@ color: anchor
   legend() {
     showDialog(
       context: context,
-
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return Dialog(
@@ -3208,13 +3201,14 @@ color: anchor
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                   child: Column(children: [
-                    SizedBox(height: 3.h,),
+                    SizedBox(
+                      height: 3.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         Text("Anchorages",
                             style: TextStyle(
                                 letterSpacing: 1,
@@ -3224,7 +3218,9 @@ color: anchor
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3234,7 +3230,6 @@ color: anchor
                               "assets/mooring-green.png",
                               height: 15.w,
                               width: 15.w,
-
                             ),
                             Text("Recommended",
                                 style: TextStyle(
@@ -3251,8 +3246,6 @@ color: anchor
                               "assets/mooring-yellow.png",
                               height: 15.w,
                               width: 15.w,
-
-
                             ),
                             Text("Average",
                                 style: TextStyle(
@@ -3263,15 +3256,12 @@ color: anchor
                                     fontFamily: "volken")),
                           ],
                         ),
-
                         Column(
                           children: [
                             Image.asset(
                               "assets/mooring-red.png",
                               height: 15.w,
-                              width:15.w,
-
-
+                              width: 15.w,
                             ),
                             Text("To Avoid",
                                 style: TextStyle(
@@ -3284,9 +3274,13 @@ color: anchor
                         ),
                       ],
                     ),
-                    SizedBox(height: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Divider(color: secondary),
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -3299,7 +3293,9 @@ color: anchor
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(height: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3309,7 +3305,6 @@ color: anchor
                               "assets/mooringbuoygreen.png",
                               height: 15.w,
                               width: 15.w,
-
                             ),
                             Text("Recommended",
                                 style: TextStyle(
@@ -3326,8 +3321,6 @@ color: anchor
                               "assets/mooring-buoy-yellow.png",
                               height: 15.w,
                               width: 15.w,
-
-
                             ),
                             Text("Average",
                                 style: TextStyle(
@@ -3338,15 +3331,12 @@ color: anchor
                                     fontFamily: "volken")),
                           ],
                         ),
-
                         Column(
                           children: [
                             Image.asset(
                               "assets/mooring-buoy-red.png",
                               height: 15.w,
-                              width:15.w,
-
-
+                              width: 15.w,
                             ),
                             Text("To Avoid",
                                 style: TextStyle(
@@ -3359,9 +3349,15 @@ color: anchor
                         ),
                       ],
                     ),
-                    SizedBox(height: 1.h,),
-                    Divider(color: secondary,),
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Divider(
+                      color: secondary,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -3374,7 +3370,9 @@ color: anchor
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(height: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3384,7 +3382,6 @@ color: anchor
                               "assets/othergreen.png",
                               height: 15.w,
                               width: 15.w,
-
                             ),
                             Text("Recommended",
                                 style: TextStyle(
@@ -3401,8 +3398,6 @@ color: anchor
                               "assets/otheryellow.png",
                               height: 15.w,
                               width: 15.w,
-
-
                             ),
                             Text("Average",
                                 style: TextStyle(
@@ -3413,15 +3408,12 @@ color: anchor
                                     fontFamily: "volken")),
                           ],
                         ),
-
                         Column(
                           children: [
                             Image.asset(
                               "assets/yellowred.png",
                               height: 15.w,
-                              width:15.w,
-
-
+                              width: 15.w,
                             ),
                             Text("To Avoid",
                                 style: TextStyle(
@@ -3434,9 +3426,15 @@ color: anchor
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.h,),
-                    SizedBox(height: 1.h,),
-                    Divider(color: secondary,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Divider(
+                      color: secondary,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -3449,7 +3447,9 @@ color: anchor
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(height: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3459,7 +3459,6 @@ color: anchor
                               "assets/mooringbuoygreen.png",
                               height: 15.w,
                               width: 15.w,
-
                             ),
                             Text("Recommended",
                                 style: TextStyle(
@@ -3476,8 +3475,6 @@ color: anchor
                               "assets/mooring-buoy-yellow.png",
                               height: 15.w,
                               width: 15.w,
-
-
                             ),
                             Text("Average",
                                 style: TextStyle(
@@ -3488,15 +3485,12 @@ color: anchor
                                     fontFamily: "volken")),
                           ],
                         ),
-
                         Column(
                           children: [
                             Image.asset(
                               "assets/mooring-buoy-red.png",
                               height: 15.w,
-                              width:15.w,
-
-
+                              width: 15.w,
                             ),
                             Text("To Avoid",
                                 style: TextStyle(
@@ -3509,8 +3503,9 @@ color: anchor
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.h,),
-
+                    SizedBox(
+                      height: 2.h,
+                    ),
                   ]),
                 ),
               ));
@@ -3518,6 +3513,7 @@ color: anchor
       },
     );
   }
+
   // showmarker() {
   //   print("dtadone");
   //   checkInternet().then((internet) async {
@@ -3607,21 +3603,29 @@ color: anchor
         positionController?.fetchPositionData();
 
         authprovider().showmarkerapi().then((response) async {
-          shoallmarkermodal = ShoAllMarkerModal.fromJson(json.decode(response.body));
+          shoallmarkermodal =
+              ShoAllMarkerModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200) {
             print("api calling done");
 
             // Clear existing markers
             // _customMarkers.clear();
 
-            for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
+            for (int index = 0;
+                index < (shoallmarkermodal?.positions?.length ?? 0);
+                index++) {
               print("markerlength${shoallmarkermodal?.positions?.length}");
-              var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1]?.toString();
-              var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0]?.toString();
+              var latitudeString = shoallmarkermodal
+                  ?.positions?[index].geometry?.coordinates?[1]
+                  ?.toString();
+              var longitudeString = shoallmarkermodal
+                  ?.positions?[index].geometry?.coordinates?[0]
+                  ?.toString();
 
               if (latitudeString != null && longitudeString != null) {
                 // Validate latitude and longitude strings
-                if (_isValidDouble(latitudeString) && _isValidDouble(longitudeString)) {
+                if (_isValidDouble(latitudeString) &&
+                    _isValidDouble(longitudeString)) {
                   try {
                     double latitude = double.parse(latitudeString);
                     double longitude = double.parse(longitudeString);
@@ -3629,19 +3633,33 @@ color: anchor
                       MarkerData(
                         marker: Marker(
                           onTap: () {
-                            print("positiname:-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                            print(
+                                "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
                             setState(() {
                               select = index;
                             });
                           },
-                          markerId: MarkerId('id-${ shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
-
+                          markerId: MarkerId(
+                              'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
                           position: LatLng(latitude, longitude),
-
                         ),
-                        child: shoallmarkermodal?.positions?[index].properties?.imgURL == null || shoallmarkermodal?.positions?[index].properties?.imgURL == ""
-                            ? Icon(Icons.location_on, color: Colors.green, size: 15.sp,)
-                            : Image.network((shoallmarkermodal?.positions?[index].properties?.imgURL).toString(), width: 50.w, height: 50.w),
+                        child: shoallmarkermodal?.positions?[index].properties
+                                        ?.imgURL ==
+                                    null ||
+                                shoallmarkermodal?.positions?[index].properties
+                                        ?.imgURL ==
+                                    ""
+                            ? Icon(
+                                Icons.location_on,
+                                color: Colors.green,
+                                size: 15.sp,
+                              )
+                            : Image.network(
+                                (shoallmarkermodal
+                                        ?.positions?[index].properties?.imgURL)
+                                    .toString(),
+                                width: 50.w,
+                                height: 50.w),
                       ),
                     );
                   } catch (e) {
@@ -3653,7 +3671,6 @@ color: anchor
               } else {
                 print("Latitude or longitude is null");
               }
-
             }
 
             // Update the state with new markers
@@ -3671,16 +3688,24 @@ color: anchor
           isLoading = false;
         });
 
-        for (int index = 0; index < (positionController.position?.positions.length ?? 0); index++) {
-          print("offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
-          print("offlinemappositionlength${positionController.position?.positions.length}");
-          var latitudeString = positionController.position?.positions[index].geometry.coordinates[1].toString();
-          var longitudeString = positionController.position?.positions[index].geometry.coordinates[0].toString();
-
+        for (int index = 0;
+            index < (positionController.position?.positions.length ?? 0);
+            index++) {
+          print(
+              "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
+          print(
+              "offlinemappositionlength${positionController.position?.positions.length}");
+          var latitudeString = positionController
+              .position?.positions[index].geometry.coordinates[1]
+              .toString();
+          var longitudeString = positionController
+              .position?.positions[index].geometry.coordinates[0]
+              .toString();
 
           if (latitudeString != null && longitudeString != null) {
             // Validate latitude and longitude strings
-            if (_isValidDouble(latitudeString) && _isValidDouble(longitudeString)) {
+            if (_isValidDouble(latitudeString) &&
+                _isValidDouble(longitudeString)) {
               try {
                 double latitude = double.parse(latitudeString);
                 double longitude = double.parse(longitudeString);
@@ -3688,20 +3713,24 @@ color: anchor
                   MarkerData(
                     marker: Marker(
                       onTap: () {
-
                         setState(() {
                           select = index;
                         });
                       },
-                      markerId: MarkerId('id-${positionController.position?.positions[index].properties.postId.toString()}'),
-
+                      markerId: MarkerId(
+                          'id-${positionController.position?.positions[index].properties.postId.toString()}'),
                       position: LatLng(latitude, longitude),
-
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: (positionController.position?.positions[index].properties.imgUrl).toString(),height: 50.w,width: 50.w,
-                      placeholder: (context, url) => CircularProgressIndicator(), // Placeholder widget while the image is loading
-                      errorWidget: (context, url, error) => Text("data"), // Widget to display when an error occurs
+                      imageUrl: (positionController
+                              .position?.positions[index].properties.imgUrl)
+                          .toString(),
+                      height: 50.w,
+                      width: 50.w,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(), // Placeholder widget while the image is loading
+                      errorWidget: (context, url, error) => Text(
+                          "data"), // Widget to display when an error occurs
                     ),
                   ),
                 );
@@ -3714,16 +3743,11 @@ color: anchor
           } else {
             print("Latitude or longitude is null");
           }
-
         }
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });
   }
-
-
-
-
 
   bool _isValidDouble(String value) {
     if (value == null) return false;
@@ -4250,5 +4274,4 @@ color: anchor
   //     }
   //   });
   // }
-
 }

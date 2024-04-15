@@ -1481,7 +1481,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               letterSpacing: 1.2,
                                               color: secondary,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 20.sp,
+                                              fontSize: 15.sp,
                                             ),
                                           ),
                                         ),
@@ -1543,7 +1543,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         },
                                         hight: 5.h,
                                         width: 30.w,
-                                        txtsize: 10.sp)
+                                        txtsize: 12.sp)
                                   ],
                                 ),
                               );

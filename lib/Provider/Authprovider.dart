@@ -173,12 +173,12 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
-  Future<http.Response> showmarkerapi() async {
+  Future<http.Response> showmarkerapi(Map<String, String> bodyData) async {
     String url = "https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties";
     print(url);
     var responseJson;
     final response = await http
-        .post(Uri.parse(url),  headers: headers)
+        .post(Uri.parse(url),body: bodyData,  headers: headers)
         .timeout(
       const Duration(seconds: 60),
       onTimeout: () {
@@ -189,22 +189,7 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
-  Future<http.Response> showmarker() async {
-    String url = 'https://boatposition.fableadtechnolabs.com/wp-json/navly/v1/all_properties';
-    print(url);
-    var responseJson;
-    final response = await http
-        .post(Uri.parse(url),)
-        .timeout(
-      const Duration(seconds: 60),
-      onTimeout: () {
-        throw const SocketException('Something went wrong');
-      },
-    );
-    responseJson = responses(response);
-    print("printAlldata${response.body}");
-    return responseJson;
-  }
+
 
 
   Future<http.Response> maltiplephotoaddapi(Map<String, String> bodyData, List<String> imagePaths) async {

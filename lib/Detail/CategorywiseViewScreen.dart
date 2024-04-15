@@ -1590,7 +1590,7 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                                 MainAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    width: 25.w,
+                                    width: 42.w,
                                     child: Text(
                                       viewcategorywisevieweetailmodal
                                           ?.nearbyPosts?[index]
@@ -1612,7 +1612,7 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                                         letterSpacing: 1.2,
                                         color: secondary,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20.sp,
+                                        fontSize: 15.sp,
                                       ),
                                     ),
                                   ),
@@ -1676,7 +1676,7 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                                   },
                                   hight: 5.h,
                                   width: 30.w,
-                                  txtsize: 10.sp)
+                                  txtsize: 12.sp)
                             ],
                           ),
                         );

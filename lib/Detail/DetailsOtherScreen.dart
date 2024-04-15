@@ -430,7 +430,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width: 25.w,
+                                        width: 42.w,
                                         child: Text(
                                           addviewothermodal?.nearbyPosts?[index].title==""|| addviewothermodal?.nearbyPosts?[index].title==null?"N/A":(addviewothermodal?.nearbyPosts?[index].title).toString(),
                                          maxLines: 1,
@@ -440,7 +440,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             letterSpacing: 1.2,
                                             color: secondary,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 20.sp,
+                                            fontSize: 15.sp,
                                           ),
                                         ),
                                       ),
@@ -503,7 +503,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       },
                                       hight: 5.h,
                                       width: 30.w,
-                                      txtsize: 10.sp)
+                                      txtsize: 12.sp)
                                 ],
                               ),
                             );

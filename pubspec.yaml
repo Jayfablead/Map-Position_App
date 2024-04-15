@@ -71,6 +71,7 @@ dependencies:
   http_parser:
   flutter_stripe: ^7.0.0
   internet_connection_checker:
+  flutter_cache_manager:
 
 
 

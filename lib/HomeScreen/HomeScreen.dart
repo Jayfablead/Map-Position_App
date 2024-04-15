@@ -19,6 +19,10 @@ import 'package:sizer/sizer.dart';
 import '../Achorage/AddAchoragePositionScreen.dart';
 import '../Achorage/AddOtherPositionScreen.dart';
 import '../Achorage/AddWarningScreen.dart';
+import '../Detail/CategorywiseViewScreen.dart';
+import '../Detail/DetailsOtherScreen.dart';
+import '../Detail/DetailsScreen.dart';
+import '../Detail/OtherWarningDetailsScreen.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/Loader.dart';
@@ -43,6 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _comments = TextEditingController();
   Set<Marker> _markers = {};
   List<MarkerData> _customMarkers = [];
+  var latitudeString;
+  var longitudeString;
 
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
@@ -50,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Position? _currentPosition;
   int? select;
   late LatLng dynamicLatLng;
+
   late GoogleMapController mapController;
   late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
   bool _isSatellite = false;
@@ -299,6 +306,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Expanded(
                             child: TextField(
+                              onChanged: (value) {
+                                if (value.isEmpty) {
+                                  setState(() {
+                                    isLoading=true;
+                                  });
+                                  showmarker();
+
+                                }
+                              },
                               controller: searchController,
                               decoration: inputDecoration(
                                   hintText: "Search....",
@@ -318,7 +334,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: IconButton(
                               icon: Icon(Icons.search,
                                   color: Colors.white, size: 20.sp),
-                              onPressed: _searchAndNavigate,
+                              onPressed: (){
+                                setState(() {
+                                  isLoading=true;
+                                });
+                                showmarker();
+                                },
                             ),
                           ),
                         ],
@@ -3514,106 +3535,29 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // showmarker() {
-  //   print("dtadone");
-  //   checkInternet().then((internet) async {
-  //     if (internet) {
-  //       authprovider().showmarker().then((response) async {
-  //         shoallmarkermodal = ShoAllMarkerModal.fromJson(json.decode(response.body));
-  //         if (response.statusCode == 200) {
-  //
-  //           print("api calling done");
-  //           _customMarkers.clear();
-  //
-  //           for (int index = 0; index < (shoallmarkermodal?.positions?.length ?? 0); index++) {
-  //             print("allMarkerLength${shoallmarkermodal?.positions?.length ?? 0}");
-  //             var latitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[0]?.toString();
-  //             var longitudeString = shoallmarkermodal?.positions?[index].geometry?.coordinates?[1]?.toString();
-  //
-  //             if (latitudeString != null && longitudeString != null) {
-  //               try {
-  //                 double latitude = double.parse(latitudeString);
-  //                 double longitude = double.parse(longitudeString);
-  //                 setState(() {
-  //                   _customMarkers.add(
-  //                     MarkerData(
-  //                       marker: Marker(
-  //                         onTap: () {
-  //                           print("jdkc");
-  //                           setState(() {
-  //                             select = index;
-  //                           });
-  //
-  //                           // alert();
-  //
-  //                         },
-  //                         markerId:
-  //                         MarkerId('id-$index'), // Use a unique identifier
-  //                         position: LatLng(latitude, longitude),
-  //                          // Use the correct position
-  //                       ),
-  //                       child: shoallmarkermodal?.positions?[index].properties?.imgURL==null||shoallmarkermodal?.positions?[index].properties?.imgURL==""?Icon(Icons.location_on,color: Colors.green,size: 15.sp,):Image.network((shoallmarkermodal?.positions?[index].properties?.imgURL)
-  //                           .toString(),width: 50.w,height: 50.w),
-  //
-  //                     ),
-  //
-  //                   );
-  //
-  //                 });
-  //
-  //                 // _markers.add(Marker(
-  //                 //   markerId: MarkerId((shoallmarkermodal?.positions?[index].properties?.postId).toString()),
-  //                 //   position: LatLng(latitude, longitude),
-  //                 //
-  //                 // ));
-  //               } catch (e) {
-  //                 print("Error parsing coordinates: $e");
-  //               }
-  //             } else {
-  //               print("Latitude or longitude is null");
-  //             }
-  //           }
-  //
-  //
-  //
-  //           setState(() {
-  //             isLoading = false;
-  //           });
-  //         } else {
-  //           setState(() {
-  //             isLoading = false;
-  //           });
-  //
-  //         }
-  //       });
-  //     } else {
-  //       setState(() {
-  //         isLoading = false;
-  //       });
-  //
-  //       buildErrorDialog(context, 'Error', "Internet Required");
-  //     }
-  //   });
-  // }
+
   showmarker() {
     print("dtadone");
-
+    final Map<String, String> data = {};
+    data['s'] = searchController.text.trim().toString();
+    print(data);
     checkInternet().then((internet) async {
       if (internet) {
         positionController?.fetchPositionData();
 
-        authprovider().showmarkerapi().then((response) async {
-          shoallmarkermodal =
-              ShoAllMarkerModal.fromJson(json.decode(response.body));
+        authprovider().showmarkerapi(data).then((response) async {
           if (response.statusCode == 200) {
+            shoallmarkermodal =
+                ShoAllMarkerModal.fromJson(json.decode(response.body));
+            print("maposition${shoallmarkermodal?.positions?.length}");
             print("api calling done");
 
             // Clear existing markers
-            // _customMarkers.clear();
+            _customMarkers.clear();
 
             for (int index = 0;
-                index < (shoallmarkermodal?.positions?.length ?? 0);
-                index++) {
+            index < (shoallmarkermodal?.positions?.length ?? 0);
+            index++) {
               print("markerlength${shoallmarkermodal?.positions?.length}");
               var latitudeString = shoallmarkermodal
                   ?.positions?[index].geometry?.coordinates?[1]
@@ -3629,6 +3573,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   try {
                     double latitude = double.parse(latitudeString);
                     double longitude = double.parse(longitudeString);
+                    String imageurl=(shoallmarkermodal
+                        ?.positions?[index].properties?.imgURL)
+                        .toString();
                     _customMarkers.add(
                       MarkerData(
                         marker: Marker(
@@ -3638,30 +3585,229 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               select = index;
                             });
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return StatefulBuilder(builder: (context, setState) {
+                                  return Dialog(
+
+                                      insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      backgroundColor: Colors.transparent,
+                                      child: SingleChildScrollView(
+                                          child:Stack(
+                                            children: [
+                                              InkWell(
+                                                onTap: (){
+
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context).size.width,
+                                                  margin:
+                                                  EdgeInsets.symmetric(vertical: 0.7.h),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 2.w, vertical: 1.h),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(10),
+                                                      border: Border.all(
+                                                          color: secondary, width: 1.sp)),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            height: 35.w,
+                                                            width: 35.w,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              BorderRadius.circular(15),
+                                                              child: CachedNetworkImage(
+                                                                imageUrl:shoallmarkermodal?.positions?[index].properties?.postImage ?? "" ,
+
+                                                                fit: BoxFit.cover,
+                                                                progressIndicatorBuilder:
+                                                                    (context, url,
+                                                                    progress) =>
+                                                                    Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
+                                                                errorWidget:
+                                                                    (context, url, error) =>
+                                                                    Image.asset(
+                                                                        Default_Profile),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 4.w),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment.start,
+                                                            children: [
+                                                              SizedBox(height: 0.h),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 46.w,
+                                                                    child: Text(
+                                                                      shoallmarkermodal?.positions?[index].properties?.title==null||shoallmarkermodal?.positions?[index].properties?.title==""?"N/A":shoallmarkermodal?.positions?[index].properties?.title ?? "",
+                                                                      maxLines: 1,
+                                                                      style: TextStyle(
+                                                                          overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                          fontSize: 14.sp,
+                                                                          color: Colors.black,
+                                                                          fontWeight:
+                                                                          FontWeight.bold,
+                                                                          fontFamily:
+                                                                          "volken",
+                                                                          letterSpacing: 1),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+
+                                                              SizedBox(height: 0.5.h),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment.start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Ratings :',
+                                                                    maxLines: 1,
+                                                                    style: TextStyle(
+                                                                      overflow: TextOverflow
+                                                                          .ellipsis,
+                                                                      fontSize: 13.sp,
+                                                                      color: Colors.black,
+                                                                      fontWeight:
+                                                                      FontWeight.w500,
+                                                                      fontFamily: "volken",
+                                                                      letterSpacing: 1,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(width: 2.w),
+                                                                  Text(
+                                                                    shoallmarkermodal?.positions?[index].properties?.onlyAvg==""||shoallmarkermodal?.positions?[index].properties?.onlyAvg==null?"0" :(shoallmarkermodal?.positions?[index].properties?.onlyAvg).toString(),
+                                                                    maxLines: 1,
+                                                                    style: TextStyle(
+                                                                      overflow: TextOverflow
+                                                                          .ellipsis,
+                                                                      fontSize: 13.sp,
+                                                                      color: secondary,
+                                                                      fontWeight:
+                                                                      FontWeight.w500,
+                                                                      fontFamily: "",
+                                                                      letterSpacing: 1,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(width: 0.5.w),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        bottom: 0.5.h),
+                                                                    child: Text(
+                                                                      '⭐️',
+                                                                      maxLines: 1,
+                                                                      style: TextStyle(
+                                                                        overflow: TextOverflow
+                                                                            .ellipsis,
+                                                                        fontSize: 12.sp,
+                                                                        color: Colors.orange,
+                                                                        letterSpacing: 1,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(height: 0.5.h),
+                                                              batan(
+                                                                  title: "View Details",
+                                                                  route: () {
+                                                                    shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:((shoallmarkermodal?.positions?[index].properties?.postId).toString()))):shoallmarkermodal?.positions?[index].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
+                                                                        postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString())):Get.to(CategoryWiseViewScreen(
+                                                                        postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+
+
+                                                                  },
+                                                                  hight: 6.h,
+                                                                  width: 40.w,
+                                                                  txtsize: 15.sp)
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                left: 82.w,
+                                                top: 1.h,
+                                                child: InkWell(
+                                                  onTap: () {
+Get.back();
+
+
+                                                  },
+                                                  child: Container(
+                                                    width: 10.w,
+                                                    height: 10.w,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                      BorderRadius.circular(100),
+                                                      color: Colors.black,
+                                                    ),
+                                                    child: Icon(Icons.clear,
+                                                        color: Colors.white, size: 15.sp),
+                                                  ),
+                                                ),
+                                              ),
+
+
+                                            ],
+                                          )
+                                      ));
+                                });
+                              },
+                            );
                           },
                           markerId: MarkerId(
                               'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
                           position: LatLng(latitude, longitude),
                         ),
                         child: shoallmarkermodal?.positions?[index].properties
-                                        ?.imgURL ==
-                                    null ||
-                                shoallmarkermodal?.positions?[index].properties
-                                        ?.imgURL ==
-                                    ""
+                            ?.imgURL ==
+                            null ||
+                            shoallmarkermodal?.positions?[index].properties
+                                ?.imgURL ==
+                                ""
                             ? Icon(
-                                Icons.location_on,
-                                color: Colors.green,
-                                size: 15.sp,
-                              )
+                          Icons.location_on,
+                          color: Colors.green,
+                          size: 15.sp,
+                        )
                             : Image.network(
-                                (shoallmarkermodal
-                                        ?.positions?[index].properties?.imgURL)
-                                    .toString(),
-                                width: 50.w,
-                                height: 50.w),
+                            (shoallmarkermodal
+                                ?.positions?[index].properties?.imgURL)
+                                .toString(),
+                            width: 50.w,
+                            height: 50.w),
                       ),
                     );
+
+                    // Set _currentPosition1 to the first marker position
+                    if (index == 0) {
+                      _currentPosition1 = LatLng(latitude, longitude);
+                    }
                   } catch (e) {
                     print("Error parsing coordinates: $e");
                   }
@@ -3688,9 +3834,10 @@ class _HomeScreenState extends State<HomeScreen> {
           isLoading = false;
         });
 
+        // Handle offline mode
         for (int index = 0;
-            index < (positionController.position?.positions.length ?? 0);
-            index++) {
+        index < (positionController.position?.positions.length ?? 0);
+        index++) {
           print(
               "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
           print(
@@ -3721,17 +3868,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'id-${positionController.position?.positions[index].properties.postId.toString()}'),
                       position: LatLng(latitude, longitude),
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: (positionController
-                              .position?.positions[index].properties.imgUrl)
-                          .toString(),
-                      height: 50.w,
-                      width: 50.w,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(), // Placeholder widget while the image is loading
-                      errorWidget: (context, url, error) => Text(
-                          "data"), // Widget to display when an error occurs
-                    ),
+                    child:Icon(Icons.home,size: 15.sp,color: Colors.black,),
                   ),
                 );
               } catch (e) {
@@ -3749,529 +3886,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+
   bool _isValidDouble(String value) {
     if (value == null) return false;
     final RegExp regex = RegExp(r'^-?[\d.]+$');
     return regex.hasMatch(value);
   }
 
-  // alert() {
-  //   return showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //         insetPadding: EdgeInsets.all(15),
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(16),
-  //         ),
-  //         backgroundColor: Colors.black.withOpacity(0.4),
-  //         child: GestureDetector(
-  //           onTap: () {
-  //             // Get.to(Tenth(
-  //             //   id: mapexplorationmodal?.data?[select!].ideaId,
-  //             // ));
-  //           },
-  //           child: Container(
-  //             width: MediaQuery.of(context).size.width,
-  //             padding: EdgeInsets.all(20),
-  //             decoration: BoxDecoration(
-  //               color: Colors.black.withOpacity(0.4),
-  //               borderRadius: BorderRadius.circular(16),
-  //             ),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisSize: MainAxisSize.min,
-  //               children: [
-  //                 SizedBox(
-  //                   height: 3.h,
-  //                 ),
-  //                 InkWell(onTap: (){
-  //                   // Get.to(Tenth(
-  //                   //   id: mapexplorationmodal?.data?[select!].ideaId,
-  //                   // ));
-  //                 },
-  //                   child: Text(
-  //                     mapexplorationmodal?.data?[select!].eventTitle == "" ||
-  //                         mapexplorationmodal?.data?[select!].eventTitle ==
-  //                             null
-  //                         ? "N/A"
-  //                         : (mapexplorationmodal?.data?[select!].eventTitle)
-  //                         .toString(),
-  //                     style: TextStyle(
-  //                       fontFamily: "simsan",
-  //                       color: Colors.white,
-  //                       fontSize: 18.sp,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Text(
-  //                   "已体验：" +
-  //                       (mapexplorationmodal?.data?[select!].noOfExperienced)
-  //                           .toString() +
-  //                       "| 已收藏：" +
-  //                       (mapexplorationmodal?.data?[select!].noOfCollected)
-  //                           .toString(),
-  //                   style: TextStyle(
-  //                     fontFamily: "simsan",
-  //                     color: Colors.white,
-  //                     fontSize: 14.sp,
-  //                     fontWeight: FontWeight.normal,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Row(
-  //                   crossAxisAlignment: CrossAxisAlignment.start,
-  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                   children: [
-  //                     Row(
-  //                       children: [
-  //                         Container(
-  //                             height: 30.0,
-  //                             width: 30.0,
-  //                             decoration: BoxDecoration(
-  //                               shape: BoxShape.circle,
-  //                               color: Colors.white,
-  //                             ),
-  //                             child: Icon(
-  //                               Icons.currency_yen,
-  //                               color: Colors.black,
-  //                             )),
-  //                         SizedBox(
-  //                           width: 3.h,
-  //                         ),
-  //                         Text(
-  //                           mapexplorationmodal?.data?[select!].eventFees ==
-  //                               null ||
-  //                               mapexplorationmodal
-  //                                   ?.data?[select!].eventFees ==
-  //                                   ""
-  //                               ? "N/A"
-  //                               : (mapexplorationmodal
-  //                               ?.data?[select!].eventFees)
-  //                               .toString(),
-  //                           style: TextStyle(
-  //                             fontFamily: "simsan",
-  //                             color: Colors.white,
-  //                             fontSize: 14.sp,
-  //                             fontWeight: FontWeight.bold,
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                     // Row(
-  //                     //   crossAxisAlignment: CrossAxisAlignment.start,
-  //                     //   children: [
-  //                     //     InkWell(
-  //                     //       onTap: (){
-  //                     //         Navigator.of(context).pop();
-  //                     //         print("1111111111111111111111111111111");
-  //                     //         alert1();
-  //                     //       },
-  //                     //       child:Icon(
-  //                     //         Icons.check_circle_outline,
-  //                     //         color: Colors.grey,
-  //                     //       )
-  //                     //     ),
-  //                     //     SizedBox(
-  //                     //       width: 3.h,
-  //                     //     ),
-  //                     //     Text(
-  //                     //       "已休验",
-  //                     //       style: TextStyle(
-  //                     //         fontFamily: "simsan",
-  //                     //         color: Color(0xffbA8A8A8),
-  //                     //         fontSize: 14.sp,
-  //                     //         fontWeight: FontWeight.normal,
-  //                     //       ),
-  //                     //     ),
-  //                     //     SizedBox(
-  //                     //       width: 10.h,
-  //                     //     ),
-  //                     //     InkWell(
-  //                     //       onTap: (){
-  //                     //         Navigator.of(context).pop();
-  //                     //         print("22222222222222222222222222222222");
-  //                     //         alert2();
-  //                     //       },
-  //                     //       child:Icon(
-  //                     //         Icons.favorite,
-  //                     //         color: Colors.red.shade900,
-  //                     //       ),
-  //                     //     ),
-  //                     //     SizedBox(
-  //                     //       width: 3.h,
-  //                     //     ),
-  //                     //     Text(
-  //                     //       "收藏",
-  //                     //       style: TextStyle(
-  //                     //         fontFamily: "simsan",
-  //                     //         color: Color(0xffbA8A8A8),
-  //                     //         fontSize: 14.sp,
-  //                     //         fontWeight: FontWeight.normal,
-  //                     //       ),
-  //                     //     ),
-  //                     //   ],
-  //                     // ),
-  //                     Row(
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       children: [
-  //                         GestureDetector(
-  //                           onTap: () {
-  //
-  //                             setState(
-  //                                     () {
-  //
-  //                                   sel =
-  //                                       select;
-  //                                 });
-  //                             Navigator.of(context).pop();
-  //                             // print("1111111111111");
-  //                             // alert1();
-  //                           },
-  //                           child: (mapexplorationmodal?.data?[select!].buttonExperience.toString() ==
-  //                               "1")
-  //                               ? GestureDetector(
-  //                             onTap:
-  //                                 () {
-  //                               mapexplorationmodal?.data?[select!].ideaId.toString();
-  //                             },
-  //                             child:
-  //                             Icon(
-  //                               Icons.check_circle_rounded,
-  //                               color: Color(0xffbEBEAEA),
-  //
-  //                             ),
-  //                           )
-  //                               : GestureDetector(
-  //                             onTap:
-  //                                 () {
-  //                               experincebuttonap(mapexplorationmodal?.data?[select!].ideaId.toString());
-  //                             },
-  //                             child:
-  //                             Icon(
-  //                               Icons.check_circle_outline,
-  //                               color: Color(0xffb777777),
-  //
-  //                             ),
-  //                           ),
-  //                         ),
-  //                         SizedBox(
-  //                           width: 5.w,
-  //                         ),
-  //                         GestureDetector(
-  //                           onTap: () {
-  //                             setState(
-  //                                     () {
-  //                                   sel =
-  //                                       select;
-  //                                 });
-  //                             experincebuttonap(mapexplorationmodal?.data?[select!].ideaId.toString());
-  //                           },
-  //                           child: Text(
-  //                             "已体验",
-  //                             style:
-  //                             TextStyle(
-  //                               color: Color(
-  //                                   0xffbA8A8A8),
-  //                               fontSize: 14.sp,
-  //
-  //                               fontFamily:
-  //                               "simsan",
-  //                             ),
-  //                           ),
-  //                         ),
-  //                         SizedBox(
-  //                           width: 5.w,
-  //                         ),
-  //                         GestureDetector(
-  //                             onTap:
-  //                                 () async{
-  //                               setState(
-  //                                       () {
-  //                                     COLLSEL =
-  //                                         select;
-  //                                   });
-  //                               // Navigator.of(context).pop();
-  //                               // print("222222222");
-  //                               // alert2();
-  //                             },
-  //                             child: mapexplorationmodal?.data?[select!].buttonCollected ==
-  //                                 "1"
-  //                                 ? GestureDetector(
-  //                               onTap: () {
-  //                                 collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
-  //                               },
-  //                               child: Icon(
-  //                                 Icons.favorite,
-  //                                 color: Color(0xffbD05454),
-  //
-  //                               ),
-  //                             )
-  //                                 : GestureDetector(
-  //                               onTap: () {
-  //                                 collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
-  //                               },
-  //                               child: Icon(
-  //                                 Icons.favorite_border,
-  //                                 color: Color(0xffb777777),
-  //
-  //                               ),
-  //                             )),
-  //                         SizedBox(
-  //                           width: 5.w,
-  //                         ),
-  //                         GestureDetector(
-  //                           onTap: () {
-  //                             setState(
-  //                                     () {
-  //                                   COLLSEL =
-  //                                       select;
-  //                                 });
-  //                             collectedbuttonap(mapexplorationmodal?.data?[select!].ideaId);
-  //                           },
-  //                           child: Text(
-  //                             "收藏",
-  //                             style:
-  //                             TextStyle(
-  //                               color: Color(
-  //                                   0xffbA8A8A8),
-  //                               fontSize: 14.sp,
-  //
-  //                               fontFamily:
-  //                               "simsan",
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     )
-  //                   ],
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Row(
-  //                   children: [
-  //                     Container(
-  //                       // height: 30.0,
-  //                       // width: 30.0,
-  //                         decoration: BoxDecoration(
-  //                           shape: BoxShape.circle,
-  //                         ),
-  //                         child: Icon(
-  //                           Icons.watch_later,
-  //                           color: Colors.white,
-  //                         )),
-  //                     SizedBox(
-  //                       width: 3.h,
-  //                     ),
-  //                     Text(
-  //                       "开始时间",
-  //                       style: TextStyle(
-  //                         fontFamily: "simsan",
-  //                         color: Colors.white,
-  //                         fontSize: 14.sp,
-  //                         fontWeight: FontWeight.bold,
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Text(
-  //                   mapexplorationmodal?.data?[select!].eventStartDate ==
-  //                       null ||
-  //                       mapexplorationmodal
-  //                           ?.data?[select!].eventStartDate ==
-  //                           ""
-  //                       ? "N/A"
-  //                       : (mapexplorationmodal?.data?[select!].eventStartDate)
-  //                       .toString() +
-  //                       (mapexplorationmodal?.data?[select!].eventStartTime)
-  //                           .toString(),
-  //                   style: TextStyle(
-  //                     fontFamily: "simsan",
-  //                     color: Colors.white,
-  //                     fontSize: 14.sp,
-  //                     fontWeight: FontWeight.normal,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Row(
-  //                   children: [
-  //                     Container(
-  //                         height: 30.0,
-  //                         width: 30.0,
-  //                         child: Icon(
-  //                           Icons.watch_later_outlined,
-  //                           color: Colors.white,
-  //                         )),
-  //                     Text(
-  //                       "体验时长",
-  //                       style: TextStyle(
-  //                         fontFamily: "simsan",
-  //                         color: Colors.white,
-  //                         fontSize: 14.sp,
-  //                         fontWeight: FontWeight.bold,
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Text(
-  //                   "15分钟",
-  //                   style: TextStyle(
-  //                     fontFamily: "simsan",
-  //                     color: Colors.white,
-  //                     fontSize: 16.sp,
-  //                     fontWeight: FontWeight.normal,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 Row(
-  //                   children: [
-  //                     Container(
-  //                         height: 30.0,
-  //                         width: 30.0,
-  //                         child: Icon(
-  //                           Icons.location_on,
-  //                           color: Colors.white,
-  //                         )),
-  //                     Text(
-  //                       "体验地点",
-  //                       style: TextStyle(
-  //                         fontFamily: "simsan",
-  //                         color: Colors.white,
-  //                         fontSize: 14.sp,
-  //                         fontWeight: FontWeight.bold,
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5.h,
-  //                 ),
-  //                 // Text(
-  //                 //   "中国 陕西西安 桃园南路21号公园天下小",
-  //                 //   style: TextStyle(
-  //                 //     fontFamily: "simsan",
-  //                 //       color: Colors.white,
-  //                 //       fontSize: 14.sp,
-  //                 //       fontWeight: FontWeight.bold,
-  //                 //       ),
-  //                 // ),
-  //                 Text(
-  //                   mapexplorationmodal?.data?[select!].address == null ||
-  //                       mapexplorationmodal?.data?[select!].address == ""
-  //                       ? "N/A"
-  //                       : (mapexplorationmodal?.data?[select!].address)
-  //                       .toString() +
-  //                       " | " +
-  //                       (mapexplorationmodal?.data?[select!]
-  //                           .distanceToCurrentPlace ==
-  //                           null ||
-  //                           mapexplorationmodal?.data?[select!]
-  //                               .distanceToCurrentPlace ==
-  //                               ""
-  //                           ? "N/A"
-  //                           : (mapexplorationmodal?.data?[select!].distanceToCurrentPlace)
-  //                           .toString()),
-  //                   style: TextStyle(
-  //                     fontFamily: "simsan",
-  //                     color: Colors.white,
-  //                     fontSize: 14.sp,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
-  // addanchorage() async {
-  //   print(selectedimage?.path);
-  //   EasyLoading.show(status: 'Please Wait ...');
-  //   final Map<String, String> data = {};
-  //   data['user_id'] = (loginmodal?.userId).toString();
-  //   data['positionName'] = _name.text.trim().toString();
-  //   data['comment'] = _comments.text.trim().toString();
-  //   data['m_lat'] = lat1.toString();
-  //   data['m_lng'] = lng1.toString();
-  //   data['n1'] =N1.toString();
-  //   data['n2'] =N2.toString();
-  //   data['n3'] =N3.toString();
-  //   data['ne1'] =NE1.toString();
-  //   data['ne2'] =NE2.toString();
-  //   data['ne3'] =NE3.toString();
-  //   data['e1'] =E1.toString();
-  //   data['e2'] =E2.toString();
-  //   data['e3'] =E3.toString();
-  //   data['se1'] =SE1.toString();
-  //   data['se2'] =SE2.toString();
-  //   data['se3'] =SE3.toString();
-  //   data['s1'] =S1.toString();
-  //   data['s2'] =S2.toString();
-  //   data['s3'] =S3.toString();
-  //   data['sw1'] =SW1.toString();
-  //   data['sw2'] =SW2.toString();
-  //   data['sw3'] =SW3.toString();
-  //   data['w1'] =W1.toString();
-  //   data['w2'] =W2.toString();
-  //   data['w3'] =W3.toString();
-  //   data['nw1'] =NW1.toString();
-  //   data['nw2'] =NW2.toString();
-  //   data['nw3'] =NW3.toString();
-  //   data['own_anchor'] =anchor.toString();
-  //   data['buoys'] =buoys.toString();
-  //   data['mountain_wedges'] =mountain.toString();
-  //   data['own_lines'] = ownlines.toString();
-  //   data['sand'] =sand.toString();
-  //   data['mud'] =pano.toString();
-  //   data['clay'] =clay.toString();
-  //   data['coral'] =coral.toString();
-  //   data['rocks'] =rocks.toString();
-  //   data['groceries'] =groceries.toString();
-  //   data['water'] =water.toString();
-  //   data['alcohol'] =alcohol.toString();
-  //   data['pharmacy'] =pharmacy.toString();
-  //   data['restaurant'] =restaurant.toString();
-  //   data['upload_pictures'] =
-  //   selectedimage?.path == null ? '' : selectedimage?.path ?? "";
-  //   print("Printapivalue${data}");
-  //   checkInternet().then((internet) async {
-  //     if (internet) {
-  //       authprovider().addpositionapi(data,imagePaths).then((response) async {
-  //         addpositionmodal =
-  //             AddPositionModal.fromJson(json.decode(response.body));
-  //         if (response.statusCode == 200 && addpositionmodal?.success==true) {
-  //           print("admin chalu karo bhai");
-  //           EasyLoading.showSuccess(addpositionmodal?.message ?? "");
-  //           Scessfully();
-  //         } else {
-  //           EasyLoading.showError(addpositionmodal?.message ?? "");
-  //           setState(() {
-  //           });
-  //         }
-  //       });
-  //     } else {
-  //       buildErrorDialog(context, 'Error', "Internet Required");
-  //     }
-  //   });
-  // }
 }

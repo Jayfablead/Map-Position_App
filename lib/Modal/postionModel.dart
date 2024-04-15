@@ -86,7 +86,7 @@ class Properties {
   int imageIndex;
   String? imgUrl;
   int onlyAvg;
-  TermName termName;
+  String? termName;
   bool isFavorite;
 
   Properties({
@@ -112,8 +112,9 @@ class Properties {
     catId: json["cat_id"],
     imageIndex: json["image_index"],
     imgUrl: json["imgURL"],
+    termName: json["term_name"],
     onlyAvg: json["only_avg"],
-    termName: termNameValues.map[json["term_name"]]!,
+
     isFavorite: json["is_favorite"],
   );
 

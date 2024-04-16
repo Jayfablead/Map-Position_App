@@ -359,7 +359,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                         height: 1.h,
                       ),
                       Container(
-                        height: 30.h,
+                        height: 28.h,
                         child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: addviewwarningmodal?.nearbyPosts?.length,
@@ -367,7 +367,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                           padding: EdgeInsets.zero,
                           itemBuilder: (context, index) {
                             return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 2.w),
+                              margin: EdgeInsets.symmetric(horizontal: 1.w),
                               decoration: BoxDecoration(
                                 border: Border.all(width: 1.sp, color: secondary),
                                 borderRadius: BorderRadius.circular(10),

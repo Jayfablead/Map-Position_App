@@ -1505,7 +1505,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                     height: 1.h,
                   ),
                   Container(
-                    height: 30.h,
+                    height: 28.h,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: viewcategorywisevieweetailmodal?.nearbyPosts?.length,

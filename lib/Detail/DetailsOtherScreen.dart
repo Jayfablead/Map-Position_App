@@ -149,6 +149,9 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    setState(() {
+      isLoading =true;
+    });
     viewposition();
     print("Postidavigayache:-${widget.postid.toString()}");
   }

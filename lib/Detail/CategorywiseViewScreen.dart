@@ -164,6 +164,9 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
+    setState(() {
+      isLoading =true;
+    });
     getLocation();
     print("Postidavigayache:-${widget.postid.toString()}");
   }

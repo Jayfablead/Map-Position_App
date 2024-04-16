@@ -104,6 +104,9 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
     // TODO: implement initState
     super.initState();
     viewposition();
+    setState(() {
+      isLoading =true;
+    });
     print("Postidavigayache:-${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {

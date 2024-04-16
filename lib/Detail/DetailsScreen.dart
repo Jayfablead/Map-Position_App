@@ -163,6 +163,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
+    setState(() {
+      isLoading =true;
+    });
     getLocation();
     print("Postidavigayache:-${widget.postid.toString()}");
   }

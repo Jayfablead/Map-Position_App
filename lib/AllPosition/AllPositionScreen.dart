@@ -44,6 +44,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
           resizeToAvoidBottomInset: false,
           extendBody: true,
           key: _scaffoldKeyProductlistpage,
+          backgroundColor: Colors.white,
           drawer: drawer1(),
       body: isLoading?Container():SingleChildScrollView(
         child: Padding(
@@ -72,7 +73,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                     "volken",
                     letterSpacing: 1), ),),
               ):Container(
-                height: 100.h,
+                height: 85.h,
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: shoallmarkermodal?.positions?.length ?? 0,

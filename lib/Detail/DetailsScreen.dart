@@ -1565,7 +1565,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     fontFamily: "volken")),
                             loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
                               onTap: () {
-                                Get.back();
+
                                 showratingpop1();
                               },
                               child: Text("Add Review",

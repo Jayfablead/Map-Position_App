@@ -3738,6 +3738,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               batan(
                                                                   title: "View Details",
                                                                   route: () {
+                                                                    Get.back();
                                                                     shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:((shoallmarkermodal?.positions?[index].properties?.postId).toString()))):shoallmarkermodal?.positions?[index].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
                                                                         postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString())):Get.to(CategoryWiseViewScreen(
                                                                         postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
@@ -3841,52 +3842,52 @@ Get.back();
         });
 
         // Handle offline mode
-        for (int index = 0;
-        index < (positionController.position?.positions.length ?? 0);
-        index++) {
-          print(
-              "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
-          print(
-              "offlinemappositionlength${positionController.position?.positions.length}");
-          var latitudeString = positionController
-              .position?.positions[index].geometry.coordinates[1]
-              .toString();
-          var longitudeString = positionController
-              .position?.positions[index].geometry.coordinates[0]
-              .toString();
-
-          if (latitudeString != null && longitudeString != null) {
-            // Validate latitude and longitude strings
-            if (_isValidDouble(latitudeString) &&
-                _isValidDouble(longitudeString)) {
-              try {
-                double latitude = double.parse(latitudeString);
-                double longitude = double.parse(longitudeString);
-                _customMarkers.add(
-                  MarkerData(
-                    marker: Marker(
-                      onTap: () {
-                        setState(() {
-                          select = index;
-                        });
-                      },
-                      markerId: MarkerId(
-                          'id-${positionController.position?.positions[index].properties.postId.toString()}'),
-                      position: LatLng(latitude, longitude),
-                    ),
-                    child:Icon(Icons.home,size: 15.sp,color: Colors.black,),
-                  ),
-                );
-              } catch (e) {
-                print("Error parsing coordinates: $e");
-              }
-            } else {
-              print("Invalid latitude or longitude format");
-            }
-          } else {
-            print("Latitude or longitude is null");
-          }
-        }
+        // for (int index = 0;
+        // index < (positionController.position?.positions.length ?? 0);
+        // index++) {
+        //   print(
+        //       "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
+        //   print(
+        //       "offlinemappositionlength${positionController.position?.positions.length}");
+        //   var latitudeString = positionController
+        //       .position?.positions[index].geometry.coordinates[1]
+        //       .toString();
+        //   var longitudeString = positionController
+        //       .position?.positions[index].geometry.coordinates[0]
+        //       .toString();
+        //
+        //   if (latitudeString != null && longitudeString != null) {
+        //     // Validate latitude and longitude strings
+        //     if (_isValidDouble(latitudeString) &&
+        //         _isValidDouble(longitudeString)) {
+        //       try {
+        //         double latitude = double.parse(latitudeString);
+        //         double longitude = double.parse(longitudeString);
+        //         _customMarkers.add(
+        //           MarkerData(
+        //             marker: Marker(
+        //               onTap: () {
+        //                 setState(() {
+        //                   select = index;
+        //                 });
+        //               },
+        //               markerId: MarkerId(
+        //                   'id-${positionController.position?.positions[index].properties.postId.toString()}'),
+        //               position: LatLng(latitude, longitude),
+        //             ),
+        //             child:Icon(Icons.home,size: 15.sp,color: Colors.black,),
+        //           ),
+        //         );
+        //       } catch (e) {
+        //         print("Error parsing coordinates: $e");
+        //       }
+        //     } else {
+        //       print("Invalid latitude or longitude format");
+        //     }
+        //   } else {
+        //     print("Latitude or longitude is null");
+        //   }
+        // }
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });

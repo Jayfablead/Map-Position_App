@@ -105,9 +105,16 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.black,
+                                  Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                    ),
+                                    child: Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.black,
+                                    ),
                                   )
                                 ],
                               ),
@@ -525,7 +532,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   fontFamily: "volken")),
                           loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
                             onTap: () {
-                              Get.back();
+
                               showratingpop1();
                             },
                             child: Text("Add Review",

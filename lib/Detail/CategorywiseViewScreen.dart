@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 
@@ -126,9 +127,14 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         children: [
                           Row(
                             children: [
-                              Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.black,
+                              InkWell(
+                            onTap: (){
+                             Get.to(HomeScreen());
+                            },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.black,
+                                ),
                               )
                             ],
                           ),
@@ -767,7 +773,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 1.h,
                   ),
                   Row(
                     children: [
@@ -1509,7 +1515,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 2.w),
+                          margin: EdgeInsets.symmetric(horizontal: 1.w),
                           decoration: BoxDecoration(
                             border:
                             Border.all(width: 1.sp, color: secondary),
@@ -1696,9 +1702,9 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
-                      InkWell(
+                      loginmodal?.userId==""||loginmodal?.userId==null?Container():loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
                         onTap: () {
-                          Get.back();
+
                           showratingpop1();
                         },
                         child: Text("Add Review",

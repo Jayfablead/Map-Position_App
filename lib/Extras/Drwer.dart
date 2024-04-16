@@ -66,6 +66,64 @@ class _drawer1State extends State<drawer1> {
               SizedBox(height:5. h),
                 InkWell(
                   onTap: () {
+                    Get.offAll(HomeScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child: Icon(
+                                      CupertinoIcons.home,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("Home",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                InkWell(
+                  onTap: () {
                     Get.offAll(LoginScreen());
                   },
                   child: Container(

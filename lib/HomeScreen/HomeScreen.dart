@@ -6,16 +6,16 @@ import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/bottombar.dart';
+import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
 import 'package:sizer/sizer.dart';
+
 import '../Achorage/AddAchoragePositionScreen.dart';
 import '../Achorage/AddOtherPositionScreen.dart';
 import '../Achorage/AddWarningScreen.dart';
@@ -28,12 +28,9 @@ import '../Extras/Headerwidget.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../Marina/AddMarinaScreen.dart';
-import '../Modal/AddPositionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
-import '../PrimiumPayments/home_screen.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -66,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
       GlobalKey<ScaffoldState>();
   List<String> _imagePaths = [];
+
   @override
   void dispose() {
     searchController.dispose();
@@ -178,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool NW2 = false;
   bool NW3 = false;
   bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -212,7 +211,12 @@ class _HomeScreenState extends State<HomeScreen> {
         scaffold: Scaffold(
           resizeToAvoidBottomInset: false,
           extendBody: true,
-            bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 2),
+          bottomNavigationBar:
+              loginmodal?.userId == "" || loginmodal?.userId == null
+                  ? Container()
+                  : isLoading
+                      ? Container()
+                      : Bottombar(select_tab: 2),
           key: _scaffoldKeyProductlistpage,
           drawer: drawer1(),
           body: isLoading
@@ -274,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // You can set your initial position here
                             zoom: 12.0,
                           ),
-                          mapType:_mapType,
+                          mapType: _mapType,
                           markers: _markers,
                           myLocationButtonEnabled: false,
                           myLocationEnabled: true,
@@ -309,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onChanged: (value) {
                                 if (value.isEmpty) {
                                   setState(() {
-                                    isLoading=true;
+                                    isLoading = true;
                                   });
                                   showmarker();
                                 }
@@ -333,12 +337,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: IconButton(
                               icon: Icon(Icons.search,
                                   color: Colors.white, size: 20.sp),
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
-                                  isLoading=true;
+                                  isLoading = true;
                                 });
                                 showmarker();
-                                },
+                              },
                             ),
                           ),
                         ],
@@ -347,194 +351,210 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned(
                       top: 20.h,
                       left: 55.w,
-                      child: loginmodal?.userId==""||loginmodal?.userId==null ?batan(title: "+ Add Position", route: (){
-                        buildErrorDialog(context, "","Please Login To Use This");
-                      }, hight: 5.h, width: 40.w, txtsize: 12.sp):PopupMenuButton(
-                          color: bgcolor,
-                          elevation: 00,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(color: secondary),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Container(
-                              alignment: Alignment.center,
+                      child: loginmodal?.userId == "" ||
+                              loginmodal?.userId == null
+                          ? batan(
+                              title: "+ Add Position",
+                              route: () {
+                                buildErrorDialog1(
+                                  context,
+                                  "",
+                                  "Please Login To Use This",
+                                  buttonname: 'Login',
+                                () {
+                                    Get.offAll(LoginScreen());
+                                  },
+                                );
+                              },
+                              hight: 5.h,
                               width: 40.w,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 2.w, vertical: 1.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: blackback),
-                              child: Text(
-                                "+ Add Position",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Volkan"),
-                              )),
-                          itemBuilder: (BuildContext context) {
-                            return <PopupMenuEntry>[
-                              PopupMenuItem(
-                                onTap: () {
-                                  Get.offAll(AddAchoragePositionScreen(
-                                    lat: lat1.toString(),
-                                    lng: lng1.toString(),
-                                  ));
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 8.w,
-                                      height: 8.w,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: blackback,
-                                      ),
-                                      child: Image.asset(
-                                        "assets/lagan.png",
-                                        height: 25.w,
-                                        width: 25.w,
+                              txtsize: 12.sp)
+                          : PopupMenuButton(
+                              color: bgcolor,
+                              elevation: 00,
+                              shape: RoundedRectangleBorder(
+                                  side: BorderSide(color: secondary),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  width: 40.w,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback),
+                                  child: Text(
+                                    "+ Add Position",
+                                    style: TextStyle(
+                                        letterSpacing: 1,
                                         color: Colors.white,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Text(
-                                      'Anchorage',
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan"),
-                                    ),
-                                  ],
-                                ),
-                                value: 'Anchorage',
-                              ),
-                              PopupMenuDivider(),
-                              PopupMenuItem(
-                                onTap: () {
-                                  Get.offAll(AddWarningScreen(
-                                      lat: lat1.toString(),
-                                      lng: lng1.toString()));
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        width: 8.w,
-                                        height: 8.w,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: blackback,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Volkan"),
+                                  )),
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuEntry>[
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      Get.offAll(AddAchoragePositionScreen(
+                                        lat: lat1.toString(),
+                                        lng: lng1.toString(),
+                                      ));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 8.w,
+                                          height: 8.w,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            color: blackback,
+                                          ),
+                                          child: Image.asset(
+                                            "assets/lagan.png",
+                                            height: 25.w,
+                                            width: 25.w,
+                                            color: Colors.white,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                        child: Icon(
-                                          Icons.warning_amber_outlined,
-                                          color: Colors.white,
-                                        )),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Text(
-                                      'Warning',
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan"),
-                                    ),
-                                  ],
-                                ),
-                                value: 'Warning',
-                              ),
-                              PopupMenuDivider(),
-                              PopupMenuItem(
-                                onTap: () {
-                                  Get.offAll(AddOtherPositionScreen(
-                                    lat: lat1.toString(),
-                                    lng: lng1.toString(),
-                                  ));
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        width: 8.w,
-                                        height: 8.w,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: blackback,
+                                        SizedBox(
+                                          width: 2.w,
                                         ),
-                                        child: Icon(
-                                          Icons.devices_other_sharp,
-                                          color: Colors.white,
-                                        )),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Text(
-                                      'Other',
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan"),
-                                    ),
-                                  ],
-                                ),
-                                value: 'Warning',
-                              ),
-                              PopupMenuDivider(),
-                              PopupMenuItem(
-                                onTap: () {
-                                  Get.offAll(AddMarinaScreen(
-                                    lat: lat1.toString(),
-                                    lng: lng1.toString(),
-                                  ));
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        width: 8.w,
-                                        height: 8.w,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: blackback,
+                                        Text(
+                                          'Anchorage',
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: secondary,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: "Volkan"),
                                         ),
-                                        child: Icon(Icons.directions_boat,
-                                            color: Colors.white)),
-                                    SizedBox(
-                                      width: 2.w,
+                                      ],
                                     ),
-                                    Text(
-                                      'Marina',
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan"),
+                                    value: 'Anchorage',
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      Get.offAll(AddWarningScreen(
+                                          lat: lat1.toString(),
+                                          lng: lng1.toString()));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            width: 8.w,
+                                            height: 8.w,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: blackback,
+                                            ),
+                                            child: Icon(
+                                              Icons.warning_amber_outlined,
+                                              color: Colors.white,
+                                            )),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text(
+                                          'Warning',
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: secondary,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: "Volkan"),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                value: 'Warning',
-                              ),
-                            ];
-                          },
-                          onSelected: (value) {
-                            print('Selected: $value');
-                          }),
+                                    value: 'Warning',
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      Get.offAll(AddOtherPositionScreen(
+                                        lat: lat1.toString(),
+                                        lng: lng1.toString(),
+                                      ));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            width: 8.w,
+                                            height: 8.w,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: blackback,
+                                            ),
+                                            child: Icon(
+                                              Icons.devices_other_sharp,
+                                              color: Colors.white,
+                                            )),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text(
+                                          'Other',
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: secondary,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: "Volkan"),
+                                        ),
+                                      ],
+                                    ),
+                                    value: 'Warning',
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      Get.offAll(AddMarinaScreen(
+                                        lat: lat1.toString(),
+                                        lng: lng1.toString(),
+                                      ));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            width: 8.w,
+                                            height: 8.w,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: blackback,
+                                            ),
+                                            child: Icon(Icons.directions_boat,
+                                                color: Colors.white)),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text(
+                                          'Marina',
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: secondary,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: "Volkan"),
+                                        ),
+                                      ],
+                                    ),
+                                    value: 'Warning',
+                                  ),
+                                ];
+                              },
+                              onSelected: (value) {
+                                print('Selected: $value');
+                              }),
                     ),
                     Positioned(
                       bottom: 250,
@@ -595,7 +615,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               _isSatellite = !_isSatellite;
                             });
                             setState(() {
-                              _mapType = _isSatellite ? MapType.satellite : MapType.normal;
+                              _mapType = _isSatellite
+                                  ? MapType.satellite
+                                  : MapType.normal;
                             });
                           },
                           child: Icon(
@@ -3541,7 +3563,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   showmarker() {
     print("dtadone");
     final Map<String, String> data = {};
@@ -3560,269 +3581,364 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Clear existing markers
             _customMarkers.clear();
+            if (shoallmarkermodal?.positions?.length == 0) {
+              buildErrorDialog1(
+                context,
+                '',
+                "No spots listed in this area",
+                () {
+                  setState(() {
+                    searchController.clear();
+                    isLoading = true;
+                    Get.back();
+                  });
+                  showmarker();
+                },
+              );
+            } else {
+              for (int index = 0;
+                  index < (shoallmarkermodal?.positions?.length ?? 0);
+                  index++) {
+                print("markerlength${shoallmarkermodal?.positions?.length}");
+                var latitudeString = shoallmarkermodal
+                    ?.positions?[index].geometry?.coordinates?[1]
+                    ?.toString();
+                var longitudeString = shoallmarkermodal
+                    ?.positions?[index].geometry?.coordinates?[0]
+                    ?.toString();
 
-            for (int index = 0;
-            index < (shoallmarkermodal?.positions?.length ?? 0);
-            index++) {
-              print("markerlength${shoallmarkermodal?.positions?.length}");
-              var latitudeString = shoallmarkermodal
-                  ?.positions?[index].geometry?.coordinates?[1]
-                  ?.toString();
-              var longitudeString = shoallmarkermodal
-                  ?.positions?[index].geometry?.coordinates?[0]
-                  ?.toString();
-
-              if (latitudeString != null && longitudeString != null) {
-                // Validate latitude and longitude strings
-                if (_isValidDouble(latitudeString) &&
-                    _isValidDouble(longitudeString)) {
-                  try {
-                    double latitude = double.parse(latitudeString);
-                    double longitude = double.parse(longitudeString);
-                    String imageurl=(shoallmarkermodal
-                        ?.positions?[index].properties?.imgURL)
-                        .toString();
-                    _customMarkers.add(
-                      MarkerData(
-                        marker: Marker(
-                          onTap: () {
-                            print(
-                                "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
-                            setState(() {
-                              select = index;
-                            });
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return StatefulBuilder(builder: (context, setState) {
-                                  return Dialog(
-
-                                      insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                      ),
-                                      backgroundColor: Colors.transparent,
-                                      child: SingleChildScrollView(
-                                          child:Stack(
-                                            children: [
-                                              InkWell(
-                                                onTap: (){
-
-                                                },
-                                                child: Container(
-                                                  width: MediaQuery.of(context).size.width,
-                                                  margin:
-                                                  EdgeInsets.symmetric(vertical: 0.7.h),
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 2.w, vertical: 1.h),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius: BorderRadius.circular(10),
-                                                      border: Border.all(
-                                                          color: secondary, width: 1.sp)),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Container(
-                                                            height: 35.w,
-                                                            width: 35.w,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                              BorderRadius.circular(15),
-                                                              child: CachedNetworkImage(
-                                                                imageUrl:shoallmarkermodal?.positions?[index].properties?.postImage ?? "" ,
-
-                                                                fit: BoxFit.cover,
-                                                                progressIndicatorBuilder:
-                                                                    (context, url,
-                                                                    progress) =>
-                                                                    Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),
-                                                                errorWidget:
-                                                                    (context, url, error) =>
-                                                                    Image.asset(
-                                                                        Default_Profile),
-                                                              ),
+                if (latitudeString != null && longitudeString != null) {
+                  // Validate latitude and longitude strings
+                  if (_isValidDouble(latitudeString) &&
+                      _isValidDouble(longitudeString)) {
+                    try {
+                      double latitude = double.parse(latitudeString);
+                      double longitude = double.parse(longitudeString);
+                      String imageurl = (shoallmarkermodal
+                              ?.positions?[index].properties?.imgURL)
+                          .toString();
+                      _customMarkers.add(
+                        MarkerData(
+                          marker: Marker(
+                            onTap: () {
+                              print(
+                                  "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                              setState(() {
+                                select = index;
+                              });
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return StatefulBuilder(
+                                      builder: (context, setState) {
+                                    return Dialog(
+                                        insetPadding: EdgeInsets.symmetric(
+                                            horizontal: 3.w),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        backgroundColor: Colors.transparent,
+                                        child: SingleChildScrollView(
+                                            child: Stack(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0.7.h),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2.w,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        color: secondary,
+                                                        width: 1.sp)),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 35.w,
+                                                          width: 35.w,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl: shoallmarkermodal
+                                                                      ?.positions?[
+                                                                          index]
+                                                                      .properties
+                                                                      ?.postImage ??
+                                                                  "",
+                                                              fit: BoxFit.cover,
+                                                              progressIndicatorBuilder: (context,
+                                                                      url,
+                                                                      progress) =>
+                                                                  Container(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child: Center(
+                                                                          child:
+                                                                              CircularProgressIndicator())),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  Image.asset(
+                                                                      Default_Profile),
                                                             ),
                                                           ),
-                                                          SizedBox(width: 4.w),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment.start,
-                                                            children: [
-                                                              SizedBox(height: 0.h),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment.start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 46.w,
-                                                                    child: Text(
-                                                                      shoallmarkermodal?.positions?[index].properties?.title==null||shoallmarkermodal?.positions?[index].properties?.title==""?"N/A":shoallmarkermodal?.positions?[index].properties?.title ?? "",
-                                                                      maxLines: 1,
-                                                                      style: TextStyle(
-                                                                          overflow:
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SizedBox(
+                                                                height: 0.h),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 46.w,
+                                                                  child: Text(
+                                                                    shoallmarkermodal?.positions?[index].properties?.title ==
+                                                                                null ||
+                                                                            shoallmarkermodal?.positions?[index].properties?.title ==
+                                                                                ""
+                                                                        ? "N/A"
+                                                                        : shoallmarkermodal?.positions?[index].properties?.title ??
+                                                                            "",
+                                                                    maxLines: 1,
+                                                                    style: TextStyle(
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        fontSize: 14
+                                                                            .sp,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontFamily:
+                                                                            "volken",
+                                                                        letterSpacing:
+                                                                            1),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                                height: 0.5.h),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Ratings :',
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "volken",
+                                                                    letterSpacing:
+                                                                        1,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: 2.w),
+                                                                Text(
+                                                                  shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
+                                                                              "" ||
+                                                                          shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
+                                                                              null
+                                                                      ? "0"
+                                                                      : (shoallmarkermodal
+                                                                              ?.positions?[index]
+                                                                              .properties
+                                                                              ?.onlyAvg)
+                                                                          .toString(),
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    color:
+                                                                        secondary,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "",
+                                                                    letterSpacing:
+                                                                        1,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width:
+                                                                        0.5.w),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              0.5.h),
+                                                                  child: Text(
+                                                                    '⭐️',
+                                                                    maxLines: 1,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      overflow:
                                                                           TextOverflow
                                                                               .ellipsis,
-                                                                          fontSize: 14.sp,
-                                                                          color: Colors.black,
-                                                                          fontWeight:
-                                                                          FontWeight.bold,
-                                                                          fontFamily:
-                                                                          "volken",
-                                                                          letterSpacing: 1),
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      color: Colors
+                                                                          .orange,
+                                                                      letterSpacing:
+                                                                          1,
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-
-                                                              SizedBox(height: 0.5.h),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment.start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Ratings :',
-                                                                    maxLines: 1,
-                                                                    style: TextStyle(
-                                                                      overflow: TextOverflow
-                                                                          .ellipsis,
-                                                                      fontSize: 13.sp,
-                                                                      color: Colors.black,
-                                                                      fontWeight:
-                                                                      FontWeight.w500,
-                                                                      fontFamily: "volken",
-                                                                      letterSpacing: 1,
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(width: 2.w),
-                                                                  Text(
-                                                                    shoallmarkermodal?.positions?[index].properties?.onlyAvg==""||shoallmarkermodal?.positions?[index].properties?.onlyAvg==null?"0" :(shoallmarkermodal?.positions?[index].properties?.onlyAvg).toString(),
-                                                                    maxLines: 1,
-                                                                    style: TextStyle(
-                                                                      overflow: TextOverflow
-                                                                          .ellipsis,
-                                                                      fontSize: 13.sp,
-                                                                      color: secondary,
-                                                                      fontWeight:
-                                                                      FontWeight.w500,
-                                                                      fontFamily: "",
-                                                                      letterSpacing: 1,
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(width: 0.5.w),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        bottom: 0.5.h),
-                                                                    child: Text(
-                                                                      '⭐️',
-                                                                      maxLines: 1,
-                                                                      style: TextStyle(
-                                                                        overflow: TextOverflow
-                                                                            .ellipsis,
-                                                                        fontSize: 12.sp,
-                                                                        color: Colors.orange,
-                                                                        letterSpacing: 1,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              SizedBox(height: 0.5.h),
-                                                              batan(
-                                                                  title: "View Details",
-                                                                  route: () {
-                                                                    Get.back();
-                                                                    shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:((shoallmarkermodal?.positions?[index].properties?.postId).toString()))):shoallmarkermodal?.positions?[index].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
-                                                                        postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString())):Get.to(CategoryWiseViewScreen(
-                                                                        postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
-
-
-                                                                  },
-                                                                  hight: 6.h,
-                                                                  width: 40.w,
-                                                                  txtsize: 15.sp)
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 82.w,
-                                                top: 1.h,
-                                                child: InkWell(
-                                                  onTap: () {
-Get.back();
-
-
-                                                  },
-                                                  child: Container(
-                                                    width: 10.w,
-                                                    height: 10.w,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(100),
-                                                      color: Colors.black,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                                height: 0.5.h),
+                                                            batan(
+                                                                title:
+                                                                    "View Details",
+                                                                route: () {
+                                                                  Get.back();
+                                                                  shoallmarkermodal
+                                                                              ?.positions?[
+                                                                                  index]
+                                                                              .properties
+                                                                              ?.termName ==
+                                                                          "Warning"
+                                                                      ? Get.to(
+                                                                          DetailsWarningDetailsScreen(
+                                                                          postid:
+                                                                              (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ))
+                                                                      : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                                              "Other"
+                                                                          ? Get.to(
+                                                                              DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
+                                                                          : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
+                                                                              ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
+                                                                              : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                },
+                                                                hight: 6.h,
+                                                                width: 40.w,
+                                                                txtsize: 15.sp)
+                                                          ],
+                                                        )
+                                                      ],
                                                     ),
-                                                    child: Icon(Icons.clear,
-                                                        color: Colors.white, size: 15.sp),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
-
-
-                                            ],
-                                          )
-                                      ));
-                                });
-                              },
-                            );
-                          },
-                          markerId: MarkerId(
-                              'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
-                          position: LatLng(latitude, longitude),
+                                            ),
+                                            Positioned(
+                                              left: 82.w,
+                                              top: 1.h,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                  width: 10.w,
+                                                  height: 10.w,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    color: Colors.black,
+                                                  ),
+                                                  child: Icon(Icons.clear,
+                                                      color: Colors.white,
+                                                      size: 15.sp),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )));
+                                  });
+                                },
+                              );
+                            },
+                            markerId: MarkerId(
+                                'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
+                            position: LatLng(latitude, longitude),
+                          ),
+                          child: shoallmarkermodal?.positions?[index].properties
+                                          ?.imgURL ==
+                                      null ||
+                                  shoallmarkermodal?.positions?[index]
+                                          .properties?.imgURL ==
+                                      ""
+                              ? Icon(
+                                  Icons.location_on,
+                                  color: Colors.green,
+                                  size: 15.sp,
+                                )
+                              : Image.network(
+                                  (shoallmarkermodal?.positions?[index]
+                                          .properties?.imgURL)
+                                      .toString(),
+                                  width: 50.w,
+                                  height: 50.w),
                         ),
-                        child: shoallmarkermodal?.positions?[index].properties
-                            ?.imgURL ==
-                            null ||
-                            shoallmarkermodal?.positions?[index].properties
-                                ?.imgURL ==
-                                ""
-                            ? Icon(
-                          Icons.location_on,
-                          color: Colors.green,
-                          size: 15.sp,
-                        )
-                            : Image.network(
-                            (shoallmarkermodal
-                                ?.positions?[index].properties?.imgURL)
-                                .toString(),
-                            width: 50.w,
-                            height: 50.w),
-                      ),
-                    );
+                      );
 
-                    // Set _currentPosition1 to the first marker position
-                    if (index == 0) {
-                      _currentPosition1 = LatLng(latitude, longitude);
+                      // Set _currentPosition1 to the first marker position
+                      if (index == 0) {
+                        _currentPosition1 = LatLng(latitude, longitude);
+                      }
+                    } catch (e) {
+                      print("Error parsing coordinates: $e");
                     }
-                  } catch (e) {
-                    print("Error parsing coordinates: $e");
+                  } else {
+                    print("Invalid latitude or longitude format");
                   }
                 } else {
-                  print("Invalid latitude or longitude format");
+                  print("Latitude or longitude is null");
                 }
-              } else {
-                print("Latitude or longitude is null");
               }
             }
 
@@ -3893,12 +4009,9 @@ Get.back();
     });
   }
 
-
   bool _isValidDouble(String value) {
     if (value == null) return false;
     final RegExp regex = RegExp(r'^-?[\d.]+$');
     return regex.hasMatch(value);
   }
-
-
 }

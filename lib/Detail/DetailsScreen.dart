@@ -1,12 +1,20 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
@@ -18,6 +26,7 @@ import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
+import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
 import 'CategorywiseViewScreen.dart';
 import 'DetailsOtherScreen.dart';
@@ -59,12 +68,102 @@ class _DetailsScreenState extends State<DetailsScreen> {
   String plainText = '';
   final _formKey = GlobalKey<FormState>();
   bool showError = false;
+  TextEditingController searchController = TextEditingController();
+  final PositionController positionController = Get.put(PositionController());
+
+  Set<Marker> _markers = {};
+  List<MarkerData> _customMarkers = [];
+  var latitudeString;
+  var longitudeString;
+
+  LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
+  CameraPosition _initialCameraPosition =
+  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
+  Position? _currentPosition;
+  int? select;
+  late LatLng dynamicLatLng;
+
+  late GoogleMapController mapController;
+  late LatLng _currentPosition1 = LatLng(double.parse(onwViewpostionmodal?.data?.latitude ?? ""),double.parse(onwViewpostionmodal?.data?.longitude ?? ""));
+  bool _isSatellite = false;
+  GoogleMapController? _mapController;
+  ImagePicker picker = ImagePicker();
+  File? selectedimage = null;
+  List<String> _imagePaths = [];
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+
+
+  // void _onMapTapped(LatLng latLng) {
+  //   setState(() {
+  //     _markers.clear();
+  //     _markers.add(Marker(
+  //       markerId: MarkerId('Tapped Location'),
+  //       position: latLng,
+  //     ));
+  //   });
+  // }
+
+  void _searchAndNavigate() async {
+    final String address = searchController.text;
+    List<Location> locations = await locationFromAddress(address);
+    if (locations != null && locations.isNotEmpty) {
+      setState(() {
+        _center = LatLng(locations[0].latitude, locations[0].longitude);
+        _markers.clear();
+        _markers.add(Marker(
+          markerId: MarkerId('Searched Location'),
+          position: _center,
+        ));
+        mapController!.animateCamera(CameraUpdate.newLatLng(_center));
+      });
+    }
+  }
+
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1 = lat;
+      lng1 = long;
+      isLoading = false;
+    });
+
+  }
+
+  MapType _mapType = MapType.normal;
+
+  void _toggleMapType() {
+    setState(() {
+      _isSatellite = !_isSatellite;
+    });
+    setState(() {
+      _mapType = _isSatellite ? MapType.satellite : MapType.normal;
+    });
+  }
+
+  double? lat1, lng1;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     viewposition();
+    getLocation();
     print("Postidavigayache:-${widget.postid.toString()}");
   }
 
@@ -1298,7 +1397,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               .white,
                                                                           border: Border.all(
                                                                               color: Colors.black12,
-                                                                              width: 1.sp)),
+                                                                              width: 1.sp)
+                                                                      ),
                                                                       child:
                                                                           Column(
                                                                         children: [
@@ -1346,6 +1446,78 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           )),
                                 ],
                               ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                         Row(
+                          children: [
+                            Text("Map:-",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: blackback,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),SizedBox(
+                          height: 1.h,
+                        ),
+                        Container(
+                          height: 25.h,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: Colors.black12,
+                                  width: 1.sp)
+                          ),
+                          child: CustomGoogleMapMarkerBuilder(
+                            //screenshotDelay: const Duration(seconds: 4),
+                            customMarkers: _customMarkers,
+                            builder:
+                                (BuildContext context, Set<Marker>? markers) {
+                              if (markers == null) {
+                                print("online");
+                                return GoogleMap(
+                                  onMapCreated: _onMapCreated,
+                                  initialCameraPosition: CameraPosition(
+                                    target: _currentPosition1,
+                                    // You can set your initial position here
+                                    zoom: 12.0,
+                                  ),
+                                  mapType: _mapType,
+                                  markers: _markers,
+                                  myLocationButtonEnabled: false,
+                                  myLocationEnabled: true,
+                                  zoomControlsEnabled: true,
+                                  compassEnabled: true,
+                                  scrollGesturesEnabled: true,
+                                );
+                              }
+                              return GoogleMap(
+                                onMapCreated: _onMapCreated,
+                                initialCameraPosition: CameraPosition(
+                                  target: _currentPosition1,
+                                  // You can set your initial position here
+                                  zoom: 12.0,
+                                ),
+                                gestureRecognizers: Set()
+                                  ..add(Factory<OneSequenceGestureRecognizer>(
+                                        () => EagerGestureRecognizer(),
+                                  )),
+                                scrollGesturesEnabled: true,
+                                mapToolbarEnabled: true,
+                                mapType: _mapType,
+                                markers: markers,
+                                myLocationButtonEnabled: false,
+                                myLocationEnabled: true,
+                                zoomControlsEnabled: false,
+                                compassEnabled: true,
+                              );
+                            },
+                          ),
+
+                        ),
                          SizedBox(
                                 height: 1.h,
                               ),
@@ -1360,6 +1532,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
+
                         SizedBox(
                           height: 1.h,
                         ),
@@ -1559,6 +1732,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         SizedBox(
                           height: 1.h,
                         ),
+
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1823,6 +1998,62 @@ class _DetailsScreenState extends State<DetailsScreen> {
           if (response.statusCode == 200 &&
               onwViewpostionmodal?.success == true) {
             print("anchioirapicall");
+            for (int index = 0;
+            index < (shoallmarkermodal?.positions?.length ?? 0);
+            index++) {
+              print("markerlength${shoallmarkermodal?.positions?.length}");
+              var latitudeString = onwViewpostionmodal?.data?.latitude;
+              var longitudeString = onwViewpostionmodal?.data?.longitude;
+
+              if (latitudeString != null && longitudeString != null) {
+                // Validate latitude and longitude strings
+                if (_isValidDouble(latitudeString) &&
+                    _isValidDouble(longitudeString)) {
+                  try {
+                    double latitude = double.parse(latitudeString);
+                    double longitude = double.parse(longitudeString);
+                    String imageurl=(shoallmarkermodal
+                        ?.positions?[index].properties?.imgURL)
+                        .toString();
+                    _customMarkers.add(
+                      MarkerData(
+                        marker: Marker(
+                          onTap: () {
+                            print(
+                                "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                            setState(() {
+                              select = index;
+                            });
+
+                          },
+                          markerId: MarkerId(
+                              'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
+                          position: LatLng(latitude, longitude),
+                        ),
+                        child: Image.asset(
+                          "assets/otheryellow.png",
+                          height: 20.w,
+                          width: 20.w,
+                          color: Colors.blue,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+
+                    // Set _currentPosition1 to the first marker position
+                    if (index == 0) {
+                      _currentPosition1 = LatLng(latitude, longitude);
+                    }
+                  } catch (e) {
+                    print("Error parsing coordinates: $e");
+                  }
+                } else {
+                  print("Invalid latitude or longitude format");
+                }
+              } else {
+                print("Latitude or longitude is null");
+              }
+            }
             setState(() {
               isLoading = false;
               print(plainText);
@@ -1840,6 +2071,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });
+  }
+  bool _isValidDouble(String value) {
+    if (value == null) return false;
+    final RegExp regex = RegExp(r'^-?[\d.]+$');
+    return regex.hasMatch(value);
   }
 
   addreview() {
@@ -2106,4 +2342,5 @@ class _DetailsScreenState extends State<DetailsScreen> {
       }
     });
   }
+
 }

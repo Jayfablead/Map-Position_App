@@ -10,14 +10,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
-
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../Provider/Authprovider.dart';
 import 'DetailsOtherScreen.dart';
@@ -1929,7 +1927,6 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
       }
     });
   }
-
   addreview() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
@@ -2162,7 +2159,6 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
     );
   }
   addfevorite(bool value,id) {
-
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
       data['post_id'] = id.toString();

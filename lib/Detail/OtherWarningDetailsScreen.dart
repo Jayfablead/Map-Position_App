@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/HomeScreen/HomeScreen.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
@@ -106,9 +107,14 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                             children: [
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.black,
+                                  InkWell(
+                                    onTap: (){
+                                      Get.to(HomeScreen());
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.black,
+                                    ),
                                   )
                                 ],
                               ),

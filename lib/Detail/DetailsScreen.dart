@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
@@ -124,9 +125,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.black,
+                                    InkWell(
+                                  onTap: (){
+                                    Get.to(HomeScreen());
+                                  },
+                                      child: Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Colors.black,
+                                      ),
                                     )
                                   ],
                                 ),

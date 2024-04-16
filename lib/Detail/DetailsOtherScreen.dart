@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
+import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/AddViewOtherModal.dart';
@@ -105,15 +106,20 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                    ),
-                                    child: Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.black,
+                                  InkWell(
+                                    onTap: (){
+                                      Get.to(HomeScreen());
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                      ),
+                                      child: Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   )
                                 ],

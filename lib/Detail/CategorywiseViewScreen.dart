@@ -22,6 +22,7 @@ import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
@@ -164,10 +165,11 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
+    getLocation();
     setState(() {
       isLoading =true;
     });
-    getLocation();
+
     print("Postidavigayache:-${widget.postid.toString()}");
   }
 
@@ -1861,7 +1863,15 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
-                      loginmodal?.userId==""||loginmodal?.userId==null?Container():loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
+                      loginmodal?.userId==""||loginmodal?.userId==null?Container():loginmodal?.userId==""||loginmodal?.userId==null? buildErrorDialog1(
+                        context,
+                        "",
+                        "Please Login To Use This",
+                        buttonname: 'Login',
+                            () {
+                          Get.offAll(LoginScreen());
+                        },
+                      ):InkWell(
                         onTap: () {
 
                           showratingpop1();
@@ -1876,178 +1886,193 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                       ),
                     ],
                   ),
-                  for (int i = 0;
-                  i < (viewcategorywisevieweetailmodal?.reviews?.length ?? 0);
-                  i++) ...[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 2.w),
-                      child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 0.5.h),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 0.5.h,
-                        ),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.grey.shade400, width: 0.5),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Stack(
-                          children: [
-                            Column(children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 20.w,
-                                    width: 20.w,
-                                    padding: EdgeInsets.all(1.w),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.circular(90),
-                                      child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: viewcategorywisevieweetailmodal
-                                              ?.reviews?[i].userImg ??
-                                              "",
-                                          progressIndicatorBuilder: (context,
-                                              url, progress) =>
-                                              Center(
-                                                  child:
-                                                  CircularProgressIndicator()),
-                                          errorWidget:
-                                              (context, url, error) =>
-                                              Icon(
-                                                Icons.person,
-                                                size: 15.w,
-                                                color: Colors.white,
-                                              )),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 2.w,
-                                  ),
-                                  Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 60.w,
-                                            child: Text(
-                                              viewcategorywisevieweetailmodal
-                                                  ?.reviews?[
-                                              i]
-                                                  .name ==
-                                                  "" ||
-                                                  viewcategorywisevieweetailmodal
-                                                      ?.reviews?[
-                                                  i]
-                                                      .name ==
-                                                      null
-                                                  ? "N/A"
-                                                  : (viewcategorywisevieweetailmodal
-                                                  ?.reviews?[i]
-                                                  .name)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontFamily: "volken",
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                letterSpacing: 1,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 0.5.h),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
-                                            size: 14.sp,
-                                          ),
-                                          Text(
-                                            viewcategorywisevieweetailmodal
-                                                ?.reviews?[i]
-                                                .reviewerRating ==
-                                                "" ||
-                                                viewcategorywisevieweetailmodal
-                                                    ?.reviews?[i]
-                                                    .reviewerRating ==
-                                                    null
-                                                ? "0"
-                                                : (viewcategorywisevieweetailmodal
-                                                ?.reviews?[i]
-                                                .reviewerRating)
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontFamily: "volken",
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 0.5,
-                                              color: secondary
-                                                  .withOpacity(0.45),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 0.5.h,
-                                      ),
-                                      SizedBox(
-                                        width: 65.w,
-                                        child: Text(
-                                          viewcategorywisevieweetailmodal
-                                              ?.reviews?[i]
-                                              .reviewSummary
-                                              ?.xsReviwSummery ==
-                                              "" ||
-                                              viewcategorywisevieweetailmodal
-                                                  ?.reviews?[i]
-                                                  .reviewSummary
-                                                  ?.xsReviwSummery ==
-                                                  null
-                                              ? "N/A"
-                                              : (viewcategorywisevieweetailmodal
-                                              ?.reviews?[i]
-                                              .reviewSummary
-                                              ?.xsReviwSummery)
-                                              .toString(),
-                                          style: TextStyle(
-                                            fontFamily: "volken",
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 0.5,
-                                            color: secondary
-                                                .withOpacity(0.45),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ],
-                        ),
-                      ),
-                    )
-                  ]
+                  viewcategorywisevieweetailmodal?.reviews?.length == null ||
+                      viewcategorywisevieweetailmodal?.reviews?.length == '' ||
+                      viewcategorywisevieweetailmodal?.reviews?.length == 0
+                      ?  Container(height: 20.h,alignment: Alignment.center,child: Text("No Review Available", style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black,
+                      fontWeight:
+                      FontWeight.w500,
+                      fontFamily:
+                      "volken",
+                      letterSpacing: 1), ),)
+                      : Column(
+                     children: [
+                       for (int i = 0;
+                       i < (viewcategorywisevieweetailmodal?.reviews?.length ?? 0);
+                       i++) ...[
+                         Padding(
+                           padding: EdgeInsets.symmetric(horizontal: 2.w),
+                           child: Container(
+                             margin: EdgeInsets.symmetric(vertical: 0.5.h),
+                             padding: EdgeInsets.symmetric(
+                               vertical: 0.5.h,
+                             ),
+                             decoration: BoxDecoration(
+                                 border: Border.all(
+                                     color: Colors.grey.shade400, width: 0.5),
+                                 color: Colors.white,
+                                 borderRadius: BorderRadius.circular(10)),
+                             child: Stack(
+                               children: [
+                                 Column(children: [
+                                   Row(
+                                     children: [
+                                       Container(
+                                         height: 20.w,
+                                         width: 20.w,
+                                         padding: EdgeInsets.all(1.w),
+                                         child: ClipRRect(
+                                           borderRadius:
+                                           BorderRadius.circular(90),
+                                           child: CachedNetworkImage(
+                                               fit: BoxFit.cover,
+                                               imageUrl: viewcategorywisevieweetailmodal
+                                                   ?.reviews?[i].userImg ??
+                                                   "",
+                                               progressIndicatorBuilder: (context,
+                                                   url, progress) =>
+                                                   Center(
+                                                       child:
+                                                       CircularProgressIndicator()),
+                                               errorWidget:
+                                                   (context, url, error) =>
+                                                   Icon(
+                                                     Icons.person,
+                                                     size: 15.w,
+                                                     color: Colors.white,
+                                                   )),
+                                         ),
+                                       ),
+                                       SizedBox(
+                                         width: 2.w,
+                                       ),
+                                       Column(
+                                         mainAxisAlignment:
+                                         MainAxisAlignment.start,
+                                         crossAxisAlignment:
+                                         CrossAxisAlignment.start,
+                                         children: [
+                                           Row(
+                                             mainAxisAlignment:
+                                             MainAxisAlignment
+                                                 .spaceBetween,
+                                             crossAxisAlignment:
+                                             CrossAxisAlignment.start,
+                                             children: [
+                                               SizedBox(
+                                                 width: 60.w,
+                                                 child: Text(
+                                                   viewcategorywisevieweetailmodal
+                                                       ?.reviews?[
+                                                   i]
+                                                       .name ==
+                                                       "" ||
+                                                       viewcategorywisevieweetailmodal
+                                                           ?.reviews?[
+                                                       i]
+                                                           .name ==
+                                                           null
+                                                       ? "N/A"
+                                                       : (viewcategorywisevieweetailmodal
+                                                       ?.reviews?[i]
+                                                       .name)
+                                                       .toString(),
+                                                   style: TextStyle(
+                                                     fontSize: 12.sp,
+                                                     fontFamily: "volken",
+                                                     fontWeight:
+                                                     FontWeight.bold,
+                                                     letterSpacing: 1,
+                                                     color: Colors.black,
+                                                   ),
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                           SizedBox(height: 0.5.h),
+                                           Row(
+                                             crossAxisAlignment:
+                                             CrossAxisAlignment.center,
+                                             mainAxisAlignment:
+                                             MainAxisAlignment.center,
+                                             children: [
+                                               Icon(
+                                                 Icons.star,
+                                                 color: Colors.amber,
+                                                 size: 14.sp,
+                                               ),
+                                               Text(
+                                                 viewcategorywisevieweetailmodal
+                                                     ?.reviews?[i]
+                                                     .reviewerRating ==
+                                                     "" ||
+                                                     viewcategorywisevieweetailmodal
+                                                         ?.reviews?[i]
+                                                         .reviewerRating ==
+                                                         null
+                                                     ? "0"
+                                                     : (viewcategorywisevieweetailmodal
+                                                     ?.reviews?[i]
+                                                     .reviewerRating)
+                                                     .toString(),
+                                                 style: TextStyle(
+                                                   fontFamily: "volken",
+                                                   fontWeight: FontWeight.bold,
+                                                   letterSpacing: 0.5,
+                                                   color: secondary
+                                                       .withOpacity(0.45),
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                           SizedBox(
+                                             height: 0.5.h,
+                                           ),
+                                           SizedBox(
+                                             width: 65.w,
+                                             child: Text(
+                                               viewcategorywisevieweetailmodal
+                                                   ?.reviews?[i]
+                                                   .reviewSummary
+                                                   ?.xsReviwSummery ==
+                                                   "" ||
+                                                   viewcategorywisevieweetailmodal
+                                                       ?.reviews?[i]
+                                                       .reviewSummary
+                                                       ?.xsReviwSummery ==
+                                                       null
+                                                   ? "N/A"
+                                                   : (viewcategorywisevieweetailmodal
+                                                   ?.reviews?[i]
+                                                   .reviewSummary
+                                                   ?.xsReviwSummery)
+                                                   .toString(),
+                                               style: TextStyle(
+                                                 fontFamily: "volken",
+                                                 fontWeight: FontWeight.bold,
+                                                 letterSpacing: 0.5,
+                                                 color: secondary
+                                                     .withOpacity(0.45),
+                                               ),
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                       SizedBox(
+                                         height: 10.h,
+                                       ),
+                                     ],
+                                   ),
+                                 ]),
+                               ],
+                             ),
+                           ),
+                         )
+                       ]
+                     ],
+                 )
                 ]),
               )
             ],

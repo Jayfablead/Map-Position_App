@@ -23,6 +23,7 @@ import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
@@ -163,9 +164,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
-    setState(() {
-      isLoading =true;
-    });
     getLocation();
     print("Postidavigayache:-${widget.postid.toString()}");
   }
@@ -1747,7 +1745,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
-                            loginmodal?.userId==""||loginmodal?.userId==null?Container():InkWell(
+                            loginmodal?.userId==""||loginmodal?.userId==null?InkWell(
+                              onTap: () {
+
+                                buildErrorDialog1(
+                                  context,
+                                  "",
+                                  "Please Login To Use This",
+                                  buttonname: 'Login',
+                                      () {
+                                    Get.offAll(LoginScreen());
+                                  },
+                                );
+                              },
+                              child: Text("Add Review",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: blackback,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
+                            ):InkWell(
                               onTap: () {
 
                                 showratingpop1();
@@ -1762,10 +1780,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 2.h,),
                         onwViewpostionmodal?.reviews?.length == null ||
                                 onwViewpostionmodal?.reviews?.length == '' ||
                                 onwViewpostionmodal?.reviews?.length == 0
-                            ? Container()
+                            ?  Container(height: 20.h,alignment: Alignment.center,child: Text("No Review Available", style: TextStyle(
+                            fontSize: 15.sp,
+                            color: Colors.black,
+                            fontWeight:
+                            FontWeight.w500,
+                            fontFamily:
+                            "volken",
+                            letterSpacing: 1), ),)
                             : Column(
                                 children: [
                                   for (int i = 0;

@@ -23,7 +23,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
-      bottomNavigationBar: Bottombar(select_tab: 1),
+      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container(): Bottombar(select_tab: 1),
       body: SingleChildScrollView(
         child: Padding(
           padding:EdgeInsets.symmetric(horizontal: 2.w),

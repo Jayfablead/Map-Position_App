@@ -281,10 +281,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           batan(
                               title: "Go to MainPage",
-                              route: () {},
-                              hight: 4.h,
+                              route: () {
+                                Get.offAll(HomeScreen());
+                              },
+                              hight: 5.h,
                               width: 45.w,
-                              txtsize: 12.sp),
+                              txtsize: 14.sp),
                         ],
                       ),
                     ),

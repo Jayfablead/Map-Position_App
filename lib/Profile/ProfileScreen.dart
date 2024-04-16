@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         isLoading: isLoading,
         scaffold:Scaffold(
       extendBody: true,
-      bottomNavigationBar: Bottombar(select_tab: 4),
+      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 4),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,

@@ -73,7 +73,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
         isLoading: isLoading,
         scaffold: Scaffold(
           extendBody: true,
-          bottomNavigationBar: Bottombar(select_tab: 3),
+         bottomNavigationBar: loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container():Bottombar(select_tab: 3),
           backgroundColor: Colors.white,
           drawer: drawer1(),
           key: _scaffoldKeyProductlistpage,

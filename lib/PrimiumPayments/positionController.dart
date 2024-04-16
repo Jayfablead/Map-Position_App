@@ -26,13 +26,13 @@ class PositionController extends GetxController {
     _internetSubscription = InternetConnectionChecker().onStatusChange.listen(
           (status) {
         if (status == InternetConnectionStatus.connected) {
-          Get.snackbar(
-            'Internet Connected',
-            'Internet connection is restored.',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
+          // Get.snackbar(
+          //   'Internet Connected',
+          //   'Internet connection is restored.',
+          //   snackPosition: SnackPosition.BOTTOM,
+          //   backgroundColor: Colors.green,
+          //   colorText: Colors.white,
+          // );
           fetchPositionData(); // Fetch data when internet is connected
         }
       },

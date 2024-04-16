@@ -25,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Timer(
       Duration(seconds: 5),
           () =>
-      (loginmodal == null) ? Get.offAll(LoginScreen()) : Get.offAll(HomeScreen()),
+      (loginmodal == null) ? Get.offAll(HomeScreen()) : Get.offAll(HomeScreen()),
     );
     super.initState();
   }

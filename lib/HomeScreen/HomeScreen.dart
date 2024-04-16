@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await showmarker();
   }
 
-  MapType _mapType = MapType.satellite;
+  MapType _mapType = MapType.normal;
 
   void _toggleMapType() {
     setState(() {
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
         scaffold: Scaffold(
           resizeToAvoidBottomInset: false,
           extendBody: true,
-          bottomNavigationBar: Bottombar(select_tab: 2),
+            bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 2),
           key: _scaffoldKeyProductlistpage,
           drawer: drawer1(),
           body: isLoading
@@ -235,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   // You can set your initial position here
                                   zoom: 12.0,
                                 ),
-                                mapType: MapType.normal,
+                                mapType: _mapType,
                                 markers: _markers,
                                 myLocationButtonEnabled: false,
                                 myLocationEnabled: true,
@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                               scrollGesturesEnabled: true,
                               mapToolbarEnabled: true,
-                              mapType: MapType.normal,
+                              mapType: _mapType,
                               markers: markers,
                               myLocationButtonEnabled: false,
                               myLocationEnabled: true,
@@ -274,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // You can set your initial position here
                             zoom: 12.0,
                           ),
-                          mapType: MapType.normal,
+                          mapType:_mapType,
                           markers: _markers,
                           myLocationButtonEnabled: false,
                           myLocationEnabled: true,
@@ -312,7 +312,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     isLoading=true;
                                   });
                                   showmarker();
-
                                 }
                               },
                               controller: searchController,
@@ -348,7 +347,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned(
                       top: 20.h,
                       left: 55.w,
-                      child: PopupMenuButton(
+                      child: loginmodal?.userId==""||loginmodal?.userId==null ?batan(title: "+ Add Position", route: (){
+                        buildErrorDialog(context, "","Please Login To Use This");
+                      }, hight: 5.h, width: 40.w, txtsize: 12.sp):PopupMenuButton(
                           color: bgcolor,
                           elevation: 00,
                           shape: RoundedRectangleBorder(
@@ -590,7 +591,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundColor: blackback,
                         child: InkWell(
                           onTap: () {
-                            Get.offAll(OtherPage());
+                            setState(() {
+                              _isSatellite = !_isSatellite;
+                            });
+                            setState(() {
+                              _mapType = _isSatellite ? MapType.satellite : MapType.normal;
+                            });
                           },
                           child: Icon(
                               _isSatellite ? Icons.map_outlined : Icons.map,

@@ -47,7 +47,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         isLoading: isLoading,
         scaffold:Scaffold(
       extendBody: true,
-      bottomNavigationBar: Bottombar(select_tab: 0),
+      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 0),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,

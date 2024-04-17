@@ -2,7 +2,7 @@ class AddViewOtherModal {
   bool? success;
   String? message;
   Data? data;
-  int? averageRating;
+  num? averageRating;
   List<NearbyPosts>? nearbyPosts;
   List<Reviews>? reviews;
 

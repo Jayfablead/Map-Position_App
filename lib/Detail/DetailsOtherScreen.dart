@@ -855,7 +855,8 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                       ],
                     )
                     ]),
-                  )
+                  ),
+                  SizedBox(height:5.h),
                 ]))));
   }
 

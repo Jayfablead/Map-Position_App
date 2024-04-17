@@ -2138,10 +2138,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ),
+
                                   ]
                                 ],
                               ),
+                        SizedBox(height: 5.h,),
                       ]),
                     )
                   ],
@@ -2163,6 +2165,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               OnwViewPostionModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 &&
               onwViewpostionmodal?.success == true) {
+            print("reviewlegth${onwViewpostionmodal
+                ?.reviews?.length}");
             print("anchioirapicall");
             for (int index = 0;
             index < (shoallmarkermodal?.positions?.length ?? 0);
@@ -2491,6 +2495,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               AddFavouritePositionModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 &&
               addfavouritepositionmodal?.success == true) {
+
             EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
             // viewposition();
             viewposition();

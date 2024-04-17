@@ -985,20 +985,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                       ? Container()
                       : Row(
                     children: [
-                      viewcategorywisevieweetailmodal?.data?.metaFields
-                          ?.ownAnchor?[0] ==
-                          "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.ownLines?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.buoys?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.mountainWedges?[0] ==
-                              "false"
-                          ? Container()
-                          : Container(
+                      Container(
                           width: 95.w,
                           padding: EdgeInsets.symmetric(
                               horizontal: 3.w, vertical: 1.h),
@@ -1047,7 +1034,9 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Row(
+                              viewcategorywisevieweetailmodal?.data?.metaFields
+                                  ?.ownAnchor?[0] ==
+                                  "false"?Container():Row(
                                 children: [
                                   Container(
                                     height: 20.w,
@@ -1062,8 +1051,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           15),
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                        'https://www.svgheart.com/wp-content/uploads/2021/11/anchor-monogram-frame-sailing-ship-free-svg-file-SvgHeart.Com.png',
-                                        color: Colors.blue,
+                                        'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
+
                                         progressIndicatorBuilder:
                                             (context, url,
                                             progress) =>
@@ -1080,7 +1069,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text("Anchor Allowed",
+                                  Text("Use your own anchor(s)",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -1090,45 +1079,155 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           fontFamily:
                                           "volken")),
                                 ],
-                              )
+                              ),
+                              viewcategorywisevieweetailmodal?.data?.metaFields
+                                  ?.buoys?[0] ==
+                                  "false"?Container(): Row(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 20.w,
+                                    padding:
+                                    EdgeInsets.symmetric(
+                                        horizontal: 1.w,
+                                        vertical: 1.h),
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          15),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                        'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg',
+
+                                        progressIndicatorBuilder:
+                                            (context, url,
+                                            progress) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context,
+                                            url, error) =>
+                                            Image.asset(
+                                                Default_Profile,
+                                                fit: BoxFit
+                                                    .cover),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  Text("Fixed Buoys are available",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 15.sp,
+                                          fontWeight:
+                                          FontWeight.bold,
+                                          fontFamily:
+                                          "volken")),
+                                ],
+                              ),
+                              viewcategorywisevieweetailmodal?.data?.metaFields
+                                  ?.mountainWedges?[0] ==
+                                  "false"?Container():Row(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 20.w,
+                                    padding:
+                                    EdgeInsets.symmetric(
+                                        horizontal: 1.w,
+                                        vertical: 1.h),
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          15),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                        'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png',
+
+                                        progressIndicatorBuilder:
+                                            (context, url,
+                                            progress) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context,
+                                            url, error) =>
+                                            Image.asset(
+                                                Default_Profile,
+                                                fit: BoxFit
+                                                    .cover),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  Text("mountain wedges available",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 14.sp,
+                                          fontWeight:
+                                          FontWeight.bold,
+                                          fontFamily:
+                                          "volken")),
+                                ],
+                              ),
+                              viewcategorywisevieweetailmodal?.data?.metaFields
+                                  ?.ownLines?[0] ==
+                                  "false" ?Container(): Row(
+                                children: [
+                                  Container(
+                                    height: 20.w,
+                                    width: 20.w,
+                                    padding:
+                                    EdgeInsets.symmetric(
+                                        horizontal: 1.w,
+                                        vertical: 1.h),
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          15),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                        'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg',
+
+                                        progressIndicatorBuilder:
+                                            (context, url,
+                                            progress) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context,
+                                            url, error) =>
+                                            Image.asset(
+                                                Default_Profile,
+                                                fit: BoxFit
+                                                    .cover),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  Text("Use your own lines ashore",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 14.sp,
+                                          fontWeight:
+                                          FontWeight.bold,
+                                          fontFamily:
+                                          "volken")),
+                                ],
+                              ),
                             ],
                           )),
                     ],
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : SizedBox(
+                   SizedBox(
                     height: 1.h,
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : Row(
+                  Row(
                     children: [
-                      viewcategorywisevieweetailmodal?.data?.metaFields
-                          ?.sand?[0] ==
-                          "false" ||
-                          viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.mud?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.clay?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.coral?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.rocks?[0] ==
-                              "false"
-                          ? Container()
-                          : Container(
+                      Container(
                           width: 95.w,
                           padding: EdgeInsets.symmetric(
                               horizontal: 3.w, vertical: 1.h),
@@ -1177,23 +1276,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              viewcategorywisevieweetailmodal
-                                  ?.data
-                                  ?.metaFields
-                                  ?.clay?[0] ==
-                                  "false" ||
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.mud?[0] ==
-                                      "false" ||
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.sand?[0] ==
-                                      "false"
-                                  ? Container()
-                                  : Row(
+                              Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment
                                     .spaceBetween,
@@ -1215,6 +1298,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         },
                                         child:
                                         Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(
                                                   10),
@@ -1231,19 +1315,19 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 25.w,
                                                 width:
                                                 25.w,
-                                                padding:
-                                                EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+
                                                 child:
                                                 ClipRRect(
                                                   borderRadius: BorderRadius.circular(90),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVM_V8qDAZB0zcdTh_ab6TVb4_7xMvEXtSNYO7m7PGX2kdPNo5",
+                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(height: 1.h,),
                                               Text(
                                                 "Sand",
                                                 maxLines:
@@ -1270,7 +1354,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       ?.mud?[0] ==
                                       "false"
                                       ? Container()
-                                      : Column(
+                                      :  Column(
                                     children: [
                                       InkWell(
                                         onTap: () {
@@ -1279,6 +1363,9 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         },
                                         child:
                                         Container(
+
+
+                                          padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(
                                                   10),
@@ -1295,19 +1382,19 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 25.w,
                                                 width:
                                                 25.w,
-                                                padding:
-                                                EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+
                                                 child:
                                                 ClipRRect(
                                                   borderRadius: BorderRadius.circular(90),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSe0dP7c4doZOnbn5eWQCdiv1hn2cg4visMGff3p7T46c5_HEB0",
+                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                    errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                                    errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(height: 1.h,),
                                               Text(
                                                 "Mud",
                                                 maxLines:
@@ -1345,6 +1432,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         },
                                         child:
                                         Container(
+                                          padding:
+                                          EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(
                                                   10),
@@ -1361,19 +1450,19 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 25.w,
                                                 width:
                                                 25.w,
-                                                padding:
-                                                EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+
                                                 child:
                                                 ClipRRect(
                                                   borderRadius: BorderRadius.circular(90),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQcTjDNEoMZGc-8fD9iEjGO-_TFILg0FNmsGV8BiL2WWLkmHxbr",
+                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(height: 1.h,),
                                               Text(
                                                 "Clay",
                                                 maxLines:
@@ -1396,37 +1485,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   ),
                                 ],
                               ),
-                              viewcategorywisevieweetailmodal
-                                  ?.data
-                                  ?.metaFields
-                                  ?.clay?[0] ==
-                                  "false" ||
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.mud?[0] ==
-                                      "false" ||
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.sand?[0] ==
-                                      "false"
-                                  ? Container()
-                                  : SizedBox(
+                              SizedBox(
                                 height: 1.h,
                               ),
-                              viewcategorywisevieweetailmodal
-                                  ?.data
-                                  ?.metaFields
-                                  ?.coral?[0] ==
-                                  "false" ||
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.rocks?[0] ==
-                                      "false"
-                                  ? Container()
-                                  : Row(
+                              Row(
                                 children: [
                                   viewcategorywisevieweetailmodal
                                       ?.data
@@ -1443,6 +1505,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         },
                                         child:
                                         Container(
+                                          padding:
+                                          EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(
                                                   10),
@@ -1459,19 +1523,19 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 25.w,
                                                 width:
                                                 25.w,
-                                                padding:
-                                                EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+
                                                 child:
                                                 ClipRRect(
                                                   borderRadius: BorderRadius.circular(90),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS9uACGi1F5UMGPlL_1Crtjf3E0joc_PXvwaB_5UTO3tdZzTbTa",
+                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(height: 1.h,),
                                               Text(
                                                 "Coral",
                                                 maxLines:
@@ -1499,7 +1563,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       "false"
                                       ? Container()
                                       : SizedBox(
-                                    width: 5.w,
+                                    width: 3.w,
                                   ),
                                   viewcategorywisevieweetailmodal
                                       ?.data
@@ -1516,6 +1580,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         },
                                         child:
                                         Container(
+                                          padding:
+                                          EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(
                                                   10),
@@ -1523,7 +1589,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   .white,
                                               border: Border.all(
                                                   color: Colors.black12,
-                                                  width: 1.sp)),
+                                                  width: 1.sp)
+                                          ),
                                           child:
                                           Column(
                                             children: [
@@ -1532,19 +1599,19 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 25.w,
                                                 width:
                                                 25.w,
-                                                padding:
-                                                EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.w),
+
                                                 child:
                                                 ClipRRect(
                                                   borderRadius: BorderRadius.circular(90),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRV6ZHxdZ3zrFnId6sOl1xhuovMAQvC0IV6IHc3BSGO-SPRHglK",
+                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(height: 1.h,),
                                               Text(
                                                 "Rocks",
                                                 maxLines:
@@ -2069,12 +2136,14 @@ print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorit
                                ],
                              ),
                            ),
-                         )
+                         ),
+                         SizedBox(height:5.h),
                        ]
                      ],
                  )
                 ]),
-              )
+              ),
+
             ],
           ),
         ),

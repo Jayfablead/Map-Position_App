@@ -802,7 +802,8 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                        ],
                      )
                     ]),
-                  )
+                  ),
+                  SizedBox(height:5.h),
                 ]))));
   }
 

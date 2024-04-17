@@ -1681,7 +1681,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           value: S1,
                           onChanged: (bool? value) {
                             setState(() {
-                              SE1 = value!;
+                              S1 = value!;
                             });
                           },
                         ),
@@ -1851,14 +1851,14 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     Row(
                       children: [
                         Checkbox(
-                          value: W2,
+                          value: W3,
                           onChanged: (bool? value) {
                             setState(() {
-                              W2 = value!;
+                              W3 = value!;
                             });
                           },
                         ),
-                        Text("W2",style: TextStyle(
+                        Text("W3",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,

@@ -3252,8 +3252,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                   child: Column(children: [
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                       InkWell(
+                        onTap: (){
+                          Get.back();
+                        },
+                         child: Container(
+                           width: 10.w,
+                           height: 10.w,
+                           alignment: Alignment.center,
+                           decoration: BoxDecoration(
+                             color: Colors.black,
+                             borderRadius: BorderRadius.circular(100),
+                           ),
+                           child: Icon(Icons.close,color: Colors.white,size: 15.sp,),
+                         ),
+                       )
+                      ],
+                    ),
                     SizedBox(
-                      height: 3.h,
+                      height: 1.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -14,7 +14,7 @@ okbuildErrorDialog(BuildContext context, String title, String contant,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20.0),
-        // color: Boxbg
+        // color: Colors.white
       ),
       child: Center(
         child: Text(buttonname ?? 'OK',
@@ -24,8 +24,8 @@ okbuildErrorDialog(BuildContext context, String title, String contant,
               fontWeight: FontWeight.bold,
               fontFamily: 'volken',
               letterSpacing: 1,
-              decorationColor: Colors.white,
-              color: Colors.white,
+              decorationColor: Colors.black,
+              color: Colors.black,
             )),
       ),
     ),
@@ -43,7 +43,7 @@ okbuildErrorDialog(BuildContext context, String title, String contant,
         child: Container(
           width: 73.w,
           decoration: BoxDecoration(
-            color: Boxbg,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -64,10 +64,10 @@ okbuildErrorDialog(BuildContext context, String title, String contant,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Colors.white,
+                              color: Colors.black,
                               letterSpacing: 1.2,
                               fontWeight: FontWeight.bold,
-                              decorationColor: Colors.white,
+                              decorationColor: Colors.black,
                               fontFamily: 'volken',
                             ),
                           ),
@@ -86,9 +86,9 @@ okbuildErrorDialog(BuildContext context, String title, String contant,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.sp,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
-                        decorationColor: Colors.white,
+                        decorationColor: Colors.black,
                         letterSpacing: 1,
                         fontFamily: 'volken',
                       ),
@@ -122,7 +122,7 @@ buildErrorDialog(BuildContext context, String title, String contant,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20.0),
-        // color: Boxbg
+        // color: Colors.white
       ),
       child: Center(
         child: Text(buttonname ?? 'OK',
@@ -132,8 +132,8 @@ buildErrorDialog(BuildContext context, String title, String contant,
               fontWeight: FontWeight.bold,
               fontFamily: 'volken',
               letterSpacing: 1,
-              decorationColor: Colors.white,
-              color: Colors.white,
+              decorationColor: Colors.black,
+              color: Colors.black,
             )),
       ),
     ),
@@ -157,7 +157,7 @@ buildErrorDialog(BuildContext context, String title, String contant,
         child: Container(
           width: 73.w,
           decoration: BoxDecoration(
-            color: Boxbg,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -178,10 +178,10 @@ buildErrorDialog(BuildContext context, String title, String contant,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Colors.white,
+                              color: Colors.black,
                               letterSpacing: 1.2,
                               fontWeight: FontWeight.bold,
-                              decorationColor: Colors.white,
+                              decorationColor: Colors.black,
                               fontFamily: 'volken',
                             ),
                           ),
@@ -200,9 +200,9 @@ buildErrorDialog(BuildContext context, String title, String contant,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.sp,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
-                        decorationColor: Colors.white,
+                        decorationColor: Colors.black,
                         letterSpacing: 1,
                         fontFamily: 'volken',
                       ),
@@ -237,7 +237,7 @@ buildErrorDialog1(
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20.0),
-        // color: Boxbg
+        // color: Colors.white
       ),
       child: Center(
         child: Text(buttonname ?? 'OK',
@@ -247,8 +247,8 @@ buildErrorDialog1(
               fontWeight: FontWeight.bold,
               fontFamily: 'volken',
               letterSpacing: 1,
-              decorationColor: Colors.white,
-              color: Colors.white,
+              decorationColor: Colors.black,
+              color: Colors.black,
             )),
       ),
     ),
@@ -266,7 +266,7 @@ buildErrorDialog1(
         child: Container(
           width: 73.w,
           decoration: BoxDecoration(
-            color: Boxbg,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -287,10 +287,10 @@ buildErrorDialog1(
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Colors.white,
+                              color: Colors.black,
                               letterSpacing: 1.2,
                               fontWeight: FontWeight.bold,
-                              decorationColor: Colors.white,
+                              decorationColor: Colors.black,
                               fontFamily: 'volken',
                             ),
                           ),
@@ -309,9 +309,9 @@ buildErrorDialog1(
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.sp,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
-                        decorationColor: Colors.white,
+                        decorationColor: Colors.black,
                         letterSpacing: 1,
                         fontFamily: 'volken',
                       ),
@@ -463,7 +463,7 @@ update(
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20.0),
-        // color: Boxbg
+        // color: Colors.white
       ),
       child: Center(
         child: Text(buttonname ?? 'OK',
@@ -471,8 +471,8 @@ update(
             style: TextStyle(
               fontSize: 15.sp,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
-              decorationColor: Colors.white,
+              color: Colors.black,
+              decorationColor: Colors.black,
               fontFamily: 'volken',
             )),
       ),
@@ -492,7 +492,7 @@ update(
           child: Container(
             width: 73.w,
             decoration: BoxDecoration(
-              color: Boxbg,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -513,9 +513,9 @@ update(
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16.sp,
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                decorationColor: Colors.white,
+                                decorationColor: Colors.black,
                                 fontFamily: 'volken',
                               ),
                             ),
@@ -534,9 +534,9 @@ update(
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16.sp,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.normal,
-                          decorationColor: Colors.white,
+                          decorationColor: Colors.black,
                           fontFamily: 'volken',
                         ),
                       ),
@@ -593,9 +593,9 @@ update(
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16.sp,
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                decorationColor: Colors.white,
+                                decorationColor: Colors.black,
                                 fontFamily: 'volken',
                               ),
                             ),
@@ -614,9 +614,9 @@ update(
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16.sp,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.normal,
-                          decorationColor: Colors.white,
+                          decorationColor: Colors.black,
                           fontFamily: 'volken',
                         ),
                       ),

@@ -192,6 +192,8 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                       });
                     },
                     child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 1.w, vertical: 1.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: anchor
@@ -204,14 +206,13 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                           Container(
                             height: 15.w,
                             width: 15.w,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 1.w),
+                           
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl:
-                                "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTAaMkDgX6jts8zrbrgdKCKcvv1Ej797yziRZa8zanKbmTlYUA4",
+                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg",
                                 progressIndicatorBuilder: (context,
                                     url, progress) =>
                                     Center(
@@ -222,6 +223,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(width: 1.w,),
                           Text(
                             "Use Your Own Anchor(s)",
                             maxLines: 1,
@@ -251,6 +253,8 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                       });
                     },
                     child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 1.w, vertical: 1.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: buoys
@@ -263,14 +267,13 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                           Container(
                             height: 15.w,
                             width: 15.w,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 1.w),
+                            
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl:
-                                "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRaBKeK6wNXC0miPo0xPySQB7KlfFschpuEE36RHM9mVUTwSxb0",
+                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg",
                                 progressIndicatorBuilder: (context,
                                     url, progress) =>
                                     Center(
@@ -309,6 +312,8 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                       });
                     },
                     child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 1.w, vertical: 1.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: mountain
@@ -321,14 +326,13 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                           Container(
                             height: 15.w,
                             width: 15.w,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 1.w),
+
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl:
-                                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRsuOEAeqfLBWmOiHFKl3b7qNF1kbRZSkNNiIuTI1la2P_1Ckgu",
+                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png",
                                 progressIndicatorBuilder: (context,
                                     url, progress) =>
                                     Center(
@@ -339,8 +343,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(width: 1,),
                           SizedBox(
-                            width: 60.w,
+                            width: 75.w,
                             child: Text(
                               "Fixed Mountain Wedges available",
                               style: TextStyle(
@@ -368,6 +373,8 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                       });
                     },
                     child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 1.w, vertical: 1.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: ownlines
@@ -380,14 +387,13 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                           Container(
                             height: 15.w,
                             width: 15.w,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 1.w),
+
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
                                 imageUrl:
-                                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQT2drB7N17HmLqx4UzFHxuXWnQ8O2KRxoRx3Wp2vnDMNEcbCyf",
+                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg",
                                 progressIndicatorBuilder: (context,
                                     url, progress) =>
                                     Center(
@@ -398,6 +404,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(width: 1.w,),
                           Text(
                             "Use Your Own Lines Ashore",
                             maxLines: 1,
@@ -452,6 +459,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -466,16 +476,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVM_V8qDAZB0zcdTh_ab6TVb4_7xMvEXtSNYO7m7PGX2kdPNo5",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -489,6 +497,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Sand",
                                         maxLines: 1,
@@ -521,6 +530,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -535,16 +547,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+                                        
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSe0dP7c4doZOnbn5eWQCdiv1hn2cg4visMGff3p7T46c5_HEB0",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -558,6 +568,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Mud",
                                         maxLines: 1,
@@ -590,6 +601,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -604,16 +618,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQcTjDNEoMZGc-8fD9iEjGO-_TFILg0FNmsGV8BiL2WWLkmHxbr",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -627,6 +639,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Clay",
                                         maxLines: 1,
@@ -663,6 +676,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -677,16 +693,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS9uACGi1F5UMGPlL_1Crtjf3E0joc_PXvwaB_5UTO3tdZzTbTa",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -700,6 +714,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Coral",
                                         maxLines: 1,
@@ -724,7 +739,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             height: 1.h,
                           ),
                           SizedBox(
-                            width:10.w,
+                            width:7.w,
                           ),
                           Column(
                             children: [
@@ -735,6 +750,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -749,16 +767,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRV6ZHxdZ3zrFnId6sOl1xhuovMAQvC0IV6IHc3BSGO-SPRHglK",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -772,6 +788,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Rocks",
                                         maxLines: 1,
@@ -831,6 +848,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -845,9 +865,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
@@ -900,6 +918,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -914,9 +935,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
@@ -969,6 +988,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -983,9 +1005,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
@@ -1042,6 +1062,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -1056,9 +1079,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
@@ -1103,7 +1124,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             height: 1.h,
                           ),
                           SizedBox(
-                            width: 9.5.w,
+                            width: 6.w,
                           ),
                           Column(
                             children: [
@@ -1114,6 +1135,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                   });
                                 },
                                 child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
                                   decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.circular(10),
@@ -1128,9 +1152,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                       Container(
                                         height: 25.w,
                                         width: 25.w,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w,
-                                            vertical: 1.w),
+
                                         child: ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(90),
@@ -1179,10 +1201,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                     SizedBox(
                       height: 2.h,
                     ),
-
-
-
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

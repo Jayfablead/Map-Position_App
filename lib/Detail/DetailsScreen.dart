@@ -26,6 +26,7 @@ import '../HomeScreen/HomeScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
+import '../Modal/DaywiseWedhterModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
@@ -71,7 +72,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   bool showError = false;
   TextEditingController searchController = TextEditingController();
   final PositionController positionController = Get.put(PositionController());
-
+  DateTime? futureDate;
   Set<Marker> _markers = {};
   List<MarkerData> _customMarkers = [];
   var latitudeString;
@@ -145,7 +146,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     });
 
   }
-
+  DateTime now = DateTime.now();
   MapType _mapType = MapType.normal;
 
   void _toggleMapType() {
@@ -165,10 +166,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
     super.initState();
     viewposition();
     getLocation();
+    setState(() {
+      futureDate = now.add(Duration(days: 10));
+
+    });
+    wedther();
     print("Postidavigayache:-${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {
+
     return commanScreen(
       isLoading: isLoading,
       scaffold: Scaffold(
@@ -2513,5 +2520,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
       }
     });
   }
-
+  wedther() {
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().wedtherapi(onwViewpostionmodal?.data?.latitude,onwViewpostionmodal?.data?.longitude,'${now.year}-${now.month}-${now.day}','${futureDate!.year}-${futureDate!.month}-${futureDate!.day}').then((response) async {
+          daywisewedhtermodal = DaywiseWeatherModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 ) {
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
 }

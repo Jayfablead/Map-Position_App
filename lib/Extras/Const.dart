@@ -12,6 +12,7 @@ import '../Modal/AddWaringmodal.dart';
 import '../Modal/AddviewWarningModal.dart';
 import '../Modal/CastomPositionMarinaModal.dart';
 import '../Modal/ChangePasswordModal.dart';
+import '../Modal/DaywiseWedhterModal.dart';
 import '../Modal/DeletePositionModal.dart';
 import '../Modal/EditCasotamMarinaModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
@@ -90,6 +91,7 @@ AddFavouritePositionModal? addfavouritepositionmodal;
 ViewFouriteModal? viewfouritemodal;
 StripePaymentsModal? stripepaymentsmodal;
 PostionModel? position;
+DaywiseWeatherModal? daywisewedhtermodal;
 
 // Custom Button
 InkWell batan({

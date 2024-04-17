@@ -500,4 +500,20 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+  Future<http.Response> wedtherapi(latitude1,longitude2,carrentdate,tendays) async {
+    String url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude1},${longitude2}/${carrentdate}/${tendays}/?key=5ZPYVKDXPN3D8K4MYRV7W78KZ';
+    print(url);
+    var responseJson;
+    final response = await http
+        .get(Uri.parse(url))
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
 }

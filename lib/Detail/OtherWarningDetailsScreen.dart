@@ -16,6 +16,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
+import 'package:mapposition/Modal/DaywiseWedhterModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
@@ -98,7 +99,8 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
       _mapType = _isSatellite ? MapType.satellite : MapType.normal;
     });
   }
-
+  DateTime now = DateTime.now();
+  DateTime? futureDate;
   double? lat1, lng1;
   @override
   void initState() {
@@ -107,7 +109,9 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
 
       setState(() {
       isLoading =true;
+      futureDate = now.add(Duration(days: 10));
     });  viewposition();
+    wedther();
     print("Postidavigayache:-${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {
@@ -1166,6 +1170,29 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
       } else {
         EasyLoading.showError(addreviewmodal?.message ?? '');
         setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
+  wedther() {
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().wedtherapi(addviewwarningmodal?.data?.latitude,addviewwarningmodal?.data?.longitude,'${now.year}-${now.month}-${now.day}','${futureDate!.year}-${futureDate!.month}-${futureDate!.day}').then((response) async {
+          daywisewedhtermodal = DaywiseWeatherModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 ) {
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });

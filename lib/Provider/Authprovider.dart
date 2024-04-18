@@ -502,7 +502,7 @@ class authprovider with ChangeNotifier {
   }
   Future<http.Response> wedtherapi(latitude1,longitude2,carrentdate,tendays) async {
     String url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude1},${longitude2}/${carrentdate}/${tendays}/?key=5ZPYVKDXPN3D8K4MYRV7W78KZ';
-    print(url);
+    print("wedtherurl${url}");
     var responseJson;
     final response = await http
         .get(Uri.parse(url))

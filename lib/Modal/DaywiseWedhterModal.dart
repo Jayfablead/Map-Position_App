@@ -1,29 +1,24 @@
 class DaywiseWeatherModal {
-  int? queryCost;
-  double? latitude;
-  double? longitude;
+  num? queryCost;
+  num? latitude;
+  num? longitude;
   String? resolvedAddress;
   String? address;
   String? timezone;
-  double? tzoffset;
+  num? tzoffset;
   String? description;
   List<Days>? days;
-  List<Null>? alerts;
-  CurrentConditions? currentConditions;
 
-  DaywiseWeatherModal({
-    this.queryCost,
-    this.latitude,
-    this.longitude,
-    this.resolvedAddress,
-    this.address,
-    this.timezone,
-    this.tzoffset,
-    this.description,
-    this.days,
-    this.alerts,
-    this.currentConditions,
-  });
+  DaywiseWeatherModal(
+      {this.queryCost,
+        this.latitude,
+        this.longitude,
+        this.resolvedAddress,
+        this.address,
+        this.timezone,
+        this.tzoffset,
+        this.description,
+        this.days});
 
   DaywiseWeatherModal.fromJson(Map<String, dynamic> json) {
     queryCost = json['queryCost'];
@@ -37,31 +32,23 @@ class DaywiseWeatherModal {
     if (json['days'] != null) {
       days = <Days>[];
       json['days'].forEach((v) {
-        days!.add(Days.fromJson(v));
+        days!.add(new Days.fromJson(v));
       });
     }
-
-    currentConditions = json['currentConditions'] != null
-        ? CurrentConditions.fromJson(json['currentConditions'])
-        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['queryCost'] = queryCost;
-    data['latitude'] = latitude;
-    data['longitude'] = longitude;
-    data['resolvedAddress'] = resolvedAddress;
-    data['address'] = address;
-    data['timezone'] = timezone;
-    data['tzoffset'] = tzoffset;
-    data['description'] = description;
-    if (days != null) {
-      data['days'] = days!.map((v) => v.toJson()).toList();
-    }
-
-    if (currentConditions != null) {
-      data['currentConditions'] = currentConditions!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['queryCost'] = this.queryCost;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['resolvedAddress'] = this.resolvedAddress;
+    data['address'] = this.address;
+    data['timezone'] = this.timezone;
+    data['tzoffset'] = this.tzoffset;
+    data['description'] = this.description;
+    if (this.days != null) {
+      data['days'] = this.days!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -81,70 +68,65 @@ class Days {
   num? precip;
   num? precipprob;
   num? precipcover;
-  num? preciptype;
-  int? snow;
-  int? snowdepth;
+  num? snow;
+  num? snowdepth;
   num? windgust;
   num? windspeed;
   num? winddir;
   num? pressure;
   num? cloudcover;
-  int? visibility;
+  num? visibility;
   num? solarradiation;
   num? solarenergy;
-  int? uvindex;
-  int? severerisk;
+  num? uvindex;
+  num? severerisk;
   String? sunrise;
-  int? sunriseEpoch;
+  num? sunriseEpoch;
   String? sunset;
-  int? sunsetEpoch;
+  num? sunsetEpoch;
   num? moonphase;
   String? conditions;
   String? description;
   String? icon;
-  List<String>? stations;
   String? source;
   List<Hours>? hours;
 
-  Days({
-    this.datetime,
-    this.datetimeEpoch,
-    this.tempmax,
-    this.tempmin,
-    this.temp,
-    this.feelslikemax,
-    this.feelslikemin,
-    this.feelslike,
-    this.dew,
-    this.humidity,
-    this.precip,
-    this.precipprob,
-    this.precipcover,
-    this.preciptype,
-    this.snow,
-    this.snowdepth,
-    this.windgust,
-    this.windspeed,
-    this.winddir,
-    this.pressure,
-    this.cloudcover,
-    this.visibility,
-    this.solarradiation,
-    this.solarenergy,
-    this.uvindex,
-    this.severerisk,
-    this.sunrise,
-    this.sunriseEpoch,
-    this.sunset,
-    this.sunsetEpoch,
-    this.moonphase,
-    this.conditions,
-    this.description,
-    this.icon,
-    this.stations,
-    this.source,
-    this.hours,
-  });
+  Days(
+      {this.datetime,
+        this.datetimeEpoch,
+        this.tempmax,
+        this.tempmin,
+        this.temp,
+        this.feelslikemax,
+        this.feelslikemin,
+        this.feelslike,
+        this.dew,
+        this.humidity,
+        this.precip,
+        this.precipprob,
+        this.precipcover,
+        this.snow,
+        this.snowdepth,
+        this.windgust,
+        this.windspeed,
+        this.winddir,
+        this.pressure,
+        this.cloudcover,
+        this.visibility,
+        this.solarradiation,
+        this.solarenergy,
+        this.uvindex,
+        this.severerisk,
+        this.sunrise,
+        this.sunriseEpoch,
+        this.sunset,
+        this.sunsetEpoch,
+        this.moonphase,
+        this.conditions,
+        this.description,
+        this.icon,
+        this.source,
+        this.hours});
 
   Days.fromJson(Map<String, dynamic> json) {
     datetime = json['datetime'];
@@ -160,7 +142,6 @@ class Days {
     precip = json['precip'];
     precipprob = json['precipprob'];
     precipcover = json['precipcover'];
-    preciptype = json['preciptype'];
     snow = json['snow'];
     snowdepth = json['snowdepth'];
     windgust = json['windgust'];
@@ -181,53 +162,53 @@ class Days {
     conditions = json['conditions'];
     description = json['description'];
     icon = json['icon'];
-    stations = json['stations'] != null ? List<String>.from(json['stations']) : null;
     source = json['source'];
     if (json['hours'] != null) {
-      hours = List<Hours>.from(json['hours'].map((x) => Hours.fromJson(x)));
+      hours = <Hours>[];
+      json['hours'].forEach((v) {
+        hours!.add(new Hours.fromJson(v));
+      });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['datetime'] = datetime;
-    data['datetimeEpoch'] = datetimeEpoch;
-    data['tempmax'] = tempmax;
-    data['tempmin'] = tempmin;
-    data['temp'] = temp;
-    data['feelslikemax'] = feelslikemax;
-    data['feelslikemin'] = feelslikemin;
-    data['feelslike'] = feelslike;
-    data['dew'] = dew;
-    data['humidity'] = humidity;
-    data['precip'] = precip;
-    data['precipprob'] = precipprob;
-    data['precipcover'] = precipcover;
-    data['preciptype'] = preciptype;
-    data['snow'] = snow;
-    data['snowdepth'] = snowdepth;
-    data['windgust'] = windgust;
-    data['windspeed'] = windspeed;
-    data['winddir'] = winddir;
-    data['pressure'] = pressure;
-    data['cloudcover'] = cloudcover;
-    data['visibility'] = visibility;
-    data['solarradiation'] = solarradiation;
-    data['solarenergy'] = solarenergy;
-    data['uvindex'] = uvindex;
-    data['severerisk'] = severerisk;
-    data['sunrise'] = sunrise;
-    data['sunriseEpoch'] = sunriseEpoch;
-    data['sunset'] = sunset;
-    data['sunsetEpoch'] = sunsetEpoch;
-    data['moonphase'] = moonphase;
-    data['conditions'] = conditions;
-    data['description'] = description;
-    data['icon'] = icon;
-    data['stations'] = stations;
-    data['source'] = source;
-    if (hours != null) {
-      data['hours'] = hours!.map((x) => x.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['datetime'] = this.datetime;
+    data['datetimeEpoch'] = this.datetimeEpoch;
+    data['tempmax'] = this.tempmax;
+    data['tempmin'] = this.tempmin;
+    data['temp'] = this.temp;
+    data['feelslikemax'] = this.feelslikemax;
+    data['feelslikemin'] = this.feelslikemin;
+    data['feelslike'] = this.feelslike;
+    data['dew'] = this.dew;
+    data['humidity'] = this.humidity;
+    data['precip'] = this.precip;
+    data['precipprob'] = this.precipprob;
+    data['precipcover'] = this.precipcover;
+    data['snow'] = this.snow;
+    data['snowdepth'] = this.snowdepth;
+    data['windgust'] = this.windgust;
+    data['windspeed'] = this.windspeed;
+    data['winddir'] = this.winddir;
+    data['pressure'] = this.pressure;
+    data['cloudcover'] = this.cloudcover;
+    data['visibility'] = this.visibility;
+    data['solarradiation'] = this.solarradiation;
+    data['solarenergy'] = this.solarenergy;
+    data['uvindex'] = this.uvindex;
+    data['severerisk'] = this.severerisk;
+    data['sunrise'] = this.sunrise;
+    data['sunriseEpoch'] = this.sunriseEpoch;
+    data['sunset'] = this.sunset;
+    data['sunsetEpoch'] = this.sunsetEpoch;
+    data['moonphase'] = this.moonphase;
+    data['conditions'] = this.conditions;
+    data['description'] = this.description;
+    data['icon'] = this.icon;
+    data['source'] = this.source;
+    if (this.hours != null) {
+      data['hours'] = this.hours!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -244,7 +225,6 @@ class Hours {
   num? precipprob;
   num? snow;
   num? snowdepth;
-  dynamic preciptype;
   num? windgust;
   num? windspeed;
   num? winddir;
@@ -253,50 +233,46 @@ class Hours {
   num? cloudcover;
   num? solarradiation;
   num? solarenergy;
-  int? uvindex;
-  int? severerisk;
+  num? uvindex;
+  num? severerisk;
   String? conditions;
   String? icon;
-  List<String>? stations;
   String? source;
   String? sunrise;
-  int? sunriseEpoch;
+  num? sunriseEpoch;
   String? sunset;
-  int? sunsetEpoch;
+  num? sunsetEpoch;
   num? moonphase;
 
-  Hours({
-    this.datetime,
-    this.datetimeEpoch,
-    this.temp,
-    this.feelslike,
-    this.humidity,
-    this.dew,
-    this.precip,
-    this.precipprob,
-    this.snow,
-    this.snowdepth,
-    this.preciptype,
-    this.windgust,
-    this.windspeed,
-    this.winddir,
-    this.pressure,
-    this.visibility,
-    this.cloudcover,
-    this.solarradiation,
-    this.solarenergy,
-    this.uvindex,
-    this.severerisk,
-    this.conditions,
-    this.icon,
-    this.stations,
-    this.source,
-    this.sunrise,
-    this.sunriseEpoch,
-    this.sunset,
-    this.sunsetEpoch,
-    this.moonphase,
-  });
+  Hours(
+      {this.datetime,
+        this.datetimeEpoch,
+        this.temp,
+        this.feelslike,
+        this.humidity,
+        this.dew,
+        this.precip,
+        this.precipprob,
+        this.snow,
+        this.snowdepth,
+        this.windgust,
+        this.windspeed,
+        this.winddir,
+        this.pressure,
+        this.visibility,
+        this.cloudcover,
+        this.solarradiation,
+        this.solarenergy,
+        this.uvindex,
+        this.severerisk,
+        this.conditions,
+        this.icon,
+        this.source,
+        this.sunrise,
+        this.sunriseEpoch,
+        this.sunset,
+        this.sunsetEpoch,
+        this.moonphase});
 
   Hours.fromJson(Map<String, dynamic> json) {
     datetime = json['datetime'];
@@ -309,7 +285,6 @@ class Hours {
     precipprob = json['precipprob'];
     snow = json['snow'];
     snowdepth = json['snowdepth'];
-    preciptype = json['preciptype'];
     windgust = json['windgust'];
     windspeed = json['windspeed'];
     winddir = json['winddir'];
@@ -322,7 +297,6 @@ class Hours {
     severerisk = json['severerisk'];
     conditions = json['conditions'];
     icon = json['icon'];
-    stations = json['stations'] != null ? List<String>.from(json['stations']) : null;
     source = json['source'];
     sunrise = json['sunrise'];
     sunriseEpoch = json['sunriseEpoch'];
@@ -332,171 +306,35 @@ class Hours {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['datetime'] = datetime;
-    data['datetimeEpoch'] = datetimeEpoch;
-    data['temp'] = temp;
-    data['feelslike'] = feelslike;
-    data['humidity'] = humidity;
-    data['dew'] = dew;
-    data['precip'] = precip;
-    data['precipprob'] = precipprob;
-    data['snow'] = snow;
-    data['snowdepth'] = snowdepth;
-    data['preciptype'] = preciptype;
-    data['windgust'] = windgust;
-    data['windspeed'] = windspeed;
-    data['winddir'] = winddir;
-    data['pressure'] = pressure;
-    data['visibility'] = visibility;
-    data['cloudcover'] = cloudcover;
-    data['solarradiation'] = solarradiation;
-    data['solarenergy'] = solarenergy;
-    data['uvindex'] = uvindex;
-    data['severerisk'] = severerisk;
-    data['conditions'] = conditions;
-    data['icon'] = icon;
-    data['stations'] = stations;
-    data['source'] = source;
-    data['sunrise'] = sunrise;
-    data['sunriseEpoch'] = sunriseEpoch;
-    data['sunset'] = sunset;
-    data['sunsetEpoch'] = sunsetEpoch;
-    data['moonphase'] = moonphase;
-    return data;
-  }
-}
-
-class CurrentConditions {
-  String? datetime;
-  int? datetimeEpoch;
-  num? temp;
-  num? feelslike;
-  num? humidity;
-  num? dew;
-  num? precip;
-  num? precipprob;
-  num? snow;
-  num? snowdepth;
-  dynamic preciptype;
-  num? windgust;
-  num? windspeed;
-  num? winddir;
-  num? pressure;
-  num? visibility;
-  num? cloudcover;
-  num? solarradiation;
-  num? solarenergy;
-  int? uvindex;
-  int? severerisk;
-  String? conditions;
-  String? icon;
-  List<dynamic>? stations;
-  String? source;
-  String? sunrise;
-  int? sunriseEpoch;
-  String? sunset;
-  int? sunsetEpoch;
-  num? moonphase;
-
-  CurrentConditions({
-    this.datetime,
-    this.datetimeEpoch,
-    this.temp,
-    this.feelslike,
-    this.humidity,
-    this.dew,
-    this.precip,
-    this.precipprob,
-    this.snow,
-    this.snowdepth,
-    this.preciptype,
-    this.windgust,
-    this.windspeed,
-    this.winddir,
-    this.pressure,
-    this.visibility,
-    this.cloudcover,
-    this.solarradiation,
-    this.solarenergy,
-    this.uvindex,
-    this.severerisk,
-    this.conditions,
-    this.icon,
-    this.stations,
-    this.source,
-    this.sunrise,
-    this.sunriseEpoch,
-    this.sunset,
-    this.sunsetEpoch,
-    this.moonphase,
-  });
-
-  CurrentConditions.fromJson(Map<String, dynamic> json) {
-    datetime = json['datetime'];
-    datetimeEpoch = json['datetimeEpoch'];
-    temp = json['temp'];
-    feelslike = json['feelslike'];
-    humidity = json['humidity'];
-    dew = json['dew'];
-    precip = json['precip'];
-    precipprob = json['precipprob'];
-    snow = json['snow'];
-    snowdepth = json['snowdepth'];
-    preciptype = json['preciptype'];
-    windgust = json['windgust'];
-    windspeed = json['windspeed'];
-    winddir = json['winddir'];
-    pressure = json['pressure'];
-    visibility = json['visibility'];
-    cloudcover = json['cloudcover'];
-    solarradiation = json['solarradiation'];
-    solarenergy = json['solarenergy'];
-    uvindex = json['uvindex'];
-    severerisk = json['severerisk'];
-    conditions = json['conditions'];
-    icon = json['icon'];
-    stations = json['stations'] != null ? List<dynamic>.from(json['stations']) : null;
-    source = json['source'];
-    sunrise = json['sunrise'];
-    sunriseEpoch = json['sunriseEpoch'];
-    sunset = json['sunset'];
-    sunsetEpoch = json['sunsetEpoch'];
-    moonphase = json['moonphase'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['datetime'] = datetime;
-    data['datetimeEpoch'] = datetimeEpoch;
-    data['temp'] = temp;
-    data['feelslike'] = feelslike;
-    data['humidity'] = humidity;
-    data['dew'] = dew;
-    data['precip'] = precip;
-    data['precipprob'] = precipprob;
-    data['snow'] = snow;
-    data['snowdepth'] = snowdepth;
-    data['preciptype'] = preciptype;
-    data['windgust'] = windgust;
-    data['windspeed'] = windspeed;
-    data['winddir'] = winddir;
-    data['pressure'] = pressure;
-    data['visibility'] = visibility;
-    data['cloudcover'] = cloudcover;
-    data['solarradiation'] = solarradiation;
-    data['solarenergy'] = solarenergy;
-    data['uvindex'] = uvindex;
-    data['severerisk'] = severerisk;
-    data['conditions'] = conditions;
-    data['icon'] = icon;
-    data['stations'] = stations;
-    data['source'] = source;
-    data['sunrise'] = sunrise;
-    data['sunriseEpoch'] = sunriseEpoch;
-    data['sunset'] = sunset;
-    data['sunsetEpoch'] = sunsetEpoch;
-    data['moonphase'] = moonphase;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['datetime'] = this.datetime;
+    data['datetimeEpoch'] = this.datetimeEpoch;
+    data['temp'] = this.temp;
+    data['feelslike'] = this.feelslike;
+    data['humidity'] = this.humidity;
+    data['dew'] = this.dew;
+    data['precip'] = this.precip;
+    data['precipprob'] = this.precipprob;
+    data['snow'] = this.snow;
+    data['snowdepth'] = this.snowdepth;
+    data['windgust'] = this.windgust;
+    data['windspeed'] = this.windspeed;
+    data['winddir'] = this.winddir;
+    data['pressure'] = this.pressure;
+    data['visibility'] = this.visibility;
+    data['cloudcover'] = this.cloudcover;
+    data['solarradiation'] = this.solarradiation;
+    data['solarenergy'] = this.solarenergy;
+    data['uvindex'] = this.uvindex;
+    data['severerisk'] = this.severerisk;
+    data['conditions'] = this.conditions;
+    data['icon'] = this.icon;
+    data['source'] = this.source;
+    data['sunrise'] = this.sunrise;
+    data['sunriseEpoch'] = this.sunriseEpoch;
+    data['sunset'] = this.sunset;
+    data['sunsetEpoch'] = this.sunsetEpoch;
+    data['moonphase'] = this.moonphase;
     return data;
   }
 }

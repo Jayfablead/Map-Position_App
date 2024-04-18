@@ -27,6 +27,7 @@ import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
 import '../Modal/AddViewOtherModal.dart';
+import '../Modal/DaywiseWedhterModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Modal/postionModel.dart';
 import '../PrimiumPayments/positionController.dart';
@@ -91,15 +92,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
 
 
 
-  // void _onMapTapped(LatLng latLng) {
-  //   setState(() {
-  //     _markers.clear();
-  //     _markers.add(Marker(
-  //       markerId: MarkerId('Tapped Location'),
-  //       position: latLng,
-  //     ));
-  //   });
-  // }
+
 
   void _searchAndNavigate() async {
     final String address = searchController.text;
@@ -117,22 +110,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     }
   }
 
-  // getLocation() async {
-  //   LocationPermission permission;
-  //   permission = await Geolocator.requestPermission();
-  //   Position position = await Geolocator.getCurrentPosition(
-  //       desiredAccuracy: LocationAccuracy.high);
-  //   double lat = position.latitude;
-  //   double long = position.longitude;
-  //   LatLng location = LatLng(lat, long);
-  //   setState(() {
-  //     _currentPosition1 = location;
-  //     lat1 = lat;
-  //     lng1 = long;
-  //     isLoading = false;
-  //   });
-  //
-  // }
+
 
   MapType _mapType = MapType.normal;
 
@@ -144,7 +122,8 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       _mapType = _isSatellite ? MapType.satellite : MapType.normal;
     });
   }
-
+  DateTime now = DateTime.now();
+  DateTime? futureDate;
   double? lat1, lng1;
   @override
   void initState() {
@@ -153,8 +132,10 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     viewposition();
     setState(() {
       isLoading =true;
-    });
+      futureDate = now.add(Duration(days: 10));
 
+    });
+    wedther();
     print("Postidavigayache:-${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {
@@ -1218,6 +1199,29 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       } else {
         EasyLoading.showError(addreviewmodal?.message ?? '');
         setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
+  wedther() {
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().wedtherapi(addviewothermodal?.data?.latitude,addviewothermodal?.data?.longitude,'${now.year}-${now.month}-${now.day}','${futureDate!.year}-${futureDate!.month}-${futureDate!.day}').then((response) async {
+          daywisewedhtermodal = DaywiseWeatherModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 ) {
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });

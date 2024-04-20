@@ -259,7 +259,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                       Row(
                         children: [
                           Text(
-                            " ⭐️ 4.8 [${addviewothermodal?.reviews?.length} reviews]",
+                            " ⭐️${addviewothermodal?.averageRating==0||addviewothermodal?.averageRating==""||addviewothermodal?.averageRating==null?"4.8":addviewothermodal?.averageRating ?? ""}[${addviewothermodal?.reviews?.length==0||addviewothermodal?.reviews?.length==""||addviewothermodal?.reviews?.length==null?"0":addviewothermodal?.reviews?.length} reviews]",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,

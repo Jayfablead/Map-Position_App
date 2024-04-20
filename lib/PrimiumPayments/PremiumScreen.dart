@@ -162,7 +162,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
               ),
               SizedBox(height: 5.h,),
-              batan(title: "Subscribe for \$200.00", route: (){
+              loginmodal?.paymentStatus=="succeeded"?Container() :batan(title: "Subscribe for \$200.00", route: (){
                Get.to(PaymentsScreen());
               }, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],

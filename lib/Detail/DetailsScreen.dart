@@ -18,7 +18,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
@@ -295,7 +294,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Row(
                           children: [
                             Text(
-                              " ⭐️ 4.8 [${onwViewpostionmodal?.reviews?.length} reviews]",
+                              " ⭐️ ${onwViewpostionmodal?.averageRating==""||onwViewpostionmodal?.averageRating==null?"4.5":onwViewpostionmodal?.averageRating ?? ""} [${onwViewpostionmodal?.reviews?.length==0||onwViewpostionmodal?.reviews?.length==""||onwViewpostionmodal?.reviews?.length==null?"0":onwViewpostionmodal?.reviews?.length} reviews]",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: secondary,

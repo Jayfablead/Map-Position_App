@@ -228,7 +228,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                       Row(
                         children: [
                           Text(
-                            " ⭐️ 4.8 [${addviewwarningmodal?.reviews?.length} reviews]",
+                            " ⭐️${addviewwarningmodal?.averageRating=="0"||addviewwarningmodal?.averageRating==0||addviewwarningmodal?.averageRating==""||addviewwarningmodal?.averageRating==null?"4.5":addviewwarningmodal?.averageRating ?? ""}[${addviewwarningmodal?.reviews?.length=="0"||addviewwarningmodal?.reviews?.length==""||addviewwarningmodal?.reviews?.length==0||addviewwarningmodal?.reviews?.length==null?"0":addviewwarningmodal?.reviews?.length} reviews]",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,

@@ -115,7 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
       lng1 = long;
       isLoading = false;
     });
-    await loginmodal?.paymentStatus=="succeeded"?showmarker11():showmarker();
+    await loginmodal?.paymentStatus == "succeeded"
+        ? showmarker11()
+        : showmarker();
   }
 
   MapType _mapType = MapType.normal;
@@ -359,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "",
                                   "Please Login To Use This",
                                   buttonname: 'Login',
-                                () {
+                                  () {
                                     Get.offAll(LoginScreen());
                                   },
                                 );
@@ -436,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   PopupMenuDivider(),
                                   PopupMenuItem(
-                                     onTap: () {
+                                    onTap: () {
                                       Get.offAll(AddWarningScreen(
                                           lat: lat1.toString(),
                                           lng: lng1.toString()));
@@ -3253,21 +3255,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                       InkWell(
-                        onTap: (){
-                          Get.back();
-                        },
-                         child: Container(
-                           width: 10.w,
-                           height: 10.w,
-                           alignment: Alignment.center,
-                           decoration: BoxDecoration(
-                             color: Colors.black,
-                             borderRadius: BorderRadius.circular(100),
-                           ),
-                           child: Icon(Icons.close,color: Colors.white,size: 15.sp,),
-                         ),
-                       )
+                        InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            width: 10.w,
+                            height: 10.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 15.sp,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -3594,8 +3600,463 @@ class _HomeScreenState extends State<HomeScreen> {
           shoallmarkermodal =
               ShoAllMarkerModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200) {
-
             print(" ${shoallmarkermodal?.positions?.length}");
+            print("api calling done");
+
+            // Clear existing markers
+            _customMarkers.clear();
+            if (shoallmarkermodal?.positions?.length == 0) {
+              buildErrorDialog1(
+                context,
+                '',
+                "No spots listed in this area",
+                () {
+                  setState(() {
+                    searchController.clear();
+                    isLoading = true;
+                    Get.back();
+                  });
+                  showmarker();
+                },
+              );
+            } else {
+              for (int index = 0;
+                  index < (shoallmarkermodal?.positions?.length ?? 0);
+                  index++) {
+                print("markerlength${shoallmarkermodal?.positions?.length}");
+                var latitudeString = shoallmarkermodal
+                    ?.positions?[index].geometry?.coordinates?[1]
+                    ?.toString();
+                var longitudeString = shoallmarkermodal
+                    ?.positions?[index].geometry?.coordinates?[0]
+                    ?.toString();
+
+                if (latitudeString != null && longitudeString != null) {
+                  // Validate latitude and longitude strings
+                  if (_isValidDouble(latitudeString) &&
+                      _isValidDouble(longitudeString)) {
+                    try {
+                      double latitude = double.parse(latitudeString);
+                      double longitude = double.parse(longitudeString);
+                      String imageurl = (shoallmarkermodal
+                              ?.positions?[index].properties?.imgURL)
+                          .toString();
+                      _customMarkers.add(
+                        MarkerData(
+                          marker: Marker(
+                            onTap: () {
+                              print(
+                                  "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                              setState(() {
+                                select = index;
+                              });
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return StatefulBuilder(
+                                      builder: (context, setState) {
+                                    return Dialog(
+                                        insetPadding: EdgeInsets.symmetric(
+                                            horizontal: 3.w),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        backgroundColor: Colors.transparent,
+                                        child: SingleChildScrollView(
+                                            child: Stack(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 0.7.h),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2.w,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        color: secondary,
+                                                        width: 1.sp)),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 35.w,
+                                                          width: 35.w,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl: shoallmarkermodal
+                                                                      ?.positions?[
+                                                                          index]
+                                                                      .properties
+                                                                      ?.postImage ??
+                                                                  "",
+                                                              fit: BoxFit.cover,
+                                                              progressIndicatorBuilder: (context,
+                                                                      url,
+                                                                      progress) =>
+                                                                  Container(
+                                                                      alignment:
+                                                                      Alignment
+                                                                              .center,
+                                                                      child: Center(
+                                                                          child:
+                                                                              CircularProgressIndicator())),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  Image.asset(
+                                                                      Default_Profile),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SizedBox(
+                                                                height: 0.h),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 46.w,
+                                                                  child: Text(
+                                                                    shoallmarkermodal?.positions?[index].properties?.title ==
+                                                                                null ||
+                                                                            shoallmarkermodal?.positions?[index].properties?.title ==
+                                                                                ""
+                                                                        ? "N/A"
+                                                                        : shoallmarkermodal?.positions?[index].properties?.title ??
+                                                                            "",
+                                                                    maxLines: 1,
+                                                                    style: TextStyle(
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        fontSize: 14
+                                                                            .sp,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontFamily:
+                                                                            "volken",
+                                                                        letterSpacing:
+                                                                            1),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                                height: 0.5.h),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Ratings :',
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "volken",
+                                                                    letterSpacing:
+                                                                        1,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: 2.w),
+                                                                Text(
+                                                                  shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
+                                                                              "" ||
+                                                                          shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
+                                                                              null
+                                                                      ? "0"
+                                                                      : (shoallmarkermodal
+                                                                              ?.positions?[index]
+                                                                              .properties
+                                                                              ?.onlyAvg)
+                                                                          .toString(),
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    color:
+                                                                        secondary,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "",
+                                                                    letterSpacing:
+                                                                        1,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width:
+                                                                        0.5.w),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          bottom:
+                                                                              0.5.h),
+                                                                  child: Text(
+                                                                    '⭐️',
+                                                                    maxLines: 1,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      color: Colors
+                                                                          .orange,
+                                                                      letterSpacing:
+                                                                          1,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                                height: 0.5.h),
+                                                            batan(
+                                                                title:
+                                                                    "View Details",
+                                                                route: () {
+                                                                  Get.back();
+                                                                  shoallmarkermodal
+                                                                              ?.positions?[
+                                                                                  index]
+                                                                              .properties
+                                                                              ?.termName ==
+                                                                          "Warning"
+                                                                      ? Get.to(
+                                                                          DetailsWarningDetailsScreen(
+                                                                          postid:
+                                                                              (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ))
+                                                                      : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                                              "Other"
+                                                                          ? Get.to(
+                                                                              DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
+                                                                          : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
+                                                                              ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
+                                                                              : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                },
+                                                                hight: 6.h,
+                                                                width: 40.w,
+                                                                txtsize: 15.sp)
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              left: 82.w,
+                                              top: 1.h,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                  width: 10.w,
+                                                  height: 10.w,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    color: Colors.black,
+                                                  ),
+                                                  child: Icon(Icons.clear,
+                                                      color: Colors.white,
+                                                      size: 15.sp),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )));
+                                  });
+                                },
+                              );
+                            },
+                            markerId: MarkerId(
+                                'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
+                            position: LatLng(latitude, longitude),
+                          ),
+                          child: shoallmarkermodal?.positions?[index].properties
+                                          ?.imgURL ==
+                                      null ||
+                                  shoallmarkermodal?.positions?[index]
+                                          .properties?.imgURL ==
+                                      ""
+                              ? Icon(
+                                  Icons.location_on,
+                                  color: Colors.green,
+                                  size: 15.sp,
+                                )
+                              : Image.network(
+                                  (shoallmarkermodal?.positions?[index]
+                                          .properties?.imgURL)
+                                      .toString(),
+                                  width: 50.w,
+                                  height: 50.w),
+                        ),
+                      );
+
+                      // Set _currentPosition1 to the first marker position
+                      if (index == 0) {
+                        _currentPosition1 = LatLng(latitude, longitude);
+                      }
+                    } catch (e) {
+                      print("Error parsing coordinates: $e");
+                    }
+                  } else {
+                    print("Invalid latitude or longitude format");
+                  }
+                } else {
+                  print("Latitude or longitude is null");
+                }
+              }
+            }
+
+            // Update the state with new markers
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+
+        // Handle offline mode
+        for (int index = 0;
+            index < (positionController.position?.positions.length ?? 0);
+            index++) {
+          print(
+              "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
+          print(
+              "offlinemappositionlength${positionController.position?.positions.length}");
+          var latitudeString = positionController
+              .position?.positions[index].geometry.coordinates[1]
+              .toString();
+          var longitudeString = positionController
+              .position?.positions[index].geometry.coordinates[0]
+              .toString();
+
+          if (latitudeString != null && longitudeString != null) {
+            // Validate latitude and longitude strings
+            if (_isValidDouble(latitudeString) &&
+                _isValidDouble(longitudeString)) {
+              try {
+                double latitude = double.parse(latitudeString);
+                double longitude = double.parse(longitudeString);
+                _customMarkers.add(
+                  MarkerData(
+                    marker: Marker(
+                      onTap: () {
+                        setState(() {
+                          select = index;
+                        });
+                      },
+                      markerId: MarkerId(
+                          'id-${positionController.position?.positions[index].properties.postId.toString()}'),
+                      position: LatLng(latitude, longitude),
+                    ),
+                    child: Icon(
+                      Icons.home,
+                      size: 15.sp,
+                      color: Colors.black,
+                    ),
+                  ),
+                );
+              } catch (e) {
+                print("Error parsing coordinates: $e");
+              }
+            } else {
+              print("Invalid latitude or longitude format");
+            }
+          } else {
+            print("Latitude or longitude is null");
+          }
+        }
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
+
+  bool _isValidDouble(String value) {
+    if (value == null) return false;
+    final RegExp regex = RegExp(r'^-?[\d.]+$');
+    return regex.hasMatch(value);
+  }
+
+  showmarker11() {
+    print("dtadone");
+    final Map<String, String> data = {};
+    data['s'] = searchController.text.trim().toString();
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        positionController?.fetchPositionData();
+
+        authprovider().showmarkerapi(data).then((response) async {
+          shoallmarkermodal =
+              ShoAllMarkerModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200) {
+            print("maposition${shoallmarkermodal?.positions?.length}");
             print("api calling done");
 
             // Clear existing markers
@@ -3978,461 +4439,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Handle offline mode
         for (int index = 0;
-        index < (positionController.position?.positions.length ?? 0);
-        index++) {
-          print(
-              "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
-          print(
-              "offlinemappositionlength${positionController.position?.positions.length}");
-          var latitudeString = positionController
-              .position?.positions[index].geometry.coordinates[1]
-              .toString();
-          var longitudeString = positionController
-              .position?.positions[index].geometry.coordinates[0]
-              .toString();
-
-          if (latitudeString != null && longitudeString != null) {
-            // Validate latitude and longitude strings
-            if (_isValidDouble(latitudeString) &&
-                _isValidDouble(longitudeString)) {
-              try {
-                double latitude = double.parse(latitudeString);
-                double longitude = double.parse(longitudeString);
-                _customMarkers.add(
-                  MarkerData(
-                    marker: Marker(
-                      onTap: () {
-                        setState(() {
-                          select = index;
-                        });
-                      },
-                      markerId: MarkerId(
-                          'id-${positionController.position?.positions[index].properties.postId.toString()}'),
-                      position: LatLng(latitude, longitude),
-                    ),
-                    child:Icon(Icons.home,size: 15.sp,color: Colors.black,),
-                  ),
-                );
-              } catch (e) {
-                print("Error parsing coordinates: $e");
-              }
-            } else {
-              print("Invalid latitude or longitude format");
-            }
-          } else {
-            print("Latitude or longitude is null");
-          }
-        }
-        buildErrorDialog(context, 'Error', "Internet Required");
-      }
-    });
-  }
-
-  bool _isValidDouble(String value) {
-    if (value == null) return false;
-    final RegExp regex = RegExp(r'^-?[\d.]+$');
-    return regex.hasMatch(value);
-  }
-
-  showmarker11() {
-    print("dtadone");
-    final Map<String, String> data = {};
-    data['s'] = searchController.text.trim().toString();
-    print(data);
-    checkInternet().then((internet) async {
-      if (internet) {
-        positionController?.fetchPositionData();
-
-        authprovider().showmarkerapi(data).then((response) async {
-          shoallmarkermodal =
-              ShoAllMarkerModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200) {
-
-            print("maposition${shoallmarkermodal?.positions?.length}");
-            print("api calling done");
-
-            // Clear existing markers
-            _customMarkers.clear();
-            if (shoallmarkermodal?.positions?.length == 0) {
-              buildErrorDialog1(
-                context,
-                '',
-                "No spots listed in this area",
-                    () {
-                  setState(() {
-                    searchController.clear();
-                    isLoading = true;
-                    Get.back();
-                  });
-                  showmarker();
-                },
-              );
-            } else {
-              for (int index = 0;
-              index < (shoallmarkermodal?.positions?.length ?? 0);
-              index++) {
-                print("markerlength${shoallmarkermodal?.positions?.length}");
-                var latitudeString = shoallmarkermodal
-                    ?.positions?[index].geometry?.coordinates?[1]
-                    ?.toString();
-                var longitudeString = shoallmarkermodal
-                    ?.positions?[index].geometry?.coordinates?[0]
-                    ?.toString();
-
-                if (latitudeString != null && longitudeString != null) {
-                  // Validate latitude and longitude strings
-                  if (_isValidDouble(latitudeString) &&
-                      _isValidDouble(longitudeString)) {
-                    try {
-                      double latitude = double.parse(latitudeString);
-                      double longitude = double.parse(longitudeString);
-                      String imageurl = (shoallmarkermodal
-                          ?.positions?[index].properties?.imgURL)
-                          .toString();
-                      _customMarkers.add(
-                        MarkerData(
-                          marker: Marker(
-                            onTap: () {
-                              print(
-                                  "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
-                              setState(() {
-                                select = index;
-                              });
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return StatefulBuilder(
-                                      builder: (context, setState) {
-                                        return Dialog(
-                                            insetPadding: EdgeInsets.symmetric(
-                                                horizontal: 3.w),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10.0),
-                                            ),
-                                            backgroundColor: Colors.transparent,
-                                            child: SingleChildScrollView(
-                                                child: Stack(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Container(
-                                                        width: MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                        margin: EdgeInsets.symmetric(
-                                                            vertical: 0.7.h),
-                                                        padding: EdgeInsets.symmetric(
-                                                            horizontal: 2.w,
-                                                            vertical: 1.h),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
-                                                            border: Border.all(
-                                                                color: secondary,
-                                                                width: 1.sp)),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                          MainAxisAlignment.start,
-                                                          crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Container(
-                                                                  height: 35.w,
-                                                                  width: 35.w,
-                                                                  child: ClipRRect(
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                        15),
-                                                                    child:
-                                                                    CachedNetworkImage(
-                                                                      imageUrl: shoallmarkermodal
-                                                                          ?.positions?[
-                                                                      index]
-                                                                          .properties
-                                                                          ?.postImage ??
-                                                                          "",
-                                                                      fit: BoxFit.cover,
-                                                                      progressIndicatorBuilder: (context,
-                                                                          url,
-                                                                          progress) =>
-                                                                          Container(
-                                                                              alignment:
-                                                                              Alignment
-                                                                                  .center,
-                                                                              child: Center(
-                                                                                  child:
-                                                                                  CircularProgressIndicator())),
-                                                                      errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                          Image.asset(
-                                                                              Default_Profile),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SizedBox(width: 4.w),
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                        height: 0.h),
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                      children: [
-                                                                        SizedBox(
-                                                                          width: 46.w,
-                                                                          child: Text(
-                                                                            shoallmarkermodal?.positions?[index].properties?.title ==
-                                                                                null ||
-                                                                                shoallmarkermodal?.positions?[index].properties?.title ==
-                                                                                    ""
-                                                                                ? "N/A"
-                                                                                : shoallmarkermodal?.positions?[index].properties?.title ??
-                                                                                "",
-                                                                            maxLines: 1,
-                                                                            style: TextStyle(
-                                                                                overflow:
-                                                                                TextOverflow
-                                                                                    .ellipsis,
-                                                                                fontSize: 14
-                                                                                    .sp,
-                                                                                color: Colors
-                                                                                    .black,
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold,
-                                                                                fontFamily:
-                                                                                "volken",
-                                                                                letterSpacing:
-                                                                                1),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    SizedBox(
-                                                                        height: 0.5.h),
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Ratings :',
-                                                                          maxLines: 1,
-                                                                          style:
-                                                                          TextStyle(
-                                                                            overflow:
-                                                                            TextOverflow
-                                                                                .ellipsis,
-                                                                            fontSize:
-                                                                            13.sp,
-                                                                            color: Colors
-                                                                                .black,
-                                                                            fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                            fontFamily:
-                                                                            "volken",
-                                                                            letterSpacing:
-                                                                            1,
-                                                                          ),
-                                                                        ),
-                                                                        SizedBox(
-                                                                            width: 2.w),
-                                                                        Text(
-                                                                          shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
-                                                                              "" ||
-                                                                              shoallmarkermodal?.positions?[index].properties?.onlyAvg ==
-                                                                                  null
-                                                                              ? "0"
-                                                                              : (shoallmarkermodal
-                                                                              ?.positions?[index]
-                                                                              .properties
-                                                                              ?.onlyAvg)
-                                                                              .toString(),
-                                                                          maxLines: 1,
-                                                                          style:
-                                                                          TextStyle(
-                                                                            overflow:
-                                                                            TextOverflow
-                                                                                .ellipsis,
-                                                                            fontSize:
-                                                                            13.sp,
-                                                                            color:
-                                                                            secondary,
-                                                                            fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                            fontFamily:
-                                                                            "",
-                                                                            letterSpacing:
-                                                                            1,
-                                                                          ),
-                                                                        ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                            0.5.w),
-                                                                        Padding(
-                                                                          padding: EdgeInsets
-                                                                              .only(
-                                                                              bottom:
-                                                                              0.5.h),
-                                                                          child: Text(
-                                                                            '⭐️',
-                                                                            maxLines: 1,
-                                                                            style:
-                                                                            TextStyle(
-                                                                              overflow:
-                                                                              TextOverflow
-                                                                                  .ellipsis,
-                                                                              fontSize:
-                                                                              12.sp,
-                                                                              color: Colors
-                                                                                  .orange,
-                                                                              letterSpacing:
-                                                                              1,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    SizedBox(
-                                                                        height: 0.5.h),
-                                                                    batan(
-                                                                        title:
-                                                                        "View Details",
-                                                                        route: () {
-                                                                          Get.back();
-                                                                          shoallmarkermodal
-                                                                              ?.positions?[
-                                                                          index]
-                                                                              .properties
-                                                                              ?.termName ==
-                                                                              "Warning"
-                                                                              ? Get.to(
-                                                                              DetailsWarningDetailsScreen(
-                                                                                postid:
-                                                                                (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                              ))
-                                                                              : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                              "Other"
-                                                                              ? Get.to(
-                                                                              DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
-                                                                              : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
-                                                                              ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
-                                                                              : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
-                                                                        },
-                                                                        hight: 6.h,
-                                                                        width: 40.w,
-                                                                        txtsize: 15.sp)
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      left: 82.w,
-                                                      top: 1.h,
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          Get.back();
-                                                        },
-                                                        child: Container(
-                                                          width: 10.w,
-                                                          height: 10.w,
-                                                          decoration: BoxDecoration(
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                100),
-                                                            color: Colors.black,
-                                                          ),
-                                                          child: Icon(Icons.clear,
-                                                              color: Colors.white,
-                                                              size: 15.sp),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )));
-                                      });
-                                },
-                              );
-                            },
-                            markerId: MarkerId(
-                                'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
-                            position: LatLng(latitude, longitude),
-                          ),
-                          child: shoallmarkermodal?.positions?[index].properties
-                              ?.imgURL ==
-                              null ||
-                              shoallmarkermodal?.positions?[index]
-                                  .properties?.imgURL ==
-                                  ""
-                              ? Icon(
-                            Icons.location_on,
-                            color: Colors.green,
-                            size: 15.sp,
-                          )
-                              : Image.network(
-                              (shoallmarkermodal?.positions?[index]
-                                  .properties?.imgURL)
-                                  .toString(),
-                              width: 50.w,
-                              height: 50.w),
-                        ),
-                      );
-
-                      // Set _currentPosition1 to the first marker position
-                      if (index == 0) {
-                        _currentPosition1 = LatLng(latitude, longitude);
-                      }
-                    } catch (e) {
-                      print("Error parsing coordinates: $e");
-                    }
-                  } else {
-                    print("Invalid latitude or longitude format");
-                  }
-                } else {
-                  print("Latitude or longitude is null");
-                }
-              }
-            }
-
-            // Update the state with new markers
-            setState(() {
-              isLoading = false;
-            });
-          } else {
-            setState(() {
-              isLoading = false;
-            });
-          }
-        });
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-
-        // Handle offline mode
-        for (int index = 0;
-        index < (positionController.position?.positions.length ?? 0);
-        index++) {
+            index < (positionController.position?.positions.length ?? 0);
+            index++) {
           print(
               "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
           print(
@@ -4463,254 +4471,280 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (BuildContext context) {
                             return StatefulBuilder(
                                 builder: (context, setState) {
-                                  return Dialog(
-                                      insetPadding: EdgeInsets.symmetric(
-                                          horizontal: 3.w),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(10.0),
-                                      ),
-                                      backgroundColor: Colors.transparent,
-                                      child: SingleChildScrollView(
-                                          child: Stack(
+                              return Dialog(
+                                  insetPadding:
+                                      EdgeInsets.symmetric(horizontal: 3.w),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  backgroundColor: Colors.transparent,
+                                  child: SingleChildScrollView(
+                                      child: Stack(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 0.7.h),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 2.w, vertical: 1.h),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                  color: secondary,
+                                                  width: 1.sp)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 0.7.h),
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 2.w,
-                                                      vertical: 1.h),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 35.w,
+                                                    width: 35.w,
+                                                    child: ClipRRect(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                                                      border: Border.all(
-                                                          color: secondary,
-                                                          width: 1.sp)),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            positionController
+                                                                    ?.position
+                                                                    ?.positions?[
+                                                                        index]
+                                                                    .properties
+                                                                    ?.postImage ??
+                                                                "",
+                                                        fit: BoxFit.cover,
+                                                        progressIndicatorBuilder: (context,
+                                                                url,
+                                                                progress) =>
+                                                            Container(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator())),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Image.asset(
+                                                                Default_Profile),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 4.w),
+                                                  Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
+                                                      SizedBox(height: 0.h),
                                                       Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          Container(
-                                                            height: 35.w,
-                                                            width: 35.w,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  15),
-                                                              child:
-                                                              CachedNetworkImage(
-                                                                imageUrl:positionController?.position?.positions?[index].properties?.postImage ?? "",
-                                                                fit: BoxFit.cover,
-                                                                progressIndicatorBuilder: (context,
-                                                                    url,
-                                                                    progress) =>
-                                                                    Container(
-                                                                        alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                        child: Center(
-                                                                            child:
-                                                                            CircularProgressIndicator())),
-                                                                errorWidget: (context,
-                                                                    url,
-                                                                    error) =>
-                                                                    Image.asset(
-                                                                        Default_Profile),
+                                                          SizedBox(
+                                                            width: 46.w,
+                                                            child: Text(
+                                                              positionController
+                                                                              ?.position
+                                                                              ?.positions?[
+                                                                                  index]
+                                                                              .properties
+                                                                              ?.title ==
+                                                                          "" ||
+                                                                      positionController
+                                                                              ?.position
+                                                                              ?.positions?[
+                                                                                  index]
+                                                                              .properties
+                                                                              ?.title ==
+                                                                          null
+                                                                  ? "N/A"
+                                                                  : positionController
+                                                                          ?.position
+                                                                          ?.positions?[
+                                                                              index]
+                                                                          .properties
+                                                                          ?.title ??
+                                                                      "",
+                                                              maxLines: 1,
+                                                              style: TextStyle(
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontFamily:
+                                                                      "volken",
+                                                                  letterSpacing:
+                                                                      1),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 0.5.h),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'Ratings :',
+                                                            maxLines: 1,
+                                                            style: TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontSize: 13.sp,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "volken",
+                                                              letterSpacing: 1,
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 2.w),
+                                                          Text(
+                                                            positionController
+                                                                            ?.position
+                                                                            ?.positions?[
+                                                                                index]
+                                                                            .properties
+                                                                            ?.onlyAvg ==
+                                                                        "" ||
+                                                                    positionController
+                                                                            ?.position
+                                                                            ?.positions?[
+                                                                                index]
+                                                                            .properties
+                                                                            ?.onlyAvg ==
+                                                                        null
+                                                                ? "N/A"
+                                                                : (positionController
+                                                                        ?.position
+                                                                        ?.positions?[
+                                                                            index]
+                                                                        .properties
+                                                                        ?.onlyAvg)
+                                                                    .toString(),
+                                                            maxLines: 1,
+                                                            style: TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontSize: 13.sp,
+                                                              color: secondary,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily: "",
+                                                              letterSpacing: 1,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                              width: 0.5.w),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    bottom:
+                                                                        0.5.h),
+                                                            child: Text(
+                                                              '⭐️',
+                                                              maxLines: 1,
+                                                              style: TextStyle(
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                fontSize: 12.sp,
+                                                                color: Colors
+                                                                    .orange,
+                                                                letterSpacing:
+                                                                    1,
                                                               ),
                                                             ),
                                                           ),
-                                                          SizedBox(width: 4.w),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              SizedBox(
-                                                                  height: 0.h),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 46.w,
-                                                                    child: Text(
-                                                                      positionController?.position?.positions?[index].properties?.title==""||positionController?.position?.positions?[index].properties?.title==null?"N/A":positionController?.position?.positions?[index].properties?.title ?? "",
-                                                                      maxLines: 1,
-                                                                      style: TextStyle(
-                                                                          overflow:
-                                                                          TextOverflow
-                                                                              .ellipsis,
-                                                                          fontSize: 14
-                                                                              .sp,
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                          fontFamily:
-                                                                          "volken",
-                                                                          letterSpacing:
-                                                                          1),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 0.5.h),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Ratings :',
-                                                                    maxLines: 1,
-                                                                    style:
-                                                                    TextStyle(
-                                                                      overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                      fontSize:
-                                                                      13.sp,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                      fontFamily:
-                                                                      "volken",
-                                                                      letterSpacing:
-                                                                      1,
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      width: 2.w),
-                                                                  Text(
-                                                                    positionController?.position?.positions?[index].properties?.onlyAvg==null?"N/A":(positionController?.position?.positions?[index].properties?.onlyAvg).toString(),
-                                                                    maxLines: 1,
-                                                                    style:
-                                                                    TextStyle(
-                                                                      overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                      fontSize:
-                                                                      13.sp,
-                                                                      color:
-                                                                      secondary,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                      fontFamily:
-                                                                      "",
-                                                                      letterSpacing:
-                                                                      1,
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      width:
-                                                                      0.5.w),
-                                                                  Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                        bottom:
-                                                                        0.5.h),
-                                                                    child: Text(
-                                                                      '⭐️',
-                                                                      maxLines: 1,
-                                                                      style:
-                                                                      TextStyle(
-                                                                        overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                        fontSize:
-                                                                        12.sp,
-                                                                        color: Colors
-                                                                            .orange,
-                                                                        letterSpacing:
-                                                                        1,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                  height: 0.5.h),
-                                                              batan(
-                                                                  title:
-                                                                  "View Details",
-                                                                  route: () {
-                                                                    Get.back();
-                                                                    shoallmarkermodal
-                                                                        ?.positions?[
-                                                                    index]
-                                                                        .properties
-                                                                        ?.termName ==
-                                                                        "Warning"
-                                                                        ? Get.to(
-                                                                        DetailsWarningDetailsScreen(
-                                                                          postid:
-                                                                          (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                        ))
-                                                                        : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                        "Other"
-                                                                        ? Get.to(
-                                                                        DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
-                                                                        : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
-                                                                        ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
-                                                                        : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
-                                                                  },
-                                                                  hight: 6.h,
-                                                                  width: 40.w,
-                                                                  txtsize: 15.sp)
-                                                            ],
-                                                          )
                                                         ],
                                                       ),
+                                                      // SizedBox(
+                                                      //     height: 0.5.h),
+                                                      // batan(
+                                                      //     title:
+                                                      //     "View Details",
+                                                      //     route: () {
+                                                      //       Get.back();
+                                                      //       shoallmarkermodal
+                                                      //           ?.positions?[
+                                                      //       index]
+                                                      //           .properties
+                                                      //           ?.termName ==
+                                                      //           "Warning"
+                                                      //           ? Get.to(
+                                                      //           DetailsWarningDetailsScreen(
+                                                      //             postid:
+                                                      //             (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                      //           ))
+                                                      //           : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                      //           "Other"
+                                                      //           ? Get.to(
+                                                      //           DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
+                                                      //           : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
+                                                      //           ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
+                                                      //           : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                      //     },
+                                                      //     hight: 6.h,
+                                                      //     width: 40.w,
+                                                      //     txtsize: 15.sp)
                                                     ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 82.w,
-                                                top: 1.h,
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Get.back();
-                                                  },
-                                                  child: Container(
-                                                    width: 10.w,
-                                                    height: 10.w,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          100),
-                                                      color: Colors.black,
-                                                    ),
-                                                    child: Icon(Icons.clear,
-                                                        color: Colors.white,
-                                                        size: 15.sp),
-                                                  ),
-                                                ),
+                                                  )
+                                                ],
                                               ),
                                             ],
-                                          )));
-                                });
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        left: 82.w,
+                                        top: 1.h,
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: Container(
+                                            width: 10.w,
+                                            height: 10.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: Colors.black,
+                                            ),
+                                            child: Icon(Icons.clear,
+                                                color: Colors.white,
+                                                size: 15.sp),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )));
+                            });
                           },
                         );
                       },
@@ -4718,7 +4752,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           'id-${positionController.position?.positions[index].properties.postId.toString()}'),
                       position: LatLng(latitude, longitude),
                     ),
-                    child:Icon(Icons.home,size: 15.sp,color: Colors.black,),
+                    child: positionController?.position?.positions?[index]
+                                .properties?.termName ==
+                            "Anchorages"
+                        ? Image.asset(
+                            "assets/mooring-red.png",
+                          )
+                        : positionController?.position?.positions?[index]
+                                    .properties?.termName ==
+                                "Other"
+                            ? Image.asset(
+                                "assets/yellowred.png",
+                              )
+                            : positionController?.position?.positions?[index]
+                                        .properties?.termName ==
+                                    "Warning"
+                                ? Image.asset(
+                                    "assets/mooring-buoy-red.png",
+                                  )
+                                : Image.asset(
+                                    "assets/mooring-red.png",
+                                  ),
                   ),
                 );
               } catch (e) {

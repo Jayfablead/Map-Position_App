@@ -229,7 +229,6 @@ SizedBox(
 
               setState(() {
 
-
               });
             } else {
               EasyLoading.showError(updatealarammodal?.message ?? '');

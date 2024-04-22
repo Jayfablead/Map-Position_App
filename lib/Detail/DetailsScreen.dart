@@ -167,7 +167,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     getLocation();
     setState(() {
       futureDate = now.add(Duration(days: 10));
-
+      isLoading =true;
     });
     wedther();
     print("Postidavigayache:-${widget.postid.toString()}");

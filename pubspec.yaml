@@ -48,7 +48,6 @@ dependencies:
   sizer:
   carousel_slider:
   fluttertoast:
-  lottie:
   flutter_easyloading:
   file_picker:
   image_picker:
@@ -60,13 +59,8 @@ dependencies:
   line_icons:
   shared_preferences:
   flutter_rating_bar:
-  order_tracker:
   provider:
-  share_plus:
-  url_launcher:
-  flutter_inappwebview:
   permission_handler:
-  video_player: ^2.8.3
   persistent_bottom_nav_bar:
   http_parser:
   flutter_stripe: ^7.0.0

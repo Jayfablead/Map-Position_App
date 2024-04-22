@@ -10,6 +10,7 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Const.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/StripePaymentsModal.dart';
 import '../Provider/Authprovider.dart';
 
@@ -244,7 +245,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             stripepaymentsmodal = StripePaymentsModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
-              Get.offAll(HomeScreen());
+              Get.offAll(LoginScreen());
               setState(() {
                _name.clear();
                _cvv.clear();

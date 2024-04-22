@@ -3529,7 +3529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Column(
                           children: [
                             Image.asset(
-                              "assets/mooringbuoygreen.png",
+                              "assets/greenwarning.png",
                               height: 15.w,
                               width: 15.w,
                             ),
@@ -3545,7 +3545,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Column(
                           children: [
                             Image.asset(
-                              "assets/mooring-buoy-yellow.png",
+                              "assets/yellowwarning.png",
                               height: 15.w,
                               width: 15.w,
                             ),
@@ -3561,7 +3561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Column(
                           children: [
                             Image.asset(
-                              "assets/mooring-buoy-red.png",
+                              "assets/redwarning.png",
                               height: 15.w,
                               width: 15.w,
                             ),
@@ -3936,11 +3936,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   shoallmarkermodal?.positions?[index]
                                           .properties?.imgURL ==
                                       ""
-                              ? Icon(
-                                  Icons.location_on,
-                                  color: Colors.green,
-                                  size: 15.sp,
-                                )
+                              ? Image.asset(
+                            "assets/mooring-red.png",
+                          )
                               : Image.network(
                                   (shoallmarkermodal?.positions?[index]
                                           .properties?.imgURL)
@@ -3982,56 +3980,56 @@ class _HomeScreenState extends State<HomeScreen> {
         });
 
         // Handle offline mode
-        for (int index = 0;
-            index < (positionController.position?.positions.length ?? 0);
-            index++) {
-          print(
-              "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
-          print(
-              "offlinemappositionlength${positionController.position?.positions.length}");
-          var latitudeString = positionController
-              .position?.positions[index].geometry.coordinates[1]
-              .toString();
-          var longitudeString = positionController
-              .position?.positions[index].geometry.coordinates[0]
-              .toString();
-
-          if (latitudeString != null && longitudeString != null) {
-            // Validate latitude and longitude strings
-            if (_isValidDouble(latitudeString) &&
-                _isValidDouble(longitudeString)) {
-              try {
-                double latitude = double.parse(latitudeString);
-                double longitude = double.parse(longitudeString);
-                _customMarkers.add(
-                  MarkerData(
-                    marker: Marker(
-                      onTap: () {
-                        setState(() {
-                          select = index;
-                        });
-                      },
-                      markerId: MarkerId(
-                          'id-${positionController.position?.positions[index].properties.postId.toString()}'),
-                      position: LatLng(latitude, longitude),
-                    ),
-                    child: Icon(
-                      Icons.home,
-                      size: 15.sp,
-                      color: Colors.black,
-                    ),
-                  ),
-                );
-              } catch (e) {
-                print("Error parsing coordinates: $e");
-              }
-            } else {
-              print("Invalid latitude or longitude format");
-            }
-          } else {
-            print("Latitude or longitude is null");
-          }
-        }
+        // for (int index = 0;
+        //     index < (positionController.position?.positions.length ?? 0);
+        //     index++) {
+        //   print(
+        //       "offline${positionController.position?.positions[index].geometry.coordinates[1].toString()}");
+        //   print(
+        //       "offlinemappositionlength${positionController.position?.positions.length}");
+        //   var latitudeString = positionController
+        //       .position?.positions[index].geometry.coordinates[1]
+        //       .toString();
+        //   var longitudeString = positionController
+        //       .position?.positions[index].geometry.coordinates[0]
+        //       .toString();
+        //
+        //   if (latitudeString != null && longitudeString != null) {
+        //     // Validate latitude and longitude strings
+        //     if (_isValidDouble(latitudeString) &&
+        //         _isValidDouble(longitudeString)) {
+        //       try {
+        //         double latitude = double.parse(latitudeString);
+        //         double longitude = double.parse(longitudeString);
+        //         _customMarkers.add(
+        //           MarkerData(
+        //             marker: Marker(
+        //               onTap: () {
+        //                 setState(() {
+        //                   select = index;
+        //                 });
+        //               },
+        //               markerId: MarkerId(
+        //                   'id-${positionController.position?.positions[index].properties.postId.toString()}'),
+        //               position: LatLng(latitude, longitude),
+        //             ),
+        //             child: Icon(
+        //               Icons.home,
+        //               size: 15.sp,
+        //               color: Colors.black,
+        //             ),
+        //           ),
+        //         );
+        //       } catch (e) {
+        //         print("Error parsing coordinates: $e");
+        //       }
+        //     } else {
+        //       print("Invalid latitude or longitude format");
+        //     }
+        //   } else {
+        //     print("Latitude or longitude is null");
+        //   }
+        // }
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });
@@ -4392,11 +4390,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   shoallmarkermodal?.positions?[index]
                                           .properties?.imgURL ==
                                       ""
-                              ? Icon(
-                                  Icons.location_on,
-                                  color: Colors.green,
-                                  size: 15.sp,
-                                )
+                              ? Image.asset(
+                            "assets/mooring-red.png",
+                          )
                               : Image.network(
                                   (shoallmarkermodal?.positions?[index]
                                           .properties?.imgURL)
@@ -4768,7 +4764,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .properties?.termName ==
                                     "Warning"
                                 ? Image.asset(
-                                    "assets/mooring-buoy-red.png",
+                                    "assets/redwarning.png",
                                   )
                                 : Image.asset(
                                     "assets/mooring-red.png",

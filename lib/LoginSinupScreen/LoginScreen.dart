@@ -233,7 +233,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: "Login",
                         route: () {
                           LoginApi();
-
                         },
                         hight: 6.h,
                         width: MediaQuery.of(context).size.width,

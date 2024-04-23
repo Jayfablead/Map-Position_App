@@ -71,7 +71,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       ),
                       child: Column(
                         children: [
-                          Text("Navily Premium",style: TextStyle(
+                          Text("Premium",style: TextStyle(
                               letterSpacing: 1,
                               color:Colors.white,
                               fontSize: 15.sp,
@@ -94,7 +94,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Subscribe To Navily Premium,Unlock",style: TextStyle(
+                  Text("Subscribe To Premium,Unlock",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,
@@ -107,7 +107,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("More features and support Navily!",style: TextStyle(
+                  Text("More features and support Marina!",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,
@@ -162,7 +162,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
               ),
               SizedBox(height: 5.h,),
-              loginmodal?.paymentStatus=="succeeded"?Container() :batan(title: "Subscribe for \$200.00", route: (){
+             batan(title: "Subscribe for \$200.00", route: (){
                Get.to(PaymentsScreen());
               }, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],

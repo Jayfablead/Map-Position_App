@@ -85,15 +85,9 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     searchController.dispose();
     super.dispose();
   }
-
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
-
-
-
-
   void _searchAndNavigate() async {
     final String address = searchController.text;
     List<Location> locations = await locationFromAddress(address);
@@ -109,11 +103,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       });
     }
   }
-
-
-
   MapType _mapType = MapType.normal;
-
   void _toggleMapType() {
     setState(() {
       _isSatellite = !_isSatellite;
@@ -133,7 +123,6 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     setState(() {
       isLoading =true;
       futureDate = now.add(Duration(days: 10));
-
     });
     wedther();
     print("Postidavigayache:-${widget.postid.toString()}");
@@ -212,7 +201,6 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               ),
                               Row(
                                 children: [
-
                                   IconButton(
                                       onPressed: () {
                                         _scaffoldKeyProductlistpage.currentState

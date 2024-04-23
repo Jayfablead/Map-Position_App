@@ -76,7 +76,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                         ),
                         child: Column(
                           children: [
-                            Text("Navily Premium",style: TextStyle(
+                            Text("Premium",style: TextStyle(
                                 letterSpacing: 1,
                                 color:Colors.white,
                                 fontSize: 15.sp,
@@ -244,8 +244,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           authprovider().stripeapi(data).then((response) async {
             stripepaymentsmodal = StripePaymentsModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
+              print(response);
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
-              Get.offAll(LoginScreen());
+              Get.offAll(HomeScreen());
               setState(() {
                _name.clear();
                _cvv.clear();

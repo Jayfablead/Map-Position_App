@@ -85,7 +85,7 @@ class _BottombarState extends State<Bottombar> {
                 Icon(Icons.paid, color: Colors.black87),
                 activeItem:
                 Icon(Icons.paid, color: Colors.white),
-                itemLabel: 'Navily',
+                itemLabel: 'Premium',
               ),
               BottomBarItem(
                 inActiveItem: Icon(CupertinoIcons.home, color: Colors.black),

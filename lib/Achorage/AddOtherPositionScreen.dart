@@ -587,7 +587,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       batan(
-                          title: "Save Next",
+                          title: "Submit",
                           route: () {
                             widget.postid==null?addother(): updatepositionother();
                           },

@@ -55,7 +55,10 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
   bool pharmacy=false;
   bool alcohol=false;
   bool restaurant=false;
+  bool pontoon=false;
+  bool shop=false;
   bool water=false;
+  bool beach=false;
   bool N1 = false;
   bool N2 = false;
   bool N3 = false;
@@ -872,7 +875,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtRIWAWJ82MIU3sZz_G753lnqYMkP6MBq6ly1FUtoCaAW9tsUl",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-groceries-100.png",color: groceries
+                                              ? Colors.white
+                                              : Colors.black,
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -886,6 +891,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Groceries",
                                         maxLines: 1,
@@ -894,7 +900,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           fontSize: 13.sp,
                                           color: groceries
                                               ? Colors.white
-                                              : secondary,
+                                              : Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "volken",
                                           letterSpacing: 1,
@@ -906,9 +912,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
+
                           Column(
                             children: [
                               InkWell(
@@ -942,7 +946,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuoa863jQHob2mOU5heotg6KO4Af4JcqDcgwfZ4yzPt_DvntQA",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-pharmacy-100.png", color: pharmacy
+                                              ? Colors.white
+                                              : Colors.black,
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -956,6 +962,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Pharmacy",
                                         maxLines: 1,
@@ -964,7 +971,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           fontSize: 13.sp,
                                           color: pharmacy
                                               ? Colors.white
-                                              : secondary,
+                                              : Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "volken",
                                           letterSpacing: 1,
@@ -976,9 +983,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
+
                           Column(
                             children: [
                               InkWell(
@@ -1012,7 +1017,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ-Ny6we7GlTTn8xMrp9v4RAh6iUVUGDfKoJfeMX-Gddc6YYK3",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-alcohol-100.png", color: alcohol
+                                              ? Colors.white
+                                              : Colors.black,
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -1026,6 +1033,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Alcohol",
                                         maxLines: 1,
@@ -1034,7 +1042,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           fontSize: 13.sp,
                                           color: alcohol
                                               ? Colors.white
-                                              : secondary,
+                                              : Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "volken",
                                           letterSpacing: 1,
@@ -1052,6 +1060,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                         height: 1.h,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
@@ -1086,7 +1095,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4UP0P6tKJ1DQG4Q6DI5TferlLPkz9xiKMp0UGWvfXIxeJweQm",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-restaurant-100.png",color:restaurant
+                                              ? Colors.white
+                                              : Colors.black,
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -1100,6 +1111,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Restaurant",
                                         maxLines: 1,
@@ -1120,12 +1132,8 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          SizedBox(
-                            width: 6.w,
-                          ),
+
+
                           Column(
                             children: [
                               InkWell(
@@ -1159,7 +1167,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgAT9tkJyYp2ai141ZTuPOYa1h0MpXg06Tq1y_ZeiIss-2Tg2O",
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-water-100.png",color:water
+                                              ? Colors.white
+                                              : Colors.black ,
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -1173,6 +1183,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 1.h,),
                                       Text(
                                         "Water",
                                         maxLines: 1,
@@ -1193,6 +1204,227 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                               ),
                             ],
                           ),
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    beach=!beach; // Change to any color you desire
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color:beach
+                                          ? Colors.black
+                                          : Colors.white ,
+                                      border: Border.all(
+                                          color: secondary1,
+                                          width: 1.sp)),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 25.w,
+                                        width: 25.w,
+
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(90),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-beach-100.png", color:beach
+                                              ? Colors.white
+                                              : Colors.black ,
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 1.h,),
+                                      Text(
+                                        "Beach",
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 13.sp,
+                                          color: beach
+                                              ? Colors.white
+                                              : secondary,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "volken",
+                                          letterSpacing: 1,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                       
+                        children: [
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    pontoon=!pontoon;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color:pontoon
+                                          ? Colors.black
+                                          : Colors.white ,
+                                      border: Border.all(
+                                          color: secondary1,
+                                          width: 1.sp)),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 25.w,
+                                        width: 25.w,
+
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(90),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-pontoon-100.png",color:pontoon
+                                              ? Colors.white
+                                              : Colors.black,
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 1.h,),
+                                      Text(
+                                        "Pontoon",
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 13.sp,
+                                          color: pontoon
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "volken",
+                                          letterSpacing: 1,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+SizedBox(width: 7.w,),
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    shop=!shop; // Change to any color you desire
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w,
+                                      vertical: 1.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color:shop
+                                          ? Colors.black
+                                          : Colors.white ,
+                                      border: Border.all(
+                                          color: secondary1,
+                                          width: 1.sp)),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 25.w,
+                                        width: 25.w,
+
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(90),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                            "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-shop-100.png",color:shop
+                                              ? Colors.white
+                                              : Colors.black ,
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 1.h,),
+                                      Text(
+                                        "Shop",
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 13.sp,
+                                          color: shop
+                                              ? Colors.white
+                                              : secondary,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "volken",
+                                          letterSpacing: 1,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
                         ],
                       ),
                     ],
@@ -2226,7 +2458,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   batan(
-                      title: "Save Next",
+                      title: "Submit",
                       route: () {
                         widget.postid==null?addanchorage():updateancorage();
                       },

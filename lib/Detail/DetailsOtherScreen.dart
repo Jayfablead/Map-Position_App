@@ -258,107 +258,12 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           SizedBox(
                             width: 3.w,
                           ),
-                          // Icon(
-                          //   Icons.add_location,
-                          //   color: Colors.black,
-                          //   size: 20.sp,
-                          // ),
-                          // Text(
-                          //   "Sleman,Yogyakarta",
-                          //   style: TextStyle(
-                          //       letterSpacing: 1,
-                          //       color: secondary,
-                          //       fontSize: 12.sp,
-                          //       fontWeight: FontWeight.normal,
-                          //       fontFamily: "volken"),
-                          // ),
+
                         ],
                       ),
                       SizedBox(
                         height: 1.h,
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Container(
-                      //           margin: EdgeInsets.symmetric(horizontal: 1.w),
-                      //           height: 15.w,
-                      //           width: 15.w,
-                      //           decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             border: Border.all(
-                      //               color: bgcolor, // Border color
-                      //               width: 2.sp, // Border width
-                      //             ),
-                      //           ),
-                      //           child: ClipRRect(
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             child: CachedNetworkImage(
-                      //               imageUrl:
-                      //                   'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
-                      //               fit: BoxFit.cover,
-                      //               progressIndicatorBuilder:
-                      //                   (context, url, progress) =>
-                      //                       CircularProgressIndicator(),
-                      //               errorWidget: (context, url, error) =>
-                      //                   Image.asset(Default_Profile, fit: BoxFit.cover),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 3.w,
-                      //         ),
-                      //         Column(
-                      //           crossAxisAlignment: CrossAxisAlignment.start,
-                      //           children: [
-                      //             Text("Rabert Downerny",
-                      //                 style: TextStyle(
-                      //                     letterSpacing: 1,
-                      //                     color: Colors.black,
-                      //                     fontSize: 12.sp,
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontFamily: "volken")),
-                      //             SizedBox(
-                      //               height: 0.5.h,
-                      //             ),
-                      //             Text("Boat Owner",
-                      //                 style: TextStyle(
-                      //                     letterSpacing: 1,
-                      //                     color: secondary,
-                      //                     fontSize: 12.sp,
-                      //                     fontWeight: FontWeight.normal,
-                      //                     fontFamily: "volken")),
-                      //           ],
-                      //         ),
-                      //       ],
-                      //     ),
-                      //     Row(
-                      //       children: [
-                      //         Container(
-                      //           height: 12.w,
-                      //           width: 12.w,
-                      //           alignment: Alignment.center,
-                      //           padding: EdgeInsetsDirectional.all(2.2.w),
-                      //           decoration: BoxDecoration(
-                      //             color: blackback,
-                      //             borderRadius: BorderRadius.circular(900),
-                      //           ),
-                      //           child: Icon(
-                      //             Icons.sms,
-                      //             color: Colors.white,
-                      //             size: 15.sp,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ],
-                      // ),
-                      // SizedBox(
-                      //   height: 1.h,
-                      // ),
 
                       SizedBox(
                         height: 2.h,

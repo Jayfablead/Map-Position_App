@@ -5,11 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:mapposition/PrimiumPayments/stripedModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Const.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../Invoice/ViewInvoiceScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/StripePaymentsModal.dart';
 import '../Provider/Authprovider.dart';
@@ -242,11 +245,23 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().stripeapi(data).then((response) async {
+            StripedModel
             stripepaymentsmodal = StripePaymentsModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
+
+
               print(response);
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
+
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              String? jsonData = prefs.getString('stripepayments');
+              if (jsonData != null) {
+                stripepaymentsmodal =  StripePaymentsModal.fromJson(json.decode(response.body));
+                print(" it is my position  ${stripepaymentsmodal?.data?.planEndDate}");
+
+              }
               Get.offAll(HomeScreen());
+
               setState(() {
                _name.clear();
                _cvv.clear();

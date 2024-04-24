@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:mapposition/PrimiumPayments/stripedModel.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -230,6 +230,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       ),
     );
   }
+  String? storedPlanEndDate;
   stripepaymetsapi() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
@@ -242,24 +243,26 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       data['cvv'] = _cvv.text.trim().toString();
       data['amount'] = "200";
       print(data);
+
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().stripeapi(data).then((response) async {
-            StripedModel
+
             stripepaymentsmodal = StripePaymentsModal.fromJson(json.decode(response.body));
+            String? planEndDate = stripepaymentsmodal?.data?.planEndDate;
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
 
 
               print(response);
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
-
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              String? jsonData = prefs.getString('stripepayments');
-              if (jsonData != null) {
-                stripepaymentsmodal =  StripePaymentsModal.fromJson(json.decode(response.body));
-                print(" it is my position  ${stripepaymentsmodal?.data?.planEndDate}");
-
+              if (planEndDate != null) {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setString('stripeSuccess', planEndDate);
+                storedPlanEndDate = prefs.getString('stripeSuccess');
+                print("plan date${storedPlanEndDate}");
               }
+
+
               Get.offAll(HomeScreen());
 
               setState(() {

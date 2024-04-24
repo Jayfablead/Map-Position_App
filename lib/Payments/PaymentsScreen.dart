@@ -16,7 +16,7 @@ import '../Invoice/ViewInvoiceScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/StripePaymentsModal.dart';
 import '../Provider/Authprovider.dart';
-
+String? storedPlanEndDate;
 class PaymentsScreen extends StatefulWidget {
   const PaymentsScreen({super.key});
 
@@ -230,7 +230,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       ),
     );
   }
-  String? storedPlanEndDate;
+
   stripepaymetsapi() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');

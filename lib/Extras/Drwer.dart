@@ -798,7 +798,7 @@ Get.offAll(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Navily Premium",
+                                  Text("Premium",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

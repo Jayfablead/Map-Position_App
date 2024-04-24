@@ -211,25 +211,20 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     getLocation();
     positionController?.fetchPositionData();
-
     getStoredPlanEndDate();
-
     print("paymentsdate${storedPlanEndDate}");
     _timer = Timer.periodic(const Duration(minutes: 5), (timer) {
       stripepay();
     });
-
     super.initState();
-
-
     print("livelocation:-${_currentPosition1}");
     print("offlineimagestore:-${_currentPosition1}");
-    // showmarker();
+
   }
 
   void stripepay(){
     setState(() {
-      storedPlanEndDate== DateTime.now()? buildErrorDialog(context, '', "Your Premium expired"):null;
+      storedPlanEndDate== time? buildErrorDialog(context, '', "Your Premium expired"):null;
     });
   }
   Widget build(BuildContext context) {

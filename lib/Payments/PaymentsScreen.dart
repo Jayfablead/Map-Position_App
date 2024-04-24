@@ -25,6 +25,8 @@ class PaymentsScreen extends StatefulWidget {
 }
 
 class _PaymentsScreenState extends State<PaymentsScreen> {
+  String? planEndDate;
+  String? storedPlanEndDate;
   final _formKey = GlobalKey<FormState>();
   TextEditingController _num =TextEditingController();
   TextEditingController _name =TextEditingController();
@@ -243,7 +245,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       data['cvv'] = _cvv.text.trim().toString();
       data['amount'] = "200";
       print(data);
-
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().stripeapi(data).then((response) async {
@@ -251,8 +252,6 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             stripepaymentsmodal = StripePaymentsModal.fromJson(json.decode(response.body));
             String? planEndDate = stripepaymentsmodal?.data?.planEndDate;
             if (response.statusCode == 200 && stripepaymentsmodal?.success == true) {
-
-
               print(response);
               EasyLoading.showSuccess(stripepaymentsmodal?.message ?? '');
               if (planEndDate != null) {
@@ -261,16 +260,13 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                 storedPlanEndDate = prefs.getString('stripeSuccess');
                 print("plan date${storedPlanEndDate}");
               }
-
-
               Get.offAll(HomeScreen());
-
               setState(() {
-               _name.clear();
-               _cvv.clear();
-               _ey.clear();
-               _ed.clear();
-               _num.clear();
+                _name.clear();
+                _cvv.clear();
+                _ey.clear();
+                _ed.clear();
+                _num.clear();
               });
             } else {
               EasyLoading.showError(stripepaymentsmodal?.message ?? '');

@@ -4,13 +4,15 @@ class LoginModal {
   String? token;
   int? userId;
   String? paymentStatus;
+  String? planEndDate;
 
   LoginModal(
       {this.success,
         this.message,
         this.token,
         this.userId,
-        this.paymentStatus});
+        this.paymentStatus,
+        this.planEndDate});
 
   LoginModal.fromJson(Map<String, dynamic> json) {
     success = json['success'];
@@ -18,6 +20,7 @@ class LoginModal {
     token = json['token'];
     userId = json['user_id'];
     paymentStatus = json['payment_status'];
+    planEndDate = json['planEndDate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +30,7 @@ class LoginModal {
     data['token'] = this.token;
     data['user_id'] = this.userId;
     data['payment_status'] = this.paymentStatus;
+    data['planEndDate'] = this.planEndDate;
     return data;
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/buildErrorDialog.dart';
@@ -309,8 +310,15 @@ class _LoginScreenState extends State<LoginScreen> {
         if (internet) {
           authprovider().loginApi(data).then((response) async {
             loginmodal = LoginModal.fromJson(json.decode(response.body));
+            String? planEndDate = loginmodal?.planEndDate;
             if (response.statusCode == 200 && loginmodal?.success == true) {
               SaveDataLocal.saveLogInData(loginmodal!);
+              if (planEndDate != null) {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setString('stripeSuccess', planEndDate);
+                storedPlanEndDate = prefs.getString('stripeSuccess');
+                print("plan date${storedPlanEndDate}");
+              }
               EasyLoading.showSuccess(loginmodal?.message ?? '');
               Get.offAll(HomeScreen());
 

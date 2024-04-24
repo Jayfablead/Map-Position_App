@@ -70,7 +70,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 height: 2.h,
               ),
 
-              Container(
+              viewfouritemodal?.positions?.length==0||viewfouritemodal?.positions?.length==null||viewfouritemodal?.positions?.length==""?Container(height: 70.h,child: Center(child: Text("No Favourite Available",style: TextStyle(color:Colors.black,fontSize: 15.sp),)),):Container(
                 height: 75.h,
                 child: ListView.builder(
                   padding: EdgeInsets.zero,

@@ -990,6 +990,8 @@ Get.offAll(ChangePasswordScreen());
       },
     );
   }
+
+
   Viewprofile() {
     final Map<String, String> data = {};
     data['id'] = (loginmodal?.userId).toString();
@@ -1022,4 +1024,5 @@ Get.offAll(ChangePasswordScreen());
       fontSize: 12.sp,
       fontFamily: 'volken',
       fontWeight: FontWeight.w600);
+
 }

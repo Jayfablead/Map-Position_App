@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   String getCurrentDateTime() {
     DateTime now = DateTime.now();
-    DateTime desiredDate = DateTime(now.year + 1, now.month, now.day, 9, 11);
+    DateTime desiredDate = DateTime(now.year, now.month, now.day,now.hour,now.minute);
     return DateFormat('yyyy-MM-dd HH:mm').format(desiredDate);
   }
 
@@ -127,16 +127,14 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = false;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() async{
+    setState(() {
       storedPlanEndDate= prefs.getString('stripeSuccess');
       time = getCurrentDateTime();
       print("ViyojaBHai${storedPlanEndDate}");
       print("Time Avi gayo:-${time}");
       print("Date Avi gayo:-${storedPlanEndDate}");
-      await  storedPlanEndDate== time ? showmarker11():showmarker();
-
     });
-
+    await  storedPlanEndDate != time ? showmarker11():showmarker();
   }
   MapType _mapType = MapType.normal;
 
@@ -3611,6 +3609,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   showmarker() {
     print("dtadone");
+    print("showmarker");
     final Map<String, String> data = {};
     data['s'] = searchController.text.trim().toString();
     print(data);
@@ -4065,6 +4064,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   showmarker11() {
     print("dtadone");
+    print("showmarker11");
     final Map<String, String> data = {};
     data['s'] = searchController.text.trim().toString();
     print(data);

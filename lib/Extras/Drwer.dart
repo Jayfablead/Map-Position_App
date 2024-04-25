@@ -8,6 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mapposition/AllPosition/AllPositionScreen.dart';
 import 'package:mapposition/Extras/sharedpreferance.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Invoice/MyInvoiceScreen.dart';
@@ -950,8 +951,9 @@ Get.offAll(ChangePasswordScreen());
                         ),
                         batan(
                             title: "Logout",
-                            route: () {
-                              Get.to(LoginScreen());
+                            route: () async{
+                              SharedPreferences preferences = await SharedPreferences.getInstance();
+                              await preferences.clear();
                               setState(() async {
                                 await SaveDataLocal.clearUserData();
                                 loginmodal =

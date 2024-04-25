@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -191,6 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool NW2 = false;
   bool NW3 = false;
   bool isLoading = true;
+  bool _isConnected = false;
 
   Timer? _timer;
 
@@ -217,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     print("livelocation:-${_currentPosition1}");
     print("offlineimagestore:-${_currentPosition1}");
-
+    _checkInternet();
   }
 
   void stripepay(){
@@ -368,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Positioned(
+              _isConnected ?Positioned(
                 top: 20.h,
                 left: 55.w,
                 child: loginmodal?.userId == "" ||
@@ -575,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onSelected: (value) {
                       print('Selected: $value');
                     }),
-              ),
+              ): Container() ,
               Positioned(
                 bottom: 250,
                 right: 20,
@@ -623,7 +625,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.my_location, color: Colors.white),
                 ),
               ),
-              Positioned(
+              _isConnected ?Positioned(
                 bottom: 110,
                 right: 20,
                 child: FloatingActionButton(
@@ -645,7 +647,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white),
                   ),
                 ),
-              ),
+              ):Container(),
             ],
           ),
         ));
@@ -4051,7 +4053,13 @@ class _HomeScreenState extends State<HomeScreen> {
         //     print("Latitude or longitude is null");
         //   }
         // }
-        buildErrorDialog(context, 'Error', "Internet Required");
+        Get.snackbar(
+          'No Internet Connection',
+          'Please connect to the internet',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
       }
     });
   }
@@ -4803,9 +4811,20 @@ class _HomeScreenState extends State<HomeScreen> {
             print("Latitude or longitude is null");
           }
         }
-        buildErrorDialog(context, 'Error', "Internet Required");
+
       }
     });
   }
-
+  Future<void> _checkInternet() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _isConnected = false;
+      });
+    } else {
+      setState(() {
+        _isConnected = true;
+      });
+    }
+  }
 }

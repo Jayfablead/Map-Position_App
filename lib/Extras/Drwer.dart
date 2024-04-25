@@ -1016,7 +1016,13 @@ Get.offAll(ChangePasswordScreen());
           }
         });
       } else {
-        buildErrorDialog(context, 'Error', "Internet Required");
+        Get.snackbar(
+          'No Internet Connection',
+          'Please connect to the internet',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
       }
     });
   }

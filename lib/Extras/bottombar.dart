@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'package:connectivity/connectivity.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../HomeScreen/HomeScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
 import '../Profile/ProfileScreen.dart';
+import 'buildErrorDialog.dart';
 import 'const.dart';
 
 class Bottombar extends StatefulWidget {
@@ -26,6 +28,7 @@ bool isopn = false;
 int? _selectedIndex;
 NotchBottomBarController? _controller;
 Timer? _timer;
+bool _isConnected = false;
 
 class _BottombarState extends State<Bottombar> {
   @override
@@ -39,7 +42,7 @@ class _BottombarState extends State<Bottombar> {
 
       print("sel:${_selectedIndex}");
     });
-
+    _checkInternet();
     // _timer = Timer.periodic(const Duration(milliseconds: 700), (timer) {
     //   RemainingMsgApi();
     // });
@@ -109,7 +112,7 @@ class _BottombarState extends State<Bottombar> {
             ],
 
             onTap: (index) {
-              index == 0
+              _isConnected ? index == 0
                   ? Get.to(FavouriteScreen())
                   : index == 1
                   ? Get.to(PremiumScreen())
@@ -117,11 +120,24 @@ class _BottombarState extends State<Bottombar> {
                   ? Get.to(HomeScreen())
                   : index == 3
                   ? Get.to(MyMarinaListScreen())
-                  : Get.to(ProfileScreen());
+                  : Get.to(ProfileScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
+
             },
           ),
         ),
       ],
     );
+  }
+  Future<void> _checkInternet() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _isConnected = false;
+      });
+    } else {
+      setState(() {
+        _isConnected = true;
+      });
+    }
   }
 }

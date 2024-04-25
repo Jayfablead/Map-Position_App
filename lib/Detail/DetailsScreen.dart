@@ -2173,60 +2173,66 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     SizedBox(
                                       height: 2.h,
                                     ),
-                                    batan(
-                                        title: "View Details",
-                                        route: () {
-                                          if (onwViewpostionmodal
-                                                  ?.nearbyPosts?[index]
-                                                  .postCategory ==
-                                              "Warning") {
-                                            Get.back();
-                                            Get.to(DetailsWarningDetailsScreen(
-                                              postid: (onwViewpostionmodal
-                                                          ?.nearbyPosts?[index]
-                                                          .id)
-                                                      ?.toString() ??
-                                                  "",
-                                            ));
-                                          } else if (onwViewpostionmodal
-                                                  ?.nearbyPosts?[index]
-                                                  .postCategory ==
-                                              "Other") {
-                                            Get.back();
-                                            Get.to(DetailsOtherScreen(
-                                              postid: (onwViewpostionmodal
-                                                          ?.nearbyPosts?[index]
-                                                          .id)
-                                                      ?.toString() ??
-                                                  "",
-                                            ));
-                                          } else if (onwViewpostionmodal
-                                                  ?.nearbyPosts?[index]
-                                                  .postCategory ==
-                                              "Anchorages") {
-                                            Get.back();
-                                            Get.to(DetailsScreen(
+                                    InkWell(
+                                      onTap: (){
+                                        print("Abc");
+                                      },
+                                      child: batan(
+                                          title: "View Details",
+                                          route: () {
+                                            print("Abc");
+                                            if (onwViewpostionmodal
+                                                    ?.nearbyPosts?[index]
+                                                    .postCategory ==
+                                                "Warning") {
+                                              Get.back();
+                                              Get.to(DetailsWarningDetailsScreen(
                                                 postid: (onwViewpostionmodal
-                                                            ?.nearbyPosts?[
-                                                                index]
+                                                            ?.nearbyPosts?[index]
                                                             .id)
                                                         ?.toString() ??
-                                                    ""));
-                                          } else
-                                            () {
+                                                    "",
+                                              ));
+                                            } else if (onwViewpostionmodal
+                                                    ?.nearbyPosts?[index]
+                                                    .postCategory ==
+                                                "Other") {
                                               Get.back();
-                                              Get.to(CategoryWiseViewScreen(
+                                              Get.to(DetailsOtherScreen(
+                                                postid: (onwViewpostionmodal
+                                                            ?.nearbyPosts?[index]
+                                                            .id)
+                                                        ?.toString() ??
+                                                    "",
+                                              ));
+                                            } else if (onwViewpostionmodal
+                                                    ?.nearbyPosts?[index]
+                                                    .postCategory ==
+                                                "Anchorages") {
+                                              Get.back();
+                                              Get.to(DetailsScreen(
                                                   postid: (onwViewpostionmodal
                                                               ?.nearbyPosts?[
                                                                   index]
                                                               .id)
                                                           ?.toString() ??
                                                       ""));
-                                            };
-                                        },
-                                        hight: 5.h,
-                                        width: 30.w,
-                                        txtsize: 12.sp)
+                                            } else
+                                              () {
+                                                Get.back();
+                                                Get.to(CategoryWiseViewScreen(
+                                                    postid: (onwViewpostionmodal
+                                                                ?.nearbyPosts?[
+                                                                    index]
+                                                                .id)
+                                                            ?.toString() ??
+                                                        ""));
+                                              };
+                                          },
+                                          hight: 5.h,
+                                          width: 30.w,
+                                          txtsize: 12.sp),
+                                    )
                                   ],
                                 ),
                               );

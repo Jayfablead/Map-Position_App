@@ -402,7 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white, size: 20.sp),
                         onPressed: () {
                           setState(() {
-                            // isLoading = true;
+                            isLoading = true;
                           });
                           positionController.fetchPositionData();
                           positionController.printSearchResults();
@@ -4490,6 +4490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (BuildContext context) {
                             return StatefulBuilder(
                                 builder: (context, setState) {
+
                                   return Dialog(
                                       insetPadding:
                                       EdgeInsets.symmetric(horizontal: 3.w),
@@ -4534,6 +4535,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               child: CachedNetworkImage(
                                                                 imageUrl:
                                                                 positionController
+
+
                                                                     ?.position
                                                                     ?.positions?[
                                                                 index]
@@ -4794,6 +4797,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 );
+                if (index == 0) {
+                  _currentPosition1 = LatLng(latitude, longitude);
+                }
               } catch (e) {
                 print("Error parsing coordinates: $e");
               }
@@ -4823,10 +4829,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   offlineserach(){
+    setState(() {
+      isLoading = false;
+    });
+
     print("jayla${positionController?.filteredProducts.length}");
     for (int index = 0;
     index < (positionController?.filteredProducts.length ?? 0);
-
     index++) {
       print("Serachoffline${positionController?.filteredProducts.length}");
       var latitudeString = positionController
@@ -5162,8 +5171,10 @@ class _HomeScreenState extends State<HomeScreen> {
             );
             _focusOnLiveLocation();
             if (index == 0) {
-              _currentPosition1 = LatLng(latitude, longitude);
-              print("Denish${_currentPosition1}");
+              setState(() {
+                _currentPosition1 = LatLng(latitude, longitude);
+                  print("Denish${_currentPosition1}");
+              });
             }
           } catch (e) {
             print("Error parsing coordinates: $e");

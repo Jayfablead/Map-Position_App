@@ -12,11 +12,12 @@ import 'dart:convert';
 import '../Modal/StripePaymentsModal.dart';
 import '../Modal/postionModel.dart';
 
-
 class PositionController extends GetxController {
   RxBool isLoading = false.obs;
   PostionModel? position;
   late StreamSubscription<InternetConnectionStatus> _internetSubscription;
+  var searchQuery = ''.obs;
+  var PositionList = <Position>[].obs;
 
   @override
   void onInit() {
@@ -26,13 +27,6 @@ class PositionController extends GetxController {
     _internetSubscription = InternetConnectionChecker().onStatusChange.listen(
           (status) {
         if (status == InternetConnectionStatus.connected) {
-          // Get.snackbar(
-          //   'Internet Connected',
-          //   'Internet connection is restored.',
-          //   snackPosition: SnackPosition.BOTTOM,
-          //   backgroundColor: Colors.green,
-          //   colorText: Colors.white,
-          // );
           fetchPositionData(); // Fetch data when internet is connected
         }
       },
@@ -68,6 +62,9 @@ class PositionController extends GetxController {
           // Store data in SharedPreferences
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('positionData', response.body);
+
+          // Update PositionList
+          PositionList.value = position?.positions ?? [];
         } else {
           // Handle error response
           print('Error: ${response.statusCode}');
@@ -91,9 +88,24 @@ class PositionController extends GetxController {
       if (jsonData != null) {
         position = postionModelFromJson(jsonData);
         print(" it is my position  ${position?.positions.length}");
+
+        // Update PositionList
+        PositionList.value = position?.positions ?? [];
+        print("marker${searchQuery.value}");
+
+
+
+        // Call the printSearchResults() method to print the search results
+        printSearchResults();
         isLoading.value = true;
+
+
       }
     }
+
+
+    print( " PositionList :-${PositionList.value}" );
+
   }
 
   Future<bool> checkInternetConnectivity() async {
@@ -102,6 +114,35 @@ class PositionController extends GetxController {
       return isDeviceConnected;
     } catch (e) {
       return false;
+    }
+  }
+
+  void updateSearchQuery(String query) {
+    searchQuery.value = query;
+    print("serchcontrroler${searchQuery.value}");
+  }
+
+  List<Position> get filteredProducts {
+    if (searchQuery.isNotEmpty) {
+      return PositionList.where((product) =>
+      product.properties?.title.toLowerCase().contains(searchQuery.value.toLowerCase()) ?? false
+      ).toList();
+    } else {
+      return PositionList.toList();
+    }
+  }
+
+  void printSearchResults() {
+    // Iterate over the filtered products
+    if (filteredProducts.isEmpty) {
+      print("No search results found");
+    } else {
+      // Iterate over the filtered products
+      print("Search results:");
+      filteredProducts.forEach((position) {
+        // Print the position
+        print("Position: $position");
+      });
     }
   }
 }

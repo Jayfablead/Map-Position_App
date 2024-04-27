@@ -94,7 +94,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Subscribe To Premium,Unlock",style: TextStyle(
+                  loginmodal?.paymentStatus=="succeeded"?Text("You Have All Ready Subscribed",style: TextStyle(
+                  letterSpacing: 1,
+                  color:blackback,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: "volken")):Text("Subscribe To Premium,Unlock",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,
@@ -107,7 +112,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("More features and support Marina!",style: TextStyle(
+                  loginmodal?.paymentStatus=="succeeded"?Text("To Premium",style: TextStyle(
+                  letterSpacing: 1,
+                  color:blackback,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: "volken")):Text("More features and support Marina!",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,

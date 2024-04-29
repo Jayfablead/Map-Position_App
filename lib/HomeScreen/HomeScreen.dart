@@ -3259,7 +3259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Position Successfully Save Nextd",
+                            Text("Position Successfully Save Next",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -4838,6 +4838,7 @@ class _HomeScreenState extends State<HomeScreen> {
         '',
         "No spots listed in this area",
             () {
+
           setState(() {
             searchController.clear();
             isLoading = true;
@@ -4875,9 +4876,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) {
-                          return StatefulBuilder(
-                              builder: (context, setState) {
+                        builder: (BuildContext cxontext) {
+                          return StatefulBuilder(                             builder: (context, setState) {
                                 return Dialog(
                                     insetPadding:
                                     EdgeInsets.symmetric(horizontal: 3.w),

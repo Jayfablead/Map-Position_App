@@ -371,7 +371,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ):
-
               Positioned(
                 top: 10.h,
                 left: 10,
@@ -410,6 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           offlineserach();
                           _focusOnLiveLocation();
                         },
+
                       ),
                     ),
                   ],

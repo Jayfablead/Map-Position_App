@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
-                                    CircularProgressIndicator(),
+                                    Center(child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 Image.asset(Default_Profile, fit: BoxFit.cover),
                           ),

@@ -62,6 +62,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 height: 5.h,
               ),
               header(
+                show: 1,
                   text: "Favourite",
                   callback1: () {
                     _scaffoldKeyProductlistpage.currentState?.openDrawer();

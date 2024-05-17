@@ -55,7 +55,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                 height: 5.h,
               ),
               header(
-                  text: "Marina",
+                  text: "Position",
                   callback1: () {
                     _scaffoldKeyProductlistpage.currentState
                         ?.openDrawer();
@@ -64,7 +64,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                 height: 2.h,
               ),
               shoallmarkermodal?.positions?.length==null||shoallmarkermodal?.positions?.length==0?Center(
-                child: Container(height: 80.h,alignment: Alignment.center,child: Text("No Marina Available", style: TextStyle(
+                child: Container(height: 80.h,alignment: Alignment.center,child: Text("No Position Available", style: TextStyle(
                     fontSize: 15.sp,
                     color: Colors.black,
                     fontWeight:

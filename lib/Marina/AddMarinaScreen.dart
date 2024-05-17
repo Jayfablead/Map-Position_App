@@ -149,7 +149,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               children: [
                 SizedBox(height: 5.h,),
                 header(
-                    text: "AddMarina",
+                    text: "Add Position",
                     callback1: () {
                       _scaffoldKeyProductlistpage.currentState?.openDrawer();
                     }),
@@ -157,7 +157,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
              Row(
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
-                 Text("Marina Description",style: TextStyle(
+                 Text("Position Description",style: TextStyle(
                      letterSpacing: 1,
                      color: Colors.black,
                      fontSize: 15.sp,
@@ -224,108 +224,108 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ),
                 ),
                 SizedBox(height: 2.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Marina Price",style: TextStyle(
-                        letterSpacing: 1,
-                        color: Colors.black,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "volken")),
-                  ],
-                ),
-                SizedBox(height: 2.h,),
-                Text("Price in \$  :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(color: secondary),
-                    controller: _priceindoller,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Price";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Price",
-                        icon: Icon(
-                          Icons.payment,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 2.h,),
-                Text("After Price Label :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _pricelebal,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter After Price Label";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your After Price Label",
-                        icon: Icon(
-                          Icons.price_check,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 2.h,),
-                Text("Before Price Label :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _pricelebal1,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Before Price Label";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Before Price Label",
-                        icon: Icon(
-                          Icons.price_check,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 2.h,),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text("Position Price",style: TextStyle(
+                //         letterSpacing: 1,
+                //         color: Colors.black,
+                //         fontSize: 15.sp,
+                //         fontWeight: FontWeight.bold,
+                //         fontFamily: "volken")),
+                //   ],
+                // ),
+                // SizedBox(height: 2.h,),
+                // Text("Price in \$  :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.number,
+                //     style: TextStyle(color: secondary),
+                //     controller: _priceindoller,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Price";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Price",
+                //         icon: Icon(
+                //           Icons.payment,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 2.h,),
+                // Text("After Price Label :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _pricelebal,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter After Price Label";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your After Price Label",
+                //         icon: Icon(
+                //           Icons.price_check,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 2.h,),
+                // Text("Before Price Label :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _pricelebal1,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Before Price Label";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Before Price Label",
+                //         icon: Icon(
+                //           Icons.price_check,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 2.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -340,7 +340,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         SizedBox(height: 1.h,),
                         SizedBox(
                           width: 85.w,
-                          child: Text("Selecting a category will make it easier for users to find you Marina in search results.",style: TextStyle(
+                          child: Text("Selecting a category will make it easier for users to find you Position in search results.",style: TextStyle(
                               letterSpacing: 1,
                               color: secondary,
                               fontSize: 12.sp,
@@ -373,7 +373,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   child:DropdownButton(
                     dropdownColor: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    hint: Text("Please Select Marina Category",style: TextStyle(color:secondary,fontFamily: "volken",)),
+                    hint: Text("Please Select Position Category",style: TextStyle(color:secondary,fontFamily: "volken",)),
 
                     value: selectedvalue,
                     onChanged: (val)
@@ -2286,7 +2286,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    batan(title: "Add Marina", route: (){
+                    batan(title: "Add Position", route: (){
                       widget.postid==null?castommapposition():updatecasotammarina();
                     }, hight: 6.h, width: 70.w, txtsize: 20.sp),
                   ],

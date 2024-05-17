@@ -100,7 +100,7 @@ class _BottombarState extends State<Bottombar> {
                 Icon(Icons.directions_boat, color: Colors.black),
                 activeItem:
                 Icon(Icons.directions_boat, color: Colors.white),
-                itemLabel: 'Marina',
+                itemLabel: 'Position',
               ),
               BottomBarItem(
                 inActiveItem:

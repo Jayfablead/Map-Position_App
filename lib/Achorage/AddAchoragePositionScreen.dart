@@ -123,6 +123,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                 height: 5.h,
               ),
                   header(
+
                       text: "Anchor",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState?.openDrawer();
@@ -173,6 +174,600 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
               SizedBox(
                 height: 2.h,
               ),
+                  Column(children: [
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("North (N) : -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: N1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  N1 = value!;
+                                });
+                              },
+                            ),
+                            Text("N1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: N2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  N2 = value!;
+                                });
+                              },
+                            ),
+                            Text("N2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: N3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  N3 = value!;
+                                });
+                              },
+                            ),
+                            Text("N3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),
+                    SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Northeast (NE) : -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NE1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NE1 = value!;
+                                });
+                              },
+                            ),
+                            Text("NE1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NE2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NE2 = value!;
+                                });
+                              },
+                            ),
+                            Text("NE2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NE3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NE3 = value!;
+                                });
+                              },
+                            ),
+                            Text("NE3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),
+                    SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("East (E) : -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: E1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  E1 = value!;
+                                });
+                              },
+                            ),
+                            Text("E1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: E2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  E2 = value!;
+                                });
+                              },
+                            ),
+                            Text("E2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: E3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  E3 = value!;
+                                });
+                              },
+                            ),
+                            Text("E3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Southeast (SE): -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SE1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SE1 = value!;
+                                });
+                              },
+                            ),
+                            Text("SE1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SE2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SE2 = value!;
+                                });
+                              },
+                            ),
+                            Text("SE2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SE3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SE3 = value!;
+                                });
+                              },
+                            ),
+                            Text("SE3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("South (S): -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: S1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  S1 = value!;
+                                });
+                              },
+                            ),
+                            Text("S1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: S2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  S2 = value!;
+                                });
+                              },
+                            ),
+                            Text("S2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: S3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  S3 = value!;
+                                });
+                              },
+                            ),
+                            Text("S3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Southwest (SW): -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SW1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SW1 = value!;
+                                });
+                              },
+                            ),
+                            Text("SW1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SW2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SW2 = value!;
+                                });
+                              },
+                            ),
+                            Text("SW2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: SW3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  SW3 = value!;
+                                });
+                              },
+                            ),
+                            Text("SW3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("West (W): -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: W1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  W1 = value!;
+                                });
+                              },
+                            ),
+                            Text("W1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: W2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  W2 = value!;
+                                });
+                              },
+                            ),
+                            Text("W2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: W3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  W3 = value!;
+                                });
+                              },
+                            ),
+                            Text("W3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),SizedBox(height: 1.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Northwest (NW): -",style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NW1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NW1 = value!;
+                                });
+                              },
+                            ),
+                            Text("NW1",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NW2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NW2 = value!;
+                                });
+                              },
+                            ),
+                            Text("NW2",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: NW3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  NW3 = value!;
+                                });
+                              },
+                            ),
+                            Text("NW3",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+
+
+                      ],
+                    ),
+
+                  ]),
+                  SizedBox(
+                    height: 2.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -1429,597 +2024,7 @@ SizedBox(width: 7.w,),
                       ),
                     ],
                   ),
-                  Column(children: [
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("North (N) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N1 = value!;
-                                });
-                              },
-                            ),
-                            Text("N1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N2 = value!;
-                                });
-                              },
-                            ),
-                            Text("N2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N3 = value!;
-                                });
-                              },
-                            ),
-                            Text("N3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
 
-
-                      ],
-                    ),
-                    SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Northeast (NE) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE1 = value!;
-                                });
-                              },
-                            ),
-                            Text("NE1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE2 = value!;
-                                });
-                              },
-                            ),
-                            Text("NE2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE3 = value!;
-                                });
-                              },
-                            ),
-                            Text("NE3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),
-                    SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("East (E) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E1 = value!;
-                                });
-                              },
-                            ),
-                            Text("E1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E2 = value!;
-                                });
-                              },
-                            ),
-                            Text("E2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E3 = value!;
-                                });
-                              },
-                            ),
-                            Text("E3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Southeast (SE): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE1 = value!;
-                                });
-                              },
-                            ),
-                            Text("SE1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE2 = value!;
-                                });
-                              },
-                            ),
-                            Text("SE2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE3 = value!;
-                                });
-                              },
-                            ),
-                            Text("SE3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("South (S): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S1 = value!;
-                                });
-                              },
-                            ),
-                            Text("S1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S2 = value!;
-                                });
-                              },
-                            ),
-                            Text("S2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S3 = value!;
-                                });
-                              },
-                            ),
-                            Text("S3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Southwest (SW): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW1 = value!;
-                                });
-                              },
-                            ),
-                            Text("SW1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW2 = value!;
-                                });
-                              },
-                            ),
-                            Text("SW2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW3 = value!;
-                                });
-                              },
-                            ),
-                            Text("SW3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("West (W): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W1 = value!;
-                                });
-                              },
-                            ),
-                            Text("W1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W2 = value!;
-                                });
-                              },
-                            ),
-                            Text("W2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W3 = value!;
-                                });
-                              },
-                            ),
-                            Text("W3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Northwest (NW): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW1 = value!;
-                                });
-                              },
-                            ),
-                            Text("NW1",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW2 = value!;
-                                });
-                              },
-                            ),
-                            Text("NW2",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW3 = value!;
-                                });
-                              },
-                            ),
-                            Text("NW3",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-
-                      ],
-                    ),
-
-                  ]),
                   Column(children: [
                     SizedBox(
                       height: 2.h,

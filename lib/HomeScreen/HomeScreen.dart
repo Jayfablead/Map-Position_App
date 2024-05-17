@@ -318,6 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SizedBox(
                   width: 85.w,
                   child: header(
+                    show: 1,
                       text: "Home",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState
@@ -463,7 +464,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return <PopupMenuEntry>[
                         PopupMenuItem(
                           onTap: () {
-                            Get.offAll(AddAchoragePositionScreen(
+                            Get.back();
+                            Get.to(AddAchoragePositionScreen(
                               lat: lat1.toString(),
                               lng: lng1.toString(),
                             ));
@@ -506,7 +508,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         PopupMenuDivider(),
                         PopupMenuItem(
                           onTap: () {
-                            Get.offAll(AddWarningScreen(
+                            Get.back();
+                            Get.to(AddWarningScreen(
                                 lat: lat1.toString(),
                                 lng: lng1.toString()));
                           },
@@ -544,7 +547,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         PopupMenuDivider(),
                         PopupMenuItem(
                           onTap: () {
-                            Get.offAll(AddOtherPositionScreen(
+                            Get.back();
+                            Get.to(AddOtherPositionScreen(
                               lat: lat1.toString(),
                               lng: lng1.toString(),
                             ));
@@ -580,43 +584,43 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           value: 'Warning',
                         ),
-                        PopupMenuDivider(),
-                        PopupMenuItem(
-                          onTap: () {
-                            Get.offAll(AddMarinaScreen(
-                              lat: lat1.toString(),
-                              lng: lng1.toString(),
-                            ));
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: 8.w,
-                                  height: 8.w,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                    color: blackback,
-                                  ),
-                                  child: Icon(Icons.directions_boat,
-                                      color: Colors.white)),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Marina',
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "Volkan"),
-                              ),
-                            ],
-                          ),
-                          value: 'Warning',
-                        ),
+                        // PopupMenuDivider(),
+                        // PopupMenuItem(
+                        //   onTap: () {
+                        //     Get.offAll(AddMarinaScreen(
+                        //       lat: lat1.toString(),
+                        //       lng: lng1.toString(),
+                        //     ));
+                        //   },
+                        //   child: Row(
+                        //     children: [
+                        //       Container(
+                        //           width: 8.w,
+                        //           height: 8.w,
+                        //           alignment: Alignment.center,
+                        //           decoration: BoxDecoration(
+                        //             borderRadius:
+                        //             BorderRadius.circular(100),
+                        //             color: blackback,
+                        //           ),
+                        //           child: Icon(Icons.directions_boat,
+                        //               color: Colors.white)),
+                        //       SizedBox(
+                        //         width: 2.w,
+                        //       ),
+                        //       Text(
+                        //         'Position',
+                        //         style: TextStyle(
+                        //             letterSpacing: 1,
+                        //             color: secondary,
+                        //             fontSize: 12.sp,
+                        //             fontWeight: FontWeight.normal,
+                        //             fontFamily: "Volkan"),
+                        //       ),
+                        //     ],
+                        //   ),
+                        //   value: 'Warning',
+                        // ),
                       ];
                     },
                     onSelected: (value) {
@@ -3424,7 +3428,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Marinas",
+                        Text("Positions",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,

@@ -11,15 +11,22 @@ DatabaseHelper databaseHelper = DatabaseHelper();
 Widget header({
   required String text,
   required VoidCallback callback1,
+  int? show
 }) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      IconButton(
+    show==1?IconButton(
+  onPressed: () {
+    Get.back();
+  },
+  icon: Icon(null,
+  color: blackback, size: 23.sp),
+  ) :  IconButton(
         onPressed: () {
           Get.back();
         },
-        icon: Icon(Icons.arrow_back_ios_new_rounded,
+        icon: Icon(Icons.keyboard_arrow_left,
             color: blackback, size: 23.sp),
       ),
       Text(

@@ -71,6 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 5.h,
                   ),
                   header(
+                    show: 1,
                       text: "Profile",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState?.openDrawer();
@@ -100,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
-                                    CircularProgressIndicator(),
+                                    Center(child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 Image.asset(Default_Profile, fit: BoxFit.cover),
                           ),
@@ -283,7 +284,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Add New Marina",
+                                  Text("Add New Position",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -460,7 +461,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("My Marina",
+                                  Text("My Position",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -573,7 +574,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text("Navily Premium",
+                              Text("Premium",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,

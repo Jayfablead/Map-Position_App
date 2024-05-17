@@ -30,13 +30,13 @@ class _PremiumScreenState extends State<PremiumScreen> {
           child: Column(
             children: [
               SizedBox(height: 5.h,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              SizedBox(  width: 100.w, child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InkWell(
-                      onTap: (){
-                        Get.back();
-                      },child: Icon(Icons.arrow_back_ios,color: blackback,size: 20.sp,)),
+                  // InkWell(
+                  //     onTap: (){
+                  //       Get.back();
+                  //     },child: Icon(Icons.arrow_back_ios,color: blackback,size: 20.sp,)),
                   InkWell(
                     onTap: (){},
                     child: Text("Need Help?",style: TextStyle(
@@ -47,7 +47,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         fontFamily: "volken")),
                   ),
                 ],
-              ),
+              ),),
               SizedBox(height: 5.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

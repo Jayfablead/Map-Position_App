@@ -275,7 +275,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("All Marina",
+                                  Text("All Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -565,7 +565,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("All Marina",
+                                  Text("All Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -623,7 +623,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Add New Marina",
+                                  Text("Add New Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -740,7 +740,7 @@ Get.offAll(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("My Marina",
+                                  Text("My Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

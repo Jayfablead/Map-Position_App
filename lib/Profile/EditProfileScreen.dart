@@ -36,6 +36,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _lastname = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _phone = TextEditingController();
+  TextEditingController _yourBoat = TextEditingController();
+  TextEditingController _length = TextEditingController();
+  TextEditingController _type = TextEditingController();
+
 
   final _formKey = GlobalKey<FormState>();
   bool secure = false;
@@ -264,7 +268,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SizedBox(
                       height: 2.h,
                     ),
-
                     Text("Phone : ",
                         style: TextStyle(
                             letterSpacing: 1,
@@ -296,7 +299,108 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             )),
                       ),
                     ),
-
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Text("Your Bot : ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(color: Colors.black
+                        ),
+                        controller: _yourBoat,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Bot";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                            hintText: "Enter Your Your Bot",
+                            icon: Icon(
+                              Icons.directions_boat,
+                              color: secondary,
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Text("Length : ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(color: Colors.black
+                        ),
+                        controller: _length,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Length";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                            hintText: "Enter Your Your Length",
+                            icon: Icon(
+                              Icons.format_size,
+                              color: secondary,
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Text("Type : ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(color: Colors.black
+                        ),
+                        controller: _type,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Type";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                            hintText: "Enter Your Your Type",
+                            icon: Icon(
+                              Icons.type_specimen,
+                              color: secondary,
+                            )),
+                      ),
+                    ),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -370,6 +474,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _firstname.text=(viewprofilemodal?.userDetails?.userMeta?.firstName).toString();
             _lastname.text=(viewprofilemodal?.userDetails?.userMeta?.lastName).toString();
             _phone.text=(viewprofilemodal?.userDetails?.userMeta?.phone).toString();
+            _yourBoat.text="My Boat";
+            _length.text="14";
+            _type.text="Abc";
             setState(() {
               isLoading=false;
             });

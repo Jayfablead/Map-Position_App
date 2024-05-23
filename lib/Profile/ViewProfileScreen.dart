@@ -305,6 +305,153 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                     ),
                   ),
                   SizedBox(
+                    height: 2.h,
+                  ),
+
+                  Text("Your Boat : ",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          color: blackback,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "volken")),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: bgcolor,
+                        border: Border.all(color: secondary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.directions_boat,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("My Boat",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+
+                  Text("Length : ",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          color: blackback,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "volken")),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: bgcolor,
+                        border: Border.all(color: secondary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.format_size,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("14",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+
+                  Text("Type : ",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          color: blackback,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "volken")),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: bgcolor,
+                        border: Border.all(color: secondary, width:1.sp)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.type_specimen,
+                              color: secondary,
+                              size: 18.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("Abc",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
                     height: 3.5.h,
                   ),
                   // Password

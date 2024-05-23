@@ -311,6 +311,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                       SizedBox(
                         width: 3.w,
                       ),
+
                       // Icon(
                       //   Icons.add_location,
                       //   color: Colors.black,
@@ -412,6 +413,34 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   // SizedBox(
                   //   height: 1.h,
                   // ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Gujarat",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken"),
+                            ),
+                            Text(
+                              "${viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude} ",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: secondary,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: "volken"),
+                            ),
+                          ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 1.h,),
                   viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
                       viewcategorywisevieweetailmodal?.data?.postCategory ==
                           "Other" ||

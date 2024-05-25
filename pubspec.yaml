@@ -67,6 +67,7 @@ dependencies:
   internet_connection_checker:
   flutter_cache_manager:
   intl:
+  syncfusion_flutter_charts:
 
 
 

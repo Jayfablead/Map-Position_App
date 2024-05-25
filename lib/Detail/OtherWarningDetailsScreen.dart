@@ -1143,6 +1143,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
       },
     );
   }
+
   addfevorite(bool value,id) {
 
     EasyLoading.show(status: 'Please Wait ...');

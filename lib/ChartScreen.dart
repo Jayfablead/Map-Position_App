@@ -179,7 +179,7 @@ class _PieChartsScreenState extends State<PieChartsScreen> {
 
           )
         ],
-      ) ,
+      ),
     );
   }
 }

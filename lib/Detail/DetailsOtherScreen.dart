@@ -241,6 +241,21 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 1.h),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on,color: Colors.black,size: 15.sp),
+                          Text(
+                            "${addviewothermodal?.data?.latitude}, ${addviewothermodal?.data?.longitude} ",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken"),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 1.h,
                       ),

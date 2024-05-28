@@ -275,23 +275,43 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Column(children: [
-                  Row(
+                  Column(
                     children: [
-                      SizedBox(
-                        width: 90.w,
-                        child: Text(
-                          viewcategorywisevieweetailmodal?.data?.title == "" ||
-                              viewcategorywisevieweetailmodal?.data?.title == null
-                              ? "N/A"
-                              : viewcategorywisevieweetailmodal?.data?.title ?? "",
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              color: blackback,
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "volken"),
-                        ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 90.w,
+                            child: Text(
+                              viewcategorywisevieweetailmodal?.data?.title == "" ||
+                                  viewcategorywisevieweetailmodal?.data?.title == null
+                                  ? "N/A"
+                                  : viewcategorywisevieweetailmodal?.data?.title ?? "",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: blackback,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken"),
+                            ),
+                          ),
+                          
+                        ],
                       ),
+                      SizedBox(height: 1.h),
+                      Row(
+                          children: [
+                            Icon(Icons.location_on,color: Colors.black,size: 15.sp),
+                            Text(
+                              "${viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude} ",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: secondary,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: "volken"),
+                            ),
+                          ],
+                      )
                     ],
                   ),
                   SizedBox(
@@ -413,33 +433,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   // SizedBox(
                   //   height: 1.h,
                   // ),
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Gujarat",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: Colors.black,
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken"),
-                            ),
-                            Text(
-                              "${viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude} ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken"),
-                            ),
-                          ],
-                      )
-                    ],
-                  ),
+                
                   SizedBox(height: 1.h,),
                   viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
                       viewcategorywisevieweetailmodal?.data?.postCategory ==

@@ -173,6 +173,22 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+  Future<http.Response> updatealaramapitwo(Map<String, String> bodyData) async {
+    String url = '${apiUrl}update-alarm';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
   Future<http.Response> showmarkerapi(Map<String, String> bodyData) async {
     String url = "https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties";
     print(url);
@@ -534,6 +550,22 @@ class authprovider with ChangeNotifier {
   }
   Future<http.Response> deletealarmapi(Map<String, String> bodyData) async {
     String url = '${apiUrl}delete-alarm';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
+  Future<http.Response> newupdatealaramapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}alarm-details';
     print(url);
     var responseJson;
     final response = await http

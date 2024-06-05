@@ -37,7 +37,7 @@ Widget spinKit = Container(
   width: 90.0,
   height: 90.0,
   child: const SpinKitChasingDots(
-    color: Color(0xffAD8109),
+    color:Colors.white,
     size: 40.0,
   ),
 );

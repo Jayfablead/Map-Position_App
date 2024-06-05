@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Const.dart';
@@ -13,6 +15,7 @@ import '../Extras/buildErrorDialog.dart';
 import '../Modal/DeleteAlaramModal.dart';
 import '../Modal/UserAlaramModal.dart';
 import '../Provider/Authprovider.dart';
+import 'UpdatealramScreen2.dart';
 class UpdateAlarmScreen extends StatefulWidget {
   const UpdateAlarmScreen({super.key});
   @override
@@ -206,10 +209,15 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.edit,
-                                      color: Colors.black,
-                                      size: 25.sp,
+                                    InkWell(
+                                       onTap: (){
+                                         Get.to(UpdatealramScreenTwo(id: (useralarammodal?.alarms?[index].id).toString(),));
+                                       },
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: Colors.black,
+                                        size: 25.sp,
+                                      ),
                                     ),
                                   ],
                                 ),

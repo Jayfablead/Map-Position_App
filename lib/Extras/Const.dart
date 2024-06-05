@@ -20,6 +20,7 @@ import '../Modal/EditCasotamMarinaModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
 import '../Modal/LoginModal.dart';
 import '../Modal/MyMarinaViewModal.dart';
+import '../Modal/NewUpdatealaramModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
@@ -28,6 +29,7 @@ import '../Modal/UpdateAlaramModal.dart';
 import '../Modal/UpdateOtherPositionModal.dart';
 import '../Modal/UpdateProfileModal.dart';
 import '../Modal/UpdateWarningModal.dart';
+import '../Modal/UpdatealramModalscreen.dart';
 import '../Modal/UpdateanchorgeModal.dart';
 import '../Modal/UserAlaramModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
@@ -98,6 +100,8 @@ DaywiseWeatherModal? daywisewedhtermodal;
 UserAlaramModal? useralarammodal;
 DeleteAlaramModal? deletealarammodal;
 AddAlaramModal? addalarammodal;
+NewUpdatealaramModal? newupdatealarammodal;
+UpdatealramModalscreen? updatealrammodalscreen;
 
 // Custom Button
 InkWell batan({

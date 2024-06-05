@@ -86,6 +86,9 @@ class UserMeta {
   String? myLat;
   String? myLng;
   String? radiusAround;
+  String? userboat;
+  String? userboatlength;
+  String? userboattype;
 
   UserMeta(
       {this.firstName,
@@ -103,7 +106,10 @@ class UserMeta {
         this.title,
         this.myLat,
         this.myLng,
-        this.radiusAround});
+        this.radiusAround,
+        this.userboat,
+        this.userboatlength,
+        this.userboattype});
 
   UserMeta.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'];
@@ -122,6 +128,9 @@ class UserMeta {
     myLat = json['my_lat'];
     myLng = json['my_lng'];
     radiusAround = json['radius_around'];
+    userboat = json['userboat'];
+    userboatlength = json['userboatlength'];
+    userboattype = json['userboattype'];
   }
 
   Map<String, dynamic> toJson() {
@@ -142,6 +151,9 @@ class UserMeta {
     data['my_lat'] = this.myLat;
     data['my_lng'] = this.myLng;
     data['radius_around'] = this.radiusAround;
+    data['userboat'] = this.userboat;
+    data['userboatlength'] = this.userboatlength;
+    data['userboattype'] = this.userboattype;
     return data;
   }
 }

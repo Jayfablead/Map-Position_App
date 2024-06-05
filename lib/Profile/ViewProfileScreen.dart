@@ -340,7 +340,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("My Boat",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.userboat==""||viewprofilemodal?.userDetails?.userMeta?.userboat==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.userboat ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,
@@ -389,7 +389,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("14",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.userboatlength==""||viewprofilemodal?.userDetails?.userMeta?.userboatlength==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.userboatlength ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,
@@ -438,7 +438,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            Text("Abc",
+                            Text(viewprofilemodal?.userDetails?.userMeta?.userboattype==""||viewprofilemodal?.userDetails?.userMeta?.userboattype==null?"N/A":viewprofilemodal?.userDetails?.userMeta?.userboattype ?? "",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: secondary,

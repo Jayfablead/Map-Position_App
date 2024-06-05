@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -5,6 +7,10 @@ import 'package:sizer/sizer.dart';
 import '../Extras/Const.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
+import '../Extras/Loader.dart';
+import '../Extras/buildErrorDialog.dart';
+import '../Modal/UserAlaramModal.dart';
+import '../Provider/Authprovider.dart';
 class UpdateAlarmScreen extends StatefulWidget {
   const UpdateAlarmScreen({super.key});
   @override
@@ -68,10 +74,12 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
   String? selectedvalue = "All Categories";
   String? selectedvalue1 = "Active";
   MapType _mapType = MapType.satellite;
+  bool isLoading =true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    ViewAlaram();
     getLocation().then((_) {
       setState(() async {
         _markers.add(Marker(
@@ -89,13 +97,13 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: bgcolor,
-      key: _scaffoldKeyProductlistpage1,
-      drawer: drawer1(),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
+    return commanScreen(
+      isLoading: isLoading,
+      scaffold: Scaffold(
+        backgroundColor: bgcolor,
+        key: _scaffoldKeyProductlistpage1,
+        drawer: drawer1(),
+        body: isLoading?Container():SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.w),
             child: Column(
@@ -144,474 +152,141 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                 SizedBox(
                   height: 2.h,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: secondary)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Title:-",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Text("Alarm",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: secondary,
-                        thickness: 0.1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Status :- ",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green.shade100),
-                                child: Text("Active",
-                                    textAlign: TextAlign.center,
+                useralarammodal?.alarms?.length==null||useralarammodal?.alarms?.length==0?Center(
+                  child: Container(height: 80.h,alignment: Alignment.center,child: Text("No Alarm Available", style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black,
+                      fontWeight:
+                      FontWeight.w500,
+                      fontFamily:
+                      "volken",
+                      letterSpacing: 1), ),),
+                ):Container(
+                  height: 55.h,
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount:useralarammodal?.alarms?.length,
+                    itemBuilder: (
+                        context, index
+                        ){
+                      return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 1.w),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(color: secondary)),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Title:-",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(useralarammodal?.alarms?[index].name==""||useralarammodal?.alarms?[index].name==null?"N/A":(useralarammodal?.alarms?[index].name).toString(),
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: secondary,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.edit,
+                                      color: Colors.black,
+                                      size: 25.sp,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: secondary,
+                              thickness: 0.1.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Status :- ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.green.shade100),
+                                      child: Text(useralarammodal?.alarms?[index].status==""||useralarammodal?.alarms?[index].status==null?"N/A":(useralarammodal?.alarms?[index].status).toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: Colors.green,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: "volken")),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.delete,
+                                      color: Colors.red.shade200,
+                                      size: 25.sp,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            Row(
+                              children: [
+                                Text("Category :- ",
                                     style: TextStyle(
                                         letterSpacing: 1,
-                                        color: Colors.green,
+                                        color: blackback,
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.delete,
-                                color: Colors.red.shade200,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Text("Category :- ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: blackback,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                          Text("Anchorage",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: secondary)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Title:-",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Text("Alarm1",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: secondary,
-                        thickness: 0.1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Status :- ",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green.shade100),
-                                child: Text("Active",
+                                Text(useralarammodal?.alarms?[index].category==""||useralarammodal?.alarms?[index].category==null?"N/A":useralarammodal?.alarms?[index].category ?? "",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         letterSpacing: 1,
-                                        color: Colors.green,
+                                        color: secondary,
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.delete,
-                                color: Colors.red.shade200,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Text("Category :- ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: blackback,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                          Text("Marinas",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                    ],
+                              ],
+                            ),
+
+                          ],
+                        ),
+                      );
+                    }
                   ),
                 ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: secondary)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Title:-",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Text("Alarm1",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: secondary,
-                        thickness: 0.1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Status :- ",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Container(
-                               padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red.shade100),
-                                child: Text("InActive",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: Colors.red,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.delete,
-                                color: Colors.red.shade200,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Text("Category :- ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: blackback,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                          Text("Other",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: secondary)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Title:-",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Text("Mumbai",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: secondary,
-                        thickness: 0.1.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text("Status :- ",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green.shade100),
-                                child: Text("Active",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: Colors.green,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.delete,
-                                color: Colors.red.shade200,
-                                size: 25.sp,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Row(
-                        children: [
-                          Text("Category :- ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: blackback,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                          Text("All",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
+
+
+
               ],
             ),
           ),
@@ -619,6 +294,38 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
       ),
     );
   }
+  ViewAlaram() {
+    final Map<String, String> data = {};
+    data['user_id'] = (loginmodal?.userId).toString();
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().useralaramapi(data).then((response) async {
+          useralarammodal =
+              UserAlaramModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 ) {
+            print("anchioirapicall");
+            setState(() {
+              isLoading = false;
 
+            });
+            setState(() {
+              isLoading = false;
+
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
 
 }

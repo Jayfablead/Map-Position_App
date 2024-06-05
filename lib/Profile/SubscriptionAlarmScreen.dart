@@ -367,7 +367,7 @@ SizedBox(
                 ),
                 SizedBox(height: 2.h,),
                 batan(
-                    title: "UPDATE ALARAM",
+                    title: "Add ALARM",
                     route: () {
                       updatealaram();
                     },
@@ -390,6 +390,10 @@ SizedBox(
       data['id'] = (loginmodal?.userId).toString();
       data['my_lat'] =lat1.toString() ;
       data['my_lng'] = lng1.toString();
+      data['location'] =_currentPosition1.toString();
+      data['category'] =selectedvalue.toString() ;
+      data['status'] =selectedvalue1.toString() ;
+
       print("Alaramapidata${data}");
       checkInternet().then((internet) async {
         if (internet) {

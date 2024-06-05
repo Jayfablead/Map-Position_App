@@ -366,6 +366,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               color: secondary,
                             )),
                       ),
+
+
                     ),
                     SizedBox(
                       height: 2.h,
@@ -433,24 +435,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       data['first_name'] = _firstname.text.trim().toString();
       data['last_name'] = _lastname.text.trim().toString();
       data['phone'] = _phone.text.trim().toString();
-      data['skype'] ="";
-      data['profile_img'] =(selectedimage?.path).toString();
+      data['skype'] = "";
+      data['userboat'] = _yourBoat.text.trim().toString();
+      data['userboatlength'] = _length.text.trim().toString();
+      data['userboattype'] = _type.text.trim().toString();
+
+      // Check if selectedimage is not null before adding it to the data map
+      if (selectedimage != null && selectedimage?.path != null) {
+        data['profile_img'] = selectedimage!.path;
+      } else {
+        data['profile_img'] = ''; // or handle it in another way if necessary
+      }
+
       print("Printapivalue${data}");
+
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().editprofile1(data).then((response) async {
-            updateprofilemodal =
-                UpdateProfileModal.fromJson(json.decode(response.body));
-            if (response.statusCode == 200 && updateprofilemodal?.success==true) {
+            updateprofilemodal = UpdateProfileModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && updateprofilemodal?.success == true) {
               EasyLoading.showSuccess(updateprofilemodal?.message ?? "");
               Get.to(ViewPRofileScreen());
               setState(() {
-                isLoading=false;
+                isLoading = false;
               });
             } else {
               EasyLoading.showError(updateprofilemodal?.message ?? "");
               setState(() {
-                isLoading=false;
+                isLoading = false;
               });
             }
           });
@@ -460,6 +472,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       });
     }
   }
+
   Viewprofile() {
     final Map<String, String> data = {};
     data['id'] = (loginmodal?.userId).toString();
@@ -474,9 +487,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _firstname.text=(viewprofilemodal?.userDetails?.userMeta?.firstName).toString();
             _lastname.text=(viewprofilemodal?.userDetails?.userMeta?.lastName).toString();
             _phone.text=(viewprofilemodal?.userDetails?.userMeta?.phone).toString();
-            _yourBoat.text="My Boat";
-            _length.text="14";
-            _type.text="Abc";
+            _yourBoat.text=(viewprofilemodal?.userDetails?.userMeta?.userboat).toString();
+            _length.text=(viewprofilemodal?.userDetails?.userMeta?.userboatlength).toString();
+            _type.text=(viewprofilemodal?.userDetails?.userMeta?.userboattype).toString();
+            String? profileImagePath = viewprofilemodal?.userDetails?.profileImage;
+            File? selectedImage;
+            if (profileImagePath != null) {
+              selectedImage = File(profileImagePath);
+            } else {
+              selectedImage = null;
+            }
+
             setState(() {
               isLoading=false;
             });

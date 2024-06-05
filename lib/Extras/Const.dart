@@ -27,6 +27,7 @@ import '../Modal/UpdateOtherPositionModal.dart';
 import '../Modal/UpdateProfileModal.dart';
 import '../Modal/UpdateWarningModal.dart';
 import '../Modal/UpdateanchorgeModal.dart';
+import '../Modal/UserAlaramModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../Modal/ViewFouriteModal.dart';
 import '../Modal/ViewProfileModal.dart';
@@ -92,6 +93,7 @@ ViewFouriteModal? viewfouritemodal;
 StripePaymentsModal? stripepaymentsmodal;
 PostionModel? position;
 DaywiseWeatherModal? daywisewedhtermodal;
+UserAlaramModal? useralarammodal;
 
 // Custom Button
 InkWell batan({

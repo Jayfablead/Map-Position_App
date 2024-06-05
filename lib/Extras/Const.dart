@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Modal/AddAlaramModal.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddOtherPositionModal.dart';
 import '../Modal/AddPositionModal.dart';
@@ -13,6 +14,7 @@ import '../Modal/AddviewWarningModal.dart';
 import '../Modal/CastomPositionMarinaModal.dart';
 import '../Modal/ChangePasswordModal.dart';
 import '../Modal/DaywiseWedhterModal.dart';
+import '../Modal/DeleteAlaramModal.dart';
 import '../Modal/DeletePositionModal.dart';
 import '../Modal/EditCasotamMarinaModal.dart';
 import '../Modal/ForgotPasswordModal.dart';
@@ -94,6 +96,8 @@ StripePaymentsModal? stripepaymentsmodal;
 PostionModel? position;
 DaywiseWeatherModal? daywisewedhtermodal;
 UserAlaramModal? useralarammodal;
+DeleteAlaramModal? deletealarammodal;
+AddAlaramModal? addalarammodal;
 
 // Custom Button
 InkWell batan({

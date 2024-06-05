@@ -16,8 +16,10 @@ import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
+import '../Modal/AddAlaramModal.dart';
 import '../Modal/UpdateAlaramModal.dart';
 import '../Provider/Authprovider.dart';
+import 'UpdateAlarmScreen.dart';
 
 class SubscriptionAlarmScreen extends StatefulWidget {
   const SubscriptionAlarmScreen({super.key});
@@ -84,8 +86,8 @@ class _SubscriptionAlarmScreenState extends State<SubscriptionAlarmScreen> {
       lng1=long;
     });
   }
-  String? selectedvalue = "All Categories";
-  String? selectedvalue1 = "Active";
+  String? selectedvalue = "";
+  String? selectedvalue1 = "1";
   MapType _mapType = MapType.satellite;
   @override
   void initState() {
@@ -238,39 +240,39 @@ SizedBox(
                     items: [
                       DropdownMenuItem(
                         child: Text("All Categories",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "All Categories",
+                        value: "",
                       ),
                       DropdownMenuItem(
                         child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Anchorage",
+                        value: "49",
                       ),
                       DropdownMenuItem(
                         child: Text("Ferries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Ferries",
+                        value: "54",
                       ),
                       DropdownMenuItem(
                         child: Text("Harbors",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Harbors",
+                        value: "48",
                       ),
                       DropdownMenuItem(
                         child: Text("Inlets",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Inlets",
+                        value: "50",
                       ),
                       DropdownMenuItem(
                         child: Text("Landmarks",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Landmarks",
+                        value: "55",
                       ),
                       DropdownMenuItem(
                         child: Text("Marinas",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Marinas",
+                        value: "47",
                       ),
                       DropdownMenuItem(
                         child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Other",
+                        value: "66",
                       ),
                       DropdownMenuItem(
                         child: Text("Warning",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Warning",
+                        value: "65",
                       ),
 
                     ],
@@ -318,11 +320,11 @@ SizedBox(
                     items: [
                       DropdownMenuItem(
                         child: Text("Active",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "Active",
+                        value: "1",
                       ),
                       DropdownMenuItem(
                         child: Text("InActive",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                        value: "InActive",
+                        value: "0",
                       ),
 
 
@@ -369,7 +371,7 @@ SizedBox(
                 batan(
                     title: "Add ALARM",
                     route: () {
-                      updatealaram();
+                      AddAlaram();
                     },
                     hight: 6.h,
                     width: MediaQuery.of(context).size.width,
@@ -382,15 +384,15 @@ SizedBox(
       ),
     );
   }
-  updatealaram() {
+  AddAlaram() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
-      data['radius_around'] = _position.text.trim().toString();
-      data['id'] = (loginmodal?.userId).toString();
-      data['my_lat'] =lat1.toString() ;
-      data['my_lng'] = lng1.toString();
-      data['location'] =_currentPosition1.toString();
+      data['radius'] = _position.text.trim().toString();
+      data['user_id'] = (loginmodal?.userId).toString();
+      data['latitude'] =lat1.toString() ;
+      data['longitude'] = lng1.toString();
+      data['location'] =_title.text.trim().toString();
       data['category'] =selectedvalue.toString() ;
       data['status'] =selectedvalue1.toString() ;
 
@@ -398,19 +400,19 @@ SizedBox(
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().updatealaramapi(data).then((response) async {
-            updatealarammodal = UpdateAlaramModal.fromJson(json.decode(response.body));
-            if (response.statusCode == 200 && loginmodal?.success == true) {
+            addalarammodal = AddAlaramModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && addalarammodal?.success == true) {
 
-              EasyLoading.showSuccess(updatealarammodal?.message ?? '');
-              Get.offAll(HomeScreen());
+              EasyLoading.showSuccess(addalarammodal?.message ?? '');
+              Get.offAll(UpdateAlarmScreen());
 
               setState(() {
 
               });
             } else {
-              EasyLoading.showError(updatealarammodal?.message ?? '');
+              EasyLoading.showError(addalarammodal?.message ?? '');
               buildErrorDialog(
-                  context, "Login Error", (updatealarammodal?.message ?? ''));
+                  context, "Login Error", (addalarammodal?.message ?? ''));
             }
           });
         } else {

@@ -2530,6 +2530,9 @@ SizedBox(width: 7.w,),
       data['alcohol'] =alcohol.toString();
       data['pharmacy'] =pharmacy.toString();
       data['restaurant'] =restaurant.toString();
+      data['beach'] =beach.toString();
+      data['pontoon'] =pontoon.toString();
+      data['shop'] =shop.toString();
       print(imagePaths);
       data['upload_pictures[]'] =jsonEncode(imagePaths);
       print("Printapivalue${data}");

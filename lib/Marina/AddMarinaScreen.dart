@@ -97,6 +97,9 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   bool Water = false;
   bool Restaurant = false;
   bool Alcohol = false;
+  bool beach = false;
+  bool shop = false;
+  bool pontoon = false;
   ImagePicker picker = ImagePicker();
   List<XFile>? resultList;
   List<XFile>? resultList1;
@@ -2232,6 +2235,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: shop,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  shop  = value!;
+                                });
+                              },
+                            ),
+                            Text("Shop",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
 
                       ],
                     ),
@@ -2269,6 +2290,42 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                               },
                             ),
                             Text("Alcohol",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: beach,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  beach  = value!;
+                                });
+                              },
+                            ),
+                            Text("Beach",style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: pontoon,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  pontoon  = value!;
+                                });
+                              },
+                            ),
+                            Text("Pontoon",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -2463,7 +2520,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "pharmacy": Pharmacy,
         "water": Water,
         "restaurant": Restaurant,
-        "alcohol": Alcohol
+        "alcohol": Alcohol,
+        "beach": beach,
+        "pontoon": pontoon,
+        "shop": shop
         // add other meta fields here
       };
       meta.forEach((key, value) {

@@ -709,6 +709,5 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
         }
       });
     }
-
   }
 }

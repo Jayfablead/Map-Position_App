@@ -293,7 +293,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           children: [
                             Icon(Icons.location_on,color: Colors.black,size: 15.sp),
                             Text(
-                              "${onwViewpostionmodal?.data?.latitude}, ${onwViewpostionmodal?.data?.longitude} ",
+                              "${onwViewpostionmodal?.data?.latitude==""||onwViewpostionmodal?.data?.latitude==null?"N/A":onwViewpostionmodal?.data?.latitude}, ${onwViewpostionmodal?.data?.longitude==""||onwViewpostionmodal?.data?.longitude==null?"N/A":onwViewpostionmodal?.data?.longitude} ",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: secondary,

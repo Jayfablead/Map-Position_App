@@ -29,18 +29,18 @@ import '../Modal/DaywiseWedhterModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
+import 'CategorywiseViewScreen.dart';
 import 'DetailsOtherScreen.dart';
 import 'DetailsScreen.dart';
 import 'OtherWarningDetailsScreen.dart';
-import 'ViewAllPositionDetailsScreen.dart';
 
-class CategoryWiseViewScreen extends StatefulWidget {
+class ViewAllPositionDetailsScreen extends StatefulWidget {
   String? postid;
 
-  CategoryWiseViewScreen({super.key, this.postid});
+  ViewAllPositionDetailsScreen({super.key, this.postid});
 
   @override
-  State<CategoryWiseViewScreen> createState() => _CategoryWiseViewScreenState();
+  State<ViewAllPositionDetailsScreen> createState() => _ViewAllPositionDetailsScreenState();
 }
 
 final List<String> titles = [
@@ -58,7 +58,7 @@ List imgs = [
   "https://d2ugbn5gb88fyp.cloudfront.net/1289393/0_0.png",
 ];
 
-class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
+class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
   GlobalKey<ScaffoldState>();
   TextEditingController _name = TextEditingController();
@@ -295,23 +295,23 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   fontFamily: "volken"),
                             ),
                           ),
-                          
+
                         ],
                       ),
                       SizedBox(height: 1.h),
                       Row(
-                          children: [
-                            Icon(Icons.location_on,color: Colors.black,size: 15.sp),
-                            Text(
-                              "${viewcategorywisevieweetailmodal?.data?.latitude==""||viewcategorywisevieweetailmodal?.data?.latitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude==""||viewcategorywisevieweetailmodal?.data?.longitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.longitude} ",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken"),
-                            ),
-                          ],
+                        children: [
+                          Icon(Icons.location_on,color: Colors.black,size: 15.sp),
+                          Text(
+                            "${viewcategorywisevieweetailmodal?.data?.latitude==""||viewcategorywisevieweetailmodal?.data?.latitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude==""||viewcategorywisevieweetailmodal?.data?.longitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.longitude} ",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken"),
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -434,7 +434,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   // SizedBox(
                   //   height: 1.h,
                   // ),
-                
+
                   SizedBox(height: 1.h,),
                   Row(
                     children: [
@@ -450,7 +450,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   SizedBox(
                     height: 2.h,
                   ),
-                   Container(
+                  Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: 0.5.w, vertical: 1.h),
                     decoration: BoxDecoration(
@@ -459,7 +459,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       children: [
-                         Row(
+                        Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
@@ -504,7 +504,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.groceries ==
+                                                ?.groceries?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -582,7 +582,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.pharmacy ==
+                                                ?.pharmacy?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -660,7 +660,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.alcohol==
+                                                ?.alcohol?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -747,7 +747,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant==
+                                                ?.restaurant?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -825,7 +825,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.water==
+                                                ?.water?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -903,7 +903,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.alcohol==
+                                                ?.alcohol?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -991,7 +991,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant ==
+                                                ?.restaurant?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -1069,7 +1069,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.water==
+                                                ?.water?[0] ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -1206,10 +1206,22 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               fontFamily: "volken"))
                     ],
                   ),
-                  SizedBox(
+                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
+                      viewcategorywisevieweetailmodal?.data?.postCategory ==
+                          "Other" ||
+                      viewcategorywisevieweetailmodal?.data?.postCategory ==
+                          "Warning"
+                      ? Container()
+                      : SizedBox(
                     height: 1.h,
                   ),
-                  Row(
+                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
+                      viewcategorywisevieweetailmodal?.data?.postCategory ==
+                          "Other" ||
+                      viewcategorywisevieweetailmodal?.data?.postCategory ==
+                          "Warning"
+                      ? Container()
+                      : Row(
                     children: [
                       Container(
                           width: 95.w,
@@ -1279,7 +1291,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           child: CachedNetworkImage(
                                             imageUrl:
                                             'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
-                                      
+
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -1295,22 +1307,22 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       ),
                                       Positioned(
                                         left: 12.w,
-                                          child:
-                                          viewcategorywisevieweetailmodal?.data?.metaFields
-                                              ?.ownAnchor==
-                                              "false"?Container(
+                                        child:
+                                        viewcategorywisevieweetailmodal?.data?.metaFields
+                                            ?.ownAnchor?[0] ==
+                                            "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.red,width: 1.sp),
                                             ),
-                                              child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                          Container(
+                                            child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
+                                        Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.green,width: 1.sp),
                                             ),
-                                              child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
-                                          ),
+                                            child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -1327,7 +1339,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           "volken")),
                                 ],
                               ),
-                             Row(
+                              Row(
                                 children: [
                                   Stack(
                                     children: [
@@ -1363,7 +1375,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.buoys ==
+                                            ?.buoys?[0] ==
                                             "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1429,7 +1441,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.mountainWedges==
+                                            ?.mountainWedges?[0] ==
                                             "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1590,7 +1602,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     .spaceBetween,
                                 children: [
 
-                                      Column(
+                                  Column(
                                     children: [
                                       Container(
                                         padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
@@ -1631,7 +1643,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.sand==
+                                                      ?.sand?[0] ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1710,7 +1722,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.mud==
+                                                      ?.mud?[0] ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1749,7 +1761,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   ),
 
 
-                                       Column(
+                                  Column(
                                     children: [
                                       Container(
                                         padding:
@@ -1790,7 +1802,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.clay==
+                                                      ?.clay?[0] ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1836,7 +1848,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 children: [
 
 
-                                       Column(
+                                  Column(
                                     children: [
                                       Container(
                                         padding:
@@ -1877,7 +1889,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.coral ==
+                                                      ?.coral?[0] ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1914,11 +1926,17 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  viewcategorywisevieweetailmodal
+                                      ?.data
+                                      ?.metaFields
+                                      ?.coral?[0] ==
+                                      "false"
+                                      ? Container()
+                                      : SizedBox(
                                     width: 3.w,
                                   ),
 
-                                       Column(
+                                  Column(
                                     children: [
                                       Container(
                                         padding:
@@ -1960,7 +1978,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.rocks==
+                                                      ?.rocks?[0] ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -2560,18 +2578,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               batan(
                                   title: "View Details",
                                   route: () {
-                                    print("dsfsf${viewcategorywisevieweetailmodal
-                                        ?.nearbyPosts?[
-                                    index]
-                                        .id}");
-                                    Get.to(ViewAllPositionDetailsScreen(
-                                        postid: (viewcategorywisevieweetailmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .id)
-                                            ?.toString()
-                                            ));
 
+Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
+    ?.nearbyPosts?[index]
+    .id.toString(),));
 
                                   },
                                   hight: 5.h,
@@ -2793,7 +2803,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           ),
                                         ],
                                       ),
-                                     
+
                                     ],
                                   ),
                                 ]),
@@ -2801,7 +2811,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                             ),
                           ),
                         ),
-                       
+
                       ]
                     ],
                   )

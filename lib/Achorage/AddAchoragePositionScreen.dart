@@ -1466,7 +1466,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1537,7 +1537,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1608,7 +1608,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1686,7 +1686,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1758,7 +1758,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1828,7 +1828,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1906,7 +1906,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
@@ -1978,7 +1978,7 @@ SizedBox(width: 7.w,),
 
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:

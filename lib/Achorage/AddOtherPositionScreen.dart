@@ -79,7 +79,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
   List<XFile>? resultList1;
   List<File> selectedImages = [];
   List<String> imagePaths = [];
-  List<XFile> imagesList = <XFile>[];
+  // List<XFile> imagesList = <XFile>[];
   String _error = 'No Error Dectected';
   List<String> imageNames = [];
   ImagePicker _picker = ImagePicker();

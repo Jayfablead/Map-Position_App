@@ -227,7 +227,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                         children: [
                           Icon(Icons.location_on,color: Colors.black,size: 15.sp),
                           Text(
-                            "${addviewwarningmodal?.data?.latitude}, ${addviewwarningmodal?.data?.longitude} ",
+                            "${addviewwarningmodal?.data?.latitude==""||addviewwarningmodal?.data?.latitude==null?"N/A":addviewwarningmodal?.data?.latitude}, ${addviewwarningmodal?.data?.longitude==""||addviewwarningmodal?.data?.longitude==null?"N/A":addviewwarningmodal?.data?.longitude} ",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,

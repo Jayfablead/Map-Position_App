@@ -246,7 +246,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                         children: [
                           Icon(Icons.location_on,color: Colors.black,size: 15.sp),
                           Text(
-                            "${addviewothermodal?.data?.latitude}, ${addviewothermodal?.data?.longitude} ",
+                            "${addviewothermodal?.data?.latitude==""||addviewothermodal?.data?.latitude==null?"N/A":addviewothermodal?.data?.latitude}, ${addviewothermodal?.data?.longitude==""||addviewothermodal?.data?.longitude==null?"N/A":addviewothermodal?.data?.longitude} ",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,

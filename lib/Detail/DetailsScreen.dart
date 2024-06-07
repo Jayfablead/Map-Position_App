@@ -165,6 +165,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     super.initState();
     viewposition();
     getLocation();
+    isLoading =true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
       isLoading =true;
@@ -451,44 +452,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 ],
                               ),
 
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.water?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.pharmacy?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.groceries?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.alcohol?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.restaurant?[0] ==
-                                    "false"
-                            ? Container()
-                            :
+
                         SizedBox(
                                 height: 2.h,
                               ),
 
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.water?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.pharmacy?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.groceries?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.alcohol?[0] ==
-                                    "false" ||
-                                onwViewpostionmodal
-                                        ?.data?.metaFields?.restaurant?[0] ==
-                                    "false"
-                            ? Container()
-                            :
+
                         Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 2.w, vertical: 1.h),
@@ -506,7 +475,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               onwViewpostionmodal
                                                           ?.data
                                                           ?.metaFields
-                                                          ?.groceries?[0] ==
+                                                          ?.groceries==
                                                       "false"
                                                   ? Container()
                                                   : Row(
@@ -647,16 +616,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     )
                                             ],
                                           ),
-                                    onwViewpostionmodal?.data?.metaFields
-                                                    ?.pharmacy?[0] ==
-                                                "false" ||
-                                            onwViewpostionmodal
-                                                    ?.data
-                                                    ?.metaFields
-                                                    ?.groceries?[0] ==
-                                                "false"
-                                        ? Container()
-                                        : SizedBox(
+                                    SizedBox(
                                             height: 1.h,
                                           ),
 
@@ -664,13 +624,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              onwViewpostionmodal
-                                                          ?.data
-                                                          ?.metaFields
-                                                          ?.alcohol?[0] ==
-                                                      "false"
-                                                  ? Container()
-                                                  :
+
                                               Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -732,13 +686,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                     "volken")),
                                                       ],
                                                     ),
-                                              onwViewpostionmodal
-                                                          ?.data
-                                                          ?.metaFields
-                                                          ?.restaurant?[0] ==
-                                                      "false"
-                                                  ? Container()
-                                                  : Row(
+                                              Row(
                                                       children: [
                                                         Container(
                                                           height: 15.w,
@@ -923,28 +871,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        onwViewpostionmodal?.data?.postCategory == "Marinas" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Other" ||
-                                onwViewpostionmodal?.data?.postCategory ==
-                                    "Warning"
-                            ? Container()
-                            : Row(
+                       Row(
                                 children: [
-                                  onwViewpostionmodal?.data?.metaFields
-                                                  ?.ownAnchor?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.ownLines?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.buoys?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.mountainWedges?[0] ==
-                                              "false"
-                                      ? Container()
-                                      : Text("Details :-",
+                                 Text("Details :-",
                                           style: TextStyle(
                                               letterSpacing: 1,
                                               color: blackback,
@@ -1007,9 +936,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               SizedBox(
                                                 height: 1.h,
                                               ),
-                                              onwViewpostionmodal?.data?.metaFields
-                                                  ?.ownAnchor?[0] ==
-                                                  "false"?Container():Row(
+                                             Row(
                                                 children: [
                                                   Container(
                                                     height: 20.w,
@@ -1053,9 +980,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               "volken")),
                                                 ],
                                               ),
-                                              onwViewpostionmodal?.data?.metaFields
-                                                  ?.buoys?[0] ==
-                                                  "false"?Container(): Row(
+                                             Row(
                                                 children: [
                                                   Container(
                                                     height: 20.w,
@@ -1099,9 +1024,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               "volken")),
                                                 ],
                                               ),
-                                              onwViewpostionmodal?.data?.metaFields
-                                                  ?.mountainWedges?[0] ==
-                                                  "false"?Container():Row(
+                                              Row(
                                                 children: [
                                                   Container(
                                                     height: 20.w,
@@ -1145,9 +1068,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               "volken")),
                                                 ],
                                               ),
-                                              onwViewpostionmodal?.data?.metaFields
-                                                  ?.ownLines?[0] ==
-                                                  "false" ?Container(): Row(
+                                             Row(
                                                 children: [
                                                   Container(
                                                     height: 20.w,
@@ -1254,13 +1175,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.sand?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Column(
+                                                         Column(
                                                                 children: [
                                                                   InkWell(
                                                                     onTap: () {
@@ -1288,7 +1203,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                 25.w,
                                                                             width:
                                                                                 25.w,
-                                                                           
+
                                                                             child:
                                                                                 ClipRRect(
                                                                               borderRadius: BorderRadius.circular(90),
@@ -1330,8 +1245,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                     },
                                                                     child:
                                                                         Container(
-                                                                          
-                                                                         
+
+
                                                                       padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
                                                                       decoration: BoxDecoration(
                                                                           borderRadius: BorderRadius.circular(
@@ -1348,8 +1263,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             height:
                                                                                 25.w,
                                                                             width:
-                                                                                25.w,                                                                    
-                                                                           
+                                                                                25.w,
+
                                                                             child:
                                                                                 ClipRRect(
                                                                               borderRadius: BorderRadius.circular(90),
@@ -1382,13 +1297,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   ),
                                                                 ],
                                                               ),
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.clay?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Column(
+                                                       Column(
                                                                 children: [
                                                                   InkWell(
                                                                     onTap: () {
@@ -1457,13 +1366,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     ),
                                               Row(
                                                       children: [
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.coral?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Column(
+                                                        Column(
                                                                 children: [
                                                                   InkWell(
                                                                     onTap: () {
@@ -1490,7 +1393,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                 25.w,
                                                                             width:
                                                                                 25.w,
-                                                                           
+
                                                                             child:
                                                                                 ClipRRect(
                                                                               borderRadius: BorderRadius.circular(90),
@@ -1523,22 +1426,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   ),
                                                                 ],
                                                               ),
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.coral?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : SizedBox(
+                                                         SizedBox(
                                                                 width: 3.w,
                                                               ),
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.rocks?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Column(
+                                                        Column(
                                                                 children: [
                                                                   InkWell(
                                                                     onTap: () {
@@ -1652,7 +1543,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                              20.w,
                                              width:
                                              20.w,
-                                       
+
                                              child:
                                              ClipRRect(
                                                borderRadius: BorderRadius.circular(90),
@@ -1684,7 +1575,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                        Row(
                                          children: [
                                            Container(
-                                             padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),                                          
+                                             padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
                                              child:
                                              Row(
                                                children: [
@@ -1693,7 +1584,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                    20.w,
                                                    width:
                                                    20.w,
-                                                                                                  
+
                                                    child:
                                                    ClipRRect(
                                                      borderRadius: BorderRadius.circular(90),
@@ -1955,7 +1846,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             ),
                                           ],
                                         ),
-                                      
+
                                       ],
                                     ),
 
@@ -1963,7 +1854,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 )),
                           ],
                         ),
-                        
+
                         SizedBox(
                           height: 1.h,
                         ),

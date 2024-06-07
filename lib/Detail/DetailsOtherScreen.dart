@@ -120,6 +120,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
+    isLoading =true;
     setState(() {
       isLoading =true;
       futureDate = now.add(Duration(days: 10));
@@ -189,7 +190,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white,
+
                                       ),
                                       child: Icon(
                                         Icons.arrow_back_ios,
@@ -337,6 +338,363 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              width: 95.w,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: secondary, width: 1.sp),
+                                borderRadius:
+                                BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Weather :-",
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: blackback,
+                                              fontSize: 15.sp,
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontFamily:
+                                              "volken")),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          Text(
+                                            "Wind",
+                                            maxLines:
+                                            1,
+                                            style:
+                                            TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontSize: 13.sp,
+                                              color: secondary,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "volken",
+                                              letterSpacing: 1,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/swell.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 1.w,),
+                                                Text(
+                                                  "Swell",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
+                                              style:
+                                              TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 1.h,),
+                                                Text(
+                                                  "Height",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              daywisewedhtermodal?.days?[0].hours?[0].conditions==""||daywisewedhtermodal?.days?[0].hours?[0].conditions==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].conditions).toString(),
+                                              style:
+                                              TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wave-line.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 1.h,),
+                                                Text(
+                                                  "    --",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/temp.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              "${daywisewedhtermodal?.days?[0].temp==""||daywisewedhtermodal?.days?[0].temp==null?"N/A":(daywisewedhtermodal?.days?[0].temp).toString()}°C",
+                                              style:
+                                              TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                    ],
+                                  ),
+
+                                ],
+                              )),
                         ],
                       ),
                       SizedBox(
@@ -516,53 +874,13 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   batan(
                                       title: "View Details",
                                       route: () {
-                                        if (addviewothermodal
-                                            ?.nearbyPosts?[index]
-                                            .postCategory ==
-                                            "Warning") {
-                                          Get.back();
-                                          Get.to(DetailsWarningDetailsScreen(
+                                        Get.to(CategoryWiseViewScreen(
                                             postid: (addviewothermodal
-                                                ?.nearbyPosts?[index]
+                                                ?.nearbyPosts?[
+                                            index]
                                                 .id)
-                                                ?.toString() ??
-                                                "",
-                                          ));
-                                        } else if (addviewothermodal
-                                            ?.nearbyPosts?[index]
-                                            .postCategory ==
-                                            "Other") {
-                                          Get.back();
-                                          Get.to(DetailsOtherScreen(
-                                            postid: (addviewothermodal
-                                                ?.nearbyPosts?[index]
-                                                .id)
-                                                ?.toString() ??
-                                                "",
-                                          ));
-                                        } else if (addviewothermodal
-                                            ?.nearbyPosts?[index]
-                                            .postCategory ==
-                                            "Anchorages") {
-                                          Get.back();
-                                          Get.to(DetailsScreen(
-                                              postid: (addviewothermodal
-                                                  ?.nearbyPosts?[
-                                              index]
-                                                  .id)
-                                                  ?.toString() ??
-                                                  ""));
-                                        } else
-                                              () {
-                                            Get.back();
-                                            Get.to(CategoryWiseViewScreen(
-                                                postid: (addviewothermodal
-                                                    ?.nearbyPosts?[
-                                                index]
-                                                    .id)
-                                                    ?.toString() ??
-                                                    ""));
-                                          };
+                                                ?.toString()
+                                                ));
 
                                       },
                                       hight: 5.h,
@@ -1134,4 +1452,5 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       }
     });
   }
+
 }

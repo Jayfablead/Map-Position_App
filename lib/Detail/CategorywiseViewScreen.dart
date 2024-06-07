@@ -169,6 +169,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     super.initState();
     viewposition();
     getLocation();
+    isLoading =true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
 

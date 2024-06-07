@@ -169,6 +169,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
     super.initState();
     viewposition();
     getLocation();
+    isLoading =true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
 
@@ -504,7 +505,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.groceries?[0] ==
+                                                ?.groceries ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -582,7 +583,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.pharmacy?[0] ==
+                                                ?.pharmacy ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -660,7 +661,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.alcohol?[0] ==
+                                                ?.alcohol ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -747,7 +748,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant?[0] ==
+                                                ?.restaurant==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -825,7 +826,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.water?[0] ==
+                                                ?.water ==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -903,7 +904,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.alcohol?[0] ==
+                                                ?.alcohol==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -991,7 +992,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant?[0] ==
+                                                ?.restaurant==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -1069,7 +1070,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.water?[0] ==
+                                                ?.water==
                                                 "false"
                                                 ? Container(
                                                 decoration: BoxDecoration(
@@ -1176,28 +1177,9 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   SizedBox(
                     height: 2.h,
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : Row(
+                  Row(
                     children: [
-                      viewcategorywisevieweetailmodal?.data?.metaFields
-                          ?.ownAnchor?[0] ==
-                          "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.ownLines?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.buoys?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.mountainWedges?[0] ==
-                              "false"
-                          ? Container()
-                          : Text("Details :-",
+                      Text("Details :-",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,
@@ -1206,22 +1188,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               fontFamily: "volken"))
                     ],
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : SizedBox(
+                 SizedBox(
                     height: 1.h,
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : Row(
+                   Row(
                     children: [
                       Container(
                           width: 95.w,
@@ -1309,7 +1279,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.ownAnchor?[0] ==
+                                            ?.ownAnchor ==
                                             "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1375,7 +1345,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.buoys?[0] ==
+                                            ?.buoys ==
                                             "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1441,7 +1411,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.mountainWedges?[0] ==
+                                            ?.mountainWedges ==
                                             "false"?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1508,7 +1478,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.ownLines?[0] ==
+                                            ?.ownLines==
                                             "false" ?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
@@ -1643,7 +1613,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.sand?[0] ==
+                                                      ?.sand ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1722,7 +1692,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.mud?[0] ==
+                                                      ?.mud==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1802,7 +1772,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.clay?[0] ==
+                                                      ?.clay
+                                                    ==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1889,7 +1860,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.coral?[0] ==
+                                                      ?.coral==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(
@@ -1929,7 +1900,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   viewcategorywisevieweetailmodal
                                       ?.data
                                       ?.metaFields
-                                      ?.coral?[0] ==
+                                      ?.coral==
                                       "false"
                                       ? Container()
                                       : SizedBox(
@@ -1978,7 +1949,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                   viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.rocks?[0] ==
+                                                      ?.rocks==
                                                       "false"
                                                       ? Container(
                                                       decoration: BoxDecoration(

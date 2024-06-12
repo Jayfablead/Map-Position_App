@@ -2575,6 +2575,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               _title.text=viewcategorywisevieweetailmodal?.data?.title==""||viewcategorywisevieweetailmodal?.data?.title==null?"":(viewcategorywisevieweetailmodal?.data?.title).toString();
               _descripation.text=viewcategorywisevieweetailmodal?.data?.content==""||viewcategorywisevieweetailmodal?.data?.content==null?"":(viewcategorywisevieweetailmodal?.data?.content).toString();
               _address.text=viewcategorywisevieweetailmodal?.data?.content==""||viewcategorywisevieweetailmodal?.data?.content==null?"":(viewcategorywisevieweetailmodal?.data?.content).toString();
+              selectedvalue=viewcategorywisevieweetailmodal?.data?.postCategory==""||viewcategorywisevieweetailmodal?.data?.postCategory==null?"Anchorages":viewcategorywisevieweetailmodal?.data?.postCategory.toString();
+
               dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {
                 setState(() {
@@ -2584,7 +2586,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Water = false;
               }
-              dynamic rocksvalue = onwViewpostionmodal?.data?.metaFields?.rocks;
+              dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.rocks;
               if (rocksvalue != null && rocksvalue is bool) {
                 setState(() {
                   Rocks = rocksvalue;
@@ -2593,16 +2595,16 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Rocks = false;
               }
-              dynamic coralvalue = onwViewpostionmodal?.data?.metaFields?.coral;
+              dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.coral;
               if (coralvalue != null && coralvalue is bool) {
                 setState(() {
-                  Coral =onwViewpostionmodal?.data?.metaFields?.coral=="true";
+                  Coral =coralvalue;
                 });
 
               } else {
                 Coral = false;
               }
-              dynamic clayvalue = onwViewpostionmodal?.data?.metaFields?.clay;
+              dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
               if (clayvalue != null && clayvalue is bool) {
                 setState(() {
                   Clay = clayvalue;
@@ -2611,7 +2613,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Clay = false;
               }
-              dynamic sandvalue = onwViewpostionmodal?.data?.metaFields?.sand;
+              dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
               if (sandvalue != null && sandvalue is bool) {
                 setState(() {
                   Sand = sandvalue;
@@ -2620,7 +2622,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Sand = false;
               }
-              dynamic buoysvalue = onwViewpostionmodal?.data?.metaFields?.buoys;
+              dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.buoys;
               if (buoysvalue != null && buoysvalue is bool) {
                 setState(() {
                   Fixed = buoysvalue;
@@ -2629,7 +2631,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Fixed = false;
               }
-              dynamic restaurantsvalue = onwViewpostionmodal?.data?.metaFields?.restaurant;
+              dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.restaurant;
               if (restaurantsvalue != null && restaurantsvalue is bool) {
 
                 setState(() {
@@ -2638,7 +2640,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Restaurant = false;
               }
-              dynamic alcoholvalue = onwViewpostionmodal?.data?.metaFields?.alcohol;
+              dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.alcohol;
               if (alcoholvalue != null && alcoholvalue is bool) {
                 setState(() {
                   Alcohol = alcoholvalue;
@@ -2647,7 +2649,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Alcohol = false;
               }
-              dynamic pharmacyvalue = onwViewpostionmodal?.data?.metaFields?.pharmacy;
+              dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.pharmacy;
               if (pharmacyvalue != null && pharmacyvalue is bool) {
                 setState(() {
                   Pharmacy = pharmacyvalue;
@@ -2656,7 +2658,34 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 Pharmacy = false;
               }
-              dynamic groceriesvalue = onwViewpostionmodal?.data?.metaFields?.groceries;
+              dynamic beachcyvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.beach;
+              if (pharmacyvalue != null && pharmacyvalue is bool) {
+                setState(() {
+                  beach = beachcyvalue;
+                });
+
+              } else {
+                beach = false;
+              }
+              dynamic shopvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.shop;
+              if (pharmacyvalue != null && pharmacyvalue is bool) {
+                setState(() {
+                  shop = shopvalue;
+                });
+
+              } else {
+                shop = false;
+              }
+              dynamic pontoonvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.pontoon;
+              if (pharmacyvalue != null && pharmacyvalue is bool) {
+                setState(() {
+                  pontoon = pontoonvalue;
+                });
+
+              } else {
+                pontoon = false;
+              }
+              dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.groceries;
               if (groceriesvalue != null && groceriesvalue is bool) {
                 setState(() {
                   Groceries = groceriesvalue;
@@ -2666,7 +2695,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Groceries = false;
               }
 
-              dynamic mountainvalue = onwViewpostionmodal?.data?.metaFields?.mountainWedges;
+              dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.mountainWedges;
               if (mountainvalue != null && mountainvalue is bool) {
                 setState(() {
                   mountain = mountainvalue;
@@ -2675,7 +2704,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 mountain = false;
               }
-              dynamic NW3value = onwViewpostionmodal?.data?.metaFields?.nw3;
+              dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
               if (NW3value != null && NW3value is bool) {
                 setState(() {
                   NW3 = NW3value;
@@ -2684,7 +2713,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 NW3 = false;
               }
-              dynamic NW1value = onwViewpostionmodal?.data?.metaFields?.nw1;
+              dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
               if (NW1value != null && NW1value is bool) {
                 setState(() {
                   NW1 = NW1value;
@@ -2693,7 +2722,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 NW1 = false;
               }
-              dynamic NW2value = onwViewpostionmodal?.data?.metaFields?.nw2;
+              dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
               if (NW2value != null && NW2value is bool) {
                 setState(() {
                   NW2 = NW1value;
@@ -2702,7 +2731,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 NW2 = false;
               }
-              dynamic N1value = onwViewpostionmodal?.data?.metaFields?.n1;
+              dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
               if (N1value != null && N1value is bool) {
                 setState(() {
                   N1 = N1value;
@@ -2719,7 +2748,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 N2 = false;
-              }dynamic N3value = onwViewpostionmodal?.data?.metaFields?.n3;
+              }dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
               if (N3value != null && N3value is bool) {
                 setState(() {
                   N3 = N3value;
@@ -2727,7 +2756,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 N3 = false;
-              }dynamic E1value = onwViewpostionmodal?.data?.metaFields?.e1;
+              }dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
               if (E1value != null && E1value is bool) {
                 setState(() {
                   E1= E1value;
@@ -2735,7 +2764,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 E1 = false;
-              }dynamic E2value = onwViewpostionmodal?.data?.metaFields?.e2;
+              }dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
               if (E2value != null && E2value is bool) {
                 setState(() {
                   E2= E2value;
@@ -2743,7 +2772,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 E2 = false;
-              }dynamic E3value = onwViewpostionmodal?.data?.metaFields?.e3;
+              }dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
               if (E3value != null && E3value is bool) {
                 setState(() {
                   E3= E3value;
@@ -2751,7 +2780,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 E3 = false;
-              }dynamic W1value = onwViewpostionmodal?.data?.metaFields?.w1;
+              }dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
               if (W1value != null && W1value is bool) {
                 setState(() {
                   W1= W1value;
@@ -2759,7 +2788,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 W1 = false;
-              }dynamic W2value = onwViewpostionmodal?.data?.metaFields?.w2;
+              }dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
               if (W2value != null && W2value is bool) {
                 setState(() {
                   W2= W2value;
@@ -2767,7 +2796,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 W2 = false;
-              }dynamic W3value = onwViewpostionmodal?.data?.metaFields?.w3;
+              }dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
               if (W3value != null && W3value is bool) {
                 setState(() {
                   W3= W3value;
@@ -2775,7 +2804,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 W3 = false;
-              }dynamic SW1value = onwViewpostionmodal?.data?.metaFields?.sw1;
+              }dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
               if (SW1value != null && SW1value is bool) {
                 setState(() {
                   SW1= SW1value;
@@ -2783,7 +2812,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 SW1 = false;
-              }dynamic SW2value = onwViewpostionmodal?.data?.metaFields?.sw2;
+              }dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
               if (SW2value != null && SW2value is bool) {
                 setState(() {
                   SW2= SW2value;
@@ -2791,7 +2820,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
               } else {
                 SW2 = false;
-              }dynamic SW3value = onwViewpostionmodal?.data?.metaFields?.sw3;
+              }
+              dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
               if (SW3value != null && SW3value is bool) {
                 setState(() {
                   SW3= SW3value;
@@ -2800,7 +2830,79 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               } else {
                 SW3 = false;
               }
+              dynamic NE1value = viewcategorywisevieweetailmodal?.data?.metaFields?.ne1;
+              if (NE1value != null && NE1value is bool) {
+                setState(() {
+                  NE1= SW3value;
+                });
 
+              } else {
+                NE1 = false;
+              }
+              dynamic NE2value = viewcategorywisevieweetailmodal?.data?.metaFields?.ne2;
+              if (NE2value != null && NE2value is bool) {
+                setState(() {
+                  NE2= NE2value;
+                });
+              } else {
+                NE2 = false;
+              }
+              dynamic NE3value = viewcategorywisevieweetailmodal?.data?.metaFields?.ne3;
+              if (NE3value != null && NE3value is bool) {
+                setState(() {
+                  NE3= NE3value;
+                });
+              } else {
+                NE3 = false;
+              }
+              dynamic SE1value = viewcategorywisevieweetailmodal?.data?.metaFields?.se1;
+              if (SE1value != null && SE1value is bool) {
+                setState(() {
+                  SE1= SE1value;
+                });
+              } else {
+                SE1 = false;
+              }
+              dynamic SE2value = viewcategorywisevieweetailmodal?.data?.metaFields?.se2;
+              if (SE2value != null && SE2value is bool) {
+                setState(() {
+                  SE2= SE2value;
+                });
+              } else {
+                SE2 = false;
+              }
+              dynamic SE3value = viewcategorywisevieweetailmodal?.data?.metaFields?.se3;
+              if (SE3value != null && SE3value is bool) {
+                setState(() {
+                  SE3= SE3value;
+                });
+              } else {
+                SE3 = false;
+              }
+              dynamic S1value = viewcategorywisevieweetailmodal?.data?.metaFields?.s1;
+              if (S1value != null && S1value is bool) {
+                setState(() {
+                  S1= S1value;
+                });
+              } else {
+                S1 = false;
+              }
+              dynamic S2value = viewcategorywisevieweetailmodal?.data?.metaFields?.s2;
+              if (S2value != null && S2value is bool) {
+                setState(() {
+                  S2= S2value;
+                });
+              } else {
+                S2 = false;
+              }
+              dynamic S3value = viewcategorywisevieweetailmodal?.data?.metaFields?.s3;
+              if (S3value != null && S3value is bool) {
+                setState(() {
+                  S3= S3value;
+                });
+              } else {
+                S3 = false;
+              }
             });
           } else {
             setState(() {

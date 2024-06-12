@@ -487,9 +487,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _firstname.text=(viewprofilemodal?.userDetails?.userMeta?.firstName).toString();
             _lastname.text=(viewprofilemodal?.userDetails?.userMeta?.lastName).toString();
             _phone.text=(viewprofilemodal?.userDetails?.userMeta?.phone).toString();
-            _yourBoat.text=(viewprofilemodal?.userDetails?.userMeta?.userboat).toString();
-            _length.text=(viewprofilemodal?.userDetails?.userMeta?.userboatlength).toString();
-            _type.text=(viewprofilemodal?.userDetails?.userMeta?.userboattype).toString();
+            _yourBoat.text=viewprofilemodal?.userDetails?.userMeta?.userboat==""||viewprofilemodal?.userDetails?.userMeta?.userboat==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboat).toString();
+            _length.text=viewprofilemodal?.userDetails?.userMeta?.userboatlength==""||viewprofilemodal?.userDetails?.userMeta?.userboatlength==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboatlength).toString();
+            _type.text=viewprofilemodal?.userDetails?.userMeta?.userboattype==""||viewprofilemodal?.userDetails?.userMeta?.userboattype==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboattype).toString();
             String? profileImagePath = viewprofilemodal?.userDetails?.profileImage;
             File? selectedImage;
             if (profileImagePath != null) {

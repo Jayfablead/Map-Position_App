@@ -98,11 +98,13 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
+  String? thumbnail;
   void initState() {
     // TODO: implement initState
     super.initState();
     print("widget.postid${ widget.postid}");
     widget.postid==null?"":viewposition();
+    thumbnail = onwViewpostionmodal?.data?.thumbnail?.toString();
   }
   @override
 
@@ -2301,60 +2303,7 @@ SizedBox(width: 7.w,),
                           children: [
                             Column(
                               children: [
-                                // InkWell(
-                                //   onTap: () async {
-                                //     resultList1 =
-                                //     await ImagePicker()
-                                //         .pickMultiImage();
-                                //     if (resultList1 != null) {
-                                //       if (resultList1!.length +
-                                //           selectedImages
-                                //               .length >
-                                //           maxImageLimit) {
-                                //         // Handle maximum image limit exceeded
-                                //         buildErrorDialog(context,
-                                //             "", "You selected more than 9 images");
-                                //       } else {
-                                //         setState(() {
-                                //           print(selectedImages);
-                                //           selectedImages.addAll(
-                                //               resultList1!
-                                //                   .map((XFile
-                                //               file) =>
-                                //                   File(file
-                                //                       .path))
-                                //                   .toList());
-                                //           imagePaths = resultList1!
-                                //               .map((file) =>
-                                //           file.path)
-                                //               .toList();
-                                //         });
-                                //       }
-                                //     }
-                                //     // final XFile? photo =
-                                //     // await picker.pickImage(
-                                //     //     source: ImageSource.gallery);
-                                //     // setState(() {
-                                //     //   selectedimage = File(photo!.path);
-                                //     //   print(selectedimage);
-                                //     // });
-                                //   },
-                                //   child: Container(
-                                //     width: 18.w,
-                                //     height: 18.w,
-                                //     decoration: BoxDecoration(
-                                //         borderRadius:
-                                //         BorderRadius.circular(100),
-                                //         color: Colors.black),
-                                //     child:  Text("Selcted Photo",
-                                //         style: TextStyle(
-                                //             letterSpacing: 1,
-                                //             color: blackback,
-                                //             fontSize: 14.sp,
-                                //             fontWeight: FontWeight.normal,
-                                //             fontFamily: "volken"))
-                                //   ),
-                                // ),
+
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,
@@ -2410,45 +2359,7 @@ SizedBox(width: 7.w,),
 
                               ],
                             ),
-                            // Column(
-                            //   children: [
-                            //     InkWell(
-                            //       onTap: () async {
-                            //
-                            //         final XFile? photo =
-                            //         await picker.pickImage(
-                            //             source: ImageSource.camera);
-                            //         setState(() {
-                            //           selectedimage = File(photo!.path);
-                            //           print(selectedimage);
-                            //         });
-                            //       },
-                            //       child: Container(
-                            //         width: 18.w,
-                            //         height: 18.w,
-                            //         decoration: BoxDecoration(
-                            //             borderRadius:
-                            //             BorderRadius.circular(100),
-                            //             color: Colors.black),
-                            //         child: Icon(
-                            //           Icons.camera_alt,
-                            //           size: 20.sp,
-                            //           color: Colors.white,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       height: 1.h,
-                            //     ),
-                            //     Text("Camera",
-                            //         style: TextStyle(
-                            //             letterSpacing: 1,
-                            //             color: blackback,
-                            //             fontSize: 14.sp,
-                            //             fontWeight: FontWeight.normal,
-                            //             fontFamily: "volken"))
-                            //   ],
-                            // )
+
                           ],
                         ),
                       ],
@@ -2652,232 +2563,225 @@ SizedBox(width: 7.w,),
               _name.text=onwViewpostionmodal?.data?.title==""||onwViewpostionmodal?.data?.title==null?"":(onwViewpostionmodal?.data?.title).toString();
               _comments.text=onwViewpostionmodal?.data?.content==""||onwViewpostionmodal?.data?.content==null?"":(onwViewpostionmodal?.data?.content).toString();
 
-              dynamic waterValue = onwViewpostionmodal?.data?.metaFields?.water;
-              if (waterValue != null && waterValue is bool) {
-                setState(() {
-                  water = waterValue;
-                });
 
-              } else {
-                water = false;
-              }
-              dynamic rocksvalue = onwViewpostionmodal?.data?.metaFields?.rocks;
-              if (rocksvalue != null && rocksvalue is bool) {
-                setState(() {
-                  rocks = rocksvalue;
-                });
-
-              } else {
-                rocks = false;
-              }
-              dynamic coralvalue = onwViewpostionmodal?.data?.metaFields?.coral;
-              if (coralvalue != null && coralvalue is bool) {
-                setState(() {
-                  coral = coralvalue;
-                });
-
-              } else {
-                coral = false;
-              }
-              dynamic clayvalue = onwViewpostionmodal?.data?.metaFields?.clay;
-              if (clayvalue != null && clayvalue is bool) {
-                setState(() {
-                  clay = clayvalue;
-                });
-
-              } else {
-                clay = false;
-              }
-              dynamic sandvalue = onwViewpostionmodal?.data?.metaFields?.sand;
-              if (sandvalue != null && sandvalue is bool) {
-                setState(() {
-                  sand = sandvalue;
-                });
-
-              } else {
-                sand = false;
-              }
-              dynamic buoysvalue = onwViewpostionmodal?.data?.metaFields?.buoys;
-              if (buoysvalue != null && buoysvalue is bool) {
-                setState(() {
-                  buoys = buoysvalue;
-                });
-
-              } else {
-                buoys = false;
-              }
-              dynamic restaurantsvalue = onwViewpostionmodal?.data?.metaFields?.restaurant;
-              if (restaurantsvalue != null && restaurantsvalue is bool) {
-
-                setState(() {
-                  restaurant = restaurantsvalue;
-                });
-              } else {
-                restaurant = false;
-              }
-              dynamic alcoholvalue = onwViewpostionmodal?.data?.metaFields?.alcohol;
-              if (alcoholvalue != null && alcoholvalue is bool) {
-                setState(() {
-                  alcohol = alcoholvalue;
-                });
-
-              } else {
-                alcohol = false;
-              }
-              dynamic pharmacyvalue = onwViewpostionmodal?.data?.metaFields?.pharmacy;
-              if (pharmacyvalue != null && pharmacyvalue is bool) {
-                setState(() {
-                  pharmacy = pharmacyvalue;
-                });
-
-              } else {
-                pharmacy = false;
-              }
-              dynamic groceriesvalue = onwViewpostionmodal?.data?.metaFields?.groceries;
-              if (groceriesvalue != null && groceriesvalue is bool) {
-                setState(() {
-                  groceries = groceriesvalue;
-                });
-
-              } else {
-                groceries = false;
-              }
-              dynamic mountainvalue = onwViewpostionmodal?.data?.metaFields?.mountainWedges;
-              if (mountainvalue != null && mountainvalue is bool) {
-                setState(() {
-                  mountain = mountainvalue;
-                });
-
-              } else {
-                mountain = false;
-              }
-              dynamic NW3value = onwViewpostionmodal?.data?.metaFields?.nw3;
-              if (NW3value != null && NW3value is bool) {
-                setState(() {
-                  NW3 = NW3value;
-                });
-
-              } else {
-                NW3 = false;
-              }
-              dynamic NW1value = onwViewpostionmodal?.data?.metaFields?.nw1;
-              if (NW1value != null && NW1value is bool) {
-                setState(() {
-                  NW1 = NW1value;
-                });
-
-              } else {
-                NW1 = false;
-              }
-              dynamic NW2value = onwViewpostionmodal?.data?.metaFields?.nw2;
-              if (NW2value != null && NW2value is bool) {
-                setState(() {
-                  NW2 = NW1value;
-                });
-
-              } else {
-                NW2 = false;
-              }
-              dynamic N1value = onwViewpostionmodal?.data?.metaFields?.n1;
-              if (N1value != null && N1value is bool) {
-                setState(() {
-                  N1 = N1value;
-                });
-
-              } else {
-                N1 = false;
-              }
-              dynamic N2value = onwViewpostionmodal?.data?.metaFields?.n2;
-              if (N2value != null && N1value is bool) {
-                setState(() {
-                  N2 = N2value;
-                });
-
-              } else {
-                N2 = false;
-              }dynamic N3value = onwViewpostionmodal?.data?.metaFields?.n3;
-              if (N3value != null && N3value is bool) {
-                setState(() {
-                  N3 = N3value;
-                });
-
-              } else {
-                N3 = false;
-              }dynamic E1value = onwViewpostionmodal?.data?.metaFields?.e1;
-              if (E1value != null && E1value is bool) {
-                setState(() {
-                  E1= E1value;
-                });
-
-              } else {
-                E1 = false;
-              }dynamic E2value = onwViewpostionmodal?.data?.metaFields?.e2;
-              if (E2value != null && E2value is bool) {
-                setState(() {
-                  E2= E2value;
-                });
-
-              } else {
-                E2 = false;
-              }dynamic E3value = onwViewpostionmodal?.data?.metaFields?.e3;
-              if (E3value != null && E3value is bool) {
-                setState(() {
-                  E3= E3value;
-                });
-
-              } else {
-                E3 = false;
-              }dynamic W1value = onwViewpostionmodal?.data?.metaFields?.w1;
-              if (W1value != null && W1value is bool) {
-                setState(() {
-                  W1= W1value;
-                });
-
-              } else {
-                W1 = false;
-              }dynamic W2value = onwViewpostionmodal?.data?.metaFields?.w2;
-              if (W2value != null && W2value is bool) {
-                setState(() {
-                  W2= W2value;
-                });
-
-              } else {
-                W2 = false;
-              }dynamic W3value = onwViewpostionmodal?.data?.metaFields?.w3;
-              if (W3value != null && W3value is bool) {
-                setState(() {
-                  W3= W3value;
-                });
-
-              } else {
-                W3 = false;
-              }dynamic SW1value = onwViewpostionmodal?.data?.metaFields?.sw1;
-              if (SW1value != null && SW1value is bool) {
-                setState(() {
-                  SW1= SW1value;
-                });
-
-              } else {
-                SW1 = false;
-              }dynamic SW2value = onwViewpostionmodal?.data?.metaFields?.sw2;
-              if (SW2value != null && SW2value is bool) {
-                setState(() {
-                  SW2= SW2value;
-                });
-
-              } else {
-                SW2 = false;
-              }dynamic SW3value = onwViewpostionmodal?.data?.metaFields?.sw3;
-              if (SW3value != null && SW3value is bool) {
-                setState(() {
-                  SW3= SW3value;
-                });
-
-              } else {
-                SW3 = false;
-              }
-
-            });
+                dynamic waterValue = onwViewpostionmodal?.data?.metaFields
+                    ?.water;
+                if (waterValue != null && waterValue is bool) {
+                  setState(() {
+                    water = waterValue;
+                  });
+                } else {
+                  water = false;
+                }
+                dynamic rocksvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.rocks;
+                if (rocksvalue != null && rocksvalue is bool) {
+                  setState(() {
+                    rocks = rocksvalue;
+                  });
+                } else {
+                  rocks = false;
+                }
+                dynamic coralvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.coral;
+                if (coralvalue != null && coralvalue is bool) {
+                  setState(() {
+                    coral = coralvalue;
+                  });
+                } else {
+                  coral = false;
+                }
+                dynamic clayvalue = onwViewpostionmodal?.data?.metaFields?.clay;
+                if (clayvalue != null && clayvalue is bool) {
+                  setState(() {
+                    clay = clayvalue;
+                  });
+                } else {
+                  clay = false;
+                }
+                dynamic sandvalue = onwViewpostionmodal?.data?.metaFields?.sand;
+                if (sandvalue != null && sandvalue is bool) {
+                  setState(() {
+                    sand = sandvalue;
+                  });
+                } else {
+                  sand = false;
+                }
+                dynamic buoysvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.buoys;
+                if (buoysvalue != null && buoysvalue is bool) {
+                  setState(() {
+                    buoys = buoysvalue;
+                  });
+                } else {
+                  buoys = false;
+                }
+                dynamic restaurantsvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.restaurant;
+                if (restaurantsvalue != null && restaurantsvalue is bool) {
+                  setState(() {
+                    restaurant = restaurantsvalue;
+                  });
+                } else {
+                  restaurant = false;
+                }
+                dynamic alcoholvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.alcohol;
+                if (alcoholvalue != null && alcoholvalue is bool) {
+                  setState(() {
+                    alcohol = alcoholvalue;
+                  });
+                } else {
+                  alcohol = false;
+                }
+                dynamic pharmacyvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.pharmacy;
+                if (pharmacyvalue != null && pharmacyvalue is bool) {
+                  setState(() {
+                    pharmacy = pharmacyvalue;
+                  });
+                } else {
+                  pharmacy = false;
+                }
+                dynamic groceriesvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.groceries;
+                if (groceriesvalue != null && groceriesvalue is bool) {
+                  setState(() {
+                    groceries = groceriesvalue;
+                  });
+                } else {
+                  groceries = false;
+                }
+                dynamic mountainvalue = onwViewpostionmodal?.data?.metaFields
+                    ?.mountainWedges;
+                if (mountainvalue != null && mountainvalue is bool) {
+                  setState(() {
+                    mountain = mountainvalue;
+                  });
+                } else {
+                  mountain = false;
+                }
+                dynamic NW3value = onwViewpostionmodal?.data?.metaFields?.nw3;
+                if (NW3value != null && NW3value is bool) {
+                  setState(() {
+                    NW3 = NW3value;
+                  });
+                } else {
+                  NW3 = false;
+                }
+                dynamic NW1value = onwViewpostionmodal?.data?.metaFields?.nw1;
+                if (NW1value != null && NW1value is bool) {
+                  setState(() {
+                    NW1 = NW1value;
+                  });
+                } else {
+                  NW1 = false;
+                }
+                dynamic NW2value = onwViewpostionmodal?.data?.metaFields?.nw2;
+                if (NW2value != null && NW2value is bool) {
+                  setState(() {
+                    NW2 = NW1value;
+                  });
+                } else {
+                  NW2 = false;
+                }
+                dynamic N1value = onwViewpostionmodal?.data?.metaFields?.n1;
+                if (N1value != null && N1value is bool) {
+                  setState(() {
+                    N1 = N1value;
+                  });
+                } else {
+                  N1 = false;
+                }
+                dynamic N2value = onwViewpostionmodal?.data?.metaFields?.n2;
+                if (N2value != null && N1value is bool) {
+                  setState(() {
+                    N2 = N2value;
+                  });
+                } else {
+                  N2 = false;
+                }
+                dynamic N3value = onwViewpostionmodal?.data?.metaFields?.n3;
+                if (N3value != null && N3value is bool) {
+                  setState(() {
+                    N3 = N3value;
+                  });
+                } else {
+                  N3 = false;
+                }
+                dynamic E1value = onwViewpostionmodal?.data?.metaFields?.e1;
+                if (E1value != null && E1value is bool) {
+                  setState(() {
+                    E1 = E1value;
+                  });
+                } else {
+                  E1 = false;
+                }
+                dynamic E2value = onwViewpostionmodal?.data?.metaFields?.e2;
+                if (E2value != null && E2value is bool) {
+                  setState(() {
+                    E2 = E2value;
+                  });
+                } else {
+                  E2 = false;
+                }
+                dynamic E3value = onwViewpostionmodal?.data?.metaFields?.e3;
+                if (E3value != null && E3value is bool) {
+                  setState(() {
+                    E3 = E3value;
+                  });
+                } else {
+                  E3 = false;
+                }
+                dynamic W1value = onwViewpostionmodal?.data?.metaFields?.w1;
+                if (W1value != null && W1value is bool) {
+                  setState(() {
+                    W1 = W1value;
+                  });
+                } else {
+                  W1 = false;
+                }
+                dynamic W2value = onwViewpostionmodal?.data?.metaFields?.w2;
+                if (W2value != null && W2value is bool) {
+                  setState(() {
+                    W2 = W2value;
+                  });
+                } else {
+                  W2 = false;
+                }
+                dynamic W3value = onwViewpostionmodal?.data?.metaFields?.w3;
+                if (W3value != null && W3value is bool) {
+                  setState(() {
+                    W3 = W3value;
+                  });
+                } else {
+                  W3 = false;
+                }
+                dynamic SW1value = onwViewpostionmodal?.data?.metaFields?.sw1;
+                if (SW1value != null && SW1value is bool) {
+                  setState(() {
+                    SW1 = SW1value;
+                  });
+                } else {
+                  SW1 = false;
+                }
+                dynamic SW2value = onwViewpostionmodal?.data?.metaFields?.sw2;
+                if (SW2value != null && SW2value is bool) {
+                  setState(() {
+                    SW2 = SW2value;
+                  });
+                } else {
+                  SW2 = false;
+                }
+                dynamic SW3value = onwViewpostionmodal?.data?.metaFields?.sw3;
+                if (SW3value != null && SW3value is bool) {
+                  setState(() {
+                    SW3 = SW3value;
+                  });
+                } else {
+                  SW3 = false;
+                }
+              });
           } else {
             setState(() {
 

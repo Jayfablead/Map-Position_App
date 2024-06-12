@@ -55,7 +55,19 @@ class _SinupScreen2State extends State<SinupScreen2> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.keyboard_arrow_left,
+                          color: blackback, size: 30.sp),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -378,8 +390,7 @@ class _SinupScreen2State extends State<SinupScreen2> {
               LoginApi();
             } else {
               EasyLoading.showError(sinupmodal?.message ?? '');
-              buildErrorDialog(
-                  context, "Login Error", (sinupmodal?.message ?? ''));
+
             }
           });
         } else {
@@ -401,13 +412,12 @@ class _SinupScreen2State extends State<SinupScreen2> {
             loginmodal = LoginModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && loginmodal?.success == true) {
               SaveDataLocal.saveLogInData(loginmodal!);
-              EasyLoading.showSuccess("Sin up Success");
+              EasyLoading.showSuccess(sinupmodal?.message ?? '');
               Get.offAll(HomeScreen());
 
             } else {
               EasyLoading.showError(sinupmodal?.message ?? '');
-              buildErrorDialog(
-                  context, "Login Error",(sinupmodal?.message ?? ''));
+
             }
           });
         } else {

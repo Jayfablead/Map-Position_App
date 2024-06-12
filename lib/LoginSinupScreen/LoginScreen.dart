@@ -328,8 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
               });
             } else {
               EasyLoading.showError(loginmodal?.message ?? '');
-              buildErrorDialog(
-                  context, "Login Error", (loginmodal?.message ?? ''));
+
             }
           });
         } else {

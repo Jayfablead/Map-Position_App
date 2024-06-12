@@ -506,7 +506,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.groceries ==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -584,7 +584,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.pharmacy ==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -662,7 +662,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.alcohol==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -749,7 +749,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.restaurant==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -827,7 +827,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.water==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -905,7 +905,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.alcohol==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -993,7 +993,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.restaurant ==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -1071,7 +1071,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 ?.data
                                                 ?.metaFields
                                                 ?.water==
-                                                "false"
+                                                false
                                                 ? Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(100),
@@ -1177,28 +1177,9 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  viewcategorywisevieweetailmodal?.data?.postCategory == "Marinas" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Other" ||
-                      viewcategorywisevieweetailmodal?.data?.postCategory ==
-                          "Warning"
-                      ? Container()
-                      : Row(
+                  Row(
                     children: [
-                      viewcategorywisevieweetailmodal?.data?.metaFields
-                          ?.ownAnchor?[0] ==
-                          "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.ownLines?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.buoys?[0] ==
-                              "false" ||
-                          viewcategorywisevieweetailmodal?.data?.metaFields
-                              ?.mountainWedges?[0] ==
-                              "false"
-                          ? Container()
-                          : Text("Details :-",
+                      Text("Details :-",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,
@@ -1299,7 +1280,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           child:
                                           viewcategorywisevieweetailmodal?.data?.metaFields
                                               ?.ownAnchor==
-                                              "false"?Container(
+                                              false?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.red,width: 1.sp),
@@ -1365,7 +1346,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
                                             ?.buoys ==
-                                            "false"?Container(
+                                            false?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.red,width: 1.sp),
@@ -1431,7 +1412,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
                                             ?.mountainWedges==
-                                            "false"?Container(
+                                            false?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.red,width: 1.sp),
@@ -1497,8 +1478,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         left: 12.w,
                                         child:
                                         viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.ownLines?[0] ==
-                                            "false" ?Container(
+                                            ?.ownLines ==
+                                            false ?Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               border: Border.all(color: Colors.red,width: 1.sp),
@@ -1633,7 +1614,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       ?.data
                                                       ?.metaFields
                                                       ?.sand==
-                                                      "false"
+                                                      false
                                                       ? Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
@@ -1712,7 +1693,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       ?.data
                                                       ?.metaFields
                                                       ?.mud==
-                                                      "false"
+                                                      false
                                                       ? Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
@@ -1792,7 +1773,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       ?.data
                                                       ?.metaFields
                                                       ?.clay==
-                                                      "false"
+                                                      false
                                                       ? Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
@@ -1879,7 +1860,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       ?.data
                                                       ?.metaFields
                                                       ?.coral ==
-                                                      "false"
+                                                      false
                                                       ? Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),
@@ -1962,7 +1943,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       ?.data
                                                       ?.metaFields
                                                       ?.rocks==
-                                                      "false"
+                                                      false
                                                       ? Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(100),

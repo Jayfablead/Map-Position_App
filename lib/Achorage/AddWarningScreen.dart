@@ -17,6 +17,7 @@ import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddWaringmodal.dart';
+import '../Modal/AddviewWarningModal.dart';
 import '../Modal/UpdateWarningModal.dart';
 import '../Provider/Authprovider.dart';
 
@@ -78,6 +79,8 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
   bool NW1 = false;
   bool NW2 = false;
   bool NW3 = false;
+  String plainText = '';
+  bool isLoading=true;
   ImagePicker picker = ImagePicker();
   List<XFile>? resultList;
   List<XFile>? resultList1;
@@ -115,7 +118,11 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
     print("posid;-${widget.postid.toString()}");
     print("lat;-${widget.lat.toString()}");
     print("lag;-${widget.lng.toString()}");
+    widget.postid==null?"":viewposition();
     getLocation();
+    setState(() {
+
+    });
     print("lagetlocationwaringt;-${lat1.toString()}");
   }
   Widget build(BuildContext context) {
@@ -709,5 +716,44 @@ class _AddWarningScreenState extends State<AddWarningScreen> {
         }
       });
     }
+  }
+
+
+
+  viewposition() {
+    final Map<String, String> data = {};
+    data['post_id'] =widget.postid.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewsinganalpositionviewapi(data).then((response) async {
+          addviewwarningmodal =
+              AddviewWarningModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && addviewwarningmodal?.success == true) {
+            _name.text=addviewwarningmodal?.data?.title==""||addviewwarningmodal?.data?.title==null?"":addviewwarningmodal?.data?.title ?? "";
+            _comments.text=addviewwarningmodal?.data?.content==""||addviewwarningmodal?.data?.content==null?"":addviewwarningmodal?.data?.content ?? "";
+
+            print("warningapicall");
+
+            setState(() {
+              isLoading = false;
+              print(plainText);
+            });
+          } else {
+
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+
+        setState(() {
+          isLoading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

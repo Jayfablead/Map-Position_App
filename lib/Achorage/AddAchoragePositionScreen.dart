@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -97,14 +98,14 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
-
-  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewposition();
-
+    print("widget.postid${ widget.postid}");
+    widget.postid==null?"":viewposition();
   }
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -2638,7 +2639,7 @@ SizedBox(width: 7.w,),
     final Map<String, String> data = {};
     data['post_id'] = widget.postid.toString();
     data['user_id'] = (loginmodal?.userId).toString();
-    print(data);
+    print("PrintdataAmchorage${data}");
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().viewsinganalpositionviewapi(data).then((response) async {
@@ -2650,6 +2651,7 @@ SizedBox(width: 7.w,),
             setState(() {
               _name.text=onwViewpostionmodal?.data?.title==""||onwViewpostionmodal?.data?.title==null?"":(onwViewpostionmodal?.data?.title).toString();
               _comments.text=onwViewpostionmodal?.data?.content==""||onwViewpostionmodal?.data?.content==null?"":(onwViewpostionmodal?.data?.content).toString();
+
               dynamic waterValue = onwViewpostionmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {
                 setState(() {

@@ -14,6 +14,7 @@ import '../Extras/Headerwidget.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Modal/AddOtherPositionModal.dart';
+import '../Modal/AddViewOtherModal.dart';
 import '../Modal/UpdateOtherPositionModal.dart';
 import '../Provider/Authprovider.dart';
 
@@ -87,6 +88,13 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("widget.postid${widget.postid}");
+    widget.postid==null?"":viewposition();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -678,5 +686,42 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
         }
       });
     }
+  }
+
+
+  viewposition() {
+    final Map<String, String> data = {};
+    data['post_id'] =widget.postid.toString();
+    data['user_id'] = (loginmodal?.userId).toString();
+    print(data);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().viewsinganalpositionviewapi(data).then((response) async {
+          addviewothermodal =
+              AddViewOtherModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && addviewothermodal?.success == true) {
+            _name.text=addviewothermodal?.data?.title==""||addviewothermodal?.data?.title==null?"":addviewothermodal?.data?.title ?? "";
+            _comments.text=addviewothermodal?.data?.content==""||addviewothermodal?.data?.content==null?"":addviewothermodal?.data?.content ?? "";
+
+            print("warningapicall");
+
+            setState(() {
+
+            });
+          } else {
+
+            setState(() {
+
+            });
+          }
+        });
+      } else {
+
+        setState(() {
+
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

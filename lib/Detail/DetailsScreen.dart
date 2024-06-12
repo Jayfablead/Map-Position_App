@@ -425,23 +425,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                         Row(
                                 children: [
-                                  onwViewpostionmodal?.data?.metaFields
-                                                  ?.water?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.pharmacy?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.groceries?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.alcohol?[0] ==
-                                              "false" ||
-                                          onwViewpostionmodal?.data?.metaFields
-                                                  ?.restaurant?[0] ==
-                                              "false"
-                                      ? Container()
-                                      :
+
                                   Text("Facilities Nearby :-",
                                           style: TextStyle(
                                               letterSpacing: 1,
@@ -486,13 +470,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                           CrossAxisAlignment
                                                               .center,
                                                       children: [
-                                                        onwViewpostionmodal
-                                                                    ?.data
-                                                                    ?.metaFields
-                                                                    ?.groceries?[0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Container(
+                                                       Container(
                                                                 height: 15.w,
                                                                 width: 15.w,
                                                                 padding: EdgeInsets
@@ -531,14 +509,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                         SizedBox(
                                                           width: 3.w,
                                                         ),
-                                                        onwViewpostionmodal
-                                                                        ?.data
-                                                                        ?.metaFields
-                                                                        ?.groceries?[
-                                                                    0] ==
-                                                                "false"
-                                                            ? Container()
-                                                            : Text("Groceries",
+                                                        Text("Groceries",
                                                                 style: TextStyle(
                                                                     letterSpacing:
                                                                         1,
@@ -553,13 +524,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                         "volken")),
                                                       ],
                                                     ),
-                                              onwViewpostionmodal
-                                                          ?.data
-                                                          ?.metaFields
-                                                          ?.pharmacy?[0] ==
-                                                      "false"
-                                                  ? Container()
-                                                  : Row(
+                                               Row(
                                                       children: [
                                                         Container(
                                                           height: 15.w,
@@ -744,17 +709,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             ],
                                           ),
 
-                                    onwViewpostionmodal
-                                        ?.data?.metaFields?.water?[0] ==
-                                        "false"
-                                        ? Container():SizedBox(
+                                    SizedBox(
                                             height: 1.h,
                                           ),
-                                    onwViewpostionmodal
-                                                ?.data?.metaFields?.water?[0] ==
-                                            "false"
-                                        ? Container()
-                                        : Row(
+                                   Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [

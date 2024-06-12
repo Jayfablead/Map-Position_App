@@ -103,6 +103,25 @@ class Data {
 class MetaFields {
   bool? originalAuthor;
   bool? bThumbnailId;
+  bool? propertyAddress;
+  String? propertyCity;
+  String? propertyArea;
+  String? propertyZip;
+  String? propertyCountry;
+  bool? propertyLatitude;
+  bool? propertyLongitude;
+  String? textSlips;
+  String? textMinimumapproachdepth;
+  String? textMeanlowwaterdockdepth;
+  String? textMinimumchanneldepth;
+  String? textMeanhighwaterclearance;
+  String? textFueldock;
+  String? textGas;
+  String? textTransientstorage;
+  bool? textLongtermstorage;
+  String? textMaxvesselloa;
+  String? textMaxsliplength;
+  String? textMaxslipwidth;
   bool? n1;
   bool? n2;
   bool? n3;
@@ -137,33 +156,16 @@ class MetaFields {
   bool? coral;
   bool? rocks;
   bool? groceries;
-  bool? water;
-  bool? alcohol;
   bool? pharmacy;
+  bool? water;
   bool? restaurant;
+  bool? alcohol;
   bool? beach;
   bool? pontoon;
   bool? shop;
-  bool? propertyLatitude;
-  bool? propertyLongitude;
   bool? propertyPrice;
   bool? propertyLabel;
   bool? propertyLabelBefore;
-  bool? propertyAddress;
-  bool? propertyZip;
-  bool? propertyCountry;
-  bool? textSlips;
-  bool? textMinimumapproachdepth;
-  bool? textMeanlowwaterdockdepth;
-  bool? textMinimumchanneldepth;
-  bool? textMeanhighwaterclearance;
-  bool? textFueldock;
-  bool? textGas;
-  bool? textTransientstorage;
-  bool? textLongtermstorage;
-  bool? textMaxvesselloa;
-  bool? textMaxsliplength;
-  bool? textMaxslipwidth;
   bool? localPgprSliderType;
   bool? localPgprContentType;
   bool? propFeatured;
@@ -187,8 +189,6 @@ class MetaFields {
   bool? hiddenAddress;
   bool? wpestateTotalViews;
   bool? wpestateDetailedViews;
-  bool? propertyCity;
-  bool? propertyArea;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
@@ -289,6 +289,25 @@ class MetaFields {
   MetaFields(
       {this.originalAuthor,
         this.bThumbnailId,
+        this.propertyAddress,
+        this.propertyCity,
+        this.propertyArea,
+        this.propertyZip,
+        this.propertyCountry,
+        this.propertyLatitude,
+        this.propertyLongitude,
+        this.textSlips,
+        this.textMinimumapproachdepth,
+        this.textMeanlowwaterdockdepth,
+        this.textMinimumchanneldepth,
+        this.textMeanhighwaterclearance,
+        this.textFueldock,
+        this.textGas,
+        this.textTransientstorage,
+        this.textLongtermstorage,
+        this.textMaxvesselloa,
+        this.textMaxsliplength,
+        this.textMaxslipwidth,
         this.n1,
         this.n2,
         this.n3,
@@ -323,33 +342,16 @@ class MetaFields {
         this.coral,
         this.rocks,
         this.groceries,
-        this.water,
-        this.alcohol,
         this.pharmacy,
+        this.water,
         this.restaurant,
+        this.alcohol,
         this.beach,
         this.pontoon,
         this.shop,
-        this.propertyLatitude,
-        this.propertyLongitude,
         this.propertyPrice,
         this.propertyLabel,
         this.propertyLabelBefore,
-        this.propertyAddress,
-        this.propertyZip,
-        this.propertyCountry,
-        this.textSlips,
-        this.textMinimumapproachdepth,
-        this.textMeanlowwaterdockdepth,
-        this.textMinimumchanneldepth,
-        this.textMeanhighwaterclearance,
-        this.textFueldock,
-        this.textGas,
-        this.textTransientstorage,
-        this.textLongtermstorage,
-        this.textMaxvesselloa,
-        this.textMaxsliplength,
-        this.textMaxslipwidth,
         this.localPgprSliderType,
         this.localPgprContentType,
         this.propFeatured,
@@ -373,8 +375,6 @@ class MetaFields {
         this.hiddenAddress,
         this.wpestateTotalViews,
         this.wpestateDetailedViews,
-        this.propertyCity,
-        this.propertyArea,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
@@ -475,6 +475,25 @@ class MetaFields {
   MetaFields.fromJson(Map<String, dynamic> json) {
     originalAuthor = json['original_author'];
     bThumbnailId = json['_thumbnail_id'];
+    propertyAddress = json['property_address'];
+    propertyCity = json['property_city'];
+    propertyArea = json['property_area'];
+    propertyZip = json['property_zip'];
+    propertyCountry = json['property_country'];
+    propertyLatitude = json['property_latitude'];
+    propertyLongitude = json['property_longitude'];
+    textSlips = json['text_slips'];
+    textMinimumapproachdepth = json['text_minimumapproachdepth'];
+    textMeanlowwaterdockdepth = json['text_meanlowwaterdockdepth'];
+    textMinimumchanneldepth = json['text_minimumchanneldepth'];
+    textMeanhighwaterclearance = json['text_meanhighwaterclearance'];
+    textFueldock = json['text_fueldock'];
+    textGas = json['text_gas'];
+    textTransientstorage = json['text_transientstorage'];
+    textLongtermstorage = json['text_longtermstorage'];
+    textMaxvesselloa = json['text_maxvesselloa'];
+    textMaxsliplength = json['text_maxsliplength'];
+    textMaxslipwidth = json['text_maxslipwidth'];
     n1 = json['n1'];
     n2 = json['n2'];
     n3 = json['n3'];
@@ -509,33 +528,16 @@ class MetaFields {
     coral = json['coral'];
     rocks = json['rocks'];
     groceries = json['groceries'];
-    water = json['water'];
-    alcohol = json['alcohol'];
     pharmacy = json['pharmacy'];
+    water = json['water'];
     restaurant = json['restaurant'];
+    alcohol = json['alcohol'];
     beach = json['beach'];
     pontoon = json['pontoon'];
     shop = json['shop'];
-    propertyLatitude = json['property_latitude'];
-    propertyLongitude = json['property_longitude'];
     propertyPrice = json['property_price'];
     propertyLabel = json['property_label'];
     propertyLabelBefore = json['property_label_before'];
-    propertyAddress = json['property_address'];
-    propertyZip = json['property_zip'];
-    propertyCountry = json['property_country'];
-    textSlips = json['text_slips'];
-    textMinimumapproachdepth = json['text_minimumapproachdepth'];
-    textMeanlowwaterdockdepth = json['text_meanlowwaterdockdepth'];
-    textMinimumchanneldepth = json['text_minimumchanneldepth'];
-    textMeanhighwaterclearance = json['text_meanhighwaterclearance'];
-    textFueldock = json['text_fueldock'];
-    textGas = json['text_gas'];
-    textTransientstorage = json['text_transientstorage'];
-    textLongtermstorage = json['text_longtermstorage'];
-    textMaxvesselloa = json['text_maxvesselloa'];
-    textMaxsliplength = json['text_maxsliplength'];
-    textMaxslipwidth = json['text_maxslipwidth'];
     localPgprSliderType = json['local_pgpr_slider_type'];
     localPgprContentType = json['local_pgpr_content_type'];
     propFeatured = json['prop_featured'];
@@ -559,8 +561,6 @@ class MetaFields {
     hiddenAddress = json['hidden_address'];
     wpestateTotalViews = json['wpestate_total_views'];
     wpestateDetailedViews = json['wpestate_detailed_views'];
-    propertyCity = json['property_city'];
-    propertyArea = json['property_area'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
@@ -663,6 +663,25 @@ class MetaFields {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['original_author'] = this.originalAuthor;
     data['_thumbnail_id'] = this.bThumbnailId;
+    data['property_address'] = this.propertyAddress;
+    data['property_city'] = this.propertyCity;
+    data['property_area'] = this.propertyArea;
+    data['property_zip'] = this.propertyZip;
+    data['property_country'] = this.propertyCountry;
+    data['property_latitude'] = this.propertyLatitude;
+    data['property_longitude'] = this.propertyLongitude;
+    data['text_slips'] = this.textSlips;
+    data['text_minimumapproachdepth'] = this.textMinimumapproachdepth;
+    data['text_meanlowwaterdockdepth'] = this.textMeanlowwaterdockdepth;
+    data['text_minimumchanneldepth'] = this.textMinimumchanneldepth;
+    data['text_meanhighwaterclearance'] = this.textMeanhighwaterclearance;
+    data['text_fueldock'] = this.textFueldock;
+    data['text_gas'] = this.textGas;
+    data['text_transientstorage'] = this.textTransientstorage;
+    data['text_longtermstorage'] = this.textLongtermstorage;
+    data['text_maxvesselloa'] = this.textMaxvesselloa;
+    data['text_maxsliplength'] = this.textMaxsliplength;
+    data['text_maxslipwidth'] = this.textMaxslipwidth;
     data['n1'] = this.n1;
     data['n2'] = this.n2;
     data['n3'] = this.n3;
@@ -697,33 +716,16 @@ class MetaFields {
     data['coral'] = this.coral;
     data['rocks'] = this.rocks;
     data['groceries'] = this.groceries;
-    data['water'] = this.water;
-    data['alcohol'] = this.alcohol;
     data['pharmacy'] = this.pharmacy;
+    data['water'] = this.water;
     data['restaurant'] = this.restaurant;
+    data['alcohol'] = this.alcohol;
     data['beach'] = this.beach;
     data['pontoon'] = this.pontoon;
     data['shop'] = this.shop;
-    data['property_latitude'] = this.propertyLatitude;
-    data['property_longitude'] = this.propertyLongitude;
     data['property_price'] = this.propertyPrice;
     data['property_label'] = this.propertyLabel;
     data['property_label_before'] = this.propertyLabelBefore;
-    data['property_address'] = this.propertyAddress;
-    data['property_zip'] = this.propertyZip;
-    data['property_country'] = this.propertyCountry;
-    data['text_slips'] = this.textSlips;
-    data['text_minimumapproachdepth'] = this.textMinimumapproachdepth;
-    data['text_meanlowwaterdockdepth'] = this.textMeanlowwaterdockdepth;
-    data['text_minimumchanneldepth'] = this.textMinimumchanneldepth;
-    data['text_meanhighwaterclearance'] = this.textMeanhighwaterclearance;
-    data['text_fueldock'] = this.textFueldock;
-    data['text_gas'] = this.textGas;
-    data['text_transientstorage'] = this.textTransientstorage;
-    data['text_longtermstorage'] = this.textLongtermstorage;
-    data['text_maxvesselloa'] = this.textMaxvesselloa;
-    data['text_maxsliplength'] = this.textMaxsliplength;
-    data['text_maxslipwidth'] = this.textMaxslipwidth;
     data['local_pgpr_slider_type'] = this.localPgprSliderType;
     data['local_pgpr_content_type'] = this.localPgprContentType;
     data['prop_featured'] = this.propFeatured;
@@ -747,8 +749,6 @@ class MetaFields {
     data['hidden_address'] = this.hiddenAddress;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['property_city'] = this.propertyCity;
-    data['property_area'] = this.propertyArea;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;

@@ -55,10 +55,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   TextEditingController _MaaSlipwidth =TextEditingController();
   TextEditingController _pricelebal1 =TextEditingController();
   String? selectedvalue="Anchorages";
-  String? services;
-  String? gas;
-  String? TransientStorage;
-  String? longtermstorage;
+  String? services="Yes";
+  String? gas="Yes";
+  String? TransientStorage="Yes";
+  String? longtermstorage="Yes";
   String? maxvesselloa;
   bool N1 = false;
   bool N2 = false;
@@ -2576,6 +2576,21 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               _descripation.text=viewcategorywisevieweetailmodal?.data?.content==""||viewcategorywisevieweetailmodal?.data?.content==null?"":(viewcategorywisevieweetailmodal?.data?.content).toString();
               _address.text=viewcategorywisevieweetailmodal?.data?.content==""||viewcategorywisevieweetailmodal?.data?.content==null?"":(viewcategorywisevieweetailmodal?.data?.content).toString();
               selectedvalue=viewcategorywisevieweetailmodal?.data?.postCategory==""||viewcategorywisevieweetailmodal?.data?.postCategory==null?"Anchorages":viewcategorywisevieweetailmodal?.data?.postCategory.toString();
+              _city.text=viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCity=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCity==""||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCity==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCity).toString();
+              _neighborthood.text=viewcategorywisevieweetailmodal?.data?.metaFields?.propertyArea=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyArea==""||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyArea==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.propertyArea).toString();
+              _zipcode.text=viewcategorywisevieweetailmodal?.data?.metaFields?.propertyZip=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyZip==""||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyZip==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.propertyZip).toString();
+              _country.text=viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCountry=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCountry==""||viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCountry==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.propertyCountry).toString();
+              _slips.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textSlips=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textSlips==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textSlips==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textSlips).toString();
+              _minimumapproachdepth.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMinimumapproachdepth=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMinimumapproachdepth==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMinimumapproachdepth==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMinimumapproachdepth).toString();
+              _meanlowwaterdockdepth.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanlowwaterdockdepth=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanlowwaterdockdepth).toString();
+              _meanhighwaterclearance.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanhighwaterclearance=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanhighwaterclearance==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanhighwaterclearance==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMeanhighwaterclearance).toString();
+              // services=viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock).toString();
+              // gas=viewcategorywisevieweetailmodal?.data?.metaFields?.textGas=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textGas==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textGas==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textGas).toString();
+              // TransientStorage=viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage).toString();
+              // longtermstorage=viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage).toString();
+              _MaxVesselLOA.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa).toString();
+              _MaaSlipLength.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength).toString();
+              _MaaSlipwidth.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth).toString();
 
               dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {

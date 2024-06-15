@@ -462,6 +462,22 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+  Future<http.Response> reportapi(Map<String, String> bodyData) async {
+    String url = '${apiUrl}add-report-position';
+    print(url);
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 60),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
 
 
 

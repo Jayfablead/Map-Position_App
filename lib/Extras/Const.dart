@@ -22,6 +22,7 @@ import '../Modal/LoginModal.dart';
 import '../Modal/MyMarinaViewModal.dart';
 import '../Modal/NewUpdatealaramModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
+import '../Modal/ReportModal.dart';
 import '../Modal/ShoAllMarkerModal.dart';
 import '../Modal/SinupModal.dart';
 import '../Modal/StripePaymentsModal.dart';
@@ -102,6 +103,7 @@ DeleteAlaramModal? deletealarammodal;
 AddAlaramModal? addalarammodal;
 NewUpdatealaramModal? newupdatealarammodal;
 UpdatealramModalscreen? updatealrammodalscreen;
+ReportModal? reportmodal;
 
 // Custom Button
 InkWell batan({

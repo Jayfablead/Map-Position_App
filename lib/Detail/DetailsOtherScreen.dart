@@ -29,6 +29,7 @@ import '../Modal/AddReviewModal.dart';
 import '../Modal/AddViewOtherModal.dart';
 import '../Modal/DaywiseWedhterModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
+import '../Modal/ReportModal.dart';
 import '../Modal/postionModel.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
@@ -64,7 +65,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
   List<MarkerData> _customMarkers = [];
   var latitudeString;
   var longitudeString;
-
+  String? selectedvalue="--- Select ---";
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
   CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
@@ -281,6 +282,37 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                         height: 1.h,
                       ),
 
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              report();
+                            },
+                            child: Icon(
+                              Icons.flag_outlined,
+                              color: Colors.black,
+                              size: 23.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          InkWell(
+                            onTap: (){
+                              report();
+                            },
+                            child: Text("Report",
+
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.black,
+                                    fontSize: 17.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -1452,5 +1484,308 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       }
     });
   }
+  report() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+                insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                // backgroundColor: Colors.transparent,
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 3.w),
+                          // height:  MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: bgcolor,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height: 7.w,
+                                    width: 7.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(100),
+                                        color: Colors.black),
+                                    child: InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                          size: 15.sp,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Report Property",
+                                    style: TextStyle(
+                                        letterSpacing: 1,
+                                        color: Colors.black,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "Volkan"),
+                                  ),
+                                  SizedBox(height: 1.h),
 
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Text("Category :-",style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken")),
+                              SizedBox(height: 1.h,),
+                              Container(
+                                height: 5.5.h,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                                decoration: BoxDecoration(
+                                  color:  Colors.white,
+                                  border: Border.all(width: 1, color: secondary),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+
+                                child:DropdownButton(
+                                  dropdownColor: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  hint: Text("Please Select Position Category",style: TextStyle(color:secondary,fontFamily: "volken",)),
+
+                                  value: selectedvalue,
+                                  onChanged: (val)
+                                  {
+                                    setState((){
+                                      selectedvalue=val!;
+                                      print(selectedvalue);
+                                    });
+                                  },
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text("--- Select ---",style: TextStyle(color:Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "--- Select ---",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("sexual content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "sexual-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("violent or repulsive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "violent-or-repulsive-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("hateful or abusive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "hateful-or-abusive-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("harassment or bullying",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "harassment-or-bullying",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("harmful or dangerous acts",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "harmful-or-dangerous-acts",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Misinformation",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "misinformation",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Child Abuse",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "child-abuse",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Promotes",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "promotes",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Spam or Misleading",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "spam-or-misleading",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Legal issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "legal-issue",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Captions issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "captions-issue",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      value: "other",
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Your Name :-",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: Colors.black,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan")),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Container(
+                                    width: 85.w,
+                                    child: TextFormField(
+
+                                      keyboardType: TextInputType.text,
+                                      style: TextStyle(color: Colors.black),
+                                      controller: _name,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Please Enter Your Name ";
+                                        }
+                                        return null;
+                                      },
+                                      decoration: inputDecoration(
+                                        hintText: "Enter Your Your Name",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+
+
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Message :-",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: Colors.black,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan")),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Container(
+                                    width: 85.w,
+                                    child: TextFormField(
+                                      maxLines: 4,
+                                      keyboardType: TextInputType.text,
+                                      style: TextStyle(color: Colors.black),
+                                      controller: _email,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Please Enter Message ";
+                                        }
+                                        return null;
+                                      },
+                                      decoration: inputDecoration(
+                                        hintText: "Enter Your Message",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              batan(
+                                  title: "REPORT",
+                                  route: () {
+                                    reportapifun();
+                                  },
+                                  hight: 6.h,
+                                  width: 85.w,
+                                  txtsize: 15.sp),
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ));
+          },
+        );
+      },
+    );
+  }
+  reportapifun() {
+    if (_formKey.currentState!.validate()) {
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['post_id'] = widget.postid.toString();
+      data['opinion_text'] = selectedvalue.toString();
+      data['name'] =_name.text.toString();
+      data['message'] = _email.text.toString();
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().reportapi(data).then((response) async {
+            reportmodal =
+                ReportModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && reportmodal?.success == true) {
+              EasyLoading.showSuccess(reportmodal?.message ?? '');
+              Get.back();
+              setState(() {});
+            } else {
+              EasyLoading.showError(reportmodal?.message ?? '');
+              setState(() {});
+            }
+          });
+        } else {
+          EasyLoading.showError(reportmodal?.message ?? '');
+          setState(() {});
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
+  }
 }

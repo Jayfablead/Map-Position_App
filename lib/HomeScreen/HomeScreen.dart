@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
 
@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: isLoading
               ? Container()
               : Stack(
-            children: [
+                          children: [
               Obx(() {
                 if (positionController.isLoading.value) {
                   return CustomGoogleMapMarkerBuilder(
@@ -331,47 +331,109 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: 10.h,
                 left: 10,
                 right: 10,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        onChanged: (value) {
-                          if (value.isEmpty) {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            showmarker();
-                          }
-                        },
-                        controller: searchController,
-                        decoration: inputDecoration(
-                            hintText: "Search....",
-                            icon: Icon(
-                              Icons.search,
-                              color: secondary,
-                            )),
+                child: Form(
+                  key: _formKey,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: searchController,
+                          decoration: inputDecoration(
+                              hintText: "Search....",
+                              icon: Icon(
+                                Icons.search,
+                                color: secondary,
+                              )),
+                          onChanged: (value) {
+                            if (value.isEmpty) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              showmarker();
+                            }
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a search term';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 1.w,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
+                      SizedBox(
+                        width: 1.w,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: blackback),
-                      child: IconButton(
-                        icon: Icon(Icons.search,
-                            color: Colors.white, size: 20.sp),
-                        onPressed: () {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          showmarker();
-                        },
+                          color: Colors.black, // Replace 'blackback' with a color
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 20.sp,
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              showmarker();
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                )
+                // Form(
+                //   key: _formKey,
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         child: TextField(
+                //           onChanged: (value) {
+                //             if (value.isEmpty) {
+                //               setState(() {
+                //                 isLoading = true;
+                //               });
+                //               showmarker();
+                //             }
+                //           },
+                //           controller: searchController,
+                //           decoration: inputDecoration(
+                //               hintText: "Search....",
+                //               icon: Icon(
+                //                 Icons.search,
+                //                 color: secondary,
+                //               )),
+                //         ),
+                //       ),
+                //       SizedBox(
+                //         width: 1.w,
+                //       ),
+                //       Container(
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //             color: blackback),
+                //         child: IconButton(
+                //           icon: Icon(Icons.search,
+                //               color: Colors.white, size: 20.sp),
+                //           onPressed: () {
+                //             if (_formKey.currentState!.validate()){
+                //               setState(() {
+                //                 isLoading = true;
+                //               });
+                //               showmarker();
+                //             }
+                //
+                //           },
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ):
               Positioned(
                 top: 10.h,
@@ -698,8 +760,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ):Container(),
-            ],
-          ),
+                          ],
+                        ),
         ));
   }
 

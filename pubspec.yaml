@@ -69,6 +69,7 @@ dependencies:
   intl:
   syncfusion_flutter_charts:
   fl_chart:
+  flutter_radar_chart:
 
 
 

@@ -166,156 +166,155 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                       fontFamily:
                       "volken",
                       letterSpacing: 1), ),),
-                ):Container(
-                  height: 55.h,
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount:useralarammodal?.alarms?.length,
-                    itemBuilder: (
-                        context, index
-                        ){
-                      return Container(
-                        padding: EdgeInsets.symmetric(horizontal: 1.w),
-                        margin: EdgeInsets.symmetric(vertical: 1.h),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(color: secondary)),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text("Title:-",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: blackback,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                    Text(useralarammodal?.alarms?[index].location==""||useralarammodal?.alarms?[index].location==null?"N/A":(useralarammodal?.alarms?[index].location).toString(),
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    InkWell(
-                                       onTap: (){
-                                         Get.to(UpdatealramScreenTwo(id: (useralarammodal?.alarms?[index].id).toString(),));
-                                       },
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: Colors.black,
-                                        size: 25.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: secondary,
-                              thickness: 0.1.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text("Status :- ",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: blackback,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                    useralarammodal?.alarms?[index].status=="1"?Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.green.shade100
-                                      ),
-                                      child: Text("Active",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              letterSpacing: 1,
-                                              color: Colors.green,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.normal,
-                                              fontFamily: "volken")),
-                                    ):Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.red.shade100
-                                      ),
-                                      child: Text("InActive",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              letterSpacing: 1,
-                                              color: Colors.red,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.normal,
-                                              fontFamily: "volken")),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: (){
-                                        deletealarama(useralarammodal?.alarms?[index].id ?? "");
-                                      },
-                                      child: Icon(
-                                        Icons.delete,
-                                        color: Colors.red.shade200,
-                                        size: 25.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Row(
-                              children: [
-                                Text("Category :- ",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: blackback,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                                Text(useralarammodal?.alarms?[index].name==""||useralarammodal?.alarms?[index].name==null?"N/A":useralarammodal?.alarms?[index].name ?? "",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: secondary,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                      );
-                    }
-                  ),
+                ):
+Column(
+  children: [
+    for (int index = 0;
+    index < (useralarammodal?.alarms?.length ?? 0);
+    index++)...[
+        Container(
+        padding: EdgeInsets.symmetric(horizontal: 1.w),
+        margin: EdgeInsets.symmetric(vertical: 1.h),
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: secondary)),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 1.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text("Title:-",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                    Text(useralarammodal?.alarms?[index].location==""||useralarammodal?.alarms?[index].location==null?"N/A":(useralarammodal?.alarms?[index].location).toString(),
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                  ],
                 ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Get.to(UpdatealramScreenTwo(id: (useralarammodal?.alarms?[index].id).toString(),));
+                      },
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                        size: 25.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Divider(
+              color: secondary,
+              thickness: 0.1.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text("Status :- ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken")),
+                    useralarammodal?.alarms?[index].status=="1"?Container(
+                      padding: EdgeInsets.symmetric(horizontal: 2.w),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green.shade100
+                      ),
+                      child: Text("Active",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.green,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: "volken")),
+                    ):Container(
+                      padding: EdgeInsets.symmetric(horizontal: 2.w),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red.shade100
+                      ),
+                      child: Text("InActive",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.red,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: "volken")),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        deletealarama(useralarammodal?.alarms?[index].id ?? "");
+                      },
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.red.shade200,
+                        size: 25.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 1.h,
+            ),
+            Row(
+              children: [
+                Text("Category :- ",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: blackback,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: "volken")),
+                Text(useralarammodal?.alarms?[index].name==""||useralarammodal?.alarms?[index].name==null?"N/A":useralarammodal?.alarms?[index].name ?? "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: secondary,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: "volken")),
+              ],
+            ),
 
+          ],
+        ),
+      ),
+    ]
+
+
+  ],
+),
 
 
               ],

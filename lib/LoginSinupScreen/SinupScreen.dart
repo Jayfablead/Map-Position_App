@@ -55,20 +55,17 @@ class _SinupScreenState extends State<SinupScreen> {
                         borderRadius: BorderRadius.circular(100),
                         color: blackback,
                       ),
-                      child: Transform.rotate(
-                          angle: pi / 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/lagan.png",
-                                height: 25.w,
-                                width: 25.w,
-                                color: Colors.white,
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          )),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/welcomelogo.png",
+                            height: 34.w,
+                            width: 34.w,
+                            fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

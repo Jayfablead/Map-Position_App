@@ -626,7 +626,7 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
       data['m_lng'] = widget.lng.toString();
       data['category'] = "Other";
       print(imagePaths);
-      data['upload_pictures[]'] =jsonEncode(imagePaths);
+      data['upload_pictures'] =jsonEncode(imagePaths);
       print("Printapivalue${data}");
       checkInternet().then((internet) async {
         if (internet) {

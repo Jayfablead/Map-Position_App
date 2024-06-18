@@ -2521,7 +2521,7 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                             () {
                           Get.offAll(LoginScreen());
                         },
-                      ):InkWell(
+                      ):loginmodal?.userId == viewcategorywisevieweetailmodal?.data?.authorId ?Container():InkWell(
                         onTap: () {
 
                           showratingpop1();

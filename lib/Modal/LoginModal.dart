@@ -2,7 +2,7 @@ class LoginModal {
   bool? success;
   String? message;
   String? token;
-  int? userId;
+  String? userId;
   String? paymentStatus;
   String? planEndDate;
 

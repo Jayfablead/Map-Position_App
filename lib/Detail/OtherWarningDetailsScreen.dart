@@ -1063,7 +1063,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                 () {
                               Get.offAll(LoginScreen());
                             },
-                          ):loginmodal?.userId == int.parse((addviewwarningmodal?.data?.authorId).toString()) ?Container():InkWell(
+                          ):loginmodal?.userId == addviewwarningmodal?.data?.authorId ?Container():InkWell(
                             onTap: () {
 
                               showratingpop1();

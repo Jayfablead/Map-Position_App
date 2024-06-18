@@ -2173,7 +2173,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "volken")),
-                            ):loginmodal?.userId == int.parse((onwViewpostionmodal?.data?.authorId).toString()) ?Container():InkWell(
+                            ):loginmodal?.userId == onwViewpostionmodal?.data?.authorId ?Container():InkWell(
                               onTap: () {
                                 showratingpop1();
                               },

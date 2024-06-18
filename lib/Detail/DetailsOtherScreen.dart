@@ -945,7 +945,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                 () {
                               Get.offAll(LoginScreen());
                             },
-                          ): loginmodal?.userId == int.parse((addviewothermodal?.data?.authorId).toString()) ?Container(): InkWell(
+                          ): loginmodal?.userId == addviewothermodal?.data?.authorId?Container(): InkWell(
                             onTap: () {
 
                               showratingpop1();

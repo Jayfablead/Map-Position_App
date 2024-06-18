@@ -52,6 +52,7 @@ class AddviewWarningModal {
 }
 
 class Data {
+  String? authorId;
   String? postCategory;
   int? id;
   String? title;
@@ -62,7 +63,8 @@ class Data {
   MetaFields? metaFields;
 
   Data(
-      {this.postCategory,
+      {this.authorId,
+        this.postCategory,
         this.id,
         this.title,
         this.content,
@@ -72,6 +74,7 @@ class Data {
         this.metaFields});
 
   Data.fromJson(Map<String, dynamic> json) {
+    authorId = json['author_id'];
     postCategory = json['post_category'];
     id = json['id'];
     title = json['title'];
@@ -86,6 +89,7 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['author_id'] = this.authorId;
     data['post_category'] = this.postCategory;
     data['id'] = this.id;
     data['title'] = this.title;
@@ -103,30 +107,34 @@ class Data {
 class MetaFields {
   bool? originalAuthor;
   bool? bThumbnailId;
+  bool? propertyLatitude;
+  bool? propertyLongitude;
+  bool? propertyPrice;
+  bool? propertyLabel;
+  bool? propertyLabelBefore;
+  bool? propertyAddress;
+  Null? propertyZip;
+  Null? propertyCountry;
+  Null? textSlips;
+  Null? textMinimumapproachdepth;
+  Null? textMeanlowwaterdockdepth;
+  Null? textMinimumchanneldepth;
+  Null? textMeanhighwaterclearance;
+  Null? textFueldock;
+  Null? textGas;
+  Null? textTransientstorage;
+  bool? textLongtermstorage;
+  Null? textMaxvesselloa;
+  Null? textMaxsliplength;
+  Null? textMaxslipwidth;
   bool? n1;
-  bool? n2;
-  bool? n3;
   bool? ne1;
-  bool? ne2;
-  bool? ne3;
-  bool? e1;
   bool? e2;
-  bool? e3;
-  bool? se1;
   bool? se2;
-  bool? se3;
-  bool? s1;
-  bool? s2;
   bool? s3;
-  bool? sw1;
-  bool? sw2;
   bool? sw3;
-  bool? w1;
   bool? w2;
-  bool? w3;
-  bool? nw1;
   bool? nw2;
-  bool? nw3;
   bool? ownAnchor;
   bool? buoys;
   bool? mountainWedges;
@@ -137,33 +145,13 @@ class MetaFields {
   bool? coral;
   bool? rocks;
   bool? groceries;
-  bool? water;
-  bool? alcohol;
   bool? pharmacy;
+  bool? water;
   bool? restaurant;
+  bool? alcohol;
   bool? beach;
   bool? pontoon;
   bool? shop;
-  bool? propertyLatitude;
-  bool? propertyLongitude;
-  bool? propertyPrice;
-  bool? propertyLabel;
-  bool? propertyLabelBefore;
-  bool? propertyAddress;
-  bool? propertyZip;
-  bool? propertyCountry;
-  bool? textSlips;
-  bool? textMinimumapproachdepth;
-  bool? textMeanlowwaterdockdepth;
-  bool? textMinimumchanneldepth;
-  bool? textMeanhighwaterclearance;
-  bool? textFueldock;
-  bool? textGas;
-  bool? textTransientstorage;
-  bool? textLongtermstorage;
-  bool? textMaxvesselloa;
-  bool? textMaxsliplength;
-  bool? textMaxslipwidth;
   bool? localPgprSliderType;
   bool? localPgprContentType;
   bool? propFeatured;
@@ -187,8 +175,22 @@ class MetaFields {
   bool? hiddenAddress;
   bool? wpestateTotalViews;
   bool? wpestateDetailedViews;
-  bool? propertyCity;
-  bool? propertyArea;
+  bool? n2;
+  bool? ne3;
+  bool? e1;
+  bool? sw1;
+  bool? n3;
+  bool? s1;
+  bool? w1;
+  bool? nw3;
+  bool? s2;
+  bool? ne2;
+  bool? e3;
+  bool? se1;
+  bool? se3;
+  bool? sw2;
+  bool? w3;
+  bool? nw1;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
@@ -213,6 +215,8 @@ class MetaFields {
   bool? bWpOldSlug;
   bool? bEditLast;
   bool? rsPageBgColor;
+  Null? propertyCity;
+  Null? propertyArea;
   bool? propertyThemeSlider;
   bool? imageToAttach;
   bool? embedVirtualTour;
@@ -289,47 +293,6 @@ class MetaFields {
   MetaFields(
       {this.originalAuthor,
         this.bThumbnailId,
-        this.n1,
-        this.n2,
-        this.n3,
-        this.ne1,
-        this.ne2,
-        this.ne3,
-        this.e1,
-        this.e2,
-        this.e3,
-        this.se1,
-        this.se2,
-        this.se3,
-        this.s1,
-        this.s2,
-        this.s3,
-        this.sw1,
-        this.sw2,
-        this.sw3,
-        this.w1,
-        this.w2,
-        this.w3,
-        this.nw1,
-        this.nw2,
-        this.nw3,
-        this.ownAnchor,
-        this.buoys,
-        this.mountainWedges,
-        this.ownLines,
-        this.sand,
-        this.mud,
-        this.clay,
-        this.coral,
-        this.rocks,
-        this.groceries,
-        this.water,
-        this.alcohol,
-        this.pharmacy,
-        this.restaurant,
-        this.beach,
-        this.pontoon,
-        this.shop,
         this.propertyLatitude,
         this.propertyLongitude,
         this.propertyPrice,
@@ -350,6 +313,31 @@ class MetaFields {
         this.textMaxvesselloa,
         this.textMaxsliplength,
         this.textMaxslipwidth,
+        this.n1,
+        this.ne1,
+        this.e2,
+        this.se2,
+        this.s3,
+        this.sw3,
+        this.w2,
+        this.nw2,
+        this.ownAnchor,
+        this.buoys,
+        this.mountainWedges,
+        this.ownLines,
+        this.sand,
+        this.mud,
+        this.clay,
+        this.coral,
+        this.rocks,
+        this.groceries,
+        this.pharmacy,
+        this.water,
+        this.restaurant,
+        this.alcohol,
+        this.beach,
+        this.pontoon,
+        this.shop,
         this.localPgprSliderType,
         this.localPgprContentType,
         this.propFeatured,
@@ -373,8 +361,22 @@ class MetaFields {
         this.hiddenAddress,
         this.wpestateTotalViews,
         this.wpestateDetailedViews,
-        this.propertyCity,
-        this.propertyArea,
+        this.n2,
+        this.ne3,
+        this.e1,
+        this.sw1,
+        this.n3,
+        this.s1,
+        this.w1,
+        this.nw3,
+        this.s2,
+        this.ne2,
+        this.e3,
+        this.se1,
+        this.se3,
+        this.sw2,
+        this.w3,
+        this.nw1,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
@@ -399,6 +401,8 @@ class MetaFields {
         this.bWpOldSlug,
         this.bEditLast,
         this.rsPageBgColor,
+        this.propertyCity,
+        this.propertyArea,
         this.propertyThemeSlider,
         this.imageToAttach,
         this.embedVirtualTour,
@@ -475,47 +479,6 @@ class MetaFields {
   MetaFields.fromJson(Map<String, dynamic> json) {
     originalAuthor = json['original_author'];
     bThumbnailId = json['_thumbnail_id'];
-    n1 = json['n1'];
-    n2 = json['n2'];
-    n3 = json['n3'];
-    ne1 = json['ne1'];
-    ne2 = json['ne2'];
-    ne3 = json['ne3'];
-    e1 = json['e1'];
-    e2 = json['e2'];
-    e3 = json['e3'];
-    se1 = json['se1'];
-    se2 = json['se2'];
-    se3 = json['se3'];
-    s1 = json['s1'];
-    s2 = json['s2'];
-    s3 = json['s3'];
-    sw1 = json['sw1'];
-    sw2 = json['sw2'];
-    sw3 = json['sw3'];
-    w1 = json['w1'];
-    w2 = json['w2'];
-    w3 = json['w3'];
-    nw1 = json['nw1'];
-    nw2 = json['nw2'];
-    nw3 = json['nw3'];
-    ownAnchor = json['own_anchor'];
-    buoys = json['buoys'];
-    mountainWedges = json['mountain_wedges'];
-    ownLines = json['own_lines'];
-    sand = json['sand'];
-    mud = json['mud'];
-    clay = json['clay'];
-    coral = json['coral'];
-    rocks = json['rocks'];
-    groceries = json['groceries'];
-    water = json['water'];
-    alcohol = json['alcohol'];
-    pharmacy = json['pharmacy'];
-    restaurant = json['restaurant'];
-    beach = json['beach'];
-    pontoon = json['pontoon'];
-    shop = json['shop'];
     propertyLatitude = json['property_latitude'];
     propertyLongitude = json['property_longitude'];
     propertyPrice = json['property_price'];
@@ -536,6 +499,31 @@ class MetaFields {
     textMaxvesselloa = json['text_maxvesselloa'];
     textMaxsliplength = json['text_maxsliplength'];
     textMaxslipwidth = json['text_maxslipwidth'];
+    n1 = json['n1'];
+    ne1 = json['ne1'];
+    e2 = json['e2'];
+    se2 = json['se2'];
+    s3 = json['s3'];
+    sw3 = json['sw3'];
+    w2 = json['w2'];
+    nw2 = json['nw2'];
+    ownAnchor = json['own_anchor'];
+    buoys = json['buoys'];
+    mountainWedges = json['mountain_wedges'];
+    ownLines = json['own_lines'];
+    sand = json['sand'];
+    mud = json['mud'];
+    clay = json['clay'];
+    coral = json['coral'];
+    rocks = json['rocks'];
+    groceries = json['groceries'];
+    pharmacy = json['pharmacy'];
+    water = json['water'];
+    restaurant = json['restaurant'];
+    alcohol = json['alcohol'];
+    beach = json['beach'];
+    pontoon = json['pontoon'];
+    shop = json['shop'];
     localPgprSliderType = json['local_pgpr_slider_type'];
     localPgprContentType = json['local_pgpr_content_type'];
     propFeatured = json['prop_featured'];
@@ -559,8 +547,22 @@ class MetaFields {
     hiddenAddress = json['hidden_address'];
     wpestateTotalViews = json['wpestate_total_views'];
     wpestateDetailedViews = json['wpestate_detailed_views'];
-    propertyCity = json['property_city'];
-    propertyArea = json['property_area'];
+    n2 = json['n2'];
+    ne3 = json['ne3'];
+    e1 = json['e1'];
+    sw1 = json['sw1'];
+    n3 = json['n3'];
+    s1 = json['s1'];
+    w1 = json['w1'];
+    nw3 = json['nw3'];
+    s2 = json['s2'];
+    ne2 = json['ne2'];
+    e3 = json['e3'];
+    se1 = json['se1'];
+    se3 = json['se3'];
+    sw2 = json['sw2'];
+    w3 = json['w3'];
+    nw1 = json['nw1'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
@@ -585,6 +587,8 @@ class MetaFields {
     bWpOldSlug = json['_wp_old_slug'];
     bEditLast = json['_edit_last'];
     rsPageBgColor = json['rs_page_bg_color'];
+    propertyCity = json['property_city'];
+    propertyArea = json['property_area'];
     propertyThemeSlider = json['property_theme_slider'];
     imageToAttach = json['image_to_attach'];
     embedVirtualTour = json['embed_virtual_tour'];
@@ -663,47 +667,6 @@ class MetaFields {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['original_author'] = this.originalAuthor;
     data['_thumbnail_id'] = this.bThumbnailId;
-    data['n1'] = this.n1;
-    data['n2'] = this.n2;
-    data['n3'] = this.n3;
-    data['ne1'] = this.ne1;
-    data['ne2'] = this.ne2;
-    data['ne3'] = this.ne3;
-    data['e1'] = this.e1;
-    data['e2'] = this.e2;
-    data['e3'] = this.e3;
-    data['se1'] = this.se1;
-    data['se2'] = this.se2;
-    data['se3'] = this.se3;
-    data['s1'] = this.s1;
-    data['s2'] = this.s2;
-    data['s3'] = this.s3;
-    data['sw1'] = this.sw1;
-    data['sw2'] = this.sw2;
-    data['sw3'] = this.sw3;
-    data['w1'] = this.w1;
-    data['w2'] = this.w2;
-    data['w3'] = this.w3;
-    data['nw1'] = this.nw1;
-    data['nw2'] = this.nw2;
-    data['nw3'] = this.nw3;
-    data['own_anchor'] = this.ownAnchor;
-    data['buoys'] = this.buoys;
-    data['mountain_wedges'] = this.mountainWedges;
-    data['own_lines'] = this.ownLines;
-    data['sand'] = this.sand;
-    data['mud'] = this.mud;
-    data['clay'] = this.clay;
-    data['coral'] = this.coral;
-    data['rocks'] = this.rocks;
-    data['groceries'] = this.groceries;
-    data['water'] = this.water;
-    data['alcohol'] = this.alcohol;
-    data['pharmacy'] = this.pharmacy;
-    data['restaurant'] = this.restaurant;
-    data['beach'] = this.beach;
-    data['pontoon'] = this.pontoon;
-    data['shop'] = this.shop;
     data['property_latitude'] = this.propertyLatitude;
     data['property_longitude'] = this.propertyLongitude;
     data['property_price'] = this.propertyPrice;
@@ -724,6 +687,31 @@ class MetaFields {
     data['text_maxvesselloa'] = this.textMaxvesselloa;
     data['text_maxsliplength'] = this.textMaxsliplength;
     data['text_maxslipwidth'] = this.textMaxslipwidth;
+    data['n1'] = this.n1;
+    data['ne1'] = this.ne1;
+    data['e2'] = this.e2;
+    data['se2'] = this.se2;
+    data['s3'] = this.s3;
+    data['sw3'] = this.sw3;
+    data['w2'] = this.w2;
+    data['nw2'] = this.nw2;
+    data['own_anchor'] = this.ownAnchor;
+    data['buoys'] = this.buoys;
+    data['mountain_wedges'] = this.mountainWedges;
+    data['own_lines'] = this.ownLines;
+    data['sand'] = this.sand;
+    data['mud'] = this.mud;
+    data['clay'] = this.clay;
+    data['coral'] = this.coral;
+    data['rocks'] = this.rocks;
+    data['groceries'] = this.groceries;
+    data['pharmacy'] = this.pharmacy;
+    data['water'] = this.water;
+    data['restaurant'] = this.restaurant;
+    data['alcohol'] = this.alcohol;
+    data['beach'] = this.beach;
+    data['pontoon'] = this.pontoon;
+    data['shop'] = this.shop;
     data['local_pgpr_slider_type'] = this.localPgprSliderType;
     data['local_pgpr_content_type'] = this.localPgprContentType;
     data['prop_featured'] = this.propFeatured;
@@ -747,8 +735,22 @@ class MetaFields {
     data['hidden_address'] = this.hiddenAddress;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['property_city'] = this.propertyCity;
-    data['property_area'] = this.propertyArea;
+    data['n2'] = this.n2;
+    data['ne3'] = this.ne3;
+    data['e1'] = this.e1;
+    data['sw1'] = this.sw1;
+    data['n3'] = this.n3;
+    data['s1'] = this.s1;
+    data['w1'] = this.w1;
+    data['nw3'] = this.nw3;
+    data['s2'] = this.s2;
+    data['ne2'] = this.ne2;
+    data['e3'] = this.e3;
+    data['se1'] = this.se1;
+    data['se3'] = this.se3;
+    data['sw2'] = this.sw2;
+    data['w3'] = this.w3;
+    data['nw1'] = this.nw1;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;
@@ -773,6 +775,8 @@ class MetaFields {
     data['_wp_old_slug'] = this.bWpOldSlug;
     data['_edit_last'] = this.bEditLast;
     data['rs_page_bg_color'] = this.rsPageBgColor;
+    data['property_city'] = this.propertyCity;
+    data['property_area'] = this.propertyArea;
     data['property_theme_slider'] = this.propertyThemeSlider;
     data['image_to_attach'] = this.imageToAttach;
     data['embed_virtual_tour'] = this.embedVirtualTour;

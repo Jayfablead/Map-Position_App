@@ -3187,7 +3187,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           Get.offAll(LoginScreen());
                                         },
                                       )
-                                    : InkWell(
+                                    :
+                            loginmodal?.userId == int.parse((viewcategorywisevieweetailmodal?.data?.authorId).toString()) ?Container(): InkWell(
                                         onTap: () {
                                           showratingpop1();
                                         },

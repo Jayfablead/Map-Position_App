@@ -2173,9 +2173,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "volken")),
-                            ):InkWell(
+                            ):loginmodal?.userId == int.parse((onwViewpostionmodal?.data?.authorId).toString()) ?Container():InkWell(
                               onTap: () {
-
                                 showratingpop1();
                               },
                               child: Text("Add Review",

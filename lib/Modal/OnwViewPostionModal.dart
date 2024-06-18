@@ -52,6 +52,7 @@ class OnwViewPostionModal {
 }
 
 class Data {
+  String? authorId;
   String? postCategory;
   int? id;
   String? title;
@@ -62,7 +63,8 @@ class Data {
   MetaFields? metaFields;
 
   Data(
-      {this.postCategory,
+      {this.authorId,
+        this.postCategory,
         this.id,
         this.title,
         this.content,
@@ -72,6 +74,7 @@ class Data {
         this.metaFields});
 
   Data.fromJson(Map<String, dynamic> json) {
+    authorId = json['author_id'];
     postCategory = json['post_category'];
     id = json['id'];
     title = json['title'];
@@ -86,6 +89,7 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['author_id'] = this.authorId;
     data['post_category'] = this.postCategory;
     data['id'] = this.id;
     data['title'] = this.title;
@@ -150,20 +154,20 @@ class MetaFields {
   bool? propertyLabel;
   bool? propertyLabelBefore;
   bool? propertyAddress;
-  bool? propertyZip;
-  bool? propertyCountry;
-  bool? textSlips;
-  bool? textMinimumapproachdepth;
-  bool? textMeanlowwaterdockdepth;
-  bool? textMinimumchanneldepth;
-  bool? textMeanhighwaterclearance;
-  bool? textFueldock;
-  bool? textGas;
-  bool? textTransientstorage;
+  String? propertyZip;
+  String? propertyCountry;
+  String? textSlips;
+  String? textMinimumapproachdepth;
+  String? textMeanlowwaterdockdepth;
+  String? textMinimumchanneldepth;
+  String? textMeanhighwaterclearance;
+  String? textFueldock;
+  String? textGas;
+  String? textTransientstorage;
   bool? textLongtermstorage;
-  bool? textMaxvesselloa;
-  bool? textMaxsliplength;
-  bool? textMaxslipwidth;
+  String? textMaxvesselloa;
+  String? textMaxsliplength;
+  String? textMaxslipwidth;
   bool? localPgprSliderType;
   bool? localPgprContentType;
   bool? propFeatured;
@@ -187,8 +191,6 @@ class MetaFields {
   bool? hiddenAddress;
   bool? wpestateTotalViews;
   bool? wpestateDetailedViews;
-  bool? propertyCity;
-  bool? propertyArea;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
@@ -213,6 +215,8 @@ class MetaFields {
   bool? bWpOldSlug;
   bool? bEditLast;
   bool? rsPageBgColor;
+  String? propertyCity;
+  String? propertyArea;
   bool? propertyThemeSlider;
   bool? imageToAttach;
   bool? embedVirtualTour;
@@ -373,8 +377,6 @@ class MetaFields {
         this.hiddenAddress,
         this.wpestateTotalViews,
         this.wpestateDetailedViews,
-        this.propertyCity,
-        this.propertyArea,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
@@ -399,6 +401,8 @@ class MetaFields {
         this.bWpOldSlug,
         this.bEditLast,
         this.rsPageBgColor,
+        this.propertyCity,
+        this.propertyArea,
         this.propertyThemeSlider,
         this.imageToAttach,
         this.embedVirtualTour,
@@ -559,8 +563,6 @@ class MetaFields {
     hiddenAddress = json['hidden_address'];
     wpestateTotalViews = json['wpestate_total_views'];
     wpestateDetailedViews = json['wpestate_detailed_views'];
-    propertyCity = json['property_city'];
-    propertyArea = json['property_area'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
@@ -585,6 +587,8 @@ class MetaFields {
     bWpOldSlug = json['_wp_old_slug'];
     bEditLast = json['_edit_last'];
     rsPageBgColor = json['rs_page_bg_color'];
+    propertyCity = json['property_city'];
+    propertyArea = json['property_area'];
     propertyThemeSlider = json['property_theme_slider'];
     imageToAttach = json['image_to_attach'];
     embedVirtualTour = json['embed_virtual_tour'];
@@ -747,8 +751,6 @@ class MetaFields {
     data['hidden_address'] = this.hiddenAddress;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['property_city'] = this.propertyCity;
-    data['property_area'] = this.propertyArea;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;
@@ -773,6 +775,8 @@ class MetaFields {
     data['_wp_old_slug'] = this.bWpOldSlug;
     data['_edit_last'] = this.bEditLast;
     data['rs_page_bg_color'] = this.rsPageBgColor;
+    data['property_city'] = this.propertyCity;
+    data['property_area'] = this.propertyArea;
     data['property_theme_slider'] = this.propertyThemeSlider;
     data['image_to_attach'] = this.imageToAttach;
     data['embed_virtual_tour'] = this.embedVirtualTour;

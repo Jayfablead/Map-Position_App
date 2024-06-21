@@ -297,12 +297,6 @@ class _drawer1State extends State<drawer1> {
                 ), SizedBox(
                   height: 2.h,
                 ),
-
-
-
-
-
-
               ],
             ),
           ],

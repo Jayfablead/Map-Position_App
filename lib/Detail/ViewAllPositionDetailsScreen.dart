@@ -2361,7 +2361,18 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   SizedBox(
                     height: 1.h,
                   ),
-                  Container(
+                  viewcategorywisevieweetailmodal
+                      ?.nearbyPosts?.length==""||viewcategorywisevieweetailmodal
+                      ?.nearbyPosts?.length==0||viewcategorywisevieweetailmodal
+                      ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Listings Available", style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black,
+                      fontWeight:
+                      FontWeight.w500,
+                      fontFamily:
+                      "volken",
+                      letterSpacing: 1), ),)
+                      : Container(
                     height: 28.h,
                     child: ListView.builder(
                       shrinkWrap: true,

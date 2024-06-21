@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
-  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
+  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 5);
   Position? _currentPosition;
   int? select;
   late LatLng dynamicLatLng;
@@ -261,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           initialCameraPosition: CameraPosition(
                             target: _currentPosition1,
                             // You can set your initial position here
-                            zoom: 12.0,
+                            zoom: 5,
                           ),
                           mapType: _mapType,
                           markers: _markers,
@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         initialCameraPosition: CameraPosition(
                           target: _currentPosition1,
                           // You can set your initial position here
-                          zoom: 12.0,
+                          zoom: 5,
                         ),
                         gestureRecognizers: Set()
                           ..add(Factory<OneSequenceGestureRecognizer>(
@@ -300,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     initialCameraPosition: CameraPosition(
                       target: _currentPosition1,
                       // You can set your initial position here
-                      zoom: 12.0,
+                      zoom: 5,
                     ),
                     mapType: _mapType,
                     markers: _markers,
@@ -770,7 +770,7 @@ class _HomeScreenState extends State<HomeScreen> {
       mapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
           target: _currentPosition1,
-          zoom: 10.0,
+          zoom: 5,
         ),
       ));
     }

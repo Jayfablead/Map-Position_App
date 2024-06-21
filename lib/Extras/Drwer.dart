@@ -344,13 +344,16 @@ class _drawer1State extends State<drawer1> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 17.sp,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken")),
+                        SizedBox(
+                          width: 40.w,
+                          child: Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: secondary,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: "volken")),
+                        ),
 
                       ],
                     )

@@ -110,7 +110,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                         child: CachedNetworkImage(
                                           imageUrl:
                                           viewfouritemodal?.positions?[i].properties?.postImage ?? "",
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                           progressIndicatorBuilder:
                                               (context, url, progress) =>
                                               Container(alignment: Alignment.center,child: Center(child: CircularProgressIndicator())),

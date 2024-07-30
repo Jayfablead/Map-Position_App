@@ -86,7 +86,7 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
     super.initState();
     ViewAlaram();
     getLocation().then((_) {
-      setState(() async {
+      setState((){
         _markers.add(Marker(
           markerId: MarkerId('Current Location'),
           // icon: await BitmapDescriptor.fromAssetImage(

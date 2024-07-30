@@ -11,7 +11,7 @@ class authprovider with ChangeNotifier {
   Map<String, String> headers = {
     'Authorization': '01234XYZABCDboatPosition@7890',
   };
-  String apiUrl = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/';
+  String apiUrl = 'https://www.navlex.net/wp-json/custom/v1/';
 
 
   Future<http.Response> loginApi(Map<String, String> bodyData) async {
@@ -190,7 +190,7 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
   Future<http.Response> showmarkerapi(Map<String, String> bodyData) async {
-    String url = "https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties";
+    String url = "${apiUrl}all-properties";
     print(url);
     var responseJson;
     final response = await http
@@ -298,7 +298,7 @@ class authprovider with ChangeNotifier {
   }
 
   Future<http.Response> mymerinaviewapi(Map<String, String> bodyData) async {
-    const url = 'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties';
+    const url = 'https://www.navlex.net/wp-json/custom/v1/all-properties';
     print(url);
     var responseJson;
     final response = await http

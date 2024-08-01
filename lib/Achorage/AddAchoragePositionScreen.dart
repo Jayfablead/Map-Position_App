@@ -126,7 +126,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                 height: 5.h,
               ),
                   header(
-
                       text: "Anchor",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState?.openDrawer();
@@ -137,7 +136,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SizedBox(
                     height: 1.5.h,
                   ),
@@ -192,8 +190,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -205,7 +202,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("N1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -223,7 +220,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("N2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -241,7 +238,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("N3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -249,8 +246,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),
                     SizedBox(height: 1.h,),
@@ -265,8 +260,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -278,7 +272,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NE1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -297,7 +291,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NE2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -315,7 +309,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NE3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -323,8 +317,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),
                     SizedBox(height: 1.h,),
@@ -339,8 +331,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -352,7 +343,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("E1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -371,7 +362,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("E2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -389,7 +380,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("E3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -397,8 +388,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),SizedBox(height: 1.h,),
                     Row(
@@ -412,8 +401,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -425,7 +413,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SE1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -444,7 +432,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SE2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -462,7 +450,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SE3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -470,8 +458,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),SizedBox(height: 1.h,),
                     Row(
@@ -485,8 +471,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -498,7 +483,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("S1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -517,7 +502,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("S2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -535,7 +520,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("S3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -543,8 +528,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),SizedBox(height: 1.h,),
                     Row(
@@ -558,8 +541,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -571,7 +553,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SW1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -590,7 +572,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SW2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -608,7 +590,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("SW3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -616,8 +598,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),SizedBox(height: 1.h,),
                     Row(
@@ -631,8 +611,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -644,7 +623,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("W1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -663,7 +642,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("W2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -681,7 +660,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("W3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -689,8 +668,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),SizedBox(height: 1.h,),
                     Row(
@@ -704,8 +681,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
                       children: [
                         Row(
                           children: [
@@ -717,7 +693,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NW1",style: TextStyle(
+                            Text("Some protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -736,7 +712,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NW2",style: TextStyle(
+                            Text("Average protection",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -754,7 +730,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 });
                               },
                             ),
-                            Text("NW3",style: TextStyle(
+                            Text("Completely protected",style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
                                 fontSize: 15.sp,
@@ -762,8 +738,6 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                                 fontFamily: "volken")),
                           ],
                         ),
-
-
                       ],
                     ),
 

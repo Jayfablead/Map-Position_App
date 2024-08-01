@@ -1404,8 +1404,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1417,7 +1416,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("N1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1435,7 +1434,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("N2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1453,7 +1452,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("N3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1461,10 +1460,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),
+
+
+
+
                 SizedBox(height: 1.h,),
                 Text("Northeast (NE) : -",style: TextStyle(
                     letterSpacing: 1,
@@ -1472,8 +1473,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1485,7 +1485,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NE1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1504,7 +1504,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NE2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1522,7 +1522,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NE3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1530,8 +1530,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),
                 SizedBox(height: 1.h,),
@@ -1541,8 +1539,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1554,7 +1551,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("E1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1573,7 +1570,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("E2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1591,7 +1588,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("E3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1599,8 +1596,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),SizedBox(height: 1.h,),
                 Text("Southeast (SE): -",style: TextStyle(
@@ -1609,8 +1604,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1622,7 +1616,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SE1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1641,7 +1635,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SE2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1659,7 +1653,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SE3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1667,8 +1661,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),SizedBox(height: 1.h,),
                 Text("South (S): -",style: TextStyle(
@@ -1677,8 +1669,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1690,7 +1681,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("S1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1709,7 +1700,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("S2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1727,7 +1718,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("S3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1735,8 +1726,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),SizedBox(height: 1.h,),
                 Text("Southwest (SW): -",style: TextStyle(
@@ -1745,8 +1734,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1758,7 +1746,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SW1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1777,7 +1765,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SW2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1795,7 +1783,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("SW3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1803,8 +1791,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),SizedBox(height: 1.h,),
                 Text("West (W): -",style: TextStyle(
@@ -1813,8 +1799,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1826,7 +1811,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("W1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1845,7 +1830,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("W2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1863,7 +1848,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("W3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1871,8 +1856,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),SizedBox(height: 1.h,),
                 Text("Northwest (NW): -",style: TextStyle(
@@ -1881,8 +1864,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: "volken")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
                   children: [
                     Row(
                       children: [
@@ -1894,7 +1876,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NW1",style: TextStyle(
+                        Text("Some protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1913,7 +1895,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NW2",style: TextStyle(
+                        Text("Average protection",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1931,7 +1913,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             });
                           },
                         ),
-                        Text("NW3",style: TextStyle(
+                        Text("Completely protected",style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
                             fontSize: 15.sp,
@@ -1939,8 +1921,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                       ],
                     ),
-
-
                   ],
                 ),
                 SizedBox(height: 1.h,),
@@ -1976,7 +1956,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ],
                 ),
                 Row(
-
                   children: [
                     Checkbox(
                       value: Fixed ,

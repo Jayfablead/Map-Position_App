@@ -39,7 +39,7 @@ import '../Modal/ViewProfileModal.dart';
 import '../Modal/postionModel.dart';
 // ************  Base url ************** //
 
-const String baseUrl = 'https://hassan-mart.com/';
+// const String baseUrl = 'https://hassan-mart.com/';
 
 Future<bool> checkInternet() async {
   var connectivityResult = await (Connectivity().checkConnectivity());

@@ -1,152 +1,256 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:sizer/sizer.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class ProtectionChart extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Radar Chart Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
+  _ProtectionChartState createState() => _ProtectionChartState();
+}
+
+class _ProtectionChartState extends State<ProtectionChart> {
+  bool NE1 = false;
+  bool NE2 = false;
+  bool NE3 = false;
+  bool N1 = false;
+  bool N2 = false;
+  bool N3 = false;
+  bool E1 = false;
+  bool E2 = false;
+  bool E3 = false;
+
+  List<RadarEntry> getRadarEntries() {
+    List<RadarEntry> entries = [];
+
+    if (NE1) entries.add(RadarEntry(value: 1));
+    if (NE2) entries.add(RadarEntry(value: 2));
+    if (NE3) entries.add(RadarEntry(value: 3));
+    if (N1) entries.add(RadarEntry(value: 4));
+    if (N2) entries.add(RadarEntry(value: 5));
+    if (N3) entries.add(RadarEntry(value: 6));
+    if (E1) entries.add(RadarEntry(value: 7));
+    if (E2) entries.add(RadarEntry(value: 8));
+    if (E3) entries.add(RadarEntry(value: 9));
+
+    // Ensure there are at least 3 entries
+    while (entries.length < 3) {
+      entries.add(RadarEntry(value: 0)); // Adding default 0 values if less than 3
+    }
+
+    return entries;
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  bool darkMode = false;
-  bool useSides = false;
-  double numberOfFeatures = 3;
+  Color getColor(String direction) {
+    if (direction == "NE") {
+      if (NE3) return Colors.green;
+      if (NE2) return Colors.red;
+      if (NE1) return Colors.yellow;
+    }
+    if (direction == "N") {
+      if (N3) return Colors.green;
+      if (N2) return Colors.red;
+      if (N1) return Colors.yellow;
+    }
+    if (direction == "E") {
+      if (E3) return Colors.green;
+      if (E2) return Colors.red;
+      if (E1) return Colors.yellow;
+    }
+    return Colors.grey;
+  }
 
   @override
   Widget build(BuildContext context) {
-    const ticks = [7, 14, 21, 28, 35];
-    var features = ["AA", "BB", "CC", "DD", "EE", "FF", "GG", "HH"];
-    var data = [
-      [10.0, 20, 28, 5, 16, 15, 17, 6],
-      [14.5, 1, 4, 14, 23, 10, 6, 19]
-    ];
-
-    features = features.sublist(0, numberOfFeatures.floor());
-    data = data
-        .map((graph) => graph.sublist(0, numberOfFeatures.floor()))
-        .toList();
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Radar Chart Example'),
-      ),
-      body: Container(
-        color: darkMode ? Colors.black : Colors.white,
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  darkMode
-                      ? Text(
-                    'Light mode',
-                    style: TextStyle(color: Colors.white),
-                  )
-                      : Text(
-                    'Dark mode',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Switch(
-                    value: this.darkMode,
-                    onChanged: (value) {
-                      setState(() {
-                        darkMode = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  useSides
-                      ? Text(
-                    'Polygon border',
-                    style: darkMode
-                        ? TextStyle(color: Colors.white)
-                        : TextStyle(color: Colors.black),
-                  )
-                      : Text(
-                    'Circular border',
-                    style: darkMode
-                        ? TextStyle(color: Colors.white)
-                        : TextStyle(color: Colors.black),
-                  ),
-                  Switch(
-                    value: this.useSides,
-                    onChanged: (value) {
-                      setState(() {
-                        useSides = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'Number of features',
-                    style: TextStyle(
-                        color: darkMode ? Colors.white : Colors.black),
-                  ),
-                  Expanded(
-                    child: Slider(
-                      value: this.numberOfFeatures,
-                      min: 3,
-                      max: 8,
-                      divisions: 5,
-                      onChanged: (value) {
-                        setState(() {
-                          numberOfFeatures = value;
-                        });
-                      },
+          children: [
+            SizedBox(height: 10.h,),
+            Container(
+              height: 50.h,
+              child: RadarChart(
+                RadarChartData(
+                  dataSets: [
+                    RadarDataSet(
+                      fillColor: getColor("NE").withOpacity(0.5),
+                      borderColor: getColor("NE"),
+                      dataEntries: getRadarEntries(),
                     ),
-                  ),
-                ],
+                    RadarDataSet(
+                      fillColor: getColor("N").withOpacity(0.5),
+                      borderColor: getColor("N"),
+                      dataEntries: getRadarEntries(),
+                    ),
+                    RadarDataSet(
+                      fillColor: getColor("E").withOpacity(0.5),
+                      borderColor: getColor("E"),
+                      dataEntries: getRadarEntries(),
+                    ),
+                  ],
+                  radarBackgroundColor: Colors.transparent,
+                ),
               ),
             ),
-            Expanded(
-              child: darkMode
-                  ? RadarChart.dark(
-                ticks: ticks,
-                features: features,
-                data: data,
-                reverseAxis: true,
-                useSides: useSides,
-              )
-                  : RadarChart.light(
-                ticks: ticks,
-                features: features,
-                data: data,
-                reverseAxis: true,
-                useSides: useSides,
-              ),
+            Column(
+              children: [
+                Text("Northeast (NE) : -"),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: NE1,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              NE1 = value!;
+                              NE2 = false;
+                              NE3 = false;
+                            });
+                          },
+                        ),
+                        Text("Some protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: NE2,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              NE1 = false;
+                              NE2 = value!;
+                              NE3 = false;
+                            });
+                          },
+                        ),
+                        Text("Average protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: NE3,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              NE1 = false;
+                              NE2 = false;
+                              NE3 = value!;
+                            });
+                          },
+                        ),
+                        Text("Completely protected"),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("North(N) : -"),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: N1,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              N1 = value!;
+                              N2 = false;
+                              N3 = false;
+                            });
+                          },
+                        ),
+                        Text("Some protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: N2,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              N1 = false;
+                              N2 = value!;
+                              N3 = false;
+                            });
+                          },
+                        ),
+                        Text("Average protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: N3,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              N1 = false;
+                              N2 = false;
+                              N3 = value!;
+                            });
+                          },
+                        ),
+                        Text("Completely protected"),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("East (E): -"),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: E1,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              E1 = value!;
+                              E2 = false;
+                              E3 = false;
+                            });
+                          },
+                        ),
+                        Text("Some protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: E2,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              E1 = false;
+                              E2 = value!;
+                              E3 = false;
+                            });
+                          },
+                        ),
+                        Text("Average protection"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: E3,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              E1= false;
+                              E2 = false;
+                              E3 = value!;
+                            });
+                          },
+                        ),
+                        Text("Completely protected"),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

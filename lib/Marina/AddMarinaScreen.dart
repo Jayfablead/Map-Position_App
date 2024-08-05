@@ -179,6 +179,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       );
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -2524,8 +2525,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "property_area": _neighborthood.text.trim().toString(),
         "property_zip":  _zipcode.text==null?"":_zipcode.text.trim().toString(),
         "property_country": _country.text==null?"":_country.text.trim().toString(),
-        "property_latitude": widget.lat==null?lat1.toString():widget.lat.toString(),
-        "property_longitude": widget.lng==null?lng1.toString():widget.lng.toString(),
+        "property_latitude": _latitude.text.toString(),
+        "property_longitude": _latitude.text.toString(),
         "text_slips": _slips.text.trim().toString(),
         "text_minimumapproachdepth": _minimumapproachdepth.text==null?"":_minimumapproachdepth.text.trim()
             .toString(),
@@ -2622,8 +2623,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "property_area": _neighborthood.text.trim().toString(),
         "property_zip":  _zipcode.text==null?"":_zipcode.text.trim().toString(),
         "property_country": _country.text==null?"":_country.text.trim().toString(),
-        "property_latitude": widget.lat==null?lat1.toString():widget.lat.toString(),
-        "property_longitude": widget.lng==null?lng1.toString():widget.lng.toString(),
+        "property_latitude": _latitude.text.toString(),
+        "property_longitude":_latitude1.text.toString(),
         "text_slips": _slips.text.trim().toString(),
         "text_minimumapproachdepth": _minimumapproachdepth.text==null?"":_minimumapproachdepth.text.trim()
             .toString(),
@@ -2745,6 +2746,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               _MaxVesselLOA.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa).toString();
               _MaaSlipLength.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength).toString();
               _MaaSlipwidth.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth).toString();
+              _latitude.text=viewcategorywisevieweetailmodal?.data?.latitude=="null"||viewcategorywisevieweetailmodal?.data?.latitude==""||viewcategorywisevieweetailmodal?.data?.latitude==null?"":(viewcategorywisevieweetailmodal?.data?.latitude).toString();
+              _latitude1.text=viewcategorywisevieweetailmodal?.data?.longitude=="null"||viewcategorywisevieweetailmodal?.data?.longitude==""||viewcategorywisevieweetailmodal?.data?.longitude==null?"":(viewcategorywisevieweetailmodal?.data?.longitude).toString();
 
 
               dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields?.water;

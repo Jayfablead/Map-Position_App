@@ -1,10 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
@@ -88,10 +92,74 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
   File? selectedimage;
   List<String> networkImageUrls = [];
   final _formKey = GlobalKey<FormState>();
+  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
+
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1=lat;
+      lng1=long;
+
+    });
+  }
+  Marker? _marker;
+  GoogleMapController? _mapController; // Add this line
+  double? _lastLatitude;
+  double? _lastLongitude;
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+
+    // Example: Move camera to a new position if a condition is met
+    if (_lastLatitude != null && _lastLongitude != null) {
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(_lastLatitude!, _lastLongitude!),
+        ),
+      );
+    } else {
+      // Default camera position if no marker is set
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(37.7749, -122.4194), // Default location
+        ),
+      );
+    }
+  }
+  TextEditingController  _latitude =TextEditingController();
+  TextEditingController  _latitude1 =TextEditingController();
+  void _onTap(LatLng location) {
+    setState(() {
+      _lastLatitude = location.latitude;
+      _lastLongitude = location.longitude;
+      _latitude.text= _lastLatitude.toString();
+      _latitude1.text= _lastLongitude.toString();
+      _marker = Marker(
+        markerId: MarkerId(location.toString()),
+        position: location,
+        infoWindow: InfoWindow(
+          title: 'New Marker',
+          snippet: 'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
+        ),
+      );
+
+      // Move the camera to the new marker position
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(location),
+      );
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getLocation();
     print("widget.postid${widget.postid}");
     widget.postid==null?"":viewposition();
   }
@@ -154,6 +222,136 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
                               hintText: "Enter Your name",
                               icon: Icon(
                                 Icons.email,
+                                color: secondary,
+                              )),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Row(
+                    children: [
+                      Text("Listing Location :-",style: TextStyle(
+                          letterSpacing: 1,
+                          color: Colors.black,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "volken")),
+
+                    ],
+                  ),
+                  SizedBox(height: 2.h,),
+
+                  Row(
+                    children: [
+                      Container(
+                        height: 45.h,
+                        width: MediaQuery.of(context).size.width * .95,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.black12, width: 1.sp)),
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          onTap: _onTap,
+                          markers: _marker != null ? {_marker!} : {},
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: true,
+                          zoomControlsEnabled: true,
+                          compassEnabled: true,
+                          scrollGesturesEnabled: true,
+                          initialCameraPosition: CameraPosition(
+                            target: _currentPosition1, // Default location
+                            zoom: 10,
+                          ),
+                          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                            // Example: Disable all gestures
+                            Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+                          }.toSet(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                      Text("Latitude:- ",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Latitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                              hintText: "Latitude",
+                              icon: Icon(
+                                Icons.location_on,
+                                color: secondary,
+                              )),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                      Text("Longitude:- ",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude1,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Longitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                              hintText: "Longitude",
+                              icon: Icon(
+                                Icons.location_on,
                                 color: secondary,
                               )),
                         ),
@@ -622,8 +820,8 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
       data['user_id'] = (loginmodal?.userId).toString();
       data['positionName'] = _name.text.trim().toString();
       data['comment'] = _comments.text.trim().toString();
-      data['m_lat'] = widget.lat.toString();
-      data['m_lng'] = widget.lng.toString();
+      data['m_lat'] =_latitude.text.toString();
+      data['m_lng'] =_latitude1.text.toString();
       data['category'] = "Other";
       print(imagePaths);
       data['upload_pictures'] =jsonEncode(imagePaths);
@@ -659,8 +857,8 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
       data['post_id'] = widget.postid.toString();
       data['positionName'] = _name.text.trim().toString();
       data['comment'] = _comments.text.trim().toString();
-      data['m_lat'] = widget.lat.toString();
-      data['m_lng'] = widget.lng.toString();
+      data['m_lat'] = _latitude.text.toString();
+      data['m_lng'] = _latitude1.text.toString();
       data['category'] = "Other";
       print(imagePaths);
       data['upload_pictures[]'] =jsonEncode(imagePaths);
@@ -702,6 +900,8 @@ class _AddOtherPositionScreenState extends State<AddOtherPositionScreen> {
           if (response.statusCode == 200 && addviewothermodal?.success == true) {
             _name.text=addviewothermodal?.data?.title==""||addviewothermodal?.data?.title==null?"":addviewothermodal?.data?.title ?? "";
             _comments.text=addviewothermodal?.data?.content==""||addviewothermodal?.data?.content==null?"":addviewothermodal?.data?.content ?? "";
+            _latitude1.text=addviewothermodal?.data?.longitude==""||addviewothermodal?.data?.longitude==null?"":addviewothermodal?.data?.longitude ?? "";
+            _latitude.text=addviewothermodal?.data?.latitude==""||addviewothermodal?.data?.latitude==null?"":addviewothermodal?.data?.latitude ?? "";
 
             print("warningapicall");
 

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
@@ -129,6 +131,52 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       lat1=lat;
       lng1=long;
 
+    });
+  }
+  Marker? _marker;
+  GoogleMapController? _mapController; // Add this line
+  double? _lastLatitude;
+  double? _lastLongitude;
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+
+    // Example: Move camera to a new position if a condition is met
+    if (_lastLatitude != null && _lastLongitude != null) {
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(_lastLatitude!, _lastLongitude!),
+        ),
+      );
+    } else {
+      // Default camera position if no marker is set
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(37.7749, -122.4194), // Default location
+        ),
+      );
+    }
+  }
+  TextEditingController  _latitude =TextEditingController();
+  TextEditingController  _latitude1 =TextEditingController();
+  void _onTap(LatLng location) {
+    setState(() {
+      _lastLatitude = location.latitude;
+      _lastLongitude = location.longitude;
+      _latitude.text= _lastLatitude.toString();
+      _latitude1.text= _lastLongitude.toString();
+      _marker = Marker(
+        markerId: MarkerId(location.toString()),
+        position: location,
+        infoWindow: InfoWindow(
+          title: 'New Marker',
+          snippet: 'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
+        ),
+      );
+
+      // Move the camera to the new marker position
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(location),
+      );
     });
   }
   @override
@@ -698,202 +746,329 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   }, hight: 6.h, width:55.w, txtsize: 20.sp),
                 ],
               ),
-                SizedBox(
-                  height: 2.h,
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Listing Location",style: TextStyle(
+                    Text("Listing Location :-",style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
+
                   ],
                 ),
-                SizedBox(height: 1.h,),
-                Text("Address :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
+                SizedBox(height: 2.h,),
+
+                Row(
+                  children: [
+                    Container(
+                      height: 45.h,
+                      width: MediaQuery.of(context).size.width * .95,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: Colors.black12, width: 1.sp)),
+                      child: GoogleMap(
+                        onMapCreated: _onMapCreated,
+                        onTap: _onTap,
+                        markers: _marker != null ? {_marker!} : {},
+                        myLocationButtonEnabled: false,
+                        myLocationEnabled: true,
+                        zoomControlsEnabled: true,
+                        compassEnabled: true,
+                        scrollGesturesEnabled: true,
+                        initialCameraPosition: CameraPosition(
+                          target: _currentPosition1, // Default location
+                          zoom: 10,
+                        ),
+                        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                          // Example: Disable all gestures
+                          Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+                        }.toSet(),
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _address,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Address";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Address",
-                        icon: Icon(
-                          Icons.home,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 1.h,),
-                Text("City :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _city,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter City";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your City",
-                        icon: Icon(
-                          Icons.location_city_sharp,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 1.h,),
-                Text("Neighborhood :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _neighborthood,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Neighborhood";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Neighborhood",
-                        icon: Icon(
-                          Icons.location_city_sharp,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 1.h,),
-                Text("Zipcode :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(color: secondary),
-                    controller: _zipcode,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Zipcode";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Zipcode",
-                        icon: Icon(
-                          Icons.location_city_sharp,
-                          color: secondary,
-                        )),
-                  ),
-                ),
-                SizedBox(height: 1.h,),
-                Text("State :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _state,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter State";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your State",
-                        icon: Icon(
-                          Icons.location_city_sharp,
-                          color: secondary,
-                        )),
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 1.5.h,
+                    ),
+                    Text("Latitude:- ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(color: secondary),
+                        controller: _latitude,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Latitude";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                            hintText: "Latitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            )),
+                      ),
+
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 1.h,
+                  height: 2.h,
                 ),
-                Text("Country :-",style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 1.5.h,
+                    ),
+                    Text("Longitude:- ",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(color: secondary),
+                        controller: _latitude1,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Longitude";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                            hintText: "Longitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            )),
+                      ),
+
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  height: 1.h,
+                  height: 2.h,
                 ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: secondary),
-                    controller: _country,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Country";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        hintText: "Enter Your Country",
-                        icon: Icon(
-                          Icons.location_city_sharp,
-                          color: secondary,
-                        )),
-                  ),
-                ),
+                // SizedBox(
+                //   height: 2.h,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text("Listing Location",style: TextStyle(
+                //         letterSpacing: 1,
+                //         color: Colors.black,
+                //         fontSize: 15.sp,
+                //         fontWeight: FontWeight.bold,
+                //         fontFamily: "volken")),
+                //   ],
+                // ),
+                // SizedBox(height: 1.h,),
+                // Text("Address :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _address,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Address";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Address",
+                //         icon: Icon(
+                //           Icons.home,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 1.h,),
+                // Text("City :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _city,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter City";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your City",
+                //         icon: Icon(
+                //           Icons.location_city_sharp,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 1.h,),
+                // Text("Neighborhood :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _neighborthood,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Neighborhood";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Neighborhood",
+                //         icon: Icon(
+                //           Icons.location_city_sharp,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 1.h,),
+                // Text("Zipcode :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.number,
+                //     style: TextStyle(color: secondary),
+                //     controller: _zipcode,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Zipcode";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Zipcode",
+                //         icon: Icon(
+                //           Icons.location_city_sharp,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(height: 1.h,),
+                // Text("State :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _state,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter State";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your State",
+                //         icon: Icon(
+                //           Icons.location_city_sharp,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Text("Country :-",style: TextStyle(
+                //     letterSpacing: 1,
+                //     color: Colors.black,
+                //     fontSize: 15.sp,
+                //     fontWeight: FontWeight.bold,
+                //     fontFamily: "volken")),
+                // SizedBox(
+                //   height: 1.h,
+                // ),
+                // Container(
+                //   width:MediaQuery.of(context).size.width,
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.text,
+                //     style: TextStyle(color: secondary),
+                //     controller: _country,
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return "Please Enter Country";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: inputDecoration(
+                //         hintText: "Enter Your Country",
+                //         icon: Icon(
+                //           Icons.location_city_sharp,
+                //           color: secondary,
+                //         )),
+                //   ),
+                // ),
                 SizedBox(
                   height: 2.h,
                 ),
@@ -2570,6 +2745,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               _MaxVesselLOA.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxvesselloa).toString();
               _MaaSlipLength.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxsliplength).toString();
               _MaaSlipwidth.text=viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textMaxslipwidth).toString();
+
 
               dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {

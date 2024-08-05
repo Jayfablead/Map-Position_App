@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
@@ -61,9 +63,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
     super.dispose();
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
+
 
   void _onMapTapped(LatLng latLng) {
     setState(() {
@@ -81,8 +81,8 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
     permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
+    double lat = double.parse((newupdatealarammodal?.alarm?.lattiude).toString());
+    double long = double.parse((newupdatealarammodal?.alarm?.longitude).toString());
     LatLng location = LatLng(lat, long);
     setState(() {
       _currentPosition1 = location;
@@ -94,25 +94,60 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
   String? selectedvalue1 = "1";
   MapType _mapType = MapType.satellite;
   bool isLoading =true;
+
+  Marker? _marker;
+  // Add this line
+  double? _lastLatitude;
+  double? _lastLongitude;
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+
+    // Example: Move camera to a new position if a condition is met
+    if (_lastLatitude != null && _lastLongitude != null) {
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(_lastLatitude!, _lastLongitude!),
+        ),
+      );
+    } else {
+      // Default camera position if no marker is set
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(37.7749, -122.4194), // Default location
+        ),
+      );
+    }
+  }
+  TextEditingController  _latitude =TextEditingController();
+  TextEditingController  _latitude1 =TextEditingController();
+  void _onTap(LatLng location) {
+
+    setState(() {
+      _lastLatitude = location.latitude;
+      _lastLongitude = location.longitude;
+      _latitude.text= _lastLatitude.toString();
+      _latitude1.text= _lastLongitude.toString();
+      _marker = Marker(
+        markerId: MarkerId(location.toString()),
+        position: location,
+        infoWindow: InfoWindow(
+          title: 'New Marker',
+          snippet: 'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
+        ),
+      );
+
+      // Move the camera to the new marker position
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(location),
+      );
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     updatealaram();
-    getLocation().then((_) {
-      setState(() async {
-        _markers.add(Marker(
-          markerId: MarkerId('Current Location'),
-          // icon: await BitmapDescriptor.fromAssetImage(
-          //   ImageConfiguration(
-          //       devicePixelRatio: 2.5, size: Size(1000.sp, 1000.sp)),
-          //   'assets/morning.png',
-          // ),
-          position: _currentPosition1,
-        ));
-      });
-    });
-    print("livelocation:-${_currentPosition1}");
+    getLocation();
   }
   Widget build(BuildContext context) {
     return commanScreen(
@@ -150,24 +185,118 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                               fontFamily: "volken")),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40.h,
-                    child:   GoogleMap(
-                      onMapCreated: _onMapCreated,
-
-                      initialCameraPosition: CameraPosition(
-                        target: _currentPosition1,
-                        // You can set your initial position here
-                        zoom: 12.0,
+                  SizedBox(height: 2.h,),
+                 
+                  Row(
+                    children: [
+                      Container(
+                        height: 45.h,
+                        width: MediaQuery.of(context).size.width * .95,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.black12, width: 1.sp)),
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          onTap: _onTap,
+                          markers: _marker != null ? {_marker!} : {},
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: true,
+                          zoomControlsEnabled: true,
+                          compassEnabled: true,
+                          scrollGesturesEnabled: true,
+                          initialCameraPosition: CameraPosition(
+                            target: _currentPosition1, // Default location
+                            zoom: 10,
+                          ),
+                          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                            // Example: Disable all gestures
+                            Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+                          }.toSet(),
+                        ),
                       ),
-                      mapType: _isSatellite ? MapType.satellite : MapType.normal,
-                      markers: _markers,
-                      myLocationButtonEnabled: false,
-                      myLocationEnabled: true,
-                      zoomControlsEnabled: true,
-                      compassEnabled: true,
-                    ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                      Text("Latitude:- ",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Latitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                              hintText: "Latitude",
+                              icon: Icon(
+                                Icons.location_on,
+                                color: secondary,
+                              )),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                      Text("Longitude:- ",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken")),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude1,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Longitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                              hintText: "Longitude",
+                              icon: Icon(
+                                Icons.location_on,
+                                color: secondary,
+                              )),
+                        ),
+
+                      ),
+                    ],
                   ),
                   SizedBox(height: 2.h,),
                   Row(
@@ -254,26 +383,26 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                           child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
                           value: "49",
                         ),
-                        DropdownMenuItem(
-                          child: Text("Ferries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "54",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Harbors",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "48",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Inlets",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "50",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Landmarks",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "55",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Marinas",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "47",
-                        ),
+                        // DropdownMenuItem(
+                        //   child: Text("Ferries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                        //   value: "54",
+                        // ),
+                        // DropdownMenuItem(
+                        //   child: Text("Harbors",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                        //   value: "48",
+                        // ),
+                        // DropdownMenuItem(
+                        //   child: Text("Inlets",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                        //   value: "50",
+                        // ),
+                        // DropdownMenuItem(
+                        //   child: Text("Landmarks",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                        //   value: "55",
+                        // ),
+                        // DropdownMenuItem(
+                        //   child: Text("Marinas",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                        //   value: "47",
+                        // ),
                         DropdownMenuItem(
                           child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
                           value: "66",
@@ -399,8 +528,8 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
       final Map<String, String> data = {};
       data['radius'] = _position.text.trim().toString();
       data['user_id'] =widget.id.toString();
-      data['latitude'] =lat1.toString() ;
-      data['longitude'] = lng1.toString();
+      data['latitude'] =_latitude.text.toString();
+      data['longitude'] = _latitude1.text.toString();
       data['location'] =_title.text.trim().toString();
       data['category'] =selectedvalue.toString() ;
       data['status'] =selectedvalue1.toString() ;
@@ -444,6 +573,8 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
             _position.text=newupdatealarammodal?.alarm?.radius ?? "";
             selectedvalue=newupdatealarammodal?.alarm?.category ?? "";
             selectedvalue1=newupdatealarammodal?.alarm?.status ?? "";
+            _latitude.text=newupdatealarammodal?.alarm?.lattiude ?? "";
+            _latitude1.text=newupdatealarammodal?.alarm?.longitude ?? "";
 
 
             setState(() {

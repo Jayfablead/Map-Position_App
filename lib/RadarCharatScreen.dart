@@ -1,260 +1,289 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:sizer/sizer.dart';
 
-class ProtectionChart extends StatefulWidget {
+
+
+class RadarChartWithCheckboxes extends StatefulWidget {
   @override
-  _ProtectionChartState createState() => _ProtectionChartState();
+  _RadarChartWithCheckboxesState createState() =>
+      _RadarChartWithCheckboxesState();
 }
 
-class _ProtectionChartState extends State<ProtectionChart> {
-  bool NE1 = false;
-  bool NE2 = false;
-  bool NE3 = false;
+class _RadarChartWithCheckboxesState extends State<RadarChartWithCheckboxes> {
   bool N1 = false;
   bool N2 = false;
   bool N3 = false;
+
+  bool NE1 = false;
+  bool NE2 = false;
+  bool NE3 = false;
+
   bool E1 = false;
   bool E2 = false;
   bool E3 = false;
 
-  List<RadarEntry> getRadarEntries() {
-    List<RadarEntry> entries = [];
+  bool SE1 = false;
+  bool SE2 = false;
+  bool SE3 = false;
 
-    if (NE1) entries.add(RadarEntry(value: 1));
-    if (NE2) entries.add(RadarEntry(value: 2));
-    if (NE3) entries.add(RadarEntry(value: 3));
-    if (N1) entries.add(RadarEntry(value: 4));
-    if (N2) entries.add(RadarEntry(value: 5));
-    if (N3) entries.add(RadarEntry(value: 6));
-    if (E1) entries.add(RadarEntry(value: 7));
-    if (E2) entries.add(RadarEntry(value: 8));
-    if (E3) entries.add(RadarEntry(value: 9));
+  bool S1 = false;
+  bool S2 = false;
+  bool S3 = false;
 
-    // Ensure there are at least 3 entries
-    while (entries.length < 3) {
-      entries.add(RadarEntry(value: 0)); // Adding default 0 values if less than 3
-    }
+  bool SW1 = false;
+  bool SW2 = false;
+  bool SW3 = false;
 
-    return entries;
-  }
+  bool W1 = false;
+  bool W2 = false;
+  bool W3 = false;
 
-  Color getColor(String direction) {
-    if (direction == "NE") {
-      if (NE3) return Colors.green;
-      if (NE2) return Colors.red;
-      if (NE1) return Colors.yellow;
-    }
-    if (direction == "N") {
-      if (N3) return Colors.green;
-      if (N2) return Colors.red;
-      if (N1) return Colors.yellow;
-    }
-    if (direction == "E") {
-      if (E3) return Colors.green;
-      if (E2) return Colors.red;
-      if (E1) return Colors.yellow;
-    }
-    return Colors.grey;
-  }
+  bool NW1 = false;
+  bool NW2 = false;
+  bool NW3 = false;
+
+  List<List<int>> data = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: 50.h,
+            child: RadarChart.light(
+              ticks: [2, 4, 6, 8, 10],
+              features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+              data: data,
+              // graphColors: [Colors.blue, Colors.green],
+              // featuresTextStyle: TextStyle(color: Colors.white),
+            ),
+          ),
+          buildCheckboxRow('North (N)', [
+            buildCheckbox('Some protection', N1, (val) {
+              setState(() {
+                N1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', N2, (val) {
+              setState(() {
+                N2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', N3, (val) {
+              setState(() {
+                N3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('Northeast (NE)', [
+            buildCheckbox('Some protection', NE1, (val) {
+              setState(() {
+                NE1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', NE2, (val) {
+              setState(() {
+                NE2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', NE3, (val) {
+              setState(() {
+                NE3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('East (E)', [
+            buildCheckbox('Some protection', E1, (val) {
+              setState(() {
+                E1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', E2, (val) {
+              setState(() {
+                E2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', E3, (val) {
+              setState(() {
+                E3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('Southeast (SE)', [
+            buildCheckbox('Some protection', SE1, (val) {
+              setState(() {
+                SE1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', SE2, (val) {
+              setState(() {
+                SE2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', SE3, (val) {
+              setState(() {
+                SE3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('South (S)', [
+            buildCheckbox('Some protection', S1, (val) {
+              setState(() {
+                S1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', S2, (val) {
+              setState(() {
+                S2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', S3, (val) {
+              setState(() {
+                S3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('Southwest (SW)', [
+            buildCheckbox('Some protection', SW1, (val) {
+              setState(() {
+                SW1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', SW2, (val) {
+              setState(() {
+                SW2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', SW3, (val) {
+              setState(() {
+                SW3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('West (W)', [
+            buildCheckbox('Some protection', W1, (val) {
+              setState(() {
+                W1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', W2, (val) {
+              setState(() {
+                W2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', W3, (val) {
+              setState(() {
+                W3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          buildCheckboxRow('West (W)', [
+            buildCheckbox('Some protection', NW1, (val) {
+              setState(() {
+                NW1 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Average protection', NW2, (val) {
+              setState(() {
+                NW2 = val;
+                updateData();
+              });
+            }),
+            buildCheckbox('Completely protected', NW3, (val) {
+              setState(() {
+                NW3 = val;
+                updateData();
+              });
+            }),
+          ]),
+          // Repeat for other directions...
+        ],
+      ),
+    );
+  }
+
+  void updateData() {
+    data[0] = [
+      (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
+      (NE1 ? 3 : 0) + (NE2 ? 3 : 0) + (NE3 ? 4 : 0),
+      (E1 ? 3 : 0) + (E2 ? 3 : 0) + (E3 ? 4 : 0),
+      (SE1 ? 3 : 0) + (SE2 ? 3 : 0) + (SE3 ? 4 : 0),
+      (S1 ? 3 : 0) + (S2 ? 3 : 0) + (S3 ? 4 : 0),
+      (SW1 ? 3 : 0) + (SW2 ? 3 : 0) + (SW3 ? 4 : 0),
+      (W1 ? 3 : 0) + (W2 ? 3 : 0) + (W3 ? 4 : 0),
+      (NW1 ? 3 : 0) + (NW2 ? 3 : 0) + (NW3 ? 4 : 0),
+    ];
+  }
+
+  Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 10.h,),
-            Container(
-              height: 50.h,
-              child: RadarChart(
-                RadarChartData(
-                  dataSets: [
-                    RadarDataSet(
-                      fillColor: getColor("NE").withOpacity(0.5),
-                      borderColor: getColor("NE"),
-                      dataEntries: getRadarEntries(),
-                    ),
-                    RadarDataSet(
-                      fillColor: getColor("N").withOpacity(0.5),
-                      borderColor: getColor("N"),
-                      dataEntries: getRadarEntries(),
-                    ),
-                    RadarDataSet(
-                      fillColor: getColor("E").withOpacity(0.5),
-                      borderColor: getColor("E"),
-                      dataEntries: getRadarEntries(),
-                    ),
-                  ],
-                  radarBackgroundColor: Colors.transparent,
-                ),
-              ),
-            ),
-            Column(
-              children: [
-                Text("Northeast (NE) : -"),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: NE1,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              NE1 = value!;
-                              NE2 = false;
-                              NE3 = false;
-                            });
-                          },
-                        ),
-                        Text("Some protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: NE2,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              NE1 = false;
-                              NE2 = value!;
-                              NE3 = false;
-                            });
-                          },
-                        ),
-                        Text("Average protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: NE3,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              NE1 = false;
-                              NE2 = false;
-                              NE3 = value!;
-                            });
-                          },
-                        ),
-                        Text("Completely protected"),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text("North(N) : -"),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: N1,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              N1 = value!;
-                              N2 = false;
-                              N3 = false;
-                            });
-                          },
-                        ),
-                        Text("Some protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: N2,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              N1 = false;
-                              N2 = value!;
-                              N3 = false;
-                            });
-                          },
-                        ),
-                        Text("Average protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: N3,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              N1 = false;
-                              N2 = false;
-                              N3 = value!;
-                            });
-                          },
-                        ),
-                        Text("Completely protected"),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text("East (E): -"),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: E1,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              E1 = value!;
-                              E2 = false;
-                              E3 = false;
-                            });
-                          },
-                        ),
-                        Text("Some protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: E2,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              E1 = false;
-                              E2 = value!;
-                              E3 = false;
-                            });
-                          },
-                        ),
-                        Text("Average protection"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: E3,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              E1= false;
-                              E2 = false;
-                              E3 = value!;
-                            });
-                          },
-                        ),
-                        Text("Completely protected"),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+            Text(
+              "$label: -",
+              style: TextStyle(
+                  letterSpacing: 1,
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "volken"),
             ),
           ],
         ),
-      ),
+        Column(children: checkboxes),
+        SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget buildCheckbox(
+      String label, bool value, Function(bool) onChanged) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: (bool? val) {
+            onChanged(val!);
+          },
+        ),
+        Text(
+          label,
+          style: TextStyle(
+              letterSpacing: 1,
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              fontFamily: "volken"),
+        ),
+      ],
     );
   }
 }

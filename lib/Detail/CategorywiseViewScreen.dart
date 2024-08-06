@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -73,6 +74,50 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
   final _formKey = GlobalKey<FormState>();
   bool showError = false;
   int type = 0;
+  bool anchor=false;
+  bool buoys=false;
+  bool mountain=false;
+  bool ownlines=false;
+  bool sand=false;
+  bool coral=false;
+  bool rocks=false;
+  bool clay=false;
+  bool pano=false;
+  bool groceries=false;
+  bool pharmacy=false;
+  bool alcohol=false;
+  bool restaurant=false;
+  bool pontoon=false;
+  bool shop=false;
+  bool water=false;
+  bool beach=false;
+  bool N1 = false;
+  bool N2 = false;
+  bool N3 = false;
+  bool NE1 = false;
+  bool NE2 = false;
+  bool NE3 = false;
+  bool E1 = false;
+  bool E2 = false;
+  bool E3 = false;
+  bool SE1 = false;
+  bool SE2 = false;
+  bool SE3 = false;
+  bool S1 = false;
+  bool S2 = false;
+  bool S3 = false;
+  bool SW1 = false;
+  bool SW2 = false;
+  bool SW3 = false;
+  bool W1 = false;
+  bool W2 = false;
+  bool W3 = false;
+  bool NW1 = false;
+  bool NW2 = false;
+  bool NW3 = false;
+  List<List<int>> data = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+  ];
   DateTime now = DateTime.now();
   TextEditingController searchController = TextEditingController();
   final PositionController positionController = Get.put(PositionController());
@@ -1459,6 +1504,198 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Row(
+                          children: [
+                            Text("Protection : -",style: TextStyle(
+                                letterSpacing: 1,
+                                color: Colors.black,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken"))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              height: 50.h,
+                              child: RadarChart.light(
+                                ticks: [2, 4, 6, 8, 10],
+                                features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+                                data: data,
+
+                                // graphColors: [Colors.blue, Colors.green],
+                                // featuresTextStyle: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            // buildCheckboxRow('North (N)', [
+                            //   buildCheckbox('Some protection', N1, (val) {
+                            //     setState(() {
+                            //       N1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', N2, (val) {
+                            //     setState(() {
+                            //       N2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', N3, (val) {
+                            //     setState(() {
+                            //       N3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('Northeast (NE)', [
+                            //   buildCheckbox('Some protection', NE1, (val) {
+                            //     setState(() {
+                            //       NE1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', NE2, (val) {
+                            //     setState(() {
+                            //       NE2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', NE3, (val) {
+                            //     setState(() {
+                            //       NE3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('East (E)', [
+                            //   buildCheckbox('Some protection', E1, (val) {
+                            //     setState(() {
+                            //       E1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', E2, (val) {
+                            //     setState(() {
+                            //       E2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', E3, (val) {
+                            //     setState(() {
+                            //       E3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('Southeast (SE)', [
+                            //   buildCheckbox('Some protection', SE1, (val) {
+                            //     setState(() {
+                            //       SE1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', SE2, (val) {
+                            //     setState(() {
+                            //       SE2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', SE3, (val) {
+                            //     setState(() {
+                            //       SE3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('South (S)', [
+                            //   buildCheckbox('Some protection', S1, (val) {
+                            //     setState(() {
+                            //       S1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', S2, (val) {
+                            //     setState(() {
+                            //       S2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', S3, (val) {
+                            //     setState(() {
+                            //       S3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('Southwest (SW)', [
+                            //   buildCheckbox('Some protection', SW1, (val) {
+                            //     setState(() {
+                            //       SW1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', SW2, (val) {
+                            //     setState(() {
+                            //       SW2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', SW3, (val) {
+                            //     setState(() {
+                            //       SW3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('West (W)', [
+                            //   buildCheckbox('Some protection', W1, (val) {
+                            //     setState(() {
+                            //       W1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', W2, (val) {
+                            //     setState(() {
+                            //       W2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', W3, (val) {
+                            //     setState(() {
+                            //       W3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // buildCheckboxRow('West (W)', [
+                            //   buildCheckbox('Some protection', NW1, (val) {
+                            //     setState(() {
+                            //       NW1 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Average protection', NW2, (val) {
+                            //     setState(() {
+                            //       NW2 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            //   buildCheckbox('Completely protected', NW3, (val) {
+                            //     setState(() {
+                            //       NW3 = val;
+                            //       updateData();
+                            //     });
+                            //   }),
+                            // ]),
+                            // Repeat for other directions...
                           ],
                         ),
                         SizedBox(
@@ -3770,6 +4007,244 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   json.decode(response.body));
           if (response.statusCode == 200 &&
               viewcategorywisevieweetailmodal?.success == true) {
+            setState(() {
+
+
+              dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.water;
+              if (waterValue != null && waterValue is bool) {
+                setState(() {
+                  print("water${water}");
+                  water = waterValue;
+                });
+              } else {
+                water = false;
+              }
+              dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.rocks;
+              if (rocksvalue != null && rocksvalue is bool) {
+                setState(() {
+                  rocks = rocksvalue;
+                });
+              } else {
+                rocks = false;
+              }
+              dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.coral;
+              if (coralvalue != null && coralvalue is bool) {
+                setState(() {
+                  coral = coralvalue;
+                });
+              } else {
+                coral = false;
+              }
+              dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
+              if (clayvalue != null && clayvalue is bool) {
+                setState(() {
+                  clay = clayvalue;
+                });
+              } else {
+                clay = false;
+              }
+              dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
+              if (sandvalue != null && sandvalue is bool) {
+                setState(() {
+                  sand = sandvalue;
+                });
+              } else {
+                sand = false;
+              }
+              dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.buoys;
+              if (buoysvalue != null && buoysvalue is bool) {
+                setState(() {
+                  buoys = buoysvalue;
+                });
+              } else {
+                buoys = false;
+              }
+              dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.restaurant;
+              if (restaurantsvalue != null && restaurantsvalue is bool) {
+                setState(() {
+                  restaurant = restaurantsvalue;
+                });
+              } else {
+                restaurant = false;
+              }
+              dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.alcohol;
+              if (alcoholvalue != null && alcoholvalue is bool) {
+                setState(() {
+                  alcohol = alcoholvalue;
+                });
+              } else {
+                alcohol = false;
+              }
+              dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.pharmacy;
+              if (pharmacyvalue != null && pharmacyvalue is bool) {
+                setState(() {
+                  pharmacy = pharmacyvalue;
+                });
+              } else {
+                pharmacy = false;
+              }
+              dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.groceries;
+              if (groceriesvalue != null && groceriesvalue is bool) {
+                setState(() {
+                  groceries = groceriesvalue;
+                });
+              } else {
+                groceries = false;
+              }
+              dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+                  ?.mountainWedges;
+              if (mountainvalue != null && mountainvalue is bool) {
+                setState(() {
+                  mountain = mountainvalue;
+
+                });
+              } else {
+                mountain = false;
+              }
+              dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
+              if (NW3value != null && NW3value is bool) {
+                setState(() {
+                  NW3 = NW3value;
+                  updateData();
+                });
+              } else {
+                NW3 = false;
+              }
+              dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
+              if (NW1value != null && NW1value is bool) {
+                setState(() {
+                  NW1 = NW1value;
+                  updateData();
+                });
+              } else {
+                NW1 = false;
+              }
+              dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
+              if (NW2value != null && NW2value is bool) {
+                setState(() {
+                  NW2 = NW1value;
+                  updateData();
+                });
+              } else {
+                NW2 = false;
+              }
+              dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
+              if (N1value != null && N1value is bool) {
+                setState(() {
+                  N1 = N1value;
+                  updateData();
+                });
+              } else {
+                N1 = false;
+              }
+              dynamic N2value = viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
+              if (N2value != null && N1value is bool) {
+                setState(() {
+                  N2 = N2value;
+                  updateData();
+                });
+              } else {
+                N2 = false;
+              }
+              dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
+              if (N3value != null && N3value is bool) {
+                setState(() {
+                  N3 = N3value;
+                  updateData();
+                });
+              } else {
+                N3 = false;
+              }
+              dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
+              if (E1value != null && E1value is bool) {
+                setState(() {
+                  E1 = E1value;
+                  updateData();
+                });
+              } else {
+                E1 = false;
+              }
+              dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
+              if (E2value != null && E2value is bool) {
+                setState(() {
+                  E2 = E2value;
+                  updateData();
+                });
+              } else {
+                E2 = false;
+              }
+              dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
+              if (E3value != null && E3value is bool) {
+                setState(() {
+                  E3 = E3value;
+                  updateData();
+                });
+              } else {
+                E3 = false;
+              }
+              dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
+              if (W1value != null && W1value is bool) {
+                setState(() {
+                  W1 = W1value;
+                  updateData();
+                });
+              } else {
+                W1 = false;
+              }
+              dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
+              if (W2value != null && W2value is bool) {
+                setState(() {
+                  W2 = W2value;
+                  updateData();
+                });
+              } else {
+                W2 = false;
+              }
+              dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
+              if (W3value != null && W3value is bool) {
+                setState(() {
+                  W3 = W3value;
+                  updateData();
+                });
+              } else {
+                W3 = false;
+              }
+              dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
+              if (SW1value != null && SW1value is bool) {
+                setState(() {
+                  SW1 = SW1value;
+                  updateData();
+                });
+              } else {
+                SW1 = false;
+              }
+              dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
+              if (SW2value != null && SW2value is bool) {
+                setState(() {
+                  SW2 = SW2value;
+                  updateData();
+                });
+              } else {
+                SW2 = false;
+              }
+              dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
+              if (SW3value != null && SW3value is bool) {
+                setState(() {
+                  SW3 = SW3value;
+                  updateData();
+                });
+              } else {
+                SW3 = false;
+              }
+            });
             print("Categorywiseapicall");
             for (int index = 0;
                 index < (shoallmarkermodal?.positions?.length ?? 0);
@@ -4150,5 +4625,63 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });
+  }
+  void updateData() {
+    data[0] = [
+      (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
+      (NE1 ? 3 : 0) + (NE2 ? 3 : 0) + (NE3 ? 4 : 0),
+      (E1 ? 3 : 0) + (E2 ? 3 : 0) + (E3 ? 4 : 0),
+      (SE1 ? 3 : 0) + (SE2 ? 3 : 0) + (SE3 ? 4 : 0),
+      (S1 ? 3 : 0) + (S2 ? 3 : 0) + (S3 ? 4 : 0),
+      (SW1 ? 3 : 0) + (SW2 ? 3 : 0) + (SW3 ? 4 : 0),
+      (W1 ? 3 : 0) + (W2 ? 3 : 0) + (W3 ? 4 : 0),
+      (NW1 ? 3 : 0) + (NW2 ? 3 : 0) + (NW3 ? 4 : 0),
+    ];
+  }
+
+  Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "$label: -",
+              style: TextStyle(
+                  letterSpacing: 1,
+                  color: Colors.black,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "volken"),
+            ),
+          ],
+        ),
+        Column(children: checkboxes),
+        SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget buildCheckbox(
+      String label, bool value, Function(bool) onChanged) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: (bool? val) {
+            onChanged(val!);
+          },
+        ),
+        Text(
+          label,
+          style: TextStyle(
+              letterSpacing: 1,
+              color: secondary,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.bold,
+              fontFamily: "volken"),
+        ),
+      ],
+    );
   }
 }

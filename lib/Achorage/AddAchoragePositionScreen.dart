@@ -26,6 +26,10 @@ import '../Modal/MyMarinaViewModal.dart';
 import '../Modal/OnwViewPostionModal.dart';
 import '../Modal/UpdateanchorgeModal.dart';
 import '../Provider/Authprovider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+import 'package:sizer/sizer.dart';
+
 
 class AddAchoragePositionScreen extends StatefulWidget {
   String? lat;
@@ -92,6 +96,9 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
   bool NW2 = false;
   bool NW3 = false;
   bool isLoading = true;
+  List<List<int>> data = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+  ];
   ImagePicker picker = ImagePicker();
   List<XFile>? resultList;
   List<XFile>? resultList1;
@@ -172,6 +179,87 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
       lng1 = long;
       isLoading = false;
     });
+  }
+  // List<RadarEntry> getRadarEntries() {
+  //   List<RadarEntry> entries = [];
+  //
+  //   if (NE1) entries.add(RadarEntry(value: 1));
+  //   if (NE2) entries.add(RadarEntry(value: 2));
+  //   if (NE3) entries.add(RadarEntry(value: 3));
+  //   if (N1) entries.add(RadarEntry(value: 4));
+  //   if (N2) entries.add(RadarEntry(value: 5));
+  //   if (N3) entries.add(RadarEntry(value: 6));
+  //   if (E1) entries.add(RadarEntry(value: 7));
+  //   if (E2) entries.add(RadarEntry(value: 8));
+  //   if (E3) entries.add(RadarEntry(value: 9));
+  //   if (SE1) entries.add(RadarEntry(value: 10));
+  //   if (SE2) entries.add(RadarEntry(value: 11));
+  //   if (SE3) entries.add(RadarEntry(value: 12));
+  //   if (S1) entries.add(RadarEntry(value: 13));
+  //   if (S2) entries.add(RadarEntry(value: 14));
+  //   if (S3) entries.add(RadarEntry(value: 15));
+  //   if (SW1) entries.add(RadarEntry(value: 16));
+  //   if (SW2) entries.add(RadarEntry(value: 17));
+  //   if (SW3) entries.add(RadarEntry(value: 18));
+  //   if (W1) entries.add(RadarEntry(value: 19));
+  //   if (W2) entries.add(RadarEntry(value: 20));
+  //   if (W3) entries.add(RadarEntry(value: 21));
+  //   if (NW1) entries.add(RadarEntry(value: 22));
+  //   if (NW2) entries.add(RadarEntry(value: 23));
+  //   if (NW3) entries.add(RadarEntry(value: 24));
+  //
+  //   // Ensure there are at least 3 entries
+  //   while (entries.length < 3) {
+  //     entries.add(RadarEntry(value: 0)); // Adding default 0 values if less than 3
+  //   }
+  //
+  //   return entries;
+  // }
+
+  Color getColor(String direction) {
+    if (direction == "NE") {
+      print("Surat${"NE"}");
+      if (NE3) return Color(0xffe69500);
+      if (NE2) return Color(0xfff7f700);
+      if (NE1) return Color(0xff35ce77);
+    }
+    if (direction == "N") {
+      if (N3) return Color(0xffe69500);
+      if (N2) return Color(0xfff7f700);
+      if (N1) return Color(0xff35ce77);
+    }
+    if (direction == "E") {
+      if (E3) return Color(0xffe69500);
+      if (E2) return  Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    if (direction == "SE") {
+      if (E3) return Color(0xffe69500);
+      if (E2) return  Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    if (direction == "S") {
+      print("Surat${"S"}");
+      if (E3) return Color(0xffe69500);
+      if (E2) return  Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    if (direction == "SW") {
+      if (E3) return Colors.green;
+      if (E2) return  Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    if (direction == "W") {
+      if (E3) return Color(0xffe69500);
+      if (E2) return  Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    if (direction == "NW") {
+      if (E3) return  Color(0xffe69500);
+      if (E2) return Color(0xfff7f700);
+      if (E1) return Color(0xff35ce77);
+    }
+    return  Color(0xfff7f700);
   }
   void initState() {
     // TODO: implement initState
@@ -375,577 +463,764 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+              Row(
+                  children: [
+                    Text("Protection : -",style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken"))
+                  ],
+              ),
               SizedBox(
                 height: 2.h,
               ),
-                  Column(children: [
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("North (N) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.h,
+                        child: RadarChart.light(
+                          ticks: [2, 4, 6, 8, 10],
+                          features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+                          data: data,
 
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
+                          // graphColors: [Colors.blue, Colors.green],
+                          // featuresTextStyle: TextStyle(color: Colors.white),
                         ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: N3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  N3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Northeast (NE) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NE3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NE3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("East (E) : -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: E3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  E3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Southeast (SE): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SE3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SE3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("South (S): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: S3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  S3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Southwest (SW): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: SW3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  SW3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("West (W): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: W3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  W3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),SizedBox(height: 1.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Northwest (NW): -",style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken")),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW1,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW1 = value!;
-                                });
-                              },
-                            ),
-                            Text("Some protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW2,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW2 = value!;
-                                });
-                              },
-                            ),
-                            Text("Average protection",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: NW3,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  NW3 = value!;
-                                });
-                              },
-                            ),
-                            Text("Completely protected",style: TextStyle(
-                                letterSpacing: 1,
-                                color: secondary,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                  ]),
+                      ),
+                      buildCheckboxRow('North (N)', [
+                        buildCheckbox('Some protection', N1, (val) {
+                          setState(() {
+                            N1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', N2, (val) {
+                          setState(() {
+                            N2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', N3, (val) {
+                          setState(() {
+                            N3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('Northeast (NE)', [
+                        buildCheckbox('Some protection', NE1, (val) {
+                          setState(() {
+                            NE1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', NE2, (val) {
+                          setState(() {
+                            NE2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', NE3, (val) {
+                          setState(() {
+                            NE3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('East (E)', [
+                        buildCheckbox('Some protection', E1, (val) {
+                          setState(() {
+                            E1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', E2, (val) {
+                          setState(() {
+                            E2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', E3, (val) {
+                          setState(() {
+                            E3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('Southeast (SE)', [
+                        buildCheckbox('Some protection', SE1, (val) {
+                          setState(() {
+                            SE1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', SE2, (val) {
+                          setState(() {
+                            SE2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', SE3, (val) {
+                          setState(() {
+                            SE3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('South (S)', [
+                        buildCheckbox('Some protection', S1, (val) {
+                          setState(() {
+                            S1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', S2, (val) {
+                          setState(() {
+                            S2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', S3, (val) {
+                          setState(() {
+                            S3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('Southwest (SW)', [
+                        buildCheckbox('Some protection', SW1, (val) {
+                          setState(() {
+                            SW1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', SW2, (val) {
+                          setState(() {
+                            SW2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', SW3, (val) {
+                          setState(() {
+                            SW3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('West (W)', [
+                        buildCheckbox('Some protection', W1, (val) {
+                          setState(() {
+                            W1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', W2, (val) {
+                          setState(() {
+                            W2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', W3, (val) {
+                          setState(() {
+                            W3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      buildCheckboxRow('West (W)', [
+                        buildCheckbox('Some protection', NW1, (val) {
+                          setState(() {
+                            NW1 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Average protection', NW2, (val) {
+                          setState(() {
+                            NW2 = val;
+                            updateData();
+                          });
+                        }),
+                        buildCheckbox('Completely protected', NW3, (val) {
+                          setState(() {
+                            NW3 = val;
+                            updateData();
+                          });
+                        }),
+                      ]),
+                      // Repeat for other directions...
+                    ],
+                  ),
+                  // Column(children: [
+                  //
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("North (N) : -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: N1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 N1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: N2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 N2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: N3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 N3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("Northeast (NE) : -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NE1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NE1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NE2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NE2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NE3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NE3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("East (E) : -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: E1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 E1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: E2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 E2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: E3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 E3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("Southeast (SE): -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SE1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SE1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SE2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SE2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SE3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SE3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("South (S): -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: S1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 S1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: S2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 S2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: S3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 S3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("Southwest (SW): -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SW1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SW1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SW2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SW2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: SW3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 SW3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("West (W): -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: W1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 W1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: W2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 W2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: W3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 W3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),SizedBox(height: 1.h,),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Text("Northwest (NW): -",style: TextStyle(
+                  //           letterSpacing: 1,
+                  //           color: Colors.black,
+                  //           fontSize: 15.sp,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontFamily: "volken")),
+                  //     ],
+                  //   ),
+                  //   Column(
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NW1,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NW1 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Some protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NW2,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NW2 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Average protection",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Checkbox(
+                  //             value: NW3,
+                  //             onChanged: (bool? value) {
+                  //               setState(() {
+                  //                 NW3 = value!;
+                  //               });
+                  //             },
+                  //           ),
+                  //           Text("Completely protected",style: TextStyle(
+                  //               letterSpacing: 1,
+                  //               color: secondary,
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: "volken")),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  //
+                  // ]),
                   SizedBox(
                     height: 2.h,
                   ),
@@ -2974,6 +3249,64 @@ SizedBox(width: 7.w,),
         buildErrorDialog(context, 'Error', "Internet Required");
       }
     });
+  }
+  void updateData() {
+    data[0] = [
+      (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
+      (NE1 ? 3 : 0) + (NE2 ? 3 : 0) + (NE3 ? 4 : 0),
+      (E1 ? 3 : 0) + (E2 ? 3 : 0) + (E3 ? 4 : 0),
+      (SE1 ? 3 : 0) + (SE2 ? 3 : 0) + (SE3 ? 4 : 0),
+      (S1 ? 3 : 0) + (S2 ? 3 : 0) + (S3 ? 4 : 0),
+      (SW1 ? 3 : 0) + (SW2 ? 3 : 0) + (SW3 ? 4 : 0),
+      (W1 ? 3 : 0) + (W2 ? 3 : 0) + (W3 ? 4 : 0),
+      (NW1 ? 3 : 0) + (NW2 ? 3 : 0) + (NW3 ? 4 : 0),
+    ];
+  }
+
+  Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "$label: -",
+              style: TextStyle(
+                  letterSpacing: 1,
+                  color: Colors.black,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "volken"),
+            ),
+          ],
+        ),
+        Column(children: checkboxes),
+        SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget buildCheckbox(
+      String label, bool value, Function(bool) onChanged) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: (bool? val) {
+            onChanged(val!);
+          },
+        ),
+        Text(
+          label,
+            style: TextStyle(
+                letterSpacing: 1,
+                color: secondary,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
+                fontFamily: "volken"),
+        ),
+      ],
+    );
   }
   }
 

@@ -3119,6 +3119,7 @@ SizedBox(width: 7.w,),
                 if (NW3value != null && NW3value is bool) {
                   setState(() {
                     NW3 = NW3value;
+                    updateData();
                   });
                 } else {
                   NW3 = false;
@@ -3127,6 +3128,7 @@ SizedBox(width: 7.w,),
                 if (NW1value != null && NW1value is bool) {
                   setState(() {
                     NW1 = NW1value;
+                    updateData();
                   });
                 } else {
                   NW1 = false;
@@ -3135,6 +3137,7 @@ SizedBox(width: 7.w,),
                 if (NW2value != null && NW2value is bool) {
                   setState(() {
                     NW2 = NW1value;
+                    updateData();
                   });
                 } else {
                   NW2 = false;
@@ -3143,6 +3146,7 @@ SizedBox(width: 7.w,),
                 if (N1value != null && N1value is bool) {
                   setState(() {
                     N1 = N1value;
+                    updateData();
                   });
                 } else {
                   N1 = false;
@@ -3151,6 +3155,7 @@ SizedBox(width: 7.w,),
                 if (N2value != null && N1value is bool) {
                   setState(() {
                     N2 = N2value;
+                    updateData();
                   });
                 } else {
                   N2 = false;
@@ -3159,6 +3164,7 @@ SizedBox(width: 7.w,),
                 if (N3value != null && N3value is bool) {
                   setState(() {
                     N3 = N3value;
+                    updateData();
                   });
                 } else {
                   N3 = false;
@@ -3167,6 +3173,7 @@ SizedBox(width: 7.w,),
                 if (E1value != null && E1value is bool) {
                   setState(() {
                     E1 = E1value;
+                    updateData();
                   });
                 } else {
                   E1 = false;
@@ -3175,6 +3182,7 @@ SizedBox(width: 7.w,),
                 if (E2value != null && E2value is bool) {
                   setState(() {
                     E2 = E2value;
+                    updateData();
                   });
                 } else {
                   E2 = false;
@@ -3183,6 +3191,7 @@ SizedBox(width: 7.w,),
                 if (E3value != null && E3value is bool) {
                   setState(() {
                     E3 = E3value;
+                    updateData();
                   });
                 } else {
                   E3 = false;
@@ -3191,6 +3200,7 @@ SizedBox(width: 7.w,),
                 if (W1value != null && W1value is bool) {
                   setState(() {
                     W1 = W1value;
+                    updateData();
                   });
                 } else {
                   W1 = false;
@@ -3199,6 +3209,7 @@ SizedBox(width: 7.w,),
                 if (W2value != null && W2value is bool) {
                   setState(() {
                     W2 = W2value;
+                    updateData();
                   });
                 } else {
                   W2 = false;
@@ -3207,6 +3218,7 @@ SizedBox(width: 7.w,),
                 if (W3value != null && W3value is bool) {
                   setState(() {
                     W3 = W3value;
+                    updateData();
                   });
                 } else {
                   W3 = false;
@@ -3215,6 +3227,7 @@ SizedBox(width: 7.w,),
                 if (SW1value != null && SW1value is bool) {
                   setState(() {
                     SW1 = SW1value;
+                    updateData();
                   });
                 } else {
                   SW1 = false;
@@ -3223,6 +3236,7 @@ SizedBox(width: 7.w,),
                 if (SW2value != null && SW2value is bool) {
                   setState(() {
                     SW2 = SW2value;
+                    updateData();
                   });
                 } else {
                   SW2 = false;
@@ -3231,6 +3245,7 @@ SizedBox(width: 7.w,),
                 if (SW3value != null && SW3value is bool) {
                   setState(() {
                     SW3 = SW3value;
+                    updateData();
                   });
                 } else {
                   SW3 = false;

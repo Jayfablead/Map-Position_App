@@ -67,7 +67,7 @@ class _drawer1State extends State<drawer1> {
               SizedBox(height:5. h),
                 InkWell(
                   onTap: () {
-                    Get.offAll(HomeScreen());
+                    Get.to(HomeScreen());
                   },
                   child: Container(
                     child: Row(
@@ -125,7 +125,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(LoginScreen());
+                    Get.to(LoginScreen());
                   },
                   child: Container(
                     child: Row(
@@ -183,7 +183,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(SinupScreen());
+                    Get.to(SinupScreen());
                   },
                   child: Container(
                     child: Row(
@@ -242,7 +242,7 @@ class _drawer1State extends State<drawer1> {
 
                 InkWell(
                   onTap: () {
-                    Get.offAll(AllPositionScreen());
+                    Get.to(AllPositionScreen());
                   },
                   child: Container(
                     child: Row(
@@ -356,7 +356,7 @@ class _drawer1State extends State<drawer1> {
                Divider(color: Colors.grey,thickness: 0.8.sp),
                 InkWell(
                   onTap: () {
-                    Get.offAll(HomeScreen());
+                    Get.to(HomeScreen());
                   },
                   child: Container(
                     child: Row(
@@ -414,7 +414,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(ProfileScreen());
+                    Get.to(ProfileScreen());
                   },
                   child: Container(
                     child: Row(
@@ -472,7 +472,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(FavouriteScreen());
+                    Get.to(FavouriteScreen());
                   },
                   child: Container(
                     child: Row(
@@ -529,7 +529,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(AllPositionScreen());
+                    Get.to(AllPositionScreen());
                   },
                   child: Container(
                     child: Row(
@@ -586,7 +586,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(AddMarinaScreen());
+                    Get.to(AddMarinaScreen());
                   },
                   child: Container(
                     child: Row(
@@ -645,7 +645,7 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-Get.offAll(ChangePasswordScreen());
+Get.to(ChangePasswordScreen());
                   },
                   child: Container(
                     child: Row(
@@ -703,7 +703,7 @@ Get.offAll(ChangePasswordScreen());
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offAll(MyMarinaListScreen());
+                    Get.to(MyMarinaListScreen());
                   },
                   child: Container(
                     child: Row(
@@ -763,7 +763,7 @@ Get.offAll(ChangePasswordScreen());
 
                 InkWell(
                   onTap: () {
-                    Get.offAll(PremiumScreen());
+                    Get.to(PremiumScreen());
                   },
                   child: Container(
                     child: Row(

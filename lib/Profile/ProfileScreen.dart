@@ -346,7 +346,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Subscription Alarm",
+                                Text("Position Alerts",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: secondary,

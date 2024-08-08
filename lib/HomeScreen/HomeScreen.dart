@@ -347,7 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onChanged: (value) {
                             if (value.isEmpty) {
                               setState(() {
-                                isLoading = true;
+                                // isLoading = true;
                               });
                               showmarker();
                             }
@@ -3737,7 +3737,6 @@ class _HomeScreenState extends State<HomeScreen> {
           if (response.statusCode == 200) {
             print(" ${shoallmarkermodal?.positions?.length}");
             print("api calling done");
-
             // Clear existing markers
             _customMarkers.clear();
             if (shoallmarkermodal?.positions?.length == 0) {
@@ -3748,7 +3747,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     () {
                   setState(() {
                     searchController.clear();
-                    isLoading = true;
+                    // isLoading = true;
                     Get.back();
                   });
                   showmarker();

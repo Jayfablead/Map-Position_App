@@ -30,7 +30,7 @@ class AllPositionScreen extends StatefulWidget {
 
 class _AllPositionScreenState extends State<AllPositionScreen> {
   bool isLoading =true;
-  final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage1 =GlobalKey<ScaffoldState>();
   @override
   void initState() {
     // TODO: implement initState
@@ -43,7 +43,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
         scaffold:Scaffold(
           resizeToAvoidBottomInset: false,
           extendBody: true,
-          key: _scaffoldKeyProductlistpage,
+          key: _scaffoldKeyProductlistpage1,
           backgroundColor: Colors.white,
           drawer: drawer1(),
       body: isLoading?Container():SingleChildScrollView(
@@ -54,11 +54,11 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
               SizedBox(
                 height: 5.h,
               ),
+
               header(
                   text: "Position",
                   callback1: () {
-                    _scaffoldKeyProductlistpage.currentState
-                        ?.openDrawer();
+                    _scaffoldKeyProductlistpage1.currentState?.openDrawer();
                   }),
               SizedBox(
                 height: 2.h,

@@ -425,7 +425,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               color: Colors.black,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "volken")),
+                              fontFamily: "volken")
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -709,7 +710,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             25.w,
                                             width:
                                             25.w,
-
                                             child:
                                             ClipRRect(
                                               borderRadius: BorderRadius.circular(00),
@@ -865,7 +865,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             25.w,
                                             width:
                                             25.w,
-
                                             child:
                                             ClipRRect(
                                               borderRadius: BorderRadius.circular(00),
@@ -967,7 +966,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data

@@ -50,7 +50,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
   int? select;
   late LatLng dynamicLatLng;
   late GoogleMapController mapController;
-  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
+  late LatLng _currentPosition1 = LatLng(double.parse(newupdatealarammodal?.alarm?.lattiude ?? ""),double.parse(newupdatealarammodal?.alarm?.longitude ?? ""));
   bool _isSatellite = false;
   GoogleMapController? _mapController;
   final _formKey = GlobalKey<FormState>();
@@ -74,6 +74,8 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
       ));
     });
   }
+
+
 
 
   getLocation() async {
@@ -168,7 +170,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
 
                   ),
                   header(
-                      text: "Subscription Alarm",
+                      text: "Position Alerts",
                       callback1: () {
                         _scaffoldKeyProductlistpage1.currentState?.openDrawer();
                       }),
@@ -186,7 +188,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                     ],
                   ),
                   SizedBox(height: 2.h,),
-                 
+
                   Row(
                     children: [
                       Container(
@@ -199,21 +201,34 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                         child: GoogleMap(
                           onMapCreated: _onMapCreated,
                           onTap: _onTap,
-                          markers: _marker != null ? {_marker!} : {},
+                          markers: {
+                            if (newupdatealarammodal?.alarm?.lattiude != null && newupdatealarammodal?.alarm?.longitude != null)
+                              Marker(
+                                markerId: MarkerId('alarm_marker'),
+                                position: LatLng(
+                                  double.parse((newupdatealarammodal?.alarm?.lattiude).toString()),
+                                  double.parse((newupdatealarammodal?.alarm?.longitude).toString()),
+                                ),
+                                infoWindow: InfoWindow(title: 'Alarm Location'),
+                              ),
+                          },
                           myLocationButtonEnabled: false,
                           myLocationEnabled: true,
                           zoomControlsEnabled: true,
                           compassEnabled: true,
                           scrollGesturesEnabled: true,
                           initialCameraPosition: CameraPosition(
-                            target: _currentPosition1, // Default location
+                            target: LatLng(
+                              double.parse(newupdatealarammodal?.alarm?.lattiude ?? '0.0'),
+                              double.parse(newupdatealarammodal?.alarm?.longitude ?? '0.0'),
+                            ),
                             zoom: 10,
                           ),
                           gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-                            // Example: Disable all gestures
                             Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
                           }.toSet(),
-                        ),
+                        )
+
                       ),
                     ],
                   ),
@@ -527,26 +542,20 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
       data['radius'] = _position.text.trim().toString();
-      data['user_id'] =widget.id.toString();
+      data['id'] =widget.id.toString();
       data['latitude'] =_latitude.text.toString();
       data['longitude'] = _latitude1.text.toString();
       data['location'] =_title.text.trim().toString();
       data['category'] =selectedvalue.toString() ;
       data['status'] =selectedvalue1.toString() ;
-
       print("Alaramapidata${data}");
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().updatealaramapitwo(data).then((response) async {
             updatealrammodalscreen = UpdatealramModalscreen.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && updatealrammodalscreen?.success == true) {
-
               EasyLoading.showSuccess(updatealrammodalscreen?.message ?? '');
               Get.offAll(UpdateAlarmScreen());
-
-              setState(() {
-
-              });
             } else {
               EasyLoading.showError(updatealrammodalscreen?.message ?? '');
               // buildErrorDialog(

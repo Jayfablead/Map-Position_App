@@ -84,7 +84,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 50.h,
+                // height: 50.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                     color: Colors.grey.shade200,
@@ -130,7 +130,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder:
                                         (context, url, progress) =>
-                                            CircularProgressIndicator(),
+                                            Center(child: CircularProgressIndicator()),
                                     errorWidget: (context, url, error) =>
                                         Image.asset(Default_Profile,
                                             fit: BoxFit.cover),
@@ -170,7 +170,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 2.h,
+                      height: 1.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -189,6 +189,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             width: 35.w,
                             txtsize: 12.sp)
                       ],
+                    ),
+                    SizedBox(
+                      height: 2 .h,
                     ),
                   ],
                 ),

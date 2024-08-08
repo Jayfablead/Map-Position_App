@@ -269,6 +269,51 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    anchor = false;
+    buoys = false;
+    mountain = false;
+    ownlines = false;
+    sand = false;
+    coral = false;
+    rocks = false;
+    clay = false;
+    pano = false;
+    groceries = false;
+    pharmacy = false;
+    alcohol = false;
+    restaurant = false;
+    pontoon = false;
+    shop = false;
+    water = false;
+    beach = false;
+    N1 = false;
+    N2 = false;
+    N3 = false;
+    NE1 = false;
+    NE2 = false;
+    NE3 = false;
+    E1 = false;
+    E2 = false;
+    E3 = false;
+    SE1 = false;
+    SE2 = false;
+    SE3 = false;
+    S1 = false;
+    S2 = false;
+    S3 = false;
+    SW1 = false;
+    SW2 = false;
+    SW3 = false;
+    W1 = false;
+    W2 = false;
+    W3 = false;
+    NW1 = false;
+    NW2 = false;
+    NW3 = false;
+    _latitude.clear();
+    _comments.clear();
+    _name.clear();
+    selectedimage == null;
     getLocation();
     print("widget.postid${widget.postid}");
     widget.postid == null ? "" : viewposition();
@@ -2727,6 +2772,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                 AddPositionModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 &&
                 addpositionmodal?.success == true) {
+
               print("admin chalu karo bhai");
               EasyLoading.showSuccess(addpositionmodal?.message ?? "");
               Get.to(HomeScreen());

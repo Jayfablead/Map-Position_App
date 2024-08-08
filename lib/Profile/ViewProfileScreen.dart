@@ -66,7 +66,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 45.h,
+
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                   color: Colors.grey.shade200,
@@ -110,7 +110,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
-                                CircularProgressIndicator(),
+                                Center(child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 Image.asset(Default_Profile,
                                     fit: BoxFit.cover),

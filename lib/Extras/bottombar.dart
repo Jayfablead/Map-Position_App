@@ -62,69 +62,65 @@ class _BottombarState extends State<Bottombar> {
     _controller = NotchBottomBarController(index: widget.select_tab!);
     return Stack(
       children: [
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: AnimatedNotchBottomBar(
-            color: Colors.white,
-            notchBottomBarController: _controller!,
-            showLabel: true,
-            notchColor: Colors.black,
-            itemLabelStyle: TextStyle(color: Colors.black, fontFamily: 'pop'),
-            removeMargins: true,
-            bottomBarWidth: MediaQuery.of(context).size.width,
-            durationInMilliSeconds: 100,
-            bottomBarItems: [
-              BottomBarItem(
-                inActiveItem:
-                Icon(Icons.favorite, color: Colors.black),
-                activeItem:
-                Icon(Icons.favorite, color: Colors.white),
-                itemLabel: 'Favourite',
+        SafeArea(
+          child: Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.only(bottom: 8), // Slight padding to avoid overflow
+              child: AnimatedNotchBottomBar(
+                color: Colors.white,
+                notchBottomBarController: _controller!,
+                showLabel: true,
+                notchColor: Colors.black,
+                itemLabelStyle: TextStyle(color: Colors.black, fontFamily: 'pop', fontSize: 12),
+                removeMargins: true,
+                bottomBarWidth: MediaQuery.of(context).size.width,
+                durationInMilliSeconds: 100,
+                bottomBarItems: [
+                  BottomBarItem(
+                    inActiveItem: Icon(Icons.favorite, color: Colors.black),
+                    activeItem: Icon(Icons.favorite, color: Colors.white),
+                    itemLabel: 'Favourite',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(Icons.paid, color: Colors.black87),
+                    activeItem: Icon(Icons.paid, color: Colors.white),
+                    itemLabel: 'Premium',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(CupertinoIcons.home, color: Colors.black),
+                    activeItem: Icon(CupertinoIcons.home, color: Colors.white),
+                    itemLabel: 'Home',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(Icons.directions_boat, color: Colors.black),
+                    activeItem: Icon(Icons.directions_boat, color: Colors.white),
+                    itemLabel: 'Position',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(Icons.person, color: Colors.black),
+                    activeItem: Icon(Icons.person, color: Colors.white),
+                    itemLabel: 'Profile',
+                  ),
+                ],
+                onTap: (index) {
+                  _isConnected ? index == 0
+                      ? Get.to(FavouriteScreen())
+                      : index == 1
+                      ? Get.to(PremiumScreen())
+                      : index == 2
+                      ? Get.to(HomeScreen())
+                      : index == 3
+                      ? Get.to(MyMarinaListScreen())
+                      : Get.to(ProfileScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
+                },
               ),
-              BottomBarItem(
-                inActiveItem:
-                Icon(Icons.paid, color: Colors.black87),
-                activeItem:
-                Icon(Icons.paid, color: Colors.white),
-                itemLabel: 'Premium',
-              ),
-              BottomBarItem(
-                inActiveItem: Icon(CupertinoIcons.home, color: Colors.black),
-                activeItem: Icon(CupertinoIcons.home, color: Colors.white),
-                itemLabel: 'Home',
-              ),
-              BottomBarItem(
-                inActiveItem:
-                Icon(Icons.directions_boat, color: Colors.black),
-                activeItem:
-                Icon(Icons.directions_boat, color: Colors.white),
-                itemLabel: 'Position',
-              ),
-              BottomBarItem(
-                inActiveItem:
-                Icon(Icons.person, color: Colors.black),
-                activeItem:
-                Icon(Icons.person, color: Colors.white),
-                itemLabel: 'Profile',
-              ),
-            ],
-
-            onTap: (index) {
-              _isConnected ? index == 0
-                  ? Get.to(FavouriteScreen())
-                  : index == 1
-                  ? Get.to(PremiumScreen())
-                  : index == 2
-                  ? Get.to(HomeScreen())
-                  : index == 3
-                  ? Get.to(MyMarinaListScreen())
-                  : Get.to(ProfileScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
-
-            },
+            ),
           ),
-        ),
+        )
+
       ],
     );
   }

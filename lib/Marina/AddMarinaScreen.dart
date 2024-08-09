@@ -122,46 +122,113 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   final _formKey = GlobalKey<FormState>();
   late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
   double? lat1,lng1;
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
-    LatLng location = LatLng(lat, long);
-    setState(() {
-      _currentPosition1 = location;
-      lat1=lat;
-      lng1=long;
+  Set<Marker> _markers = {};
 
-    });
-  }
+
   Marker? _marker;
   GoogleMapController? _mapController; // Add this line
   double? _lastLatitude;
   double? _lastLongitude;
+
+  void getLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    double lat = double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0;
+    double long = double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
+    LatLng location = LatLng(lat, long);
+
+    setState(() {
+      _currentPosition1 = location;
+      _latitude.text = lat.toString();
+      _latitude1.text = long.toString();
+      _updateMarker(); // Ensure marker is updated with new location
+    });
+  }
+
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+    print('Map Controller Created');
 
-    // Example: Move camera to a new position if a condition is met
-    if (_lastLatitude != null && _lastLongitude != null) {
+    // Set initial camera position dynamically
+    LatLng initialPosition;
+    double initialZoom;
+
+    if (newupdatealarammodal?.alarm?.lattiude != null &&
+        newupdatealarammodal?.alarm?.longitude != null) {
+      double latitude = double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0;
+      double longitude = double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
+      initialPosition = LatLng(latitude, longitude);
+
+      // Dynamic zoom level logic (adjust as needed)
+      initialZoom = _calculateZoomLevel(latitude, longitude);
+    } else {
+      initialPosition = LatLng(37.7749, -122.4194); // Default location
+      initialZoom = 10; // Default zoom level
+    }
+
+    _mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: initialPosition,
+          zoom: initialZoom,
+        ),
+      ),
+    );
+
+    _updateMarker(); // Update marker after setting the camera position
+
+    print('Markers: $_markers');
+  }
+
+
+
+  void _updateMarker() {
+    if (_latitude.text.isNotEmpty && _latitude1.text.isNotEmpty) {
+      double latitude = double.tryParse(_latitude.text) ?? 0.0;
+      double longitude = double.tryParse(_latitude1.text) ?? 0.0;
+
+      print('Updating marker to lat: $latitude, lng: $longitude'); // Debugging
+
+      Marker marker = Marker(
+        markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
+        position: LatLng(latitude, longitude),
+        infoWindow: InfoWindow(title: 'Alarm Location'),
+      );
+
+      setState(() {
+        _markers.removeWhere((m) => m.markerId.value == 'alarm_marker'); // Remove old marker if it exists
+        _markers.add(marker); // Add new marker
+      });
+
       _mapController?.animateCamera(
         CameraUpdate.newLatLng(
-          LatLng(_lastLatitude!, _lastLongitude!),
+          LatLng(latitude, longitude),
         ),
       );
     } else {
-      // Default camera position if no marker is set
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(37.7749, -122.4194), // Default location
-        ),
-      );
+      print('No valid latitude or longitude'); // Debugging
     }
   }
-  TextEditingController  _latitude =TextEditingController();
-  TextEditingController  _latitude1 =TextEditingController();
+
+// Example function to calculate zoom level dynamically based on latitude and longitude
+  double _calculateZoomLevel(double latitude, double longitude) {
+    // Adjust this logic based on your needs
+    // You can use distance from a reference point or other criteria
+    double zoomLevel = 15; // Default zoom level
+
+    // Example: Increase zoom level for closer ranges
+    if (latitude != 0.0 && longitude != 0.0) {
+      zoomLevel = 16; // More zoomed in
+    } else {
+      zoomLevel = 10; // Zoomed out
+    }
+
+    return zoomLevel;
+  }
+
+
   void _onTap(LatLng location) {
     setState(() {
       _lastLatitude = location.latitude;
@@ -183,6 +250,36 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       );
     });
   }
+
+  void _onMapTapped(LatLng latLng) {
+    setState(() {
+      _markers.clear();
+      _markers.add(Marker(
+        markerId: MarkerId('Tapped Location'),
+        position: latLng,
+      ));
+
+      // Update text fields with tapped location
+      _latitude.text = latLng.latitude.toString();
+      _latitude1.text = latLng.longitude.toString();
+    });
+  }
+
+
+
+
+
+
+
+
+  TextEditingController  _latitude =TextEditingController();
+  TextEditingController  _latitude1 =TextEditingController();
+
+
+
+
+
+
 
   @override
   void initState() {
@@ -770,30 +867,35 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 45.h,
                       width: MediaQuery.of(context).size.width * .95,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: Colors.black12, width: 1.sp)),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.black12, width: 1.sp),
+                      ),
                       child: GoogleMap(
                         onMapCreated: _onMapCreated,
-                        onTap: _onTap,
-                        markers: _marker != null ? {_marker!} : {},
+                        onTap: _onMapTapped,
+                        markers: _markers,
                         myLocationButtonEnabled: false,
                         myLocationEnabled: true,
                         zoomControlsEnabled: true,
                         compassEnabled: true,
                         scrollGesturesEnabled: true,
                         initialCameraPosition: CameraPosition(
-                          target: _currentPosition1, // Default location
+                          target: LatLng(
+                            double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0,
+                            double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0,
+                          ),
                           zoom: 10,
                         ),
                         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-                          // Example: Disable all gestures
                           Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
                         }.toSet(),
                       ),
                     ),
                   ],
                 ),
+
+
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -811,28 +913,31 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: secondary),
-                        controller: _latitude,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Latitude";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Latitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
                             hintText: "Latitude",
                             icon: Icon(
                               Icons.location_on,
                               color: secondary,
-                            )),
-                      ),
-
-                    ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when latitude changes
+                          },
+                        ))
                   ],
                 ),
+
                 SizedBox(
                   height: 2.h,
                 ),
@@ -853,26 +958,28 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: secondary),
-                        controller: _latitude1,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Longitude";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude1,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Longitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
                             hintText: "Longitude",
                             icon: Icon(
                               Icons.location_on,
                               color: secondary,
-                            )),
-                      ),
-
-                    ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when longitude changes
+                          },
+                        ))
                   ],
                 ),
                 SizedBox(

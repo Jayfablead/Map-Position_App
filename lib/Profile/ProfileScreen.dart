@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         isLoading: isLoading,
         scaffold:Scaffold(
       extendBody: true,
-      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 4),
+      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 3),
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
@@ -414,7 +414,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-
                               ],
                             ),
                           ],
@@ -642,7 +641,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       color: secondary,
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
+                                      fontFamily: "volken")
+                              ),
                             ],
                           ),
                           Icon(

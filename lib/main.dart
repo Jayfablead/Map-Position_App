@@ -3,7 +3,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'ChartScreen.dart';
 import 'HomeScreen/WelcomeScreen.dart';
 import 'Provider/Authprovider.dart';
 

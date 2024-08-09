@@ -240,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? Container()
               : isLoading
               ? Container()
-              : Bottombar(select_tab: 2),
+              : Bottombar(select_tab: 1),
           key: _scaffoldKeyProductlistpage,
           drawer: drawer1(),
           body: isLoading
@@ -500,195 +500,198 @@ class _HomeScreenState extends State<HomeScreen> {
                     hight: 5.h,
                     width: 40.w,
                     txtsize: 12.sp)
-                    : PopupMenuButton(
-                    color: bgcolor,
-                    elevation: 00,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: secondary),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                        alignment: Alignment.center,
-                        width: 40.w,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 1.h),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: blackback),
-                        child: Text(
-                          "+ Add Position",
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Volkan"),
-                        )),
-                    itemBuilder: (BuildContext context) {
-                      return <PopupMenuEntry>[
-                        PopupMenuItem(
-                          onTap: () {
-                            Get.back();
-                            Get.to(AddAchoragePositionScreen(
-                              lat: lat1.toString(),
-                              lng: lng1.toString(),
-                            ));
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 8.w,
-                                height: 8.w,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius.circular(100),
-                                  color: blackback,
-                                ),
-                                child: Image.asset(
-                                  "assets/lagan.png",
-                                  height: 25.w,
-                                  width: 25.w,
-                                  color: Colors.white,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Anchorage',
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "Volkan"),
-                              ),
-                            ],
-                          ),
-                          value: 'Anchorage',
-                        ),
-                        PopupMenuDivider(),
-                        PopupMenuItem(
-                          onTap: () {
-                            Get.back();
-                            Get.to(AddWarningScreen(
+                    : batan(title: "+ Add Position", route: (){ Get.to(AddMarinaScreen(
                                 lat: lat1.toString(),
-                                lng: lng1.toString()));
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: 8.w,
-                                  height: 8.w,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                    color: blackback,
-                                  ),
-                                  child: Icon(
-                                    Icons.warning_amber_outlined,
-                                    color: Colors.white,
-                                  )),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Warning',
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "Volkan"),
-                              ),
-                            ],
-                          ),
-                          value: 'Warning',
-                        ),
-                        PopupMenuDivider(),
-                        PopupMenuItem(
-                          onTap: () {
-                            Get.back();
-                            Get.to(AddOtherPositionScreen(
-                              lat: lat1.toString(),
-                              lng: lng1.toString(),
-                            ));
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                  width: 8.w,
-                                  height: 8.w,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                    color: blackback,
-                                  ),
-                                  child: Icon(
-                                    Icons.devices_other_sharp,
-                                    color: Colors.white,
-                                  )),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Other',
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "Volkan"),
-                              ),
-                            ],
-                          ),
-                          value: 'Warning',
-                        ),
-                        // PopupMenuDivider(),
-                        // PopupMenuItem(
-                        //   onTap: () {
-                        //     Get.offAll(AddMarinaScreen(
-                        //       lat: lat1.toString(),
-                        //       lng: lng1.toString(),
-                        //     ));
-                        //   },
-                        //   child: Row(
-                        //     children: [
-                        //       Container(
-                        //           width: 8.w,
-                        //           height: 8.w,
-                        //           alignment: Alignment.center,
-                        //           decoration: BoxDecoration(
-                        //             borderRadius:
-                        //             BorderRadius.circular(100),
-                        //             color: blackback,
-                        //           ),
-                        //           child: Icon(Icons.directions_boat,
-                        //               color: Colors.white)),
-                        //       SizedBox(
-                        //         width: 2.w,
-                        //       ),
-                        //       Text(
-                        //         'Position',
-                        //         style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 12.sp,
-                        //             fontWeight: FontWeight.normal,
-                        //             fontFamily: "Volkan"),
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   value: 'Warning',
-                        // ),
-                      ];
-                    },
-                    onSelected: (value) {
-                      print('Selected: $value');
-                    }),
+                                lng: lng1.toString(),
+                              ));}, hight: 4.5 .h, width: 40.w, txtsize: 15.sp),              // PopupMenuButton(
+                //     color: bgcolor,
+                //     elevation: 00,
+                //     shape: RoundedRectangleBorder(
+                //         side: BorderSide(color: secondary),
+                //         borderRadius: BorderRadius.circular(10)),
+                //     child: Container(
+                //         alignment: Alignment.center,
+                //         width: 40.w,
+                //         padding: EdgeInsets.symmetric(
+                //             horizontal: 2.w, vertical: 1.h),
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //             color: blackback),
+                //         child: Text(
+                //           "+ Add Position",
+                //           style: TextStyle(
+                //               letterSpacing: 1,
+                //               color: Colors.white,
+                //               fontSize: 12.sp,
+                //               fontWeight: FontWeight.bold,
+                //               fontFamily: "Volkan"),
+                //         )),
+                //     itemBuilder: (BuildContext context) {
+                //       return <PopupMenuEntry>[
+                //         PopupMenuItem(
+                //           onTap: () {
+                //             Get.back();
+                //             Get.to(AddMarinaScreen(
+                //               lat: lat1.toString(),
+                //               lng: lng1.toString(),
+                //             ));
+                //           },
+                //           child: Row(
+                //             children: [
+                //               Container(
+                //                 width: 8.w,
+                //                 height: 8.w,
+                //                 alignment: Alignment.center,
+                //                 decoration: BoxDecoration(
+                //                   borderRadius:
+                //                   BorderRadius.circular(100),
+                //                   color: blackback,
+                //                 ),
+                //                 child: Image.asset(
+                //                   "assets/lagan.png",
+                //                   height: 25.w,
+                //                   width: 25.w,
+                //                   color: Colors.white,
+                //                   fit: BoxFit.cover,
+                //                 ),
+                //               ),
+                //               SizedBox(
+                //                 width: 2.w,
+                //               ),
+                //               Text(
+                //                 'Anchorage',
+                //                 style: TextStyle(
+                //                     letterSpacing: 1,
+                //                     color: secondary,
+                //                     fontSize: 12.sp,
+                //                     fontWeight: FontWeight.normal,
+                //                     fontFamily: "Volkan"),
+                //               ),
+                //             ],
+                //           ),
+                //           value: 'Anchorage',
+                //         ),
+                //         PopupMenuDivider(),
+                //         PopupMenuItem(
+                //           onTap: () {
+                //             Get.back();
+                //             Get.to(AddMarinaScreen(
+                //                 lat: lat1.toString(),
+                //                 lng: lng1.toString()));
+                //           },
+                //           child: Row(
+                //             children: [
+                //               Container(
+                //                   width: 8.w,
+                //                   height: 8.w,
+                //                   alignment: Alignment.center,
+                //                   decoration: BoxDecoration(
+                //                     borderRadius:
+                //                     BorderRadius.circular(100),
+                //                     color: blackback,
+                //                   ),
+                //                   child: Icon(
+                //                     Icons.warning_amber_outlined,
+                //                     color: Colors.white,
+                //                   )),
+                //               SizedBox(
+                //                 width: 2.w,
+                //               ),
+                //               Text(
+                //                 'Warning',
+                //                 style: TextStyle(
+                //                     letterSpacing: 1,
+                //                     color: secondary,
+                //                     fontSize: 12.sp,
+                //                     fontWeight: FontWeight.normal,
+                //                     fontFamily: "Volkan"),
+                //               ),
+                //             ],
+                //           ),
+                //           value: 'Warning',
+                //         ),
+                //         PopupMenuDivider(),
+                //         PopupMenuItem(
+                //           onTap: () {
+                //             Get.back();
+                //             Get.to(AddMarinaScreen(
+                //               lat: lat1.toString(),
+                //               lng: lng1.toString(),
+                //             ));
+                //           },
+                //           child: Row(
+                //             children: [
+                //               Container(
+                //                   width: 8.w,
+                //                   height: 8.w,
+                //                   alignment: Alignment.center,
+                //                   decoration: BoxDecoration(
+                //                     borderRadius:
+                //                     BorderRadius.circular(100),
+                //                     color: blackback,
+                //                   ),
+                //                   child: Icon(
+                //                     Icons.devices_other_sharp,
+                //                     color: Colors.white,
+                //                   )),
+                //               SizedBox(
+                //                 width: 2.w,
+                //               ),
+                //               Text(
+                //                 'Other',
+                //                 style: TextStyle(
+                //                     letterSpacing: 1,
+                //                     color: secondary,
+                //                     fontSize: 12.sp,
+                //                     fontWeight: FontWeight.normal,
+                //                     fontFamily: "Volkan"),
+                //               ),
+                //             ],
+                //           ),
+                //           value: 'Warning',
+                //         ),
+                //         // PopupMenuDivider(),
+                //         // PopupMenuItem(
+                //         //   onTap: () {
+                //         //     Get.offAll(AddMarinaScreen(
+                //         //       lat: lat1.toString(),
+                //         //       lng: lng1.toString(),
+                //         //     ));
+                //         //   },
+                //         //   child: Row(
+                //         //     children: [
+                //         //       Container(
+                //         //           width: 8.w,
+                //         //           height: 8.w,
+                //         //           alignment: Alignment.center,
+                //         //           decoration: BoxDecoration(
+                //         //             borderRadius:
+                //         //             BorderRadius.circular(100),
+                //         //             color: blackback,
+                //         //           ),
+                //         //           child: Icon(Icons.directions_boat,
+                //         //               color: Colors.white)),
+                //         //       SizedBox(
+                //         //         width: 2.w,
+                //         //       ),
+                //         //       Text(
+                //         //         'Position',
+                //         //         style: TextStyle(
+                //         //             letterSpacing: 1,
+                //         //             color: secondary,
+                //         //             fontSize: 12.sp,
+                //         //             fontWeight: FontWeight.normal,
+                //         //             fontFamily: "Volkan"),
+                //         //       ),
+                //         //     ],
+                //         //   ),
+                //         //   value: 'Warning',
+                //         // ),
+                //       ];
+                //     },
+                //     onSelected: (value) {
+                //       print('Selected: $value');
+                //     }),
               ): Container() ,
               Positioned(
                 bottom: 250,

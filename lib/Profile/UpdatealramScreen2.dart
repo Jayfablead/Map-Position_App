@@ -63,6 +63,47 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
     super.dispose();
   }
 
+  String? selectedvalue = "";
+  String? selectedvalue1 = "1";
+  MapType _mapType = MapType.satellite;
+  bool isLoading =true;
+  Marker? _marker;
+  // Add this line
+  double? _lastLatitude;
+  double? _lastLongitude;
+
+  void _updateMarker() {
+    if (_latitude.text.isNotEmpty && _latitude1.text.isNotEmpty) {
+      double latitude = double.tryParse(_latitude.text) ?? 0.0;
+      double longitude = double.tryParse(_latitude1.text) ?? 0.0;
+
+      print('Updating marker to lat: $latitude, lng: $longitude'); // Debugging
+
+      Marker marker = Marker(
+        markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
+        position: LatLng(latitude, longitude),
+        infoWindow: InfoWindow(title: 'Alarm Location'),
+      );
+
+      setState(() {
+        _markers.removeWhere((m) => m.markerId.value == 'alarm_marker'); // Remove old marker if it exists
+        _markers.add(marker); // Add new marker
+      });
+
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(latitude, longitude),
+        ),
+      );
+    } else {
+      print('No valid latitude or longitude'); // Debugging
+    }
+  }
+
+
+
+
+
 
 
   void _onMapTapped(LatLng latLng) {
@@ -72,54 +113,86 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
         markerId: MarkerId('Tapped Location'),
         position: latLng,
       ));
+
+      // Update text fields with tapped location
+      _latitude.text = latLng.latitude.toString();
+      _latitude1.text = latLng.longitude.toString();
     });
   }
 
 
-
-
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
+  void getLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = double.parse((newupdatealarammodal?.alarm?.lattiude).toString());
-    double long = double.parse((newupdatealarammodal?.alarm?.longitude).toString());
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    double lat = double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0;
+    double long = double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
     LatLng location = LatLng(lat, long);
+
     setState(() {
       _currentPosition1 = location;
-      lat1=lat;
-      lng1=long;
+      _latitude.text = lat.toString();
+      _latitude1.text = long.toString();
+      _updateMarker(); // Ensure marker is updated with new location
     });
   }
-  String? selectedvalue = "";
-  String? selectedvalue1 = "1";
-  MapType _mapType = MapType.satellite;
-  bool isLoading =true;
 
-  Marker? _marker;
-  // Add this line
-  double? _lastLatitude;
-  double? _lastLongitude;
+
+
+
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+    print('Map Controller Created');
 
-    // Example: Move camera to a new position if a condition is met
-    if (_lastLatitude != null && _lastLongitude != null) {
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(_lastLatitude!, _lastLongitude!),
-        ),
-      );
+    // Set initial camera position dynamically
+    LatLng initialPosition;
+    double initialZoom;
+
+    if (newupdatealarammodal?.alarm?.lattiude != null &&
+        newupdatealarammodal?.alarm?.longitude != null) {
+      double latitude = double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0;
+      double longitude = double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
+      initialPosition = LatLng(latitude, longitude);
+
+      // Dynamic zoom level logic (adjust as needed)
+      initialZoom = _calculateZoomLevel(latitude, longitude);
     } else {
-      // Default camera position if no marker is set
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(37.7749, -122.4194), // Default location
-        ),
-      );
+      initialPosition = LatLng(37.7749, -122.4194); // Default location
+      initialZoom = 10; // Default zoom level
     }
+
+    _mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: initialPosition,
+          zoom: initialZoom,
+        ),
+      ),
+    );
+
+    _updateMarker(); // Update marker after setting the camera position
+
+    print('Markers: $_markers');
   }
+
+// Example function to calculate zoom level dynamically based on latitude and longitude
+  double _calculateZoomLevel(double latitude, double longitude) {
+    // Adjust this logic based on your needs
+    // You can use distance from a reference point or other criteria
+    double zoomLevel = 15; // Default zoom level
+
+    // Example: Increase zoom level for closer ranges
+    if (latitude != 0.0 && longitude != 0.0) {
+      zoomLevel = 16; // More zoomed in
+    } else {
+      zoomLevel = 10; // Zoomed out
+    }
+
+    return zoomLevel;
+  }
+
+
   TextEditingController  _latitude =TextEditingController();
   TextEditingController  _latitude1 =TextEditingController();
   void _onTap(LatLng location) {
@@ -189,49 +262,39 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   ),
                   SizedBox(height: 2.h,),
 
-                  Row(
-                    children: [
-                      Container(
-                        height: 45.h,
-                        width: MediaQuery.of(context).size.width * .95,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.black12, width: 1.sp)),
-                        child: GoogleMap(
-                          onMapCreated: _onMapCreated,
-                          onTap: _onTap,
-                          markers: {
-                            if (newupdatealarammodal?.alarm?.lattiude != null && newupdatealarammodal?.alarm?.longitude != null)
-                              Marker(
-                                markerId: MarkerId('alarm_marker'),
-                                position: LatLng(
-                                  double.parse((newupdatealarammodal?.alarm?.lattiude).toString()),
-                                  double.parse((newupdatealarammodal?.alarm?.longitude).toString()),
-                                ),
-                                infoWindow: InfoWindow(title: 'Alarm Location'),
-                              ),
-                          },
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: true,
-                          zoomControlsEnabled: true,
-                          compassEnabled: true,
-                          scrollGesturesEnabled: true,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                              double.parse(newupdatealarammodal?.alarm?.lattiude ?? '0.0'),
-                              double.parse(newupdatealarammodal?.alarm?.longitude ?? '0.0'),
-                            ),
-                            zoom: 10,
-                          ),
-                          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-                            Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
-                          }.toSet(),
-                        )
-
+              Row(
+                children: [
+                  Container(
+                    height: 45.h,
+                    width: MediaQuery.of(context).size.width * .95,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black12, width: 1.sp),
+                    ),
+                    child: GoogleMap(
+                      onMapCreated: _onMapCreated,
+                      onTap: _onMapTapped,
+                      markers: _markers,
+                      myLocationButtonEnabled: false,
+                      myLocationEnabled: true,
+                      zoomControlsEnabled: true,
+                      compassEnabled: true,
+                      scrollGesturesEnabled: true,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                          double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0,
+                          double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0,
+                        ),
+                        zoom: 10,
                       ),
-                    ],
+                      gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                        Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+                      }.toSet(),
+                    ),
                   ),
+                ],
+              ),
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -251,7 +314,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.number,
                           style: TextStyle(color: secondary),
                           controller: _latitude,
                           validator: (value) {
@@ -261,16 +324,19 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                             return null;
                           },
                           decoration: inputDecoration(
-                              hintText: "Latitude",
-                              icon: Icon(
-                                Icons.location_on,
-                                color: secondary,
-                              )),
-                        ),
-
-                      ),
+                            hintText: "Latitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when latitude changes
+                          },
+                        ))
                     ],
                   ),
+
                   SizedBox(
                     height: 2.h,
                   ),
@@ -293,7 +359,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.number,
                           style: TextStyle(color: secondary),
                           controller: _latitude1,
                           validator: (value) {
@@ -303,16 +369,19 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                             return null;
                           },
                           decoration: inputDecoration(
-                              hintText: "Longitude",
-                              icon: Icon(
-                                Icons.location_on,
-                                color: secondary,
-                              )),
-                        ),
-
-                      ),
+                            hintText: "Longitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when longitude changes
+                          },
+                        ))
                     ],
                   ),
+
                   SizedBox(height: 2.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -367,7 +436,6 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                     height: 1.h,
                   ),
                   Container(
-
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     decoration: BoxDecoration(

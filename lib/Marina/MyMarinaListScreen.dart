@@ -73,7 +73,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
         isLoading: isLoading,
         scaffold: Scaffold(
           extendBody: true,
-         bottomNavigationBar: loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container():Bottombar(select_tab: 3),
+         bottomNavigationBar: loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container():Bottombar(select_tab: 2),
           backgroundColor: Colors.white,
           drawer: drawer1(),
           key: _scaffoldKeyProductlistpage,
@@ -387,7 +387,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                     child: InkWell(
                                       onTap: () {
                                         // deleteposition((mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "");
-                                        mymarinaviewmodal?.positions?[i].properties?.termName==null||mymarinaviewmodal?.positions?[i].properties?.termName==""?Get.to(AddAchoragePositionScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)): mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(AddOtherPositionScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)): mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(AddWarningScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,));
+                                        Get.to(AddMarinaScreen(lat:lat1.toString(),lng: lng1.toString(),postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,));
                                       },
                                       child: Container(
                                         width: 10.w,

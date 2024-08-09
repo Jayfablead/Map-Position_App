@@ -2,18 +2,15 @@ import 'dart:async';
 
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:connectivity/connectivity.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Favourite/FavouriteScreen.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../Marina/MyMarinaListScreen.dart';
 import '../PrimiumPayments/PremiumScreen.dart';
 import '../Profile/ProfileScreen.dart';
 import 'buildErrorDialog.dart';
-import 'const.dart';
 
 class Bottombar extends StatefulWidget {
   int? select_tab;
@@ -68,35 +65,40 @@ class _BottombarState extends State<Bottombar> {
             left: 0,
             right: 0,
             child: Container(
-              padding: EdgeInsets.only(bottom: 8), // Slight padding to avoid overflow
+              padding: EdgeInsets.only(bottom: 8),
+              // Slight padding to avoid overflow
               child: AnimatedNotchBottomBar(
                 color: Colors.white,
                 notchBottomBarController: _controller!,
                 showLabel: true,
                 notchColor: Colors.black,
-                itemLabelStyle: TextStyle(color: Colors.black, fontFamily: 'pop', fontSize: 12),
+                itemLabelStyle: TextStyle(
+                    color: Colors.black, fontFamily: 'pop', fontSize: 12),
                 removeMargins: true,
                 bottomBarWidth: MediaQuery.of(context).size.width,
                 durationInMilliSeconds: 100,
                 bottomBarItems: [
-                  BottomBarItem(
-                    inActiveItem: Icon(Icons.favorite, color: Colors.black),
-                    activeItem: Icon(Icons.favorite, color: Colors.white),
-                    itemLabel: 'Favourite',
-                  ),
+                  // BottomBarItem(
+                  //   inActiveItem: Icon(Icons.favorite, color: Colors.black),
+                  //   activeItem: Icon(Icons.favorite, color: Colors.white),
+                  //   itemLabel: 'Favourite',
+                  // ),
                   BottomBarItem(
                     inActiveItem: Icon(Icons.paid, color: Colors.black87),
                     activeItem: Icon(Icons.paid, color: Colors.white),
                     itemLabel: 'Premium',
                   ),
                   BottomBarItem(
-                    inActiveItem: Icon(CupertinoIcons.home, color: Colors.black),
+                    inActiveItem:
+                        Icon(CupertinoIcons.home, color: Colors.black),
                     activeItem: Icon(CupertinoIcons.home, color: Colors.white),
                     itemLabel: 'Home',
                   ),
                   BottomBarItem(
-                    inActiveItem: Icon(Icons.directions_boat, color: Colors.black),
-                    activeItem: Icon(Icons.directions_boat, color: Colors.white),
+                    inActiveItem:
+                        Icon(Icons.directions_boat, color: Colors.black),
+                    activeItem:
+                        Icon(Icons.directions_boat, color: Colors.white),
                     itemLabel: 'Position',
                   ),
                   BottomBarItem(
@@ -106,24 +108,25 @@ class _BottombarState extends State<Bottombar> {
                   ),
                 ],
                 onTap: (index) {
-                  _isConnected ? index == 0
-                      ? Get.to(FavouriteScreen())
-                      : index == 1
-                      ? Get.to(PremiumScreen())
-                      : index == 2
-                      ? Get.to(HomeScreen())
-                      : index == 3
-                      ? Get.to(MyMarinaListScreen())
-                      : Get.to(ProfileScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
+                  _isConnected
+                      ? index == 0
+                          ? Get.to(PremiumScreen())
+                          : index == 1
+                              ? Get.to(HomeScreen())
+                              : index == 2
+                                  ? Get.to(MyMarinaListScreen())
+                                  : Get.to(ProfileScreen())
+                      : buildErrorDialog(
+                          context, '', "Without Internet Not Use This");
                 },
               ),
             ),
           ),
         )
-
       ],
     );
   }
+
   Future<void> _checkInternet() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {

@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Const.dart';
 import '../Extras/Drwer.dart';
@@ -105,6 +106,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
     return commanScreen(
       isLoading: isLoading,
       scaffold: Scaffold(
+        extendBody: true,
+        bottomNavigationBar: loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container():Bottombar(select_tab: 0),
         backgroundColor: bgcolor,
         key: _scaffoldKeyProductlistpage1,
         drawer: drawer1(),

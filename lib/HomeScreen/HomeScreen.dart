@@ -245,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? Container()
                   : isLoading
                       ? Container()
-                      : Bottombar(select_tab: 1),
+                      : Bottombar(select_tab: 2),
           key: _scaffoldKeyProductlistpage,
           drawer: drawer1(),
           body: isLoading

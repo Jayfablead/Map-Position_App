@@ -354,6 +354,11 @@ class authprovider with ChangeNotifier {
     // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
+
+
+
+
+
   Future<http.Response> updatecastompostionapi(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}update-custom-position';
     var responseJson;
@@ -516,6 +521,8 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+
+
   Future<http.Response> stripeapi(Map<String, String> bodyData) async {
     String url = '${apiUrl}process-payment';
     print(url);
@@ -532,6 +539,8 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+
+
   Future<http.Response> wedtherapi(latitude1,longitude2,carrentdate,tendays) async {
     String url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude1},${longitude2}/${carrentdate}/${tendays}/?key=5ZPYVKDXPN3D8K4MYRV7W78KZ';
     print("wedtherurl${url}");
@@ -548,6 +557,8 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+
+
   Future<http.Response> useralaramapi(Map<String, String> bodyData) async {
     String url = '${apiUrl}user-alarms';
     print(url);
@@ -564,6 +575,8 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+
+
   Future<http.Response> deletealarmapi(Map<String, String> bodyData) async {
     String url = '${apiUrl}delete-alarm';
     print(url);
@@ -580,6 +593,8 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+
+
   Future<http.Response> newupdatealaramapi(Map<String, String> bodyData) async {
     String url = '${apiUrl}alarm-details';
     print(url);
@@ -594,6 +609,31 @@ class authprovider with ChangeNotifier {
     );
     responseJson = responses(response);
     print(response.body);
+    return responseJson;
+  }
+
+
+
+  Future<http.Response> addnewimageviedewtailimage(Map<String, String> bodyData, List<String> imagePaths) async {
+    String url = '${apiUrl}view-position-image';
+    var responseJson;
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+    imageUploadRequest.headers.addAll(headers);
+    if (imagePaths.isNotEmpty) {
+      for (var imagePath in imagePaths) {
+        var file = await http.MultipartFile.fromPath(
+          'upload_file',
+          imagePath!,
+          contentType: MediaType('image', 'jpg,png'),
+        );
+        imageUploadRequest.files.add(file);
+      }
+    }
+    imageUploadRequest.fields.addAll(bodyData);
+    final streamResponse = await imageUploadRequest.send();
+    var response = await http.Response.fromStream(streamResponse);
+    responseJson = responses(response);
+    // print("responseJson = ${json.decode(responseJson)}");
     return responseJson;
   }
 

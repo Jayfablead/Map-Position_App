@@ -350,14 +350,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Icons.search,
                                             color: secondary,
                                           )),
-                                      // onChanged: (value) {
-                                      //   if (value.isEmpty) {
-                                      //     setState(() {
-                                      //       // isLoading = true;
-                                      //     });
-                                      //     showmarker();
-                                      //   }
-                                      // },
+                                      onChanged: (value) {
+                                        if (value.isEmpty) {
+                                          setState(() {
+                                            isLoading = true;
+                                          });
+                                          showmarker();
+                                        }
+                                      },
                                     ),
                                   ),
                                   SizedBox(
@@ -3751,6 +3751,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   showmarker() {
+    print("online545454548782121212121261");
     print("dtadone");
     print("showmarker");
     final Map<String, String> data = {};
@@ -3803,7 +3804,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       double longitude = double.parse(longitudeString);
                       String imageurl = (shoallmarkermodal
                               ?.positions?[index].properties?.imgURL)
-                          .toString();
+                               .toString();
                       _customMarkers.add(
                         MarkerData(
                           marker: Marker(
@@ -3978,7 +3979,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               .properties
                                                                               ?.onlyAvg)
                                                                           .toString(),
-                                                                  maxLines: 1,
+                                                                           maxLines: 1,
                                                                   style:
                                                                       TextStyle(
                                                                     overflow:
@@ -4064,6 +4065,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Positioned(
                                               left: 82.w,
                                               top: 1.h,
+
                                               child: InkWell(
                                                 onTap: () {
                                                   Get.back();
@@ -4159,6 +4161,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   showmarker11() {
+    print("ofline54545454545454545456");
     print("dtadone");
     print("showmarker11");
     final Map<String, String> data = {};
@@ -4440,24 +4443,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     "View Details",
                                                                 route: () {
                                                                   Get.back();
-                                                                  shoallmarkermodal
-                                                                              ?.positions?[
-                                                                                  index]
-                                                                              .properties
-                                                                              ?.termName ==
-                                                                          "Warning"
-                                                                      ? Get.to(
-                                                                          DetailsWarningDetailsScreen(
-                                                                          postid:
-                                                                              (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                        ))
-                                                                      : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                              "Other"
-                                                                          ? Get.to(
-                                                                              DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
-                                                                          : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
-                                                                              ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
-                                                                              : Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                  // shoallmarkermodal
+                                                                  //             ?.positions?[
+                                                                  //                 index]
+                                                                  //             .properties
+                                                                  //             ?.termName ==
+                                                                  //         "Warning"
+                                                                  //     ? Get.to(
+                                                                  //         DetailsWarningDetailsScreen(
+                                                                  //         postid:
+                                                                  //             (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                  //       ))
+                                                                  //     : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                                  //             "Other"
+                                                                  //         ? Get.to(
+                                                                  //             DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
+                                                                  //         : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
+                                                                  //             ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
+                                                                  //             :
+                                                                  Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
                                                                 },
                                                                 hight: 6.h,
                                                                 width: 40.w,

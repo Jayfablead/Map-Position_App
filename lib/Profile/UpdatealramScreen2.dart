@@ -589,7 +589,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   ),
                   SizedBox(height: 2.h,),
                   batan(
-                      title: "Add ALARM",
+                      title: "Update Alarm",
                       route: () {
                         AddAlaram();
                       },
@@ -636,6 +636,8 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
       });
     }
   }
+
+
   updatealaram() {
     final Map<String, String> data = {};
     data['id'] = widget.id.toString();

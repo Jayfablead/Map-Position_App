@@ -327,6 +327,9 @@ Column(
       ),
     );
   }
+
+
+
   ViewAlaram() {
     final Map<String, String> data = {};
     data['user_id'] = (loginmodal?.userId).toString();
@@ -360,6 +363,7 @@ Column(
       }
     });
   }
+
   deletealarama(id) {
     EasyLoading.show(status: 'Please Wait ...');
     final Map<String, String> data = {};

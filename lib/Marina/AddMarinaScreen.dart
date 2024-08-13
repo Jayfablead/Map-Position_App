@@ -105,7 +105,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   bool shop = false;
   bool pontoon = false;
   List<List<int>> data = [
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [3, 3, 3, 3, 3, 3, 3, 3],
   ];
   ImagePicker picker = ImagePicker();
   List<XFile>? resultList;
@@ -130,6 +130,51 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   double? _lastLatitude;
   double? _lastLongitude;
 
+  void _updateMarker() {
+    if (_latitude.text.isNotEmpty && _latitude1.text.isNotEmpty) {
+      double latitude = double.tryParse(_latitude.text) ?? 0.0;
+      double longitude = double.tryParse(_latitude1.text) ?? 0.0;
+
+      print('Updating marker to lat: $latitude, lng: $longitude'); // Debugging
+
+      Marker marker = Marker(
+        markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
+        position: LatLng(latitude, longitude),
+        infoWindow: InfoWindow(title: 'Alarm Location'),
+      );
+
+      setState(() {
+        _markers.removeWhere((m) => m.markerId.value == 'alarm_marker'); // Remove old marker if it exists
+        _markers.add(marker); // Add new marker
+      });
+
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(latitude, longitude),
+        ),
+      );
+    } else {
+      print('No valid latitude or longitude'); // Debugging
+    }
+  }
+
+
+
+  void _onMapTapped(LatLng latLng) {
+    setState(() {
+      _markers.clear();
+      _markers.add(Marker(
+        markerId: MarkerId('Tapped Location'),
+        position: latLng,
+      ));
+
+      // Update text fields with tapped location
+      _latitude.text = latLng.latitude.toString();
+      _latitude1.text = latLng.longitude.toString();
+    });
+  }
+
+
   void getLocation() async {
     LocationPermission permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
@@ -146,6 +191,9 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       _updateMarker(); // Ensure marker is updated with new location
     });
   }
+
+
+
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
@@ -182,36 +230,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     print('Markers: $_markers');
   }
 
-
-
-  void _updateMarker() {
-    if (_latitude.text.isNotEmpty && _latitude1.text.isNotEmpty) {
-      double latitude = double.tryParse(_latitude.text) ?? 0.0;
-      double longitude = double.tryParse(_latitude1.text) ?? 0.0;
-
-      print('Updating marker to lat: $latitude, lng: $longitude'); // Debugging
-
-      Marker marker = Marker(
-        markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
-        position: LatLng(latitude, longitude),
-        infoWindow: InfoWindow(title: 'Alarm Location'),
-      );
-
-      setState(() {
-        _markers.removeWhere((m) => m.markerId.value == 'alarm_marker'); // Remove old marker if it exists
-        _markers.add(marker); // Add new marker
-      });
-
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(latitude, longitude),
-        ),
-      );
-    } else {
-      print('No valid latitude or longitude'); // Debugging
-    }
-  }
-
 // Example function to calculate zoom level dynamically based on latitude and longitude
   double _calculateZoomLevel(double latitude, double longitude) {
     // Adjust this logic based on your needs
@@ -229,7 +247,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   }
 
 
+
+
+
+
+
+
+  TextEditingController  _latitude =TextEditingController();
+  TextEditingController  _latitude1 =TextEditingController();
+
+
+
+
   void _onTap(LatLng location) {
+
     setState(() {
       _lastLatitude = location.latitude;
       _lastLongitude = location.longitude;
@@ -251,38 +282,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     });
   }
 
-  void _onMapTapped(LatLng latLng) {
-    setState(() {
-      _markers.clear();
-      _markers.add(Marker(
-        markerId: MarkerId('Tapped Location'),
-        position: latLng,
-      ));
-
-      // Update text fields with tapped location
-      _latitude.text = latLng.latitude.toString();
-      _latitude1.text = latLng.longitude.toString();
-    });
-  }
-
-
-
-
-
-
-
-
-  TextEditingController  _latitude =TextEditingController();
-  TextEditingController  _latitude1 =TextEditingController();
-
-
-
-
-
-
 
   @override
   void initState() {
+
+
+
     // TODO: implement initState
     super.initState();
     widget.postid==null?"": viewposition();
@@ -367,12 +372,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _descripation,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Description";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Description";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Description",
                     ),
@@ -513,7 +518,9 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     color: Colors.black,
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
-                    fontFamily: "volken")),
+                    fontFamily: "volken")
+                ),
+
                 SizedBox(height: 1.h,),
                 Container(
                   height: 5.5.h,
@@ -913,28 +920,32 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: secondary),
-                          controller: _latitude,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Latitude";
-                            }
-                            return null;
-                          },
-                          decoration: inputDecoration(
-                            hintText: "Latitude",
-                            icon: Icon(
-                              Icons.location_on,
-                              color: secondary,
-                            ),
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(color: secondary),
+                        controller: _latitude,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Latitude";
+                          } else if (double.tryParse(value) == 0.0) {
+                            return "Latitude cannot be 0.0, please enter a valid value";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                          hintText: "Latitude",
+                          icon: Icon(
+                            Icons.location_on,
+                            color: secondary,
                           ),
-                          onChanged: (value) {
-                            _updateMarker(); // Update marker when latitude changes
-                          },
-                        ))
+                        ),
+                        onChanged: (value) {
+                          _updateMarker(); // Update marker when latitude changes
+                        },
+                      ),
+                    )
+
                   ],
                 ),
 
@@ -958,28 +969,32 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: secondary),
-                          controller: _latitude1,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Longitude";
-                            }
-                            return null;
-                          },
-                          decoration: inputDecoration(
-                            hintText: "Longitude",
-                            icon: Icon(
-                              Icons.location_on,
-                              color: secondary,
-                            ),
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(color: secondary),
+                        controller: _latitude1,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Longitude";
+                          } else if (double.tryParse(value) == 0.0) {
+                            return "Longitude cannot be 0.0, please enter a valid value";
+                          }
+                          return null;
+                        },
+                        decoration: inputDecoration(
+                          hintText: "Longitude",
+                          icon: Icon(
+                            Icons.location_on,
+                            color: secondary,
                           ),
-                          onChanged: (value) {
-                            _updateMarker(); // Update marker when longitude changes
-                          },
-                        ))
+                        ),
+                        onChanged: (value) {
+                          _updateMarker(); // Update marker when longitude changes
+                        },
+                      ),
+                    )
+
                   ],
                 ),
                 SizedBox(
@@ -1210,12 +1225,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _slips ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Slips";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Slips";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Slips",
                         icon: Icon(
@@ -1261,12 +1276,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
                     controller: _minimumapproachdepth ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Minimum Approach Depth";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Approach Depth";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Minimum Approach Depth",
                         icon: Icon(
@@ -1293,12 +1308,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
                     controller: _meanlowwaterdockdepth ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Minimum Approach Depth";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Approach Depth";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Minimum Approach Depth",
                         icon: Icon(
@@ -1325,12 +1340,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _feet ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Minimum Channel Depth";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Channel Depth";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Minimum Channel Depth",
                         icon: Icon(
@@ -1356,12 +1371,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _meanhighwaterclearance ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Mean High Water Clearance";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Mean High Water Clearance";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Mean High Water Clearance",
                         icon: Icon(
@@ -1594,12 +1609,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _MaxVesselLOA ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Max. Vessel LOA";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Vessel LOA";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Max. Vessel LOA",
                         icon: Icon(
@@ -1624,12 +1639,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _MaaSlipLength ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Max. Slip Length";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Slip Length";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Max. Slip Length",
                         icon: Icon(
@@ -1653,12 +1668,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
                     controller: _MaaSlipwidth ,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Max. Slip Width";
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Slip Width";
+                    //   }
+                    //   return null;
+                    // },
                     decoration: inputDecoration(
                         hintText: "Enter Your Max. Slip Width",
                         icon: Icon(
@@ -1706,7 +1721,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         ticks: [2, 4, 6, 8, 10],
                         features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
                         data: data,
-
                         // graphColors: [Colors.blue, Colors.green],
                         // featuresTextStyle: TextStyle(color: Colors.white),
                       ),
@@ -1715,18 +1729,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', N1, (val) {
                         setState(() {
                           N1 = val;
+                          N2 = false;
+                          N3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', N2, (val) {
                         setState(() {
                           N2 = val;
+                          N1 = false;
+                          N3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', N3, (val) {
                         setState(() {
                           N3 = val;
+                          N2 = false;
+                          N1 = false;
                           updateData();
                         });
                       }),
@@ -1735,18 +1755,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', NE1, (val) {
                         setState(() {
                           NE1 = val;
+                          NE2 = false;
+                          NE3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', NE2, (val) {
                         setState(() {
                           NE2 = val;
+                          NE1 = false;
+                          NE3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', NE3, (val) {
                         setState(() {
                           NE3 = val;
+                          NE2 = false;
+                          NE1 = false;
                           updateData();
                         });
                       }),
@@ -1755,18 +1781,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', E1, (val) {
                         setState(() {
                           E1 = val;
+                          E2 = false;
+                          E3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', E2, (val) {
                         setState(() {
                           E2 = val;
+                          E3 = false;
+                          E1 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', E3, (val) {
                         setState(() {
                           E3 = val;
+                          E2 = false;
+                          E1 = false;
                           updateData();
                         });
                       }),
@@ -1775,18 +1807,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', SE1, (val) {
                         setState(() {
                           SE1 = val;
+                          SE3= false;
+                          SE2 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', SE2, (val) {
                         setState(() {
                           SE2 = val;
+                          SE1 = false;
+                          SE3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', SE3, (val) {
                         setState(() {
                           SE3 = val;
+                          SE2 = false;
+                          SE1 = false;
                           updateData();
                         });
                       }),
@@ -1795,18 +1833,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', S1, (val) {
                         setState(() {
                           S1 = val;
+                          S2= false;
+                          S3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', S2, (val) {
                         setState(() {
                           S2 = val;
+                          S1= false;
+                          S3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', S3, (val) {
                         setState(() {
                           S3 = val;
+                          S1= false;
+                          S2 = false;
                           updateData();
                         });
                       }),
@@ -1815,18 +1859,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', SW1, (val) {
                         setState(() {
                           SW1 = val;
+                          SW2= false;
+                          SW3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', SW2, (val) {
                         setState(() {
                           SW2 = val;
+                          SW1= false;
+                          SW3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', SW3, (val) {
                         setState(() {
                           SW3 = val;
+                          SW1= false;
+                          SW2 = false;
                           updateData();
                         });
                       }),
@@ -1835,38 +1885,51 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       buildCheckbox('Some protection', W1, (val) {
                         setState(() {
                           W1 = val;
+                          W2 = false;
+                          W3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', W2, (val) {
                         setState(() {
                           W2 = val;
+                          W1 = false;
+                          W3 = false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', W3, (val) {
                         setState(() {
                           W3 = val;
+                          W2 = false;
+                          W1 = false;
                           updateData();
                         });
                       }),
                     ]),
-                    buildCheckboxRow('West (W)', [
+                    buildCheckboxRow('West (NW)', [
                       buildCheckbox('Some protection', NW1, (val) {
                         setState(() {
                           NW1 = val;
+                          NW2=false;
+                          NW3=false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Average protection', NW2, (val) {
                         setState(() {
                           NW2 = val;
+                          NW1=false;
+                          NW3=false;
                           updateData();
                         });
                       }),
                       buildCheckbox('Completely protected', NW3, (val) {
                         setState(() {
                           NW3 = val;
+                          NW2=false;
+                          NW1=false;
+                          print("NW2${NW2}");
                           updateData();
                         });
                       }),
@@ -2800,8 +2863,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    batan(title: "Add Position", route: (){
-                      widget.postid==null?castommapposition():updatecasotammarina();
+                    widget.postid==null||widget.postid==""?batan(title: "Add Position", route: (){
+                  castommapposition();
+                }, hight: 6.h, width: 70.w, txtsize: 20.sp):batan(title: "Update Position", route: (){
+                      updatecasotammarina();
                     }, hight: 6.h, width: 70.w, txtsize: 20.sp),
                   ],
                 ),
@@ -2813,6 +2878,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       ),
     );
   }
+
+
   //AddNewPositionapifuncation
   castommapposition() async {
     if (_formKey.currentState!.validate()) {
@@ -2826,7 +2893,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "property_zip":  _zipcode.text==null?"":_zipcode.text.trim().toString(),
         "property_country": _country.text==null?"":_country.text.trim().toString(),
         "property_latitude": _latitude.text.toString(),
-        "property_longitude": _latitude.text.toString(),
+        "property_longitude": _latitude1.text.toString(),
         "text_slips": _slips.text.trim().toString(),
         "text_minimumapproachdepth": _minimumapproachdepth.text==null?"":_minimumapproachdepth.text.trim()
             .toString(),
@@ -3391,16 +3458,18 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       }
     });
   }
+
+
   void updateData() {
     data[0] = [
-      (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
-      (NE1 ? 3 : 0) + (NE2 ? 3 : 0) + (NE3 ? 4 : 0),
-      (E1 ? 3 : 0) + (E2 ? 3 : 0) + (E3 ? 4 : 0),
-      (SE1 ? 3 : 0) + (SE2 ? 3 : 0) + (SE3 ? 4 : 0),
-      (S1 ? 3 : 0) + (S2 ? 3 : 0) + (S3 ? 4 : 0),
-      (SW1 ? 3 : 0) + (SW2 ? 3 : 0) + (SW3 ? 4 : 0),
-      (W1 ? 3 : 0) + (W2 ? 3 : 0) + (W3 ? 4 : 0),
-      (NW1 ? 3 : 0) + (NW2 ? 3 : 0) + (NW3 ? 4 : 0),
+      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
+      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 10 : 0),
+      (E1 ? 4 : 0) + (E2 ? 7 : 0) + (E3 ? 10 : 0),
+      (SE1 ? 4 : 0) + (SE2 ? 7 : 0) + (SE3 ? 10 : 0),
+      (S1 ? 4 : 0) + (S2 ? 7 : 0) + (S3 ? 10 : 0),
+      (SW1 ? 4 : 0) + (SW2 ? 7 : 0) + (SW3 ? 10 : 0),
+      (W1 ? 4 : 0) + (W2 ? 7 : 0) + (W3 ? 10 : 0),
+      (NW1 ? 4 : 0) + (NW2 ? 7 : 0) + (NW3 ? 10 : 0),
     ];
   }
 

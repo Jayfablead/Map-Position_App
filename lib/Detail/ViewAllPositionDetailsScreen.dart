@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -17,6 +18,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/Extras/Headerwidget.dart';
+import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 import '../Extras/Drwer.dart';
@@ -66,6 +69,24 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _review = TextEditingController();
+
+
+
+  ImagePicker picker = ImagePicker();
+  List<XFile>? resultList;
+  List<XFile>? resultList1;
+  List<File> selectedImages = [];
+  List<String> imagePaths = [];
+  List<XFile> imagesList = <XFile>[];
+  int currentIndex = 0;
+
+
+  String _error = 'No Error Dectected';
+  List<String> imageNames = [];
+  ImagePicker _picker = ImagePicker();
+  int maxImageLimit = 9;
+  File? selectedimage;
+  List<String> networkImageUrls = [];
   int _rating = 0;
   bool isLoading = true;
   String htmlString = '';
@@ -95,8 +116,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   late LatLng _currentPosition1 = LatLng(double.parse(viewcategorywisevieweetailmodal?.data?.latitude ?? ""),double.parse(viewcategorywisevieweetailmodal?.data?.longitude ?? ""));
   bool _isSatellite = false;
   GoogleMapController? _mapController;
-  ImagePicker picker = ImagePicker();
-  File? selectedimage = null;
 
   List<String> _imagePaths = [];
   @override
@@ -239,83 +258,61 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
             : SingleChildScrollView(
           child: Column(
             children: [
-              Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 50.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: bgcolor, // Border color
-                            width: 2.sp, // Border width
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            imageUrl:
-                            viewcategorywisevieweetailmodal?.data?.thumbnail ??
-                                "",
-                            fit: BoxFit.cover,
-                            progressIndicatorBuilder:
-                                (context, url, progress) => Container(
-                                alignment: Alignment.center,
-                                child: CircularProgressIndicator()),
-                            errorWidget: (context, url, error) =>
-                                Image.asset(Default_Profile,
-                                    fit: BoxFit.cover),
-                          ),
-                        ),
-                      ),
-                    ],
+              SizedBox(
+                height: 4.h,
+              ),
+              header(
+                  text: "View Detail",
+                  callback1: () {
+                    _scaffoldKeyProductlistpage.currentState
+                        ?.openDrawer();
+                  }),
+              Container(
+                height: 30.h,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    enlargeFactor: 0.2,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                    height: 30.h,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
                   ),
-                  Positioned(
-                    top: 5.h,
-                    left: 4.w,
-                    right: 3.w,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: (){
-                                  Get.to(HomeScreen());
-                                },
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
+                  items: (viewcategorywisevieweetailmodal
+                      ?.data?.thumbnails ??
+                      [])
+                      .map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1.0,
+                            ),
                           ),
-                          Row(
-                            children: [
-
-                              IconButton(
-                                  onPressed: () {
-                                    _scaffoldKeyProductlistpage
-                                        .currentState
-                                        ?.openDrawer();
-                                  },
-                                  icon: Icon(
-                                    Icons.menu_rounded,
-                                    color: blackback,
-                                    size: 23.sp,
-                                  )),
-                            ],
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: (imagePath).toString(),
+                              progressIndicatorBuilder:
+                                  (context, url, progress) => Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset(""),
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
               ),
               SizedBox(
                 height: 2.h,
@@ -325,15 +322,338 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                 child: Column(children: [
                   Column(
                     children: [
+                      SizedBox(height: 0.5.h),
+                      loginmodal?.userId == "" ||
+                          loginmodal?.userId == null
+                          ? batan(
+                          title:
+                          "Click To Add More Pictures From This Position",
+                          route: () {
+                            buildErrorDialog1(
+                              context,
+                              "",
+                              "Please Login To Use This",
+                              buttonname: 'Login',
+                                  () {
+                                Get.offAll(LoginScreen());
+                              },
+                            );
+                          },
+                          hight: 6.h,
+                          width: MediaQuery.of(context).size.width,
+                          txtsize: 12.sp)
+                          : batan(
+                          title:
+                          "Click To Add More Pictures From This Position",
+                          route: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                int counter = 0;
+                                return StatefulBuilder(
+                                  builder: (context, setState) {
+                                    return AlertDialog(
+                                      content: Column(
+                                        mainAxisSize:
+                                        MainAxisSize.min,
+                                        children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Get.back();
+                                                },
+                                                child: Container(
+                                                    height: 10.w,
+                                                    width: 10.w,
+                                                    alignment: Alignment
+                                                        .center,
+                                                    decoration:
+                                                    BoxDecoration(
+                                                        shape: BoxShape
+                                                            .circle,
+                                                        color: Colors
+                                                            .black),
+                                                    child:
+                                                    Icon(
+                                                      Icons.close,
+                                                      size: 15.sp,
+                                                      color: Colors
+                                                          .white,
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Center(
+                                                  child: Text(
+                                                    'Add More Pictures',
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        fontFamily:
+                                                        "volken",
+                                                        fontWeight:
+                                                        FontWeight
+                                                            .bold),
+                                                  )),
+                                            ],
+                                          ),
+                                          selectedimage == null
+                                              ? Container()
+                                              : Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets
+                                                    .symmetric(
+                                                    horizontal:
+                                                    1.w),
+                                                height: 30.w,
+                                                width: 30.w,
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      15),
+                                                  border: Border
+                                                      .all(
+                                                    color:
+                                                    bgcolor,
+                                                    // Border color
+                                                    width: 2
+                                                        .sp, // Border width
+                                                  ),
+                                                ),
+                                                child:
+                                                ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      15),
+                                                  child: selectedimage !=
+                                                      null
+                                                      ? Image
+                                                      .file(
+                                                    selectedimage!,
+                                                    fit: BoxFit
+                                                        .cover,
+                                                  )
+                                                      : Container(),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          resultList1 == null
+                                              ? Container()
+                                              : Column(
+                                            children: [
+                                              //for first select
+                                              // !selectedImages
+                                              //         .isEmpty
+                                              //     ? GridView
+                                              //         .builder(
+                                              //         shrinkWrap:
+                                              //             true,
+                                              //         physics:
+                                              //             NeverScrollableScrollPhysics(),
+                                              //         padding:
+                                              //             EdgeInsets
+                                              //                 .zero,
+                                              //         gridDelegate:
+                                              //             SliverGridDelegateWithFixedCrossAxisCount(
+                                              //                 crossAxisCount: 3),
+                                              //         itemBuilder:
+                                              //             (context,
+                                              //                 index) {
+                                              //           return GestureDetector(
+                                              //             onTap:
+                                              //                 () async {
+                                              //               resultList =
+                                              //                   await ImagePicker().pickMultiImage();
+                                              //
+                                              //               if (resultList !=
+                                              //                   null) {
+                                              //                 if (resultList!.length + selectedImages.length > maxImageLimit) {
+                                              //                   print('Maximum image limit exceeded');
+                                              //                 } else {
+                                              //                   setState(() {
+                                              //                     selectedImages = resultList!.map((XFile file) => File(file.path)).toList()!;
+                                              //                     imagePaths.addAll(resultList!.map((file) => file.path).toList());
+                                              //                   });
+                                              //                 }
+                                              //               }
+                                              //             },
+                                              //             child:
+                                              //                 Container(
+                                              //               margin:
+                                              //                   EdgeInsets.all(3.w),
+                                              //               height:
+                                              //                   60.h,
+                                              //               width:
+                                              //                   70.w,
+                                              //               decoration:
+                                              //                   BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
+                                              //             ),
+                                              //           );
+                                              //         },
+                                              //         itemCount:
+                                              //             9,
+                                              //       )
+                                              //     : Container(),
+                                              selectedImages
+                                                  .isEmpty
+                                                  ? Container()
+                                                  :
+                                              //disply after first selection
+                                              GridView
+                                                  .builder(
+                                                shrinkWrap:
+                                                true,
+                                                physics:
+                                                NeverScrollableScrollPhysics(),
+                                                padding:
+                                                EdgeInsets
+                                                    .zero,
+                                                gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 3),
+                                                itemCount:
+                                                9,
+                                                itemBuilder:
+                                                    (context,
+                                                    index) {
+                                                  if (index < selectedImages.length &&
+                                                      selectedImages[index] !=
+                                                          null) {
+                                                    return Container(margin: EdgeInsets.all(3.w), height: 70.h, width: 70.w, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)), child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.file(selectedImages[index], height: 60.h, width: 70.w, fit: BoxFit.cover)));
+                                                  } else {
+                                                    //remaining container
+                                                    return GestureDetector(
+                                                      onTap:
+                                                          () async {
+                                                        resultList1 = await ImagePicker().pickMultiImage();
+                                                        if (resultList1 != null) {
+                                                          if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                            // Handle maximum image limit exceeded
+                                                            buildErrorDialog(context, "", "You selected more than 9 images");
+                                                          } else {
+                                                            setState(() {
+                                                              print(selectedImages);
+                                                              selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                              imagePaths = resultList1!.map((file) => file.path).toList();
+                                                            });
+                                                          }
+                                                        }
+                                                      },
+                                                      child:
+                                                      Container(
+                                                        margin: EdgeInsets.all(3.w),
+                                                        height: 60.h,
+                                                        width: 70.w,
+                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(height: 2.h),
+                                          batan(
+                                            title: "Select Photo",
+                                            route: () async {
+                                              resultList1 =
+                                              await ImagePicker()
+                                                  .pickMultiImage();
+                                              if (resultList1 !=
+                                                  null) {
+                                                if (resultList1!
+                                                    .length +
+                                                    selectedImages
+                                                        .length >
+                                                    maxImageLimit) {
+                                                  // Handle maximum image limit exceeded
+                                                  buildErrorDialog(
+                                                      context,
+                                                      "",
+                                                      "You selected more than 9 images");
+                                                } else {
+                                                  setState(() {
+                                                    print(
+                                                        selectedImages);
+                                                    selectedImages.addAll(resultList1!
+                                                        .map((XFile
+                                                    file) =>
+                                                        File(file
+                                                            .path))
+                                                        .toList());
+                                                    imagePaths = resultList1!
+                                                        .map((file) =>
+                                                    file.path)
+                                                        .toList();
+                                                  });
+                                                }
+                                              }
+                                            },
+                                            hight: 6.h,
+                                            width:
+                                            MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            txtsize: 15.sp,
+                                          ),
+                                          SizedBox(height: 2.h),
+                                          selectedImages.isNotEmpty
+                                              ? batan(
+                                            title: "Upload",
+                                            route: () {
+                                              addnewimageapi();
+                                            },
+                                            hight: 6.h,
+                                            width:
+                                            MediaQuery.of(
+                                                context)
+                                                .size
+                                                .width,
+                                            txtsize: 15.sp,
+                                          )
+                                              : SizedBox(),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
+                          hight: 6.h,
+                          width: MediaQuery.of(context).size.width,
+                          txtsize: 11.sp),
+                      SizedBox(height: 1.h),
                       Row(
                         children: [
                           SizedBox(
                             width: 90.w,
                             child: Text(
-                              viewcategorywisevieweetailmodal?.data?.title == "" ||
-                                  viewcategorywisevieweetailmodal?.data?.title == null
+                              viewcategorywisevieweetailmodal
+                                  ?.data?.title ==
+                                  "" ||
+                                  viewcategorywisevieweetailmodal
+                                      ?.data?.title ==
+                                      null
                                   ? "N/A"
-                                  : viewcategorywisevieweetailmodal?.data?.title ?? "",
+                                  : viewcategorywisevieweetailmodal
+                                  ?.data?.title ??
+                                  "",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: blackback,
@@ -342,15 +662,15 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   fontFamily: "volken"),
                             ),
                           ),
-
                         ],
                       ),
                       SizedBox(height: 1.h),
                       Row(
                         children: [
-                          Icon(Icons.location_on,color: Colors.black,size: 15.sp),
+                          Icon(Icons.location_on,
+                              color: Colors.black, size: 15.sp),
                           Text(
-                            "${viewcategorywisevieweetailmodal?.data?.latitude==""||viewcategorywisevieweetailmodal?.data?.latitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.latitude}, ${viewcategorywisevieweetailmodal?.data?.longitude==""||viewcategorywisevieweetailmodal?.data?.longitude==null?"N/A":viewcategorywisevieweetailmodal?.data?.longitude} ",
+                            "${viewcategorywisevieweetailmodal?.data?.latitudeDms == "" || viewcategorywisevieweetailmodal?.data?.latitudeDms == null ? "N/A" : viewcategorywisevieweetailmodal?.data?.latitudeDms}, ${viewcategorywisevieweetailmodal?.data?.longitudeDms == "" || viewcategorywisevieweetailmodal?.data?.longitudeDms == null ? "N/A" : viewcategorywisevieweetailmodal?.data?.longitudeDms} ",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
@@ -368,7 +688,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   Row(
                     children: [
                       Text(
-                        " ⭐️ ${viewcategorywisevieweetailmodal?.averageRating==""||viewcategorywisevieweetailmodal?.averageRating==null?"4.5":viewcategorywisevieweetailmodal?.averageRating ?? ""} [${viewcategorywisevieweetailmodal?.reviews?.length==null||viewcategorywisevieweetailmodal?.reviews?.length==""||viewcategorywisevieweetailmodal?.reviews?.length==0?"0":viewcategorywisevieweetailmodal?.reviews?.length} reviews]",
+                        " ⭐️ ${viewcategorywisevieweetailmodal?.averageRating == "" || viewcategorywisevieweetailmodal?.averageRating == null ? "4.5" : viewcategorywisevieweetailmodal?.averageRating ?? ""} [${viewcategorywisevieweetailmodal?.reviews?.length == null || viewcategorywisevieweetailmodal?.reviews?.length == "" || viewcategorywisevieweetailmodal?.reviews?.length == 0 ? "0" : viewcategorywisevieweetailmodal?.reviews?.length} reviews]",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,
@@ -376,19 +696,118 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             fontWeight: FontWeight.normal,
                             fontFamily: "volken"),
                       ),
+                      SizedBox(
+                        width: 3.w,
+                      ),
 
-
-
+                      // Icon(
+                      //   Icons.add_location,
+                      //   color: Colors.black,
+                      //   size: 20.sp,
+                      // ),
+                      // Text(
+                      //   "Sleman,Yogyakarta",
+                      //   style: TextStyle(
+                      //       letterSpacing: 1,
+                      //       color: secondary,
+                      //       fontSize: 12.sp,
+                      //       fontWeight: FontWeight.normal,
+                      //       fontFamily: "volken"),
+                      // ),
                     ],
                   ),
                   SizedBox(
                     height: 1.h,
                   ),
-
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         Container(
+                  //           margin: EdgeInsets.symmetric(horizontal: 1.w),
+                  //           height: 15.w,
+                  //           width: 15.w,
+                  //           decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(15),
+                  //             border: Border.all(
+                  //               color: bgcolor, // Border color
+                  //               width: 2.sp, // Border width
+                  //             ),
+                  //           ),
+                  //           child: ClipRRect(
+                  //             borderRadius: BorderRadius.circular(15),
+                  //             child: CachedNetworkImage(
+                  //               imageUrl:
+                  //                   'https://i.pinimg.com/originals/51/e0/d5/51e0d5aa27808ce689e3dd5a5cd7685a.png',
+                  //               fit: BoxFit.cover,
+                  //               progressIndicatorBuilder:
+                  //                   (context, url, progress) =>
+                  //                       CircularProgressIndicator(),
+                  //               errorWidget: (context, url, error) =>
+                  //                   Image.asset(Default_Profile, fit: BoxFit.cover),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 3.w,
+                  //         ),
+                  //         Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text("Rabert Downerny",
+                  //                 style: TextStyle(
+                  //                     letterSpacing: 1,
+                  //                     color: Colors.black,
+                  //                     fontSize: 12.sp,
+                  //                     fontWeight: FontWeight.bold,
+                  //                     fontFamily: "volken")),
+                  //             SizedBox(
+                  //               height: 0.5.h,
+                  //             ),
+                  //             Text("Boat Owner",
+                  //                 style: TextStyle(
+                  //                     letterSpacing: 1,
+                  //                     color: secondary,
+                  //                     fontSize: 12.sp,
+                  //                     fontWeight: FontWeight.normal,
+                  //                     fontFamily: "volken")),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     Row(
+                  //       children: [
+                  //         Container(
+                  //           height: 12.w,
+                  //           width: 12.w,
+                  //           alignment: Alignment.center,
+                  //           padding: EdgeInsetsDirectional.all(2.2.w),
+                  //           decoration: BoxDecoration(
+                  //             color: blackback,
+                  //             borderRadius: BorderRadius.circular(900),
+                  //           ),
+                  //           child: Icon(
+                  //             Icons.sms,
+                  //             color: Colors.white,
+                  //             size: 15.sp,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 1.h,
+                  // ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Row(
                     children: [
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           report();
                         },
                         child: Icon(
@@ -401,11 +820,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                         width: 1.w,
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           report();
                         },
                         child: Text("Report",
-
                             style: TextStyle(
                                 letterSpacing: 1,
                                 decoration: TextDecoration.underline,
@@ -416,7 +834,9 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                       ),
                     ],
                   ),
-                  SizedBox(height: 1.h,),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Row(
                     children: [
                       Text("Facilities Nearby :-",
@@ -425,8 +845,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               color: Colors.black,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "volken")
-                      ),
+                              fontFamily: "volken")),
                     ],
                   ),
                   SizedBox(
@@ -436,8 +855,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                     padding: EdgeInsets.symmetric(
                         horizontal: 0.5.w, vertical: 1.h),
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 1.sp, color: secondary),
+                        border: Border.all(width: 1.sp, color: secondary),
                         borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       children: [
@@ -448,68 +866,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-groceries-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset( "assets/groceries.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-groceries-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/groceries.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
                                                 ?.groceries ==
-                                                "false"
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Groceries",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -526,68 +975,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset("assets/icons8-pharmacy-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-pharmacy-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
                                                 ?.pharmacy ==
-                                                "false"
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Pharmacy",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -604,68 +1084,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-alcohol-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset("assets/icons8-alcohol-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-alcohol-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-alcohol-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
                                                 ?.alcohol ==
-                                                "false"
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Alcohol",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -691,67 +1202,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-restaurant-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset( "assets/icons8-restaurant-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-restaurant-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-restaurant-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant==
-                                                "false"
+                                                ?.restaurant ==
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Restaurant",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -768,68 +1311,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-water-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset("assets/icons8-water-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-water-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-water-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
                                                 ?.water ==
-                                                "false"
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Water",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -846,67 +1420,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-beach-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset("icons8-beach-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-beach-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "icons8-beach-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.alcohol==
-                                                "false"
+                                                ?.alcohol ==
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Beach",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -928,39 +1534,44 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                         Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceAround,
-
                           children: [
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-pontoon-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset( "assets/icons8-restaurant-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-pontoon-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-restaurant-100.png"),
                                               ),
                                             ),
                                           ),
@@ -970,30 +1581,56 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.restaurant==
-                                                "false"
+                                                ?.restaurant ==
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Pontoon",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -1010,68 +1647,99 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 1.w, vertical: 1.h),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          10),
-                                      color: Colors
-                                          .white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: Colors.white,
                                       border: Border.all(
                                           color: Colors.black12,
                                           width: 1.sp)),
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: [
                                       Stack(
                                         children: [
                                           Container(
-                                            height:
-                                            25.w,
-                                            width:
-                                            25.w,
-
-                                            child:
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(00),
+                                            height: 25.w,
+                                            width: 25.w,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  00),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-shop-100.png",
-                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                errorWidget: (context, url, error) => Image.asset("assets/icons8-shop-100.png"),
+                                                imageUrl:
+                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-shop-100.png",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                    progress) =>
+                                                    Center(
+                                                        child:
+                                                        CircularProgressIndicator()),
+                                                errorWidget: (context,
+                                                    url, error) =>
+                                                    Image.asset(
+                                                        "assets/icons8-shop-100.png"),
                                               ),
                                             ),
                                           ),
                                           Positioned(
                                             left: 18.w,
-
                                             child:
                                             viewcategorywisevieweetailmodal
                                                 ?.data
                                                 ?.metaFields
-                                                ?.water==
-                                                "false"
+                                                ?.water ==
+                                                false
                                                 ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.red,width: 1.sp),
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .red,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.green,width: 1.sp),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color:
+                                                  Colors.red,
+                                                  size: 18.sp,
+                                                ))
+                                                : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      100),
+                                                  border: Border.all(
+                                                      color: Colors
+                                                          .green,
+                                                      width:
+                                                      1.sp),
                                                 ),
-                                                child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  color: Colors
+                                                      .green,
+                                                  size: 18.sp,
+                                                )),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Text(
                                         "Shop",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -1085,10 +1753,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                 ),
                               ],
                             ),
-
                           ],
                         ),
-
                       ],
                     ),
                   ),
@@ -1157,12 +1823,13 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Protection : -",style: TextStyle(
-                          letterSpacing: 1,
-                          color: Colors.black,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "volken"))
+                      Text("Protection : -",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: Colors.black,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken"))
                     ],
                   ),
                   SizedBox(
@@ -1174,7 +1841,16 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                         height: 50.h,
                         child: RadarChart.light(
                           ticks: [2, 4, 6, 8, 10],
-                          features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+                          features: [
+                            "N",
+                            "NE",
+                            "E",
+                            "SE",
+                            "S",
+                            "SW",
+                            "W",
+                            "NW"
+                          ],
                           data: data,
 
                           // graphColors: [Colors.blue, Colors.green],
@@ -1358,20 +2034,19 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               fontFamily: "volken"))
                     ],
                   ),
-                 SizedBox(
+                  SizedBox(
                     height: 1.h,
                   ),
-                   Row(
+                  Row(
                     children: [
                       Container(
                           width: 95.w,
                           padding: EdgeInsets.symmetric(
                               horizontal: 3.w, vertical: 1.h),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: secondary, width: 1.sp),
-                            borderRadius:
-                            BorderRadius.circular(10),
+                            border:
+                            Border.all(color: secondary, width: 1.sp),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
                             children: [
@@ -1382,10 +2057,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: blackback,
                                           fontSize: 15.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                               SizedBox(
@@ -1401,18 +2074,14 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             letterSpacing: 1,
                                             color: secondary,
                                             fontSize: 15.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .normal,
-                                            fontFamily:
-                                            "volken")),
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
                                   ),
                                 ],
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-
                               Row(
                                 children: [
                                   Stack(
@@ -1420,48 +2089,69 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        padding:
-                                        EdgeInsets.symmetric(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 1.w,
                                             vertical: 1.h),
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(
-                                              15),
+                                          BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
                                             'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
-
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
                                                 CircularProgressIndicator(),
-                                            errorWidget: (context,
-                                                url, error) =>
+                                            errorWidget: (context, url,
+                                                error) =>
                                                 Image.asset(
                                                     Default_Profile,
-                                                    fit: BoxFit
-                                                        .cover),
+                                                    fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
                                       Positioned(
                                         left: 12.w,
                                         child:
-                                        viewcategorywisevieweetailmodal?.data?.metaFields
+                                        viewcategorywisevieweetailmodal
+                                            ?.data
+                                            ?.metaFields
                                             ?.ownAnchor ==
-                                            "false"?Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.red,width: 1.sp),
+                                            false
+                                            ? Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color:
+                                                  Colors.red,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.green,width: 1.sp),
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.red,
+                                              size: 18.sp,
+                                            ))
+                                            : Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color: Colors
+                                                      .green,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                            child: Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                              size: 18.sp,
+                                            )),
                                       ),
                                     ],
                                   ),
@@ -1473,10 +2163,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: secondary,
                                           fontSize: 15.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                               Row(
@@ -1486,48 +2174,69 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        padding:
-                                        EdgeInsets.symmetric(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 1.w,
                                             vertical: 1.h),
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(
-                                              15),
+                                          BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
                                             'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg',
-
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
                                                 CircularProgressIndicator(),
-                                            errorWidget: (context,
-                                                url, error) =>
+                                            errorWidget: (context, url,
+                                                error) =>
                                                 Image.asset(
                                                     Default_Profile,
-                                                    fit: BoxFit
-                                                        .cover),
+                                                    fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
                                       Positioned(
                                         left: 12.w,
                                         child:
-                                        viewcategorywisevieweetailmodal?.data?.metaFields
+                                        viewcategorywisevieweetailmodal
+                                            ?.data
+                                            ?.metaFields
                                             ?.buoys ==
-                                            "false"?Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.red,width: 1.sp),
+                                            false
+                                            ? Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color:
+                                                  Colors.red,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.green,width: 1.sp),
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.red,
+                                              size: 18.sp,
+                                            ))
+                                            : Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color: Colors
+                                                      .green,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                            child: Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                              size: 18.sp,
+                                            )),
                                       ),
                                     ],
                                   ),
@@ -1539,10 +2248,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: secondary,
                                           fontSize: 15.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                               Row(
@@ -1552,48 +2259,69 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        padding:
-                                        EdgeInsets.symmetric(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 1.w,
                                             vertical: 1.h),
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(
-                                              15),
+                                          BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
                                             'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png',
-
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
                                                 CircularProgressIndicator(),
-                                            errorWidget: (context,
-                                                url, error) =>
+                                            errorWidget: (context, url,
+                                                error) =>
                                                 Image.asset(
                                                     Default_Profile,
-                                                    fit: BoxFit
-                                                        .cover),
+                                                    fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
                                       Positioned(
                                         left: 12.w,
                                         child:
-                                        viewcategorywisevieweetailmodal?.data?.metaFields
+                                        viewcategorywisevieweetailmodal
+                                            ?.data
+                                            ?.metaFields
                                             ?.mountainWedges ==
-                                            "false"?Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.red,width: 1.sp),
+                                            false
+                                            ? Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color:
+                                                  Colors.red,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.green,width: 1.sp),
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.red,
+                                              size: 18.sp,
+                                            ))
+                                            : Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color: Colors
+                                                      .green,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                            child: Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                              size: 18.sp,
+                                            )),
                                       ),
                                     ],
                                   ),
@@ -1605,13 +2333,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: secondary,
                                           fontSize: 14.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
-
                               Row(
                                 children: [
                                   Stack(
@@ -1619,48 +2344,69 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        padding:
-                                        EdgeInsets.symmetric(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 1.w,
                                             vertical: 1.h),
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(
-                                              15),
+                                          BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
                                             'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg',
-
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
                                                 CircularProgressIndicator(),
-                                            errorWidget: (context,
-                                                url, error) =>
+                                            errorWidget: (context, url,
+                                                error) =>
                                                 Image.asset(
                                                     Default_Profile,
-                                                    fit: BoxFit
-                                                        .cover),
+                                                    fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
                                       Positioned(
                                         left: 12.w,
                                         child:
-                                        viewcategorywisevieweetailmodal?.data?.metaFields
-                                            ?.ownLines==
-                                            "false" ?Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.red,width: 1.sp),
+                                        viewcategorywisevieweetailmodal
+                                            ?.data
+                                            ?.metaFields
+                                            ?.ownLines ==
+                                            false
+                                            ? Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color:
+                                                  Colors.red,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(color: Colors.green,width: 1.sp),
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.red,
+                                              size: 18.sp,
+                                            ))
+                                            : Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  100),
+                                              border: Border.all(
+                                                  color: Colors
+                                                      .green,
+                                                  width: 1.sp),
                                             ),
-                                            child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                            child: Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                              size: 18.sp,
+                                            )),
                                       ),
                                     ],
                                   ),
@@ -1672,10 +2418,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: secondary,
                                           fontSize: 14.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                             ],
@@ -1692,10 +2436,9 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           padding: EdgeInsets.symmetric(
                               horizontal: 3.w, vertical: 1.h),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: secondary, width: 1.sp),
-                            borderRadius:
-                            BorderRadius.circular(10),
+                            border:
+                            Border.all(color: secondary, width: 1.sp),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
                             children: [
@@ -1706,10 +2449,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: blackback,
                                           fontSize: 15.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                               SizedBox(
@@ -1725,11 +2466,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             letterSpacing: 1,
                                             color: secondary,
                                             fontSize: 15.sp,
-                                            fontWeight:
-                                            FontWeight
-                                                .normal,
-                                            fontFamily:
-                                            "volken")),
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
                                   ),
                                 ],
                               ),
@@ -1738,79 +2476,112 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
-
                                   Column(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                10),
-                                            color: Colors
-                                                .white,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: Colors.white,
                                             border: Border.all(
                                                 color: Colors.black12,
                                                 width: 1.sp)),
-                                        child:
-                                        Column(
+                                        child: Column(
                                           children: [
                                             Stack(
                                               children: [
                                                 Container(
-                                                  height:
-                                                  25.w,
-                                                  width:
-                                                  25.w,
-
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(90),
-                                                    child: CachedNetworkImage(
+                                                  height: 25.w,
+                                                  width: 25.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(90),
+                                                    child:
+                                                    CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                                      imageUrl:
+                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget: (context,
+                                                          url,
+                                                          error) =>
+                                                          Image.asset(
+                                                              Default_Profile),
                                                     ),
                                                   ),
                                                 ),
                                                 Positioned(
                                                   left: 18.w,
-
-                                                  child:
-                                                  viewcategorywisevieweetailmodal
+                                                  child: viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
                                                       ?.sand ==
-                                                      "false"
+                                                      false
                                                       ? Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.red,width: 1.sp),
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .red,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.green,width: 1.sp),
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors
+                                                            .red,
+                                                        size: 18.sp,
+                                                      ))
+                                                      : Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .green,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors
+                                                            .green,
+                                                        size: 18.sp,
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Sand",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -1823,73 +2594,108 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   Column(
                                     children: [
                                       Container(
-
-
-                                        padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                10),
-                                            color: Colors
-                                                .white,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: Colors.white,
                                             border: Border.all(
                                                 color: Colors.black12,
                                                 width: 1.sp)),
-                                        child:
-                                        Column(
+                                        child: Column(
                                           children: [
                                             Stack(
                                               children: [
                                                 Container(
-                                                  height:
-                                                  25.w,
-                                                  width:
-                                                  25.w,
-
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(90),
-                                                    child: CachedNetworkImage(
+                                                  height: 25.w,
+                                                  width: 25.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(90),
+                                                    child:
+                                                    CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                      imageUrl:
+                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget:
+                                                          (context, url,
+                                                          error) =>
+                                                          Image.asset(
+                                                            "assets/Mud.jpg",
+                                                          ),
                                                     ),
                                                   ),
                                                 ),
                                                 Positioned(
                                                   left: 18.w,
-                                                  child:
-                                                  viewcategorywisevieweetailmodal
+                                                  child: viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.mud==
-                                                      "false"
+                                                      ?.mud ==
+                                                      false
                                                       ? Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.red,width: 1.sp),
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .red,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.green,width: 1.sp),
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors
+                                                            .red,
+                                                        size: 18.sp,
+                                                      ))
+                                                      : Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .green,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors
+                                                            .green,
+                                                        size: 18.sp,
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Mud",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -1899,78 +2705,110 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       ),
                                     ],
                                   ),
-
-
                                   Column(
                                     children: [
                                       Container(
-                                        padding:
-                                        EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                10),
-                                            color: Colors
-                                                .white,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: Colors.white,
                                             border: Border.all(
                                                 color: Colors.black12,
                                                 width: 1.sp)),
-                                        child:
-                                        Column(
+                                        child: Column(
                                           children: [
                                             Stack(
                                               children: [
                                                 Container(
-                                                  height:
-                                                  25.w,
-                                                  width:
-                                                  25.w,
-
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(90),
-                                                    child: CachedNetworkImage(
+                                                  height: 25.w,
+                                                  width: 25.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(90),
+                                                    child:
+                                                    CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                                      imageUrl:
+                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget: (context,
+                                                          url,
+                                                          error) =>
+                                                          Image.asset(
+                                                              Default_Profile),
                                                     ),
                                                   ),
                                                 ),
                                                 Positioned(
                                                   left: 18.w,
-                                                  child:
-                                                  viewcategorywisevieweetailmodal
+                                                  child: viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.clay
-                                                    ==
-                                                      "false"
+                                                      ?.clay ==
+                                                      false
                                                       ? Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.red,width: 1.sp),
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .red,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.green,width: 1.sp),
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors
+                                                            .red,
+                                                        size: 18.sp,
+                                                      ))
+                                                      : Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .green,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors
+                                                            .green,
+                                                        size: 18.sp,
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Clay",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -1987,77 +2825,110 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               ),
                               Row(
                                 children: [
-
-
                                   Column(
                                     children: [
                                       Container(
-                                        padding:
-                                        EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                10),
-                                            color: Colors
-                                                .white,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: Colors.white,
                                             border: Border.all(
                                                 color: Colors.black12,
                                                 width: 1.sp)),
-                                        child:
-                                        Column(
+                                        child: Column(
                                           children: [
                                             Stack(
                                               children: [
                                                 Container(
-                                                  height:
-                                                  25.w,
-                                                  width:
-                                                  25.w,
-
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(90),
-                                                    child: CachedNetworkImage(
+                                                  height: 25.w,
+                                                  width: 25.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(90),
+                                                    child:
+                                                    CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                                      imageUrl:
+                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget: (context,
+                                                          url,
+                                                          error) =>
+                                                          Image.asset(
+                                                              Default_Profile),
                                                     ),
                                                   ),
                                                 ),
                                                 Positioned(
                                                   left: 18.w,
-                                                  child:
-                                                  viewcategorywisevieweetailmodal
+                                                  child: viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.coral==
-                                                      "false"
+                                                      ?.coral ==
+                                                      false
                                                       ? Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.red,width: 1.sp),
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .red,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.green,width: 1.sp),
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors
+                                                            .red,
+                                                        size: 18.sp,
+                                                      ))
+                                                      : Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .green,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors
+                                                            .green,
+                                                        size: 18.sp,
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Coral",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -2067,86 +2938,113 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       ),
                                     ],
                                   ),
-                                  viewcategorywisevieweetailmodal
-                                      ?.data
-                                      ?.metaFields
-                                      ?.coral==
-                                      "false"
-                                      ? Container()
-                                      : SizedBox(
+                                  SizedBox(
                                     width: 3.w,
                                   ),
-
                                   Column(
                                     children: [
                                       Container(
-                                        padding:
-                                        EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                10),
-                                            color: Colors
-                                                .white,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: Colors.white,
                                             border: Border.all(
                                                 color: Colors.black12,
-                                                width: 1.sp)
-                                        ),
-                                        child:
-                                        Column(
+                                                width: 1.sp)),
+                                        child: Column(
                                           children: [
                                             Stack(
                                               children: [
                                                 Container(
-                                                  height:
-                                                  25.w,
-                                                  width:
-                                                  25.w,
-
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(90),
-                                                    child: CachedNetworkImage(
+                                                  height: 25.w,
+                                                  width: 25.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(90),
+                                                    child:
+                                                    CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                                      imageUrl:
+                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget: (context,
+                                                          url,
+                                                          error) =>
+                                                          Image.asset(
+                                                              Default_Profile),
                                                     ),
                                                   ),
                                                 ),
                                                 Positioned(
                                                   left: 18.w,
-                                                  child:
-                                                  viewcategorywisevieweetailmodal
+                                                  child: viewcategorywisevieweetailmodal
                                                       ?.data
                                                       ?.metaFields
-                                                      ?.rocks==
-                                                      "false"
+                                                      ?.rocks ==
+                                                      false
                                                       ? Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.red,width: 1.sp),
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .red,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.close,color: Colors.red,size: 18.sp,)):
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                        border: Border.all(color: Colors.green,width: 1.sp),
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors
+                                                            .red,
+                                                        size: 18.sp,
+                                                      ))
+                                                      : Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            100),
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .green,
+                                                            width:
+                                                            1.sp),
                                                       ),
-                                                      child: Icon(Icons.check,color: Colors.green,size: 18.sp,)),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: Colors
+                                                            .green,
+                                                        size: 18.sp,
+                                                      )),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Rocks",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -2161,7 +3059,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             ],
                           )),
                     ],
-                  ),SizedBox(
+                  ),
+                  SizedBox(
                     height: 1.h,
                   ),
                   Row(
@@ -2171,10 +3070,9 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           padding: EdgeInsets.symmetric(
                               horizontal: 3.w, vertical: 1.h),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: secondary, width: 1.sp),
-                            borderRadius:
-                            BorderRadius.circular(10),
+                            border:
+                            Border.all(color: secondary, width: 1.sp),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
                             children: [
@@ -2185,47 +3083,49 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           letterSpacing: 1,
                                           color: blackback,
                                           fontSize: 15.sp,
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontFamily:
-                                          "volken")),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "volken")),
                                 ],
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        height:
-                                        20.w,
-                                        width:
-                                        20.w,
-
-                                        child:
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(00),
+                                        height: 20.w,
+                                        width: 20.w,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind.png",
-                                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                            errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                            imageUrl:
+                                            "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind.png",
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 2.w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       Text(
                                         "Wind",
-                                        maxLines:
-                                        1,
-                                        style:
-                                        TextStyle(
+                                        maxLines: 1,
+                                        style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
@@ -2239,38 +3139,49 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   Row(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                        child:
-                                        Row(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
+                                        child: Row(
                                           children: [
                                             Container(
-                                              height:
-                                              20.w,
-                                              width:
-                                              20.w,
-
-                                              child:
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(00),
+                                              height: 20.w,
+                                              width: 20.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    00),
                                                 child: CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/swell.png",
-                                                  progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                  errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                  imageUrl:
+                                                  "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/swell.png",
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                      progress) =>
+                                                      Center(
+                                                          child:
+                                                          CircularProgressIndicator()),
+                                                  errorWidget: (context,
+                                                      url, error) =>
+                                                      Image.asset(
+                                                        "assets/Mud.jpg",
+                                                      ),
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(width: 1.w,),
+                                            SizedBox(
+                                              width: 1.w,
+                                            ),
                                             Text(
                                               "Swell",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -2280,7 +3191,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       ),
                                     ],
                                   ),
-
                                 ],
                               ),
                               SizedBox(
@@ -2288,41 +3198,47 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        height:
-                                        20.w,
-                                        width:
-                                        20.w,
-
-                                        child:
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(00),
+                                        height: 20.w,
+                                        width: 20.w,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
-                                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                            errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                            imageUrl:
+                                            "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 2.w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       SizedBox(
                                         width: 25.w,
                                         child: Text(
-                                          "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
-                                          style:
-                                          TextStyle(
-                                            overflow: TextOverflow.ellipsis,
+                                          "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                          style: TextStyle(
+                                            overflow:
+                                            TextOverflow.ellipsis,
                                             fontSize: 13.sp,
                                             color: secondary,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: "volken",
-
                                           ),
                                         ),
                                       ),
@@ -2331,38 +3247,49 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   Row(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                        child:
-                                        Row(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
+                                        child: Row(
                                           children: [
                                             Container(
-                                              height:
-                                              20.w,
-                                              width:
-                                              20.w,
-
-                                              child:
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(00),
+                                              height: 20.w,
+                                              width: 20.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    00),
                                                 child: CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/height.png",
-                                                  progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                  errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                  imageUrl:
+                                                  "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                      progress) =>
+                                                      Center(
+                                                          child:
+                                                          CircularProgressIndicator()),
+                                                  errorWidget: (context,
+                                                      url, error) =>
+                                                      Image.asset(
+                                                        "assets/Mud.jpg",
+                                                      ),
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "Height",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -2379,41 +3306,62 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        height:
-                                        20.w,
-                                        width:
-                                        20.w,
-
-                                        child:
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(00),
+                                        height: 20.w,
+                                        width: 20.w,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: "https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
-                                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                            errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                            imageUrl:
+                                            "https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 2.w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       SizedBox(
                                         width: 25.w,
                                         child: Text(
-                                          daywisewedhtermodal?.days?[0].hours?[0].conditions==""||daywisewedhtermodal?.days?[0].hours?[0].conditions==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].conditions).toString(),
-                                          style:
-                                          TextStyle(
-                                            overflow: TextOverflow.ellipsis,
+                                          daywisewedhtermodal
+                                              ?.days?[0]
+                                              .hours?[0]
+                                              .conditions ==
+                                              "" ||
+                                              daywisewedhtermodal
+                                                  ?.days?[0]
+                                                  .hours?[0]
+                                                  .conditions ==
+                                                  null
+                                              ? "N/A"
+                                              : (daywisewedhtermodal
+                                              ?.days?[0]
+                                              .hours?[0]
+                                              .conditions)
+                                              .toString(),
+                                          style: TextStyle(
+                                            overflow:
+                                            TextOverflow.ellipsis,
                                             fontSize: 13.sp,
                                             color: secondary,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: "volken",
-
                                           ),
                                         ),
                                       ),
@@ -2422,38 +3370,49 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   Row(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                        child:
-                                        Row(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
+                                        child: Row(
                                           children: [
                                             Container(
-                                              height:
-                                              20.w,
-                                              width:
-                                              20.w,
-
-                                              child:
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(00),
+                                              height: 20.w,
+                                              width: 20.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    00),
                                                 child: CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wave-line.png",
-                                                  progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                  errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                  imageUrl:
+                                                  "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wave-line.png",
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                      progress) =>
+                                                      Center(
+                                                          child:
+                                                          CircularProgressIndicator()),
+                                                  errorWidget: (context,
+                                                      url, error) =>
+                                                      Image.asset(
+                                                        "assets/Mud.jpg",
+                                                      ),
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(height: 1.h,),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
                                             Text(
                                               "    --",
-                                              maxLines:
-                                              1,
-                                              style:
-                                              TextStyle(
-                                                overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                                 fontSize: 13.sp,
                                                 color: secondary,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight:
+                                                FontWeight.w500,
                                                 fontFamily: "volken",
                                                 letterSpacing: 1,
                                               ),
@@ -2470,55 +3429,58 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        height:
-                                        20.w,
-                                        width:
-                                        20.w,
-
-                                        child:
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(00),
+                                        height: 20.w,
+                                        width: 20.w,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(00),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/temp.png",
-                                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                            errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                            imageUrl:
+                                            "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/temp.png",
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                progress) =>
+                                                Center(
+                                                    child:
+                                                    CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                    Default_Profile),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 2.w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       SizedBox(
                                         width: 25.w,
                                         child: Text(
-                                          "${daywisewedhtermodal?.days?[0].temp==""||daywisewedhtermodal?.days?[0].temp==null?"N/A":(daywisewedhtermodal?.days?[0].temp).toString()}°C",
-                                          style:
-                                          TextStyle(
-                                            overflow: TextOverflow.ellipsis,
+                                          "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null ? "N/A" : (((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).toStringAsFixed(1)}°C",
+                                          style: TextStyle(
+                                            overflow:
+                                            TextOverflow.ellipsis,
                                             fontSize: 13.sp,
                                             color: secondary,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: "volken",
-
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-
                                 ],
                               ),
-
                             ],
                           )),
                     ],
                   ),
-
                   SizedBox(
                     height: 1.h,
                   ),
@@ -2528,9 +3490,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: Colors.black12,
-                            width: 1.sp)
-                    ),
+                            color: Colors.black12, width: 1.sp)),
                     child: CustomGoogleMapMarkerBuilder(
                       //screenshotDelay: const Duration(seconds: 4),
                       customMarkers: _customMarkers,
@@ -2576,7 +3536,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                         );
                       },
                     ),
-
                   ),
                   SizedBox(
                     height: 1.h,
@@ -2596,33 +3555,47 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                     height: 1.h,
                   ),
                   viewcategorywisevieweetailmodal
-                      ?.nearbyPosts?.length==""||viewcategorywisevieweetailmodal
-                      ?.nearbyPosts?.length==0||viewcategorywisevieweetailmodal
-                      ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Listings Available", style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.black,
-                      fontWeight:
-                      FontWeight.w500,
-                      fontFamily:
-                      "volken",
-                      letterSpacing: 1), ),)
+                      ?.nearbyPosts?.length ==
+                      "" ||
+                      viewcategorywisevieweetailmodal
+                          ?.nearbyPosts?.length ==
+                          0 ||
+                      viewcategorywisevieweetailmodal
+                          ?.nearbyPosts?.length ==
+                          null
+                      ? Container(
+                    height: 20.h,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "No Nearby Listings Available",
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "volken",
+                          letterSpacing: 1),
+                    ),
+                  )
                       : Container(
                     height: 28.h,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: viewcategorywisevieweetailmodal?.nearbyPosts?.length,
+                      itemCount: viewcategorywisevieweetailmodal
+                          ?.nearbyPosts?.length,
                       scrollDirection: Axis.horizontal,
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 1.w),
+                          margin:
+                          EdgeInsets.symmetric(horizontal: 1.w),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(width: 1.sp, color: secondary),
+                            border: Border.all(
+                                width: 1.sp, color: secondary),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.center,
                             children: [
                               Stack(
                                 children: [
@@ -2632,15 +3605,20 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                     child: CachedNetworkImage(
                                       height: 15.h,
                                       width: 45.w,
-                                      imageUrl: viewcategorywisevieweetailmodal
-                                          ?.nearbyPosts?[index]
+                                      imageUrl:
+                                      viewcategorywisevieweetailmodal
+                                          ?.nearbyPosts?[
+                                      index]
                                           .thumbnail ??
                                           "",
                                       fit: BoxFit.cover,
-                                      progressIndicatorBuilder: (context,
-                                          url, progress) =>
+                                      progressIndicatorBuilder:
+                                          (context, url,
+                                          progress) =>
                                           Container(
-                                              alignment: Alignment.center,
+                                              alignment:
+                                              Alignment
+                                                  .center,
                                               child:
                                               CircularProgressIndicator()),
                                       errorWidget:
@@ -2648,44 +3626,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           Image.asset(
                                             Default_Profile,
                                           ),
-                                    ),
-                                  ),
-                                  loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
-                                    top: 0.2.h,
-                                    left: 34.w,
-                                    child: InkWell(
-                                      onTap: (){
-                                        print("datavalye${viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorite}");
-                                        addfevorite( (viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorite)!,(viewcategorywisevieweetailmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .id
-                                        )
-                                            ?.toString() ??
-                                            "");
-                                        print("abc");
-                                      },
-                                      child: Container(
-                                        height: 9.w,
-                                        width: 9.w,
-                                        alignment: Alignment.center,
-                                        padding: EdgeInsetsDirectional.all(
-                                            2.2.w),
-                                        decoration: BoxDecoration(
-                                          color: blackback,
-                                          borderRadius:
-                                          BorderRadius.circular(900),
-                                        ),
-                                        child:viewcategorywisevieweetailmodal?.nearbyPosts?[index].isFavorite==true?Icon(
-                                          CupertinoIcons.heart_fill,
-                                          color: Colors.white,
-                                          size: 15.sp,
-                                        ) :Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.white,
-                                          size: 15.sp,
-                                        ),
-                                      ),
                                     ),
                                   ),
                                 ],
@@ -2699,20 +3639,24 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                     width: 42.w,
                                     child: Text(
                                       viewcategorywisevieweetailmodal
-                                          ?.nearbyPosts?[index]
+                                          ?.nearbyPosts?[
+                                      index]
                                           .title ==
                                           "" ||
                                           viewcategorywisevieweetailmodal
-                                              ?.nearbyPosts?[index]
+                                              ?.nearbyPosts?[
+                                          index]
                                               .title ==
                                               null
                                           ? "N/A"
                                           : (viewcategorywisevieweetailmodal
-                                          ?.nearbyPosts?[index]
+                                          ?.nearbyPosts?[
+                                      index]
                                           .title)
                                           .toString(),
                                       maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                      overflow:
+                                      TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontFamily: "Volkan",
                                         letterSpacing: 1.2,
@@ -2730,11 +3674,15 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               batan(
                                   title: "View Details",
                                   route: () {
-
-Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
-    ?.nearbyPosts?[index]
-    .id.toString(),));
-
+                                    print(
+                                        "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
+                                    Get.to(CategoryWiseViewScreen(
+                                        postid:
+                                        (viewcategorywisevieweetailmodal
+                                            ?.nearbyPosts?[
+                                        index]
+                                            .id)
+                                            ?.toString()));
                                   },
                                   hight: 5.h,
                                   width: 30.w,
@@ -2758,7 +3706,12 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
-                      loginmodal?.userId==""||loginmodal?.userId==null?Container():loginmodal?.userId==""||loginmodal?.userId==null? buildErrorDialog1(
+                      loginmodal?.userId == "" ||
+                          loginmodal?.userId == null
+                          ? Container()
+                          : loginmodal?.userId == "" ||
+                          loginmodal?.userId == null
+                          ? buildErrorDialog1(
                         context,
                         "",
                         "Please Login To Use This",
@@ -2766,9 +3719,13 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                             () {
                           Get.offAll(LoginScreen());
                         },
-                      ):loginmodal?.userId == viewcategorywisevieweetailmodal?.data?.authorId ?Container():InkWell(
+                      )
+                          : loginmodal?.userId ==
+                          viewcategorywisevieweetailmodal
+                              ?.data?.authorId
+                          ? Container()
+                          : InkWell(
                         onTap: () {
-
                           showratingpop1();
                         },
                         child: Text("Add Review",
@@ -2781,34 +3738,51 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                       ),
                     ],
                   ),
-                  viewcategorywisevieweetailmodal?.reviews?.length == null ||
-                      viewcategorywisevieweetailmodal?.reviews?.length == '' ||
-                      viewcategorywisevieweetailmodal?.reviews?.length == 0
-                      ?  Container(height: 20.h,alignment: Alignment.center,child: Text("No Review Available", style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.black,
-                      fontWeight:
-                      FontWeight.w500,
-                      fontFamily:
-                      "volken",
-                      letterSpacing: 1), ),)
+                  viewcategorywisevieweetailmodal?.reviews?.length ==
+                      null ||
+                      viewcategorywisevieweetailmodal
+                          ?.reviews?.length ==
+                          '' ||
+                      viewcategorywisevieweetailmodal
+                          ?.reviews?.length ==
+                          0
+                      ? Container(
+                    height: 20.h,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "No Review Available",
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "volken",
+                          letterSpacing: 1),
+                    ),
+                  )
                       : Column(
                     children: [
                       for (int i = 0;
-                      i < (viewcategorywisevieweetailmodal?.reviews?.length ?? 0);
+                      i <
+                          (viewcategorywisevieweetailmodal
+                              ?.reviews?.length ??
+                              0);
                       i++) ...[
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 2.w),
                           child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 0.5.h),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 0.5.h),
                             padding: EdgeInsets.symmetric(
                               vertical: 0.5.h,
                             ),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.grey.shade400, width: 0.5),
+                                    color: Colors.grey.shade400,
+                                    width: 0.5),
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
+                                borderRadius:
+                                BorderRadius.circular(10)),
                             child: Stack(
                               children: [
                                 Column(children: [
@@ -2817,26 +3791,33 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        padding: EdgeInsets.all(1.w),
+                                        padding:
+                                        EdgeInsets.all(1.w),
                                         child: ClipRRect(
                                           borderRadius:
-                                          BorderRadius.circular(90),
+                                          BorderRadius.circular(
+                                              90),
                                           child: CachedNetworkImage(
                                               fit: BoxFit.cover,
-                                              imageUrl: viewcategorywisevieweetailmodal
-                                                  ?.reviews?[i].userImg ??
+                                              imageUrl:
+                                              viewcategorywisevieweetailmodal
+                                                  ?.reviews?[
+                                              i]
+                                                  .userImg ??
                                                   "",
-                                              progressIndicatorBuilder: (context,
-                                                  url, progress) =>
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                  progress) =>
                                                   Center(
                                                       child:
                                                       CircularProgressIndicator()),
-                                              errorWidget:
-                                                  (context, url, error) =>
+                                              errorWidget: (context,
+                                                  url, error) =>
                                                   Icon(
                                                     Icons.person,
                                                     size: 15.w,
-                                                    color: Colors.white,
+                                                    color: Colors
+                                                        .white,
                                                   )),
                                         ),
                                       ),
@@ -2847,14 +3828,16 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                         mainAxisAlignment:
                                         MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment
+                                            .start,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
                                             MainAxisAlignment
                                                 .spaceBetween,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment
+                                                .start,
                                             children: [
                                               SizedBox(
                                                 width: 60.w,
@@ -2871,16 +3854,21 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                                           null
                                                       ? "N/A"
                                                       : (viewcategorywisevieweetailmodal
-                                                      ?.reviews?[i]
+                                                      ?.reviews?[
+                                                  i]
                                                       .name)
                                                       .toString(),
                                                   style: TextStyle(
                                                     fontSize: 12.sp,
-                                                    fontFamily: "volken",
+                                                    fontFamily:
+                                                    "volken",
                                                     fontWeight:
-                                                    FontWeight.bold,
-                                                    letterSpacing: 1,
-                                                    color: Colors.black,
+                                                    FontWeight
+                                                        .bold,
+                                                    letterSpacing:
+                                                    1,
+                                                    color: Colors
+                                                        .black,
                                                   ),
                                                 ),
                                               ),
@@ -2889,9 +3877,11 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                           SizedBox(height: 0.5.h),
                                           Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            CrossAxisAlignment
+                                                .center,
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment
+                                                .center,
                                             children: [
                                               Icon(
                                                 Icons.star,
@@ -2900,24 +3890,32 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                               ),
                                               Text(
                                                 viewcategorywisevieweetailmodal
-                                                    ?.reviews?[i]
+                                                    ?.reviews?[
+                                                i]
                                                     .reviewerRating ==
                                                     "" ||
                                                     viewcategorywisevieweetailmodal
-                                                        ?.reviews?[i]
+                                                        ?.reviews?[
+                                                    i]
                                                         .reviewerRating ==
                                                         null
                                                     ? "0"
                                                     : (viewcategorywisevieweetailmodal
-                                                    ?.reviews?[i]
+                                                    ?.reviews?[
+                                                i]
                                                     .reviewerRating)
                                                     .toString(),
                                                 style: TextStyle(
-                                                  fontFamily: "volken",
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 0.5,
+                                                  fontFamily:
+                                                  "volken",
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                                  letterSpacing:
+                                                  0.5,
                                                   color: secondary
-                                                      .withOpacity(0.45),
+                                                      .withOpacity(
+                                                      0.45),
                                                 ),
                                               ),
                                             ],
@@ -2929,33 +3927,38 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                                             width: 65.w,
                                             child: Text(
                                               viewcategorywisevieweetailmodal
-                                                  ?.reviews?[i]
+                                                  ?.reviews?[
+                                              i]
                                                   .reviewSummary
                                                   ?.xsReviwSummery ==
                                                   "" ||
                                                   viewcategorywisevieweetailmodal
-                                                      ?.reviews?[i]
+                                                      ?.reviews?[
+                                                  i]
                                                       .reviewSummary
                                                       ?.xsReviwSummery ==
                                                       null
                                                   ? "N/A"
                                                   : (viewcategorywisevieweetailmodal
-                                                  ?.reviews?[i]
+                                                  ?.reviews?[
+                                              i]
                                                   .reviewSummary
                                                   ?.xsReviwSummery)
                                                   .toString(),
                                               style: TextStyle(
-                                                fontFamily: "volken",
-                                                fontWeight: FontWeight.bold,
+                                                fontFamily:
+                                                "volken",
+                                                fontWeight:
+                                                FontWeight.bold,
                                                 letterSpacing: 0.5,
                                                 color: secondary
-                                                    .withOpacity(0.45),
+                                                    .withOpacity(
+                                                    0.45),
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-
                                     ],
                                   ),
                                 ]),
@@ -2963,13 +3966,11 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
                             ),
                           ),
                         ),
-
                       ]
                     ],
                   )
                 ]),
               ),
-
             ],
           ),
         ),
@@ -3302,6 +4303,7 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       }
     });
   }
+
   addreview() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
@@ -3332,6 +4334,7 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       });
     }
   }
+
   showratingpop1() {
     setState(() {
       _review.clear();
@@ -3533,6 +4536,7 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       },
     );
   }
+
   addfevorite(bool value,id) {
     EasyLoading.show(status: 'Please Wait ...');
     final Map<String, String> data = {};
@@ -3563,11 +4567,13 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       }
     });
   }
+
   bool _isValidDouble(String value) {
     if (value == null) return false;
     final RegExp regex = RegExp(r'^-?[\d.]+$');
     return regex.hasMatch(value);
   }
+
   wedther() {
     checkInternet().then((internet) async {
       if (internet) {
@@ -3591,6 +4597,7 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       }
     });
   }
+
   report() {
     showDialog(
       context: context,
@@ -3865,6 +4872,8 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       },
     );
   }
+
+
   reportapifun() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
@@ -3895,6 +4904,8 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
       });
     }
   }
+
+
   void updateData() {
     data[0] = [
       (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
@@ -3952,5 +4963,38 @@ Get.to(CategoryWiseViewScreen(postid:  viewcategorywisevieweetailmodal
         ),
       ],
     );
+  }
+
+
+
+  addnewimageapi() async {
+    print(selectedimage?.path);
+    EasyLoading.show(status: 'Please Wait ...');
+    final Map<String, String> data = {};
+    data['post_id'] = widget.postid.toString();
+    data['upload_file[]'] = jsonEncode(imagePaths);
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider()
+            .addnewimageviedewtailimage(data, imagePaths)
+            .then((response) async {
+          addNewPositionimageModal =
+              AddNewPositionImageModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 &&
+              addNewPositionimageModal?.success == true) {
+            print("admin chalu karo bhai");
+            EasyLoading.showSuccess(addNewPositionimageModal?.message ?? "");
+            viewposition();
+            Get.back();
+            selectedImages = [];
+          } else {
+            EasyLoading.showError(addNewPositionimageModal?.message ?? "");
+            setState(() {});
+          }
+        });
+      } else {
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 }

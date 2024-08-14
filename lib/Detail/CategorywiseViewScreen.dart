@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -13,17 +14,17 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
+
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
-import '../HomeScreen/HomeScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
@@ -32,9 +33,6 @@ import '../Modal/ReportModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'DetailsOtherScreen.dart';
-import 'DetailsScreen.dart';
-import 'OtherWarningDetailsScreen.dart';
 import 'ViewAllPositionDetailsScreen.dart';
 
 class CategoryWiseViewScreen extends StatefulWidget {
@@ -68,30 +66,30 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
   TextEditingController _email = TextEditingController();
   TextEditingController _review = TextEditingController();
   int _rating = 0;
-  String? selectedvalue="--- Select ---";
+  String? selectedvalue = "--- Select ---";
   bool isLoading = true;
   String htmlString = '';
   String plainText = '';
   final _formKey = GlobalKey<FormState>();
   bool showError = false;
   int type = 0;
-  bool anchor=false;
-  bool buoys=false;
-  bool mountain=false;
-  bool ownlines=false;
-  bool sand=false;
-  bool coral=false;
-  bool rocks=false;
-  bool clay=false;
-  bool pano=false;
-  bool groceries=false;
-  bool pharmacy=false;
-  bool alcohol=false;
-  bool restaurant=false;
-  bool pontoon=false;
-  bool shop=false;
-  bool water=false;
-  bool beach=false;
+  bool anchor = false;
+  bool buoys = false;
+  bool mountain = false;
+  bool ownlines = false;
+  bool sand = false;
+  bool coral = false;
+  bool rocks = false;
+  bool clay = false;
+  bool pano = false;
+  bool groceries = false;
+  bool pharmacy = false;
+  bool alcohol = false;
+  bool restaurant = false;
+  bool pontoon = false;
+  bool shop = false;
+  bool water = false;
+  bool beach = false;
   bool N1 = false;
   bool N2 = false;
   bool N3 = false;
@@ -157,7 +155,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
   bool _isSatellite = false;
   GoogleMapController? _mapController;
 
-
   List<String> _imagePaths = [];
 
   @override
@@ -179,6 +176,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
   //     ));
   //   });
   // }
+  int currentIndex = 0;
 
   void _searchAndNavigate() async {
     final String address = searchController.text;
@@ -255,83 +253,61 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
             : SingleChildScrollView(
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-
-                            Container(
-                              height: 50.h,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                  color: bgcolor, // Border color
-                                  width: 2.sp, // Border width
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: CachedNetworkImage(
-                                  imageUrl: viewcategorywisevieweetailmodal
-                                          ?.data?.thumbnail ??
-                                      "",
-                                  fit: BoxFit.cover,
-                                  progressIndicatorBuilder:
-                                      (context, url, progress) => Container(
-                                          alignment: Alignment.center,
-                                          child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(Default_Profile,
-                                          fit: BoxFit.cover),
-                                ),
-                              ),
-                            ),
-                          ],
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    header(
+                        text: "View Detail",
+                        callback1: () {
+                          _scaffoldKeyProductlistpage.currentState
+                              ?.openDrawer();
+                        }),
+                    Container(
+                      height: 30.h,
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          enlargeFactor: 0.2,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
+                          height: 30.h,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
                         ),
-                        Positioned(
-                          top: 5.h,
-                          left: 4.w,
-                          right: 3.w,
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(HomeScreen());
-                                      },
-                                      child: Icon(
-                                        Icons.arrow_back_ios,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  ],
+                        items: (viewcategorywisevieweetailmodal
+                                    ?.data?.thumbnails ??
+                                [])
+                            .map((imagePath) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                  ),
                                 ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          _scaffoldKeyProductlistpage
-                                              .currentState
-                                              ?.openDrawer();
-                                        },
-                                        icon: Icon(
-                                          Icons.menu_rounded,
-                                          color: blackback,
-                                          size: 23.sp,
-                                        )),
-                                  ],
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: (imagePath).toString(),
+                                    progressIndicatorBuilder:
+                                        (context, url, progress) => Center(
+                                            child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(""),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -342,284 +318,321 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         Column(
                           children: [
                             SizedBox(height: 0.5.h),
-                            batan(
-                                title: "Click To Add More Pictures From This Position",
-                                route: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      int counter = 0;
-                                      return StatefulBuilder(
-                                        builder: (context, setState) {
-                                          return AlertDialog(
-                                            title: Center(child: Text('Add More Pictures',style: TextStyle(fontSize: 18.sp,fontFamily: "volken",fontWeight: FontWeight.bold),)),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                // Container(
-                                                //   height: 35.w,
-                                                //   width: 35.w,
-                                                //   decoration: BoxDecoration(
-                                                //     borderRadius: BorderRadius.circular(5.w),
-                                                //     border: Border.all(
-                                                //       color: Colors.black,
-                                                //       width: 1.sp,
-                                                //     ),
-                                                //   ),
-                                                //   child: selectedimage == null
-                                                //       ? Center(child: Text('No Image Selected.',style: TextStyle(fontSize: 10.sp,fontFamily: "volken",fontWeight: FontWeight.bold),))
-                                                //       : ClipRRect(
-                                                //     borderRadius: BorderRadius.circular(5.w),
-                                                //     child: Image.file(
-                                                //       selectedimage!,
-                                                //       fit: BoxFit.cover,
-                                                //     ),
-                                                //   ),
-                                                // ),
-                                                selectedimage == null
-                                                    ? Container()
-                                                    : Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                                      height: 30.w,
-                                                      width: 30.w,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(15),
-                                                        border: Border.all(
-                                                          color: bgcolor, // Border color
-                                                          width: 2.sp, // Border width
-                                                        ),
-                                                      ),
-                                                      child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(15),
-                                                        child: selectedimage != null
-                                                            ? Image.file(
-                                                          selectedimage!,
-                                                          fit: BoxFit.cover,
-                                                        )
-                                                            : Container(),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                resultList1 == null || resultList1 == ""
-                                                    ? Container()
-                                                    : Column(
-                                                  children: [
-                                                    //for first select
-                                                    selectedImages.isEmpty
-                                                        ? GridView.builder(
-                                                      shrinkWrap: true,
-                                                      physics: NeverScrollableScrollPhysics(),
-                                                      padding: EdgeInsets.zero,
-                                                      gridDelegate:
-                                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 3),
-                                                      itemBuilder: (context, index) {
-                                                        return GestureDetector(
-                                                          onTap: () async {
-                                                            resultList = await ImagePicker()
-                                                                .pickMultiImage();
-
-                                                            if (resultList != null) {
-                                                              if (resultList!.length +
-                                                                  selectedImages.length >
-                                                                  maxImageLimit) {
-                                                                print(
-                                                                    'Maximum image limit exceeded');
-                                                              } else {
-                                                                setState(() {
-                                                                  selectedImages = resultList!
-                                                                      .map((XFile file) =>
-                                                                      File(file.path))
-                                                                      .toList()!;
-                                                                  imagePaths.addAll(resultList!
-                                                                      .map((file) => file.path)
-                                                                      .toList());
-                                                                });
-                                                              }
-                                                            }
+                            loginmodal?.userId == "" ||
+                                    loginmodal?.userId == null
+                                ? batan(
+                                    title:
+                                        "Click To Add More Pictures From This Position",
+                                    route: () {
+                                      buildErrorDialog1(
+                                        context,
+                                        "",
+                                        "Please Login To Use This",
+                                        buttonname: 'Login',
+                                        () {
+                                          Get.offAll(LoginScreen());
+                                        },
+                                      );
+                                    },
+                                    hight: 6.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    txtsize: 12.sp)
+                                : batan(
+                                    title:
+                                        "Click To Add More Pictures From This Position",
+                                    route: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          int counter = 0;
+                                          return StatefulBuilder(
+                                            builder: (context, setState) {
+                                              return AlertDialog(
+                                                content: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap: (){
+                                                            Get.back();
                                                           },
                                                           child: Container(
-                                                            margin: EdgeInsets.all(3.w),
-                                                            height: 60.h,
-                                                            width: 70.w,
-                                                            decoration: BoxDecoration(
-                                                                borderRadius:
-                                                                BorderRadius.circular(15),
-                                                                border: Border.all(
-                                                                    color: Colors.grey)),
-                                                          ),
-                                                        );
-                                                      },
-                                                      itemCount: 9,
-                                                    )
-                                                        : Container(),
-                                                    selectedImages.isEmpty
+                                                              height: 10.w,
+                                                              width: 10.w,
+                                                              alignment: Alignment
+                                                                  .center,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                      color: Colors
+                                                                          .black),
+                                                              child:
+                                                                  Icon(
+                                                                    Icons.close,
+                                                                    size: 15.sp,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  )),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Center(
+                                                            child: Text(
+                                                          'Add More Pictures',
+                                                          style: TextStyle(
+                                                              fontSize: 18.sp,
+                                                              fontFamily:
+                                                                  "volken",
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                      ],
+                                                    ),
+                                                    selectedimage == null
                                                         ? Container()
-                                                        :
-                                                    //disply after first selection
-                                                    GridView.builder(
-                                                      shrinkWrap: true,
-                                                      physics: NeverScrollableScrollPhysics(),
-                                                      padding: EdgeInsets.zero,
-                                                      gridDelegate:
-                                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 3),
-                                                      itemCount: 9,
-                                                      itemBuilder: (context, index) {
-                                                        if (index < selectedImages.length &&
-                                                            selectedImages[index] != null) {
-                                                          return Stack(
+                                                        : Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               Container(
-                                                                  margin: EdgeInsets.all(3.w),
-                                                                  height: 70.h,
-                                                                  width: 70.w,
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          15),
-                                                                      border: Border.all(
-                                                                          color: Colors.grey)),
-                                                                  child: ClipRRect(
-                                                                      borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          15),
-                                                                      child: Image.file(
-                                                                          selectedImages[index],
-                                                                          height: 60.h,
-                                                                          width: 70.w,
-                                                                          fit: BoxFit.cover))),
-                                                              Positioned(
-                                                                  left: 50.w,
-                                                                  top: 10.h,
-                                                                  child: GestureDetector(
-                                                                    onTap: () {
-                                                                      setState(() {
-                                                                        selectedImages
-                                                                            .removeAt(index);
-                                                                        imagePaths
-                                                                            .removeAt(index);
-                                                                      });
-                                                                    },
-                                                                    child: Container(
-                                                                        height: 15.w,
-                                                                        width: 15.w,
-                                                                        alignment:
-                                                                        Alignment.center,
-                                                                        decoration:
-                                                                        BoxDecoration(
-                                                                            shape: BoxShape
-                                                                                .circle,
-                                                                            color: Colors
-                                                                                .white),
-                                                                        child: Icon(
-                                                                          Icons.close,
-                                                                          size: 15.sp,
-                                                                        )),
-                                                                  ))
-                                                            ],
-                                                          );
-                                                        } else {
-                                                          //remaining container
-                                                          return GestureDetector(
-                                                            onTap: () async {
-                                                              resultList1 = await ImagePicker()
-                                                                  .pickMultiImage();
-                                                              if (resultList1 != null) {
-                                                                if (resultList1!.length +
-                                                                    selectedImages.length >
-                                                                    maxImageLimit) {
-                                                                  // Handle maximum image limit exceeded
-                                                                  buildErrorDialog(context, "",
-                                                                      "You selected more than 9 images");
-                                                                } else {
-                                                                  setState(() {
-                                                                    print(selectedImages);
-                                                                    selectedImages.addAll(
-                                                                        resultList1!
-                                                                            .map((XFile file) =>
-                                                                            File(file.path))
-                                                                            .toList());
-                                                                    imagePaths = resultList1!
-                                                                        .map(
-                                                                            (file) => file.path)
-                                                                        .toList();
-                                                                  });
-                                                                }
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets.all(3.w),
-                                                              height: 60.h,
-                                                              width: 70.w,
-                                                              decoration: BoxDecoration(
+                                                                margin: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            1.w),
+                                                                height: 30.w,
+                                                                width: 30.w,
+                                                                decoration:
+                                                                    BoxDecoration(
                                                                   borderRadius:
-                                                                  BorderRadius.circular(15),
-                                                                  border: Border.all(
-                                                                      color: Colors.grey)),
-                                                            ),
-                                                          );
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              15),
+                                                                  border: Border
+                                                                      .all(
+                                                                    color:
+                                                                        bgcolor,
+                                                                    // Border color
+                                                                    width: 2
+                                                                        .sp, // Border width
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              15),
+                                                                  child: selectedimage !=
+                                                                          null
+                                                                      ? Image
+                                                                          .file(
+                                                                          selectedimage!,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        )
+                                                                      : Container(),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                    resultList1 == null
+                                                        ? Container()
+                                                        : Column(
+                                                            children: [
+                                                              //for first select
+                                                              // !selectedImages
+                                                              //         .isEmpty
+                                                              //     ? GridView
+                                                              //         .builder(
+                                                              //         shrinkWrap:
+                                                              //             true,
+                                                              //         physics:
+                                                              //             NeverScrollableScrollPhysics(),
+                                                              //         padding:
+                                                              //             EdgeInsets
+                                                              //                 .zero,
+                                                              //         gridDelegate:
+                                                              //             SliverGridDelegateWithFixedCrossAxisCount(
+                                                              //                 crossAxisCount: 3),
+                                                              //         itemBuilder:
+                                                              //             (context,
+                                                              //                 index) {
+                                                              //           return GestureDetector(
+                                                              //             onTap:
+                                                              //                 () async {
+                                                              //               resultList =
+                                                              //                   await ImagePicker().pickMultiImage();
+                                                              //
+                                                              //               if (resultList !=
+                                                              //                   null) {
+                                                              //                 if (resultList!.length + selectedImages.length > maxImageLimit) {
+                                                              //                   print('Maximum image limit exceeded');
+                                                              //                 } else {
+                                                              //                   setState(() {
+                                                              //                     selectedImages = resultList!.map((XFile file) => File(file.path)).toList()!;
+                                                              //                     imagePaths.addAll(resultList!.map((file) => file.path).toList());
+                                                              //                   });
+                                                              //                 }
+                                                              //               }
+                                                              //             },
+                                                              //             child:
+                                                              //                 Container(
+                                                              //               margin:
+                                                              //                   EdgeInsets.all(3.w),
+                                                              //               height:
+                                                              //                   60.h,
+                                                              //               width:
+                                                              //                   70.w,
+                                                              //               decoration:
+                                                              //                   BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
+                                                              //             ),
+                                                              //           );
+                                                              //         },
+                                                              //         itemCount:
+                                                              //             9,
+                                                              //       )
+                                                              //     : Container(),
+                                                              selectedImages
+                                                                      .isEmpty
+                                                                  ? Container()
+                                                                  :
+                                                                  //disply after first selection
+                                                                  GridView
+                                                                      .builder(
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      physics:
+                                                                          NeverScrollableScrollPhysics(),
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      gridDelegate:
+                                                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                                                              crossAxisCount: 3),
+                                                                      itemCount:
+                                                                          9,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        if (index < selectedImages.length &&
+                                                                            selectedImages[index] !=
+                                                                                null) {
+                                                                          return Container(margin: EdgeInsets.all(3.w), height: 70.h, width: 70.w, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)), child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.file(selectedImages[index], height: 60.h, width: 70.w, fit: BoxFit.cover)));
+                                                                        } else {
+                                                                          //remaining container
+                                                                          return GestureDetector(
+                                                                            onTap:
+                                                                                () async {
+                                                                              resultList1 = await ImagePicker().pickMultiImage();
+                                                                              if (resultList1 != null) {
+                                                                                if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                                                  // Handle maximum image limit exceeded
+                                                                                  buildErrorDialog(context, "", "You selected more than 9 images");
+                                                                                } else {
+                                                                                  setState(() {
+                                                                                    print(selectedImages);
+                                                                                    selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                                    imagePaths = resultList1!.map((file) => file.path).toList();
+                                                                                  });
+                                                                                }
+                                                                              }
+                                                                            },
+                                                                            child:
+                                                                                Container(
+                                                                              margin: EdgeInsets.all(3.w),
+                                                                              height: 60.h,
+                                                                              width: 70.w,
+                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                      },
+                                                                    )
+                                                            ],
+                                                          ),
+                                                    SizedBox(height: 2.h),
+                                                    batan(
+                                                      title: "Select Photo",
+                                                      route: () async {
+                                                        resultList1 =
+                                                            await ImagePicker()
+                                                                .pickMultiImage();
+                                                        if (resultList1 !=
+                                                            null) {
+                                                          if (resultList1!
+                                                                      .length +
+                                                                  selectedImages
+                                                                      .length >
+                                                              maxImageLimit) {
+                                                            // Handle maximum image limit exceeded
+                                                            buildErrorDialog(
+                                                                context,
+                                                                "",
+                                                                "You selected more than 9 images");
+                                                          } else {
+                                                            setState(() {
+                                                              print(
+                                                                  selectedImages);
+                                                              selectedImages.addAll(resultList1!
+                                                                  .map((XFile
+                                                                          file) =>
+                                                                      File(file
+                                                                          .path))
+                                                                  .toList());
+                                                              imagePaths = resultList1!
+                                                                  .map((file) =>
+                                                                      file.path)
+                                                                  .toList();
+                                                            });
+                                                          }
                                                         }
                                                       },
-                                                    )
+                                                      hight: 6.h,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      txtsize: 15.sp,
+                                                    ),
+                                                    SizedBox(height: 2.h),
+                                                    selectedImages.isNotEmpty
+                                                        ? batan(
+                                                            title: "Upload",
+                                                            route: () {
+                                                              addnewimageapi();
+                                                            },
+                                                            hight: 6.h,
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            txtsize: 15.sp,
+                                                          )
+                                                        : SizedBox(),
                                                   ],
                                                 ),
-                                                SizedBox(height: 2.h),
-                                                batan(
-                                                  title: "Selecat Photo",
-                                                  route: () async {
-                                                    resultList1 =
-                                                    await ImagePicker().pickMultiImage();
-                                                    if (resultList1 != null) {
-                                                      if (resultList1!.length +
-                                                          selectedImages.length >
-                                                          maxImageLimit) {
-                                                        // Handle maximum image limit exceeded
-                                                        buildErrorDialog(context, "",
-                                                            "You selected more than 9 images");
-                                                      } else {
-                                                        setState(() {
-                                                          print(selectedImages);
-                                                          selectedImages.addAll(resultList1!
-                                                              .map((XFile file) =>
-                                                              File(file.path))
-                                                              .toList());
-                                                          imagePaths = resultList1!
-                                                              .map((file) => file.path)
-                                                              .toList();
-                                                        });
-                                                      }
-                                                    }
-                                                  },
-                                                  hight: 6.h,
-                                                  width: MediaQuery.of(context).size.width,
-                                                  txtsize: 15.sp,
-                                                ),
-                                                SizedBox(height: 2.h),
-                                                batan(
-                                                  title: "Upload",
-                                                  route: ()  {
-                                                    addnewimageapi();
-                                                  },
-                                                  hight: 6.h,
-                                                  width: MediaQuery.of(context).size.width,
-                                                  txtsize: 15.sp,
-                                                ),
-                                              ],
-                                            ),
+                                              );
+                                            },
                                           );
                                         },
                                       );
                                     },
-                                  );
-                                },
-                                hight: 6.h,
-                                width: MediaQuery.of(context).size.width,
-                                txtsize: 11.sp),
+                                    hight: 6.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    txtsize: 11.sp),
                             SizedBox(height: 1.h),
                             Row(
                               children: [
@@ -789,7 +802,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         Row(
                           children: [
                             InkWell(
-                              onTap: (){
+                              onTap: () {
                                 report();
                               },
                               child: Icon(
@@ -802,11 +815,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               width: 1.w,
                             ),
                             InkWell(
-                            onTap: (){
-                              report();
-                            },
+                              onTap: () {
+                                report();
+                              },
                               child: Text("Report",
-
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       decoration: TextDecoration.underline,
@@ -1806,12 +1818,13 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Protection : -",style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken"))
+                            Text("Protection : -",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: Colors.black,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken"))
                           ],
                         ),
                         SizedBox(
@@ -1823,7 +1836,16 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               height: 50.h,
                               child: RadarChart.light(
                                 ticks: [2, 4, 6, 8, 10],
-                                features: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+                                features: [
+                                  "N",
+                                  "NE",
+                                  "E",
+                                  "SE",
+                                  "S",
+                                  "SW",
+                                  "W",
+                                  "NW"
+                                ],
                                 data: data,
 
                                 // graphColors: [Colors.blue, Colors.green],
@@ -3204,7 +3226,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             SizedBox(
                                               width: 25.w,
                                               child: Text(
-                                                "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" ||daywisewedhtermodal?.days?[0].windspeed ==null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                                "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
                                                 style: TextStyle(
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -3235,7 +3257,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       child: CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl:
-                                                            "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png", 
+                                                            "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
                                                         progressIndicatorBuilder:
                                                             (context, url,
                                                                     progress) =>
@@ -3435,11 +3457,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             SizedBox(
                                               width: 25.w,
                                               child: Text(
-                                                "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null
-                                                    ? "N/A"
-                                                    : (((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).toStringAsFixed(1)}°C",
-
-                                                style: TextStyle(
+                                                "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null ? "N/A" : ((((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).round()).toString()}°C",
+                                              style: TextStyle(
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   fontSize: 13.sp,
@@ -3531,125 +3550,144 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                           height: 1.h,
                         ),
                         viewcategorywisevieweetailmodal
-                            ?.nearbyPosts?.length==""||viewcategorywisevieweetailmodal
-                            ?.nearbyPosts?.length==0||viewcategorywisevieweetailmodal
-                            ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Listings Available", style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Colors.black,
-                            fontWeight:
-                            FontWeight.w500,
-                            fontFamily:
-                            "volken",
-                            letterSpacing: 1), ),)
-                            :Container(
-                          height: 28.h,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: viewcategorywisevieweetailmodal
-                                ?.nearbyPosts?.length,
-                            scrollDirection: Axis.horizontal,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(width: 1.sp, color: secondary),
-                                  borderRadius: BorderRadius.circular(10),
+                                        ?.nearbyPosts?.length ==
+                                    "" ||
+                                viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?.length ==
+                                    0 ||
+                                viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?.length ==
+                                    null
+                            ? Container(
+                                height: 20.h,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "No Nearby Listings Available",
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "volken",
+                                      letterSpacing: 1),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: CachedNetworkImage(
-                                            height: 15.h,
-                                            width: 45.w,
-                                            imageUrl:
-                                                viewcategorywisevieweetailmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .thumbnail ??
-                                                    "",
-                                            fit: BoxFit.cover,
-                                            progressIndicatorBuilder: (context,
-                                                    url, progress) =>
-                                                Container(
-                                                    alignment: Alignment.center,
-                                                    child:
-                                                        CircularProgressIndicator()),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Image.asset(
-                                              Default_Profile,
-                                            ),
+                              )
+                            : Container(
+                                height: 28.h,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: viewcategorywisevieweetailmodal
+                                      ?.nearbyPosts?.length,
+                                  scrollDirection: Axis.horizontal,
+                                  padding: EdgeInsets.zero,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 1.w),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1.sp, color: secondary),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  height: 15.h,
+                                                  width: 45.w,
+                                                  imageUrl:
+                                                      viewcategorywisevieweetailmodal
+                                                              ?.nearbyPosts?[
+                                                                  index]
+                                                              .thumbnail ??
+                                                          "",
+                                                  fit: BoxFit.cover,
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              progress) =>
+                                                          Container(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child:
+                                                                  CircularProgressIndicator()),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Image.asset(
+                                                    Default_Profile,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-
-                                      ],
-                                    ),
-                                    SizedBox(height: 1.h),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 42.w,
-                                          child: Text(
-                                            viewcategorywisevieweetailmodal
-                                                            ?.nearbyPosts?[
-                                                                index]
-                                                            .title ==
-                                                        "" ||
-                                                    viewcategorywisevieweetailmodal
-                                                            ?.nearbyPosts?[
-                                                                index]
-                                                            .title ==
-                                                        null
-                                                ? "N/A"
-                                                : (viewcategorywisevieweetailmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .title)
-                                                    .toString(),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontFamily: "Volkan",
-                                              letterSpacing: 1.2,
-                                              color: secondary,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15.sp,
-                                            ),
+                                          SizedBox(height: 1.h),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: 42.w,
+                                                child: Text(
+                                                  viewcategorywisevieweetailmodal
+                                                                  ?.nearbyPosts?[
+                                                                      index]
+                                                                  .title ==
+                                                              "" ||
+                                                          viewcategorywisevieweetailmodal
+                                                                  ?.nearbyPosts?[
+                                                                      index]
+                                                                  .title ==
+                                                              null
+                                                      ? "N/A"
+                                                      : (viewcategorywisevieweetailmodal
+                                                              ?.nearbyPosts?[
+                                                                  index]
+                                                              .title)
+                                                          .toString(),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontFamily: "Volkan",
+                                                    letterSpacing: 1.2,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15.sp,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                    batan(
-                                        title: "View Details",
-                                        route: () {
-                                          print(
-                                              "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
-                                          Get.to(ViewAllPositionDetailsScreen(
-                                              postid:
-                                                  (viewcategorywisevieweetailmodal
-                                                          ?.nearbyPosts?[index]
-                                                          .id)
-                                                      ?.toString()));
-                                        },
-                                        hight: 5.h,
-                                        width: 30.w,
-                                        txtsize: 12.sp)
-                                  ],
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                          batan(
+                                              title: "View Details",
+                                              route: () {
+                                                print(
+                                                    "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
+                                                Get.to(ViewAllPositionDetailsScreen(
+                                                    postid:
+                                                        (viewcategorywisevieweetailmodal
+                                                                ?.nearbyPosts?[
+                                                                    index]
+                                                                .id)
+                                                            ?.toString()));
+                                              },
+                                              hight: 5.h,
+                                              width: 30.w,
+                                              txtsize: 12.sp)
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                              ),
                         SizedBox(
                           height: 1.h,
                         ),
@@ -3677,19 +3715,22 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           Get.offAll(LoginScreen());
                                         },
                                       )
-                                    :
-                            loginmodal?.userId == viewcategorywisevieweetailmodal?.data?.authorId ?Container(): InkWell(
-                                        onTap: () {
-                                          showratingpop1();
-                                        },
-                                        child: Text("Add Review",
-                                            style: TextStyle(
-                                                letterSpacing: 1,
-                                                color: blackback,
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: "volken")),
-                                      ),
+                                    : loginmodal?.userId ==
+                                            viewcategorywisevieweetailmodal
+                                                ?.data?.authorId
+                                        ? Container()
+                                        : InkWell(
+                                            onTap: () {
+                                              showratingpop1();
+                                            },
+                                            child: Text("Add Review",
+                                                style: TextStyle(
+                                                    letterSpacing: 1,
+                                                    color: blackback,
+                                                    fontSize: 15.sp,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: "volken")),
+                                          ),
                           ],
                         ),
                         viewcategorywisevieweetailmodal?.reviews?.length ==
@@ -3932,7 +3973,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     );
   }
 
-
   report() {
     showDialog(
       context: context,
@@ -3976,7 +4016,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     width: 7.w,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                        BorderRadius.circular(100),
+                                            BorderRadius.circular(100),
                                         color: Colors.black),
                                     child: InkWell(
                                         onTap: () {
@@ -3995,7 +4035,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -4008,96 +4048,165 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         fontFamily: "Volkan"),
                                   ),
                                   SizedBox(height: 1.h),
-
                                 ],
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Text("Category :-",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: Colors.black,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
-                              SizedBox(height: 1.h,),
+                              Text("Category :-",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: Colors.black,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
+                              SizedBox(
+                                height: 1.h,
+                              ),
                               Container(
                                 height: 5.5.h,
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                                 decoration: BoxDecoration(
-                                  color:  Colors.white,
-                                  border: Border.all(width: 1, color: secondary),
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(width: 1, color: secondary),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-
-                                child:DropdownButton(
+                                child: DropdownButton(
                                   dropdownColor: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  hint: Text("Please Select Position Category",style: TextStyle(color:secondary,fontFamily: "volken",)),
-
+                                  hint: Text("Please Select Position Category",
+                                      style: TextStyle(
+                                        color: secondary,
+                                        fontFamily: "volken",
+                                      )),
                                   value: selectedvalue,
-                                  onChanged: (val)
-                                  {
-                                    setState((){
-                                      selectedvalue=val!;
+                                  onChanged: (val) {
+                                    setState(() {
+                                      selectedvalue = val!;
                                       print(selectedvalue);
                                     });
                                   },
                                   items: [
                                     DropdownMenuItem(
-                                      child: Text("--- Select ---",style: TextStyle(color:Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("--- Select ---",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "--- Select ---",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("sexual content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("sexual content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "sexual-content",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("violent or repulsive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child:
+                                          Text("violent or repulsive content",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.normal,
+                                                fontFamily: "volken",
+                                              )),
                                       value: "violent-or-repulsive-content",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("hateful or abusive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("hateful or abusive content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "hateful-or-abusive-content",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("harassment or bullying",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("harassment or bullying",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "harassment-or-bullying",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("harmful or dangerous acts",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("harmful or dangerous acts",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "harmful-or-dangerous-acts",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Misinformation",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Misinformation",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "misinformation",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Child Abuse",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Child Abuse",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "child-abuse",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Promotes",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Promotes",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "promotes",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Spam or Misleading",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Spam or Misleading",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "spam-or-misleading",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Legal issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Legal issue",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "legal-issue",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Captions issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Captions issue",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "captions-issue",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                      child: Text("Other",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "other",
                                     ),
-
                                   ],
                                 ),
                               ),
@@ -4120,7 +4229,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   Container(
                                     width: 85.w,
                                     child: TextFormField(
-
                                       keyboardType: TextInputType.text,
                                       style: TextStyle(color: Colors.black),
                                       controller: _name,
@@ -4143,8 +4251,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-
-
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -4184,7 +4290,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               SizedBox(
                                 height: 2.h,
                               ),
-                             batan(
+                              batan(
                                   title: "REPORT",
                                   route: () {
                                     reportapifun();
@@ -4214,13 +4320,12 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       final Map<String, String> data = {};
       data['post_id'] = widget.postid.toString();
       data['opinion_text'] = selectedvalue.toString();
-      data['name'] =_name.text.toString();
+      data['name'] = _name.text.toString();
       data['message'] = _email.text.toString();
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().reportapi(data).then((response) async {
-            reportmodal =
-                ReportModal.fromJson(json.decode(response.body));
+            reportmodal = ReportModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && reportmodal?.success == true) {
               EasyLoading.showSuccess(reportmodal?.message ?? '');
               Get.back();
@@ -4255,8 +4360,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               viewcategorywisevieweetailmodal?.success == true) {
             wedther();
             setState(() {
-              dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.water;
+              dynamic waterValue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {
                 setState(() {
                   print("water${water}");
@@ -4265,8 +4370,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 water = false;
               }
-              dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.rocks;
+              dynamic rocksvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.rocks;
               if (rocksvalue != null && rocksvalue is bool) {
                 setState(() {
                   rocks = rocksvalue;
@@ -4274,8 +4379,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 rocks = false;
               }
-              dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.coral;
+              dynamic coralvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.coral;
               if (coralvalue != null && coralvalue is bool) {
                 setState(() {
                   coral = coralvalue;
@@ -4283,7 +4388,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 coral = false;
               }
-              dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
+              dynamic clayvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
               if (clayvalue != null && clayvalue is bool) {
                 setState(() {
                   clay = clayvalue;
@@ -4291,7 +4397,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 clay = false;
               }
-              dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
+              dynamic sandvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
               if (sandvalue != null && sandvalue is bool) {
                 setState(() {
                   sand = sandvalue;
@@ -4299,8 +4406,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 sand = false;
               }
-              dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.buoys;
+              dynamic buoysvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.buoys;
               if (buoysvalue != null && buoysvalue is bool) {
                 setState(() {
                   buoys = buoysvalue;
@@ -4308,8 +4415,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 buoys = false;
               }
-              dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.restaurant;
+              dynamic restaurantsvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.restaurant;
               if (restaurantsvalue != null && restaurantsvalue is bool) {
                 setState(() {
                   restaurant = restaurantsvalue;
@@ -4317,8 +4424,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 restaurant = false;
               }
-              dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.alcohol;
+              dynamic alcoholvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.alcohol;
               if (alcoholvalue != null && alcoholvalue is bool) {
                 setState(() {
                   alcohol = alcoholvalue;
@@ -4326,8 +4433,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 alcohol = false;
               }
-              dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.pharmacy;
+              dynamic pharmacyvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.pharmacy;
               if (pharmacyvalue != null && pharmacyvalue is bool) {
                 setState(() {
                   pharmacy = pharmacyvalue;
@@ -4335,8 +4442,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 pharmacy = false;
               }
-              dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.groceries;
+              dynamic groceriesvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.groceries;
               if (groceriesvalue != null && groceriesvalue is bool) {
                 setState(() {
                   groceries = groceriesvalue;
@@ -4344,17 +4451,17 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 groceries = false;
               }
-              dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.mountainWedges;
+              dynamic mountainvalue = viewcategorywisevieweetailmodal
+                  ?.data?.metaFields?.mountainWedges;
               if (mountainvalue != null && mountainvalue is bool) {
                 setState(() {
                   mountain = mountainvalue;
-
                 });
               } else {
                 mountain = false;
               }
-              dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
+              dynamic NW3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
               if (NW3value != null && NW3value is bool) {
                 setState(() {
                   NW3 = NW3value;
@@ -4363,7 +4470,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 NW3 = false;
               }
-              dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
+              dynamic NW1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
               if (NW1value != null && NW1value is bool) {
                 setState(() {
                   NW1 = NW1value;
@@ -4372,7 +4480,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 NW1 = false;
               }
-              dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
+              dynamic NW2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
               if (NW2value != null && NW2value is bool) {
                 setState(() {
                   NW2 = NW1value;
@@ -4381,7 +4490,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 NW2 = false;
               }
-              dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
+              dynamic N1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
               if (N1value != null && N1value is bool) {
                 setState(() {
                   N1 = N1value;
@@ -4390,7 +4500,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 N1 = false;
               }
-              dynamic N2value = viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
+              dynamic N2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
               if (N2value != null && N1value is bool) {
                 setState(() {
                   N2 = N2value;
@@ -4399,7 +4510,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 N2 = false;
               }
-              dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
+              dynamic N3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
               if (N3value != null && N3value is bool) {
                 setState(() {
                   N3 = N3value;
@@ -4408,7 +4520,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 N3 = false;
               }
-              dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
+              dynamic E1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
               if (E1value != null && E1value is bool) {
                 setState(() {
                   E1 = E1value;
@@ -4417,7 +4530,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 E1 = false;
               }
-              dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
+              dynamic E2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
               if (E2value != null && E2value is bool) {
                 setState(() {
                   E2 = E2value;
@@ -4426,7 +4540,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 E2 = false;
               }
-              dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
+              dynamic E3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
               if (E3value != null && E3value is bool) {
                 setState(() {
                   E3 = E3value;
@@ -4435,7 +4550,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 E3 = false;
               }
-              dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
+              dynamic W1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
               if (W1value != null && W1value is bool) {
                 setState(() {
                   W1 = W1value;
@@ -4444,7 +4560,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 W1 = false;
               }
-              dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
+              dynamic W2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
               if (W2value != null && W2value is bool) {
                 setState(() {
                   W2 = W2value;
@@ -4453,7 +4570,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 W2 = false;
               }
-              dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
+              dynamic W3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
               if (W3value != null && W3value is bool) {
                 setState(() {
                   W3 = W3value;
@@ -4462,7 +4580,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 W3 = false;
               }
-              dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
+              dynamic SW1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
               if (SW1value != null && SW1value is bool) {
                 setState(() {
                   SW1 = SW1value;
@@ -4471,7 +4590,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 SW1 = false;
               }
-              dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
+              dynamic SW2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
               if (SW2value != null && SW2value is bool) {
                 setState(() {
                   SW2 = SW2value;
@@ -4480,7 +4600,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
               } else {
                 SW2 = false;
               }
-              dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
+              dynamic SW3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
               if (SW3value != null && SW3value is bool) {
                 setState(() {
                   SW3 = SW3value;
@@ -4842,8 +4963,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
   }
 
   wedther() {
-    print("viewcategorywisevieweetailmodal?.data?.latitude,${ viewcategorywisevieweetailmodal?.data?.latitude}");
-    print("viewcategorywisevieweetailmodal?.data?.longitude,${ viewcategorywisevieweetailmodal?.data?.longitude}");
+    print(
+        "viewcategorywisevieweetailmodal?.data?.latitude,${viewcategorywisevieweetailmodal?.data?.latitude}");
+    print(
+        "viewcategorywisevieweetailmodal?.data?.longitude,${viewcategorywisevieweetailmodal?.data?.longitude}");
     checkInternet().then((internet) async {
       if (internet) {
         authprovider()
@@ -4887,7 +5010,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     ];
   }
 
-
   Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
     return Column(
       children: [
@@ -4911,8 +5033,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     );
   }
 
-  Widget buildCheckbox(
-      String label, bool value, Function(bool) onChanged) {
+  Widget buildCheckbox(String label, bool value, Function(bool) onChanged) {
     return Row(
       children: [
         Checkbox(
@@ -4933,6 +5054,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       ],
     );
   }
+
   addnewimageapi() async {
     print(selectedimage?.path);
     EasyLoading.show(status: 'Please Wait ...');
@@ -4941,12 +5063,18 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     data['upload_file[]'] = jsonEncode(imagePaths);
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().addnewimageviedewtailimage(data,imagePaths).then((response) async {
-          addNewPositionimageModal =AddNewPositionImageModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 && addNewPositionimageModal?.success==true) {
+        authprovider()
+            .addnewimageviedewtailimage(data, imagePaths)
+            .then((response) async {
+          addNewPositionimageModal =
+              AddNewPositionImageModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 &&
+              addNewPositionimageModal?.success == true) {
             print("admin chalu karo bhai");
             EasyLoading.showSuccess(addNewPositionimageModal?.message ?? "");
             viewposition();
+            Get.back();
+            selectedImages = [];
           } else {
             EasyLoading.showError(addNewPositionimageModal?.message ?? "");
             setState(() {});
@@ -4957,4 +5085,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       }
     });
   }
+
+
 }

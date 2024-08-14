@@ -83,7 +83,7 @@ class _BottombarState extends State<Bottombar> {
                 Icon(Icons.alarm, color: Colors.black),
                 activeItem:
                 Icon(Icons.alarm, color: Colors.white),
-                itemLabel: 'Alarm',
+                itemLabel: 'Alert',
               ),
               BottomBarItem(
                 inActiveItem:

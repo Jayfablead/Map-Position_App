@@ -124,14 +124,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                 children: [
                                   InkWell(
                                     onTap: (){
-                                      mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
-                                          postid: (mymarinaviewmodal
-                                              ?.positions?[
-                                          i]
-                                              .properties
-                                              ?.postId)
-                                              ?.toString() ??
-                                              "")):Get.to(CategoryWiseViewScreen(
+                                      Get.to(CategoryWiseViewScreen(
                                           postid: (mymarinaviewmodal
                                               ?.positions?[
                                           i]
@@ -331,14 +324,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                   batan(
                                                       title: "View Details",
                                                       route: () {
-                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
-                                                            postid: (mymarinaviewmodal
-                                                                        ?.positions?[
-                                                                            i]
-                                                                        .properties
-                                                                        ?.postId)
-                                                                    ?.toString() ??
-                                                                "")):Get.to(CategoryWiseViewScreen(
+                                                       Get.to(CategoryWiseViewScreen(
                                                             postid: (mymarinaviewmodal
                                                                 ?.positions?[
                                                             i]
@@ -346,8 +332,6 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                                 ?.postId)
                                                                 ?.toString() ??
                                                                 ""));
-
-
                                                       },
                                                       hight: 6.h,
                                                       width: 40.w,

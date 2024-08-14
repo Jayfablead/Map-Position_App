@@ -90,14 +90,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                       children: [
                         InkWell(
                           onTap: (){
-                            shoallmarkermodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Anchorages"?Get.to(DetailsScreen(
-                                postid: (shoallmarkermodal
-                                    ?.positions?[
-                                i]
-                                    .properties
-                                    ?.postId)
-                                    ?.toString() ??
-                                    "")):Get.to(CategoryWiseViewScreen(
+                           Get.to(CategoryWiseViewScreen(
                                 postid: (shoallmarkermodal
                                     ?.positions?[
                                 i]

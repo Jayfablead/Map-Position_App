@@ -125,18 +125,18 @@ class MetaFields {
   Null? propertyCountry;
   bool? propertyLatitude;
   bool? propertyLongitude;
-  Null? textSlips;
-  Null? textMinimumapproachdepth;
-  Null? textMeanlowwaterdockdepth;
-  Null? textMinimumchanneldepth;
-  Null? textMeanhighwaterclearance;
-  Null? textFueldock;
-  Null? textGas;
-  Null? textTransientstorage;
+  String? textSlips;
+  String? textMinimumapproachdepth;
+  String? textMeanlowwaterdockdepth;
+  String? textMinimumchanneldepth;
+  String? textMeanhighwaterclearance;
+  String? textFueldock;
+  String? textGas;
+  String? textTransientstorage;
   bool? textLongtermstorage;
-  Null? textMaxvesselloa;
-  Null? textMaxsliplength;
-  Null? textMaxslipwidth;
+  String? textMaxvesselloa;
+  String? textMaxsliplength;
+  String? textMaxslipwidth;
   bool? n1;
   bool? n2;
   bool? n3;
@@ -175,16 +175,13 @@ class MetaFields {
   bool? water;
   bool? restaurant;
   bool? alcohol;
-  bool? bEditLock;
   bool? bThumbnailId;
-  bool? beach;
-  bool? pontoon;
-  bool? shop;
-  bool? wpestateTotalViews;
-  bool? wpestateDetailedViews;
   bool? propertyPrice;
   bool? propertyLabel;
   bool? propertyLabelBefore;
+  bool? beach;
+  bool? pontoon;
+  bool? shop;
   bool? localPgprSliderType;
   bool? localPgprContentType;
   bool? propFeatured;
@@ -206,6 +203,9 @@ class MetaFields {
   bool? payStatus;
   bool? pageCustomZoom;
   bool? hiddenAddress;
+  bool? bEditLock;
+  bool? wpestateTotalViews;
+  bool? wpestateDetailedViews;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
@@ -340,16 +340,13 @@ class MetaFields {
         this.water,
         this.restaurant,
         this.alcohol,
-        this.bEditLock,
         this.bThumbnailId,
-        this.beach,
-        this.pontoon,
-        this.shop,
-        this.wpestateTotalViews,
-        this.wpestateDetailedViews,
         this.propertyPrice,
         this.propertyLabel,
         this.propertyLabelBefore,
+        this.beach,
+        this.pontoon,
+        this.shop,
         this.localPgprSliderType,
         this.localPgprContentType,
         this.propFeatured,
@@ -371,6 +368,9 @@ class MetaFields {
         this.payStatus,
         this.pageCustomZoom,
         this.hiddenAddress,
+        this.bEditLock,
+        this.wpestateTotalViews,
+        this.wpestateDetailedViews,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
@@ -505,16 +505,13 @@ class MetaFields {
     water = json['water'];
     restaurant = json['restaurant'];
     alcohol = json['alcohol'];
-    bEditLock = json['_edit_lock'];
     bThumbnailId = json['_thumbnail_id'];
-    beach = json['beach'];
-    pontoon = json['pontoon'];
-    shop = json['shop'];
-    wpestateTotalViews = json['wpestate_total_views'];
-    wpestateDetailedViews = json['wpestate_detailed_views'];
     propertyPrice = json['property_price'];
     propertyLabel = json['property_label'];
     propertyLabelBefore = json['property_label_before'];
+    beach = json['beach'];
+    pontoon = json['pontoon'];
+    shop = json['shop'];
     localPgprSliderType = json['local_pgpr_slider_type'];
     localPgprContentType = json['local_pgpr_content_type'];
     propFeatured = json['prop_featured'];
@@ -536,6 +533,9 @@ class MetaFields {
     payStatus = json['pay_status'];
     pageCustomZoom = json['page_custom_zoom'];
     hiddenAddress = json['hidden_address'];
+    bEditLock = json['_edit_lock'];
+    wpestateTotalViews = json['wpestate_total_views'];
+    wpestateDetailedViews = json['wpestate_detailed_views'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
@@ -672,16 +672,13 @@ class MetaFields {
     data['water'] = this.water;
     data['restaurant'] = this.restaurant;
     data['alcohol'] = this.alcohol;
-    data['_edit_lock'] = this.bEditLock;
     data['_thumbnail_id'] = this.bThumbnailId;
-    data['beach'] = this.beach;
-    data['pontoon'] = this.pontoon;
-    data['shop'] = this.shop;
-    data['wpestate_total_views'] = this.wpestateTotalViews;
-    data['wpestate_detailed_views'] = this.wpestateDetailedViews;
     data['property_price'] = this.propertyPrice;
     data['property_label'] = this.propertyLabel;
     data['property_label_before'] = this.propertyLabelBefore;
+    data['beach'] = this.beach;
+    data['pontoon'] = this.pontoon;
+    data['shop'] = this.shop;
     data['local_pgpr_slider_type'] = this.localPgprSliderType;
     data['local_pgpr_content_type'] = this.localPgprContentType;
     data['prop_featured'] = this.propFeatured;
@@ -703,6 +700,9 @@ class MetaFields {
     data['pay_status'] = this.payStatus;
     data['page_custom_zoom'] = this.pageCustomZoom;
     data['hidden_address'] = this.hiddenAddress;
+    data['_edit_lock'] = this.bEditLock;
+    data['wpestate_total_views'] = this.wpestateTotalViews;
+    data['wpestate_detailed_views'] = this.wpestateDetailedViews;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;
@@ -782,7 +782,7 @@ class MetaFields {
 }
 
 class NearbyPosts {
-  Null? postCategory;
+  String? postCategory;
   int? id;
   String? title;
   String? latitude;

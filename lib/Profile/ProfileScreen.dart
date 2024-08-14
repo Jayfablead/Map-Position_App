@@ -346,7 +346,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Position Alerts",
+                                Text("Add Alerts",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: secondary,
@@ -407,7 +407,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("My Alarm",
+                                Text("Alert",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: secondary,

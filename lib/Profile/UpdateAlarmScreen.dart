@@ -6,10 +6,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:mapposition/Profile/SubscriptionAlarmScreen.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Extras/Const.dart';
 import '../Extras/Drwer.dart';
 import '../Extras/Headerwidget.dart';
@@ -116,12 +116,15 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.sp)
-          ),
-          onPressed: (){
+              borderRadius: BorderRadius.circular(30.sp)),
+          onPressed: () {
             Get.to(SubscriptionAlarmScreen());
           },
-          child: Icon(Icons.add,size: 20.sp,color: Colors.white,),
+          child: Icon(
+            Icons.add,
+            size: 20.sp,
+            color: Colors.white,
+          ),
         ),
         extendBody: true,
         // bottomNavigationBar:

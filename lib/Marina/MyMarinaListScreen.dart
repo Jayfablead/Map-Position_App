@@ -324,7 +324,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                   batan(
                                                       title: "View Details",
                                                       route: () {
-                                                       Get.to(CategoryWiseViewScreen(
+                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(CategoryWiseViewScreen(
                                                             postid: (mymarinaviewmodal
                                                                 ?.positions?[
                                                             i]

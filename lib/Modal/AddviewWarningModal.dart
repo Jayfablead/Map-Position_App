@@ -58,8 +58,11 @@ class Data {
   String? title;
   String? content;
   String? latitude;
+  String? latitudeDms;
   String? longitude;
+  String? longitudeDms;
   String? thumbnail;
+  List<String>? thumbnails;
   MetaFields? metaFields;
 
   Data(
@@ -69,8 +72,11 @@ class Data {
         this.title,
         this.content,
         this.latitude,
+        this.latitudeDms,
         this.longitude,
+        this.longitudeDms,
         this.thumbnail,
+        this.thumbnails,
         this.metaFields});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -80,8 +86,11 @@ class Data {
     title = json['title'];
     content = json['content'];
     latitude = json['latitude'];
+    latitudeDms = json['latitude_dms'];
     longitude = json['longitude'];
+    longitudeDms = json['longitude_dms'];
     thumbnail = json['thumbnail'];
+    thumbnails = json['thumbnails'].cast<String>();
     metaFields = json['meta_fields'] != null
         ? new MetaFields.fromJson(json['meta_fields'])
         : null;
@@ -95,8 +104,11 @@ class Data {
     data['title'] = this.title;
     data['content'] = this.content;
     data['latitude'] = this.latitude;
+    data['latitude_dms'] = this.latitudeDms;
     data['longitude'] = this.longitude;
+    data['longitude_dms'] = this.longitudeDms;
     data['thumbnail'] = this.thumbnail;
+    data['thumbnails'] = this.thumbnails;
     if (this.metaFields != null) {
       data['meta_fields'] = this.metaFields!.toJson();
     }
@@ -106,15 +118,13 @@ class Data {
 
 class MetaFields {
   bool? originalAuthor;
-  bool? bThumbnailId;
+  bool? propertyAddress;
+  Null? propertyCity;
+  Null? propertyArea;
+  Null? propertyZip;
+  Null? propertyCountry;
   bool? propertyLatitude;
   bool? propertyLongitude;
-  bool? propertyPrice;
-  bool? propertyLabel;
-  bool? propertyLabelBefore;
-  bool? propertyAddress;
-  String? propertyZip;
-  String? propertyCountry;
   String? textSlips;
   String? textMinimumapproachdepth;
   String? textMeanlowwaterdockdepth;
@@ -128,13 +138,29 @@ class MetaFields {
   String? textMaxsliplength;
   String? textMaxslipwidth;
   bool? n1;
+  bool? n2;
+  bool? n3;
   bool? ne1;
+  bool? ne2;
+  bool? ne3;
+  bool? e1;
   bool? e2;
+  bool? e3;
+  bool? se1;
   bool? se2;
+  bool? se3;
+  bool? s1;
+  bool? s2;
   bool? s3;
+  bool? sw1;
+  bool? sw2;
   bool? sw3;
+  bool? w1;
   bool? w2;
+  bool? w3;
+  bool? nw1;
   bool? nw2;
+  bool? nw3;
   bool? ownAnchor;
   bool? buoys;
   bool? mountainWedges;
@@ -149,6 +175,10 @@ class MetaFields {
   bool? water;
   bool? restaurant;
   bool? alcohol;
+  bool? bThumbnailId;
+  bool? propertyPrice;
+  bool? propertyLabel;
+  bool? propertyLabelBefore;
   bool? beach;
   bool? pontoon;
   bool? shop;
@@ -173,50 +203,27 @@ class MetaFields {
   bool? payStatus;
   bool? pageCustomZoom;
   bool? hiddenAddress;
+  bool? bEditLock;
   bool? wpestateTotalViews;
   bool? wpestateDetailedViews;
-  bool? n2;
-  bool? ne3;
-  bool? e1;
-  bool? sw1;
-  bool? n3;
-  bool? s1;
-  bool? w1;
-  bool? nw3;
-  bool? s2;
-  bool? ne2;
-  bool? e3;
-  bool? se1;
-  bool? se3;
-  bool? sw2;
-  bool? w3;
-  bool? nw1;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
-  bool? mooringTypes;
   bool? timezone;
-  bool? plan;
   bool? rating;
-  bool? maxDraft;
-  bool? multihullFriendly;
-  bool? equipmentAvailability;
-  bool? likes;
-  bool? comments;
-  bool? navlyUrl;
-  bool? hasDock;
   bool? hasPontoon;
   bool? hasBeach;
   bool? hasShop;
-  bool? hasHawser;
-  bool? bEditLock;
-  bool? bWpTrashMetaStatus;
-  bool? bWpTrashMetaTime;
-  bool? bWpOldSlug;
+  bool? likes;
+  bool? comments;
+  bool? navlyUrl;
   bool? bEditLast;
-  bool? rsPageBgColor;
-  String? propertyCity;
-  String? propertyArea;
+  bool? plan;
+  bool? maxDraft;
+  bool? multihullFriendly;
+  bool? equipmentAvailability;
+  bool? mooringTypes;
+  bool? bWpOldDate;
   bool? propertyThemeSlider;
   bool? imageToAttach;
   bool? embedVirtualTour;
@@ -271,36 +278,18 @@ class MetaFields {
   bool? advFilterSearchCategory;
   bool? currentAdvFilterCity;
   bool? currentAdvFilterArea;
-  bool? address;
-  bool? placeId;
-  bool? compoundCode;
-  bool? globalCode;
-  bool? checkboxValues;
-  bool? north;
-  bool? northeast;
-  bool? east;
-  bool? southeast;
-  bool? south;
-  bool? southwest;
-  bool? west;
-  bool? northwest;
-  bool? badMood;
-  bool? okayMood;
-  bool? goodMood;
-  bool? greatMood;
-  bool? excellencMood;
+  bool? hasHawser;
+  bool? bWpOldSlug;
 
   MetaFields(
       {this.originalAuthor,
-        this.bThumbnailId,
-        this.propertyLatitude,
-        this.propertyLongitude,
-        this.propertyPrice,
-        this.propertyLabel,
-        this.propertyLabelBefore,
         this.propertyAddress,
+        this.propertyCity,
+        this.propertyArea,
         this.propertyZip,
         this.propertyCountry,
+        this.propertyLatitude,
+        this.propertyLongitude,
         this.textSlips,
         this.textMinimumapproachdepth,
         this.textMeanlowwaterdockdepth,
@@ -314,13 +303,29 @@ class MetaFields {
         this.textMaxsliplength,
         this.textMaxslipwidth,
         this.n1,
+        this.n2,
+        this.n3,
         this.ne1,
+        this.ne2,
+        this.ne3,
+        this.e1,
         this.e2,
+        this.e3,
+        this.se1,
         this.se2,
+        this.se3,
+        this.s1,
+        this.s2,
         this.s3,
+        this.sw1,
+        this.sw2,
         this.sw3,
+        this.w1,
         this.w2,
+        this.w3,
+        this.nw1,
         this.nw2,
+        this.nw3,
         this.ownAnchor,
         this.buoys,
         this.mountainWedges,
@@ -335,6 +340,10 @@ class MetaFields {
         this.water,
         this.restaurant,
         this.alcohol,
+        this.bThumbnailId,
+        this.propertyPrice,
+        this.propertyLabel,
+        this.propertyLabelBefore,
         this.beach,
         this.pontoon,
         this.shop,
@@ -359,50 +368,27 @@ class MetaFields {
         this.payStatus,
         this.pageCustomZoom,
         this.hiddenAddress,
+        this.bEditLock,
         this.wpestateTotalViews,
         this.wpestateDetailedViews,
-        this.n2,
-        this.ne3,
-        this.e1,
-        this.sw1,
-        this.n3,
-        this.s1,
-        this.w1,
-        this.nw3,
-        this.s2,
-        this.ne2,
-        this.e3,
-        this.se1,
-        this.se3,
-        this.sw2,
-        this.w3,
-        this.nw1,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
-        this.mooringTypes,
         this.timezone,
-        this.plan,
         this.rating,
-        this.maxDraft,
-        this.multihullFriendly,
-        this.equipmentAvailability,
-        this.likes,
-        this.comments,
-        this.navlyUrl,
-        this.hasDock,
         this.hasPontoon,
         this.hasBeach,
         this.hasShop,
-        this.hasHawser,
-        this.bEditLock,
-        this.bWpTrashMetaStatus,
-        this.bWpTrashMetaTime,
-        this.bWpOldSlug,
+        this.likes,
+        this.comments,
+        this.navlyUrl,
         this.bEditLast,
-        this.rsPageBgColor,
-        this.propertyCity,
-        this.propertyArea,
+        this.plan,
+        this.maxDraft,
+        this.multihullFriendly,
+        this.equipmentAvailability,
+        this.mooringTypes,
+        this.bWpOldDate,
         this.propertyThemeSlider,
         this.imageToAttach,
         this.embedVirtualTour,
@@ -457,36 +443,18 @@ class MetaFields {
         this.advFilterSearchCategory,
         this.currentAdvFilterCity,
         this.currentAdvFilterArea,
-        this.address,
-        this.placeId,
-        this.compoundCode,
-        this.globalCode,
-        this.checkboxValues,
-        this.north,
-        this.northeast,
-        this.east,
-        this.southeast,
-        this.south,
-        this.southwest,
-        this.west,
-        this.northwest,
-        this.badMood,
-        this.okayMood,
-        this.goodMood,
-        this.greatMood,
-        this.excellencMood});
+        this.hasHawser,
+        this.bWpOldSlug});
 
   MetaFields.fromJson(Map<String, dynamic> json) {
     originalAuthor = json['original_author'];
-    bThumbnailId = json['_thumbnail_id'];
-    propertyLatitude = json['property_latitude'];
-    propertyLongitude = json['property_longitude'];
-    propertyPrice = json['property_price'];
-    propertyLabel = json['property_label'];
-    propertyLabelBefore = json['property_label_before'];
     propertyAddress = json['property_address'];
+    propertyCity = json['property_city'];
+    propertyArea = json['property_area'];
     propertyZip = json['property_zip'];
     propertyCountry = json['property_country'];
+    propertyLatitude = json['property_latitude'];
+    propertyLongitude = json['property_longitude'];
     textSlips = json['text_slips'];
     textMinimumapproachdepth = json['text_minimumapproachdepth'];
     textMeanlowwaterdockdepth = json['text_meanlowwaterdockdepth'];
@@ -500,13 +468,29 @@ class MetaFields {
     textMaxsliplength = json['text_maxsliplength'];
     textMaxslipwidth = json['text_maxslipwidth'];
     n1 = json['n1'];
+    n2 = json['n2'];
+    n3 = json['n3'];
     ne1 = json['ne1'];
+    ne2 = json['ne2'];
+    ne3 = json['ne3'];
+    e1 = json['e1'];
     e2 = json['e2'];
+    e3 = json['e3'];
+    se1 = json['se1'];
     se2 = json['se2'];
+    se3 = json['se3'];
+    s1 = json['s1'];
+    s2 = json['s2'];
     s3 = json['s3'];
+    sw1 = json['sw1'];
+    sw2 = json['sw2'];
     sw3 = json['sw3'];
+    w1 = json['w1'];
     w2 = json['w2'];
+    w3 = json['w3'];
+    nw1 = json['nw1'];
     nw2 = json['nw2'];
+    nw3 = json['nw3'];
     ownAnchor = json['own_anchor'];
     buoys = json['buoys'];
     mountainWedges = json['mountain_wedges'];
@@ -521,6 +505,10 @@ class MetaFields {
     water = json['water'];
     restaurant = json['restaurant'];
     alcohol = json['alcohol'];
+    bThumbnailId = json['_thumbnail_id'];
+    propertyPrice = json['property_price'];
+    propertyLabel = json['property_label'];
+    propertyLabelBefore = json['property_label_before'];
     beach = json['beach'];
     pontoon = json['pontoon'];
     shop = json['shop'];
@@ -545,50 +533,27 @@ class MetaFields {
     payStatus = json['pay_status'];
     pageCustomZoom = json['page_custom_zoom'];
     hiddenAddress = json['hidden_address'];
+    bEditLock = json['_edit_lock'];
     wpestateTotalViews = json['wpestate_total_views'];
     wpestateDetailedViews = json['wpestate_detailed_views'];
-    n2 = json['n2'];
-    ne3 = json['ne3'];
-    e1 = json['e1'];
-    sw1 = json['sw1'];
-    n3 = json['n3'];
-    s1 = json['s1'];
-    w1 = json['w1'];
-    nw3 = json['nw3'];
-    s2 = json['s2'];
-    ne2 = json['ne2'];
-    e3 = json['e3'];
-    se1 = json['se1'];
-    se3 = json['se3'];
-    sw2 = json['sw2'];
-    w3 = json['w3'];
-    nw1 = json['nw1'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
-    mooringTypes = json['mooringTypes'];
     timezone = json['timezone'];
-    plan = json['plan'];
     rating = json['rating'];
-    maxDraft = json['maxDraft'];
-    multihullFriendly = json['multihullFriendly'];
-    equipmentAvailability = json['equipmentAvailability'];
-    likes = json['likes'];
-    comments = json['comments'];
-    navlyUrl = json['navly_url'];
-    hasDock = json['hasDock'];
     hasPontoon = json['hasPontoon'];
     hasBeach = json['hasBeach'];
     hasShop = json['hasShop'];
-    hasHawser = json['hasHawser'];
-    bEditLock = json['_edit_lock'];
-    bWpTrashMetaStatus = json['_wp_trash_meta_status'];
-    bWpTrashMetaTime = json['_wp_trash_meta_time'];
-    bWpOldSlug = json['_wp_old_slug'];
+    likes = json['likes'];
+    comments = json['comments'];
+    navlyUrl = json['navly_url'];
     bEditLast = json['_edit_last'];
-    rsPageBgColor = json['rs_page_bg_color'];
-    propertyCity = json['property_city'];
-    propertyArea = json['property_area'];
+    plan = json['plan'];
+    maxDraft = json['maxDraft'];
+    multihullFriendly = json['multihullFriendly'];
+    equipmentAvailability = json['equipmentAvailability'];
+    mooringTypes = json['mooringTypes'];
+    bWpOldDate = json['_wp_old_date'];
     propertyThemeSlider = json['property_theme_slider'];
     imageToAttach = json['image_to_attach'];
     embedVirtualTour = json['embed_virtual_tour'];
@@ -643,38 +608,20 @@ class MetaFields {
     advFilterSearchCategory = json['adv_filter_search_category'];
     currentAdvFilterCity = json['current_adv_filter_city'];
     currentAdvFilterArea = json['current_adv_filter_area'];
-    address = json['address'];
-    placeId = json['place_id'];
-    compoundCode = json['compound_code'];
-    globalCode = json['global_code'];
-    checkboxValues = json['checkbox_values'];
-    north = json['north'];
-    northeast = json['northeast'];
-    east = json['east'];
-    southeast = json['southeast'];
-    south = json['south'];
-    southwest = json['southwest'];
-    west = json['west'];
-    northwest = json['northwest'];
-    badMood = json['bad_mood'];
-    okayMood = json['okay_mood'];
-    goodMood = json['good_mood'];
-    greatMood = json['great_mood'];
-    excellencMood = json['excellenc_mood'];
+    hasHawser = json['hasHawser'];
+    bWpOldSlug = json['_wp_old_slug'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['original_author'] = this.originalAuthor;
-    data['_thumbnail_id'] = this.bThumbnailId;
-    data['property_latitude'] = this.propertyLatitude;
-    data['property_longitude'] = this.propertyLongitude;
-    data['property_price'] = this.propertyPrice;
-    data['property_label'] = this.propertyLabel;
-    data['property_label_before'] = this.propertyLabelBefore;
     data['property_address'] = this.propertyAddress;
+    data['property_city'] = this.propertyCity;
+    data['property_area'] = this.propertyArea;
     data['property_zip'] = this.propertyZip;
     data['property_country'] = this.propertyCountry;
+    data['property_latitude'] = this.propertyLatitude;
+    data['property_longitude'] = this.propertyLongitude;
     data['text_slips'] = this.textSlips;
     data['text_minimumapproachdepth'] = this.textMinimumapproachdepth;
     data['text_meanlowwaterdockdepth'] = this.textMeanlowwaterdockdepth;
@@ -688,13 +635,29 @@ class MetaFields {
     data['text_maxsliplength'] = this.textMaxsliplength;
     data['text_maxslipwidth'] = this.textMaxslipwidth;
     data['n1'] = this.n1;
+    data['n2'] = this.n2;
+    data['n3'] = this.n3;
     data['ne1'] = this.ne1;
+    data['ne2'] = this.ne2;
+    data['ne3'] = this.ne3;
+    data['e1'] = this.e1;
     data['e2'] = this.e2;
+    data['e3'] = this.e3;
+    data['se1'] = this.se1;
     data['se2'] = this.se2;
+    data['se3'] = this.se3;
+    data['s1'] = this.s1;
+    data['s2'] = this.s2;
     data['s3'] = this.s3;
+    data['sw1'] = this.sw1;
+    data['sw2'] = this.sw2;
     data['sw3'] = this.sw3;
+    data['w1'] = this.w1;
     data['w2'] = this.w2;
+    data['w3'] = this.w3;
+    data['nw1'] = this.nw1;
     data['nw2'] = this.nw2;
+    data['nw3'] = this.nw3;
     data['own_anchor'] = this.ownAnchor;
     data['buoys'] = this.buoys;
     data['mountain_wedges'] = this.mountainWedges;
@@ -709,6 +672,10 @@ class MetaFields {
     data['water'] = this.water;
     data['restaurant'] = this.restaurant;
     data['alcohol'] = this.alcohol;
+    data['_thumbnail_id'] = this.bThumbnailId;
+    data['property_price'] = this.propertyPrice;
+    data['property_label'] = this.propertyLabel;
+    data['property_label_before'] = this.propertyLabelBefore;
     data['beach'] = this.beach;
     data['pontoon'] = this.pontoon;
     data['shop'] = this.shop;
@@ -733,50 +700,27 @@ class MetaFields {
     data['pay_status'] = this.payStatus;
     data['page_custom_zoom'] = this.pageCustomZoom;
     data['hidden_address'] = this.hiddenAddress;
+    data['_edit_lock'] = this.bEditLock;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
-    data['n2'] = this.n2;
-    data['ne3'] = this.ne3;
-    data['e1'] = this.e1;
-    data['sw1'] = this.sw1;
-    data['n3'] = this.n3;
-    data['s1'] = this.s1;
-    data['w1'] = this.w1;
-    data['nw3'] = this.nw3;
-    data['s2'] = this.s2;
-    data['ne2'] = this.ne2;
-    data['e3'] = this.e3;
-    data['se1'] = this.se1;
-    data['se3'] = this.se3;
-    data['sw2'] = this.sw2;
-    data['w3'] = this.w3;
-    data['nw1'] = this.nw1;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;
-    data['mooringTypes'] = this.mooringTypes;
     data['timezone'] = this.timezone;
-    data['plan'] = this.plan;
     data['rating'] = this.rating;
-    data['maxDraft'] = this.maxDraft;
-    data['multihullFriendly'] = this.multihullFriendly;
-    data['equipmentAvailability'] = this.equipmentAvailability;
-    data['likes'] = this.likes;
-    data['comments'] = this.comments;
-    data['navly_url'] = this.navlyUrl;
-    data['hasDock'] = this.hasDock;
     data['hasPontoon'] = this.hasPontoon;
     data['hasBeach'] = this.hasBeach;
     data['hasShop'] = this.hasShop;
-    data['hasHawser'] = this.hasHawser;
-    data['_edit_lock'] = this.bEditLock;
-    data['_wp_trash_meta_status'] = this.bWpTrashMetaStatus;
-    data['_wp_trash_meta_time'] = this.bWpTrashMetaTime;
-    data['_wp_old_slug'] = this.bWpOldSlug;
+    data['likes'] = this.likes;
+    data['comments'] = this.comments;
+    data['navly_url'] = this.navlyUrl;
     data['_edit_last'] = this.bEditLast;
-    data['rs_page_bg_color'] = this.rsPageBgColor;
-    data['property_city'] = this.propertyCity;
-    data['property_area'] = this.propertyArea;
+    data['plan'] = this.plan;
+    data['maxDraft'] = this.maxDraft;
+    data['multihullFriendly'] = this.multihullFriendly;
+    data['equipmentAvailability'] = this.equipmentAvailability;
+    data['mooringTypes'] = this.mooringTypes;
+    data['_wp_old_date'] = this.bWpOldDate;
     data['property_theme_slider'] = this.propertyThemeSlider;
     data['image_to_attach'] = this.imageToAttach;
     data['embed_virtual_tour'] = this.embedVirtualTour;
@@ -831,24 +775,8 @@ class MetaFields {
     data['adv_filter_search_category'] = this.advFilterSearchCategory;
     data['current_adv_filter_city'] = this.currentAdvFilterCity;
     data['current_adv_filter_area'] = this.currentAdvFilterArea;
-    data['address'] = this.address;
-    data['place_id'] = this.placeId;
-    data['compound_code'] = this.compoundCode;
-    data['global_code'] = this.globalCode;
-    data['checkbox_values'] = this.checkboxValues;
-    data['north'] = this.north;
-    data['northeast'] = this.northeast;
-    data['east'] = this.east;
-    data['southeast'] = this.southeast;
-    data['south'] = this.south;
-    data['southwest'] = this.southwest;
-    data['west'] = this.west;
-    data['northwest'] = this.northwest;
-    data['bad_mood'] = this.badMood;
-    data['okay_mood'] = this.okayMood;
-    data['good_mood'] = this.goodMood;
-    data['great_mood'] = this.greatMood;
-    data['excellenc_mood'] = this.excellencMood;
+    data['hasHawser'] = this.hasHawser;
+    data['_wp_old_slug'] = this.bWpOldSlug;
     return data;
   }
 }

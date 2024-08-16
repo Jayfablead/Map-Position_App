@@ -119,10 +119,10 @@ class Data {
 class MetaFields {
   bool? originalAuthor;
   bool? propertyAddress;
-  Null? propertyCity;
-  Null? propertyArea;
-  Null? propertyZip;
-  Null? propertyCountry;
+  String? propertyCity;
+  String? propertyArea;
+  String? propertyZip;
+  String? propertyCountry;
   bool? propertyLatitude;
   bool? propertyLongitude;
   String? textSlips;

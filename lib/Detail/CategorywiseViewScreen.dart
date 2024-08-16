@@ -348,287 +348,184 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           return StatefulBuilder(
                                             builder: (context, setState) {
                                               return AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        GestureDetector(
-                                                          onTap: (){
-                                                            Get.back();
-                                                          },
-                                                          child: Container(
+                                                contentPadding: EdgeInsets.all(10), // Optional: Adjust padding if needed
+                                                content: Container(
+                                                  width: MediaQuery.of(context).size.width,
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                            child: Container(
                                                               height: 10.w,
                                                               width: 10.w,
-                                                              alignment: Alignment
-                                                                  .center,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                      color: Colors
-                                                                          .black),
-                                                              child:
-                                                                  Icon(
-                                                                    Icons.close,
-                                                                    size: 15.sp,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Center(
-                                                            child: Text(
-                                                          'Add More Pictures',
-                                                          style: TextStyle(
-                                                              fontSize: 18.sp,
-                                                              fontFamily:
-                                                                  "volken",
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                      ],
-                                                    ),
-                                                    selectedimage == null
-                                                        ? Container()
-                                                        : Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            1.w),
-                                                                height: 30.w,
-                                                                width: 30.w,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  border: Border
-                                                                      .all(
-                                                                    color:
-                                                                        bgcolor,
-                                                                    // Border color
-                                                                    width: 2
-                                                                        .sp, // Border width
-                                                                  ),
-                                                                ),
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  child: selectedimage !=
-                                                                          null
-                                                                      ? Image
-                                                                          .file(
-                                                                          selectedimage!,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        )
-                                                                      : Container(),
-                                                                ),
+                                                              alignment: Alignment.center,
+                                                              decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                color: Colors.black,
                                                               ),
-                                                            ],
+                                                              child: Icon(
+                                                                Icons.close,
+                                                                size: 15.sp,
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
                                                           ),
-                                                    resultList1 == null
-                                                        ? Container()
-                                                        : Column(
-                                                            children: [
-                                                              //for first select
-                                                              // !selectedImages
-                                                              //         .isEmpty
-                                                              //     ? GridView
-                                                              //         .builder(
-                                                              //         shrinkWrap:
-                                                              //             true,
-                                                              //         physics:
-                                                              //             NeverScrollableScrollPhysics(),
-                                                              //         padding:
-                                                              //             EdgeInsets
-                                                              //                 .zero,
-                                                              //         gridDelegate:
-                                                              //             SliverGridDelegateWithFixedCrossAxisCount(
-                                                              //                 crossAxisCount: 3),
-                                                              //         itemBuilder:
-                                                              //             (context,
-                                                              //                 index) {
-                                                              //           return GestureDetector(
-                                                              //             onTap:
-                                                              //                 () async {
-                                                              //               resultList =
-                                                              //                   await ImagePicker().pickMultiImage();
-                                                              //
-                                                              //               if (resultList !=
-                                                              //                   null) {
-                                                              //                 if (resultList!.length + selectedImages.length > maxImageLimit) {
-                                                              //                   print('Maximum image limit exceeded');
-                                                              //                 } else {
-                                                              //                   setState(() {
-                                                              //                     selectedImages = resultList!.map((XFile file) => File(file.path)).toList()!;
-                                                              //                     imagePaths.addAll(resultList!.map((file) => file.path).toList());
-                                                              //                   });
-                                                              //                 }
-                                                              //               }
-                                                              //             },
-                                                              //             child:
-                                                              //                 Container(
-                                                              //               margin:
-                                                              //                   EdgeInsets.all(3.w),
-                                                              //               height:
-                                                              //                   60.h,
-                                                              //               width:
-                                                              //                   70.w,
-                                                              //               decoration:
-                                                              //                   BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
-                                                              //             ),
-                                                              //           );
-                                                              //         },
-                                                              //         itemCount:
-                                                              //             9,
-                                                              //       )
-                                                              //     : Container(),
-                                                              selectedImages
-                                                                      .isEmpty
-                                                                  ? Container()
-                                                                  :
-                                                                  //disply after first selection
-                                                                  GridView
-                                                                      .builder(
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      physics:
-                                                                          NeverScrollableScrollPhysics(),
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .zero,
-                                                                      gridDelegate:
-                                                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                                                              crossAxisCount: 3),
-                                                                      itemCount:
-                                                                          9,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              index) {
-                                                                        if (index < selectedImages.length &&
-                                                                            selectedImages[index] !=
-                                                                                null) {
-                                                                          return Container(margin: EdgeInsets.all(3.w), height: 70.h, width: 70.w, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)), child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.file(selectedImages[index], height: 60.h, width: 70.w, fit: BoxFit.cover)));
-                                                                        } else {
-                                                                          //remaining container
-                                                                          return GestureDetector(
-                                                                            onTap:
-                                                                                () async {
-                                                                              resultList1 = await ImagePicker().pickMultiImage();
-                                                                              if (resultList1 != null) {
-                                                                                if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                                                  // Handle maximum image limit exceeded
-                                                                                  buildErrorDialog(context, "", "You selected more than 9 images");
-                                                                                } else {
-                                                                                  setState(() {
-                                                                                    print(selectedImages);
-                                                                                    selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                                                    imagePaths = resultList1!.map((file) => file.path).toList();
-                                                                                  });
-                                                                                }
-                                                                              }
-                                                                            },
-                                                                            child:
-                                                                                Container(
-                                                                              margin: EdgeInsets.all(3.w),
-                                                                              height: 60.h,
-                                                                              width: 70.w,
-                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                      },
-                                                                    )
-                                                            ],
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Center(
+                                                            child: Text(
+                                                              'Add More Pictures',
+                                                              style: TextStyle(
+                                                                fontSize: 18.sp,
+                                                                fontFamily: "volken",
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                            ),
                                                           ),
-                                                    SizedBox(height: 2.h),
-                                                    batan(
-                                                      title: "Select Photo",
-                                                      route: () async {
-                                                        resultList1 =
-                                                            await ImagePicker()
-                                                                .pickMultiImage();
-                                                        if (resultList1 !=
-                                                            null) {
-                                                          if (resultList1!
-                                                                      .length +
-                                                                  selectedImages
-                                                                      .length >
-                                                              maxImageLimit) {
-                                                            // Handle maximum image limit exceeded
-                                                            buildErrorDialog(
-                                                                context,
-                                                                "",
-                                                                "You selected more than 9 images");
-                                                          } else {
-                                                            setState(() {
-                                                              print(
-                                                                  selectedImages);
-                                                              selectedImages.addAll(resultList1!
-                                                                  .map((XFile
-                                                                          file) =>
-                                                                      File(file
-                                                                          .path))
-                                                                  .toList());
-                                                              imagePaths = resultList1!
-                                                                  .map((file) =>
-                                                                      file.path)
-                                                                  .toList();
-                                                            });
-                                                          }
-                                                        }
-                                                      },
-                                                      hight: 6.h,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      txtsize: 15.sp,
-                                                    ),
-                                                    SizedBox(height: 2.h),
-                                                    selectedImages.isNotEmpty
-                                                        ? batan(
-                                                            title: "Upload",
-                                                            route: () {
-                                                              addnewimageapi();
+                                                        ],
+                                                      ),
+                                                      selectedimage == null
+                                                          ? Container()
+                                                          : Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Container(
+                                                            margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                                            height: 30.w,
+                                                            width: 30.w,
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(15),
+                                                              border: Border.all(
+                                                                color: bgcolor,
+                                                                width: 2.sp,
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius: BorderRadius.circular(15),
+                                                              child: Image.file(
+                                                                selectedimage!,
+                                                                fit: BoxFit.cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      resultList1 == null
+                                                          ? Container()
+                                                          : Column(
+                                                        children: [
+                                                          selectedImages.isEmpty
+                                                              ? Container()
+                                                              : GridView.builder(
+                                                            shrinkWrap: true,
+                                                            physics: NeverScrollableScrollPhysics(),
+                                                            padding: EdgeInsets.zero,
+                                                            gridDelegate:
+                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                              crossAxisCount: 3,
+                                                            ),
+                                                            itemCount: 9,
+                                                            itemBuilder: (context, index) {
+                                                              if (index < selectedImages.length &&
+                                                                  selectedImages[index] != null) {
+                                                                return Container(
+                                                                  margin: EdgeInsets.all(3.w),
+                                                                  height: 70.h,
+                                                                  width: 70.w,
+                                                                  decoration: BoxDecoration(
+                                                                    borderRadius: BorderRadius.circular(15),
+                                                                    border: Border.all(color: Colors.grey),
+                                                                  ),
+                                                                  child: ClipRRect(
+                                                                    borderRadius: BorderRadius.circular(15),
+                                                                    child: Image.file(
+                                                                      selectedImages[index],
+                                                                      height: 60.h,
+                                                                      width: 70.w,
+                                                                      fit: BoxFit.cover,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                return GestureDetector(
+                                                                  onTap: () async {
+                                                                    resultList1 = await ImagePicker().pickMultiImage();
+                                                                    if (resultList1 != null) {
+                                                                      if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                                        buildErrorDialog(context, "", "You selected more than 9 images");
+                                                                      } else {
+                                                                        setState(() {
+                                                                          selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                          imagePaths = resultList1!.map((file) => file.path).toList();
+                                                                        });
+                                                                      }
+                                                                    }
+                                                                  },
+                                                                  child: Container(
+                                                                    margin: EdgeInsets.all(3.w),
+                                                                    height: 60.h,
+                                                                    width: 70.w,
+                                                                    decoration: BoxDecoration(
+                                                                      borderRadius: BorderRadius.circular(15),
+                                                                      border: Border.all(color: Colors.grey),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
                                                             },
-                                                            hight: 6.h,
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            txtsize: 15.sp,
-                                                          )
-                                                        : SizedBox(),
-                                                  ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 2.h),
+                                                      batan(
+                                                        title: "Select Photo",
+                                                        route: () async {
+                                                          resultList1 = await ImagePicker().pickMultiImage();
+                                                          if (resultList1 != null) {
+                                                            if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                              buildErrorDialog(context, "", "You selected more than 9 images");
+                                                            } else {
+                                                              setState(() {
+                                                                selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                imagePaths = resultList1!.map((file) => file.path).toList();
+                                                              });
+                                                            }
+                                                          }
+                                                        },
+                                                        hight: 6.h,
+                                                        width: MediaQuery.of(context).size.width,
+                                                        txtsize: 15.sp,
+                                                      ),
+                                                      SizedBox(height: 2.h),
+                                                      selectedImages.isNotEmpty
+                                                          ? batan(
+                                                        title: "Upload",
+                                                        route: () {
+                                                          addnewimageapi();
+                                                        },
+                                                        hight: 6.h,
+                                                        width: MediaQuery.of(context).size.width,
+                                                        txtsize: 15.sp,
+                                                      )
+                                                          : SizedBox(),
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             },
                                           );
                                         },
                                       );
+
                                     },
                                     hight: 6.h,
                                     width: MediaQuery.of(context).size.width,

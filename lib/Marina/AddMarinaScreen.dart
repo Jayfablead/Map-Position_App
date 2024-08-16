@@ -158,8 +158,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     }
   }
 
-
-
   void _onMapTapped(LatLng latLng) {
     setState(() {
       _markers.clear();
@@ -191,9 +189,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       _updateMarker(); // Ensure marker is updated with new location
     });
   }
-
-
-
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
@@ -245,12 +240,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
     return zoomLevel;
   }
-
-
-
-
-
-
 
 
   TextEditingController  _latitude =TextEditingController();
@@ -901,8 +890,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ],
                 ),
 
-
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -920,38 +907,35 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        style: TextStyle(color: secondary),
-                        controller: _latitude,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Latitude";
-                          } else if (double.tryParse(value) == 0.0) {
-                            return "Latitude cannot be 0.0, please enter a valid value";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                          hintText: "Latitude",
-                          icon: Icon(
-                            Icons.location_on,
-                            color: secondary,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Latitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                            hintText: "Latitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
                           ),
-                        ),
-                        onChanged: (value) {
-                          _updateMarker(); // Update marker when latitude changes
-                        },
-                      ),
-                    )
-
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when latitude changes
+                          },
+                        ))
                   ],
                 ),
 
                 SizedBox(
                   height: 2.h,
                 ),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -969,34 +953,31 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        style: TextStyle(color: secondary),
-                        controller: _latitude1,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Longitude";
-                          } else if (double.tryParse(value) == 0.0) {
-                            return "Longitude cannot be 0.0, please enter a valid value";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                          hintText: "Longitude",
-                          icon: Icon(
-                            Icons.location_on,
-                            color: secondary,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude1,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Longitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                            hintText: "Longitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
                           ),
-                        ),
-                        onChanged: (value) {
-                          _updateMarker(); // Update marker when longitude changes
-                        },
-                      ),
-                    )
-
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when longitude changes
+                          },
+                        ))
                   ],
                 ),
+
                 SizedBox(
                   height: 2.h,
                 ),
@@ -1542,8 +1523,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         child: Text("No",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
                         value: "No",
                       ),
-
-
                     ],
                   ),
                 ),

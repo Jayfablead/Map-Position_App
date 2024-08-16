@@ -4032,7 +4032,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     "View Details",
                                                                 route: () {
                                                                   Get.back();
-                                                                 Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                  shoallmarkermodal
+                                                                      ?.positions?[
+                                                                  index]
+                                                                      .properties
+                                                                      ?.termName ==
+                                                                      "Warning"
+                                                                      ? Get.to(
+                                                                      DetailsWarningDetailsScreen(
+                                                                        postid:
+                                                                        (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                      ))
+                                                                      : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                                      "Other"
+                                                                      ? Get.to(
+                                                                      DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString()))):  Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
                                                                 },
                                                                 hight: 6.h,
                                                                 width: 40.w,
@@ -4048,7 +4062,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Positioned(
                                               left: 82.w,
                                               top: 1.h,
-
                                               child: InkWell(
                                                 onTap: () {
                                                   Get.back();
@@ -4426,25 +4439,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     "View Details",
                                                                 route: () {
                                                                   Get.back();
-                                                                  // shoallmarkermodal
-                                                                  //             ?.positions?[
-                                                                  //                 index]
-                                                                  //             .properties
-                                                                  //             ?.termName ==
-                                                                  //         "Warning"
-                                                                  //     ? Get.to(
-                                                                  //         DetailsWarningDetailsScreen(
-                                                                  //         postid:
-                                                                  //             (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                  //       ))
-                                                                  //     : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                  //             "Other"
-                                                                  //         ? Get.to(
-                                                                  //             DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
-                                                                  //         : shoallmarkermodal?.positions?[index].properties?.termName == "Anchorages"
-                                                                  //             ? Get.to(DetailsScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()))
-                                                                  //             :
-                                                                  Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                  shoallmarkermodal
+                                                                              ?.positions?[
+                                                                                  index]
+                                                                              .properties
+                                                                              ?.termName ==
+                                                                          "Warning"
+                                                                      ? Get.to(
+                                                                          DetailsWarningDetailsScreen(
+                                                                          postid:
+                                                                              (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ))
+                                                                      : shoallmarkermodal?.positions?[index].properties?.termName ==
+                                                                              "Other"
+                                                                          ? Get.to(
+                                                                              DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
+
+                                                                              :
+                                                                                  Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
                                                                 },
                                                                 hight: 6.h,
                                                                 width: 40.w,

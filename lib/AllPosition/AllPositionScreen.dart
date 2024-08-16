@@ -314,7 +314,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                                         batan(
                                             title: "View Details",
                                             route: () {
-                                             Get.to(CategoryWiseViewScreen(
+                                              mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Other"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):  Get.to(CategoryWiseViewScreen(
                                                   postid: (shoallmarkermodal
                                                       ?.positions?[
                                                   i]
@@ -322,7 +322,6 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
                                                       ?.postId)
                                                       ?.toString() ??
                                                       ""));
-
 
                                             },
                                             hight: 6.h,

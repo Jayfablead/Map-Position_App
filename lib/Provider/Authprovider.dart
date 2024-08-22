@@ -12,6 +12,7 @@ class authprovider with ChangeNotifier {
     'Authorization': '01234XYZABCDboatPosition@7890',
   };
   String apiUrl = 'https://www.navlex.net/wp-json/custom/v1/';
+  static String Photourl = 'https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/';
 
 
   Future<http.Response> loginApi(Map<String, String> bodyData) async {

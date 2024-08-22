@@ -781,7 +781,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-groceries-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/03/icons8-groceries-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -890,7 +890,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -999,7 +999,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-alcohol-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/03/icons8-alcohol-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1117,7 +1117,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-restaurant-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/03/icons8-restaurant-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1226,7 +1226,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-water-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/03/icons8-water-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1335,7 +1335,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-beach-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/04/icons8-beach-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1453,7 +1453,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-pontoon-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/04/icons8-pontoon-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1562,7 +1562,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                          "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-shop-100.png",
+                                                          "https://www.navlex.net/wp-content/uploads/2024/04/icons8-shop-100.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -1989,7 +1989,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     BorderRadius.circular(15),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
+                                                      'https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg',
                                                   progressIndicatorBuilder:
                                                       (context, url,
                                                               progress) =>
@@ -2074,7 +2074,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     BorderRadius.circular(15),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg',
+                                                      'https://www.navlex.net/wp-content/uploads/2024/03/buoys.jpg',
                                                   progressIndicatorBuilder:
                                                       (context, url,
                                                               progress) =>
@@ -2159,7 +2159,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     BorderRadius.circular(15),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png',
+                                                      'https://www.navlex.net/wp-content/uploads/2024/03/mountain.png',
                                                   progressIndicatorBuilder:
                                                       (context, url,
                                                               progress) =>
@@ -2244,7 +2244,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     BorderRadius.circular(15),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg',
+                                                      'https://www.navlex.net/wp-content/uploads/2024/03/ashore.jpg',
                                                   progressIndicatorBuilder:
                                                       (context, url,
                                                               progress) =>
@@ -2398,7 +2398,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                               CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl:
-                                                                "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                                "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
                                                             progressIndicatorBuilder:
                                                                 (context, url,
                                                                         progress) =>
@@ -2511,7 +2511,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                               CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl:
-                                                                "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                                "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
                                                             progressIndicatorBuilder:
                                                                 (context, url,
                                                                         progress) =>
@@ -2625,7 +2625,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                               CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl:
-                                                                "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                                "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
                                                             progressIndicatorBuilder:
                                                                 (context, url,
                                                                         progress) =>
@@ -2745,7 +2745,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                               CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl:
-                                                                "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                                "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Coral.png",
                                                             progressIndicatorBuilder:
                                                                 (context, url,
                                                                         progress) =>
@@ -2861,7 +2861,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                               CachedNetworkImage(
                                                             fit: BoxFit.cover,
                                                             imageUrl:
-                                                                "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                                "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
                                                             progressIndicatorBuilder:
                                                                 (context, url,
                                                                         progress) =>

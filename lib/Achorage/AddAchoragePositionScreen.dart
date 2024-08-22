@@ -1313,7 +1313,7 @@ class _AddAchoragePositionScreenState extends State<AddAchoragePositionScreen> {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl:
-                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg",
+                                "https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg",
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
                                     Center(child: CircularProgressIndicator()),

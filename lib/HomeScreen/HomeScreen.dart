@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
+import 'package:mapposition/Profile/SubscriptionAlarmScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -268,6 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   // You can set your initial position here
                                   zoom: 5,
                                 ),
+                                gestureRecognizers: Set()
+                                  ..add(Factory<OneSequenceGestureRecognizer>(
+                                        () => EagerGestureRecognizer(),
+                                  )),
                                 mapType: _mapType,
                                 markers: _markers,
                                 myLocationButtonEnabled: false,
@@ -307,6 +312,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             // You can set your initial position here
                             zoom: 5,
                           ),
+                          gestureRecognizers: Set()
+                            ..add(Factory<OneSequenceGestureRecognizer>(
+                                  () => EagerGestureRecognizer(),
+                            )),
                           mapType: _mapType,
                           markers: _markers,
                           myLocationButtonEnabled: false,
@@ -495,36 +504,69 @@ class _HomeScreenState extends State<HomeScreen> {
                     _isConnected
                         ? Positioned(
                             top: 20.h,
-                            left: 55.w,
-                            child: loginmodal?.userId == "" ||
-                                    loginmodal?.userId == null
-                                ? batan(
-                                    title: "+ Add Position",
-                                    route: () {
-                                      buildErrorDialog1(
-                                        context,
-                                        "",
-                                        "Please Login To Use This",
-                                        buttonname: 'Login',
-                                        () {
-                                          Get.offAll(LoginScreen());
+                            left: 3.w,
+                            child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    loginmodal?.userId == "" ||
+                                        loginmodal?.userId == null
+                                        ? batan(
+                                        title: "+ Add Alarm",
+                                        route: () {
+                                          buildErrorDialog1(
+                                            context,
+                                            "",
+                                            "Please Login To Use This",
+                                            buttonname: 'Login',
+                                                () {
+                                              Get.offAll(LoginScreen());
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    hight: 5.h,
-                                    width: 40.w,
-                                    txtsize: 12.sp)
-                                : batan(
-                                    title: "+ Add Position",
-                                    route: () {
-                                      Get.to(AddMarinaScreen(
-                                        lat: lat1.toString(),
-                                        lng: lng1.toString(),
-                                      ));
-                                    },
-                                    hight: 4.5.h,
-                                    width: 40.w,
-                                    txtsize: 15.sp), // PopupMenuButton(
+                                        hight: 5.h,
+                                        width: 40.w,
+                                        txtsize: 12.sp): batan(
+                                        title: "+ Add Alarm",
+                                        route: () {
+                                          Get.to(SubscriptionAlarmScreen(
+
+                                          ));
+                                        },
+                                        hight: 4.5.h,
+                                        width: 40.w,
+                                        txtsize: 15.sp),
+                                    SizedBox(width: 13.w,),
+                                    loginmodal?.userId == "" ||
+                                        loginmodal?.userId == null
+                                        ? batan(
+                                        title: "+ Add Position",
+                                        route: () {
+                                          buildErrorDialog1(
+                                            context,
+                                            "",
+                                            "Please Login To Use This",
+                                            buttonname: 'Login',
+                                            () {
+                                              Get.offAll(LoginScreen());
+                                            },
+                                          );
+                                        },
+                                        hight: 5.h,
+                                        width: 40.w,
+                                        txtsize: 12.sp): batan(
+                        title: "+ Add Position",
+                        route: () {
+                          Get.to(AddMarinaScreen(
+                            lat: lat1.toString(),
+                            lng: lng1.toString(),
+                          ));
+                        },
+                        hight: 4.5.h,
+                        width: 40.w,
+                        txtsize: 15.sp),
+                                  ],
+                                )
+                                // PopupMenuButton(
                             //     color: bgcolor,
                             //     elevation: 00,
                             //     shape: RoundedRectangleBorder(
@@ -715,76 +757,85 @@ class _HomeScreenState extends State<HomeScreen> {
                             //     }),
                           )
                         : Container(),
-                    Positioned(
-                      bottom: 250,
-                      right: 20,
-                      child: InkWell(
-                        onTap: () {
-                          legend();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 5.w),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: blackback,
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.fmd_good,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text("Legend",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: Colors.white,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   bottom: 250,
+                    //   right: 20,
+                    //   child: InkWell(
+                    //     onTap: () {
+                    //       legend();
+                    //     },
+                    //     child: Container(
+                    //       padding: EdgeInsets.symmetric(
+                    //           vertical: 1.h, horizontal: 5.w),
+                    //       alignment: Alignment.center,
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         color: blackback,
+                    //       ),
+                    //       child: Row(
+                    //         children: [
+                    //           Icon(
+                    //             Icons.fmd_good,
+                    //             color: Colors.white,
+                    //           ),
+                    //           SizedBox(
+                    //             width: 2.w,
+                    //           ),
+                    //           Text("Legend",
+                    //               style: TextStyle(
+                    //                   letterSpacing: 1,
+                    //                   color: Colors.white,
+                    //                   fontSize: 15.sp,
+                    //                   fontWeight: FontWeight.normal,
+                    //                   fontFamily: "volken")),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Positioned(
                       bottom: 180,
                       right: 20,
-                      child: FloatingActionButton(
-                        backgroundColor: blackback,
-                        onPressed: () {
-                          _focusOnLiveLocation();
-                        },
-                        child: Icon(Icons.my_location, color: Colors.white),
+                      child: Container(
+                        width: 15.w,
+                        height: 7.h,
+                        child: FloatingActionButton(
+                          backgroundColor: blackback,
+                          onPressed: () {
+                            _focusOnLiveLocation();
+                          },
+                          child: Icon(Icons.my_location, color: Colors.white),
+                        ),
                       ),
                     ),
                     _isConnected
                         ? Positioned(
                             bottom: 110,
                             right: 20,
-                            child: FloatingActionButton(
-                              onPressed: _toggleMapType,
-                              backgroundColor: blackback,
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _isSatellite = !_isSatellite;
-                                  });
-                                  setState(() {
-                                    _mapType = _isSatellite
-                                        ? MapType.satellite
-                                        : MapType.normal;
-                                  });
-                                },
-                                child: Icon(
-                                    _isSatellite
-                                        ? Icons.map_outlined
-                                        : Icons.map,
-                                    color: Colors.white),
+                            child: Container(
+                              width: 15.w,
+                              height: 7.h,
+                              child: FloatingActionButton(
+
+                                onPressed: _toggleMapType,
+                                backgroundColor: blackback,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _isSatellite = !_isSatellite;
+                                    });
+                                    setState(() {
+                                      _mapType = _isSatellite
+                                          ? MapType.satellite
+                                          : MapType.normal;
+                                    });
+                                  },
+                                  child: Icon(
+                                      _isSatellite
+                                          ? Icons.map_outlined
+                                          : Icons.map,
+                                      color: Colors.white),
+                                ),
                               ),
                             ),
                           )
@@ -4108,6 +4159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 50.w),
                         ),
                       );
+print("shoallmarkermodal?.positions?[index].properties?.imgURL${shoallmarkermodal?.positions?[index].properties?.imgURL}");
 
                       // Set _currentPosition1 to the first marker position
                       if (index == 0) {

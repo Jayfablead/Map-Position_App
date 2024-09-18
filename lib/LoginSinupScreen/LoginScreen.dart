@@ -81,28 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 1.h,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Login",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "volken")),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Welcome Back!Please Enter Your Details",
+                    Text("Welcome Back",
                         style: TextStyle(
                             letterSpacing: 2,
                             color: secondary,
-                            fontSize: 12.sp,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w100,
                             fontFamily: "volken")),
                   ],
@@ -207,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     // Forgot Password
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
                           onTap: () {
@@ -274,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {},
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           batan(
                               title: "Go to MainPage",

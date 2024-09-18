@@ -1070,7 +1070,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           ),
                           Row(
                             children: [
-                              Text("Nearby Listings :-",
+                              Text("Nearby Listings",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: blackback,

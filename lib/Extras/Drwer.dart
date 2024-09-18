@@ -8,6 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mapposition/AllPosition/AllPositionScreen.dart';
 import 'package:mapposition/Extras/sharedpreferance.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
+import 'package:mapposition/Profile/SubscriptionAlarmScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -275,7 +276,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("All Position",
+                                  Text("Nearby Position ",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -414,7 +415,66 @@ class _drawer1State extends State<drawer1> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ProfileScreen());
+                    Get.to(PremiumScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child:  Icon(
+                                      Icons.paid,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("Premium",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                InkWell(
+                  onTap: () {
+                    Get.to(SubscriptionAlarmScreen());
                   },
                   child: Container(
                     child: Row(
@@ -438,7 +498,7 @@ class _drawer1State extends State<drawer1> {
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      CupertinoIcons.person,
+                                      CupertinoIcons.clock,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -447,7 +507,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Profile",
+                                  Text("Add Alarm",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -470,61 +530,6 @@ class _drawer1State extends State<drawer1> {
                 SizedBox(
                   height: 2.h,
                 ),
-                // InkWell(
-                //   onTap: () {
-                //     Get.to(FavouriteScreen());
-                //   },
-                //   child: Container(
-                //     child: Row(
-                //       children: [
-                //         SizedBox(
-                //           width: 6.w,
-                //         ),
-                //         Container(
-                //           width: 64.w,
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //             crossAxisAlignment: CrossAxisAlignment.center,
-                //             children: [
-                //               Row(
-                //                 children: [
-                //                   Container(
-                //                     width: 10.w,
-                //                     height: 10.w,
-                //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(10),
-                //                       color: blackback,
-                //                     ),
-                //                     child: Icon(
-                //                       CupertinoIcons.heart,
-                //                       color: bgcolor,
-                //                       size: 18.sp,
-                //                     ),
-                //                   ),
-                //
-                //                   SizedBox(
-                //                     width: 2.w,
-                //                   ),
-                //                   Text("Favourite",
-                //                       style: TextStyle(
-                //                         fontSize: 17.sp,
-                //                         fontWeight: FontWeight.w500,
-                //                         fontFamily: 'volken',
-                //                         color:secondary,
-                //                       )),
-                //                 ],
-                //               ),
-                //               Icon(
-                //                 Icons.chevron_right_rounded,
-                //                 color:blackback,
-                //               )
-                //             ],
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 InkWell(
                   onTap: () {
                     Get.to(AllPositionScreen());
@@ -560,7 +565,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("All Position",
+                                  Text("Nearby Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -618,7 +623,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Add New Position",
+                                  Text("Add Position",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -676,7 +681,7 @@ Get.to(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Change Password",
+                                  Text("ChangePassword",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -735,7 +740,7 @@ Get.to(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("My Position",
+                                  Text("My Positions",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -758,10 +763,9 @@ Get.to(ChangePasswordScreen());
                 SizedBox(
                   height: 2.h,
                 ),
-
                 InkWell(
                   onTap: () {
-                    Get.to(PremiumScreen());
+                    Get.to(ProfileScreen());
                   },
                   child: Container(
                     child: Row(
@@ -784,8 +788,8 @@ Get.to(ChangePasswordScreen());
                                       borderRadius: BorderRadius.circular(10),
                                       color: blackback,
                                     ),
-                                    child:  Icon(
-                                      Icons.paid,
+                                    child: Icon(
+                                      CupertinoIcons.person,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -794,7 +798,7 @@ Get.to(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Premium",
+                                  Text("Profile",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -817,6 +821,7 @@ Get.to(ChangePasswordScreen());
                 SizedBox(
                   height: 2.h,
                 ),
+
                 InkWell(
                   onTap: () {
                     showbootomsheetremove();

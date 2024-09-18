@@ -47,7 +47,7 @@ class PositionController extends GetxController {
       try {
         final response = await http.post(
           Uri.parse(
-            'https://boatposition.fableadtechnolabs.com/wp-json/custom/v1/all-properties',
+            'https://www.navlex.net/wp-json/custom/v1/all-properties',
           ),
           headers: {"Authorization": "01234XYZABCDboatPosition@7890"},
         );

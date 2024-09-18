@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/AllPosition/AllPositionScreen.dart';
 import 'package:mapposition/Profile/UpdateAlarmScreen.dart';
+import 'package:sizer/sizer.dart';
 
 import '../Favourite/FavouriteScreen.dart';
 import '../HomeScreen/HomeScreen.dart';
@@ -73,7 +74,7 @@ class _BottombarState extends State<Bottombar> {
             notchBottomBarController: _controller!,
             showLabel: true,
             notchColor: Colors.black,
-            itemLabelStyle: TextStyle(color: Colors.black, fontFamily: 'pop'),
+            itemLabelStyle: TextStyle(color: Colors.black, fontFamily: 'pop',fontSize: 10.sp),
             removeMargins: true,
             bottomBarWidth: MediaQuery.of(context).size.width,
             durationInMilliSeconds: 100,
@@ -106,10 +107,10 @@ class _BottombarState extends State<Bottombar> {
               ),
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.person, color: Colors.black),
+                Icon(Icons.directions_boat_sharp, color: Colors.black),
                 activeItem:
-                Icon(Icons.person, color: Colors.white),
-                itemLabel: 'Profile',
+                Icon(Icons.directions_boat_sharp, color: Colors.white),
+                itemLabel: 'Nearby' ,
               ),
             ],
 
@@ -122,7 +123,7 @@ class _BottombarState extends State<Bottombar> {
                   ? Get.to(HomeScreen())
                   : index == 3
                   ? Get.to(MyMarinaListScreen())
-                  : Get.to(ProfileScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
+                  : Get.to(AllPositionScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
 
             },
           ),

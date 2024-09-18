@@ -2465,7 +2465,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         });
                       },
                     ),
-                    Text("Use your own anchor's",style: TextStyle(
+                    Text("Use own anchor's",style: TextStyle(
                         letterSpacing: 1,
                         color: secondary,
                         fontSize: 15.sp,
@@ -2483,7 +2483,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         });
                       },
                     ),
-                    Text("Fixed Buoys are available",style: TextStyle(
+                    Text("Buoys available",style: TextStyle(
                         letterSpacing: 1,
                         color: secondary,
                         fontSize: 15.sp,
@@ -2502,7 +2502,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         });
                       },
                     ),
-                    Text("Fixed mountain wedges available",style: TextStyle(
+                    Text("Wedges available",style: TextStyle(
                         letterSpacing: 1,
                         color: secondary,
                         fontSize: 15.sp,
@@ -2521,7 +2521,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         });
                       },
                     ),
-                    Text("Use your own lines ashore",style: TextStyle(
+                    Text("Use lines ashore",style: TextStyle(
                         letterSpacing: 1,
                         color: secondary,
                         fontSize: 15.sp,

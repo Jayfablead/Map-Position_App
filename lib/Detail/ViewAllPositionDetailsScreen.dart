@@ -889,7 +889,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-groceries-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/03/icons8-groceries-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -998,7 +998,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1107,7 +1107,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-alcohol-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/03/icons8-alcohol-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1225,7 +1225,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-restaurant-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/03/icons8-restaurant-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1334,7 +1334,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/icons8-water-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/03/icons8-water-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1443,7 +1443,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-beach-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/04/icons8-beach-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1561,7 +1561,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-pontoon-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/04/icons8-pontoon-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -1670,7 +1670,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl:
-                                                "https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/04/icons8-shop-100.png",
+                                                "https://www.navlex.net/wp-content/uploads/2024/04/icons8-shop-100.png",
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                     progress) =>
@@ -2023,20 +2023,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   SizedBox(
                     height: 2.h,
                   ),
-                  Row(
-                    children: [
-                      Text("Details :-",
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              color: blackback,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "volken"))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
+                 
                   Row(
                     children: [
                       Container(
@@ -2069,7 +2056,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 87.w,
                                     child: Text(
-                                        "Here are the mooring conditions you'll find in the anchorage Anse de l'Aiguade",
+                                        "Here are the mooring conditions you'll find in the anchorage",
                                         style: TextStyle(
                                             letterSpacing: 1,
                                             color: secondary,
@@ -2096,8 +2083,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           borderRadius:
                                           BorderRadius.circular(15),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                            'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
+                                            imageUrl:" https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg",
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -2158,7 +2144,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text("Use your own anchor(s)",
+                                  Text("Use own anchor(s)",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -2182,7 +2168,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
-                                            'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg',
+                                            'https://www.navlex.net/wp-content/uploads/2024/03/buoys.jpg',
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -2243,7 +2229,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text("Fixed Buoys are available",
+                                  Text("Buoys available",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -2267,7 +2253,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
-                                            'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png',
+                                            'https://www.navlex.net/wp-content/uploads/2024/03/mountain.png',
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -2328,7 +2314,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text("mountain wedges available",
+                                  Text("Wedges available",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -2352,7 +2338,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           BorderRadius.circular(15),
                                           child: CachedNetworkImage(
                                             imageUrl:
-                                            'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg',
+                                            'https://www.navlex.net/wp-content/uploads/2024/03/ashore.jpg',
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -2413,7 +2399,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text("Use your own lines ashore",
+                                  Text("Use lines ashore",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -2461,7 +2447,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 87.w,
                                     child: Text(
-                                        "You'll find the following types of seabed at Anse de l'Aiguade",
+                                        "You'll find the following types of seabed at",
                                         style: TextStyle(
                                             letterSpacing: 1,
                                             color: secondary,
@@ -2506,7 +2492,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                           progress) =>
@@ -2619,7 +2605,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                           progress) =>
@@ -2733,7 +2719,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                           progress) =>
@@ -2853,7 +2839,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Coral.png",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                           progress) =>
@@ -2969,7 +2955,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl:
-                                                      "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                           progress) =>
@@ -3542,7 +3528,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Nearby Listings :-",
+                      Text("Nearby Listings",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,
@@ -4106,6 +4092,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                 setState(() {
                   NW1 = NW1value;
                   updateData();
+                  print("NW1${NW1}");
+                  print("NW1value${NW1value}");
                 });
               } else {
                 NW1 = false;
@@ -4906,18 +4894,20 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   }
 
 
+
   void updateData() {
     data[0] = [
-      (N1 ? 3 : 0) + (N2 ? 3 : 0) + (N3 ? 4 : 0),
-      (NE1 ? 3 : 0) + (NE2 ? 3 : 0) + (NE3 ? 4 : 0),
-      (E1 ? 3 : 0) + (E2 ? 3 : 0) + (E3 ? 4 : 0),
-      (SE1 ? 3 : 0) + (SE2 ? 3 : 0) + (SE3 ? 4 : 0),
-      (S1 ? 3 : 0) + (S2 ? 3 : 0) + (S3 ? 4 : 0),
-      (SW1 ? 3 : 0) + (SW2 ? 3 : 0) + (SW3 ? 4 : 0),
-      (W1 ? 3 : 0) + (W2 ? 3 : 0) + (W3 ? 4 : 0),
-      (NW1 ? 3 : 0) + (NW2 ? 3 : 0) + (NW3 ? 4 : 0),
+      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
+      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 10 : 0),
+      (E1 ? 4 : 0) + (E2 ? 7 : 0) + (E3 ? 10 : 0),
+      (SE1 ? 4 : 0) + (SE2 ? 7 : 0) + (SE3 ? 10 : 0),
+      (S1 ? 4 : 0) + (S2 ? 7 : 0) + (S3 ? 10 : 0),
+      (SW1 ? 4 : 0) + (SW2 ? 7 : 0) + (SW3 ? 10 : 0),
+      (W1 ? 4 : 0) + (W2 ? 7 : 0) + (W3 ? 10 : 0),
+      (NW1 ? 4 : 0) + (NW2 ? 7 : 0) + (NW3 ? 10 : 0),
     ];
   }
+
 
   Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
     return Column(

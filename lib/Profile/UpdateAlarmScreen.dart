@@ -116,7 +116,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.sp)),
+              borderRadius: BorderRadius.circular(30.sp)
+          ),
           onPressed: () {
             Get.to(SubscriptionAlarmScreen());
           },
@@ -260,7 +261,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                                                         fontSize: 15.sp,
                                                         fontWeight:
                                                             FontWeight.normal,
-                                                        fontFamily: "volken")),
+                                                        fontFamily: "volken")
+                                                ),
                                               ],
                                             ),
                                             Row(
@@ -316,7 +318,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                                                                     .circular(
                                                                         10),
                                                             color: Colors.green
-                                                                .shade100),
+                                                                .shade100
+                                                        ),
                                                         child: Text("Active",
                                                             textAlign: TextAlign
                                                                 .center,
@@ -343,7 +346,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                                                                     .circular(
                                                                         10),
                                                             color: Colors
-                                                                .red.shade100),
+                                                                .red.shade100
+                                                        ),
                                                         child: Text("InActive",
                                                             textAlign: TextAlign
                                                                 .center,
@@ -393,7 +397,8 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
                                                     fontSize: 15.sp,
                                                     fontWeight:
                                                         FontWeight.normal,
-                                                    fontFamily: "volken")),
+                                                    fontFamily: "volken")
+                                            ),
                                             Text(
                                                 useralarammodal?.alarms?[index]
                                                                 .name ==

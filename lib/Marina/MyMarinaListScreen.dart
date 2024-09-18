@@ -89,7 +89,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                         ),
                         header(
                           show: 1,
-                            text: "My Position",
+                            text: "My Positions",
                             callback1: () {
                               _scaffoldKeyProductlistpage.currentState
                                   ?.openDrawer();
@@ -98,7 +98,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                           height: 2.h,
                         ),
                         mymarinaviewmodal?.positions?.length==null||mymarinaviewmodal?.positions?.length==0?Center(
-                          child: Container(height: 80.h,alignment: Alignment.center,child: Text("No Position Available", style: TextStyle(
+                          child: Container(height: 80.h,alignment: Alignment.center,child: Text("No Positions Available", style: TextStyle(
                               fontSize: 15.sp,
                               color: Colors.black,
                               fontWeight:

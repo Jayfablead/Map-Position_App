@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         isLoading: isLoading,
         scaffold:Scaffold(
       extendBody: true,
-      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 4),
+
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
@@ -285,7 +285,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Add New Position",
+                                  Text("Add Position",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -522,7 +522,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("My Position",
+                                  Text("My Positions",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -580,7 +580,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text("Change Password",
+                              Text("ChangePassword",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -654,91 +654,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 2.h,),
-                  Row(mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("My Invoice : -",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: secondary,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: "volken")),
-                          SizedBox(height: 2.h,),
-                          Container(
-                          alignment: Alignment.center,
-
-
-                            height: 12.h,
-                            width: 95.w,
-
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: secondary,
-                                    width: 1.sp
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(900),
-                                        ),
-                                        height: 12.w,
-                                        width: 13.w,
-                                        // padding: EdgeInsets.all(1.w),
-                                        child:
-                                        Image.asset("assets/Upload .png")),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Invoice File.pdf",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                            fontFamily: 'pop',
-                                            color: blackback,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 13.sp,
-                                            letterSpacing: 1,
-                                          ),
-                                        ),
-                                        SizedBox(height: 1.h),
-                                        Text(
-                                          "Safe Boat",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                            fontFamily: 'pop',
-                                            color: Colors.black.withOpacity(0.8),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 13.sp,
-                                            letterSpacing: 1,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-
-                    ],
-                  )
+                  // SizedBox(height: 2.h,),
+                  // Row(mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text("My Invoice : -",
+                  //             style: TextStyle(
+                  //                 letterSpacing: 1,
+                  //                 color: secondary,
+                  //                 fontSize: 15.sp,
+                  //                 fontWeight: FontWeight.normal,
+                  //                 fontFamily: "volken")),
+                  //         SizedBox(height: 2.h,),
+                  //         Container(
+                  //         alignment: Alignment.center,
+                  //
+                  //
+                  //           height: 12.h,
+                  //           width: 95.w,
+                  //
+                  //           decoration: BoxDecoration(
+                  //               border: Border.all(
+                  //                   color: secondary,
+                  //                   width: 1.sp
+                  //               ),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //               color: Colors.white),
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Row(
+                  //                 crossAxisAlignment: CrossAxisAlignment.center,
+                  //                 children: [
+                  //                   Container(
+                  //                       decoration: BoxDecoration(
+                  //                         borderRadius: BorderRadius.circular(900),
+                  //                       ),
+                  //                       height: 12.w,
+                  //                       width: 13.w,
+                  //                       // padding: EdgeInsets.all(1.w),
+                  //                       child:
+                  //                       Image.asset("assets/Upload .png")),
+                  //                   SizedBox(
+                  //                     width: 2.w,
+                  //                   ),
+                  //                   Column(
+                  //                     crossAxisAlignment:
+                  //                     CrossAxisAlignment.start,
+                  //                     children: [
+                  //                       Text(
+                  //                         "Invoice File.pdf",
+                  //                         textAlign: TextAlign.start,
+                  //                         style: TextStyle(
+                  //                           fontFamily: 'pop',
+                  //                           color: blackback,
+                  //                           fontWeight: FontWeight.bold,
+                  //                           fontSize: 13.sp,
+                  //                           letterSpacing: 1,
+                  //                         ),
+                  //                       ),
+                  //                       SizedBox(height: 1.h),
+                  //                       Text(
+                  //                         "Safe Boat",
+                  //                         textAlign: TextAlign.start,
+                  //                         style: TextStyle(
+                  //                           fontFamily: 'pop',
+                  //                           color: Colors.black.withOpacity(0.8),
+                  //                           fontWeight: FontWeight.bold,
+                  //                           fontSize: 13.sp,
+                  //                           letterSpacing: 1,
+                  //                         ),
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //
+                  //   ],
+                  // )
                 ],
               ),
             ),

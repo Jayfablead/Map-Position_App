@@ -205,7 +205,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Text("First Name : ",
+                    Text("Username: ",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: blackback,
@@ -223,12 +223,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: _firstname,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please Enter First Name";
+                            return "Please Enter User Name";
                           }
                           return null;
                         },
                         decoration: inputDecoration(
-                            hintText: "Enter Your First Name",
+                            hintText: "Enter Your User Name",
                             icon: Icon(
                               Icons.person,
                               color: secondary,
@@ -238,73 +238,73 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Text("Last Name : ",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: "volken")),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: Colors.black),
-                        controller: _lastname,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Last Name";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                            hintText: "Enter Your Last Name",
-                            icon: Icon(
-                              Icons.person,
-                              color: secondary,
-                            )),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Text("Phone : ",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: "volken")),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black
-                        ),
-                        controller: _phone,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Phone";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                            hintText: "Enter Your Phone",
-                            icon: Icon(
-                              Icons.phone_android,
-                              color: secondary,
-                            )),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
+                    // Text("Last Name : ",
+                    //     style: TextStyle(
+                    //         letterSpacing: 1,
+                    //         color: blackback,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.normal,
+                    //         fontFamily: "volken")),
+                    // SizedBox(
+                    //   height: 1.h,
+                    // ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: TextFormField(
+                    //     keyboardType: TextInputType.emailAddress,
+                    //     style: TextStyle(color: Colors.black),
+                    //     controller: _lastname,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return "Please Enter Last Name";
+                    //       }
+                    //       return null;
+                    //     },
+                    //     decoration: inputDecoration(
+                    //         hintText: "Enter Your Last Name",
+                    //         icon: Icon(
+                    //           Icons.person,
+                    //           color: secondary,
+                    //         )),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // Text("Phone : ",
+                    //     style: TextStyle(
+                    //         letterSpacing: 1,
+                    //         color: blackback,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.normal,
+                    //         fontFamily: "volken")),
+                    // SizedBox(
+                    //   height: 1.h,
+                    // ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: TextFormField(
+                    //     keyboardType: TextInputType.text,
+                    //     style: TextStyle(color: Colors.black
+                    //     ),
+                    //     controller: _phone,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return "Please Enter Phone";
+                    //       }
+                    //       return null;
+                    //     },
+                    //     decoration: inputDecoration(
+                    //         hintText: "Enter Your Phone",
+                    //         icon: Icon(
+                    //           Icons.phone_android,
+                    //           color: secondary,
+                    //         )),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
                     Text("Your Bot : ",
                         style: TextStyle(
                             letterSpacing: 1,
@@ -324,90 +324,90 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         controller: _yourBoat,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please Enter Your Bot";
+                            return "Please Enter Describe your Boat";
                           }
                           return null;
                         },
                         decoration: inputDecoration(
-                            hintText: "Enter Your Your Bot",
+                            hintText: "Enter Describe your Boat",
                             icon: Icon(
                               Icons.directions_boat,
                               color: secondary,
                             )),
                       ),
                     ),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // Text("Length : ",
+                    //     style: TextStyle(
+                    //         letterSpacing: 1,
+                    //         color: blackback,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.normal,
+                    //         fontFamily: "volken")),
+                    // SizedBox(
+                    //   height: 1.h,
+                    // ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: TextFormField(
+                    //     keyboardType: TextInputType.text,
+                    //     style: TextStyle(color: Colors.black
+                    //     ),
+                    //     controller: _length,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return "Please Enter Your Length";
+                    //       }
+                    //       return null;
+                    //     },
+                    //     decoration: inputDecoration(
+                    //         hintText: "Enter Your Your Length",
+                    //         icon: Icon(
+                    //           Icons.format_size,
+                    //           color: secondary,
+                    //         )),
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // SizedBox(
+                    //   height: 2.h,
+                    // ),
+                    // Text("Type : ",
+                    //     style: TextStyle(
+                    //         letterSpacing: 1,
+                    //         color: blackback,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.normal,
+                    //         fontFamily: "volken")),
+                    // SizedBox(
+                    //   height: 1.h,
+                    // ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: TextFormField(
+                    //     keyboardType: TextInputType.text,
+                    //     style: TextStyle(color: Colors.black
+                    //     ),
+                    //     controller: _type,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return "Please Enter Your Type";
+                    //       }
+                    //       return null;
+                    //     },
+                    //     decoration: inputDecoration(
+                    //         hintText: "Enter Your Your Type",
+                    //         icon: Icon(
+                    //           Icons.type_specimen,
+                    //           color: secondary,
+                    //         )),
+                    //   ),
+                    // ),
                     SizedBox(
-                      height: 2.h,
-                    ),
-                    Text("Length : ",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: "volken")),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black
-                        ),
-                        controller: _length,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Your Length";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                            hintText: "Enter Your Your Length",
-                            icon: Icon(
-                              Icons.format_size,
-                              color: secondary,
-                            )),
-                      ),
-
-
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Text("Type : ",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: "volken")),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black
-                        ),
-                        controller: _type,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Your Type";
-                          }
-                          return null;
-                        },
-                        decoration: inputDecoration(
-                            hintText: "Enter Your Your Type",
-                            icon: Icon(
-                              Icons.type_specimen,
-                              color: secondary,
-                            )),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
+                      height: 4.h,
                     ),
                     // Password
 
@@ -436,12 +436,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       final Map<String, String> data = {};
       data['user_id'] = (loginmodal?.userId).toString();
       data['first_name'] = _firstname.text.trim().toString();
-      data['last_name'] = _lastname.text.trim().toString();
-      data['phone'] = _phone.text.trim().toString();
+      data['last_name'] = "N/A";
+      data['phone'] = "N/A";
       data['skype'] = "";
       data['userboat'] = _yourBoat.text.trim().toString();
-      data['userboatlength'] = _length.text.trim().toString();
-      data['userboattype'] = _type.text.trim().toString();
+      data['userboatlength'] = "N/A";
+      data['userboattype'] ="N/A";
 
       // Check if selectedimage is not null before adding it to the data map
       if (selectedimage != null && selectedimage?.path != null) {
@@ -487,12 +487,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           viewprofilemodal = ViewProfileModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && viewprofilemodal?.success == true) {
             print("Successs123456");
-            _firstname.text=(viewprofilemodal?.userDetails?.userMeta?.firstName).toString();
-            _lastname.text=(viewprofilemodal?.userDetails?.userMeta?.lastName).toString();
-            _phone.text=(viewprofilemodal?.userDetails?.userMeta?.phone).toString();
+            _firstname.text=viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "";
+
             _yourBoat.text=viewprofilemodal?.userDetails?.userMeta?.userboat==""||viewprofilemodal?.userDetails?.userMeta?.userboat==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboat).toString();
-            _length.text=viewprofilemodal?.userDetails?.userMeta?.userboatlength==""||viewprofilemodal?.userDetails?.userMeta?.userboatlength==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboatlength).toString();
-            _type.text=viewprofilemodal?.userDetails?.userMeta?.userboattype==""||viewprofilemodal?.userDetails?.userMeta?.userboattype==null?"":(viewprofilemodal?.userDetails?.userMeta?.userboattype).toString();
+
             String? profileImagePath = viewprofilemodal?.userDetails?.profileImage;
             File? selectedImage;
             if (profileImagePath != null) {

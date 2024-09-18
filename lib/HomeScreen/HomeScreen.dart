@@ -757,42 +757,42 @@ class _HomeScreenState extends State<HomeScreen> {
                             //     }),
                           )
                         : Container(),
-                    // Positioned(
-                    //   bottom: 250,
-                    //   right: 20,
-                    //   child: InkWell(
-                    //     onTap: () {
-                    //       legend();
-                    //     },
-                    //     child: Container(
-                    //       padding: EdgeInsets.symmetric(
-                    //           vertical: 1.h, horizontal: 5.w),
-                    //       alignment: Alignment.center,
-                    //       decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //         color: blackback,
-                    //       ),
-                    //       child: Row(
-                    //         children: [
-                    //           Icon(
-                    //             Icons.fmd_good,
-                    //             color: Colors.white,
-                    //           ),
-                    //           SizedBox(
-                    //             width: 2.w,
-                    //           ),
-                    //           Text("Legend",
-                    //               style: TextStyle(
-                    //                   letterSpacing: 1,
-                    //                   color: Colors.white,
-                    //                   fontSize: 15.sp,
-                    //                   fontWeight: FontWeight.normal,
-                    //                   fontFamily: "volken")),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Positioned(
+                      bottom: 250,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () {
+                          legend();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 1.h, horizontal: 3.w),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: blackback,
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.fmd_good,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text("Legend",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     Positioned(
                       bottom: 180,
                       right: 20,
@@ -3452,7 +3452,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return StatefulBuilder(builder: (context, setState) {
           return Dialog(
               backgroundColor: Colors.white,
-              insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
+              // insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -3464,7 +3464,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w,),
                   child: Column(children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -3490,9 +3490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -3500,13 +3498,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
-                                fontSize: 15.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
                       ],
                     ),
                     SizedBox(
-                      height: 2.h,
+                      height: 0.5.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -3515,14 +3513,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooring-green.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Recommended",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3531,14 +3529,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooring-yellow.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Average",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3547,42 +3545,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooring-red.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
-                            Text("To Avoid",
+                            Text("Avoid",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Divider(color: secondary),
-                    SizedBox(
-                      height: 2.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Positions",
+                        Text("Marina",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
-                                fontSize: 15.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3590,14 +3582,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooringbuoygreen.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Recommended",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3606,14 +3598,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooring-buoy-yellow.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Average",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3622,29 +3614,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/mooring-buoy-red.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
-                            Text("To Avoid",
+                            Text("Avoid",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Divider(
                       color: secondary,
                     ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -3652,14 +3640,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
-                                fontSize: 15.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3667,14 +3653,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/othergreen.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Recommended",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3683,14 +3669,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/otheryellow.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Average",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3699,26 +3685,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/yellowred.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
-                            Text("To Avoid",
+                            Text("Avoid",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Divider(
                       color: secondary,
                     ),
@@ -3729,14 +3710,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
-                                fontSize: 15.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -3744,14 +3723,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/greenwarning.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Recommended",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3760,14 +3739,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/yellowwarning.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
                             Text("Average",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
@@ -3776,23 +3755,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Image.asset(
                               "assets/redwarning.png",
-                              height: 15.w,
-                              width: 15.w,
+                              height: 10.w,
+                              width: 10.w,
                             ),
-                            Text("To Avoid",
+                            Text("Avoid",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: "volken")),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
+
                   ]),
                 ),
               ));
@@ -3824,7 +3801,7 @@ class _HomeScreenState extends State<HomeScreen> {
               buildErrorDialog1(
                 context,
                 '',
-                "No spots listed in this area",
+                "No positions listed in this area",
                 () {
                   setState(() {
                     searchController.clear();
@@ -4232,7 +4209,7 @@ print("shoallmarkermodal?.positions?[index].properties?.imgURL${shoallmarkermoda
               buildErrorDialog1(
                 context,
                 '',
-                "No spots listed in this area",
+                "No positions listed in this area",
                 () {
                   setState(() {
                     searchController.clear();

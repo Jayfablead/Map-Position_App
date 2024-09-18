@@ -111,8 +111,10 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
 
   Widget build(BuildContext context) {
     return commanScreen(
+
       isLoading: isLoading,
       scaffold: Scaffold(
+        bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 0),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           shape: RoundedRectangleBorder(

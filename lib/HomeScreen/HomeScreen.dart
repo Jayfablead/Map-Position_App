@@ -3500,7 +3500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Anchorages",
+                        Text("Anchorage",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,

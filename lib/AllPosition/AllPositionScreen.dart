@@ -4,8 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,12 +33,35 @@ class AllPositionScreen extends StatefulWidget {
 
 class _AllPositionScreenState extends State<AllPositionScreen> {
   bool isLoading =true;
+  late LatLng _currentPosition1 = LatLng(21.1702, 72.8311);
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage1 =GlobalKey<ScaffoldState>();
+  double? lat1, lng1;
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+    LatLng location = LatLng(lat, long);
+    setState(() {
+      _currentPosition1 = location;
+      lat1 = lat;
+      lng1 = long;
+
+      showmarker();
+    });
+    print("lat1${lat1}${lng1}");
+
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    showmarker();
+setState(() {
+  isLoading = true;
+});
+    getLocation();
   }
   Widget build(BuildContext context) {
     return commanScreen(
@@ -352,6 +377,11 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
     print("dtadone");
     final Map<String, String> data = {};
     data['s'] = "";
+    data['user_id'] =(loginmodal?.userId).toString();
+    data['lat'] =lat1.toString();
+    data['long'] =lng1.toString();
+    print("lat1${lat1}${lng1}");
+ print("data${data}");
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().showmarkerapi(data).then((response) async {
@@ -368,6 +398,7 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
           }
         });
       } else {
+
         setState(() {
           isLoading = false;
         });
@@ -379,35 +410,35 @@ class _AllPositionScreenState extends State<AllPositionScreen> {
     // Use a regular expression to remove HTML tags
     return htmlString.replaceAll(RegExp(r'<[^>]*>|\"'), '');
   }
-  addfevorite(bool value, id) {
-    EasyLoading.show(status: 'Please Wait ...');
-    final Map<String, String> data = {};
-    data['post_id'] = id.toString();
-    data['user_id'] = (loginmodal?.userId).toString();
-    data['isFavorite'] = value ? '0' : '1';
-    print(data);
-    checkInternet().then((internet) async {
-      if (internet) {
-        authprovider().addfevouriteapi(data).then((response) async {
-          addfavouritepositionmodal =
-              AddFavouritePositionModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 &&
-              addfavouritepositionmodal?.success == true) {
-            EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
-
-            showmarker();
-            print('details screen api call');
-            setState(() {});
-          } else {
-            EasyLoading.showError(addreviewmodal?.message ?? '');
-            setState(() {});
-          }
-        });
-      } else {
-        EasyLoading.showError(addreviewmodal?.message ?? '');
-        setState(() {});
-        buildErrorDialog(context, 'Error', "Internet Required");
-      }
-    });
-  }
+  // addfevorite(bool value, id) {
+  //   EasyLoading.show(status: 'Please Wait ...');
+  //   final Map<String, String> data = {};
+  //   data['post_id'] = id.toString();
+  //   data['user_id'] = (loginmodal?.userId).toString();
+  //   data['isFavorite'] = value ? '0' : '1';
+  //   print(data);
+  //   checkInternet().then((internet) async {
+  //     if (internet) {
+  //       authprovider().addfevouriteapi(data).then((response) async {
+  //         addfavouritepositionmodal =
+  //             AddFavouritePositionModal.fromJson(json.decode(response.body));
+  //         if (response.statusCode == 200 &&
+  //             addfavouritepositionmodal?.success == true) {
+  //           EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
+  //
+  //           showmarker();
+  //           print('details screen api call');
+  //           setState(() {});
+  //         } else {
+  //           EasyLoading.showError(addreviewmodal?.message ?? '');
+  //           setState(() {});
+  //         }
+  //       });
+  //     } else {
+  //       EasyLoading.showError(addreviewmodal?.message ?? '');
+  //       setState(() {});
+  //       buildErrorDialog(context, 'Error', "Internet Required");
+  //     }
+  //   });
+  // }
 }

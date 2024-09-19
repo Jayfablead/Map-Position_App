@@ -276,7 +276,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Nearby Position ",
+                                  Text("Nearby Positions",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

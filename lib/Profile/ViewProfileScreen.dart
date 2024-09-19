@@ -307,7 +307,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
                   //   height: 2.h,
                   // ),
 
-                  Text("Your Boat : ",
+                  Text("Describe your Boat : ",
                       style: TextStyle(
                           letterSpacing: 1,
                           color: blackback,

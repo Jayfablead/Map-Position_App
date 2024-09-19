@@ -332,12 +332,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     controller: _title,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Title";
+                        return "Please Enter Position Title";
                       }
                       return null;
                     },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Title",
+                        hintText: "Enter Position Title",
                         icon: Icon(
                           Icons.title,
                           color: secondary,

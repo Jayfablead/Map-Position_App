@@ -149,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     setState(() {
       _mapType = _isSatellite ? MapType.satellite : MapType.normal;
+
     });
   }
 
@@ -354,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: TextFormField(
                                       controller: searchController,
                                       decoration: inputDecoration(
-                                          hintText: "Search....",
+                                          hintText: "Search Positions....",
                                           icon: Icon(
                                             Icons.search,
                                             color: secondary,
@@ -472,7 +473,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         positionController.updateSearchQuery,
                                     controller: searchController,
                                     decoration: inputDecoration(
-                                        hintText: "Search....",
+                                        hintText: "Search Positions....",
                                         icon: Icon(
                                           Icons.search,
                                           color: secondary,

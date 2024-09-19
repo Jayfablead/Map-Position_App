@@ -305,7 +305,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     // SizedBox(
                     //   height: 2.h,
                     // ),
-                    Text("Your Bot : ",
+                    Text("Describe your Boat : ",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: blackback,

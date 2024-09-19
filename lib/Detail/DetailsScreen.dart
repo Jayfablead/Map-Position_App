@@ -3128,6 +3128,87 @@ class _DetailsScreenState extends State<DetailsScreen> {
               } else {
                 SW3 = false;
               }
+              dynamic NE1value = onwViewpostionmodal?.data?.metaFields?.ne1;
+              if (NE1value != null && NE1value is bool) {
+                setState(() {
+                  NE1 = NE1value;
+                  updateData();
+                });
+              } else {
+                NE1 = false;
+              }
+              dynamic NE2value = onwViewpostionmodal?.data?.metaFields?.ne2;
+              if (NE2value != null && NE2value is bool) {
+                setState(() {
+                  NE2 = NE2value;
+                  updateData();
+                });
+              } else {
+                NE2 = false;
+              }
+              dynamic NE3value = onwViewpostionmodal?.data?.metaFields?.ne3;
+              if (NE3value != null && NE3value is bool) {
+                setState(() {
+                  NE3 = NE3value;
+                  updateData();
+                });
+              } else {
+                NE3 = false;
+              }
+              dynamic SE1value = onwViewpostionmodal?.data?.metaFields?.se1;
+              if (SE1value != null && SE1value is bool) {
+                setState(() {
+                  SE1 = SE1value;
+                  updateData();
+                });
+              } else {
+                SE1 = false;
+              }
+              dynamic SE2value = onwViewpostionmodal?.data?.metaFields?.se2;
+              if (SE2value != null && SE2value is bool) {
+                setState(() {
+                  SE2 = SE2value;
+                  updateData();
+                });
+              } else {
+                SE2 = false;
+              }
+              dynamic SE3value = onwViewpostionmodal?.data?.metaFields?.se3;
+              if (SE3value != null && SE3value is bool) {
+                setState(() {
+                  SE3 = SE3value;
+                  updateData();
+                });
+              } else {
+                SE3 = false;
+              }
+              dynamic S1value = onwViewpostionmodal?.data?.metaFields?.s1;
+              if (S1value != null && S1value is bool) {
+                setState(() {
+                  S1 = S1value;
+                  updateData();
+                });
+              } else {
+                S1 = false;
+              }
+              dynamic S2value = onwViewpostionmodal?.data?.metaFields?.s2;
+              if (S2value != null && S2value is bool) {
+                setState(() {
+                  S2 = S2value;
+                  updateData();
+                });
+              } else {
+                S2 = false;
+              }
+              dynamic S3value = onwViewpostionmodal?.data?.metaFields?.s3;
+              if (S3value != null && S3value is bool) {
+                setState(() {
+                  S3 = S3value;
+                  updateData();
+                });
+              } else {
+                S3 = false;
+              }
             });
             for (int index = 0;
             index < (shoallmarkermodal?.positions?.length ?? 0);

@@ -51,18 +51,23 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
     double lat = position.latitude;
     double long = position.longitude;
     LatLng location = LatLng(lat, long);
+    viewmymarina();
     setState(() {
       _currentPosition1 = location;
       lat1=lat;
       lng1=long;
-      isLoading=false;
+      viewmymarina();
+
     });
   }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewmymarina();
+    setState(() {
+      isLoading=true;
+    });
+
     htmlString = '';
     plainText = '';
     getLocation();

@@ -3976,11 +3976,249 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               ViewCategoryWiseviewDetailModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 &&
               viewcategorywisevieweetailmodal?.success == true) {
+            // setState(() {
+            //
+            //
+            //   dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.water;
+            //   if (waterValue != null && waterValue is bool) {
+            //     setState(() {
+            //       print("water${water}");
+            //       water = waterValue;
+            //     });
+            //   } else {
+            //     water = false;
+            //   }
+            //   dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.rocks;
+            //   if (rocksvalue != null && rocksvalue is bool) {
+            //     setState(() {
+            //       rocks = rocksvalue;
+            //     });
+            //   } else {
+            //     rocks = false;
+            //   }
+            //   dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.coral;
+            //   if (coralvalue != null && coralvalue is bool) {
+            //     setState(() {
+            //       coral = coralvalue;
+            //     });
+            //   } else {
+            //     coral = false;
+            //   }
+            //   dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
+            //   if (clayvalue != null && clayvalue is bool) {
+            //     setState(() {
+            //       clay = clayvalue;
+            //     });
+            //   } else {
+            //     clay = false;
+            //   }
+            //   dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
+            //   if (sandvalue != null && sandvalue is bool) {
+            //     setState(() {
+            //       sand = sandvalue;
+            //     });
+            //   } else {
+            //     sand = false;
+            //   }
+            //   dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.buoys;
+            //   if (buoysvalue != null && buoysvalue is bool) {
+            //     setState(() {
+            //       buoys = buoysvalue;
+            //     });
+            //   } else {
+            //     buoys = false;
+            //   }
+            //   dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.restaurant;
+            //   if (restaurantsvalue != null && restaurantsvalue is bool) {
+            //     setState(() {
+            //       restaurant = restaurantsvalue;
+            //     });
+            //   } else {
+            //     restaurant = false;
+            //   }
+            //   dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.alcohol;
+            //   if (alcoholvalue != null && alcoholvalue is bool) {
+            //     setState(() {
+            //       alcohol = alcoholvalue;
+            //     });
+            //   } else {
+            //     alcohol = false;
+            //   }
+            //   dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.pharmacy;
+            //   if (pharmacyvalue != null && pharmacyvalue is bool) {
+            //     setState(() {
+            //       pharmacy = pharmacyvalue;
+            //     });
+            //   } else {
+            //     pharmacy = false;
+            //   }
+            //   dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.groceries;
+            //   if (groceriesvalue != null && groceriesvalue is bool) {
+            //     setState(() {
+            //       groceries = groceriesvalue;
+            //     });
+            //   } else {
+            //     groceries = false;
+            //   }
+            //   dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields
+            //       ?.mountainWedges;
+            //   if (mountainvalue != null && mountainvalue is bool) {
+            //     setState(() {
+            //       mountain = mountainvalue;
+            //
+            //     });
+            //   } else {
+            //     mountain = false;
+            //   }
+            //   dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
+            //   if (NW3value != null && NW3value is bool) {
+            //     setState(() {
+            //       NW3 = NW3value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     NW3 = false;
+            //   }
+            //   dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
+            //   if (NW1value != null && NW1value is bool) {
+            //     setState(() {
+            //       NW1 = NW1value;
+            //       updateData();
+            //       print("NW1${NW1}");
+            //       print("NW1value${NW1value}");
+            //     });
+            //   } else {
+            //     NW1 = false;
+            //   }
+            //   dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
+            //   if (NW2value != null && NW2value is bool) {
+            //     setState(() {
+            //       NW2 = NW1value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     NW2 = false;
+            //   }
+            //   dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
+            //   if (N1value != null && N1value is bool) {
+            //     setState(() {
+            //       N1 = N1value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     N1 = false;
+            //   }
+            //   dynamic N2value = viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
+            //   if (N2value != null && N1value is bool) {
+            //     setState(() {
+            //       N2 = N2value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     N2 = false;
+            //   }
+            //   dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
+            //   if (N3value != null && N3value is bool) {
+            //     setState(() {
+            //       N3 = N3value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     N3 = false;
+            //   }
+            //   dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
+            //   if (E1value != null && E1value is bool) {
+            //     setState(() {
+            //       E1 = E1value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     E1 = false;
+            //   }
+            //   dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
+            //   if (E2value != null && E2value is bool) {
+            //     setState(() {
+            //       E2 = E2value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     E2 = false;
+            //   }
+            //   dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
+            //   if (E3value != null && E3value is bool) {
+            //     setState(() {
+            //       E3 = E3value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     E3 = false;
+            //   }
+            //   dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
+            //   if (W1value != null && W1value is bool) {
+            //     setState(() {
+            //       W1 = W1value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     W1 = false;
+            //   }
+            //   dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
+            //   if (W2value != null && W2value is bool) {
+            //     setState(() {
+            //       W2 = W2value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     W2 = false;
+            //   }
+            //   dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
+            //   if (W3value != null && W3value is bool) {
+            //     setState(() {
+            //       W3 = W3value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     W3 = false;
+            //   }
+            //   dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
+            //   if (SW1value != null && SW1value is bool) {
+            //     setState(() {
+            //       SW1 = SW1value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     SW1 = false;
+            //   }
+            //   dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
+            //   if (SW2value != null && SW2value is bool) {
+            //     setState(() {
+            //       SW2 = SW2value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     SW2 = false;
+            //   }
+            //   dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
+            //   if (SW3value != null && SW3value is bool) {
+            //     setState(() {
+            //       SW3 = SW3value;
+            //       updateData();
+            //     });
+            //   } else {
+            //     SW3 = false;
+            //   }
+            // });
             setState(() {
-
-
-              dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.water;
+              dynamic waterValue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {
                 setState(() {
                   print("water${water}");
@@ -3989,8 +4227,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 water = false;
               }
-              dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.rocks;
+              dynamic rocksvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.rocks;
               if (rocksvalue != null && rocksvalue is bool) {
                 setState(() {
                   rocks = rocksvalue;
@@ -3998,8 +4236,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 rocks = false;
               }
-              dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.coral;
+              dynamic coralvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.coral;
               if (coralvalue != null && coralvalue is bool) {
                 setState(() {
                   coral = coralvalue;
@@ -4007,7 +4245,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 coral = false;
               }
-              dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
+              dynamic clayvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
               if (clayvalue != null && clayvalue is bool) {
                 setState(() {
                   clay = clayvalue;
@@ -4015,7 +4254,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 clay = false;
               }
-              dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
+              dynamic sandvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
               if (sandvalue != null && sandvalue is bool) {
                 setState(() {
                   sand = sandvalue;
@@ -4023,8 +4263,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 sand = false;
               }
-              dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.buoys;
+              dynamic buoysvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.buoys;
               if (buoysvalue != null && buoysvalue is bool) {
                 setState(() {
                   buoys = buoysvalue;
@@ -4032,8 +4272,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 buoys = false;
               }
-              dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.restaurant;
+              dynamic restaurantsvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.restaurant;
               if (restaurantsvalue != null && restaurantsvalue is bool) {
                 setState(() {
                   restaurant = restaurantsvalue;
@@ -4041,8 +4281,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 restaurant = false;
               }
-              dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.alcohol;
+              dynamic alcoholvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.alcohol;
               if (alcoholvalue != null && alcoholvalue is bool) {
                 setState(() {
                   alcohol = alcoholvalue;
@@ -4050,8 +4290,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 alcohol = false;
               }
-              dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.pharmacy;
+              dynamic pharmacyvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.pharmacy;
               if (pharmacyvalue != null && pharmacyvalue is bool) {
                 setState(() {
                   pharmacy = pharmacyvalue;
@@ -4059,8 +4299,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 pharmacy = false;
               }
-              dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.groceries;
+              dynamic groceriesvalue =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.groceries;
               if (groceriesvalue != null && groceriesvalue is bool) {
                 setState(() {
                   groceries = groceriesvalue;
@@ -4068,26 +4308,28 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 groceries = false;
               }
-              dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-                  ?.mountainWedges;
+              dynamic mountainvalue = viewcategorywisevieweetailmodal
+                  ?.data?.metaFields?.mountainWedges;
               if (mountainvalue != null && mountainvalue is bool) {
                 setState(() {
                   mountain = mountainvalue;
-
                 });
               } else {
                 mountain = false;
               }
-              dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
+              dynamic NW3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
               if (NW3value != null && NW3value is bool) {
                 setState(() {
                   NW3 = NW3value;
                   updateData();
                 });
+                print("NW3${NW3}");
               } else {
                 NW3 = false;
               }
-              dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
+              dynamic NW1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
               if (NW1value != null && NW1value is bool) {
                 setState(() {
                   NW1 = NW1value;
@@ -4098,7 +4340,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 NW1 = false;
               }
-              dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
+              dynamic NW2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
               if (NW2value != null && NW2value is bool) {
                 setState(() {
                   NW2 = NW1value;
@@ -4107,7 +4350,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 NW2 = false;
               }
-              dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
+              dynamic N1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
               if (N1value != null && N1value is bool) {
                 setState(() {
                   N1 = N1value;
@@ -4116,7 +4360,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 N1 = false;
               }
-              dynamic N2value = viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
+              dynamic N2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
               if (N2value != null && N1value is bool) {
                 setState(() {
                   N2 = N2value;
@@ -4125,7 +4370,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 N2 = false;
               }
-              dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
+              dynamic N3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
               if (N3value != null && N3value is bool) {
                 setState(() {
                   N3 = N3value;
@@ -4134,7 +4380,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 N3 = false;
               }
-              dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
+              dynamic E1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
               if (E1value != null && E1value is bool) {
                 setState(() {
                   E1 = E1value;
@@ -4143,7 +4390,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 E1 = false;
               }
-              dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
+              dynamic E2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
               if (E2value != null && E2value is bool) {
                 setState(() {
                   E2 = E2value;
@@ -4152,7 +4400,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 E2 = false;
               }
-              dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
+              dynamic E3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
               if (E3value != null && E3value is bool) {
                 setState(() {
                   E3 = E3value;
@@ -4161,7 +4410,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 E3 = false;
               }
-              dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
+              dynamic W1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
               if (W1value != null && W1value is bool) {
                 setState(() {
                   W1 = W1value;
@@ -4170,7 +4420,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 W1 = false;
               }
-              dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
+              dynamic W2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
               if (W2value != null && W2value is bool) {
                 setState(() {
                   W2 = W2value;
@@ -4179,7 +4430,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 W2 = false;
               }
-              dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
+              dynamic W3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
               if (W3value != null && W3value is bool) {
                 setState(() {
                   W3 = W3value;
@@ -4188,7 +4440,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 W3 = false;
               }
-              dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
+              dynamic SW1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
               if (SW1value != null && SW1value is bool) {
                 setState(() {
                   SW1 = SW1value;
@@ -4197,7 +4450,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 SW1 = false;
               }
-              dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
+              dynamic SW2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
               if (SW2value != null && SW2value is bool) {
                 setState(() {
                   SW2 = SW2value;
@@ -4206,7 +4460,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
               } else {
                 SW2 = false;
               }
-              dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
+              dynamic SW3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
               if (SW3value != null && SW3value is bool) {
                 setState(() {
                   SW3 = SW3value;
@@ -4214,6 +4469,96 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                 });
               } else {
                 SW3 = false;
+              }
+              dynamic NE1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.ne1;
+              if (NE1value != null && NE1value is bool) {
+                setState(() {
+                  NE1 = NE1value;
+                  updateData();
+                });
+              } else {
+                NE1 = false;
+              }
+              dynamic NE2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.ne2;
+              if (NE2value != null && NE2value is bool) {
+                setState(() {
+                  NE2 = NE2value;
+                  updateData();
+                });
+              } else {
+                NE2 = false;
+              }
+              dynamic NE3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.ne3;
+              if (NE3value != null && NE3value is bool) {
+                setState(() {
+                  NE3 = NE3value;
+                  updateData();
+                });
+              } else {
+                NE3 = false;
+              }
+              dynamic SE1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.se1;
+              if (SE1value != null && SE1value is bool) {
+                setState(() {
+                  SE1 = SE1value;
+                  updateData();
+                });
+              } else {
+                SE1 = false;
+              }
+              dynamic SE2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.se2;
+              if (SE2value != null && SE2value is bool) {
+                setState(() {
+                  SE2 = SE2value;
+                  updateData();
+                });
+              } else {
+                SE2 = false;
+              }
+              dynamic SE3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.se3;
+              if (SE3value != null && SE3value is bool) {
+                setState(() {
+                  SE3 = SE3value;
+                  updateData();
+                });
+              } else {
+                SE3 = false;
+              }
+              dynamic S1value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.s1;
+              if (S1value != null && S1value is bool) {
+                setState(() {
+                  S1 = S1value;
+                  updateData();
+                });
+              } else {
+                S1 = false;
+              }
+              dynamic S2value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.s2;
+              if (S2value != null && S2value is bool) {
+                setState(() {
+                  S2 = S2value;
+                  updateData();
+                });
+              } else {
+                S2 = false;
+              }
+              dynamic S3value =
+                  viewcategorywisevieweetailmodal?.data?.metaFields?.s3;
+              if (S3value != null && S3value is bool) {
+                setState(() {
+                  S3 = S3value;
+                  updateData();
+                });
+              } else {
+                S3 = false;
               }
             });
             print("Categorywiseapicall");

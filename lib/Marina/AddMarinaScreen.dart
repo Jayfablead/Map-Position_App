@@ -3227,6 +3227,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NW3value != null && NW3value is bool) {
                 setState(() {
                   NW3 = NW3value;
+                  updateData();
                 });
 
               } else {
@@ -3236,6 +3237,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NW1value != null && NW1value is bool) {
                 setState(() {
                   NW1 = NW1value;
+                  updateData();
                 });
 
               } else {
@@ -3245,6 +3247,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NW2value != null && NW2value is bool) {
                 setState(() {
                   NW2 = NW1value;
+                  updateData();
+
                 });
 
               } else {
@@ -3254,6 +3258,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (N1value != null && N1value is bool) {
                 setState(() {
                   N1 = N1value;
+                  updateData();
                 });
 
               } else {
@@ -3263,6 +3268,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (N2value != null && N1value is bool) {
                 setState(() {
                   N2 = N2value;
+                  updateData();
                 });
 
               } else {
@@ -3271,6 +3277,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (N3value != null && N3value is bool) {
                 setState(() {
                   N3 = N3value;
+                  updateData();
                 });
 
               } else {
@@ -3279,6 +3286,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (E1value != null && E1value is bool) {
                 setState(() {
                   E1= E1value;
+                  updateData();
                 });
 
               } else {
@@ -3287,6 +3295,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (E2value != null && E2value is bool) {
                 setState(() {
                   E2= E2value;
+                  updateData();
                 });
 
               } else {
@@ -3295,6 +3304,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (E3value != null && E3value is bool) {
                 setState(() {
                   E3= E3value;
+                  updateData();
                 });
 
               } else {
@@ -3303,6 +3313,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (W1value != null && W1value is bool) {
                 setState(() {
                   W1= W1value;
+                  updateData();
                 });
 
               } else {
@@ -3311,6 +3322,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (W2value != null && W2value is bool) {
                 setState(() {
                   W2= W2value;
+                  updateData();
                 });
 
               } else {
@@ -3319,6 +3331,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (W3value != null && W3value is bool) {
                 setState(() {
                   W3= W3value;
+                  updateData();
                 });
 
               } else {
@@ -3327,6 +3340,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SW1value != null && SW1value is bool) {
                 setState(() {
                   SW1= SW1value;
+                  updateData();
                 });
 
               } else {
@@ -3335,6 +3349,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SW2value != null && SW2value is bool) {
                 setState(() {
                   SW2= SW2value;
+                  updateData();
                 });
 
               } else {
@@ -3344,6 +3359,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SW3value != null && SW3value is bool) {
                 setState(() {
                   SW3= SW3value;
+                  updateData();
                 });
 
               } else {
@@ -3353,6 +3369,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NE1value != null && NE1value is bool) {
                 setState(() {
                   NE1= SW3value;
+                  updateData();
                 });
 
               } else {
@@ -3362,6 +3379,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NE2value != null && NE2value is bool) {
                 setState(() {
                   NE2= NE2value;
+                  updateData();
                 });
               } else {
                 NE2 = false;
@@ -3370,6 +3388,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (NE3value != null && NE3value is bool) {
                 setState(() {
                   NE3= NE3value;
+                  updateData();
                 });
               } else {
                 NE3 = false;
@@ -3378,6 +3397,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SE1value != null && SE1value is bool) {
                 setState(() {
                   SE1= SE1value;
+                  updateData();
                 });
               } else {
                 SE1 = false;
@@ -3386,6 +3406,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SE2value != null && SE2value is bool) {
                 setState(() {
                   SE2= SE2value;
+                  updateData();
                 });
               } else {
                 SE2 = false;
@@ -3394,6 +3415,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (SE3value != null && SE3value is bool) {
                 setState(() {
                   SE3= SE3value;
+                  updateData();
                 });
               } else {
                 SE3 = false;
@@ -3402,6 +3424,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (S1value != null && S1value is bool) {
                 setState(() {
                   S1= S1value;
+                  updateData();
                 });
               } else {
                 S1 = false;
@@ -3410,6 +3433,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (S2value != null && S2value is bool) {
                 setState(() {
                   S2= S2value;
+                  updateData();
                 });
               } else {
                 S2 = false;
@@ -3418,6 +3442,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
               if (S3value != null && S3value is bool) {
                 setState(() {
                   S3= S3value;
+                  updateData();
                 });
               } else {
                 S3 = false;
@@ -3438,7 +3463,6 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     });
   }
 
-
   void updateData() {
     data[0] = [
       (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
@@ -3451,6 +3475,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       (NW1 ? 4 : 0) + (NW2 ? 7 : 0) + (NW3 ? 10 : 0),
     ];
   }
+
 
   Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
     return Column(

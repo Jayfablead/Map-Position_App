@@ -18,39 +18,35 @@
 	<string>MapPosition</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-<key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                	<string>com.googleusercontent.apps.140957747776-hm7rbk959tvgji621ab8ck510hid1dai</string>
-            </array>
-        </dict>
-    </array>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.140957747776-hm7rbk959tvgji621ab8ck510hid1dai</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>This app requires access to the camera.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Jigsaw location need location permission for getting location </string>
-    <key>NSLocationUsageDescription</key>
-    <string>Jigsaw location need location permission for getting location </string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Jigsaw location need location permission for getting location </string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app does not require access to the microphone.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app requires access to the photo library.</string>
-    <key>UIApplicationSupportsIndirectInputEvents</key>
-    <true/>
+	<string>Map Position requires access to the camera to capture images for map markers and location-based services.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Map Position requires continuous access to your location to provide accurate location tracking and navigation.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Map Position requires access to your location to offer accurate directions and nearby location information.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Map Position needs access to your location while using the app to display your position on the map and provide navigation services.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Map Position requires access to your photo library to select images for map markers and location sharing.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

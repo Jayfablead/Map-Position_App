@@ -784,7 +784,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                       child:
                                                                           CachedNetworkImage(
                                                                         imageUrl:
-                                                                            '',
+                                                                            'https://www.navlex.net/wp-content/uploads/2024/03/icons8-groceries-100.png',
                                                                         fit: BoxFit
                                                                             .cover,
                                                                         progressIndicatorBuilder: (context,
@@ -838,7 +838,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             15),
                                                                 child:
                                                                     CachedNetworkImage(
-                                                                  imageUrl: '',
+                                                                  imageUrl: 'https://www.navlex.net/wp-content/uploads/2024/03/icons8-pharmacy-100.png',
                                                                   fit: BoxFit.cover,
                                                                   progressIndicatorBuilder:
                                                                       (context, url,
@@ -910,7 +910,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             15),
                                                                 child:
                                                                     CachedNetworkImage(
-                                                                  imageUrl: '',
+                                                                  imageUrl: 'https://www.navlex.net/wp-content/uploads/2024/03/icons8-alcohol-100.png',
                                                                   fit: BoxFit.cover,
                                                                   progressIndicatorBuilder:
                                                                       (context, url,
@@ -965,7 +965,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             15),
                                                                 child:
                                                                     CachedNetworkImage(
-                                                                  imageUrl: '',
+                                                                  imageUrl: 'https://www.navlex.net/wp-content/uploads/2024/03/icons8-restaurant-100.png',
                                                                   fit: BoxFit.cover,
                                                                   progressIndicatorBuilder:
                                                                       (context, url,
@@ -1026,7 +1026,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               BorderRadius.circular(
                                                                   15),
                                                           child: CachedNetworkImage(
-                                                            imageUrl: '',
+                                                            imageUrl: 'https://www.navlex.net/wp-content/uploads/2024/03/icons8-water-100.png',
                                                             fit: BoxFit.cover,
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -1205,7 +1205,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   15),
                                                           child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/anchor.jpg',
+                                                                'https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg',
 
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -1249,7 +1249,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   15),
                                                           child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/buoys.jpg',
+                                                                'https://www.navlex.net/wp-content/uploads/2024/03/buoys.jpg',
 
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -1293,7 +1293,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   15),
                                                           child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/mountain.png',
+                                                                'https://www.navlex.net/wp-content/uploads/2024/03/mountain.png',
 
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -1337,7 +1337,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   15),
                                                           child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://boatposition.fableadtechnolabs.com/wp-content/uploads/2024/03/ashore.jpg',
+                                                                'https://www.navlex.net/wp-content/uploads/2024/03/ashore.jpg',
 
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -1642,7 +1642,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                   borderRadius: BorderRadius.circular(90),
                                                                                   child: CachedNetworkImage(
                                                                                     fit: BoxFit.cover,
-                                                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
                                                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                                                   ),
@@ -1703,7 +1703,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                   borderRadius: BorderRadius.circular(90),
                                                                                   child: CachedNetworkImage(
                                                                                     fit: BoxFit.cover,
-                                                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
                                                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                                                     errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                                                   ),
@@ -1765,7 +1765,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                   borderRadius: BorderRadius.circular(90),
                                                                                   child: CachedNetworkImage(
                                                                                     fit: BoxFit.cover,
-                                                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
                                                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                                                   ),
@@ -1832,7 +1832,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                   borderRadius: BorderRadius.circular(90),
                                                                                   child: CachedNetworkImage(
                                                                                     fit: BoxFit.cover,
-                                                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Coral.png",
                                                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                                                   ),
@@ -1896,7 +1896,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                   borderRadius: BorderRadius.circular(90),
                                                                                   child: CachedNetworkImage(
                                                                                     fit: BoxFit.cover,
-                                                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
                                                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                                                   ),
@@ -1982,7 +1982,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                    borderRadius: BorderRadius.circular(90),
                                                    child: CachedNetworkImage(
                                                      fit: BoxFit.cover,
-                                                     imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind.png",
+                                                     imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind.png",
                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                      errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                    ),
@@ -2023,7 +2023,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                          borderRadius: BorderRadius.circular(90),
                                                          child: CachedNetworkImage(
                                                            fit: BoxFit.cover,
-                                                           imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/swell.png",
+                                                           imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/swell.png",
                                                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                            errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                          ),
@@ -2073,7 +2073,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     borderRadius: BorderRadius.circular(90),
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
+                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
                                                       progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                       errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                     ),
@@ -2115,7 +2115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                           borderRadius: BorderRadius.circular(90),
                                                           child: CachedNetworkImage(
                                                             fit: BoxFit.cover,
-                                                            imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                            imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
                                                             progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                             errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                           ),
@@ -2206,7 +2206,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                           borderRadius: BorderRadius.circular(90),
                                                           child: CachedNetworkImage(
                                                             fit: BoxFit.cover,
-                                                            imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wave-line.png",
+                                                            imageUrl: "${authprovider.Photourl}wave-line.png",
                                                             progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                             errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                           ),
@@ -2255,7 +2255,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     borderRadius: BorderRadius.circular(90),
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/temp.png",
+                                                      imageUrl: "${authprovider.Photourl}temp.png",
                                                       progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                       errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                     ),

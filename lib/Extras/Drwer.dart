@@ -9,6 +9,7 @@ import 'package:mapposition/AllPosition/AllPositionScreen.dart';
 import 'package:mapposition/Extras/sharedpreferance.dart';
 import 'package:mapposition/Favourite/FavouriteScreen.dart';
 import 'package:mapposition/Profile/SubscriptionAlarmScreen.dart';
+import 'package:mapposition/Profile/UpdateAlarmScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -276,7 +277,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Nearby Positions",
+                                  Text("Nearby",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -498,7 +499,7 @@ class _drawer1State extends State<drawer1> {
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      CupertinoIcons.clock,
+                                      Icons.add_alert,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -507,7 +508,66 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Add Alarm",
+                                  Text("Add Alerts",
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'volken',
+                                        color:secondary,
+                                      )),
+                                ],
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color:blackback,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                InkWell(
+                  onTap: () {
+                    Get.to(UpdateAlarmScreen());
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Container(
+                          width: 64.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 10.w,
+                                    height: 10.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: blackback,
+                                    ),
+                                    child: Icon(
+                                      Icons.add_alert,
+                                      color: bgcolor,
+                                      size: 18.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Text("Alerts",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -565,7 +625,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Nearby Position",
+                                  Text("Nearby",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,
@@ -614,7 +674,7 @@ class _drawer1State extends State<drawer1> {
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      Icons.directions_boat,
+                                      Icons.add,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -643,64 +703,64 @@ class _drawer1State extends State<drawer1> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                InkWell(
-                  onTap: () {
-Get.to(ChangePasswordScreen());
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 6.w,
-                        ),
-                        Container(
-                          width: 64.w,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 10.w,
-                                    height: 10.w,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: blackback,
-                                    ),
-                                    child: Icon(
-                                      Icons.password,
-                                      color: bgcolor,
-                                      size: 18.sp,
-                                    ),
-                                  ),
-
-                                  SizedBox(
-                                    width: 2.w,
-                                  ),
-                                  Text("ChangePassword",
-                                      style: TextStyle(
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'volken',
-                                        color:secondary,
-                                      )),
-                                ],
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:blackback,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+//                 SizedBox(
+//                   height: 2.h,
+//                 ),
+//                 InkWell(
+//                   onTap: () {
+// Get.to(ChangePasswordScreen());
+//                   },
+//                   child: Container(
+//                     child: Row(
+//                       children: [
+//                         SizedBox(
+//                           width: 6.w,
+//                         ),
+//                         Container(
+//                           width: 64.w,
+//                           child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               Row(
+//                                 children: [
+//                                   Container(
+//                                     width: 10.w,
+//                                     height: 10.w,
+//                                     decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(10),
+//                                       color: blackback,
+//                                     ),
+//                                     child: Icon(
+//                                       Icons.password,
+//                                       color: bgcolor,
+//                                       size: 18.sp,
+//                                     ),
+//                                   ),
+//
+//                                   SizedBox(
+//                                     width: 2.w,
+//                                   ),
+//                                   Text("ChangePassword",
+//                                       style: TextStyle(
+//                                         fontSize: 17.sp,
+//                                         fontWeight: FontWeight.w500,
+//                                         fontFamily: 'volken',
+//                                         color:secondary,
+//                                       )),
+//                                 ],
+//                               ),
+//                               Icon(
+//                                 Icons.chevron_right_rounded,
+//                                 color:blackback,
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
                 SizedBox(
                   height: 2.h,
                 ),
@@ -731,7 +791,7 @@ Get.to(ChangePasswordScreen());
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      Icons.directions_boat,
+                                      Icons.add_location,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -740,7 +800,7 @@ Get.to(ChangePasswordScreen());
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("My Positions",
+                                  Text("Mine",
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w500,

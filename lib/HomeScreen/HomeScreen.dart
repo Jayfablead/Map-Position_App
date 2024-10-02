@@ -335,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 85.w,
                         child: header(
                             show: 1,
-                            text: "Home",
+                            text: "Navlex",
                             callback1: () {
                               _scaffoldKeyProductlistpage.currentState
                                   ?.openDrawer();
@@ -766,38 +766,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned(
                       bottom: 250,
                       right: 20,
-                      child: InkWell(
-                        onTap: () {
+                      child: Container(
+                      width: 15.w,
+                      height: 7.h,
+                      child: FloatingActionButton(
+                        backgroundColor: blackback,
+                        onPressed: () {
                           legend();
                         },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.h, horizontal: 3.w),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: blackback,
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.fmd_good,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text("Legend",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                        ),
+                        child: Icon(Icons.fmd_good, color: Colors.white),
                       ),
+                                            ),
                     ),
                     Positioned(
                       bottom: 180,
@@ -3470,7 +3449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   padding: EdgeInsets.symmetric(
-                    horizontal: 2.w,
+                    horizontal: 5.w,
                   ),
                   child: Column(children: [
                     Row(
@@ -3522,7 +3501,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 10.w,
                               width: 10.w,
                             ),
-                            Text("Recommended",
+                            Text("Good",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -3588,7 +3567,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 10.w,
                               width: 10.w,
                             ),
-                            Text("Recommended",
+                            Text("Good",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -3656,7 +3635,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 10.w,
                               width: 10.w,
                             ),
-                            Text("Recommended",
+                            Text("Good",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -3724,7 +3703,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 10.w,
                               width: 10.w,
                             ),
-                            Text("Recommended",
+                            Text("Good",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,

@@ -79,12 +79,13 @@ class _BottombarState extends State<Bottombar> {
             bottomBarWidth: MediaQuery.of(context).size.width,
             durationInMilliSeconds: 100,
             bottomBarItems: [
+
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.alarm, color: Colors.black),
+                Icon(Icons.directions_boat, color: Colors.black),
                 activeItem:
-                Icon(Icons.alarm, color: Colors.white),
-                itemLabel: 'Alert',
+                Icon(Icons.directions_boat, color: Colors.white),
+                itemLabel: 'Position',
               ),
               BottomBarItem(
                 inActiveItem:
@@ -98,31 +99,32 @@ class _BottombarState extends State<Bottombar> {
                 activeItem: Icon(CupertinoIcons.home, color: Colors.white),
                 itemLabel: 'Home',
               ),
+
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.directions_boat, color: Colors.black),
+                Icon(Icons.add_alert, color: Colors.black),
                 activeItem:
-                Icon(Icons.directions_boat, color: Colors.white),
-                itemLabel: 'Position',
+                Icon(Icons.add_alert, color: Colors.white),
+                itemLabel: 'Alert',
               ),
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.directions_boat_sharp, color: Colors.black),
+                Icon(Icons.fmd_good, color: Colors.black),
                 activeItem:
-                Icon(Icons.directions_boat_sharp, color: Colors.white),
+                Icon(Icons.fmd_good, color: Colors.white),
                 itemLabel: 'Nearby' ,
               ),
             ],
 
             onTap: (index) {
               _isConnected ? index == 0
-                  ? Get.to(UpdateAlarmScreen())
+                  ? Get.to(MyMarinaListScreen())
                   : index == 1
                   ? Get.to(PremiumScreen())
                   : index == 2
                   ? Get.to(HomeScreen())
                   : index == 3
-                  ? Get.to(MyMarinaListScreen())
+                  ? Get.to(UpdateAlarmScreen())
                   : Get.to(AllPositionScreen()) : buildErrorDialog(context, '', "Without Internet Not Use This");
 
             },

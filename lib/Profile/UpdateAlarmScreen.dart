@@ -114,7 +114,7 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
 
       isLoading: isLoading,
       scaffold: Scaffold(
-        bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 0),
+        bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 3),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           shape: RoundedRectangleBorder(

@@ -248,196 +248,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  InkWell(
-                    onTap: (){
-                      Get.to(AddMarinaScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgcolor,
-                          border: Border.all(color: secondary, width:1.sp))
-                      ,child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 10.w,
-                                height: 10.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: blackback,
-                                ),
-                                child: Icon(
-                                  Icons.directions_boat,
-                                  color: bgcolor,
-                                  size: 18.sp,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Add Position",
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "volken")),
-
-                                ],
-                              ),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: blackback,
-                            size: 18.sp,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  InkWell(
-                    onTap: (){
-                      Get.to(SubscriptionAlarmScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgcolor,
-                          border: Border.all(color: secondary, width:1.sp))
-                      ,child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: blackback,
-                              ),
-                              child: Icon(
-                                Icons.alarm,
-                                color: bgcolor,
-                                size: 18.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Add Alerts",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: secondary,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-
-                              ],
-                            ),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: blackback,
-                          size: 18.sp,
-                        )
-                      ],
-                    ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  InkWell(
-                    onTap: (){
-                      Get.to(UpdateAlarmScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgcolor,
-                          border: Border.all(color: secondary, width:1.sp))
-                      ,child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 10.w,
-                              height: 10.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: blackback,
-                              ),
-                              child: Icon(
-                                Icons.alarm,
-                                color: bgcolor,
-                                size: 18.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Alert",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: secondary,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: blackback,
-                          size: 18.sp,
-                        )
-                      ],
-                    ),
-                    ),
-                  ),
-                  // SizedBox(
-                  //   height: 2.h,
-                  // ),
                   // InkWell(
-                  // onTap: (){
-                  //   Get.to(FavouriteScreen());
-                  // },
+                  //   onTap: (){
+                  //     Get.to(AddMarinaScreen());
+                  //   },
                   //   child: Container(
                   //     alignment: Alignment.center,
                   //     padding:
-                  //         EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  //     EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                   //     width: MediaQuery.of(context).size.width,
                   //     decoration: BoxDecoration(
                   //         borderRadius: BorderRadius.circular(10),
@@ -456,21 +274,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //                 color: blackback,
                   //               ),
                   //               child: Icon(
-                  //                 Icons.favorite,
-                  //                 color: Colors.white,
+                  //                 Icons.directions_boat,
+                  //                 color: bgcolor,
                   //                 size: 18.sp,
                   //               ),
                   //             ),
                   //             SizedBox(
                   //               width: 5.w,
                   //             ),
-                  //             Text("My Favourites",
-                  //                 style: TextStyle(
-                  //                     letterSpacing: 1,
-                  //                     color: secondary,
-                  //                     fontSize: 15.sp,
-                  //                     fontWeight: FontWeight.normal,
-                  //                     fontFamily: "volken")),
+                  //             Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 Text("Add Position",
+                  //                     style: TextStyle(
+                  //                         letterSpacing: 1,
+                  //                         color: secondary,
+                  //                         fontSize: 15.sp,
+                  //                         fontWeight: FontWeight.normal,
+                  //                         fontFamily: "volken")),
+                  //
+                  //               ],
+                  //             ),
                   //           ],
                   //         ),
                   //         Icon(
@@ -482,70 +306,246 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //     ),
                   //   ),
                   // ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  InkWell(
-                    onTap: (){
-                      Get.to(MyMarinaListScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgcolor,
-                          border: Border.all(color: secondary, width:1.sp))
-                      ,child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 10.w,
-                                height: 10.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: blackback,
-                                ),
-                                child: Icon(
-                                  Icons.directions_boat,
-                                  color: bgcolor,
-                                  size: 18.sp,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("My Positions",
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "volken")),
-
-                                ],
-                              ),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: blackback,
-                            size: 18.sp,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
+                  // InkWell(
+                  //   onTap: (){
+                  //     Get.to(SubscriptionAlarmScreen());
+                  //   },
+                  //   child: Container(
+                  //     alignment: Alignment.center,
+                  //     padding:
+                  //     EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  //     width: MediaQuery.of(context).size.width,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10),
+                  //         color: bgcolor,
+                  //         border: Border.all(color: secondary, width:1.sp))
+                  //     ,child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Container(
+                  //             width: 10.w,
+                  //             height: 10.w,
+                  //             decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(10),
+                  //               color: blackback,
+                  //             ),
+                  //             child: Icon(
+                  //               Icons.alarm,
+                  //               color: bgcolor,
+                  //               size: 18.sp,
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             width: 5.w,
+                  //           ),
+                  //           Column(
+                  //             crossAxisAlignment: CrossAxisAlignment.start,
+                  //             children: [
+                  //               Text("Add Alerts",
+                  //                   style: TextStyle(
+                  //                       letterSpacing: 1,
+                  //                       color: secondary,
+                  //                       fontSize: 15.sp,
+                  //                       fontWeight: FontWeight.normal,
+                  //                       fontFamily: "volken")),
+                  //
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       Icon(
+                  //         Icons.arrow_forward_ios_rounded,
+                  //         color: blackback,
+                  //         size: 18.sp,
+                  //       )
+                  //     ],
+                  //   ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
+                  // InkWell(
+                  //   onTap: (){
+                  //     Get.to(UpdateAlarmScreen());
+                  //   },
+                  //   child: Container(
+                  //     alignment: Alignment.center,
+                  //     padding:
+                  //     EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  //     width: MediaQuery.of(context).size.width,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10),
+                  //         color: bgcolor,
+                  //         border: Border.all(color: secondary, width:1.sp))
+                  //     ,child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           Container(
+                  //             width: 10.w,
+                  //             height: 10.w,
+                  //             decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(10),
+                  //               color: blackback,
+                  //             ),
+                  //             child: Icon(
+                  //               Icons.alarm,
+                  //               color: bgcolor,
+                  //               size: 18.sp,
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             width: 5.w,
+                  //           ),
+                  //           Column(
+                  //             crossAxisAlignment: CrossAxisAlignment.start,
+                  //             children: [
+                  //               Text("Alert",
+                  //                   style: TextStyle(
+                  //                       letterSpacing: 1,
+                  //                       color: secondary,
+                  //                       fontSize: 15.sp,
+                  //                       fontWeight: FontWeight.normal,
+                  //                       fontFamily: "volken")),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       Icon(
+                  //         Icons.arrow_forward_ios_rounded,
+                  //         color: blackback,
+                  //         size: 18.sp,
+                  //       )
+                  //     ],
+                  //   ),
+                  //   ),
+                  // ),
+                  // // SizedBox(
+                  // //   height: 2.h,
+                  // // ),
+                  // // InkWell(
+                  // // onTap: (){
+                  // //   Get.to(FavouriteScreen());
+                  // // },
+                  // //   child: Container(
+                  // //     alignment: Alignment.center,
+                  // //     padding:
+                  // //         EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  // //     width: MediaQuery.of(context).size.width,
+                  // //     decoration: BoxDecoration(
+                  // //         borderRadius: BorderRadius.circular(10),
+                  // //         color: bgcolor,
+                  // //         border: Border.all(color: secondary, width:1.sp))
+                  // //     ,child: Row(
+                  // //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // //       children: [
+                  // //         Row(
+                  // //           children: [
+                  // //             Container(
+                  // //               width: 10.w,
+                  // //               height: 10.w,
+                  // //               decoration: BoxDecoration(
+                  // //                 borderRadius: BorderRadius.circular(10),
+                  // //                 color: blackback,
+                  // //               ),
+                  // //               child: Icon(
+                  // //                 Icons.favorite,
+                  // //                 color: Colors.white,
+                  // //                 size: 18.sp,
+                  // //               ),
+                  // //             ),
+                  // //             SizedBox(
+                  // //               width: 5.w,
+                  // //             ),
+                  // //             Text("My Favourites",
+                  // //                 style: TextStyle(
+                  // //                     letterSpacing: 1,
+                  // //                     color: secondary,
+                  // //                     fontSize: 15.sp,
+                  // //                     fontWeight: FontWeight.normal,
+                  // //                     fontFamily: "volken")),
+                  // //           ],
+                  // //         ),
+                  // //         Icon(
+                  // //           Icons.arrow_forward_ios_rounded,
+                  // //           color: blackback,
+                  // //           size: 18.sp,
+                  // //         )
+                  // //       ],
+                  // //     ),
+                  // //   ),
+                  // // ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
+                  // InkWell(
+                  //   onTap: (){
+                  //     Get.to(MyMarinaListScreen());
+                  //   },
+                  //   child: Container(
+                  //     alignment: Alignment.center,
+                  //     padding:
+                  //     EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  //     width: MediaQuery.of(context).size.width,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10),
+                  //         color: bgcolor,
+                  //         border: Border.all(color: secondary, width:1.sp))
+                  //     ,child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Row(
+                  //           children: [
+                  //             Container(
+                  //               width: 10.w,
+                  //               height: 10.w,
+                  //               decoration: BoxDecoration(
+                  //                 borderRadius: BorderRadius.circular(10),
+                  //                 color: blackback,
+                  //               ),
+                  //               child: Icon(
+                  //                 Icons.directions_boat,
+                  //                 color: bgcolor,
+                  //                 size: 18.sp,
+                  //               ),
+                  //             ),
+                  //             SizedBox(
+                  //               width: 5.w,
+                  //             ),
+                  //             Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 Text("My Positions",
+                  //                     style: TextStyle(
+                  //                         letterSpacing: 1,
+                  //                         color: secondary,
+                  //                         fontSize: 15.sp,
+                  //                         fontWeight: FontWeight.normal,
+                  //                         fontFamily: "volken")),
+                  //
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         Icon(
+                  //           Icons.arrow_forward_ios_rounded,
+                  //           color: blackback,
+                  //           size: 18.sp,
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
                   InkWell(
                       onTap: (){
                         Get.to(ChangePasswordScreen());

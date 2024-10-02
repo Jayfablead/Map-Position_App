@@ -1664,24 +1664,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 SizedBox(
                   height: 1.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Wind Rose",style: TextStyle(
-                        letterSpacing: 1,
-                        color: Colors.black,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "volken")),
-                    SizedBox(
-                      height: 1.h,
-                    ),
 
-                  ],
-                ),
                 Row(
                   children: [
-                    Text("Protection : -",style: TextStyle(
+                    Text("Protection",style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
@@ -3484,7 +3470,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "$label: -",
+              "$label",
               style: TextStyle(
                   letterSpacing: 1,
                   color: Colors.black,

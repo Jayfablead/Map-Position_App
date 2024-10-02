@@ -229,7 +229,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               loginmodal?.userId == null
                               ? batan(
                               title:
-                              "Click To Add More Pictures From This Position",
+                              "Add More Pictures",
                               route: () {
                                 buildErrorDialog1(
                                   context,
@@ -246,7 +246,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               txtsize: 12.sp)
                               : batan(
                               title:
-                              "Click To Add More Pictures From This Position",
+                              "Add More Pictures",
                               route: () {
                                 showDialog(
                                   context: context,

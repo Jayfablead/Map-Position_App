@@ -327,7 +327,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           loginmodal?.userId == null
                           ? batan(
                           title:
-                          "Click To Add More Pictures From This Position",
+                          "Add More Pictures",
                           route: () {
                             buildErrorDialog1(
                               context,
@@ -344,7 +344,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           txtsize: 12.sp)
                           : batan(
                           title:
-                          "Click To Add More Pictures From This Position",
+                          "Add More Pictures",
                           route: () {
                             showDialog(
                               context: context,
@@ -1857,167 +1857,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           // featuresTextStyle: TextStyle(color: Colors.white),
                         ),
                       ),
-                      // buildCheckboxRow('North (N)', [
-                      //   buildCheckbox('Some protection', N1, (val) {
-                      //     setState(() {
-                      //       N1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', N2, (val) {
-                      //     setState(() {
-                      //       N2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', N3, (val) {
-                      //     setState(() {
-                      //       N3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('Northeast (NE)', [
-                      //   buildCheckbox('Some protection', NE1, (val) {
-                      //     setState(() {
-                      //       NE1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', NE2, (val) {
-                      //     setState(() {
-                      //       NE2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', NE3, (val) {
-                      //     setState(() {
-                      //       NE3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('East (E)', [
-                      //   buildCheckbox('Some protection', E1, (val) {
-                      //     setState(() {
-                      //       E1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', E2, (val) {
-                      //     setState(() {
-                      //       E2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', E3, (val) {
-                      //     setState(() {
-                      //       E3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('Southeast (SE)', [
-                      //   buildCheckbox('Some protection', SE1, (val) {
-                      //     setState(() {
-                      //       SE1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', SE2, (val) {
-                      //     setState(() {
-                      //       SE2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', SE3, (val) {
-                      //     setState(() {
-                      //       SE3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('South (S)', [
-                      //   buildCheckbox('Some protection', S1, (val) {
-                      //     setState(() {
-                      //       S1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', S2, (val) {
-                      //     setState(() {
-                      //       S2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', S3, (val) {
-                      //     setState(() {
-                      //       S3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('Southwest (SW)', [
-                      //   buildCheckbox('Some protection', SW1, (val) {
-                      //     setState(() {
-                      //       SW1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', SW2, (val) {
-                      //     setState(() {
-                      //       SW2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', SW3, (val) {
-                      //     setState(() {
-                      //       SW3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('West (W)', [
-                      //   buildCheckbox('Some protection', W1, (val) {
-                      //     setState(() {
-                      //       W1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', W2, (val) {
-                      //     setState(() {
-                      //       W2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', W3, (val) {
-                      //     setState(() {
-                      //       W3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // buildCheckboxRow('West (W)', [
-                      //   buildCheckbox('Some protection', NW1, (val) {
-                      //     setState(() {
-                      //       NW1 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Average protection', NW2, (val) {
-                      //     setState(() {
-                      //       NW2 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      //   buildCheckbox('Completely protected', NW3, (val) {
-                      //     setState(() {
-                      //       NW3 = val;
-                      //       updateData();
-                      //     });
-                      //   }),
-                      // ]),
-                      // Repeat for other directions...
+
                     ],
                   ),
                   SizedBox(
@@ -2051,24 +1891,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 87.w,
-                                    child: Text(
-                                        "Here are the mooring conditions you'll find in the anchorage",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 1.h,
-                              ),
+
                               Row(
                                 children: [
                                   Stack(

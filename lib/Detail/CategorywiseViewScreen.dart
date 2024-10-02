@@ -322,7 +322,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     loginmodal?.userId == null
                                 ? batan(
                                     title:
-                                        "Click To Add More Pictures From This Position",
+                                        "Add More Pictures",
                                     route: () {
                                       buildErrorDialog1(
                                         context,
@@ -339,7 +339,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     txtsize: 12.sp)
                                 : batan(
                                     title:
-                                        "Click To Add More Pictures From This Position",
+                                        "Add More Pictures",
                                     route: () {
                                       showDialog(
                                         context: context,
@@ -1917,7 +1917,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Details :-",
+                            Text("Details",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: blackback,
@@ -1956,24 +1956,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     SizedBox(
                                       height: 1.h,
                                     ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 87.w,
-                                          child: Text(
-                                              "Here are the mooring conditions you'll find in the anchorage",
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  color: secondary,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontFamily: "volken")),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
+                                    
                                     Row(
                                       children: [
                                         Stack(
@@ -2336,7 +2319,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Seabed types :-",
+                                        Text("Seabed types",
                                             style: TextStyle(
                                                 letterSpacing: 1,
                                                 color: blackback,
@@ -2348,24 +2331,24 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     SizedBox(
                                       height: 1.h,
                                     ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 87.w,
-                                          child: Text(
-                                              "You'll find the following types of seabed at",
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  color: secondary,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontFamily: "volken")),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
+                                    // Row(
+                                    //   children: [
+                                    //     SizedBox(
+                                    //       width: 87.w,
+                                    //       child: Text(
+                                    //           "You'll find the following types of seabed at",
+                                    //           style: TextStyle(
+                                    //               letterSpacing: 1,
+                                    //               color: secondary,
+                                    //               fontSize: 15.sp,
+                                    //               fontWeight: FontWeight.normal,
+                                    //               fontFamily: "volken")),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // SizedBox(
+                                    //   height: 1.h,
+                                    // ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

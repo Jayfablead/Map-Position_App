@@ -211,7 +211,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               loginmodal?.userId == null
                               ? batan(
                               title:
-                              "Click To Add More Pictures From This Position",
+                              "Add More Pictures",
                               route: () {
                                 buildErrorDialog1(
                                   context,
@@ -228,7 +228,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               txtsize: 12.sp)
                               : batan(
                               title:
-                              "Click To Add More Pictures From This Position",
+                              "Add More Pictures",
                               route: () {
                                 showDialog(
                                   context: context,

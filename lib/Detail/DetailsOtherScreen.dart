@@ -164,7 +164,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                     height: 4.h,
                   ),
                   header(
-                      text: "View Detail",
+                      text: "Details",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState
                             ?.openDrawer();

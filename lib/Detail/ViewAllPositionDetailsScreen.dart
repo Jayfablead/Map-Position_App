@@ -262,7 +262,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                 height: 4.h,
               ),
               header(
-                  text: "View Detail",
+                  text: "Detail",
                   callback1: () {
                     _scaffoldKeyProductlistpage.currentState
                         ?.openDrawer();

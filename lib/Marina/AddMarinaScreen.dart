@@ -57,6 +57,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   TextEditingController _MaaSlipLength =TextEditingController();
   TextEditingController _MaaSlipwidth =TextEditingController();
   TextEditingController _pricelebal1 =TextEditingController();
+
   String? selectedvalue="Anchorages";
   String? services="Yes";
   String? gas="Yes";
@@ -178,8 +179,13 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
-    double lat = double.tryParse(newupdatealarammodal?.alarm?.lattiude ?? '0.0') ?? 0.0;
-    double long = double.tryParse(newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
+    double lat = double.tryParse(
+        (newupdatealarammodal?.alarm?.lattiude == null || newupdatealarammodal?.alarm?.lattiude == "")
+            ? position.latitude.toString()
+            : newupdatealarammodal?.alarm?.lattiude ?? '0.0'
+    ) ?? 0.0;
+
+    double long = double.tryParse(newupdatealarammodal?.alarm?.longitude==null||newupdatealarammodal?.alarm?.longitude ==""?position.longitude.toString():newupdatealarammodal?.alarm?.longitude ?? '0.0') ?? 0.0;
     LatLng location = LatLng(lat, long);
 
     setState(() {
@@ -303,19 +309,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       _scaffoldKeyProductlistpage.currentState?.openDrawer();
                     }),
              SizedBox(height: 2.h,),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Text("Position Description",style: TextStyle(
-                     letterSpacing: 1,
-                     color: Colors.black,
-                     fontSize: 15.sp,
-                     fontWeight: FontWeight.bold,
-                     fontFamily: "volken")),
-               ],
-             ),
-                SizedBox(height: 2.h,),
-                Text("Title :-",style: TextStyle(
+
+                Text("Title",style: TextStyle(
                     letterSpacing: 1,
                     color: Colors.black,
                     fontSize: 15.sp,
@@ -338,14 +333,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     },
                     decoration: inputDecoration(
                         hintText: "Enter Position Title",
-                        icon: Icon(
-                          Icons.title,
-                          color: secondary,
-                        )),
+
+                    ),
                   ),
                 ),
                 SizedBox(height: 2.h,),
-                Text("Description :-",style: TextStyle(
+                Text("Description",style: TextStyle(
                     letterSpacing: 1,
                     color: Colors.black,
                     fontSize: 15.sp,
@@ -480,29 +473,19 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   children: [
                     Column(
                       children: [
-                        Text("Select Categories",style: TextStyle(
+                        Text("Select Category",style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: "volken")),
-                        SizedBox(height: 1.h,),
-                        SizedBox(
-                          width: 85.w,
-                          child: Text("Selecting a category will make it easier for users to find you Position in search results.",style: TextStyle(
-                              letterSpacing: 1,
-                              color: secondary,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "volken")),
-                        ),
 
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 2.h,),
-                Text("Category :-",style: TextStyle(
+                Text("Category",style: TextStyle(
                     letterSpacing: 1,
                     color: Colors.black,
                     fontSize: 15.sp,
@@ -591,20 +574,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Listing Media",style: TextStyle(
-                        letterSpacing: 1,
-                        color: Colors.black,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "volken")),
-                  ],
-                ),
+
               SizedBox(height: 2.h,),
                 selectedimage == null?Container():Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -844,9 +814,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   }, hight: 6.h, width:55.w, txtsize: 20.sp),
                 ],
               ),
+                SizedBox(height: 2.h,),
                 Row(
                   children: [
-                    Text("Listing Location :-",style: TextStyle(
+                    Text("Listing Location",style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
@@ -896,7 +867,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     SizedBox(
                       height: 1.5.h,
                     ),
-                    Text("Latitude:- ",
+                    Text("Latitude",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,

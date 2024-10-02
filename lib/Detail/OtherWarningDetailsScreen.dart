@@ -146,7 +146,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                     height: 4.h,
                   ),
                   header(
-                      text: "View Detail",
+                      text: "Details",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState
                             ?.openDrawer();

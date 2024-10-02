@@ -257,7 +257,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                       height: 4.h,
                     ),
                     header(
-                        text: "View Detail",
+                        text: "Details",
                         callback1: () {
                           _scaffoldKeyProductlistpage.currentState
                               ?.openDrawer();

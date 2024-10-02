@@ -328,7 +328,7 @@ setState(() {
                         ),
                         SizedBox(height: 0.5.h),
                         batan(
-                            title: "View Details",
+                            title: "Details",
                             route: () {
                               Get.to(CategoryWiseViewScreen(
                                   postid: (shoallmarkermodal

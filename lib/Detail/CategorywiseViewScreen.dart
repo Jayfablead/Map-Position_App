@@ -194,21 +194,21 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     }
   }
 
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
-    LatLng location = LatLng(lat, long);
-    setState(() {
-      _currentPosition1 = location;
-      lat1 = lat;
-      lng1 = long;
-      isLoading = false;
-    });
-  }
+  // getLocation() async {
+  //   LocationPermission permission;
+  //   permission = await Geolocator.requestPermission();
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   double lat = position.latitude;
+  //   double long = position.longitude;
+  //   LatLng location = LatLng(lat, long);
+  //   setState(() {
+  //     _currentPosition1 = location;
+  //     lat1 = lat;
+  //     lng1 = long;
+  //     isLoading = false;
+  //   });
+  // }
 
   MapType _mapType = MapType.normal;
 
@@ -229,7 +229,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
-    getLocation();
+    // getLocation();
     isLoading = true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
@@ -731,7 +731,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Facilities Nearby :-",
+                            Text("Facilities Nearby",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -1655,7 +1655,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Description :-",
+                            Text("Description",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: blackback,
@@ -1715,7 +1715,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Protection : -",
+                            Text("Protection",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
@@ -1944,7 +1944,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Characteristics",
+                                        Text("Mooring Options",
                                             style: TextStyle(
                                                 letterSpacing: 1,
                                                 color: blackback,
@@ -2331,24 +2331,24 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     SizedBox(
                                       height: 1.h,
                                     ),
-                                    // Row(
-                                    //   children: [
-                                    //     SizedBox(
-                                    //       width: 87.w,
-                                    //       child: Text(
-                                    //           "You'll find the following types of seabed at",
-                                    //           style: TextStyle(
-                                    //               letterSpacing: 1,
-                                    //               color: secondary,
-                                    //               fontSize: 15.sp,
-                                    //               fontWeight: FontWeight.normal,
-                                    //               fontFamily: "volken")),
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                    // SizedBox(
-                                    //   height: 1.h,
-                                    // ),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 87.w,
+                                          child: Text(
+                                              "You'll find the following types of seabed at Anse de l'Aiguade",
+                                              style: TextStyle(
+                                                  letterSpacing: 1,
+                                                  color: secondary,
+                                                  fontSize: 15.sp,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontFamily: "volken")),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -2953,7 +2953,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Weather :-",
+                                        Text("Weather",
                                             style: TextStyle(
                                                 letterSpacing: 1,
                                                 color: blackback,
@@ -3394,7 +3394,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 initialCameraPosition: CameraPosition(
                                   target: _currentPosition1,
                                   // You can set your initial position here
-                                  zoom: 12.0,
+                                  zoom: 5.0,
                                 ),
                                 gestureRecognizers: Set()
                                   ..add(Factory<OneSequenceGestureRecognizer>(
@@ -3933,7 +3933,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Text("Category :-",
+                              Text("Category",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: Colors.black,
@@ -4096,7 +4096,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Your Name :-",
+                                  Text("Your Name",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,
@@ -4134,7 +4134,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Message :-",
+                                  Text("Message",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,

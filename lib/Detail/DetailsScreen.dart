@@ -149,26 +149,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
   }
 
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
-    LatLng location = LatLng(lat, long);
-    setState(() {
-      _currentPosition1 = location;
-      lat1 = lat;
-      lng1 = long;
-      isLoading = false;
-    });
-
-
-
-
-
-  }
+  // getLocation() async {
+  //   LocationPermission permission;
+  //   permission = await Geolocator.requestPermission();
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   double lat = position.latitude;
+  //   double long = position.longitude;
+  //   LatLng location = LatLng(lat, long);
+  //   setState(() {
+  //     _currentPosition1 = location;
+  //     lat1 = lat;
+  //     lng1 = long;
+  //     isLoading = false;
+  //   });
+  //
+  //
+  //
+  //
+  //
+  // }
   DateTime now = DateTime.now();
   MapType _mapType = MapType.normal;
 
@@ -231,14 +231,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
     // TODO: implement initState
     super.initState();
     viewposition();
-    getLocation();
+    // getLocation();
     isLoading =true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
       isLoading =true;
     });
     wedther();
-    print("Postidavigayache:-${widget.postid.toString()}");
+    print("Postidavigayache${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {
@@ -722,7 +722,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Row(
                                     children: [
 
-                                      Text("Facilities Nearby :-",
+                                      Text("Facilities Nearby",
                                               style: TextStyle(
                                                   letterSpacing: 1,
                                                   color: Colors.black,
@@ -1067,7 +1067,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Description :-",
+                                Text("Description",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
@@ -1125,17 +1125,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             SizedBox(
                               height: 2.h,
                             ),
-                           Row(
-                                    children: [
-                                     Text("Details :-",
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  color: blackback,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily: "volken"))
-                                    ],
-                                  ),
+                         
                            SizedBox(
                                     height: 1.h,
                                   ),
@@ -1155,7 +1145,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      Text("Characteristics",
+                                                      Text("Mooring Options",
                                                           style: TextStyle(
                                                               letterSpacing: 1,
                                                               color: blackback,
@@ -1166,27 +1156,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   "volken")),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 1.h,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 87.w,
-                                                        child: Text(
-                                                            "Here are the mooring conditions you'll find in the anchorage Anse de l'Aiguade",
-                                                            style: TextStyle(
-                                                                letterSpacing: 1,
-                                                                color: secondary,
-                                                                fontSize: 15.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                fontFamily:
-                                                                    "volken")),
-                                                      ),
-                                                    ],
-                                                  ),
+
                                                   SizedBox(
                                                     height: 1.h,
                                                   ),
@@ -1568,7 +1538,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      Text("Seabed types :-",
+                                                      Text("Seabed types",
                                                           style: TextStyle(
                                                               letterSpacing: 1,
                                                               color: blackback,
@@ -1949,7 +1919,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text("Weather :-",
+                                            Text("Weather",
                                                 style: TextStyle(
                                                     letterSpacing: 1,
                                                     color: blackback,
@@ -2293,7 +2263,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                              Row(
                               children: [
-                                Text("Map:-",
+                                Text("Map",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
@@ -3232,7 +3202,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         marker: Marker(
                           onTap: () {
                             print(
-                                "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                                "positiname${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
                             setState(() {
                               select = index;
                             });
@@ -3392,7 +3362,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Your Rating :-",
+                                    "Your Rating",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,
@@ -3659,7 +3629,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Text("Category :-",style: TextStyle(
+                              Text("Category",style: TextStyle(
                                   letterSpacing: 1,
                                   color: Colors.black,
                                   fontSize: 15.sp,
@@ -3752,7 +3722,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Your Name :-",
+                                  Text("Your Name",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,
@@ -3793,7 +3763,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Message :-",
+                                  Text("Messag",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,

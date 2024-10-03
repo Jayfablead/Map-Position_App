@@ -14,18 +14,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/CategorywiseViewScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
+
 import '../Extras/Drwer.dart';
 import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
-import '../HomeScreen/HomeScreen.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
 import '../Modal/AddReviewModal.dart';
@@ -34,10 +34,7 @@ import '../Modal/ReportModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'CategorywiseViewScreen.dart';
-import 'DetailsOtherScreen.dart';
-import 'DetailsScreen.dart';
-import 'OtherWarningDetailsScreen.dart';
+import 'ViewAllPositionDetailsScreen.dart';
 
 class ViewAllPositionDetailsScreen extends StatefulWidget {
   String? postid;
@@ -69,109 +66,31 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _review = TextEditingController();
-
-
-
-  ImagePicker picker = ImagePicker();
-  List<XFile>? resultList;
-  List<XFile>? resultList1;
-  List<File> selectedImages = [];
-  List<String> imagePaths = [];
-  List<XFile> imagesList = <XFile>[];
-  int currentIndex = 0;
-
-
-  String _error = 'No Error Dectected';
-  List<String> imageNames = [];
-  ImagePicker _picker = ImagePicker();
-  int maxImageLimit = 9;
-  File? selectedimage;
-  List<String> networkImageUrls = [];
   int _rating = 0;
+  String? selectedvalue = "--- Select ---";
   bool isLoading = true;
   String htmlString = '';
   String plainText = '';
   final _formKey = GlobalKey<FormState>();
   bool showError = false;
-  int type=0;
-  String? selectedvalue="--- Select ---";
-  DateTime now = DateTime.now();
-  TextEditingController searchController = TextEditingController();
-  final PositionController positionController = Get.put(PositionController());
-
-  TextEditingController _comments = TextEditingController();
-  Set<Marker> _markers = {};
-  List<MarkerData> _customMarkers = [];
-  var latitudeString;
-  var longitudeString;
-
-  LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
-  CameraPosition _initialCameraPosition =
-  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
-  Position? _currentPosition;
-  int? select;
-  late LatLng dynamicLatLng;
-
-  late GoogleMapController mapController;
-  late LatLng _currentPosition1 = LatLng(double.parse(viewcategorywisevieweetailmodal?.data?.latitude ?? ""),double.parse(viewcategorywisevieweetailmodal?.data?.longitude ?? ""));
-  bool _isSatellite = false;
-  GoogleMapController? _mapController;
-
-  List<String> _imagePaths = [];
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
-
-
-  // void _onMapTapped(LatLng latLng) {
-  //   setState(() {
-  //     _markers.clear();
-  //     _markers.add(Marker(
-  //       markerId: MarkerId('Tapped Location'),
-  //       position: latLng,
-  //     ));
-  //   });
-  // }
-
-  void _searchAndNavigate() async {
-    final String address = searchController.text;
-    List<Location> locations = await locationFromAddress(address);
-    if (locations != null && locations.isNotEmpty) {
-      setState(() {
-        _center = LatLng(locations[0].latitude, locations[0].longitude);
-        _markers.clear();
-        _markers.add(Marker(
-          markerId: MarkerId('Searched Location'),
-          position: _center,
-        ));
-        mapController!.animateCamera(CameraUpdate.newLatLng(_center));
-      });
-    }
-  }
-  bool anchor=false;
-  bool buoys=false;
-  bool mountain=false;
-  bool ownlines=false;
-  bool sand=false;
-  bool coral=false;
-  bool rocks=false;
-  bool clay=false;
-  bool pano=false;
-  bool groceries=false;
-  bool pharmacy=false;
-  bool alcohol=false;
-  bool restaurant=false;
-  bool pontoon=false;
-  bool shop=false;
-  bool water=false;
-  bool beach=false;
+  int type = 0;
+  bool anchor = false;
+  bool buoys = false;
+  bool mountain = false;
+  bool ownlines = false;
+  bool sand = false;
+  bool coral = false;
+  bool rocks = false;
+  bool clay = false;
+  bool pano = false;
+  bool groceries = false;
+  bool pharmacy = false;
+  bool alcohol = false;
+  bool restaurant = false;
+  bool pontoon = false;
+  bool shop = false;
+  bool water = false;
+  bool beach = false;
   bool N1 = false;
   bool N2 = false;
   bool N3 = false;
@@ -199,22 +118,98 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   List<List<int>> data = [
     [0, 0, 0, 0, 0, 0, 0, 0],
   ];
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
-    LatLng location = LatLng(lat, long);
-    setState(() {
-      _currentPosition1 = location;
-      lat1 = lat;
-      lng1 = long;
-      isLoading = false;
-    });
+  ImagePicker picker = ImagePicker();
+  List<XFile>? resultList;
+  List<XFile>? resultList1;
+  List<File> selectedImages = [];
+  List<String> imagePaths = [];
+  List<XFile> imagesList = <XFile>[];
+  String _error = 'No Error Dectected';
+  List<String> imageNames = [];
+  ImagePicker _picker = ImagePicker();
+  int maxImageLimit = 9;
+  File? selectedimage;
+  List<String> networkImageUrls = [];
 
+  String? thumbnail;
+  DateTime now = DateTime.now();
+  TextEditingController searchController = TextEditingController();
+  final PositionController positionController = Get.put(PositionController());
+
+  TextEditingController _comments = TextEditingController();
+  Set<Marker> _markers = {};
+  List<MarkerData> _customMarkers = [];
+  var latitudeString;
+  var longitudeString;
+
+  LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
+  CameraPosition _initialCameraPosition =
+  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
+  Position? _currentPosition;
+  int? select;
+  late LatLng dynamicLatLng;
+
+  late GoogleMapController mapController;
+  late LatLng _currentPosition1 = LatLng(
+      double.parse(viewcategorywisevieweetailmodal?.data?.latitude ?? ""),
+      double.parse(viewcategorywisevieweetailmodal?.data?.longitude ?? ""));
+  bool _isSatellite = false;
+  GoogleMapController? _mapController;
+
+  List<String> _imagePaths = [];
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  // void _onMapTapped(LatLng latLng) {
+  //   setState(() {
+  //     _markers.clear();
+  //     _markers.add(Marker(
+  //       markerId: MarkerId('Tapped Location'),
+  //       position: latLng,
+  //     ));
+  //   });
+  // }
+  int currentIndex = 0;
+
+  void _searchAndNavigate() async {
+    final String address = searchController.text;
+    List<Location> locations = await locationFromAddress(address);
+    if (locations != null && locations.isNotEmpty) {
+      setState(() {
+        _center = LatLng(locations[0].latitude, locations[0].longitude);
+        _markers.clear();
+        _markers.add(Marker(
+          markerId: MarkerId('Searched Location'),
+          position: _center,
+        ));
+        mapController!.animateCamera(CameraUpdate.newLatLng(_center));
+      });
+    }
+  }
+
+  // getLocation() async {
+  //   LocationPermission permission;
+  //   permission = await Geolocator.requestPermission();
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   double lat = position.latitude;
+  //   double long = position.longitude;
+  //   LatLng location = LatLng(lat, long);
+  //   setState(() {
+  //     _currentPosition1 = location;
+  //     lat1 = lat;
+  //     lng1 = long;
+  //     isLoading = false;
+  //   });
+  // }
 
   MapType _mapType = MapType.normal;
 
@@ -226,23 +221,24 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
       _mapType = _isSatellite ? MapType.satellite : MapType.normal;
     });
   }
+
   DateTime? futureDate;
   double? lat1, lng1;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     viewposition();
-    getLocation();
-    isLoading =true;
+    // getLocation();
+    isLoading = true;
     setState(() {
       futureDate = now.add(Duration(days: 10));
-
     });
     setState(() {
-      isLoading =true;
+      isLoading = true;
     });
-    wedther();
+
     print("Postidavigayache:-${widget.postid.toString()}");
   }
 
@@ -262,7 +258,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                 height: 4.h,
               ),
               header(
-                  text: "Detail",
+                  text: "Details",
                   callback1: () {
                     _scaffoldKeyProductlistpage.currentState
                         ?.openDrawer();
@@ -353,287 +349,184 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                 return StatefulBuilder(
                                   builder: (context, setState) {
                                     return AlertDialog(
-                                      content: Column(
-                                        mainAxisSize:
-                                        MainAxisSize.min,
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: (){
-                                                  Get.back();
-                                                },
-                                                child: Container(
+                                      contentPadding: EdgeInsets.all(10), // Optional: Adjust padding if needed
+                                      content: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Container(
                                                     height: 10.w,
                                                     width: 10.w,
-                                                    alignment: Alignment
-                                                        .center,
-                                                    decoration:
-                                                    BoxDecoration(
-                                                        shape: BoxShape
-                                                            .circle,
-                                                        color: Colors
-                                                            .black),
-                                                    child:
-                                                    Icon(
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.black,
+                                                    ),
+                                                    child: Icon(
                                                       Icons.close,
                                                       size: 15.sp,
-                                                      color: Colors
-                                                          .white,
-                                                    )),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            children: [
-                                              Center(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Center(
                                                   child: Text(
                                                     'Add More Pictures',
                                                     style: TextStyle(
-                                                        fontSize: 18.sp,
-                                                        fontFamily:
-                                                        "volken",
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .bold),
-                                                  )),
-                                            ],
-                                          ),
-                                          selectedimage == null
-                                              ? Container()
-                                              : Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets
-                                                    .symmetric(
-                                                    horizontal:
-                                                    1.w),
-                                                height: 30.w,
-                                                width: 30.w,
-                                                decoration:
-                                                BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      15),
-                                                  border: Border
-                                                      .all(
-                                                    color:
-                                                    bgcolor,
-                                                    // Border color
-                                                    width: 2
-                                                        .sp, // Border width
+                                                      fontSize: 18.sp,
+                                                      fontFamily: "volken",
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
-                                                child:
-                                                ClipRRect(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      15),
-                                                  child: selectedimage !=
-                                                      null
-                                                      ? Image
-                                                      .file(
-                                                    selectedimage!,
-                                                    fit: BoxFit
-                                                        .cover,
-                                                  )
-                                                      : Container(),
+                                              ],
+                                            ),
+                                            selectedimage == null
+                                                ? Container()
+                                                : Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                                  height: 30.w,
+                                                  width: 30.w,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    border: Border.all(
+                                                      color: bgcolor,
+                                                      width: 2.sp,
+                                                    ),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    child: Image.file(
+                                                      selectedimage!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          resultList1 == null
-                                              ? Container()
-                                              : Column(
-                                            children: [
-                                              //for first select
-                                              // !selectedImages
-                                              //         .isEmpty
-                                              //     ? GridView
-                                              //         .builder(
-                                              //         shrinkWrap:
-                                              //             true,
-                                              //         physics:
-                                              //             NeverScrollableScrollPhysics(),
-                                              //         padding:
-                                              //             EdgeInsets
-                                              //                 .zero,
-                                              //         gridDelegate:
-                                              //             SliverGridDelegateWithFixedCrossAxisCount(
-                                              //                 crossAxisCount: 3),
-                                              //         itemBuilder:
-                                              //             (context,
-                                              //                 index) {
-                                              //           return GestureDetector(
-                                              //             onTap:
-                                              //                 () async {
-                                              //               resultList =
-                                              //                   await ImagePicker().pickMultiImage();
-                                              //
-                                              //               if (resultList !=
-                                              //                   null) {
-                                              //                 if (resultList!.length + selectedImages.length > maxImageLimit) {
-                                              //                   print('Maximum image limit exceeded');
-                                              //                 } else {
-                                              //                   setState(() {
-                                              //                     selectedImages = resultList!.map((XFile file) => File(file.path)).toList()!;
-                                              //                     imagePaths.addAll(resultList!.map((file) => file.path).toList());
-                                              //                   });
-                                              //                 }
-                                              //               }
-                                              //             },
-                                              //             child:
-                                              //                 Container(
-                                              //               margin:
-                                              //                   EdgeInsets.all(3.w),
-                                              //               height:
-                                              //                   60.h,
-                                              //               width:
-                                              //                   70.w,
-                                              //               decoration:
-                                              //                   BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
-                                              //             ),
-                                              //           );
-                                              //         },
-                                              //         itemCount:
-                                              //             9,
-                                              //       )
-                                              //     : Container(),
-                                              selectedImages
-                                                  .isEmpty
-                                                  ? Container()
-                                                  :
-                                              //disply after first selection
-                                              GridView
-                                                  .builder(
-                                                shrinkWrap:
-                                                true,
-                                                physics:
-                                                NeverScrollableScrollPhysics(),
-                                                padding:
-                                                EdgeInsets
-                                                    .zero,
-                                                gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 3),
-                                                itemCount:
-                                                9,
-                                                itemBuilder:
-                                                    (context,
-                                                    index) {
-                                                  if (index < selectedImages.length &&
-                                                      selectedImages[index] !=
-                                                          null) {
-                                                    return Container(margin: EdgeInsets.all(3.w), height: 70.h, width: 70.w, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)), child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.file(selectedImages[index], height: 60.h, width: 70.w, fit: BoxFit.cover)));
-                                                  } else {
-                                                    //remaining container
-                                                    return GestureDetector(
-                                                      onTap:
-                                                          () async {
-                                                        resultList1 = await ImagePicker().pickMultiImage();
-                                                        if (resultList1 != null) {
-                                                          if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                            // Handle maximum image limit exceeded
-                                                            buildErrorDialog(context, "", "You selected more than 9 images");
-                                                          } else {
-                                                            setState(() {
-                                                              print(selectedImages);
-                                                              selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                              imagePaths = resultList1!.map((file) => file.path).toList();
-                                                            });
-                                                          }
-                                                        }
-                                                      },
-                                                      child:
-                                                      Container(
+                                              ],
+                                            ),
+                                            resultList1 == null
+                                                ? Container()
+                                                : Column(
+                                              children: [
+                                                selectedImages.isEmpty
+                                                    ? Container()
+                                                    : GridView.builder(
+                                                  shrinkWrap: true,
+                                                  physics: NeverScrollableScrollPhysics(),
+                                                  padding: EdgeInsets.zero,
+                                                  gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 3,
+                                                  ),
+                                                  itemCount: 9,
+                                                  itemBuilder: (context, index) {
+                                                    if (index < selectedImages.length &&
+                                                        selectedImages[index] != null) {
+                                                      return Container(
                                                         margin: EdgeInsets.all(3.w),
-                                                        height: 60.h,
+                                                        height: 70.h,
                                                         width: 70.w,
-                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.grey)),
-                                                      ),
-                                                    );
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(15),
+                                                          border: Border.all(color: Colors.grey),
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius: BorderRadius.circular(15),
+                                                          child: Image.file(
+                                                            selectedImages[index],
+                                                            height: 60.h,
+                                                            width: 70.w,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      return GestureDetector(
+                                                        onTap: () async {
+                                                          resultList1 = await ImagePicker().pickMultiImage();
+                                                          if (resultList1 != null) {
+                                                            if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                              buildErrorDialog(context, "", "You selected more than 9 images");
+                                                            } else {
+                                                              setState(() {
+                                                                selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                imagePaths = resultList1!.map((file) => file.path).toList();
+                                                              });
+                                                            }
+                                                          }
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets.all(3.w),
+                                                          height: 60.h,
+                                                          width: 70.w,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(15),
+                                                            border: Border.all(color: Colors.grey),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            batan(
+                                              title: "Select Photo",
+                                              route: () async {
+                                                resultList1 = await ImagePicker().pickMultiImage();
+                                                if (resultList1 != null) {
+                                                  if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                    buildErrorDialog(context, "", "You selected more than 9 images");
+                                                  } else {
+                                                    setState(() {
+                                                      selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                      imagePaths = resultList1!.map((file) => file.path).toList();
+                                                    });
                                                   }
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(height: 2.h),
-                                          batan(
-                                            title: "Select Photo",
-                                            route: () async {
-                                              resultList1 =
-                                              await ImagePicker()
-                                                  .pickMultiImage();
-                                              if (resultList1 !=
-                                                  null) {
-                                                if (resultList1!
-                                                    .length +
-                                                    selectedImages
-                                                        .length >
-                                                    maxImageLimit) {
-                                                  // Handle maximum image limit exceeded
-                                                  buildErrorDialog(
-                                                      context,
-                                                      "",
-                                                      "You selected more than 9 images");
-                                                } else {
-                                                  setState(() {
-                                                    print(
-                                                        selectedImages);
-                                                    selectedImages.addAll(resultList1!
-                                                        .map((XFile
-                                                    file) =>
-                                                        File(file
-                                                            .path))
-                                                        .toList());
-                                                    imagePaths = resultList1!
-                                                        .map((file) =>
-                                                    file.path)
-                                                        .toList();
-                                                  });
                                                 }
-                                              }
-                                            },
-                                            hight: 6.h,
-                                            width:
-                                            MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            txtsize: 15.sp,
-                                          ),
-                                          SizedBox(height: 2.h),
-                                          selectedImages.isNotEmpty
-                                              ? batan(
-                                            title: "Upload",
-                                            route: () {
-                                              addnewimageapi();
-                                            },
-                                            hight: 6.h,
-                                            width:
-                                            MediaQuery.of(
-                                                context)
-                                                .size
-                                                .width,
-                                            txtsize: 15.sp,
-                                          )
-                                              : SizedBox(),
-                                        ],
+                                              },
+                                              hight: 6.h,
+                                              width: MediaQuery.of(context).size.width,
+                                              txtsize: 15.sp,
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            selectedImages.isNotEmpty
+                                                ? batan(
+                                              title: "Upload",
+                                              route: () {
+                                                addnewimageapi();
+                                              },
+                                              hight: 6.h,
+                                              width: MediaQuery.of(context).size.width,
+                                              txtsize: 15.sp,
+                                            )
+                                                : SizedBox(),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },
                                 );
                               },
                             );
+
                           },
                           hight: 6.h,
                           width: MediaQuery.of(context).size.width,
@@ -839,7 +732,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Facilities Nearby :-",
+                      Text("Facilities Nearby",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -1763,7 +1656,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Description :-",
+                      Text("Description",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,
@@ -1823,7 +1716,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Protection : -",
+                      Text("Protection",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -1857,13 +1750,186 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           // featuresTextStyle: TextStyle(color: Colors.white),
                         ),
                       ),
-
+                      // buildCheckboxRow('North (N)', [
+                      //   buildCheckbox('Some protection', N1, (val) {
+                      //     setState(() {
+                      //       N1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', N2, (val) {
+                      //     setState(() {
+                      //       N2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', N3, (val) {
+                      //     setState(() {
+                      //       N3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('Northeast (NE)', [
+                      //   buildCheckbox('Some protection', NE1, (val) {
+                      //     setState(() {
+                      //       NE1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', NE2, (val) {
+                      //     setState(() {
+                      //       NE2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', NE3, (val) {
+                      //     setState(() {
+                      //       NE3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('East (E)', [
+                      //   buildCheckbox('Some protection', E1, (val) {
+                      //     setState(() {
+                      //       E1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', E2, (val) {
+                      //     setState(() {
+                      //       E2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', E3, (val) {
+                      //     setState(() {
+                      //       E3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('Southeast (SE)', [
+                      //   buildCheckbox('Some protection', SE1, (val) {
+                      //     setState(() {
+                      //       SE1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', SE2, (val) {
+                      //     setState(() {
+                      //       SE2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', SE3, (val) {
+                      //     setState(() {
+                      //       SE3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('South (S)', [
+                      //   buildCheckbox('Some protection', S1, (val) {
+                      //     setState(() {
+                      //       S1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', S2, (val) {
+                      //     setState(() {
+                      //       S2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', S3, (val) {
+                      //     setState(() {
+                      //       S3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('Southwest (SW)', [
+                      //   buildCheckbox('Some protection', SW1, (val) {
+                      //     setState(() {
+                      //       SW1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', SW2, (val) {
+                      //     setState(() {
+                      //       SW2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', SW3, (val) {
+                      //     setState(() {
+                      //       SW3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('West (W)', [
+                      //   buildCheckbox('Some protection', W1, (val) {
+                      //     setState(() {
+                      //       W1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', W2, (val) {
+                      //     setState(() {
+                      //       W2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', W3, (val) {
+                      //     setState(() {
+                      //       W3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // buildCheckboxRow('West (W)', [
+                      //   buildCheckbox('Some protection', NW1, (val) {
+                      //     setState(() {
+                      //       NW1 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Average protection', NW2, (val) {
+                      //     setState(() {
+                      //       NW2 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      //   buildCheckbox('Completely protected', NW3, (val) {
+                      //     setState(() {
+                      //       NW3 = val;
+                      //       updateData();
+                      //     });
+                      //   }),
+                      // ]),
+                      // Repeat for other directions...
                     ],
                   ),
                   SizedBox(
                     height: 2.h,
                   ),
-                 
+                  Row(
+                    children: [
+                      Text("Details",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              color: blackback,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "volken"))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Row(
                     children: [
                       Container(
@@ -1879,7 +1945,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             children: [
                               Row(
                                 children: [
-                                  Text("Characteristics",
+                                  Text("Mooring Options",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: blackback,
@@ -1906,7 +1972,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           borderRadius:
                                           BorderRadius.circular(15),
                                           child: CachedNetworkImage(
-                                            imageUrl:" https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg",
+                                            imageUrl:
+                                            'https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg',
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
@@ -2165,7 +2232,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                             progressIndicatorBuilder:
                                                 (context, url,
                                                 progress) =>
-                                                CircularProgressIndicator(),
+                                                Center(child: CircularProgressIndicator()),
                                             errorWidget: (context, url,
                                                 error) =>
                                                 Image.asset(
@@ -2253,7 +2320,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             children: [
                               Row(
                                 children: [
-                                  Text("Seabed types :-",
+                                  Text("Seabed types",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: blackback,
@@ -2270,7 +2337,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                   SizedBox(
                                     width: 87.w,
                                     child: Text(
-                                        "You'll find the following types of seabed at",
+                                        "You'll find the following types of seabed at Anse de l'Aiguade",
                                         style: TextStyle(
                                             letterSpacing: 1,
                                             color: secondary,
@@ -2887,7 +2954,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             children: [
                               Row(
                                 children: [
-                                  Text("Weather :-",
+                                  Text("Weather",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: blackback,
@@ -3271,7 +3338,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       SizedBox(
                                         width: 25.w,
                                         child: Text(
-                                          "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null ? "N/A" : (((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).toStringAsFixed(1)}°C",
+                                          "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null ? "N/A" : ((((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).round()).toString()}°C",
                                           style: TextStyle(
                                             overflow:
                                             TextOverflow.ellipsis,
@@ -3328,7 +3395,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           initialCameraPosition: CameraPosition(
                             target: _currentPosition1,
                             // You can set your initial position here
-                            zoom: 12.0,
+                            zoom: 5.0,
                           ),
                           gestureRecognizers: Set()
                             ..add(Factory<OneSequenceGestureRecognizer>(
@@ -3787,258 +3854,392 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
     );
   }
 
+  report() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+                insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                // backgroundColor: Colors.transparent,
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 3.w),
+                          // height:  MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: bgcolor,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height: 7.w,
+                                    width: 7.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(100),
+                                        color: Colors.black),
+                                    child: InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                          size: 15.sp,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Report Property",
+                                    style: TextStyle(
+                                        letterSpacing: 1,
+                                        color: Colors.black,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "Volkan"),
+                                  ),
+                                  SizedBox(height: 1.h),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Text("Category",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: Colors.black,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "volken")),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Container(
+                                height: 5.5.h,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                  Border.all(width: 1, color: secondary),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: DropdownButton(
+                                  dropdownColor: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  hint: Text("Please Select Position Category",
+                                      style: TextStyle(
+                                        color: secondary,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: selectedvalue,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      selectedvalue = val!;
+                                      print(selectedvalue);
+                                    });
+                                  },
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text("--- Select ---",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "--- Select ---",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("sexual content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "sexual-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child:
+                                      Text("violent or repulsive content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "violent-or-repulsive-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("hateful or abusive content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "hateful-or-abusive-content",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("harassment or bullying",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "harassment-or-bullying",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("harmful or dangerous acts",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "harmful-or-dangerous-acts",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Misinformation",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "misinformation",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Child Abuse",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "child-abuse",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Promotes",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "promotes",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Spam or Misleading",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "spam-or-misleading",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Legal issue",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "legal-issue",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Captions issue",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "captions-issue",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("Other",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
+                                      value: "other",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Your Name",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: Colors.black,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan")),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Container(
+                                    width: 85.w,
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.text,
+                                      style: TextStyle(color: Colors.black),
+                                      controller: _name,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Please Enter Your Name ";
+                                        }
+                                        return null;
+                                      },
+                                      decoration: inputDecoration(
+                                        hintText: "Enter Your Your Name",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Message",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: Colors.black,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "Volkan")),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Container(
+                                    width: 85.w,
+                                    child: TextFormField(
+                                      maxLines: 4,
+                                      keyboardType: TextInputType.text,
+                                      style: TextStyle(color: Colors.black),
+                                      controller: _email,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Please Enter Message ";
+                                        }
+                                        return null;
+                                      },
+                                      decoration: inputDecoration(
+                                        hintText: "Enter Your Message",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              batan(
+                                  title: "REPORT",
+                                  route: () {
+                                    reportapifun();
+                                  },
+                                  hight: 6.h,
+                                  width: 85.w,
+                                  txtsize: 15.sp),
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ));
+          },
+        );
+      },
+    );
+  }
+
+  reportapifun() {
+    if (_formKey.currentState!.validate()) {
+      EasyLoading.show(status: 'Please Wait ...');
+      final Map<String, String> data = {};
+      data['post_id'] = widget.postid.toString();
+      data['opinion_text'] = selectedvalue.toString();
+      data['name'] = _name.text.toString();
+      data['message'] = _email.text.toString();
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().reportapi(data).then((response) async {
+            reportmodal = ReportModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && reportmodal?.success == true) {
+              EasyLoading.showSuccess(reportmodal?.message ?? '');
+              Get.back();
+              setState(() {});
+            } else {
+              EasyLoading.showError(reportmodal?.message ?? '');
+              setState(() {});
+            }
+          });
+        } else {
+          EasyLoading.showError(reportmodal?.message ?? '');
+          setState(() {});
+          buildErrorDialog(context, 'Error', "Internet Required");
+        }
+      });
+    }
+  }
+
   viewposition() {
     final Map<String, String> data = {};
     data['post_id'] = widget.postid.toString();
     data['user_id'] = (loginmodal?.userId).toString();
     print(data);
+    print("printData${data}");
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().viewsinganalpositionviewapi(data).then((response) async {
           viewcategorywisevieweetailmodal =
-              ViewCategoryWiseviewDetailModal.fromJson(json.decode(response.body));
+              ViewCategoryWiseviewDetailModal.fromJson(
+                  json.decode(response.body));
           if (response.statusCode == 200 &&
               viewcategorywisevieweetailmodal?.success == true) {
-            // setState(() {
-            //
-            //
-            //   dynamic waterValue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.water;
-            //   if (waterValue != null && waterValue is bool) {
-            //     setState(() {
-            //       print("water${water}");
-            //       water = waterValue;
-            //     });
-            //   } else {
-            //     water = false;
-            //   }
-            //   dynamic rocksvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.rocks;
-            //   if (rocksvalue != null && rocksvalue is bool) {
-            //     setState(() {
-            //       rocks = rocksvalue;
-            //     });
-            //   } else {
-            //     rocks = false;
-            //   }
-            //   dynamic coralvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.coral;
-            //   if (coralvalue != null && coralvalue is bool) {
-            //     setState(() {
-            //       coral = coralvalue;
-            //     });
-            //   } else {
-            //     coral = false;
-            //   }
-            //   dynamic clayvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.clay;
-            //   if (clayvalue != null && clayvalue is bool) {
-            //     setState(() {
-            //       clay = clayvalue;
-            //     });
-            //   } else {
-            //     clay = false;
-            //   }
-            //   dynamic sandvalue = viewcategorywisevieweetailmodal?.data?.metaFields?.sand;
-            //   if (sandvalue != null && sandvalue is bool) {
-            //     setState(() {
-            //       sand = sandvalue;
-            //     });
-            //   } else {
-            //     sand = false;
-            //   }
-            //   dynamic buoysvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.buoys;
-            //   if (buoysvalue != null && buoysvalue is bool) {
-            //     setState(() {
-            //       buoys = buoysvalue;
-            //     });
-            //   } else {
-            //     buoys = false;
-            //   }
-            //   dynamic restaurantsvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.restaurant;
-            //   if (restaurantsvalue != null && restaurantsvalue is bool) {
-            //     setState(() {
-            //       restaurant = restaurantsvalue;
-            //     });
-            //   } else {
-            //     restaurant = false;
-            //   }
-            //   dynamic alcoholvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.alcohol;
-            //   if (alcoholvalue != null && alcoholvalue is bool) {
-            //     setState(() {
-            //       alcohol = alcoholvalue;
-            //     });
-            //   } else {
-            //     alcohol = false;
-            //   }
-            //   dynamic pharmacyvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.pharmacy;
-            //   if (pharmacyvalue != null && pharmacyvalue is bool) {
-            //     setState(() {
-            //       pharmacy = pharmacyvalue;
-            //     });
-            //   } else {
-            //     pharmacy = false;
-            //   }
-            //   dynamic groceriesvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.groceries;
-            //   if (groceriesvalue != null && groceriesvalue is bool) {
-            //     setState(() {
-            //       groceries = groceriesvalue;
-            //     });
-            //   } else {
-            //     groceries = false;
-            //   }
-            //   dynamic mountainvalue = viewcategorywisevieweetailmodal?.data?.metaFields
-            //       ?.mountainWedges;
-            //   if (mountainvalue != null && mountainvalue is bool) {
-            //     setState(() {
-            //       mountain = mountainvalue;
-            //
-            //     });
-            //   } else {
-            //     mountain = false;
-            //   }
-            //   dynamic NW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw3;
-            //   if (NW3value != null && NW3value is bool) {
-            //     setState(() {
-            //       NW3 = NW3value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     NW3 = false;
-            //   }
-            //   dynamic NW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw1;
-            //   if (NW1value != null && NW1value is bool) {
-            //     setState(() {
-            //       NW1 = NW1value;
-            //       updateData();
-            //       print("NW1${NW1}");
-            //       print("NW1value${NW1value}");
-            //     });
-            //   } else {
-            //     NW1 = false;
-            //   }
-            //   dynamic NW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.nw2;
-            //   if (NW2value != null && NW2value is bool) {
-            //     setState(() {
-            //       NW2 = NW1value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     NW2 = false;
-            //   }
-            //   dynamic N1value = viewcategorywisevieweetailmodal?.data?.metaFields?.n1;
-            //   if (N1value != null && N1value is bool) {
-            //     setState(() {
-            //       N1 = N1value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     N1 = false;
-            //   }
-            //   dynamic N2value = viewcategorywisevieweetailmodal?.data?.metaFields?.n2;
-            //   if (N2value != null && N1value is bool) {
-            //     setState(() {
-            //       N2 = N2value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     N2 = false;
-            //   }
-            //   dynamic N3value = viewcategorywisevieweetailmodal?.data?.metaFields?.n3;
-            //   if (N3value != null && N3value is bool) {
-            //     setState(() {
-            //       N3 = N3value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     N3 = false;
-            //   }
-            //   dynamic E1value = viewcategorywisevieweetailmodal?.data?.metaFields?.e1;
-            //   if (E1value != null && E1value is bool) {
-            //     setState(() {
-            //       E1 = E1value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     E1 = false;
-            //   }
-            //   dynamic E2value = viewcategorywisevieweetailmodal?.data?.metaFields?.e2;
-            //   if (E2value != null && E2value is bool) {
-            //     setState(() {
-            //       E2 = E2value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     E2 = false;
-            //   }
-            //   dynamic E3value = viewcategorywisevieweetailmodal?.data?.metaFields?.e3;
-            //   if (E3value != null && E3value is bool) {
-            //     setState(() {
-            //       E3 = E3value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     E3 = false;
-            //   }
-            //   dynamic W1value = viewcategorywisevieweetailmodal?.data?.metaFields?.w1;
-            //   if (W1value != null && W1value is bool) {
-            //     setState(() {
-            //       W1 = W1value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     W1 = false;
-            //   }
-            //   dynamic W2value = viewcategorywisevieweetailmodal?.data?.metaFields?.w2;
-            //   if (W2value != null && W2value is bool) {
-            //     setState(() {
-            //       W2 = W2value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     W2 = false;
-            //   }
-            //   dynamic W3value = viewcategorywisevieweetailmodal?.data?.metaFields?.w3;
-            //   if (W3value != null && W3value is bool) {
-            //     setState(() {
-            //       W3 = W3value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     W3 = false;
-            //   }
-            //   dynamic SW1value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw1;
-            //   if (SW1value != null && SW1value is bool) {
-            //     setState(() {
-            //       SW1 = SW1value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     SW1 = false;
-            //   }
-            //   dynamic SW2value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw2;
-            //   if (SW2value != null && SW2value is bool) {
-            //     setState(() {
-            //       SW2 = SW2value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     SW2 = false;
-            //   }
-            //   dynamic SW3value = viewcategorywisevieweetailmodal?.data?.metaFields?.sw3;
-            //   if (SW3value != null && SW3value is bool) {
-            //     setState(() {
-            //       SW3 = SW3value;
-            //       updateData();
-            //     });
-            //   } else {
-            //     SW3 = false;
-            //   }
-            // });
+            wedther();
             setState(() {
               dynamic waterValue =
                   viewcategorywisevieweetailmodal?.data?.metaFields?.water;
@@ -4389,8 +4590,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
             index < (shoallmarkermodal?.positions?.length ?? 0);
             index++) {
               print("markerlength${shoallmarkermodal?.positions?.length}");
-              var latitudeString = viewcategorywisevieweetailmodal?.data?.latitude;
-              var longitudeString = viewcategorywisevieweetailmodal?.data?.longitude;
+              var latitudeString =
+                  viewcategorywisevieweetailmodal?.data?.latitude;
+              var longitudeString =
+                  viewcategorywisevieweetailmodal?.data?.longitude;
 
               if (latitudeString != null && longitudeString != null) {
                 // Validate latitude and longitude strings
@@ -4399,7 +4602,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   try {
                     double latitude = double.parse(latitudeString);
                     double longitude = double.parse(longitudeString);
-                    String imageurl=(shoallmarkermodal
+                    String imageurl = (shoallmarkermodal
                         ?.positions?[index].properties?.imgURL)
                         .toString();
                     _customMarkers.add(
@@ -4411,7 +4614,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                             setState(() {
                               select = index;
                             });
-
                           },
                           markerId: MarkerId(
                               'id-${shoallmarkermodal?.positions?[index].properties?.title.toString()}'),
@@ -4662,7 +4864,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               SizedBox(
                                 height: 2.h,
                               ),
-                              loginmodal?.userId==""||loginmodal?.userId==null?Container():batan(
+                              loginmodal?.userId == "" ||
+                                  loginmodal?.userId == null
+                                  ? Container()
+                                  : batan(
                                   title: "Add Review",
                                   route: () {
                                     if (_rating == 0) {
@@ -4693,19 +4898,20 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
     );
   }
 
-  addfevorite(bool value,id) {
+  addfevorite(bool value, id) {
     EasyLoading.show(status: 'Please Wait ...');
     final Map<String, String> data = {};
     data['post_id'] = id.toString();
     data['user_id'] = (loginmodal?.userId).toString();
-    data['isFavorite'] =value?'0':'1' ;
+    data['isFavorite'] = value ? '0' : '1';
     print(data);
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().addfevouriteapi(data).then((response) async {
           addfavouritepositionmodal =
               AddFavouritePositionModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 && addfavouritepositionmodal?.success == true) {
+          if (response.statusCode == 200 &&
+              addfavouritepositionmodal?.success == true) {
             EasyLoading.showSuccess(addfavouritepositionmodal?.message ?? '');
             // viewposition();
             viewposition();
@@ -4731,11 +4937,22 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   }
 
   wedther() {
+    print(
+        "viewcategorywisevieweetailmodal?.data?.latitude,${viewcategorywisevieweetailmodal?.data?.latitude}");
+    print(
+        "viewcategorywisevieweetailmodal?.data?.longitude,${viewcategorywisevieweetailmodal?.data?.longitude}");
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().wedtherapi(viewcategorywisevieweetailmodal?.data?.latitude,viewcategorywisevieweetailmodal?.data?.longitude,'${now.year}-${now.month}-${now.day}','${futureDate!.year}-${futureDate!.month}-${futureDate!.day}').then((response) async {
-          daywisewedhtermodal = DaywiseWeatherModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 ) {
+        authprovider()
+            .wedtherapi(
+            viewcategorywisevieweetailmodal?.data?.latitude,
+            viewcategorywisevieweetailmodal?.data?.longitude,
+            '${now.year}-${now.month}-${now.day}',
+            '${futureDate!.year}-${futureDate!.month}-${futureDate!.day}')
+            .then((response) async {
+          daywisewedhtermodal =
+              DaywiseWeatherModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200) {
             setState(() {
               isLoading = false;
             });
@@ -4753,314 +4970,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
       }
     });
   }
-
-  report() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return Dialog(
-                insetPadding: EdgeInsets.symmetric(horizontal: 3.w),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                // backgroundColor: Colors.transparent,
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 3.w),
-                          // height:  MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: bgcolor,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: 7.w,
-                                    width: 7.w,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(100),
-                                        color: Colors.black),
-                                    child: InkWell(
-                                        onTap: () {
-                                          Get.back();
-                                        },
-                                        child: Icon(
-                                          Icons.close,
-                                          color: Colors.white,
-                                          size: 15.sp,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Report Property",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: Colors.black,
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "Volkan"),
-                                  ),
-                                  SizedBox(height: 1.h),
-
-                                ],
-                              ),
-                              SizedBox(
-                                height: 1.h,
-                              ),
-                              Text("Category :-",style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: Colors.black,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
-                              SizedBox(height: 1.h,),
-                              Container(
-                                height: 5.5.h,
-                                width: MediaQuery.of(context).size.width,
-                                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                                decoration: BoxDecoration(
-                                  color:  Colors.white,
-                                  border: Border.all(width: 1, color: secondary),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-
-                                child:DropdownButton(
-                                  dropdownColor: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  hint: Text("Please Select Position Category",style: TextStyle(color:secondary,fontFamily: "volken",)),
-
-                                  value: selectedvalue,
-                                  onChanged: (val)
-                                  {
-                                    setState((){
-                                      selectedvalue=val!;
-                                      print(selectedvalue);
-                                    });
-                                  },
-                                  items: [
-                                    DropdownMenuItem(
-                                      child: Text("--- Select ---",style: TextStyle(color:Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "--- Select ---",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("sexual content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "sexual-content",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("violent or repulsive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "violent-or-repulsive-content",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("hateful or abusive content",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "hateful-or-abusive-content",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("harassment or bullying",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "harassment-or-bullying",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("harmful or dangerous acts",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "harmful-or-dangerous-acts",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Misinformation",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "misinformation",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Child Abuse",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "child-abuse",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Promotes",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "promotes",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Spam or Misleading",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "spam-or-misleading",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Legal issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "legal-issue",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Captions issue",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "captions-issue",
-                                    ),
-                                    DropdownMenuItem(
-                                      child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                      value: "other",
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 1.h,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Your Name :-",
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: Colors.black,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan")),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  Container(
-                                    width: 85.w,
-                                    child: TextFormField(
-
-                                      keyboardType: TextInputType.text,
-                                      style: TextStyle(color: Colors.black),
-                                      controller: _name,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Please Enter Your Name ";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: inputDecoration(
-                                        hintText: "Enter Your Your Name",
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 1.h,
-                              ),
-
-
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Message :-",
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: Colors.black,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "Volkan")),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  Container(
-                                    width: 85.w,
-                                    child: TextFormField(
-                                      maxLines: 4,
-                                      keyboardType: TextInputType.text,
-                                      style: TextStyle(color: Colors.black),
-                                      controller: _email,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Please Enter Message ";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: inputDecoration(
-                                        hintText: "Enter Your Message",
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              batan(
-                                  title: "REPORT",
-                                  route: () {
-                                    reportapifun();
-                                  },
-                                  hight: 6.h,
-                                  width: 85.w,
-                                  txtsize: 15.sp),
-                              SizedBox(
-                                height: 3.h,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ));
-          },
-        );
-      },
-    );
-  }
-
-
-  reportapifun() {
-    if (_formKey.currentState!.validate()) {
-      EasyLoading.show(status: 'Please Wait ...');
-      final Map<String, String> data = {};
-      data['post_id'] = widget.postid.toString();
-      data['opinion_text'] = selectedvalue.toString();
-      data['name'] =_name.text.toString();
-      data['message'] = _email.text.toString();
-      checkInternet().then((internet) async {
-        if (internet) {
-          authprovider().reportapi(data).then((response) async {
-            reportmodal =
-                ReportModal.fromJson(json.decode(response.body));
-            if (response.statusCode == 200 && reportmodal?.success == true) {
-              EasyLoading.showSuccess(reportmodal?.message ?? '');
-              Get.back();
-              setState(() {});
-            } else {
-              EasyLoading.showError(reportmodal?.message ?? '');
-              setState(() {});
-            }
-          });
-        } else {
-          EasyLoading.showError(reportmodal?.message ?? '');
-          setState(() {});
-          buildErrorDialog(context, 'Error', "Internet Required");
-        }
-      });
-    }
-  }
-
 
 
   void updateData() {
@@ -5100,8 +5009,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
     );
   }
 
-  Widget buildCheckbox(
-      String label, bool value, Function(bool) onChanged) {
+  Widget buildCheckbox(String label, bool value, Function(bool) onChanged) {
     return Row(
       children: [
         Checkbox(
@@ -5122,8 +5030,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
       ],
     );
   }
-
-
 
   addnewimageapi() async {
     print(selectedimage?.path);
@@ -5155,4 +5061,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
       }
     });
   }
+
+
 }

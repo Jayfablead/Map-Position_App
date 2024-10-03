@@ -38,7 +38,7 @@ class _SubscriptionAlarmScreenState extends State<SubscriptionAlarmScreen> {
   TextEditingController _position =TextEditingController();
 
   TextEditingController _title =TextEditingController();
-  Set<Marker> _markers = {};
+
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
   CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
@@ -61,74 +61,175 @@ class _SubscriptionAlarmScreenState extends State<SubscriptionAlarmScreen> {
 
 
 
-  getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
-    LatLng location = LatLng(lat, long);
-    setState(() {
-      _currentPosition1 = location;
-      lat1=lat;
-      lng1=long;
 
-    });
-  }
-  Marker? _marker;
+
   GoogleMapController? _mapController; // Add this line
   double? _lastLatitude;
   double? _lastLongitude;
+  Set<Marker> _markers = {};
+  double _calculateZoomLevel(double latitude, double longitude) {
+    // Adjust this logic based on your needs
+    // You can use distance from a reference point or other criteria
+    double zoomLevel = 15; // Default zoom level
+
+    // Example: Increase zoom level for closer ranges
+    if (latitude != 0.0 && longitude != 0.0) {
+      zoomLevel = 16; // More zoomed in
+    } else {
+      zoomLevel = 10; // Zoomed out
+    }
+
+    return zoomLevel;
+  }
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+    print('Map Controller Created');
 
-    // Example: Move camera to a new position if a condition is met
-    if (_lastLatitude != null && _lastLongitude != null) {
+    // Set initial camera position dynamically
+    LatLng initialPosition;
+    double initialZoom;
+
+    if (newupdatealarammodal?.alarm?.lattiude != null &&
+        newupdatealarammodal?.alarm?.longitude != null) {
+      double latitude = double.tryParse(viewcategorywisevieweetailmodal
+          ?.data?.latitude ==
+          "null" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == "" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == "null" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == null
+          ? _latitude.text
+          : viewcategorywisevieweetailmodal?.data?.latitude.toString() ??
+          '0.0') ??
+          0.0;
+      double longitude = double.tryParse(viewcategorywisevieweetailmodal
+          ?.data?.longitude ==
+          "null" ||
+          viewcategorywisevieweetailmodal?.data?.longitude == null ||
+          viewcategorywisevieweetailmodal?.data?.longitude == ""
+          ? _latitude1.text
+          : viewcategorywisevieweetailmodal?.data?.longitude.toString() ??
+          "0.0") ??
+          0.0;
+      initialPosition = LatLng(latitude, longitude);
+
+      // Dynamic zoom level logic (adjust as needed)
+      initialZoom = _calculateZoomLevel(latitude, longitude);
+    } else {
+      initialPosition = LatLng(37.7749, -122.4194); // Default location
+      initialZoom = 10; // Default zoom level
+    }
+
+    _mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: initialPosition,
+          zoom: initialZoom,
+        ),
+      ),
+    );
+
+    _updateMarker(); // Update marker after setting the camera position
+
+    print('Markers: $_markers');
+  }
+  bool isloding =true;
+  void _updateMarker() {
+    if (_latitude.text.isNotEmpty && _latitude1.text.isNotEmpty) {
+      double latitude = double.tryParse(_latitude.text) ?? 0.0;
+      double longitude = double.tryParse(_latitude1.text) ?? 0.0;
+
+      print('Updating marker to lat: $latitude, lng: $longitude'); // Debugging
+
+      Marker marker = Marker(
+        markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
+        position: LatLng(latitude, longitude),
+        infoWindow: InfoWindow(title: 'Alarm Location'),
+      );
+
+      setState(() {
+        _markers.removeWhere((m) =>
+        m.markerId.value ==
+            'alarm_marker'); // Remove old marker if it exists
+        _markers.add(marker); // Add new marker
+      });
+
       _mapController?.animateCamera(
         CameraUpdate.newLatLng(
-          LatLng(_lastLatitude!, _lastLongitude!),
+          LatLng(latitude, longitude),
         ),
       );
     } else {
-      // Default camera position if no marker is set
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(37.7749, -122.4194), // Default location
-        ),
-      );
+      print('No valid latitude or longitude'); // Debugging
     }
+  }
+  double lat = 0.0;
+  double long = 0.0;
+  void getLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    lat = double.tryParse(position.latitude.toString()) ?? 0.0;
+
+    long = double.tryParse(position.longitude.toString()) ?? 1.0;
+    LatLng location = LatLng(lat, long);
+    print("latlatlatlat${lat}");
+    setState(() {
+      _currentPosition1 = location;
+      _latitude.text = lat.toString();
+      _latitude1.text = long.toString();
+      _updateMarker();
+      isloding = false; // Ensure marker is updated with new location
+    });
+    print(" _latitude.text${_latitude.text}");
+    print(" _latitude.text${_latitude1.text}");
   }
   TextEditingController  _latitude =TextEditingController();
   TextEditingController  _latitude1 =TextEditingController();
-  void _onTap(LatLng location) {
-    setState(() {
-      _lastLatitude = location.latitude;
-      _lastLongitude = location.longitude;
-      _latitude.text= _lastLatitude.toString();
-      _latitude1.text= _lastLongitude.toString();
-      _marker = Marker(
-        markerId: MarkerId(location.toString()),
-        position: location,
-        infoWindow: InfoWindow(
-          title: 'New Marker',
-          snippet: 'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
-        ),
-      );
-
-      // Move the camera to the new marker position
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(location),
-      );
-    });
-  }
+  // void _onTap() {
+  //   setState(() {
+  //     _lastLatitude = lat1;
+  //     _lastLongitude = ;
+  //     _latitude.text= _lastLatitude.toString();
+  //     _latitude1.text= _lastLongitude.toString();
+  //     _marker = Marker(
+  //       markerId: MarkerId(location.toString()),
+  //       position: location,
+  //       infoWindow: InfoWindow(
+  //         title: 'New Marker',
+  //         snippet: 'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
+  //       ),
+  //     );
+  //
+  //     // Move the camera to the new marker position
+  //     _mapController?.animateCamera(
+  //       CameraUpdate.newLatLng(location),
+  //     );
+  //   });
+  // }
   String? selectedvalue = "";
   String? selectedvalue1 = "1";
   MapType _mapType = MapType.satellite;
+  void _onMapTapped(LatLng latLng) {
+    setState(() {
+      _markers.clear();
+      _markers.add(Marker(
+        markerId: MarkerId('Tapped Location'),
+        position: latLng,
+      ));
+
+      // Update text fields with tapped location
+      _latitude.text = latLng.latitude.toString();
+      _latitude1.text = latLng.longitude.toString();
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    setState(() {
+      isloding=true;
+    });
     getLocation();
   }
   Widget build(BuildContext context) {
@@ -148,7 +249,7 @@ SizedBox(
 
 ),
                 header(
-                    text: "Subscription Alarm",
+                    text: "Add Alert",
                     callback1: () {
                       _scaffoldKeyProductlistpage1.currentState?.openDrawer();
                     }),
@@ -165,6 +266,7 @@ SizedBox(
                             fontFamily: "volken")),
                   ],
                 ),
+                SizedBox(height: 2.h,),
                 Row(
                   children: [
                     Container(
@@ -176,8 +278,8 @@ SizedBox(
                               color: Colors.black12, width: 1.sp)),
                       child: GoogleMap(
                         onMapCreated: _onMapCreated,
-                        onTap: _onTap,
-                        markers: _marker != null ? {_marker!} : {},
+                        onTap: _onMapTapped,
+                        markers: _markers,
                         myLocationButtonEnabled: false,
                         myLocationEnabled: true,
                         zoomControlsEnabled: true,
@@ -201,7 +303,7 @@ SizedBox(
                     SizedBox(
                       height: 1.5.h,
                     ),
-                    Text("Latitude:- ",
+                    Text("Latitude",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -243,7 +345,7 @@ SizedBox(
                     SizedBox(
                       height: 1.5.h,
                     ),
-                    Text("Longitude:- ",
+                    Text("Longitude",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -280,7 +382,7 @@ SizedBox(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Title :-",
+                    Text("Title",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -300,12 +402,13 @@ SizedBox(
                     controller: _title,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Your Title";
+                        return "Please Enter Your Title of Alert";
+
                       }
                       return null;
                     },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Title",
+                        hintText: "Enter Your Title of Alert",
                         icon: Icon(
                           Icons.map,
                           color: secondary,
@@ -317,7 +420,7 @@ SizedBox(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Select a category:-",
+                    Text("Select a category",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -397,7 +500,7 @@ SizedBox(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Status:-",
+                    Text("Status",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -450,7 +553,7 @@ SizedBox(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Radius around your position (km)",
+                    Text("Alert radius from position",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -470,12 +573,12 @@ SizedBox(
                     controller: _position,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Your position";
+                        return "Please Enter Your Alert radius from position";
                       }
                       return null;
                     },
                     decoration: inputDecoration(
-                        hintText: "Enter Your position",
+                        hintText: "Enter Your Alert radius from position",
                         icon: Icon(
                           Icons.map,
                           color: secondary,
@@ -484,7 +587,7 @@ SizedBox(
                 ),
                 SizedBox(height: 2.h,),
                 batan(
-                    title: "Add ALARM",
+                    title: "Add ALERT",
                     route: () {
                       AddAlaram();
                     },

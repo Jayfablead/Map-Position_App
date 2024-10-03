@@ -301,7 +301,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       SizedBox(
                         height: 1.5.h,
                       ),
-                      Text("Latitude:- ",
+                      Text("Latitude",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -346,7 +346,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       SizedBox(
                         height: 1.5.h,
                       ),
-                      Text("Longitude:- ",
+                      Text("Longitude ",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -386,7 +386,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Title :-",
+                      Text("Title",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -406,12 +406,12 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       controller: _title,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Your Title";
+                          return "Please Enter Your Title of Alert";
                         }
                         return null;
                       },
                       decoration: inputDecoration(
-                          hintText: "Enter Your Title",
+                          hintText: "Enter Your Title of Alert",
                           icon: Icon(
                             Icons.map,
                             color: secondary,
@@ -423,7 +423,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Select a category:-",
+                      Text("Select a category",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -502,7 +502,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Status:-",
+                      Text("Status",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -555,7 +555,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Radius around your position (km)",
+                      Text("Alert radius from position",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: Colors.black,
@@ -575,12 +575,12 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                       controller: _position,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Your position";
+                          return "Please Enter Your Alert radius from position";
                         }
                         return null;
                       },
                       decoration: inputDecoration(
-                          hintText: "Enter Your position",
+                          hintText: "Enter Your Alert radius from position",
                           icon: Icon(
                             Icons.map,
                             color: secondary,
@@ -589,7 +589,7 @@ class _UpdatealramScreenTwoState extends State<UpdatealramScreenTwo> {
                   ),
                   SizedBox(height: 2.h,),
                   batan(
-                      title: "Update Alarm",
+                      title: "Update ALERT",
                       route: () {
                         AddAlaram();
                       },

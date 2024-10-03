@@ -531,7 +531,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           ),
                           Row(
                             children: [
-                              Text("Description :-",
+                              Text("Description",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: blackback,
@@ -603,7 +603,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text("Weather :-",
+                                          Text("Weather",
                                               style: TextStyle(
                                                   letterSpacing: 1,
                                                   color: blackback,
@@ -1589,7 +1589,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Your Rating :-",
+                                    "Your Rating",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,
@@ -1855,7 +1855,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Text("Category :-",style: TextStyle(
+                              Text("Category",style: TextStyle(
                                   letterSpacing: 1,
                                   color: Colors.black,
                                   fontSize: 15.sp,
@@ -1948,7 +1948,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Your Name :-",
+                                  Text("Your Name",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,

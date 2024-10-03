@@ -4202,7 +4202,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       // Set _currentPosition1 to the first marker position
                       if (index == 0) {
-                        _currentPosition1 = LatLng(latitude, longitude);
+                        searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);
+
                       }
                     } catch (e) {
                       print("Error parsing coordinates: $e");
@@ -4268,6 +4269,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Clear existing markers
             _customMarkers.clear();
             if (shoallmarkermodal?.positions?.length == 0) {
+               _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString()));
               print("_currentPosition1_currentPosition1${_currentPosition1}");
               print("denishdfgjsfg");
               buildErrorDialog1(
@@ -4694,7 +4696,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       // Set _currentPosition1 to the first marker position
                       if (index == 0) {
-                        _currentPosition1 = LatLng(latitude, longitude);
+                        searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);
                       }
                     } catch (e) {
                       print("Error parsing coordinates: $e");
@@ -5065,7 +5067,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     .properties?.imgUrl}");
                    
                 if (index == 0) {
-                  _currentPosition1 = LatLng(latitude, longitude);
+                  searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);
                 }
               } catch (e) {
                 print("Error parsing coordinates: $e");
@@ -5099,6 +5101,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = false;
     });
     if (positionController?.filteredProducts.length == 0) {
+       _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString()));
       print("_currentPosition1_currentPosition1${_currentPosition1}");
       print("jaylogadosdfgjsfg");
       buildErrorDialog1(
@@ -5407,7 +5410,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // _focusOnLiveLocation();
               if (index == 0) {
                 setState(() {
-                  _currentPosition1 = LatLng(latitude, longitude);
+                  searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);_currentPosition1 = LatLng(latitude, longitude);
                   print("Denish${_currentPosition1}");
                 });
               }

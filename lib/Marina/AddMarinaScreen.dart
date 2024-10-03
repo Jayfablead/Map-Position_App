@@ -556,6 +556,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ),
                           ],
                         ),
+
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 2.h,
                         ),
@@ -571,150 +572,168 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           height: 1.h,
                         ),
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                          height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          height: 6.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: secondary),
+                            color:  Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color:secondary),
                           ),
-                          child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            hint: Text("Please Select Position Category",
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontFamily: "volken",
-                                )),
-                            value: selectedvalue,
-                            onChanged: (val) {
-                              setState(() {
-                                selectedvalue = val!;
-                                print(selectedvalue);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("Anchorages",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Anchorages",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.5.w),
+                            child: DropdownButton<String>(
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                    CupertinoIcons.chevron_down,
+                                    size: 16.sp,
+                                    color: Colors.grey
+                                ),
                               ),
-                              DropdownMenuItem(
-                                child: Text("Bridges",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Bridges",
+                              dropdownColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              value: selectedvalue,
+                              iconSize: 24.sp,
+
+                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(16),
+                              onChanged: (val) {
+                                setState((){
+                                  selectedvalue = val as String?;
+                                  print("selectedvalue1selectedvalue1${selectedvalue}");
+                                });
+                              },
+                              hint: Text(
+                                  "Please Select Position Category",
+                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
                               ),
-                              DropdownMenuItem(
-                                child: Text("Ferries",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Ferries",
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Anchorages",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Anchorages",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Bridges",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Bridges",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Ferries",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Ferries",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Harbors",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Harbors",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Inlets",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Inlets",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Landmarks",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Landmarks",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Lighthouses",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Lighthouses",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Locks",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Locks",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Marinas",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Marinas",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Other",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Other",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Sabah",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "SBH",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Ramps",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Ramps",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Warning",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Warning",
+                                ),
+                              ],
+                              underline: Container(
+                                height: .8,
                               ),
-                              DropdownMenuItem(
-                                child: Text("Harbors",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Harbors",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Inlets",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Inlets",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Landmarks",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Landmarks",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Lighthouses",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Lighthouses",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Locks",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Locks",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Marinas",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Marinas",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Other",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Other",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Sabah",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "SBH",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Ramps",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Ramps",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("Warning",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Warning",
-                              ),
-                            ],
+                            ),
                           ),
                         ),
+
 
                         SizedBox(
                           height: 2.h,
@@ -1341,52 +1360,70 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
-                          height: 5.5.h,
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          height: 6.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: secondary),
+                            color:  Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color:secondary),
                           ),
-                          child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            hint: Text("Please Select Fuel Dock ",
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontFamily: "volken",
-                                )),
-                            value: services,
-                            onChanged: (val) {
-                              setState(() {
-                                services = val!;
-                                print(services);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("Yes",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Yes",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.5.w),
+                            child: DropdownButton<String>(
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                    CupertinoIcons.chevron_down,
+                                    size: 16.sp,
+                                    color: Colors.grey
+                                ),
                               ),
-                              DropdownMenuItem(
-                                child: Text("No",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "No",
+                              dropdownColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              value: services,
+                              iconSize: 24.sp,
+
+                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(16),
+                              onChanged: (val) {
+                                setState((){
+                                  services = val as String?;
+                                  print("selectedvalue1selectedvalue1${services}");
+                                });
+                              },
+                              hint: Text(
+                                  "Please Select Fuel Dock",
+                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
                               ),
-                            ],
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Yes",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Yes",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("No",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "No",
+                                ),
+                              ],
+                              underline: Container(
+                                height: .8,
+                              ),
+                            ),
                           ),
                         ),
+
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
@@ -1401,51 +1438,69 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           height: 1.h,
                         ),
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          height: 6.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: secondary),
+                            color:  Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color:secondary),
                           ),
-                          child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            hint: Text("Please Select Gas ",
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontFamily: "volken",
-                                )),
-                            value: gas,
-                            onChanged: (val) {
-                              setState(() {
-                                gas = val!;
-                                print(gas);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("Yes",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Yes",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.5.w),
+                            child: DropdownButton<String>(
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                    CupertinoIcons.chevron_down,
+                                    size: 16.sp,
+                                    color: Colors.grey
+                                ),
                               ),
-                              DropdownMenuItem(
-                                child: Text("No",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "No",
+                              dropdownColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              value: gas,
+                              iconSize: 24.sp,
+
+                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(16),
+                              onChanged: (val) {
+                                setState((){
+                                  gas = val as String?;
+                                  print("selectedvalue1selectedvalue1${gas}");
+                                });
+                              },
+                              hint: Text(
+                                  "Please Select Gas",
+                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
                               ),
-                            ],
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Yes",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Yes",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("No",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "No",
+                                ),
+                              ],
+                              underline: Container(
+                                height: .8,
+                              ),
+                            ),
                           ),
                         ),
+
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
@@ -1459,52 +1514,70 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                          height: 5.5.h,
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          height: 6.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: secondary),
+                            color:  Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color:secondary),
                           ),
-                          child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            hint: Text("Please Select Transient Storage ",
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontFamily: "volken",
-                                )),
-                            value: TransientStorage,
-                            onChanged: (val) {
-                              setState(() {
-                                TransientStorage = val!;
-                                print(TransientStorage);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("Yes",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Yes",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.5.w),
+                            child: DropdownButton<String>(
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                    CupertinoIcons.chevron_down,
+                                    size: 16.sp,
+                                    color: Colors.grey
+                                ),
                               ),
-                              DropdownMenuItem(
-                                child: Text("No",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "No",
+                              dropdownColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              value: TransientStorage,
+                              iconSize: 24.sp,
+
+                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(16),
+                              onChanged: (val) {
+                                setState((){
+                                  TransientStorage = val as String?;
+                                  print("selectedvalue1selectedvalue1${TransientStorage}");
+                                });
+                              },
+                              hint: Text(
+                                  "Please Select Transient Storage",
+                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
                               ),
-                            ],
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Yes",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Yes",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("No",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "No",
+                                ),
+                              ],
+                              underline: Container(
+                                height: .8,
+                              ),
+                            ),
                           ),
                         ),
+
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
@@ -1518,50 +1591,67 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                          height: 5.5.h,
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          height: 6.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(width: 1, color: secondary),
+                            color:  Colors.white,
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color:secondary),
                           ),
-                          child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            hint: Text("Please Select Transient Storage ",
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontFamily: "volken",
-                                )),
-                            value: longtermstorage,
-                            onChanged: (val) {
-                              setState(() {
-                                longtermstorage = val!;
-                                print(longtermstorage);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("Yes",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "Yes",
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0.w, vertical: 2.5.w),
+                            child: DropdownButton<String>(
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                    CupertinoIcons.chevron_down,
+                                    size: 16.sp,
+                                    color: Colors.grey
+                                ),
                               ),
-                              DropdownMenuItem(
-                                child: Text("No",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken",
-                                    )),
-                                value: "No",
+                              dropdownColor: Colors.white,
+                              padding: EdgeInsets.zero,
+                              value: longtermstorage,
+                              iconSize: 24.sp,
+
+                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(16),
+                              onChanged: (val) {
+                                setState((){
+                                  longtermstorage = val as String?;
+                                  print("selectedvalue1selectedvalue1${longtermstorage}");
+                                });
+                              },
+                              hint: Text(
+                                  "Please Select Transient Storage",
+                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
                               ),
-                            ],
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Yes",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "Yes",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("No",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "volken",
+                                      )),
+                                  value: "No",
+                                ),
+                              ],
+                              underline: Container(
+                                height: .8,
+                              ),
+                            ),
                           ),
                         ),
                         selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(

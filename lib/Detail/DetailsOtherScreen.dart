@@ -1070,7 +1070,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           ),
                           Row(
                             children: [
-                              Text("Nearby Listings",
+                              Text("Nearby Position",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: blackback,
@@ -1085,7 +1085,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                           addviewothermodal
                               ?.nearbyPosts?.length==""||addviewothermodal
                               ?.nearbyPosts?.length==0||addviewothermodal
-                              ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Listings Available", style: TextStyle(
+                              ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Position Available", style: TextStyle(
                               fontSize: 15.sp,
                               color: Colors.black,
                               fontWeight:

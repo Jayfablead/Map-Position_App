@@ -3417,7 +3417,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Nearby Listings",
+                            Text("Nearby Positions",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: blackback,
@@ -3442,7 +3442,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 height: 20.h,
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "No Nearby Listings Available",
+                                  "No Nearby Position Available",
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       color: Colors.black,

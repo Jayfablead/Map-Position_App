@@ -531,7 +531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                         hight: 5.h,
                                         width: 40.w,
-                                        txtsize: 12.sp)
+                                        txtsize: 10.sp)
                                     : batan(
                                         title: "+ Add Alarm",
                                         route: () {
@@ -539,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                         hight: 4.5.h,
                                         width: 40.w,
-                                        txtsize: 15.sp),
+                                        txtsize: 10.sp),
                                 SizedBox(
                                   width: 13.w,
                                 ),
@@ -560,7 +560,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                         hight: 5.h,
                                         width: 40.w,
-                                        txtsize: 12.sp)
+                                        txtsize: 10.sp)
                                     : batan(
                                         title: "+ Add Position",
                                         route: () {
@@ -571,7 +571,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                         hight: 4.5.h,
                                         width: 40.w,
-                                        txtsize: 15.sp),
+                                        txtsize: 10.sp),
                               ],
                             )
                             // PopupMenuButton(

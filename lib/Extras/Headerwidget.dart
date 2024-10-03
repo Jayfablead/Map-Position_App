@@ -32,7 +32,7 @@ Widget header({
       Text(
         text,
         style: TextStyle(
-          fontSize: 20.sp,
+          fontSize: 16.sp,
           fontFamily: 'sofi',
           letterSpacing: 1,
           color: blackback,

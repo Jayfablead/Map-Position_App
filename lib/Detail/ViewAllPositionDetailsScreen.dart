@@ -323,7 +323,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           loginmodal?.userId == null
                           ? batan(
                           title:
-                          "Add More Pictures",
+                          "Click to Add More Pictures From This Position",
                           route: () {
                             buildErrorDialog1(
                               context,
@@ -337,10 +337,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           },
                           hight: 6.h,
                           width: MediaQuery.of(context).size.width,
-                          txtsize: 12.sp)
+                          txtsize: 8.sp)
                           : batan(
                           title:
-                          "Add More Pictures",
+                          "Click to Add More Pictures From This Position",
                           route: () {
                             showDialog(
                               context: context,
@@ -530,7 +530,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                           },
                           hight: 6.h,
                           width: MediaQuery.of(context).size.width,
-                          txtsize: 11.sp),
+                          txtsize: 8.sp),
                       SizedBox(height: 1.h),
                       Row(
                         children: [

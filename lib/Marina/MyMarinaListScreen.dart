@@ -94,7 +94,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                         ),
                         header(
                           show: 1,
-                            text: "My Positions",
+                            text: "Mine",
                             callback1: () {
                               _scaffoldKeyProductlistpage.currentState
                                   ?.openDrawer();

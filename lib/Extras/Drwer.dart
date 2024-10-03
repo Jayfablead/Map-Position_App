@@ -104,7 +104,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Home",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -162,7 +162,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Login",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -220,7 +220,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Sign Up",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -279,7 +279,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Nearby",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -346,7 +346,7 @@ class _drawer1State extends State<drawer1> {
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: secondary,
-                                  fontSize: 17.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.normal,
                                   fontFamily: "volken")),
                         ),
@@ -393,7 +393,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Home",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -451,7 +451,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Premium",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -499,7 +499,7 @@ class _drawer1State extends State<drawer1> {
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      Icons.add_alert,
+                                      Icons.add_alert_rounded,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -510,7 +510,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Add Alerts",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -558,7 +558,7 @@ class _drawer1State extends State<drawer1> {
                                       color: blackback,
                                     ),
                                     child: Icon(
-                                      Icons.add_alert,
+                                      CupertinoIcons.bell_fill,
                                       color: bgcolor,
                                       size: 18.sp,
                                     ),
@@ -569,7 +569,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Alerts",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -627,7 +627,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Nearby",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -685,7 +685,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Add Position",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -743,7 +743,7 @@ class _drawer1State extends State<drawer1> {
 //                                   ),
 //                                   Text("ChangePassword",
 //                                       style: TextStyle(
-//                                         fontSize: 17.sp,
+//                                         fontSize: 15.sp,
 //                                         fontWeight: FontWeight.w500,
 //                                         fontFamily: 'volken',
 //                                         color:secondary,
@@ -802,7 +802,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Mine",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -860,7 +860,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Profile",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,
@@ -919,7 +919,7 @@ class _drawer1State extends State<drawer1> {
                                   ),
                                   Text("Logout",
                                       style: TextStyle(
-                                        fontSize: 17.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'volken',
                                         color:secondary,

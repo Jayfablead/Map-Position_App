@@ -102,9 +102,9 @@ class _BottombarState extends State<Bottombar> {
 
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.add_alert, color: Colors.black),
+                Icon(CupertinoIcons.bell_fill, color: Colors.black),
                 activeItem:
-                Icon(Icons.add_alert, color: Colors.white),
+                Icon(CupertinoIcons.bell_fill, color: Colors.white),
                 itemLabel: 'Alert',
               ),
               BottomBarItem(

@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     searchController.dispose();
     super.dispose();
+
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -364,6 +365,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         if (value.isEmpty) {
                                           setState(() {
                                             isLoading = true;
+
                                           });
                                           showmarker();
                                         }
@@ -833,7 +835,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_currentPosition1 != null && mapController != null) {
       mapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
-          target: _currentPosition1,
+          target: _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())),
           zoom: 5,
         ),
       ));
@@ -3755,6 +3757,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   showmarker() {
+
     print("online545454548782121212121261");
     print("dtadone");
     print("showmarker");
@@ -3774,13 +3777,18 @@ class _HomeScreenState extends State<HomeScreen> {
             // Clear existing markers
             _customMarkers.clear();
             if (shoallmarkermodal?.positions?.length == 0) {
+             
+              print("hareshsdfgjsfg");
+              _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString()));
+              print("_currentPosition1_currentPosition1${_currentPosition1}");
               buildErrorDialog1(
                 context,
                 '',
-                "No positions listed in this area",
+                "No positions found",
                 () {
                   setState(() {
                     searchController.clear();
+                    _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString()));
                     // isLoading = true;
                     Get.back();
                   });
@@ -4260,10 +4268,12 @@ class _HomeScreenState extends State<HomeScreen> {
             // Clear existing markers
             _customMarkers.clear();
             if (shoallmarkermodal?.positions?.length == 0) {
+              print("_currentPosition1_currentPosition1${_currentPosition1}");
+              print("denishdfgjsfg");
               buildErrorDialog1(
                 context,
                 '',
-                "No positions listed in this area",
+                "No positions found",
                 () {
                   setState(() {
                     searchController.clear();
@@ -5089,10 +5099,12 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = false;
     });
     if (positionController?.filteredProducts.length == 0) {
+      print("_currentPosition1_currentPosition1${_currentPosition1}");
+      print("jaylogadosdfgjsfg");
       buildErrorDialog1(
         context,
         '',
-        "No spots listed in this area",
+        "No positions found",
         () {
           setState(() {
             searchController.clear();

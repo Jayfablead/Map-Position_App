@@ -123,13 +123,14 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("warning Screen call tha che ho ");
     isLoading =true;
       setState(() {
       isLoading =true;
       futureDate = now.add(Duration(days: 10));
     });  viewposition();
     wedther();
-    print("Postidavigayache:-${widget.postid.toString()}");
+    print("Postidavigayache${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {
     return commanScreen(
@@ -608,7 +609,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                           ),
                           Row(
                             children: [
-                              Text("Description :-",
+                              Text("Description",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: blackback,
@@ -681,7 +682,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                     children: [
                                       Row(
                                         children: [
-                                          Text("Weather :-",
+                                          Text("Weather",
                                               style: TextStyle(
                                                   letterSpacing: 1,
                                                   color: blackback,
@@ -714,7 +715,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                   borderRadius: BorderRadius.circular(0),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind.png",
+                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind.png",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
@@ -749,13 +750,12 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                       20.w,
                                                       width:
                                                       20.w,
-
                                                       child:
                                                       ClipRRect(
                                                         borderRadius: BorderRadius.circular(0),
                                                         child: CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/swell.png",
+                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/swell.png",
                                                           progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                           errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                         ),
@@ -805,7 +805,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                   borderRadius: BorderRadius.circular(0),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
+                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
@@ -847,7 +847,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                         borderRadius: BorderRadius.circular(0),
                                                         child: CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
                                                           progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                           errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                         ),
@@ -896,7 +896,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                   borderRadius: BorderRadius.circular(0),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
+                                                    imageUrl:"https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
@@ -938,7 +938,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                         borderRadius: BorderRadius.circular(0),
                                                         child: CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/wave-line.png",
+                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wave-line.png",
                                                           progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                           errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                         ),
@@ -987,7 +987,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                   borderRadius: BorderRadius.circular(0),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: "https://boatposition.fableadtechnolabs.com/wp-content/themes/wpstate-child/img/weather/temp.png",
+                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/temp.png",
                                                     progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
                                                     errorWidget: (context, url, error) => Image.asset(Default_Profile),
                                                   ),
@@ -1479,7 +1479,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                         marker: Marker(
                           onTap: () {
                             print(
-                                "positiname:-${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
+                                "positiname${shoallmarkermodal?.positions?[index].properties?.title.toString()}");
                             setState(() {
                               select = index;
                             });
@@ -1653,7 +1653,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Your Rating :-",
+                                    "Your Rating",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,
@@ -1923,7 +1923,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Text("Category :-",style: TextStyle(
+                              Text("Category",style: TextStyle(
                                   letterSpacing: 1,
                                   color: Colors.black,
                                   fontSize: 15.sp,
@@ -2016,7 +2016,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Your Name :-",
+                                  Text("Your Name",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,
@@ -2057,7 +2057,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Message :-",
+                                  Text("Message",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: Colors.black,

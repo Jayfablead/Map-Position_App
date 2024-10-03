@@ -59,6 +59,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   TextEditingController _pricelebal1 = TextEditingController();
 
   String? selectedvalue = "Anchorages";
+  String? selectedvalue1;
   String? services = "Yes";
   String? gas = "Yes";
   String? TransientStorage = "Yes";
@@ -366,7 +367,59 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
+                        Text("Select Position Type",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: Colors.black,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          decoration: BoxDecoration(
+                            color:  Colors.white,
+                            border: Border.all(width: 1, color:secondary),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
 
+                          child:DropdownButton(
+                            dropdownColor: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            hint: Text("Please Select Position Type",style: TextStyle(color: Colors.black,  fontFamily: "volken",)),
+
+                            value: selectedvalue1,
+                            onChanged: (val)
+                            {
+                              setState((){
+                                selectedvalue1 = val as String?;
+                                print("selectedvalue1selectedvalue1${selectedvalue1}");
+                              });
+                            },
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                value: "Anchorage",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Warning",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                value: "Warning",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                                value: "Other",
+                              ),
+
+
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
                         Text("Title",
                             style: TextStyle(
                                 letterSpacing: 1,
@@ -428,109 +481,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text("Position Price",style: TextStyle(
-                        //         letterSpacing: 1,
-                        //         color: Colors.black,
-                        //         fontSize: 15.sp,
-                        //         fontWeight: FontWeight.bold,
-                        //         fontFamily: "volken")),
-                        //   ],
-                        // ),
-                        // SizedBox(height: 2.h,),
-                        // Text("Price in \$  :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.number,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _priceindoller,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Price";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Price",
-                        //         icon: Icon(
-                        //           Icons.payment,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 2.h,),
-                        // Text("After Price Label :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _pricelebal,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter After Price Label";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your After Price Label",
-                        //         icon: Icon(
-                        //           Icons.price_check,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 2.h,),
-                        // Text("Before Price Label :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _pricelebal1,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Before Price Label";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Before Price Label",
-                        //         icon: Icon(
-                        //           Icons.price_check,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 2.h,),
-                        Row(
+
+                        selectedvalue1=="Warning"|| selectedvalue1=="Anchorage"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Column(
@@ -546,10 +498,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        Text("Category",
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Category",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
@@ -557,10 +509,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
 
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
                           height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -1103,206 +1055,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        // SizedBox(
-                        //   height: 2.h,
-                        // ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text("Listing Location",style: TextStyle(
-                        //         letterSpacing: 1,
-                        //         color: Colors.black,
-                        //         fontSize: 15.sp,
-                        //         fontWeight: FontWeight.bold,
-                        //         fontFamily: "volken")),
-                        //   ],
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("Address :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _address,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Address";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Address",
-                        //         icon: Icon(
-                        //           Icons.home,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("City :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _city,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter City";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your City",
-                        //         icon: Icon(
-                        //           Icons.location_city_sharp,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("Neighborhood :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _neighborthood,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Neighborhood";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Neighborhood",
-                        //         icon: Icon(
-                        //           Icons.location_city_sharp,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("Zipcode :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.number,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _zipcode,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Zipcode";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Zipcode",
-                        //         icon: Icon(
-                        //           Icons.location_city_sharp,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("State :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _state,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter State";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your State",
-                        //         icon: Icon(
-                        //           Icons.location_city_sharp,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Text("Country :-",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   width:MediaQuery.of(context).size.width,
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.text,
-                        //     style: TextStyle(color: secondary),
-                        //     controller: _country,
-                        //     validator: (value) {
-                        //       if (value!.isEmpty) {
-                        //         return "Please Enter Country";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     decoration: inputDecoration(
-                        //         hintText: "Enter Your Country",
-                        //         icon: Icon(
-                        //           Icons.location_city_sharp,
-                        //           color: secondary,
-                        //         )),
-                        //   ),
-                        // ),
-                        SizedBox(
+
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Berth Capacity",
@@ -1314,17 +1071,17 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        Text("Slips  :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips  :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1344,10 +1101,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Approach",
@@ -1357,26 +1114,26 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
-                            SizedBox(
+                            selectedvalue1=="Anchorage"?Container():SizedBox(
                               height: 1.h,
                             ),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Text("Minimum Approach Depth : ( Meters ) :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth : ( Meters ) :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
 
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -1396,20 +1153,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Mean Low Water Dock Depth : ( Meters ) :-",
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth : ( Meters ) :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -1429,20 +1186,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Minimum Channel Depth : ( Feet ) :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth : ( Feet ) :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1462,20 +1219,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Mean High Water Clearance : ( Feet ) :-",
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearance : ( Feet ) :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1495,38 +1252,38 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Services & Amenities",
+                            selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
-                            SizedBox(
+                            selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                               height: 1.h,
                             ),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Text("Fuel Dock :-",
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
                           height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -1572,20 +1329,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Gas  :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas  :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -1631,20 +1388,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Text("Transient Storage  :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage  :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -1690,20 +1447,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Long Term Storage  :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage  :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
                           height: 5.5.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -1749,20 +1506,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Text("Max. Vessel LOA  :-",
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA  :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1782,20 +1539,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Max. Slip Length :-",
+                        selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1815,20 +1572,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Text("Max. Slip Width :-",
+                        selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max. Slip Width :-",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        SizedBox(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1848,11 +1605,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
 
-                        Row(
+                        selectedvalue1=="Warning"?Container():  Row(
                           children: [
                             Text("Protection",
                                 style: TextStyle(
@@ -1863,10 +1620,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken"))
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        Column(
+                    selectedvalue1=="Warning"?Container():Column(
                           children: [
                             Container(
                               height: 50.h,
@@ -2099,535 +1856,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             // Repeat for other directions...
                           ],
                         ),
-                        // Text("North (N) : -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: N1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               N1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: N2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               N2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: N3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               N3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),
-                        //
-                        //
-                        //
-                        //
-                        // SizedBox(height: 1.h,),
-                        // Text("Northeast (NE) : -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NE1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NE1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NE2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NE2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NE3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NE3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),
-                        // SizedBox(height: 1.h,),
-                        // Text("East (E) : -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: E1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               E1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: E2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               E2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: E3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               E3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),SizedBox(height: 1.h,),
-                        // Text("Southeast (SE): -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SE1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SE1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SE2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SE2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SE3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SE3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),SizedBox(height: 1.h,),
-                        // Text("South (S): -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: S1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               S1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: S2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               S2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: S3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               S3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),SizedBox(height: 1.h,),
-                        // Text("Southwest (SW): -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SW1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SW1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SW2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SW2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: SW3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               SW3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),SizedBox(height: 1.h,),
-                        // Text("West (W): -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: W1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               W1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: W2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               W2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: W3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               W3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),SizedBox(height: 1.h,),
-                        // Text("Northwest (NW): -",style: TextStyle(
-                        //     letterSpacing: 1,
-                        //     color: Colors.black,
-                        //     fontSize: 15.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: "volken")),
-                        // Column(
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NW1,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NW1 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Some protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NW2,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NW2 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Average protection",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //     Row(
-                        //       children: [
-                        //         Checkbox(
-                        //           value: NW3,
-                        //           onChanged: (bool? value) {
-                        //             setState(() {
-                        //               NW3 = value!;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text("Completely protected",style: TextStyle(
-                        //             letterSpacing: 1,
-                        //             color: secondary,
-                        //             fontSize: 15.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             fontFamily: "volken")),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),
+
                         SizedBox(
                           height: 1.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Features: -",
@@ -2639,10 +1872,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: Use,
@@ -2661,7 +1894,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: Fixed,
@@ -2680,7 +1913,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: mountain,
@@ -2699,7 +1932,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container():Row(
                           children: [
                             Checkbox(
                               value: ashore,
@@ -2718,10 +1951,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Conditions",
@@ -2733,10 +1966,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -2761,10 +1994,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                             fontFamily: "volken")),
                                   ],
                                 ),
-                                SizedBox(
+                                selectedvalue1=="Warning"?Container():SizedBox(
                                   height: 1.h,
                                 ),
-                                Row(
+                                selectedvalue1=="Warning"?Container():  Row(
                                   children: [
                                     Checkbox(
                                       value: Coral,
@@ -2783,7 +2016,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                             fontFamily: "volken")),
                                   ],
                                 ),
-                                Row(
+                                selectedvalue1=="Warning"?Container(): Row(
                                   children: [
                                     Checkbox(
                                       value: Rocks,
@@ -2851,10 +2084,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Facilities",
@@ -2866,10 +2099,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        SizedBox(
+                        selectedvalue1=="Warning"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        Row(
+                        selectedvalue1=="Warning"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -3166,7 +2399,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       data['user_id'] = (loginmodal?.userId).toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
-      data['post_category'] = selectedvalue.toString();
+      data['post_category'] =selectedvalue1=="Anchorage"?"Anchorage":selectedvalue1=="Warning"?"Warning":selectedvalue.toString();
       data['post_images[]'] = jsonEncode(imagePaths);
       // data['meta'] = meta.toString();
       print("Printapivalue $data");
@@ -3283,7 +2516,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       data['post_id'] = widget.postid.toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
-      data['post_category'] = selectedvalue.toString();
+      data['post_category'] = selectedvalue1=="Warning"?"Warning":selectedvalue1=="Anchorage"?"Anchorage":selectedvalue.toString();
       data['post_images[]'] = jsonEncode(imagePaths);
       print("Printapivalue $data");
       checkInternet().then((internet) async {
@@ -3511,6 +2744,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ? ""
                   : (viewcategorywisevieweetailmodal?.data?.longitude)
                       .toString();
+              selectedvalue1=viewcategorywisevieweetailmodal?.data?.postCategory=="Warning"?"Warning":viewcategorywisevieweetailmodal?.data?.postCategory=="Anchorage"?"Anchorage":"Other";
+
               getLocation();
               print(
                   "viewcategorywisevieweetailmodal?.data?.longitude${viewcategorywisevieweetailmodal?.data?.latitude ?? ""}");

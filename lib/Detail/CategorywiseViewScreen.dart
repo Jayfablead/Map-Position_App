@@ -1356,7 +1356,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       viewcategorywisevieweetailmodal
                                                                   ?.data
                                                                   ?.metaFields
-                                                                  ?.alcohol ==
+                                                                  ?.beach ==
                                                               false
                                                           ? Container(
                                                               decoration:
@@ -1474,7 +1474,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       viewcategorywisevieweetailmodal
                                                                   ?.data
                                                                   ?.metaFields
-                                                                  ?.restaurant ==
+                                                                  ?.hasPontoon ==
                                                               false
                                                           ? Container(
                                                               decoration:
@@ -1583,7 +1583,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       viewcategorywisevieweetailmodal
                                                                   ?.data
                                                                   ?.metaFields
-                                                                  ?.water ==
+                                                                  ?.shop ==
                                                               false
                                                           ? Container(
                                                               decoration:

@@ -176,6 +176,8 @@ class MetaFields {
   bool? restaurant;
   bool? alcohol;
   bool? bThumbnailId;
+  bool? wpestateTotalViews;
+  bool? wpestateDetailedViews;
   bool? propertyPrice;
   bool? propertyLabel;
   bool? propertyLabelBefore;
@@ -204,8 +206,6 @@ class MetaFields {
   bool? pageCustomZoom;
   bool? hiddenAddress;
   bool? bEditLock;
-  bool? wpestateTotalViews;
-  bool? wpestateDetailedViews;
   bool? kind;
   bool? navPropertyLatitude;
   bool? navPropertyLongitude;
@@ -341,6 +341,8 @@ class MetaFields {
         this.restaurant,
         this.alcohol,
         this.bThumbnailId,
+        this.wpestateTotalViews,
+        this.wpestateDetailedViews,
         this.propertyPrice,
         this.propertyLabel,
         this.propertyLabelBefore,
@@ -369,8 +371,6 @@ class MetaFields {
         this.pageCustomZoom,
         this.hiddenAddress,
         this.bEditLock,
-        this.wpestateTotalViews,
-        this.wpestateDetailedViews,
         this.kind,
         this.navPropertyLatitude,
         this.navPropertyLongitude,
@@ -506,6 +506,8 @@ class MetaFields {
     restaurant = json['restaurant'];
     alcohol = json['alcohol'];
     bThumbnailId = json['_thumbnail_id'];
+    wpestateTotalViews = json['wpestate_total_views'];
+    wpestateDetailedViews = json['wpestate_detailed_views'];
     propertyPrice = json['property_price'];
     propertyLabel = json['property_label'];
     propertyLabelBefore = json['property_label_before'];
@@ -534,8 +536,6 @@ class MetaFields {
     pageCustomZoom = json['page_custom_zoom'];
     hiddenAddress = json['hidden_address'];
     bEditLock = json['_edit_lock'];
-    wpestateTotalViews = json['wpestate_total_views'];
-    wpestateDetailedViews = json['wpestate_detailed_views'];
     kind = json['kind'];
     navPropertyLatitude = json['nav_property_latitude'];
     navPropertyLongitude = json['nav_property_longitude'];
@@ -673,6 +673,8 @@ class MetaFields {
     data['restaurant'] = this.restaurant;
     data['alcohol'] = this.alcohol;
     data['_thumbnail_id'] = this.bThumbnailId;
+    data['wpestate_total_views'] = this.wpestateTotalViews;
+    data['wpestate_detailed_views'] = this.wpestateDetailedViews;
     data['property_price'] = this.propertyPrice;
     data['property_label'] = this.propertyLabel;
     data['property_label_before'] = this.propertyLabelBefore;
@@ -701,8 +703,6 @@ class MetaFields {
     data['page_custom_zoom'] = this.pageCustomZoom;
     data['hidden_address'] = this.hiddenAddress;
     data['_edit_lock'] = this.bEditLock;
-    data['wpestate_total_views'] = this.wpestateTotalViews;
-    data['wpestate_detailed_views'] = this.wpestateDetailedViews;
     data['kind'] = this.kind;
     data['nav_property_latitude'] = this.navPropertyLatitude;
     data['nav_property_longitude'] = this.navPropertyLongitude;

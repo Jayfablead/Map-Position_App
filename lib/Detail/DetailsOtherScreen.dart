@@ -812,16 +812,55 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     ),
                                   ],
                                 ),
+                                // Row(
+                                //   children: [
+                                //     Text("Long Term Storage : ",
+                                //         style: TextStyle(
+                                //             letterSpacing: 1,
+                                //             color: blackback,
+                                //             fontSize: 12.sp,
+                                //             fontWeight: FontWeight.normal,
+                                //             fontFamily: "volken")),
+                                //     Text(addviewothermodal?.data?.metaFields?.textLongtermstorage==""||addviewothermodal?.data?.metaFields?.textLongtermstorage==null?"0":(addviewothermodal?.data?.metaFields?.textLongtermstorage).toString,
+                                //       style: TextStyle(
+                                //           letterSpacing: 1,
+                                //           color: secondary,
+                                //           fontSize: 12.sp,
+                                //           fontWeight: FontWeight.normal,
+                                //           fontFamily: "volken"),
+                                //     ),
+                                //   ],
+                                // ),
                                 Row(
                                   children: [
-                                    Text("Long Term Storage : ",
+                                    Text("Max. Vessel LOA : ",
                                         style: TextStyle(
                                             letterSpacing: 1,
                                             color: blackback,
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(,
+                                    Text(addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxvesselloa ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Max. Slip Length: ",
+
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? "",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -852,14 +891,64 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                 ),
                                 Row(
                                   children: [
-                                    Text("Transient Storage : ",
+                                    Text("Max. Slip Width : ",
                                         style: TextStyle(
                                             letterSpacing: 1,
                                             color: blackback,
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
+                                    Text(addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"0":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Container(
+                            width: 95.w,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              border:
+                              Border.all(color: secondary, width: 1.sp),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Details",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "volken")),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Marina Id : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(widget.postid ?? "",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,

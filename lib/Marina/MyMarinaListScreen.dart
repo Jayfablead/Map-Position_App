@@ -329,7 +329,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                   batan(
                                                       title: "View Details",
                                                       route: () {
-                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(CategoryWiseViewScreen(
+                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(CategoryWiseViewScreen(
                                                             postid: (mymarinaviewmodal
                                                                 ?.positions?[
                                                             i]

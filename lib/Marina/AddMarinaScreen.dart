@@ -2502,7 +2502,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "pharmacy": Pharmacy,
         "water": Water,
         "restaurant": Restaurant,
-        "alcohol": Alcohol
+        "alcohol": Alcohol,
+        "beach": beach,
+        "pontoon": pontoon,
+        "shop": shop
         // add other meta fields here
       };
       meta.forEach((key, value) {

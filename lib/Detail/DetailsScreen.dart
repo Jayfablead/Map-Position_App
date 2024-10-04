@@ -277,7 +277,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           autoPlay: true,
                           enlargeCenterPage: true,
                         ),
-                        items: (viewcategorywisevieweetailmodal
+                        items: (onwViewpostionmodal
                             ?.data?.thumbnails ??
                             [])
                             .map((imagePath) {

@@ -279,6 +279,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         items: (viewcategorywisevieweetailmodal
                                     ?.data?.thumbnails ??
                                 [])
+
                             .map((imagePath) {
                           return Builder(
                             builder: (BuildContext context) {

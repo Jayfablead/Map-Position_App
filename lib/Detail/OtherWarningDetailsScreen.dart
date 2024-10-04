@@ -166,7 +166,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                         autoPlay: true,
                         enlargeCenterPage: true,
                       ),
-                      items: (viewcategorywisevieweetailmodal
+                      items: (addviewwarningmodal
                           ?.data?.thumbnails ??
                           [])
                           .map((imagePath) {

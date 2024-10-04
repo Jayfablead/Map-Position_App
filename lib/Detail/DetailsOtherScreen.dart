@@ -148,6 +148,8 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
     });
     wedther();
     print("Postidavigayache:-${widget.postid.toString()}");
+    print("Postidavigayache:-a screen call thay che}");
+
   }
   Widget build(BuildContext context) {
     return commanScreen(
@@ -183,7 +185,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                         autoPlay: true,
                         enlargeCenterPage: true,
                       ),
-                      items: (viewcategorywisevieweetailmodal
+                      items: (addviewothermodal
                           ?.data?.thumbnails ??
                           [])
                           .map((imagePath) {
@@ -207,7 +209,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       (context, url, progress) => Center(
                                       child: CircularProgressIndicator()),
                                   errorWidget: (context, url, error) =>
-                                      Image.asset(""),
+                                      Image.asset(Default_Profile),
                                 ),
                               ),
                             );
@@ -584,6 +586,291 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                 ),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Container(
+                              width: 95.w,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              border:
+                              Border.all(color: secondary, width: 1.sp),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Birth Capacity",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "volken")),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Slips : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textSlips==""||addviewothermodal?.data?.metaFields?.textSlips==null?"N/A":addviewothermodal?.data?.metaFields?.textSlips ??"",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Container(
+                            width: 95.w,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              border:
+                              Border.all(color: secondary, width: 1.sp),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("APPROACH",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "volken")),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Minimum Approach Depth : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumapproachdepth ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Mean Low Water Dock Depth : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"0":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Minimum Channel Depth : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumchanneldepth ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Mean High Water Clearance : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"0":addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Container(
+                            width: 95.w,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              border:
+                              Border.all(color: secondary, width: 1.sp),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("SERVICES & AMENITIES",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "volken")),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Fuel Dock : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textFueldock==""||addviewothermodal?.data?.metaFields?.textFueldock==null?"0":addviewothermodal?.data?.metaFields?.textFueldock ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Gas: : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textGas==""||addviewothermodal?.data?.metaFields?.textGas==null?"0":addviewothermodal?.data?.metaFields?.textGas ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Long Term Storage : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(,
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Transient Storage : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Transient Storage : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: 1.h,

@@ -1097,10 +1097,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           height: 2.h,
                         ),
 
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                      selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Berth Capacity",
@@ -1112,17 +1112,17 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips",
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1142,10 +1142,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Approach",
@@ -1155,26 +1155,26 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
-                            selectedvalue1=="Anchorage"?Container():SizedBox(
+                            selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
                               height: 1.h,
                             ),
                           ],
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth( Meters )",
+                        selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth( Meters )",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
 
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -1194,20 +1194,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth( Meters )",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth( Meters )",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -1227,20 +1227,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth(Feet)",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth(Feet)",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1260,20 +1260,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearanc(Feet)",
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearanc(Feet)",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1293,38 +1293,38 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
+                            selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: Colors.black,
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
-                            selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                            selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                               height: 1.h,
                             ),
                           ],
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           height: 6.h,
                           decoration: BoxDecoration(
@@ -1388,20 +1388,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           ),
                         ),
 
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           height: 6.h,
                           decoration: BoxDecoration(
@@ -1465,20 +1465,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           ),
                         ),
 
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           height: 6.h,
                           decoration: BoxDecoration(
@@ -1542,20 +1542,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           ),
                         ),
 
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           height: 6.h,
                           decoration: BoxDecoration(
@@ -1618,10 +1618,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ),
                           ),
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA",
+                        selectedvalue1=="Other"||   selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
@@ -1651,20 +1651,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length",
+                        selectedvalue1=="Other"||    selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1684,20 +1684,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max.Slip Width",
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max.Slip Width",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "volken")),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -1717,11 +1717,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 )),
                           ),
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
 
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():  Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():  Row(
                           children: [
                             Text("Protection",
                                 style: TextStyle(
@@ -1732,10 +1732,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken"))
                           ],
                         ),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                        selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Column(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Column(
                           children: [
                             Container(
                               height: 50.h,
@@ -1969,10 +1969,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                           ],
                         ),
 
-                        SizedBox(
+                        selectedvalue1=="Other"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
+                        selectedvalue1=="Other"||  selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Features",
@@ -1984,10 +1984,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Warning"?Container(): SizedBox(
+                        selectedvalue1=="Other"||selectedvalue1=="Warning"?Container(): SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1=="Other"||  selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: Use,
@@ -2006,7 +2006,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1=="Other"||  selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: Fixed,
@@ -2025,7 +2025,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container(): Row(
                           children: [
                             Checkbox(
                               value: mountain,
@@ -2044,7 +2044,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
                           children: [
                             Checkbox(
                               value: ashore,
@@ -2063,10 +2063,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): SizedBox(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Conditions",
@@ -2078,14 +2078,14 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():SizedBox(
+                        selectedvalue1=="Other"||  selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
+                        selectedvalue1=="Other"|| selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            selectedvalue1=="Other"?Container(): Column(
                               children: [
                                 Row(
                                   children: [
@@ -2106,10 +2106,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                             fontFamily: "volken")),
                                   ],
                                 ),
-                                selectedvalue1=="Warning"?Container():SizedBox(
+                                selectedvalue1=="Other"|| selectedvalue1=="Warning"?Container():SizedBox(
                                   height: 1.h,
                                 ),
-                                selectedvalue1=="Warning"?Container():  Row(
+                                selectedvalue1=="Other"||  selectedvalue1=="Warning"?Container():  Row(
                                   children: [
                                     Checkbox(
                                       value: Coral,

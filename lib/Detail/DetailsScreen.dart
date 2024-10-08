@@ -2537,6 +2537,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                   .id)
                                                               ?.toString() ??
                                                           ""));
+                                                } else if (onwViewpostionmodal
+                                                    ?.nearbyPosts?[index]
+                                                    .postCategory ==
+                                                    "Marina") {
+                                                  Get.back();
+                                                  Get.to(DetailsOtherScreen(
+                                                      postid: (onwViewpostionmodal
+                                                          ?.nearbyPosts?[
+                                                      index]
+                                                          .id)
+                                                          ?.toString() ??
+                                                          ""));
                                                 } else
                                                   () {
                                                     Get.back();

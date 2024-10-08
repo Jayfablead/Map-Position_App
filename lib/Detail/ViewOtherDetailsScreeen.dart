@@ -16,6 +16,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/CategorywiseViewScreen.dart';
+import 'package:mapposition/Detail/DetailsOtherScreen.dart';
+import 'package:mapposition/Detail/OtherWarningDetailsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -3550,6 +3553,65 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                               batan(
                                   title: "View Details",
                                   route: () {
+                                    if (viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?[index]
+                                        .postCategory ==
+                                        "Warning") {
+                                      Get.back();
+                                      Get.to(DetailsWarningDetailsScreen(
+                                        postid: (viewcategorywisevieweetailmodal
+                                            ?.nearbyPosts?[index]
+                                            .id)
+                                            ?.toString() ??
+                                            "",
+                                      ));
+                                    } else if (viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?[index]
+                                        .postCategory ==
+                                        "Other") {
+                                      Get.back();
+                                      Get.to(ViewOterDetailsScreen(
+                                        postid: (viewcategorywisevieweetailmodal
+                                            ?.nearbyPosts?[index]
+                                            .id)
+                                            ?.toString() ??
+                                            "",
+                                      ));
+                                    } else if (viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?[index]
+                                        .postCategory ==
+                                        "Anchorages") {
+                                      Get.back();
+                                      Get.to(CategoryWiseViewScreen(
+                                          postid: (viewcategorywisevieweetailmodal
+                                              ?.nearbyPosts?[
+                                          index]
+                                              .id)
+                                              ?.toString() ??
+                                              ""));
+                                    }else if (viewcategorywisevieweetailmodal
+                                        ?.nearbyPosts?[index]
+                                        .postCategory ==
+                                        "Marina") {
+                                      Get.back();
+                                      Get.to(DetailsOtherScreen(
+                                          postid: (viewcategorywisevieweetailmodal
+                                              ?.nearbyPosts?[
+                                          index]
+                                              .id)
+                                              ?.toString() ??
+                                              ""));
+                                    } else
+                                          () {
+                                        Get.back();
+                                        Get.to(ViewOterDetailsScreen(
+                                            postid: (viewcategorywisevieweetailmodal
+                                                ?.nearbyPosts?[
+                                            index]
+                                                .id)
+                                                ?.toString() ??
+                                                ""));
+                                      };
                                     print(
                                         "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
                                     Get.to(ViewAllPositionDetailsScreen(

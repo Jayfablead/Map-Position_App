@@ -16,6 +16,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/ViewAllPositionDetailsScreen.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -1570,13 +1572,75 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       batan(
                                           title: "View Details",
                                           route: () {
-                                            Get.to(CategoryWiseViewScreen(
+                                            if (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .postCategory ==
+                                                "Warning") {
+                                              Get.back();
+                                              Get.to(DetailsWarningDetailsScreen(
                                                 postid: (addviewothermodal
+                                                    ?.nearbyPosts?[index]
+                                                    .id)
+                                                    ?.toString() ??
+                                                    "",
+                                              ));
+                                            } else if (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .postCategory ==
+                                                "Other") {
+                                              Get.back();
+                                              Get.to(ViewOterDetailsScreen(
+                                                postid: (addviewothermodal
+                                                    ?.nearbyPosts?[index]
+                                                    .id)
+                                                    ?.toString() ??
+                                                    "",
+                                              ));
+                                            } else if (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .postCategory ==
+                                                "Anchorages") {
+                                              Get.back();
+                                              Get.to(CategoryWiseViewScreen(
+                                                  postid: (addviewothermodal
+                                                      ?.nearbyPosts?[
+                                                  index]
+                                                      .id)
+                                                      ?.toString() ??
+                                                      ""));
+                                            }else if (addviewothermodal
+                                                ?.nearbyPosts?[index]
+                                                .postCategory ==
+                                                "Marina") {
+                                              Get.back();
+                                              Get.to(DetailsOtherScreen(
+                                                  postid: (addviewothermodal
+                                                      ?.nearbyPosts?[
+                                                  index]
+                                                      .id)
+                                                      ?.toString() ??
+                                                      ""));
+                                            } else
+                                                  () {
+                                                Get.back();
+                                                Get.to(ViewOterDetailsScreen(
+                                                    postid: (addviewothermodal
+                                                        ?.nearbyPosts?[
+                                                    index]
+                                                        .id)
+                                                        ?.toString() ??
+                                                        ""));
+                                              };
+                                            print(
+                                                "dsfsf${addviewothermodal?.nearbyPosts?[index].id}");
+                                            Get.to(ViewAllPositionDetailsScreen(
+                                                postid:
+                                                (addviewothermodal
                                                     ?.nearbyPosts?[
                                                 index]
                                                     .id)
-                                                    ?.toString()
-                                                    ));
+                                                    ?.toString()));
+
                         
                                           },
                                           hight: 5.h,

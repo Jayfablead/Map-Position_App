@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:sizer/sizer.dart';
 
@@ -330,14 +331,15 @@ setState(() {
                         batan(
                             title: "Details",
                             route: () {
-                              Get.to(CategoryWiseViewScreen(
+                              shoallmarkermodal?.positions?[i].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
                                   postid: (shoallmarkermodal
                                       ?.positions?[
                                   i]
-                                      .properties
-                                      ?.postId)
-                                      ?.toString() ??
-                                      ""));
+                                  .properties
+                                  ?.postId)
+                                  ?.toString() ??
+                              ""));
+
 
                             },
                             hight: 6.h,

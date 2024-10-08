@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
@@ -1127,6 +1128,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                       batan(
                                           title: "View Details",
                                           route: () {
+
                                             if (addviewwarningmodal
                                                 ?.nearbyPosts?[index]
                                                 .postCategory ==
@@ -1144,7 +1146,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                 .postCategory ==
                                                 "Other") {
                                               Get.back();
-                                              Get.to(DetailsOtherScreen(
+                                              Get.to(ViewOterDetailsScreen(
                                                 postid: (addviewwarningmodal
                                                     ?.nearbyPosts?[index]
                                                     .id)
@@ -1156,7 +1158,19 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                 .postCategory ==
                                                 "Anchorages") {
                                               Get.back();
-                                              Get.to(DetailsScreen(
+                                              Get.to(CategoryWiseViewScreen(
+                                                  postid: (addviewwarningmodal
+                                                      ?.nearbyPosts?[
+                                                  index]
+                                                      .id)
+                                                      ?.toString() ??
+                                                      ""));
+                                            }else if (addviewwarningmodal
+                                                ?.nearbyPosts?[index]
+                                                .postCategory ==
+                                                "Marina") {
+                                              Get.back();
+                                              Get.to(DetailsOtherScreen(
                                                   postid: (addviewwarningmodal
                                                       ?.nearbyPosts?[
                                                   index]
@@ -1166,7 +1180,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                             } else
                                                   () {
                                                 Get.back();
-                                                Get.to(CategoryWiseViewScreen(
+                                                Get.to(ViewOterDetailsScreen(
                                                     postid: (addviewwarningmodal
                                                         ?.nearbyPosts?[
                                                     index]

@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
@@ -3777,7 +3778,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Clear existing markers
             _customMarkers.clear();
             if (shoallmarkermodal?.positions?.length == 0) {
-             
+
               print("hareshsdfgjsfg");
               _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString()));
               print("_currentPosition1_currentPosition1${_currentPosition1}");
@@ -4043,22 +4044,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           title:
                                                                           "View Details",
                                                                           route: () {
+
                                                                             Get.back();
-                                                                            shoallmarkermodal
-                                                                                ?.positions?[
-                                                                            index]
-                                                                                .properties
-                                                                                ?.termName ==
-                                                                                "Warning"
-                                                                                ? Get.to(
-                                                                                DetailsWarningDetailsScreen(
-                                                                                  postid:
-                                                                                  (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                                ))
-                                                                                : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                                "Other"
-                                                                                ? Get.to(
-                                                                                DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString()))):  Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                            shoallmarkermodal?.positions?[index].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
+                                                                                postid: (shoallmarkermodal
+                                                                                    ?.positions?[
+                                                                                index]
+                                                                                    .properties
+                                                                                    ?.postId)
+                                                                                    ?.toString() ??
+                                                                                    ""));
                                                                           },
                                                                           hight: 6.h,
                                                                           width: 40.w,
@@ -4534,24 +4529,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       "View Details",
                                                                   route: () {
                                                                     Get.back();
-                                                                    shoallmarkermodal
-                                                                                ?.positions?[
-                                                                                    index]
-                                                                                .properties
-                                                                                ?.termName ==
-                                                                            "Warning"
-                                                                        ? Get.to(
-                                                                            DetailsWarningDetailsScreen(
-                                                                            postid:
-                                                                                (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
-                                                                          ))
-                                                                        : shoallmarkermodal?.positions?[index].properties?.termName ==
-                                                                                "Other"
-                                                                            ? Get.to(
-                                                                                DetailsOtherScreen(postid: ((shoallmarkermodal?.positions?[index].properties?.postId).toString())))
-
-                                                                                :
-                                                                                    Get.to(CategoryWiseViewScreen(postid: (shoallmarkermodal?.positions?[index].properties?.postId).toString()));
+                                                                    shoallmarkermodal?.positions?[index].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
+                                                                        postid: (shoallmarkermodal
+                                                                            ?.positions?[
+                                                                        index]
+                                                                            .properties
+                                                                            ?.postId)
+                                                                            ?.toString() ??
+                                                                            ""));
                                                                   },
                                                                   hight: 6.h,
                                                                   width: 40.w,
@@ -5065,7 +5050,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
                 print("positionController?.position?.positions?[index].properties?.termName ${positionController?.position?.positions?[index]
                     .properties?.imgUrl}");
-                   
+
                 if (index == 0) {
                   searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);
                 }

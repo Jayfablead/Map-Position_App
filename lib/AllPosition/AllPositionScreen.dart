@@ -329,7 +329,7 @@ setState(() {
                         ),
                         SizedBox(height: 0.5.h),
                         batan(
-                            title: "Details",
+                            title: "View Details",
                             route: () {
                               shoallmarkermodal?.positions?[i].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
                                   postid: (shoallmarkermodal

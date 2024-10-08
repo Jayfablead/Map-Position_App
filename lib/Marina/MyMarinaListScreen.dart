@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/Drwer.dart';
 import 'package:sizer/sizer.dart';
 
@@ -329,7 +330,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                   batan(
                                                       title: "View Details",
                                                       route: () {
-                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(CategoryWiseViewScreen(
+                                                        mymarinaviewmodal?.positions?[i].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):mymarinaviewmodal?.positions?[i].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(mymarinaviewmodal?.positions?[i].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
                                                             postid: (mymarinaviewmodal
                                                                 ?.positions?[
                                                             i]

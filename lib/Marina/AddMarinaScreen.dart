@@ -1631,7 +1631,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
+                      selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.text,
@@ -2196,10 +2196,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             ),
                           ],
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():SizedBox(
+                        selectedvalue1=="Other"?Container(): selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():Row(
+                        selectedvalue1=="Other"?Container(): selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container():Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Facilities",
@@ -2211,10 +2211,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():SizedBox(
+                        selectedvalue1=="Other"?Container():  selectedvalue1=="Marinas"|| selectedvalue1=="Warning"?Container():SizedBox(
                           height: 2.h,
                         ),
-                        selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1=="Other"?Container():   selectedvalue1=="Marinas"||selectedvalue1=="Warning"?Container(): Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

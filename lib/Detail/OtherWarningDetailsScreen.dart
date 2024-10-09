@@ -130,7 +130,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
       isLoading =true;
       futureDate = now.add(Duration(days: 10));
     });  viewposition();
-    wedther();
+
     print("Postidavigayache${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {
@@ -730,20 +730,35 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                                 ),
                                               ),
                                               SizedBox(width: 2.w,),
-                                              SizedBox(
-                                                width: 25.w,
-                                                child: Text(
-                                                  "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
-                                                  style:
-                                                  TextStyle(
-                                                    overflow: TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
+                                              Column(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 25.w,
+                                                    child: Text(
+                                                      "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
+                                                      style:
+                                                      TextStyle(
+                                                        overflow: TextOverflow.ellipsis,
+                                                        fontSize: 13.sp,
+                                                        color: secondary,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: "volken",
 
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                  Text(
+                                                    "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                                    style: TextStyle(
+                                                      overflow:
+                                                      TextOverflow.ellipsis,
+                                                      fontSize: 13.sp,
+                                                      color: secondary,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily: "volken",
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -1434,6 +1449,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
           addviewwarningmodal =
               AddviewWarningModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && addviewwarningmodal?.success == true) {
+            wedther();
             print("warningapicall");
             for (int index = 0;
             index < (shoallmarkermodal?.positions?.length ?? 0);

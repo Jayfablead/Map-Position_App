@@ -148,9 +148,10 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
       isLoading =true;
       futureDate = now.add(Duration(days: 10));
     });
-    wedther();
+
     print("Postidavigayache:-${widget.postid.toString()}");
     print("Postidavigayache:-a screen call thay che}");
+    print("Postidavigayache:-a screen call thay che}${addviewothermodal?.data?.latitude}");
 
   }
   Widget build(BuildContext context) {
@@ -678,7 +679,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumapproachdepth ?? "",
+                                    Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumapproachdepth ?? ""}' + " Meters",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -697,7 +698,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"0":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"0":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? ""}" + " Meters",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -716,7 +717,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumchanneldepth ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumchanneldepth ?? ""}" + " Feet",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -735,7 +736,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"0":addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"0":addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance ?? ""}" + " Feet",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -814,6 +815,25 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     ),
                                   ],
                                 ),
+                                Row(
+                                  children: [
+                                    Text("Transient Storage : ",
+                                        style: TextStyle(
+                                            letterSpacing: 1,
+                                            color: blackback,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken")),
+                                    Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: "volken"),
+                                    ),
+                                  ],
+                                ),
                                 // Row(
                                 //   children: [
                                 //     Text("Long Term Storage : ",
@@ -842,7 +862,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxvesselloa ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxvesselloa ?? ""}" + " Feet",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -852,6 +872,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     ),
                                   ],
                                 ),
+
                                 Row(
                                   children: [
                                     Text("Max. Slip Length: ",
@@ -862,7 +883,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? ""}" + " Meters",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -872,25 +893,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Text("Transient Storage : ",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: blackback,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
-                                      style: TextStyle(
-                                          letterSpacing: 1,
-                                          color: secondary,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: "volken"),
-                                    ),
-                                  ],
-                                ),
+
                                 Row(
                                   children: [
                                     Text("Max. Slip Width : ",
@@ -900,7 +903,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.normal,
                                             fontFamily: "volken")),
-                                    Text(addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"0":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? "",
+                                    Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"0":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? ""}" + " Meters",
                                       style: TextStyle(
                                           letterSpacing: 1,
                                           color: secondary,
@@ -1131,19 +1134,35 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                               SizedBox(
                                                 width: 2.w,
                                               ),
-                                              SizedBox(
-                                                width: 25.w,
-                                                child: Text(
-                                                  "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
-                                                  style: TextStyle(
-                                                    overflow:
-                                                    TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
+                                              Column(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 25.w,
+                                                    child: Text(
+                                                      "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                                      style: TextStyle(
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                        fontSize: 13.sp,
+                                                        color: secondary,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: "volken",
+                                                      ),
+                                                    ),
+
                                                   ),
-                                                ),
+                                                  Text(
+                                                    "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                                    style: TextStyle(
+                                                      overflow:
+                                                      TextOverflow.ellipsis,
+                                                      fontSize: 13.sp,
+                                                      color: secondary,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily: "volken",
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -1892,6 +1911,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
           addviewothermodal =
               AddViewOtherModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && addviewothermodal?.success == true) {
+            wedther();
             for (int index = 0;
             index < (shoallmarkermodal?.positions?.length ?? 0);
             index++) {

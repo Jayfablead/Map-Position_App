@@ -238,7 +238,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       futureDate = now.add(Duration(days: 10));
       isLoading =true;
     });
-    wedther();
+
     print("Postidavigayache${widget.postid.toString()}");
     print("details Screen call thay che:-${widget.postid.toString()}");
   }
@@ -2052,20 +2052,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   ),
                                                 ),
                                                 SizedBox(width: 2.w,),
-                                                SizedBox(
-                                                  width: 25.w,
-                                                  child: Text(
-                                                      "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
-                                                    style:
-                                                    TextStyle(
-                                                      overflow: TextOverflow.ellipsis,
-                                                      fontSize: 13.sp,
-                                                      color: secondary,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily: "volken",
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 25.w,
+                                                      child: Text(
+                                                          "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
+                                                        style:
+                                                        TextStyle(
+                                                          overflow: TextOverflow.ellipsis,
+                                                          fontSize: 13.sp,
+                                                          color: secondary,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontFamily: "volken",
 
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                    Text(
+                                                      "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                                      style: TextStyle(
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                        fontSize: 13.sp,
+                                                        color: secondary,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: "volken",
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -2919,6 +2934,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               OnwViewPostionModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 &&
               onwViewpostionmodal?.success == true) {
+            wedther();
             print("reviewlegth${onwViewpostionmodal
                 ?.reviews?.length}");
             print("anchioirapicall");

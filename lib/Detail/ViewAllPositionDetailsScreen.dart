@@ -3108,19 +3108,34 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      SizedBox(
-                                        width: 25.w,
-                                        child: Text(
-                                          "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
-                                          style: TextStyle(
-                                            overflow:
-                                            TextOverflow.ellipsis,
-                                            fontSize: 13.sp,
-                                            color: secondary,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "volken",
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          Text(
+                                            "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                            style: TextStyle(
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              fontSize: 13.sp,
+                                              color: secondary,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "volken",
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

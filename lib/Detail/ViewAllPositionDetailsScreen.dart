@@ -243,6 +243,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
     });
 
     print("Postidavigayache:-${widget.postid.toString()}");
+    print("a sdsfsdfsdfsdfff:-${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {

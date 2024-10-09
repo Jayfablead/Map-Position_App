@@ -240,6 +240,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     });
     wedther();
     print("Postidavigayache${widget.postid.toString()}");
+    print("details Screen call thay che:-${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {

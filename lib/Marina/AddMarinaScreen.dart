@@ -2052,7 +2052,9 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 setState(() {
                                   ashore = value!;
                                 });
+                                print("dsdfsdf${ashore}");
                               },
+
                             ),
                             Text("Use lines ashore",
                                 style: TextStyle(
@@ -2373,6 +2375,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                         setState(() {
                                           pontoon = value!;
                                         });
+                                        print("fsdfsdfsdfsdf${pontoon}");
                                       },
                                     ),
                                     Text("Pontoon",
@@ -2432,6 +2435,23 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       EasyLoading.show(status: 'Please Wait ...');
       final Map<String, String> data = {};
       var meta = {
+        "own_anchor": Use,
+        "buoys": Fixed,
+        "mountain_wedges": mountain,
+        "own_lines": ashore,
+        "sand": Sand,
+        "mud": Mud,
+        "clay": Clay,
+        "coral": Coral,
+        "rocks": Rocks,
+        "groceries": Groceries,
+        "pharmacy": Pharmacy,
+        "water": Water,
+        "restaurant": Restaurant,
+        "alcohol": Alcohol,
+        "beach": beach,
+        "pontoon": pontoon,
+        "shop": shop,
         "property_address":
             _address.text == null ? "" : _address.text.trim().toString(),
         "property_city": _city.text == null ? "" : _city.text.trim().toString(),
@@ -2489,23 +2509,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "nw1": NW1,
         "nw2": NW2,
         "nw3": NW3,
-        "own_anchor": Use,
-        "buoys": Fixed,
-        "mountain_wedges": mountain,
-        "own_lines": ashore,
-        "sand": Sand,
-        "mud": Mud,
-        "clay": Clay,
-        "coral": Coral,
-        "rocks": Rocks,
-        "groceries": Groceries,
-        "pharmacy": Pharmacy,
-        "water": Water,
-        "restaurant": Restaurant,
-        "alcohol": Alcohol,
-        "beach": beach,
-        "pontoon": pontoon,
-        "shop": shop
+
         // add other meta fields here
       };
       meta.forEach((key, value) {
@@ -3246,8 +3250,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
   void updateData() {
     data[0] = [
-      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
-      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 10 : 0),
+      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 9 : 0),
+      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 9 : 0),
       (E1 ? 4 : 0) + (E2 ? 7 : 0) + (E3 ? 10 : 0),
       (SE1 ? 4 : 0) + (SE2 ? 7 : 0) + (SE3 ? 10 : 0),
       (S1 ? 4 : 0) + (S2 ? 7 : 0) + (S3 ? 10 : 0),

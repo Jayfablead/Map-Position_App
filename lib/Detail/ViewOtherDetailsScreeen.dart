@@ -242,6 +242,7 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
     });
 
     print("Postidavigayache:-${widget.postid.toString()}");
+    print("loda vi yo ja:-${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {

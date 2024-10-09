@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -2501,65 +2502,112 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               title: "View Details",
                                               route: () {
                                                 print("Abc");
-                                                if (onwViewpostionmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .postCategory ==
-                                                    "Warning") {
-                                                  Get.back();
-                                                  Get.to(DetailsWarningDetailsScreen(
-                                                    postid: (onwViewpostionmodal
-                                                                ?.nearbyPosts?[index]
-                                                                .id)
-                                                            ?.toString() ??
-                                                        "",
-                                                  ));
-                                                } else if (onwViewpostionmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .postCategory ==
-                                                    "Other") {
-                                                  Get.back();
-                                                  Get.to(DetailsOtherScreen(
-                                                    postid: (onwViewpostionmodal
-                                                                ?.nearbyPosts?[index]
-                                                                .id)
-                                                            ?.toString() ??
-                                                        "",
-                                                  ));
-                                                } else if (onwViewpostionmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .postCategory ==
-                                                    "Anchorages") {
-                                                  Get.back();
-                                                  Get.to(DetailsScreen(
-                                                      postid: (onwViewpostionmodal
-                                                                  ?.nearbyPosts?[
-                                                                      index]
-                                                                  .id)
-                                                              ?.toString() ??
-                                                          ""));
-                                                } else if (onwViewpostionmodal
-                                                    ?.nearbyPosts?[index]
+                                                onwViewpostionmodal
+                                                    ?.nearbyPosts?[
+                                                index]
                                                     .postCategory ==
-                                                    "Marina") {
-                                                  Get.back();
-                                                  Get.to(DetailsOtherScreen(
+                                                    "Anchorage"
+                                                    ? Get.to(
+                                                    CategoryWiseViewScreen(
                                                       postid: (onwViewpostionmodal
                                                           ?.nearbyPosts?[
                                                       index]
                                                           .id)
                                                           ?.toString() ??
-                                                          ""));
-                                                } else
-                                                  () {
-                                                    Get.back();
-                                                    Get.to(CategoryWiseViewScreen(
-                                                        postid: (onwViewpostionmodal
-                                                                    ?.nearbyPosts?[
-                                                                        index]
-                                                                    .id)
-                                                                ?.toString() ??
-                                                            ""));
-                                                  };
+                                                          "",
+                                                    ))
+                                                    : onwViewpostionmodal
+                                                    ?.nearbyPosts?[
+                                                index]
+                                                    .postCategory ==
+                                                    "Warning"
+                                                    ? Get.to(
+                                                    DetailsWarningDetailsScreen(
+                                                      postid: (onwViewpostionmodal
+                                                          ?.nearbyPosts?[
+                                                      index]
+                                                          .id)
+                                                          ?.toString() ??
+                                                          "",
+                                                    ))
+                                                    : onwViewpostionmodal
+                                                    ?.nearbyPosts?[
+                                                index]
+                                                    .postCategory ==
+                                                    "Marina"
+                                                    ? Get.to(
+                                                    DetailsOtherScreen(
+                                                      postid: (onwViewpostionmodal
+                                                          ?.nearbyPosts?[index]
+                                                          .id)
+                                                          ?.toString() ??
+                                                          "",
+                                                    ))
+                                                    : Get.to(ViewOterDetailsScreen(
+                                                    postid: (onwViewpostionmodal
+                                                        ?.nearbyPosts?[
+                                                    index]
+                                                        .id)
+                                                        .toString()));
+                                                // if (onwViewpostionmodal
+                                                //         ?.nearbyPosts?[index]
+                                                //         .postCategory ==
+                                                //     "Warning") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsWarningDetailsScreen(
+                                                //     postid: (onwViewpostionmodal
+                                                //                 ?.nearbyPosts?[index]
+                                                //                 .id)
+                                                //             ?.toString() ??
+                                                //         "",
+                                                //   ));
+                                                // } else if (onwViewpostionmodal
+                                                //         ?.nearbyPosts?[index]
+                                                //         .postCategory ==
+                                                //     "Other") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsOtherScreen(
+                                                //     postid: (onwViewpostionmodal
+                                                //                 ?.nearbyPosts?[index]
+                                                //                 .id)
+                                                //             ?.toString() ??
+                                                //         "",
+                                                //   ));
+                                                // } else if (onwViewpostionmodal
+                                                //         ?.nearbyPosts?[index]
+                                                //         .postCategory ==
+                                                //     "Anchorages") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsScreen(
+                                                //       postid: (onwViewpostionmodal
+                                                //                   ?.nearbyPosts?[
+                                                //                       index]
+                                                //                   .id)
+                                                //               ?.toString() ??
+                                                //           ""));
+                                                // } else if (onwViewpostionmodal
+                                                //     ?.nearbyPosts?[index]
+                                                //     .postCategory ==
+                                                //     "Marina") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsOtherScreen(
+                                                //       postid: (onwViewpostionmodal
+                                                //           ?.nearbyPosts?[
+                                                //       index]
+                                                //           .id)
+                                                //           ?.toString() ??
+                                                //           ""));
+                                                // } else
+                                                //   () {
+                                                //     Get.back();
+                                                //     Get.to(CategoryWiseViewScreen(
+                                                //         postid: (onwViewpostionmodal
+                                                //                     ?.nearbyPosts?[
+                                                //                         index]
+                                                //                     .id)
+                                                //                 ?.toString() ??
+                                                //             ""));
+                                                //   };
                                               },
                                               hight: 5.h,
                                               width: 30.w,

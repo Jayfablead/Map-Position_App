@@ -282,7 +282,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         items: (viewcategorywisevieweetailmodal
                                     ?.data?.thumbnails ??
                                 [])
-
                             .map((imagePath) {
                           return Builder(
                             builder: (BuildContext context) {
@@ -352,46 +351,66 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           return StatefulBuilder(
                                             builder: (context, setState) {
                                               return AlertDialog(
-                                                contentPadding: EdgeInsets.all(10), // Optional: Adjust padding if needed
+                                                contentPadding:
+                                                    EdgeInsets.all(10),
+                                                // Optional: Adjust padding if needed
                                                 content: Container(
-                                                  width: MediaQuery.of(context).size.width,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
                                                   child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
                                                     children: <Widget>[
                                                       Row(
-                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
                                                         children: [
                                                           GestureDetector(
                                                             onTap: () {
-                                                              Navigator.of(context).pop();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
                                                             },
                                                             child: Container(
                                                               height: 10.w,
                                                               width: 10.w,
-                                                              alignment: Alignment.center,
-                                                              decoration: BoxDecoration(
-                                                                shape: BoxShape.circle,
-                                                                color: Colors.black,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                               child: Icon(
                                                                 Icons.close,
                                                                 size: 15.sp,
-                                                                color: Colors.white,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
                                                             ),
                                                           ),
                                                         ],
                                                       ),
                                                       Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Center(
                                                             child: Text(
                                                               'Add More Pictures',
                                                               style: TextStyle(
                                                                 fontSize: 18.sp,
-                                                                fontFamily: "volken",
-                                                                fontWeight: FontWeight.bold,
+                                                                fontFamily:
+                                                                    "volken",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
                                                               ),
                                                             ),
                                                           ),
@@ -400,126 +419,177 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                       selectedimage == null
                                                           ? Container()
                                                           : Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: [
-                                                          Container(
-                                                            margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                                            height: 30.w,
-                                                            width: 30.w,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(15),
-                                                              border: Border.all(
-                                                                color: bgcolor,
-                                                                width: 2.sp,
-                                                              ),
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              1.w),
+                                                                  height: 30.w,
+                                                                  width: 30.w,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color:
+                                                                          bgcolor,
+                                                                      width:
+                                                                          2.sp,
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                    child: Image
+                                                                        .file(
+                                                                      selectedimage!,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            child: ClipRRect(
-                                                              borderRadius: BorderRadius.circular(15),
-                                                              child: Image.file(
-                                                                selectedimage!,
-                                                                fit: BoxFit.cover,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
                                                       resultList1 == null
                                                           ? Container()
                                                           : Column(
-                                                        children: [
-                                                          selectedImages.isEmpty
-                                                              ? Container()
-                                                              : GridView.builder(
-                                                            shrinkWrap: true,
-                                                            physics: NeverScrollableScrollPhysics(),
-                                                            padding: EdgeInsets.zero,
-                                                            gridDelegate:
-                                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                              crossAxisCount: 3,
+                                                              children: [
+                                                                selectedImages
+                                                                        .isEmpty
+                                                                    ? Container()
+                                                                    : GridView
+                                                                        .builder(
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        physics:
+                                                                            NeverScrollableScrollPhysics(),
+                                                                        padding:
+                                                                            EdgeInsets.zero,
+                                                                        gridDelegate:
+                                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                                          crossAxisCount:
+                                                                              3,
+                                                                        ),
+                                                                        itemCount:
+                                                                            9,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                index) {
+                                                                          if (index < selectedImages.length &&
+                                                                              selectedImages[index] != null) {
+                                                                            return Container(
+                                                                              margin: EdgeInsets.all(3.w),
+                                                                              height: 70.h,
+                                                                              width: 70.w,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(15),
+                                                                                border: Border.all(color: Colors.grey),
+                                                                              ),
+                                                                              child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(15),
+                                                                                child: Image.file(
+                                                                                  selectedImages[index],
+                                                                                  height: 60.h,
+                                                                                  width: 70.w,
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          } else {
+                                                                            return GestureDetector(
+                                                                              onTap: () async {
+                                                                                resultList1 = await ImagePicker().pickMultiImage();
+                                                                                if (resultList1 != null) {
+                                                                                  if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                                                    buildErrorDialog(context, "", "You selected more than 9 images");
+                                                                                  } else {
+                                                                                    setState(() {
+                                                                                      selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                                      imagePaths = resultList1!.map((file) => file.path).toList();
+                                                                                    });
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              child: Container(
+                                                                                margin: EdgeInsets.all(3.w),
+                                                                                height: 60.h,
+                                                                                width: 70.w,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                  border: Border.all(color: Colors.grey),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                              ],
                                                             ),
-                                                            itemCount: 9,
-                                                            itemBuilder: (context, index) {
-                                                              if (index < selectedImages.length &&
-                                                                  selectedImages[index] != null) {
-                                                                return Container(
-                                                                  margin: EdgeInsets.all(3.w),
-                                                                  height: 70.h,
-                                                                  width: 70.w,
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(15),
-                                                                    border: Border.all(color: Colors.grey),
-                                                                  ),
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(15),
-                                                                    child: Image.file(
-                                                                      selectedImages[index],
-                                                                      height: 60.h,
-                                                                      width: 70.w,
-                                                                      fit: BoxFit.cover,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                return GestureDetector(
-                                                                  onTap: () async {
-                                                                    resultList1 = await ImagePicker().pickMultiImage();
-                                                                    if (resultList1 != null) {
-                                                                      if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                                        buildErrorDialog(context, "", "You selected more than 9 images");
-                                                                      } else {
-                                                                        setState(() {
-                                                                          selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                                          imagePaths = resultList1!.map((file) => file.path).toList();
-                                                                        });
-                                                                      }
-                                                                    }
-                                                                  },
-                                                                  child: Container(
-                                                                    margin: EdgeInsets.all(3.w),
-                                                                    height: 60.h,
-                                                                    width: 70.w,
-                                                                    decoration: BoxDecoration(
-                                                                      borderRadius: BorderRadius.circular(15),
-                                                                      border: Border.all(color: Colors.grey),
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
                                                       SizedBox(height: 2.h),
                                                       batan(
                                                         title: "Select Photo",
                                                         route: () async {
-                                                          resultList1 = await ImagePicker().pickMultiImage();
-                                                          if (resultList1 != null) {
-                                                            if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                              buildErrorDialog(context, "", "You selected more than 9 images");
+                                                          resultList1 =
+                                                              await ImagePicker()
+                                                                  .pickMultiImage();
+                                                          if (resultList1 !=
+                                                              null) {
+                                                            if (resultList1!
+                                                                        .length +
+                                                                    selectedImages
+                                                                        .length >
+                                                                maxImageLimit) {
+                                                              buildErrorDialog(
+                                                                  context,
+                                                                  "",
+                                                                  "You selected more than 9 images");
                                                             } else {
                                                               setState(() {
-                                                                selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                                imagePaths = resultList1!.map((file) => file.path).toList();
+                                                                selectedImages.addAll(resultList1!
+                                                                    .map((XFile
+                                                                            file) =>
+                                                                        File(file
+                                                                            .path))
+                                                                    .toList());
+                                                                imagePaths = resultList1!
+                                                                    .map((file) =>
+                                                                        file.path)
+                                                                    .toList();
                                                               });
                                                             }
                                                           }
                                                         },
                                                         hight: 6.h,
-                                                        width: MediaQuery.of(context).size.width,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
                                                         txtsize: 15.sp,
                                                       ),
                                                       SizedBox(height: 2.h),
                                                       selectedImages.isNotEmpty
                                                           ? batan(
-                                                        title: "Upload",
-                                                        route: () {
-                                                          addnewimageapi();
-                                                        },
-                                                        hight: 6.h,
-                                                        width: MediaQuery.of(context).size.width,
-                                                        txtsize: 15.sp,
-                                                      )
+                                                              title: "Upload",
+                                                              route: () {
+                                                                addnewimageapi();
+                                                              },
+                                                              hight: 6.h,
+                                                              width:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                              txtsize: 15.sp,
+                                                            )
                                                           : SizedBox(),
                                                     ],
                                                   ),
@@ -529,7 +599,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           );
                                         },
                                       );
-
                                     },
                                     hight: 6.h,
                                     width: MediaQuery.of(context).size.width,
@@ -1960,7 +2029,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     SizedBox(
                                       height: 1.h,
                                     ),
-                                    
                                     Row(
                                       children: [
                                         Stack(
@@ -2235,7 +2303,9 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   progressIndicatorBuilder:
                                                       (context, url,
                                                               progress) =>
-                                                          Center(child: CircularProgressIndicator()),
+                                                          Center(
+                                                              child:
+                                                                  CircularProgressIndicator()),
                                                   errorWidget: (context, url,
                                                           error) =>
                                                       Image.asset(
@@ -3342,7 +3412,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                               width: 25.w,
                                               child: Text(
                                                 "${daywisewedhtermodal?.days?[0].temp == "" || daywisewedhtermodal?.days?[0].temp == null ? "N/A" : ((((daywisewedhtermodal?.days?[0].temp ?? 0) - 32) * 5 / 9).round()).toString()}°C",
-                                              style: TextStyle(
+                                                style: TextStyle(
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   fontSize: 13.sp,
@@ -3553,74 +3623,121 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                           batan(
                                               title: "View Details",
                                               route: () {
-                                                if (viewcategorywisevieweetailmodal
-                                                    ?.nearbyPosts?[index]
-                                                    .postCategory ==
-                                                    "Warning") {
-                                                  Get.back();
-                                                  Get.to(DetailsWarningDetailsScreen(
-                                                    postid: (viewcategorywisevieweetailmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .id)
-                                                        ?.toString() ??
-                                                        "",
-                                                  ));
-                                                } else if (viewcategorywisevieweetailmodal
-                                                    ?.nearbyPosts?[index]
-                                                    .postCategory ==
-                                                    "Other") {
-                                                  Get.back();
-                                                  Get.to(ViewOterDetailsScreen(
-                                                    postid: (viewcategorywisevieweetailmodal
-                                                        ?.nearbyPosts?[index]
-                                                        .id)
-                                                        ?.toString() ??
-                                                        "",
-                                                  ));
-                                                } else if (viewcategorywisevieweetailmodal
-                                                    ?.nearbyPosts?[index]
-                                                    .postCategory ==
-                                                    "Anchorages") {
-                                                  Get.back();
-                                                  Get.to(CategoryWiseViewScreen(
-                                                      postid: (viewcategorywisevieweetailmodal
-                                                          ?.nearbyPosts?[
-                                                      index]
-                                                          .id)
-                                                          ?.toString() ??
-                                                          ""));
-                                                }else if (viewcategorywisevieweetailmodal
-                                                    ?.nearbyPosts?[index]
-                                                    .postCategory ==
-                                                    "Marina") {
-                                                  Get.back();
-                                                  Get.to(DetailsOtherScreen(
-                                                      postid: (viewcategorywisevieweetailmodal
-                                                          ?.nearbyPosts?[
-                                                      index]
-                                                          .id)
-                                                          ?.toString() ??
-                                                          ""));
-                                                } else
-                                                      () {
-                                                    Get.back();
-                                                    Get.to(ViewOterDetailsScreen(
-                                                        postid: (viewcategorywisevieweetailmodal
+                                                viewcategorywisevieweetailmodal
                                                             ?.nearbyPosts?[
-                                                        index]
-                                                            .id)
-                                                            ?.toString() ??
-                                                            ""));
-                                                  };
-                                                print(
-                                                    "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
-                                                Get.to(ViewAllPositionDetailsScreen(
-                                                    postid:
-                                                        (viewcategorywisevieweetailmodal
+                                                                index]
+                                                            .postCategory ==
+                                                        "Anchorage"
+                                                    ? Get.to(
+                                                        CategoryWiseViewScreen(
+                                                        postid: (viewcategorywisevieweetailmodal
+                                                                    ?.nearbyPosts?[
+                                                                        index]
+                                                                    .id)
+                                                                ?.toString() ??
+                                                            "",
+                                                      ))
+                                                    : viewcategorywisevieweetailmodal
                                                                 ?.nearbyPosts?[
                                                                     index]
-                                                                .id)
-                                                            ?.toString()));
+                                                                .postCategory ==
+                                                            "Warning"
+                                                        ? Get.to(
+                                                            DetailsWarningDetailsScreen(
+                                                            postid: (viewcategorywisevieweetailmodal
+                                                                        ?.nearbyPosts?[
+                                                                            index]
+                                                                        .id)
+                                                                    ?.toString() ??
+                                                                "",
+                                                          ))
+                                                        : viewcategorywisevieweetailmodal
+                                                                    ?.nearbyPosts?[
+                                                                        index]
+                                                                    .postCategory ==
+                                                                "Marina"
+                                                            ? Get.to(
+                                                                DetailsOtherScreen(
+                                                                postid: (viewcategorywisevieweetailmodal
+                                                                            ?.nearbyPosts?[index]
+                                                                            .id)
+                                                                        ?.toString() ??
+                                                                    "",
+                                                              ))
+                                                            : Get.to(ViewOterDetailsScreen(
+                                                                postid: (viewcategorywisevieweetailmodal
+                                                                        ?.nearbyPosts?[
+                                                                            index]
+                                                                        .id)
+                                                                    .toString()));
+                                                // if (viewcategorywisevieweetailmodal
+                                                //     ?.nearbyPosts?[index]
+                                                //     .postCategory ==
+                                                //     "Warning") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsWarningDetailsScreen(
+                                                //     postid: (viewcategorywisevieweetailmodal
+                                                //         ?.nearbyPosts?[index]
+                                                //         .id)
+                                                //         ?.toString() ??
+                                                //         "",
+                                                //   ));
+                                                // } else if (viewcategorywisevieweetailmodal
+                                                //     ?.nearbyPosts?[index]
+                                                //     .postCategory ==
+                                                //     "Other") {
+                                                //   Get.back();
+                                                //   Get.to(ViewOterDetailsScreen(
+                                                //     postid: (viewcategorywisevieweetailmodal
+                                                //         ?.nearbyPosts?[index]
+                                                //         .id)
+                                                //         ?.toString() ??
+                                                //         "",
+                                                //   ));
+                                                // } else if (viewcategorywisevieweetailmodal
+                                                //     ?.nearbyPosts?[index]
+                                                //     .postCategory ==
+                                                //     "Anchorages") {
+                                                //   Get.back();
+                                                //   Get.to(CategoryWiseViewScreen(
+                                                //       postid: (viewcategorywisevieweetailmodal
+                                                //           ?.nearbyPosts?[
+                                                //       index]
+                                                //           .id)
+                                                //           ?.toString() ??
+                                                //           ""));
+                                                // }else if (viewcategorywisevieweetailmodal
+                                                //     ?.nearbyPosts?[index]
+                                                //     .postCategory ==
+                                                //     "Marina") {
+                                                //   Get.back();
+                                                //   Get.to(DetailsOtherScreen(
+                                                //       postid: (viewcategorywisevieweetailmodal
+                                                //           ?.nearbyPosts?[
+                                                //       index]
+                                                //           .id)
+                                                //           ?.toString() ??
+                                                //           ""));
+                                                // } else
+                                                //       () {
+                                                //     Get.back();
+                                                //     Get.to(ViewOterDetailsScreen(
+                                                //         postid: (viewcategorywisevieweetailmodal
+                                                //             ?.nearbyPosts?[
+                                                //         index]
+                                                //             .id)
+                                                //             ?.toString() ??
+                                                //             ""));
+                                                //   };
+                                                // print(
+                                                //     "dsfsf${viewcategorywisevieweetailmodal?.nearbyPosts?[index].id}");
+                                                // Get.to(ViewAllPositionDetailsScreen(
+                                                //     postid:
+                                                //         (viewcategorywisevieweetailmodal
+                                                //                 ?.nearbyPosts?[
+                                                //                     index]
+                                                //                 .id)
+                                                //             ?.toString()));
                                               },
                                               hight: 5.h,
                                               width: 30.w,
@@ -5033,7 +5150,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     });
   }
 
-
   void updateData() {
     data[0] = [
       (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
@@ -5046,7 +5162,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       (NW1 ? 4 : 0) + (NW2 ? 7 : 0) + (NW3 ? 10 : 0),
     ];
   }
-
 
   Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
     return Column(
@@ -5123,6 +5238,4 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       }
     });
   }
-
-
 }

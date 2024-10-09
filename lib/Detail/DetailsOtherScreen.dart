@@ -1572,74 +1572,121 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       batan(
                                           title: "View Details",
                                           route: () {
-                                            if (addviewothermodal
-                                                ?.nearbyPosts?[index]
+                                            addviewothermodal
+                                                ?.nearbyPosts?[
+                                            index]
                                                 .postCategory ==
-                                                "Warning") {
-                                              Get.back();
-                                              Get.to(DetailsWarningDetailsScreen(
-                                                postid: (addviewothermodal
-                                                    ?.nearbyPosts?[index]
-                                                    .id)
-                                                    ?.toString() ??
-                                                    "",
-                                              ));
-                                            } else if (addviewothermodal
-                                                ?.nearbyPosts?[index]
-                                                .postCategory ==
-                                                "Other") {
-                                              Get.back();
-                                              Get.to(ViewOterDetailsScreen(
-                                                postid: (addviewothermodal
-                                                    ?.nearbyPosts?[index]
-                                                    .id)
-                                                    ?.toString() ??
-                                                    "",
-                                              ));
-                                            } else if (addviewothermodal
-                                                ?.nearbyPosts?[index]
-                                                .postCategory ==
-                                                "Anchorages") {
-                                              Get.back();
-                                              Get.to(CategoryWiseViewScreen(
+                                                "Anchorage"
+                                                ? Get.to(
+                                                CategoryWiseViewScreen(
                                                   postid: (addviewothermodal
                                                       ?.nearbyPosts?[
                                                   index]
                                                       .id)
                                                       ?.toString() ??
-                                                      ""));
-                                            }else if (addviewothermodal
-                                                ?.nearbyPosts?[index]
+                                                      "",
+                                                ))
+                                                : addviewothermodal
+                                                ?.nearbyPosts?[
+                                            index]
                                                 .postCategory ==
-                                                "Marina") {
-                                              Get.back();
-                                              Get.to(DetailsOtherScreen(
+                                                "Warning"
+                                                ? Get.to(
+                                                DetailsWarningDetailsScreen(
                                                   postid: (addviewothermodal
                                                       ?.nearbyPosts?[
                                                   index]
                                                       .id)
                                                       ?.toString() ??
-                                                      ""));
-                                            } else
-                                                  () {
-                                                Get.back();
-                                                Get.to(ViewOterDetailsScreen(
-                                                    postid: (addviewothermodal
-                                                        ?.nearbyPosts?[
-                                                    index]
-                                                        .id)
-                                                        ?.toString() ??
-                                                        ""));
-                                              };
-                                            print(
-                                                "dsfsf${addviewothermodal?.nearbyPosts?[index].id}");
-                                            Get.to(ViewAllPositionDetailsScreen(
-                                                postid:
-                                                (addviewothermodal
+                                                      "",
+                                                ))
+                                                : addviewothermodal
+                                                ?.nearbyPosts?[
+                                            index]
+                                                .postCategory ==
+                                                "Marina"
+                                                ? Get.to(
+                                                DetailsOtherScreen(
+                                                  postid: (addviewothermodal
+                                                      ?.nearbyPosts?[index]
+                                                      .id)
+                                                      ?.toString() ??
+                                                      "",
+                                                ))
+                                                : Get.to(ViewOterDetailsScreen(
+                                                postid: (addviewothermodal
                                                     ?.nearbyPosts?[
                                                 index]
                                                     .id)
-                                                    ?.toString()));
+                                                    .toString()));
+                                            // if (addviewothermodal
+                                            //     ?.nearbyPosts?[index]
+                                            //     .postCategory ==
+                                            //     "Warning") {
+                                            //   Get.back();
+                                            //   Get.to(DetailsWarningDetailsScreen(
+                                            //     postid: (addviewothermodal
+                                            //         ?.nearbyPosts?[index]
+                                            //         .id)
+                                            //         ?.toString() ??
+                                            //         "",
+                                            //   ));
+                                            // } else if (addviewothermodal
+                                            //     ?.nearbyPosts?[index]
+                                            //     .postCategory ==
+                                            //     "Other") {
+                                            //   Get.back();
+                                            //   Get.to(ViewOterDetailsScreen(
+                                            //     postid: (addviewothermodal
+                                            //         ?.nearbyPosts?[index]
+                                            //         .id)
+                                            //         ?.toString() ??
+                                            //         "",
+                                            //   ));
+                                            // } else if (addviewothermodal
+                                            //     ?.nearbyPosts?[index]
+                                            //     .postCategory ==
+                                            //     "Anchorages") {
+                                            //   Get.back();
+                                            //   Get.to(CategoryWiseViewScreen(
+                                            //       postid: (addviewothermodal
+                                            //           ?.nearbyPosts?[
+                                            //       index]
+                                            //           .id)
+                                            //           ?.toString() ??
+                                            //           ""));
+                                            // }else if (addviewothermodal
+                                            //     ?.nearbyPosts?[index]
+                                            //     .postCategory ==
+                                            //     "Marina") {
+                                            //   Get.back();
+                                            //   Get.to(DetailsOtherScreen(
+                                            //       postid: (addviewothermodal
+                                            //           ?.nearbyPosts?[
+                                            //       index]
+                                            //           .id)
+                                            //           ?.toString() ??
+                                            //           ""));
+                                            // } else
+                                            //       () {
+                                            //     Get.back();
+                                            //     Get.to(ViewOterDetailsScreen(
+                                            //         postid: (addviewothermodal
+                                            //             ?.nearbyPosts?[
+                                            //         index]
+                                            //             .id)
+                                            //             ?.toString() ??
+                                            //             ""));
+                                            //   };
+                                            // print(
+                                            //     "dsfsf${addviewothermodal?.nearbyPosts?[index].id}");
+                                            // Get.to(ViewAllPositionDetailsScreen(
+                                            //     postid:
+                                            //     (addviewothermodal
+                                            //         ?.nearbyPosts?[
+                                            //     index]
+                                            //         .id)
+                                            //         ?.toString()));
 
                         
                                           },

@@ -22,7 +22,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -38,7 +38,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -54,7 +54,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -70,7 +70,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -86,7 +86,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -165,7 +165,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -181,7 +181,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -197,7 +197,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url),body: bodyData,  headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -305,7 +305,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -321,7 +321,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -439,7 +439,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -459,7 +459,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -475,7 +475,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -494,7 +494,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -513,7 +513,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -531,7 +531,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -549,7 +549,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .get(Uri.parse(url))
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -567,7 +567,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 180),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -585,7 +585,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },
@@ -603,7 +603,7 @@ class authprovider with ChangeNotifier {
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
         .timeout(
-      const Duration(seconds: 60),
+      const Duration(seconds: 120),
       onTimeout: () {
         throw const SocketException('Something went wrong');
       },

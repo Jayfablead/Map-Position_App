@@ -100,7 +100,9 @@ setState(() {
                     fontFamily:
                     "volken",
                     letterSpacing: 1), ),),
-              ):Column(
+              ):
+
+              Column(
                 children: [
               for (int i = 0;
               i < (shoallmarkermodal?.positions?.length ?? 0);

@@ -231,6 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void stripepay() {
+    if(mounted)
     setState(() {
       storedPlanEndDate == time
           ? buildErrorDialog(context, '', "Your Premium expired")

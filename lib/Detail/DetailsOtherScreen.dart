@@ -1526,42 +1526,42 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                                   ),
                                             ),
                                           ),
-                                          loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
-                                            top: 0.2.h,
-                                            left: 34.w,
-                                            child: InkWell(
-                                              onTap: (){
-                                                print("datavalye${addviewothermodal?.nearbyPosts?[index].isFavorite}");
-                                                addfevorite( (addviewothermodal?.nearbyPosts?[index].isFavorite)!,(addviewothermodal
-                                                    ?.nearbyPosts?[
-                                                index]
-                                                    .id
-                                                )
-                                                    ?.toString() ??
-                                                    "");
-                                                print("abc");
-                                              },
-                                              child: Container(
-                                                height: 9.w,
-                                                width: 9.w,
-                                                alignment: Alignment.center,
-                                                padding: EdgeInsetsDirectional.all(2.2.w),
-                                                decoration: BoxDecoration(
-                                                  color: blackback,
-                                                  borderRadius: BorderRadius.circular(900),
-                                                ),
-                                                child: addviewothermodal?.nearbyPosts?[index].isFavorite==true?Icon(
-                                                  CupertinoIcons.heart_fill,
-                                                  color: Colors.white,
-                                                  size: 15.sp,
-                                                ) :Icon(
-                                                  Icons.favorite_border,
-                                                  color: Colors.white,
-                                                  size: 15.sp,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                          // loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
+                                          //   top: 0.2.h,
+                                          //   left: 34.w,
+                                          //   child: InkWell(
+                                          //     onTap: (){
+                                          //       print("datavalye${addviewothermodal?.nearbyPosts?[index].isFavorite}");
+                                          //       addfevorite( (addviewothermodal?.nearbyPosts?[index].isFavorite)!,(addviewothermodal
+                                          //           ?.nearbyPosts?[
+                                          //       index]
+                                          //           .id
+                                          //       )
+                                          //           ?.toString() ??
+                                          //           "");
+                                          //       print("abc");
+                                          //     },
+                                          //     child: Container(
+                                          //       height: 9.w,
+                                          //       width: 9.w,
+                                          //       alignment: Alignment.center,
+                                          //       padding: EdgeInsetsDirectional.all(2.2.w),
+                                          //       decoration: BoxDecoration(
+                                          //         color: blackback,
+                                          //         borderRadius: BorderRadius.circular(900),
+                                          //       ),
+                                          //       child: addviewothermodal?.nearbyPosts?[index].isFavorite==true?Icon(
+                                          //         CupertinoIcons.heart_fill,
+                                          //         color: Colors.white,
+                                          //         size: 15.sp,
+                                          //       ) :Icon(
+                                          //         Icons.favorite_border,
+                                          //         color: Colors.white,
+                                          //         size: 15.sp,
+                                          //       ),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                       SizedBox(height: 1.h),

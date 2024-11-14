@@ -2397,7 +2397,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         SizedBox(
                                           width: 87.w,
                                           child: Text(
-                                              "You'll find the following types of seabed at Anse de l'Aiguade",
+                                              "You'll find the following",
                                               style: TextStyle(
                                                   letterSpacing: 1,
                                                   color: secondary,

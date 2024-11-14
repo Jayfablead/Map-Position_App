@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mapposition/Extras/response.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:path/path.dart' as path;
 import '../Extras/CustomExpection.dart';
 
 class authprovider with ChangeNotifier {
@@ -332,33 +332,93 @@ class authprovider with ChangeNotifier {
   }
 
 
+  //
+  // Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<File> imgs
+  //     ) async {
+  //   String url = '${apiUrl}add-custom-position';
+  //   var responseJson;
+  //   final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+  //   imageUploadRequest.headers.addAll(headers);
+  //
+  //   for (File image in imgs) {
+  //     try {
+  //       if (await image.exists()) {
+  //         var stream = http.ByteStream(image.openRead());
+  //         var length = await image.length();
+  //         var multipartFile = http.MultipartFile(
+  //           'post_images[]', // Try changing the key here if needed
+  //           stream,
+  //           length,
+  //           filename: path.basename(image.path),
+  //         );
+  //         imageUploadRequest.files.add(multipartFile);
+  //         print("Added file: ${path.basename(image.path)}, size: $length bytes");
+  //       } else {
+  //         print("File does not exist: ${image.path}");
+  //       }
+  //     } catch (e) {
+  //       print("Error with file: ${image.path}, Error: $e");
+  //     }
+  //   }
+  //
+  //   imageUploadRequest.fields.addAll(bodyData);
+  //   final streamResponse = await imageUploadRequest.send();
+  //   var response = await http.Response.fromStream(streamResponse);
+  //   responseJson = responses(response);
+  //   // print("responseJson = ${json.decode(responseJson)}");
+  //   return responseJson;
+  // }
 
-  Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<String> imagePaths) async {
+
+
+  Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<File> imgs
+      ) async {
     String url = '${apiUrl}add-custom-position';
-    var responseJson;
-    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
-    imageUploadRequest.headers.addAll(headers);
-    if (imagePaths.isNotEmpty) {
-      for (var imagePath in imagePaths) {
-        var file = await http.MultipartFile.fromPath(
-          'post_images',
-          imagePath!,
-          contentType: MediaType('image', 'jpg,png'),
-        );
-        imageUploadRequest.files.add(file);
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+
+    // bodyData.forEach((key, value) {
+    //   request.fields[key] = value;
+    // });
+    request.fields.addAll(bodyData);
+
+
+    for (File image in imgs) {
+      try {
+        if (await image.exists()) {
+          var stream = http.ByteStream(image.openRead());
+          var length = await image.length();
+          var multipartFile = http.MultipartFile(
+            'post_images[]', // Try changing the key here if needed
+            stream,
+            length,
+            filename: path.basename(image.path),
+          );
+          request.files.add(multipartFile);
+          print("Added file: ${path.basename(image.path)}, size: $length bytes");
+        } else {
+          print("File does not exist: ${image.path}");
+        }
+      } catch (e) {
+        print("Error with file: ${image.path}, Error: $e");
       }
     }
-    imageUploadRequest.fields.addAll(bodyData);
-    final streamResponse = await imageUploadRequest.send();
-    var response = await http.Response.fromStream(streamResponse);
-    responseJson = responses(response);
-    // print("responseJson = ${json.decode(responseJson)}");
-    return responseJson;
+
+
+    try {
+      // Send the request and get the response
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      final responseJson = responses(response);
+      print(response.statusCode);
+      return responseJson;
+    } on SocketException {
+      throw Exception('No Internet connection');
+    } catch (e) {
+      throw Exception('An error occurred');
+    }
   }
-
-
-
-
 
   Future<http.Response> updatecastompostionapi(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}update-custom-position';

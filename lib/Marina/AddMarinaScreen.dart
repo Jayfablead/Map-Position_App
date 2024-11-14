@@ -933,6 +933,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                         selectedImages.addAll(resultList1!
                                             .map((XFile file) => File(file.path))
                                             .toList());
+                                        List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
                                         imagePaths = resultList1!
                                             .map((file) => file.path)
                                             .toList();
@@ -2514,18 +2515,20 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       };
       meta.forEach((key, value) {
         data['meta[$key]'] = value.toString();
-      });
+      });      List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
       data['user_id'] = (loginmodal?.userId).toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
       data['post_category'] = selectedvalue1=="Marina"?"Marina":selectedvalue1=="Anchorage"?"Anchorage":selectedvalue1=="Warning"?"Warning":"Other";
-      data['post_images[]'] = jsonEncode(imagePaths);
+
       // data['meta'] = meta.toString();
       print("Printapivalue $data");
+      print("Printapivalue $resultList1");
+      print("Printapivalue $imageFiles");
       checkInternet().then((internet) async {
         if (internet) {
           authprovider()
-              .addmarinacastomapi(data, imagePaths)
+              .addmarinacastomapi(data, imageFiles)
               .then((response) async {
             castompositionmarinamodal =
                 CastomPositionMarinaModal.fromJson(json.decode(response.body));
@@ -3250,8 +3253,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
   void updateData() {
     data[0] = [
-      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 9 : 0),
-      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 9 : 0),
+      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
+      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 10 : 0),
       (E1 ? 4 : 0) + (E2 ? 7 : 0) + (E3 ? 10 : 0),
       (SE1 ? 4 : 0) + (SE2 ? 7 : 0) + (SE3 ? 10 : 0),
       (S1 ? 4 : 0) + (S2 ? 7 : 0) + (S3 ? 10 : 0),

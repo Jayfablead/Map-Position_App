@@ -82,9 +82,9 @@ class _BottombarState extends State<Bottombar> {
 
               BottomBarItem(
                 inActiveItem:
-                Icon(Icons.directions_boat, color: Colors.black),
+                Icon(Icons.fmd_good, color: Colors.black),
                 activeItem:
-                Icon(Icons.directions_boat, color: Colors.white),
+                Icon(Icons.fmd_good, color: Colors.white),
                 itemLabel: 'Mine',
               ),
               BottomBarItem(

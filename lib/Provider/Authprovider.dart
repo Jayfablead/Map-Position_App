@@ -371,54 +371,182 @@ class authprovider with ChangeNotifier {
 
 
 
-  Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<File> imgs
-      ) async {
+  // Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<File> imgs) async {
+  //   String url = '${apiUrl}add-custom-position';
+  //
+  //   var request = http.MultipartRequest('POST', Uri.parse(url));
+  //   request.headers.addAll(headers);
+  //
+  //   // Printing the request URL and headers
+  //   print("Request URL: $url");
+  //   print("Headers: $headers");
+  //
+  //   // Adding and printing body data
+  //   request.fields.addAll(bodyData);
+  //   print("Body Data:");
+  //   bodyData.forEach((key, value) {
+  //     print("  $key: $value");
+  //   });
+  //
+  //   // Adding files and preparing a string to print full body details
+  //   List<String> filesDetails = [];
+  //   for (File image in imgs) {
+  //     try {
+  //       if (await image.exists()) {
+  //         var stream = http.ByteStream(image.openRead());
+  //         var length = await image.length();
+  //         var multipartFile = http.MultipartFile(
+  //           'post_images', // Adjust this key if necessary
+  //           stream,
+  //           length,
+  //           filename: path.basename(image.path),
+  //         );
+  //         request.files.add(multipartFile);
+  //
+  //         // Collecting file details for full body print
+  //         filesDetails.add("{ Filename: ${path.basename(image.path)}, Size: $length bytes }");
+  //       } else {
+  //         print("File does not exist: ${image.path}");
+  //       }
+  //     } catch (e) {
+  //       print("Error with file: ${image.path}, Error: $e");
+  //     }
+  //   }
+  //
+  //   // Printing full request body data (fields and files)
+  //   print("Full Body Data:");
+  //   print("{");
+  //   bodyData.forEach((key, value) {
+  //     print("  $key: $value,");
+  //   });
+  //   print("  post_images[]: [${filesDetails.join(", ")}]");
+  //   print("}");
+  //
+  //   try {
+  //     // Send the request and get the response
+  //     var streamedResponse = await request.send();
+  //     var response = await http.Response.fromStream(streamedResponse);
+  //
+  //     // Print the response status code and body
+  //     print("Response Status Code: ${response.statusCode}");
+  //     print("Response Body: ${response.body}");
+  //
+  //     final responseJson = responses(response);
+  //     return responseJson;
+  //   } on SocketException {
+  //     print("No Internet connection");
+  //     throw Exception('No Internet connection');
+  //   } catch (e) {
+  //     print("An error occurred: $e");
+  //     throw Exception('An error occurred');
+  //   }
+  // }
+  Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}add-custom-position';
+    final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
 
-    var request = http.MultipartRequest('POST', Uri.parse(url));
-    request.headers.addAll(headers);
+    // Add headers
+    imageUploadRequest.headers.addAll(headers);
 
-    // bodyData.forEach((key, value) {
-    //   request.fields[key] = value;
-    // });
-    request.fields.addAll(bodyData);
-
-
-    for (File image in imgs) {
-      try {
-        if (await image.exists()) {
-          var stream = http.ByteStream(image.openRead());
-          var length = await image.length();
-          var multipartFile = http.MultipartFile(
-            'post_images[]', // Try changing the key here if needed
-            stream,
-            length,
-            filename: path.basename(image.path),
-          );
-          request.files.add(multipartFile);
-          print("Added file: ${path.basename(image.path)}, size: $length bytes");
-        } else {
-          print("File does not exist: ${image.path}");
-        }
-      } catch (e) {
-        print("Error with file: ${image.path}, Error: $e");
+    // Add images with indexed field names (e.g., upload_file[0], upload_file[1], ...)
+    if (imagePaths.isNotEmpty) {
+      for (var i = 0; i < imagePaths.length; i++) {
+        var file = await http.MultipartFile.fromPath(
+          'post_images[$i]',  // Use indexed field names here
+          imagePaths[i],
+          contentType: MediaType('image', 'jpeg'), // Adjust as needed
+        );
+        imageUploadRequest.files.add(file);
       }
     }
 
+    // Add body data
+    imageUploadRequest.fields.addAll(bodyData);
 
-    try {
-      // Send the request and get the response
-      var streamedResponse = await request.send();
-      var response = await http.Response.fromStream(streamedResponse);
-      final responseJson = responses(response);
-      print(response.statusCode);
-      return responseJson;
-    } on SocketException {
-      throw Exception('No Internet connection');
-    } catch (e) {
-      throw Exception('An error occurred');
+    // Send request
+    final streamResponse = await imageUploadRequest.send();
+    final response = await http.Response.fromStream(streamResponse);
+
+    // Check for success or parse response
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to upload images. Status code: ${response.statusCode}');
     }
   }
+  // Future<http.Response> addmarinacastomapi(Map<String, String> bodyData, List<File> imgs) async {
+  //   String url = '${apiUrl}add-custom-position';
+  //
+  //   var request = http.MultipartRequest('POST', Uri.parse(url));
+  //   request.headers.addAll(headers);
+  //
+  //   // Print the request URL and headers for debugging
+  //   print("Request URL: $url");
+  //   print("Headers: $headers");
+  //
+  //   // Add body data and print each key-value pair for debugging
+  //   request.fields.addAll(bodyData);
+  //   print("Body Data:");
+  //   bodyData.forEach((key, value) {
+  //     print("  $key: $value");
+  //   });
+  //
+  //   // Add each image with an indexed field name and print file details
+  //   List<String> filesDetails = [];
+  //   for (int i = 0; i < imgs.length; i++) {
+  //     File image = imgs[i];
+  //     try {
+  //       if (await image.exists()) {
+  //         var stream = http.ByteStream(image.openRead());
+  //         var length = await image.length();
+  //         var multipartFile = http.MultipartFile(
+  //           'post_images[$i]',  // Indexed field names (e.g., post_images[0], post_images[1], ...)
+  //           stream,
+  //           length,
+  //           filename: path.basename(image.path),
+  //           contentType: MediaType('image', 'jpeg'),  // Adjust content type if needed
+  //         );
+  //         request.files.add(multipartFile);
+  //
+  //         // Collect file details for full body print
+  //         filesDetails.add("{ Filename: ${path.basename(image.path)}, Size: $length bytes }");
+  //       } else {
+  //         print("File does not exist: ${image.path}");
+  //       }
+  //     } catch (e) {
+  //       print("Error with file: ${image.path}, Error: $e");
+  //     }
+  //   }
+  //
+  //   // Print full request body data (fields and files)
+  //   print("Full Body Data:");
+  //   print("{");
+  //   bodyData.forEach((key, value) {
+  //     print("  $key: $value,");
+  //   });
+  //   print("  post_images[]: [${filesDetails.join(", ")}]");
+  //   print("}");
+  //
+  //   try {
+  //     // Send the request and get the response
+  //     var streamedResponse = await request.send();
+  //     var response = await http.Response.fromStream(streamedResponse);
+  //
+  //     // Print the response status code and body for debugging
+  //     print("Response Status Code: ${response.statusCode}");
+  //     print("Response Body: ${response.body}");
+  //
+  //     final responseJson = responses(response);
+  //     return responseJson;
+  //   } on SocketException {
+  //     print("No Internet connection");
+  //     throw Exception('No Internet connection');
+  //   } catch (e) {
+  //     print("An error occurred: $e");
+  //     throw Exception('An error occurred');
+  //   }
+  // }
+
 
   Future<http.Response> updatecastompostionapi(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}update-custom-position';
@@ -677,25 +805,36 @@ class authprovider with ChangeNotifier {
 
   Future<http.Response> addnewimageviedewtailimage(Map<String, String> bodyData, List<String> imagePaths) async {
     String url = '${apiUrl}view-position-image';
-    var responseJson;
     final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+
+    // Add headers
     imageUploadRequest.headers.addAll(headers);
+
+    // Add images with indexed field names (e.g., upload_file[0], upload_file[1], ...)
     if (imagePaths.isNotEmpty) {
-      for (var imagePath in imagePaths) {
+      for (var i = 0; i < imagePaths.length; i++) {
         var file = await http.MultipartFile.fromPath(
-          'upload_file',
-          imagePath!,
-          contentType: MediaType('image', 'jpg,png'),
+          'upload_file[$i]',  // Use indexed field names here
+          imagePaths[i],
+          contentType: MediaType('image', 'jpeg'), // Adjust as needed
         );
         imageUploadRequest.files.add(file);
       }
     }
+
+    // Add body data
     imageUploadRequest.fields.addAll(bodyData);
+
+    // Send request
     final streamResponse = await imageUploadRequest.send();
-    var response = await http.Response.fromStream(streamResponse);
-    responseJson = responses(response);
-    // print("responseJson = ${json.decode(responseJson)}");
-    return responseJson;
+    final response = await http.Response.fromStream(streamResponse);
+
+    // Check for success or parse response
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to upload images. Status code: ${response.statusCode}');
+    }
   }
 
 

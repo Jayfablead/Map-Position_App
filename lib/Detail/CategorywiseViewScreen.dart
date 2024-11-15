@@ -5152,19 +5152,30 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     });
   }
 
+  // void updateData() {
+  //   data[0] = [
+  //     (N1 ? 2 : 0) + (N2 ? 3 : 0) + (N3 ? 5 : 0),
+  //     (NE1 ? 2 : 0) + (NE2 ? 3 : 0) + (NE3 ?5 : 0),
+  //     (E1 ? 2 : 0) + (E2 ? 3 : 0) + (E3 ? 5: 0),
+  //     (SE1 ? 2 : 0) + (SE2 ? 3 : 0) + (SE3 ? 5 : 0),
+  //     (S1 ? 2 : 0) + (S2 ? 3 : 0) + (S3 ? 5 : 0),
+  //     (SW1 ?2: 0) + (SW2 ? 3 : 0) + (SW3 ? 5 : 0),
+  //     (W1 ? 2 : 0) + (W2 ? 3 : 0) + (W3 ? 5 : 0),
+  //     (NW1 ? 2 : 0) + (NW2 ? 3 : 0) + (NW3 ? 5: 0),
+  //   ];
+  // }
   void updateData() {
     data[0] = [
-      (N1 ? 2 : 0) + (N2 ? 3 : 0) + (N3 ? 5 : 0),
-      (NE1 ? 2 : 0) + (NE2 ? 3 : 0) + (NE3 ?5 : 0),
-      (E1 ? 2 : 0) + (E2 ? 3 : 0) + (E3 ? 5: 0),
-      (SE1 ? 2 : 0) + (SE2 ? 3 : 0) + (SE3 ? 5 : 0),
-      (S1 ? 2 : 0) + (S2 ? 3 : 0) + (S3 ? 5 : 0),
-      (SW1 ?2: 0) + (SW2 ? 3 : 0) + (SW3 ? 5 : 0),
-      (W1 ? 2 : 0) + (W2 ? 3 : 0) + (W3 ? 5 : 0),
-      (NW1 ? 2 : 0) + (NW2 ? 3 : 0) + (NW3 ? 5: 0),
+      (N1 ? 4 : 0) + (N2 ? 7 : 0) + (N3 ? 10 : 0),
+      (NE1 ? 4 : 0) + (NE2 ? 7 : 0) + (NE3 ? 10 : 0),
+      (E1 ? 4 : 0) + (E2 ? 7 : 0) + (E3 ? 10 : 0),
+      (SE1 ? 4 : 0) + (SE2 ? 7 : 0) + (SE3 ? 10 : 0),
+      (S1 ? 4 : 0) + (S2 ? 7 : 0) + (S3 ? 10 : 0),
+      (SW1 ? 4 : 0) + (SW2 ? 7 : 0) + (SW3 ? 10 : 0),
+      (W1 ? 4 : 0) + (W2 ? 7 : 0) + (W3 ? 10 : 0),
+      (NW1 ? 4 : 0) + (NW2 ? 7 : 0) + (NW3 ? 10 : 0),
     ];
   }
-
   Widget buildCheckboxRow(String label, List<Widget> checkboxes) {
     return Column(
       children: [
@@ -5215,7 +5226,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
     EasyLoading.show(status: 'Please Wait ...');
     final Map<String, String> data = {};
     data['post_id'] = widget.postid.toString();
-    data['upload_file[]'] = jsonEncode(imagePaths);
+    print("imagePaths${data}");
     checkInternet().then((internet) async {
       if (internet) {
         authprovider()

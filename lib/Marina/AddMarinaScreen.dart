@@ -2528,7 +2528,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       checkInternet().then((internet) async {
         if (internet) {
           authprovider()
-              .addmarinacastomapi(data, imageFiles)
+              .addmarinacastomapi(data, imagePaths)
               .then((response) async {
             castompositionmarinamodal =
                 CastomPositionMarinaModal.fromJson(json.decode(response.body));

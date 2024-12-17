@@ -3438,7 +3438,7 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                   ),
                   Row(
                     children: [
-                      Text("Nearby Positions",
+                      Text("Nearby Similar Positions",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,

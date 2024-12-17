@@ -3493,7 +3493,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         ),
                         Row(
                           children: [
-                            Text("Nearby Positions",
+                            Text("Nearby Similar Positions",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: blackback,

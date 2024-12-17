@@ -139,7 +139,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
   TextEditingController searchController = TextEditingController();
   final PositionController positionController = Get.put(PositionController());
 
-  TextEditingController _comments = TextEditingController();
+
   Set<Marker> _markers = {};
   List<MarkerData> _customMarkers = [];
   var latitudeString;
@@ -157,10 +157,6 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
       double.parse(viewcategorywisevieweetailmodal?.data?.latitude ?? ""),
       double.parse(viewcategorywisevieweetailmodal?.data?.longitude ?? ""));
   bool _isSatellite = false;
-  GoogleMapController? _mapController;
-
-  List<String> _imagePaths = [];
-
   @override
   void dispose() {
     searchController.dispose();
@@ -3009,6 +3005,8 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                           overflow: TextOverflow.ellipsis,
                                           fontSize: 13.sp,
                                           color: secondary,
+
+
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "volken",
                                           letterSpacing: 1,
@@ -3437,7 +3435,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                   ),
                   Row(
                     children: [
-                      Text("Nearby Position",
+                      Text("Nearby Similar Positions",
                           style: TextStyle(
                               letterSpacing: 1,
                               color: blackback,

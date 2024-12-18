@@ -16,9 +16,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/DetailsOtherScreen.dart';
 import 'package:mapposition/Detail/ViewAllPositionDetailsScreen.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
-import 'package:mapposition/Details1/MarinaDetailsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -39,20 +39,18 @@ import '../Modal/ReportModal.dart';
 import '../Modal/postionModel.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'CategorywiseViewScreen.dart';
-import 'DetailsScreen.dart';
-import 'OtherWarningDetailsScreen.dart';
 
-class DetailsOtherScreen extends StatefulWidget {
+
+class MarinaDetilsScreen extends StatefulWidget {
   String? postid;
-  DetailsOtherScreen({super.key,this.postid});
+  MarinaDetilsScreen({super.key,this.postid});
 
   @override
-  State<DetailsOtherScreen> createState() => _DetailsOtherScreenState();
+  State<MarinaDetilsScreen> createState() => _MarinaDetilsScreenState();
 }
 
 
-class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
+class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
   GlobalKey<ScaffoldState>();
   TextEditingController _name = TextEditingController();
@@ -1588,8 +1586,8 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   batan(
                                       title: "View Details",
                                       route: () {
-                                       Get.to(
-                                           MarinaDetilsScreen(
+                                        Get.to(
+                                            DetailsOtherScreen(
                                               postid: (addviewothermodal
                                                   ?.nearbyPosts?[index]
                                                   .id)

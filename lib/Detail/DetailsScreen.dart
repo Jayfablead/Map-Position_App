@@ -2365,7 +2365,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     onwViewpostionmodal
                         ?.nearbyPosts?.length==""||onwViewpostionmodal
                         ?.nearbyPosts?.length==0||onwViewpostionmodal
-                        ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Position Available", style: TextStyle(
+                        ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Similar Positions Available", style: TextStyle(
                         fontSize: 15.sp,
                         color: Colors.black,
                         fontWeight:

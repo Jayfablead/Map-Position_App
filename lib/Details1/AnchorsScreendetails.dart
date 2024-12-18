@@ -3515,7 +3515,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                   height: 20.h,
                   alignment: Alignment.center,
                   child: Text(
-                    "No Nearby Position Available",
+                    "No Nearby Similar Positions Available",
                     style: TextStyle(
                         fontSize: 15.sp,
                         color: Colors.black,

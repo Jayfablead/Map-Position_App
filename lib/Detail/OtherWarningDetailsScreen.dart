@@ -16,6 +16,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
+import 'package:mapposition/Details1/WarningDetsilsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
@@ -1030,7 +1031,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                       addviewwarningmodal
                           ?.nearbyPosts?.length==""||addviewwarningmodal
                           ?.nearbyPosts?.length==0||addviewwarningmodal
-                          ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Position Available", style: TextStyle(
+                          ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Similar Positions Available", style: TextStyle(
                           fontSize: 15.sp,
                           color: Colors.black,
                           fontWeight:
@@ -1139,113 +1140,16 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                   batan(
                                       title: "View Details",
                                       route: () {
+                                      Get.to(
+                                          WarningDetilsScreen(
+                                              postid: (addviewwarningmodal
+                                                  ?.nearbyPosts?[
+                                              index]
+                                                  .id)
+                                                  ?.toString() ??
+                                                  "",
+                                            ));
 
-                                        // if (addviewwarningmodal
-                                        //     ?.nearbyPosts?[index]
-                                        //     .postCategory ==
-                                        //     "Warning") {
-                                        //   Get.back();
-                                        //   Get.to(DetailsWarningDetailsScreen(
-                                        //     postid: (addviewwarningmodal
-                                        //         ?.nearbyPosts?[index]
-                                        //         .id)
-                                        //         ?.toString() ??
-                                        //         "",
-                                        //   ));
-                                        // } else if (addviewwarningmodal
-                                        //     ?.nearbyPosts?[index]
-                                        //     .postCategory ==
-                                        //     "Other") {
-                                        //   Get.back();
-                                        //   Get.to(ViewOterDetailsScreen(
-                                        //     postid: (addviewwarningmodal
-                                        //         ?.nearbyPosts?[index]
-                                        //         .id)
-                                        //         ?.toString() ??
-                                        //         "",
-                                        //   ));
-                                        // } else if (addviewwarningmodal
-                                        //     ?.nearbyPosts?[index]
-                                        //     .postCategory ==
-                                        //     "Anchorages") {
-                                        //   Get.back();
-                                        //   Get.to(CategoryWiseViewScreen(
-                                        //       postid: (addviewwarningmodal
-                                        //           ?.nearbyPosts?[
-                                        //       index]
-                                        //           .id)
-                                        //           ?.toString() ??
-                                        //           ""));
-                                        // }else if (addviewwarningmodal
-                                        //     ?.nearbyPosts?[index]
-                                        //     .postCategory ==
-                                        //     "Marina") {
-                                        //   Get.back();
-                                        //   Get.to(DetailsOtherScreen(
-                                        //       postid: (addviewwarningmodal
-                                        //           ?.nearbyPosts?[
-                                        //       index]
-                                        //           .id)
-                                        //           ?.toString() ??
-                                        //           ""));
-                                        // } else
-                                        //       () {
-                                        //     Get.back();
-                                        //     Get.to(ViewOterDetailsScreen(
-                                        //         postid: (addviewwarningmodal
-                                        //             ?.nearbyPosts?[
-                                        //         index]
-                                        //             .id)
-                                        //             ?.toString() ??
-                                        //             ""));
-                                        //   };
-                                        addviewwarningmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .postCategory ==
-                                            "Anchorage"
-                                            ? Get.to(
-                                            CategoryWiseViewScreen(
-                                              postid: (addviewwarningmodal
-                                                  ?.nearbyPosts?[
-                                              index]
-                                                  .id)
-                                                  ?.toString() ??
-                                                  "",
-                                            ))
-                                            : addviewwarningmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .postCategory ==
-                                            "Warning"
-                                            ? Get.to(
-                                            DetailsWarningDetailsScreen(
-                                              postid: (addviewwarningmodal
-                                                  ?.nearbyPosts?[
-                                              index]
-                                                  .id)
-                                                  ?.toString() ??
-                                                  "",
-                                            ))
-                                            : addviewwarningmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .postCategory ==
-                                            "Marina"
-                                            ? Get.to(
-                                            DetailsOtherScreen(
-                                              postid: (addviewwarningmodal
-                                                  ?.nearbyPosts?[index]
-                                                  .id)
-                                                  ?.toString() ??
-                                                  "",
-                                            ))
-                                            : Get.to(ViewOterDetailsScreen(
-                                            postid: (addviewwarningmodal
-                                                ?.nearbyPosts?[
-                                            index]
-                                                .id)
-                                                .toString()));
                                       },
                                       hight: 5.h,
                                       width: 30.w,

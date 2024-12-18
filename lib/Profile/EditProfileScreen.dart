@@ -71,27 +71,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
   Widget build(BuildContext context) {
-    return commanScreen(
-        isLoading: isLoading,
-        scaffold:Scaffold(
+    return  Scaffold(
       backgroundColor: bgcolor,
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
-      body: Form(
+      body: isLoading ? Center(child: CircularProgressIndicator(),): Form(
         key: _formKey,
-        child: isLoading ? Container():SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
                 // height: 50.h,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25),
                     color: Colors.grey.shade200,
-                  border: Border.all(
-                    width: 1.sp,
-                    color: secondary,
-                  )
+                    border: Border.all(
+                      width: 1.sp,
+                      color: secondary,
+                    )
                 ),
                 child: Column(
                   children: [
@@ -125,16 +123,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: selectedimage != null
                                 ? Image.file(selectedimage!,fit: BoxFit.cover,)
                                 : CachedNetworkImage(
-                                    imageUrl:
-                                    viewprofilemodal?.userDetails?.profileImage ?? "",
-                                    fit: BoxFit.cover,
-                                    progressIndicatorBuilder:
-                                        (context, url, progress) =>
-                                            Center(child: CircularProgressIndicator()),
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(Default_Profile,
-                                            fit: BoxFit.cover),
-                                  ),
+                              imageUrl:
+                              viewprofilemodal?.userDetails?.profileImage ?? "",
+                              fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, progress) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset(Default_Profile,
+                                      fit: BoxFit.cover),
+                            ),
                           ),
                         ),
                       ],
@@ -426,7 +424,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ),
-        ));
+    );
   }
 
   EditProfileapp() async {

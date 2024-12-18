@@ -16,10 +16,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mapposition/Detail/CategorywiseViewScreen.dart';
 import 'package:mapposition/Detail/DetailsOtherScreen.dart';
 import 'package:mapposition/Detail/OtherWarningDetailsScreen.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
-import 'package:mapposition/Details1/AnchorsScreendetails.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -37,15 +37,15 @@ import '../Modal/ReportModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'ViewAllPositionDetailsScreen.dart';
 
-class CategoryWiseViewScreen extends StatefulWidget {
+
+class AnchorgeDetilsScreen extends StatefulWidget {
   String? postid;
 
-  CategoryWiseViewScreen({super.key, this.postid});
+  AnchorgeDetilsScreen({super.key, this.postid});
 
   @override
-  State<CategoryWiseViewScreen> createState() => _CategoryWiseViewScreenState();
+  State<AnchorgeDetilsScreen> createState() => _AnchorgeDetilsScreenState();
 }
 
 final List<String> titles = [
@@ -63,9 +63,9 @@ List imgs = [
   "https://d2ugbn5gb88fyp.cloudfront.net/1289393/0_0.png",
 ];
 
-class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
+class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _review = TextEditingController();
@@ -147,7 +147,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
 
   LatLng _center = LatLng(21.1702, 72.8311); // Default initial position
   CameraPosition _initialCameraPosition =
-      CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
+  CameraPosition(target: LatLng(21.1702, 72.8311), zoom: 10);
   Position? _currentPosition;
   int? select;
   late LatLng dynamicLatLng;
@@ -3515,7 +3515,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   height: 20.h,
                   alignment: Alignment.center,
                   child: Text(
-                    "No Nearby Similar Positions Available",
+                    "No Nearby Position Available",
                     style: TextStyle(
                         fontSize: 15.sp,
                         color: Colors.black,
@@ -3622,17 +3622,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                             batan(
                                 title: "View Details",
                                 route: () {
-                                Get.to(
-                                      AnchorgeDetilsScreen(
-                                        postid: (viewcategorywisevieweetailmodal
-                                            ?.nearbyPosts?[
-                                        index]
-                                            .id)
-                                            ?.toString() ??
-                                            "",
-                                      )
-                                );
-
+                                  Get.to(CategoryWiseViewScreen(postid: (viewcategorywisevieweetailmodal?.nearbyPosts?[index].id ).toString()));
                                 },
                                 hight: 5.h,
                                 width: 30.w,
@@ -3971,7 +3961,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     width: 7.w,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(100),
+                                        BorderRadius.circular(100),
                                         color: Colors.black),
                                     child: InkWell(
                                         onTap: () {
@@ -3990,7 +3980,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -4025,7 +4015,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border:
-                                      Border.all(width: 1, color: secondary),
+                                  Border.all(width: 1, color: secondary),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: DropdownButton(
@@ -4064,12 +4054,12 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     ),
                                     DropdownMenuItem(
                                       child:
-                                          Text("violent or repulsive content",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.normal,
-                                                fontFamily: "volken",
-                                              )),
+                                      Text("violent or repulsive content",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: "volken",
+                                          )),
                                       value: "violent-or-repulsive-content",
                                     ),
                                     DropdownMenuItem(
@@ -4661,8 +4651,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
             });
             print("Categorywiseapicall");
             for (int index = 0;
-                index < (shoallmarkermodal?.positions?.length ?? 0);
-                index++) {
+            index < (shoallmarkermodal?.positions?.length ?? 0);
+            index++) {
               print("markerlength${shoallmarkermodal?.positions?.length}");
               var latitudeString =
                   viewcategorywisevieweetailmodal?.data?.latitude;
@@ -4677,7 +4667,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                     double latitude = double.parse(latitudeString);
                     double longitude = double.parse(longitudeString);
                     String imageurl = (shoallmarkermodal
-                            ?.positions?[index].properties?.imgURL)
+                        ?.positions?[index].properties?.imgURL)
                         .toString();
                     _customMarkers.add(
                       MarkerData(
@@ -4815,7 +4805,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     width: 7.w,
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(100),
+                                        BorderRadius.circular(100),
                                         color: primary),
                                     child: InkWell(
                                         onTap: () {
@@ -4834,7 +4824,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -4857,7 +4847,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     itemCount: 5,
                                     unratedColor: Colors.amber,
                                     itemPadding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    EdgeInsets.symmetric(horizontal: 4.0),
                                     itemBuilder: (context, index) {
                                       if (index < _rating.floor()) {
                                         return Icon(
@@ -4939,23 +4929,23 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 height: 2.h,
                               ),
                               loginmodal?.userId == "" ||
-                                      loginmodal?.userId == null
+                                  loginmodal?.userId == null
                                   ? Container()
                                   : batan(
-                                      title: "Add Review",
-                                      route: () {
-                                        if (_rating == 0) {
-                                          setState(() {
-                                            showError = true;
-                                          });
-                                        } else {
-                                          Get.back();
-                                          addreview();
-                                        }
-                                      },
-                                      hight: 6.h,
-                                      width: 85.w,
-                                      txtsize: 15.sp),
+                                  title: "Add Review",
+                                  route: () {
+                                    if (_rating == 0) {
+                                      setState(() {
+                                        showError = true;
+                                      });
+                                    } else {
+                                      Get.back();
+                                      addreview();
+                                    }
+                                  },
+                                  hight: 6.h,
+                                  width: 85.w,
+                                  txtsize: 15.sp),
                               SizedBox(
                                 height: 3.h,
                               ),
@@ -5019,10 +5009,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
       if (internet) {
         authprovider()
             .wedtherapi(
-                viewcategorywisevieweetailmodal?.data?.latitude,
-                viewcategorywisevieweetailmodal?.data?.longitude,
-                '${now.year}-${now.month}-${now.day}',
-                '${futureDate!.year}-${futureDate!.month}-${futureDate!.day}')
+            viewcategorywisevieweetailmodal?.data?.latitude,
+            viewcategorywisevieweetailmodal?.data?.longitude,
+            '${now.year}-${now.month}-${now.day}',
+            '${futureDate!.year}-${futureDate!.month}-${futureDate!.day}')
             .then((response) async {
           daywisewedhtermodal =
               DaywiseWeatherModal.fromJson(json.decode(response.body));

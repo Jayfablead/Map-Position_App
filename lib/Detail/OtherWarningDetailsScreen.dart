@@ -134,1307 +134,1303 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
     print("Postidavigayache${widget.postid.toString()}");
   }
   Widget build(BuildContext context) {
-    return commanScreen(
-        isLoading: isLoading,
-        scaffold:Scaffold(
-            key: _scaffoldKeyProductlistpage,
-            drawer: drawer1(),
-            backgroundColor: bgcolor,
-            body:isLoading
-                ? Container()
-                : SingleChildScrollView(
-                child: Column(children: [
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  header(
-                      text: "Details",
-                      callback1: () {
-                        _scaffoldKeyProductlistpage.currentState
-                            ?.openDrawer();
-                      }),
-                  Container(
+    return Scaffold(
+        key: _scaffoldKeyProductlistpage,
+        drawer: drawer1(),
+        backgroundColor: bgcolor,
+        body:isLoading ? Center(child: CircularProgressIndicator(),): SingleChildScrollView(
+            child: Column(children: [
+              SizedBox(
+                height: 4.h,
+              ),
+              header(
+                  text: "Details",
+                  callback1: () {
+                    _scaffoldKeyProductlistpage.currentState
+                        ?.openDrawer();
+                  }),
+              Container(
+                height: 30.h,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    enlargeFactor: 0.2,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
                     height: 30.h,
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        enlargeFactor: 0.2,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                        height: 30.h,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                      ),
-                      items: (addviewwarningmodal
-                          ?.data?.thumbnails ??
-                          [])
-                          .map((imagePath) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: (imagePath).toString(),
-                                  progressIndicatorBuilder:
-                                      (context, url, progress) => Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(""),
-                                ),
-                              ),
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                  ),
+                  items: (addviewwarningmodal
+                      ?.data?.thumbnails ??
+                      [])
+                      .map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: (imagePath).toString(),
+                              progressIndicatorBuilder:
+                                  (context, url, progress) => Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset(""),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Column(
+                  children: [
+                    Column(children: [
+                      SizedBox(height: 0.5.h),
+                      loginmodal?.userId == "" ||
+                          loginmodal?.userId == null
+                          ? batan(
+                          title:
+                          "Click to Add More Pictures From This Position",
+                          route: () {
+                            buildErrorDialog1(
+                              context,
+                              "",
+                              "Please Login To Use This",
+                              buttonname: 'Login',
+                                  () {
+                                Get.offAll(LoginScreen());
+                              },
                             );
                           },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    child: Column(
-                      children: [
-                        Column(children: [
-                          SizedBox(height: 0.5.h),
-                          loginmodal?.userId == "" ||
-                              loginmodal?.userId == null
-                              ? batan(
-                              title:
-                              "Click to Add More Pictures From This Position",
-                              route: () {
-                                buildErrorDialog1(
-                                  context,
-                                  "",
-                                  "Please Login To Use This",
-                                  buttonname: 'Login',
-                                      () {
-                                    Get.offAll(LoginScreen());
-                                  },
-                                );
-                              },
-                              hight: 6.h,
-                              width: MediaQuery.of(context).size.width,
-                              txtsize: 8.sp)
-                              : batan(
-                              title:
-                              "Click to Add More Pictures From This Position",
-                              route: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    int counter = 0;
-                                    return StatefulBuilder(
-                                      builder: (context, setState) {
-                                        return AlertDialog(
-                                          contentPadding: EdgeInsets.all(10), // Optional: Adjust padding if needed
-                                          content: Container(
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: Container(
-                                                        height: 10.w,
-                                                        width: 10.w,
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
-                                                          shape: BoxShape.circle,
-                                                          color: Colors.black,
-                                                        ),
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          size: 15.sp,
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Center(
-                                                      child: Text(
-                                                        'Add More Pictures',
-                                                        style: TextStyle(
-                                                          fontSize: 18.sp,
-                                                          fontFamily: "volken",
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                selectedimage == null
-                                                    ? Container()
-                                                    : Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                                      height: 30.w,
-                                                      width: 30.w,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(15),
-                                                        border: Border.all(
-                                                          color: bgcolor,
-                                                          width: 2.sp,
-                                                        ),
-                                                      ),
-                                                      child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(15),
-                                                        child: Image.file(
-                                                          selectedimage!,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                resultList1 == null
-                                                    ? Container()
-                                                    : Column(
-                                                  children: [
-                                                    selectedImages.isEmpty
-                                                        ? Container()
-                                                        : GridView.builder(
-                                                      shrinkWrap: true,
-                                                      physics: NeverScrollableScrollPhysics(),
-                                                      padding: EdgeInsets.zero,
-                                                      gridDelegate:
-                                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 3,
-                                                      ),
-                                                      itemCount: 9,
-                                                      itemBuilder: (context, index) {
-                                                        if (index < selectedImages.length &&
-                                                            selectedImages[index] != null) {
-                                                          return Container(
-                                                            margin: EdgeInsets.all(3.w),
-                                                            height: 70.h,
-                                                            width: 70.w,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(15),
-                                                              border: Border.all(color: Colors.grey),
-                                                            ),
-                                                            child: ClipRRect(
-                                                              borderRadius: BorderRadius.circular(15),
-                                                              child: Image.file(
-                                                                selectedImages[index],
-                                                                height: 60.h,
-                                                                width: 70.w,
-                                                                fit: BoxFit.cover,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return GestureDetector(
-                                                            onTap: () async {
-                                                              resultList1 = await ImagePicker().pickMultiImage();
-                                                              if (resultList1 != null) {
-                                                                if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                                  buildErrorDialog(context, "", "You selected more than 9 images");
-                                                                } else {
-                                                                  setState(() {
-                                                                    selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                                    imagePaths = resultList1!.map((file) => file.path).toList();
-                                                                  });
-                                                                }
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets.all(3.w),
-                                                              height: 60.h,
-                                                              width: 70.w,
-                                                              decoration: BoxDecoration(
-                                                                borderRadius: BorderRadius.circular(15),
-                                                                border: Border.all(color: Colors.grey),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 2.h),
-                                                batan(
-                                                  title: "Select Photo",
-                                                  route: () async {
-                                                    resultList1 = await ImagePicker().pickMultiImage();
-                                                    if (resultList1 != null) {
-                                                      if (resultList1!.length + selectedImages.length > maxImageLimit) {
-                                                        buildErrorDialog(context, "", "You selected more than 9 images");
-                                                      } else {
-                                                        setState(() {
-                                                          selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
-                                                          imagePaths = resultList1!.map((file) => file.path).toList();
-                                                        });
-                                                      }
-                                                    }
+                          hight: 6.h,
+                          width: MediaQuery.of(context).size.width,
+                          txtsize: 8.sp)
+                          : batan(
+                          title:
+                          "Click to Add More Pictures From This Position",
+                          route: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                int counter = 0;
+                                return StatefulBuilder(
+                                  builder: (context, setState) {
+                                    return AlertDialog(
+                                      contentPadding: EdgeInsets.all(10), // Optional: Adjust padding if needed
+                                      content: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
                                                   },
-                                                  hight: 6.h,
-                                                  width: MediaQuery.of(context).size.width,
-                                                  txtsize: 15.sp,
+                                                  child: Container(
+                                                    height: 10.w,
+                                                    width: 10.w,
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.black,
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      size: 15.sp,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
                                                 ),
-                                                SizedBox(height: 2.h),
-                                                selectedImages.isNotEmpty
-                                                    ? batan(
-                                                  title: "Upload",
-                                                  route: () {
-                                                    addnewimageapi();
-                                                  },
-                                                  hight: 6.h,
-                                                  width: MediaQuery.of(context).size.width,
-                                                  txtsize: 15.sp,
-                                                )
-                                                    : SizedBox(),
                                               ],
                                             ),
-                                          ),
-                                        );
-                                      },
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                  child: Text(
+                                                    'Add More Pictures',
+                                                    style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontFamily: "volken",
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            selectedimage == null
+                                                ? Container()
+                                                : Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                                  height: 30.w,
+                                                  width: 30.w,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    border: Border.all(
+                                                      color: bgcolor,
+                                                      width: 2.sp,
+                                                    ),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    child: Image.file(
+                                                      selectedimage!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            resultList1 == null
+                                                ? Container()
+                                                : Column(
+                                              children: [
+                                                selectedImages.isEmpty
+                                                    ? Container()
+                                                    : GridView.builder(
+                                                  shrinkWrap: true,
+                                                  physics: NeverScrollableScrollPhysics(),
+                                                  padding: EdgeInsets.zero,
+                                                  gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 3,
+                                                  ),
+                                                  itemCount: 9,
+                                                  itemBuilder: (context, index) {
+                                                    if (index < selectedImages.length &&
+                                                        selectedImages[index] != null) {
+                                                      return Container(
+                                                        margin: EdgeInsets.all(3.w),
+                                                        height: 70.h,
+                                                        width: 70.w,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(15),
+                                                          border: Border.all(color: Colors.grey),
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius: BorderRadius.circular(15),
+                                                          child: Image.file(
+                                                            selectedImages[index],
+                                                            height: 60.h,
+                                                            width: 70.w,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      return GestureDetector(
+                                                        onTap: () async {
+                                                          resultList1 = await ImagePicker().pickMultiImage();
+                                                          if (resultList1 != null) {
+                                                            if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                              buildErrorDialog(context, "", "You selected more than 9 images");
+                                                            } else {
+                                                              setState(() {
+                                                                selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                                imagePaths = resultList1!.map((file) => file.path).toList();
+                                                              });
+                                                            }
+                                                          }
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets.all(3.w),
+                                                          height: 60.h,
+                                                          width: 70.w,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(15),
+                                                            border: Border.all(color: Colors.grey),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            batan(
+                                              title: "Select Photo",
+                                              route: () async {
+                                                resultList1 = await ImagePicker().pickMultiImage();
+                                                if (resultList1 != null) {
+                                                  if (resultList1!.length + selectedImages.length > maxImageLimit) {
+                                                    buildErrorDialog(context, "", "You selected more than 9 images");
+                                                  } else {
+                                                    setState(() {
+                                                      selectedImages.addAll(resultList1!.map((XFile file) => File(file.path)).toList());
+                                                      imagePaths = resultList1!.map((file) => file.path).toList();
+                                                    });
+                                                  }
+                                                }
+                                              },
+                                              hight: 6.h,
+                                              width: MediaQuery.of(context).size.width,
+                                              txtsize: 15.sp,
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            selectedImages.isNotEmpty
+                                                ? batan(
+                                              title: "Upload",
+                                              route: () {
+                                                addnewimageapi();
+                                              },
+                                              hight: 6.h,
+                                              width: MediaQuery.of(context).size.width,
+                                              txtsize: 15.sp,
+                                            )
+                                                : SizedBox(),
+                                          ],
+                                        ),
+                                      ),
                                     );
                                   },
                                 );
-
                               },
-                              hight: 6.h,
-                              width: MediaQuery.of(context).size.width,
-                              txtsize: 8.sp),
-                          SizedBox(height: 1.h),
+                            );
+
+                          },
+                          hight: 6.h,
+                          width: MediaQuery.of(context).size.width,
+                          txtsize: 8.sp),
+                      SizedBox(height: 1.h),
 
 
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 90.w,
-                                child: Text(
-                                  addviewwarningmodal?.data?.title==""||addviewwarningmodal?.data?.title==null?"N/A":addviewwarningmodal?.data?.title ?? "",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 17.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "volken"),
-                                ),
-                              ),
-                            ],
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 90.w,
+                            child: Text(
+                              addviewwarningmodal?.data?.title==""||addviewwarningmodal?.data?.title==null?"N/A":addviewwarningmodal?.data?.title ?? "",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: blackback,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken"),
+                            ),
                           ),
-                          SizedBox(height: 1.h),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on,color: Colors.black,size: 15.sp),
-                              Text(
-                                "${addviewwarningmodal?.data?.latitude==""||addviewwarningmodal?.data?.latitude==null?"N/A":addviewwarningmodal?.data?.latitude}, ${addviewwarningmodal?.data?.longitude==""||addviewwarningmodal?.data?.longitude==null?"N/A":addviewwarningmodal?.data?.longitude} ",
+                        ],
+                      ),
+                      SizedBox(height: 1.h),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on,color: Colors.black,size: 15.sp),
+                          Text(
+                            "${addviewwarningmodal?.data?.latitude==""||addviewwarningmodal?.data?.latitude==null?"N/A":addviewwarningmodal?.data?.latitude}, ${addviewwarningmodal?.data?.longitude==""||addviewwarningmodal?.data?.longitude==null?"N/A":addviewwarningmodal?.data?.longitude} ",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken"),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            " ⭐️${addviewwarningmodal?.averageRating=="0"||addviewwarningmodal?.averageRating==0||addviewwarningmodal?.averageRating==""||addviewwarningmodal?.averageRating==null?"4.5":addviewwarningmodal?.averageRating ?? ""}[${addviewwarningmodal?.reviews?.length=="0"||addviewwarningmodal?.reviews?.length==""||addviewwarningmodal?.reviews?.length==0||addviewwarningmodal?.reviews?.length==null?"0":addviewwarningmodal?.reviews?.length} reviews]",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: secondary,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken"),
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          // Icon(
+                          //   Icons.add_location,
+                          //   color: Colors.black,
+                          //   size: 20.sp,
+                          // ),
+                          // Text(
+                          //   "Sleman,Yogyakarta",
+                          //   style: TextStyle(
+                          //       letterSpacing: 1,
+                          //       color: secondary,
+                          //       fontSize: 12.sp,
+                          //       fontWeight: FontWeight.normal,
+                          //       fontFamily: "volken"),
+                          // ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              report();
+                            },
+                            child: Icon(
+                              Icons.flag_outlined,
+                              color: Colors.black,
+                              size: 23.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          InkWell(
+                            onTap: (){
+                              report();
+                            },
+                            child: Text("Report",
+
                                 style: TextStyle(
                                     letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken"),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                " ⭐️${addviewwarningmodal?.averageRating=="0"||addviewwarningmodal?.averageRating==0||addviewwarningmodal?.averageRating==""||addviewwarningmodal?.averageRating==null?"4.5":addviewwarningmodal?.averageRating ?? ""}[${addviewwarningmodal?.reviews?.length=="0"||addviewwarningmodal?.reviews?.length==""||addviewwarningmodal?.reviews?.length==0||addviewwarningmodal?.reviews?.length==null?"0":addviewwarningmodal?.reviews?.length} reviews]",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: "volken"),
-                              ),
-                              SizedBox(
-                                width: 3.w,
-                              ),
-                              // Icon(
-                              //   Icons.add_location,
-                              //   color: Colors.black,
-                              //   size: 20.sp,
-                              // ),
-                              // Text(
-                              //   "Sleman,Yogyakarta",
-                              //   style: TextStyle(
-                              //       letterSpacing: 1,
-                              //       color: secondary,
-                              //       fontSize: 12.sp,
-                              //       fontWeight: FontWeight.normal,
-                              //       fontFamily: "volken"),
-                              // ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: (){
-                                  report();
-                                },
-                                child: Icon(
-                                  Icons.flag_outlined,
-                                  color: Colors.black,
-                                  size: 23.sp,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              InkWell(
-                                onTap: (){
-                                  report();
-                                },
-                                child: Text("Report",
-
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.black,
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "volken")),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Row(
-                            children: [
-                              Text("Description",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "volken"))
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 95.w,
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: secondary, width: 1.sp),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: ReadMoreText(
-                                  '${addviewwarningmodal?.data?.content==""||addviewwarningmodal?.data?.content==null?"N/A":addviewwarningmodal?.data?.content ?? ""}',
-                                  trimLines: 4,
-                                  trimLength: 146,
-                                  colorClickableText: Colors.blue,
-                                  trimMode: TrimMode.Length,
-                                  trimCollapsedText: ' Show more',
-                                  trimExpandedText: ' Show less',
-                                  moreStyle: TextStyle(
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "volken",
-                                      letterSpacing: 1,
-                                      color: blackback),
-                                  lessStyle: TextStyle(
-                                      fontSize: 11.sp,
-                                      fontFamily: "volken",
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1,
-                                      color: blackback),
-                                  style: TextStyle(
-                                    height: 1.5,
-                                    color: secondary,
-                                    fontFamily: "volken",
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.black,
+                                    fontSize: 17.sp,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12.sp,
-                                    letterSpacing: 1,
-                                  ),
-                                ),
+                                    fontFamily: "volken")),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Row(
+                        children: [
+                          Text("Description",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: blackback,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken"))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 95.w,
+                            padding:
+                            EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: secondary, width: 1.sp),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ReadMoreText(
+                              '${addviewwarningmodal?.data?.content==""||addviewwarningmodal?.data?.content==null?"N/A":addviewwarningmodal?.data?.content ?? ""}',
+                              trimLines: 4,
+                              trimLength: 146,
+                              colorClickableText: Colors.blue,
+                              trimMode: TrimMode.Length,
+                              trimCollapsedText: ' Show more',
+                              trimExpandedText: ' Show less',
+                              moreStyle: TextStyle(
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken",
+                                  letterSpacing: 1,
+                                  color: blackback),
+                              lessStyle: TextStyle(
+                                  fontSize: 11.sp,
+                                  fontFamily: "volken",
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                  color: blackback),
+                              style: TextStyle(
+                                height: 1.5,
+                                color: secondary,
+                                fontFamily: "volken",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp,
+                                letterSpacing: 1,
                               ),
-                            ],
+                            ),
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                  width: 95.w,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 3.w, vertical: 1.h),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: secondary, width: 1.sp),
-                                    borderRadius:
-                                    BorderRadius.circular(10),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              width: 95.w,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: secondary, width: 1.sp),
+                                borderRadius:
+                                BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Weather",
+                                          style: TextStyle(
+                                              letterSpacing: 1,
+                                              color: blackback,
+                                              fontSize: 15.sp,
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontFamily:
+                                              "volken")),
+                                    ],
                                   ),
-                                  child: Column(
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
                                     children: [
                                       Row(
                                         children: [
-                                          Text("Weather",
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  color: blackback,
-                                                  fontSize: 15.sp,
-                                                  fontWeight:
-                                                  FontWeight.bold,
-                                                  fontFamily:
-                                                  "volken")),
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          Text(
+                                            "Wind",
+                                            maxLines:
+                                            1,
+                                            style:
+                                            TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontSize: 13.sp,
+                                              color: secondary,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "volken",
+                                              letterSpacing: 1,
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 1.h,
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/swell.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 1.w,),
+                                                Text(
+                                                  "Swell",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
 
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
                                       Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                height:
-                                                20.w,
-                                                width:
-                                                20.w,
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
 
-                                                child:
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                  child: CachedNetworkImage(
-                                                    fit: BoxFit.cover,
-                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind.png",
-                                                    progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                    errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                width: 25.w,
+                                                child: Text(
+                                                  "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(width: 2.w,),
                                               Text(
-                                                "Wind",
-                                                maxLines:
-                                                1,
-                                                style:
-                                                TextStyle(
-                                                  overflow: TextOverflow.ellipsis,
+                                                "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                                style: TextStyle(
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
                                                   fontSize: 13.sp,
                                                   color: secondary,
                                                   fontWeight: FontWeight.w500,
                                                   fontFamily: "volken",
-                                                  letterSpacing: 1,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                                child:
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height:
-                                                      20.w,
-                                                      width:
-                                                      20.w,
-                                                      child:
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(0),
-                                                        child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
-                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/swell.png",
-                                                          progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                          errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 1.w,),
-                                                    Text(
-                                                      "Swell",
-                                                      maxLines:
-                                                      1,
-                                                      style:
-                                                      TextStyle(
-                                                        overflow: TextOverflow.ellipsis,
-                                                        fontSize: 13.sp,
-                                                        color: secondary,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily: "volken",
-                                                        letterSpacing: 1,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
                                       Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                height:
-                                                20.w,
-                                                width:
-                                                20.w,
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
 
-                                                child:
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                  child: CachedNetworkImage(
-                                                    fit: BoxFit.cover,
-                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wind-speed.png",
-                                                    progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                    errorWidget: (context, url, error) => Image.asset(Default_Profile),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: 2.w,),
-                                              Column(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: Text(
-                                                      "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
-                                                      style:
-                                                      TextStyle(
-                                                        overflow: TextOverflow.ellipsis,
-                                                        fontSize: 13.sp,
-                                                        color: secondary,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily: "volken",
-
-                                                      ),
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
-                                                    style: TextStyle(
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                      fontSize: 13.sp,
-                                                      color: secondary,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily: "volken",
+                                                ),
+                                                SizedBox(height: 1.h,),
+                                                Text(
+                                                  "Height",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl:"https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              daywisewedhtermodal?.days?[0].hours?[0].conditions==""||daywisewedhtermodal?.days?[0].hours?[0].conditions==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].conditions).toString(),
+                                              style:
+                                              TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wave-line.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 1.h,),
+                                                Text(
+                                                  "    --",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height:
+                                            20.w,
+                                            width:
+                                            20.w,
+
+                                            child:
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(0),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/temp.png",
+                                                progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2.w,),
+                                          SizedBox(
+                                            width: 25.w,
+                                            child: Text(
+                                              "${daywisewedhtermodal?.days?[0].temp==""||daywisewedhtermodal?.days?[0].temp==null?"N/A":(daywisewedhtermodal?.days?[0].temp).toString()}°C",
+                                              style:
+                                              TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "volken",
+
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                    ],
+                                  ),
+
+                                ],
+                              )),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Container(
+                        height: 25.h,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.black12,
+                                width: 1.sp)
+                        ),
+                        child: CustomGoogleMapMarkerBuilder(
+                          //screenshotDelay: const Duration(seconds: 4),
+                          customMarkers: _customMarkers,
+                          builder:
+                              (BuildContext context, Set<Marker>? markers) {
+                            if (markers == null) {
+                              print("online");
+                              return GoogleMap(
+                                onMapCreated: _onMapCreated,
+                                initialCameraPosition: CameraPosition(
+                                  target: _currentPosition1,
+                                  // You can set your initial position here
+                                  zoom: 12.0,
+                                ),
+                                mapType: _mapType,
+                                markers: _markers,
+                                myLocationButtonEnabled: false,
+                                myLocationEnabled: true,
+                                zoomControlsEnabled: true,
+                                compassEnabled: true,
+                                scrollGesturesEnabled: true,
+                              );
+                            }
+                            return GoogleMap(
+                              onMapCreated: _onMapCreated,
+                              initialCameraPosition: CameraPosition(
+                                target: _currentPosition1,
+                                // You can set your initial position here
+                                zoom: 12.0,
+                              ),
+                              gestureRecognizers: Set()
+                                ..add(Factory<OneSequenceGestureRecognizer>(
+                                      () => EagerGestureRecognizer(),
+                                )),
+                              scrollGesturesEnabled: true,
+                              mapToolbarEnabled: true,
+                              mapType: _mapType,
+                              markers: markers,
+                              myLocationButtonEnabled: false,
+                              myLocationEnabled: true,
+                              zoomControlsEnabled: false,
+                              compassEnabled: true,
+                            );
+                          },
+                        ),
+
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+
+
+                      Row(
+                        children: [
+                          Text("Nearby Similar Positions",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: blackback,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken")),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      addviewwarningmodal
+                          ?.nearbyPosts?.length==""||addviewwarningmodal
+                          ?.nearbyPosts?.length==0||addviewwarningmodal
+                          ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Position Available", style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                          fontWeight:
+                          FontWeight.w500,
+                          fontFamily:
+                          "volken",
+                          letterSpacing: 1), ),)
+                          :Container(
+                        height: 28.h,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: addviewwarningmodal?.nearbyPosts?.length,
+                          scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 1.w),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 1.sp, color: secondary),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: CachedNetworkImage(
+                                          height: 15.h,
+                                          width: 45.w,
+                                          imageUrl: addviewwarningmodal?.nearbyPosts?[index].thumbnail ?? "" ,
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder:
+                                              (context, url, progress) => Container(
+                                              alignment: Alignment.center,
+                                              child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                                Default_Profile,
+                                              ),
+                                        ),
+                                      ),
+                                      // loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
+                                      //   top: 0.2.h,
+                                      //   left: 34.w,
+                                      //   child: InkWell(
+                                      //     onTap: (){
+                                      //       print("datavalye${addviewwarningmodal?.nearbyPosts?[index].isFavorite}");
+                                      //       addfevorite( (addviewwarningmodal?.nearbyPosts?[index].isFavorite)!,(addviewwarningmodal
+                                      //           ?.nearbyPosts?[
+                                      //       index]
+                                      //           .id
+                                      //       )
+                                      //           ?.toString() ??
+                                      //           "");
+                                      //       print("abc");
+                                      //     },
+                                      //     child: Container(
+                                      //       height: 9.w,
+                                      //       width: 9.w,
+                                      //       alignment: Alignment.center,
+                                      //       padding: EdgeInsetsDirectional.all(2.2.w),
+                                      //       decoration: BoxDecoration(
+                                      //         color: blackback,
+                                      //         borderRadius: BorderRadius.circular(900),
+                                      //       ),
+                                      //       child: addviewwarningmodal?.nearbyPosts?[index].isFavorite==true?Icon(
+                                      //         CupertinoIcons.heart_fill,
+                                      //         color: Colors.white,
+                                      //         size: 15.sp,
+                                      //       ) :Icon(
+                                      //         Icons.favorite_border,
+                                      //         color: Colors.white,
+                                      //         size: 15.sp,
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 1.h),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 25.w,
+                                        child: Text(
+                                          addviewwarningmodal?.nearbyPosts?[index].title==""|| addviewwarningmodal?.nearbyPosts?[index].title==null?"N/A":(addviewwarningmodal?.nearbyPosts?[index].title).toString(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontFamily: "Volkan",
+                                            letterSpacing: 1.2,
+                                            color: secondary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  batan(
+                                      title: "View Details",
+                                      route: () {
+
+                                        // if (addviewwarningmodal
+                                        //     ?.nearbyPosts?[index]
+                                        //     .postCategory ==
+                                        //     "Warning") {
+                                        //   Get.back();
+                                        //   Get.to(DetailsWarningDetailsScreen(
+                                        //     postid: (addviewwarningmodal
+                                        //         ?.nearbyPosts?[index]
+                                        //         .id)
+                                        //         ?.toString() ??
+                                        //         "",
+                                        //   ));
+                                        // } else if (addviewwarningmodal
+                                        //     ?.nearbyPosts?[index]
+                                        //     .postCategory ==
+                                        //     "Other") {
+                                        //   Get.back();
+                                        //   Get.to(ViewOterDetailsScreen(
+                                        //     postid: (addviewwarningmodal
+                                        //         ?.nearbyPosts?[index]
+                                        //         .id)
+                                        //         ?.toString() ??
+                                        //         "",
+                                        //   ));
+                                        // } else if (addviewwarningmodal
+                                        //     ?.nearbyPosts?[index]
+                                        //     .postCategory ==
+                                        //     "Anchorages") {
+                                        //   Get.back();
+                                        //   Get.to(CategoryWiseViewScreen(
+                                        //       postid: (addviewwarningmodal
+                                        //           ?.nearbyPosts?[
+                                        //       index]
+                                        //           .id)
+                                        //           ?.toString() ??
+                                        //           ""));
+                                        // }else if (addviewwarningmodal
+                                        //     ?.nearbyPosts?[index]
+                                        //     .postCategory ==
+                                        //     "Marina") {
+                                        //   Get.back();
+                                        //   Get.to(DetailsOtherScreen(
+                                        //       postid: (addviewwarningmodal
+                                        //           ?.nearbyPosts?[
+                                        //       index]
+                                        //           .id)
+                                        //           ?.toString() ??
+                                        //           ""));
+                                        // } else
+                                        //       () {
+                                        //     Get.back();
+                                        //     Get.to(ViewOterDetailsScreen(
+                                        //         postid: (addviewwarningmodal
+                                        //             ?.nearbyPosts?[
+                                        //         index]
+                                        //             .id)
+                                        //             ?.toString() ??
+                                        //             ""));
+                                        //   };
+                                        addviewwarningmodal
+                                            ?.nearbyPosts?[
+                                        index]
+                                            .postCategory ==
+                                            "Anchorage"
+                                            ? Get.to(
+                                            CategoryWiseViewScreen(
+                                              postid: (addviewwarningmodal
+                                                  ?.nearbyPosts?[
+                                              index]
+                                                  .id)
+                                                  ?.toString() ??
+                                                  "",
+                                            ))
+                                            : addviewwarningmodal
+                                            ?.nearbyPosts?[
+                                        index]
+                                            .postCategory ==
+                                            "Warning"
+                                            ? Get.to(
+                                            DetailsWarningDetailsScreen(
+                                              postid: (addviewwarningmodal
+                                                  ?.nearbyPosts?[
+                                              index]
+                                                  .id)
+                                                  ?.toString() ??
+                                                  "",
+                                            ))
+                                            : addviewwarningmodal
+                                            ?.nearbyPosts?[
+                                        index]
+                                            .postCategory ==
+                                            "Marina"
+                                            ? Get.to(
+                                            DetailsOtherScreen(
+                                              postid: (addviewwarningmodal
+                                                  ?.nearbyPosts?[index]
+                                                  .id)
+                                                  ?.toString() ??
+                                                  "",
+                                            ))
+                                            : Get.to(ViewOterDetailsScreen(
+                                            postid: (addviewwarningmodal
+                                                ?.nearbyPosts?[
+                                            index]
+                                                .id)
+                                                .toString()));
+                                      },
+                                      hight: 5.h,
+                                      width: 30.w,
+                                      txtsize: 12.sp)
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Review",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: blackback,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "volken")),
+                          loginmodal?.userId==""||loginmodal?.userId==null?buildErrorDialog1(
+                            context,
+                            "",
+                            "Please Login To Use This",
+                            buttonname: 'Login',
+                                () {
+                              Get.offAll(LoginScreen());
+                            },
+                          ):loginmodal?.userId == addviewwarningmodal?.data?.authorId ?Container():InkWell(
+                            onTap: () {
+
+                              showratingpop1();
+                            },
+                            child: Text("Add Review",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: blackback,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ),
+                        ],
+                      ),
+                      addviewwarningmodal?.reviews?.length == null ||
+                          addviewwarningmodal?.reviews?.length == '' ||
+                          addviewwarningmodal?.reviews?.length == 0
+                          ?  Container(height: 20.h,alignment: Alignment.center,child: Text("No Review Available", style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                          fontWeight:
+                          FontWeight.w500,
+                          fontFamily:
+                          "volken",
+                          letterSpacing: 1), ),)
+                          : Column(
+                        children: [
+                          for (int i = 0; i < (addviewwarningmodal?.reviews?.length ?? 0); i++) ...[
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 2.w),
+                              child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 0.5.h),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 0.5.h,
+                                ),
+                                decoration: BoxDecoration(
+                                    border:
+                                    Border.all(color: Colors.grey.shade400, width: 0.5),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Stack(
+                                  children: [
+                                    Column(children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 20.w,
+                                            width: 20.w,
+                                            padding: EdgeInsets.all(1.w),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(90),
+                                              child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl:
+                                                  addviewwarningmodal?.reviews?[i].userImg ?? "",
+                                                  progressIndicatorBuilder:
+                                                      (context, url, progress) => Center(
+                                                      child:
+                                                      CircularProgressIndicator()),
+                                                  errorWidget: (context, url, error) =>
+                                                      Icon(
+                                                        Icons.person,
+                                                        size: 15.w,
+                                                        color: Colors.white,
+                                                      )),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 60.w,
+                                                    child: Text(
+                                                      addviewwarningmodal?.reviews?[i].name==""||addviewwarningmodal?.reviews?[i].name==null?"N/A":(addviewwarningmodal?.reviews?[i].name).toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        fontFamily: "volken",
+                                                        fontWeight: FontWeight.bold,
+                                                        letterSpacing: 1,
+                                                        color: Colors.black,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                                child:
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height:
-                                                      20.w,
-                                                      width:
-                                                      20.w,
-
-                                                      child:
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(0),
-                                                        child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
-                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
-                                                          progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                          errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 1.h,),
-                                                    Text(
-                                                      "Height",
-                                                      maxLines:
-                                                      1,
-                                                      style:
-                                                      TextStyle(
-                                                        overflow: TextOverflow.ellipsis,
-                                                        fontSize: 13.sp,
-                                                        color: secondary,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily: "volken",
-                                                        letterSpacing: 1,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                height:
-                                                20.w,
-                                                width:
-                                                20.w,
-
-                                                child:
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                  child: CachedNetworkImage(
-                                                    fit: BoxFit.cover,
-                                                    imageUrl:"https://img.myloview.com/posters/cloud-sun-icon-simple-color-with-outline-vector-elements-of-forecast-icons-for-ui-and-ux-website-or-mobile-application-700-219337463.jpg",
-                                                    progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                    errorWidget: (context, url, error) => Image.asset(Default_Profile),
+                                              SizedBox(height: 0.5.h),
+                                              Row(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.star,
+                                                    color: Colors.amber,
+                                                    size: 14.sp,
                                                   ),
-                                                ),
+                                                  Text(
+                                                    addviewwarningmodal?.reviews?[i].reviewerRating==""||addviewwarningmodal?.reviews?[i].reviewerRating==null?"0":(addviewwarningmodal?.reviews?[i].reviewerRating).toString(),
+                                                    style: TextStyle(
+                                                      fontFamily: "volken",
+                                                      fontWeight: FontWeight.bold,
+                                                      letterSpacing: 0.5,
+                                                      color: secondary.withOpacity(0.45),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(width: 2.w,),
                                               SizedBox(
-                                                width: 25.w,
-                                                child: Text(
-                                                  daywisewedhtermodal?.days?[0].hours?[0].conditions==""||daywisewedhtermodal?.days?[0].hours?[0].conditions==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].conditions).toString(),
-                                                  style:
-                                                  TextStyle(
-                                                    overflow: TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
-
-                                                  ),
-                                                ),
+                                                height: 0.5.h,
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                                child:
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height:
-                                                      20.w,
-                                                      width:
-                                                      20.w,
-
-                                                      child:
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(0),
-                                                        child: CachedNetworkImage(
-                                                          fit: BoxFit.cover,
-                                                          imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/wave-line.png",
-                                                          progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                          errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 1.h,),
-                                                    Text(
-                                                      "    --",
-                                                      maxLines:
-                                                      1,
-                                                      style:
-                                                      TextStyle(
-                                                        overflow: TextOverflow.ellipsis,
-                                                        fontSize: 13.sp,
-                                                        color: secondary,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily: "volken",
-                                                        letterSpacing: 1,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                height:
-                                                20.w,
-                                                width:
-                                                20.w,
-
-                                                child:
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                  child: CachedNetworkImage(
-                                                    fit: BoxFit.cover,
-                                                    imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/temp.png",
-                                                    progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                    errorWidget: (context, url, error) => Image.asset(Default_Profile),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: 2.w,),
                                               SizedBox(
-                                                width: 25.w,
+                                                width: 65.w,
                                                 child: Text(
-                                                  "${daywisewedhtermodal?.days?[0].temp==""||daywisewedhtermodal?.days?[0].temp==null?"N/A":(daywisewedhtermodal?.days?[0].temp).toString()}°C",
-                                                  style:
-                                                  TextStyle(
-                                                    overflow: TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
+                                                  addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery==""||addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery==null?"N/A":(addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery).toString(),
+                                                  style: TextStyle(
                                                     fontFamily: "volken",
-
+                                                    fontWeight: FontWeight.bold,
+                                                    letterSpacing: 0.5,
+                                                    color: secondary.withOpacity(0.45),
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
-
-                                        ],
-                                      ),
-
-                                    ],
-                                  )),
-                            ],
-                          ),
-
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Container(
-                            height: 25.h,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: Colors.black12,
-                                    width: 1.sp)
-                            ),
-                            child: CustomGoogleMapMarkerBuilder(
-                              //screenshotDelay: const Duration(seconds: 4),
-                              customMarkers: _customMarkers,
-                              builder:
-                                  (BuildContext context, Set<Marker>? markers) {
-                                if (markers == null) {
-                                  print("online");
-                                  return GoogleMap(
-                                    onMapCreated: _onMapCreated,
-                                    initialCameraPosition: CameraPosition(
-                                      target: _currentPosition1,
-                                      // You can set your initial position here
-                                      zoom: 12.0,
-                                    ),
-                                    mapType: _mapType,
-                                    markers: _markers,
-                                    myLocationButtonEnabled: false,
-                                    myLocationEnabled: true,
-                                    zoomControlsEnabled: true,
-                                    compassEnabled: true,
-                                    scrollGesturesEnabled: true,
-                                  );
-                                }
-                                return GoogleMap(
-                                  onMapCreated: _onMapCreated,
-                                  initialCameraPosition: CameraPosition(
-                                    target: _currentPosition1,
-                                    // You can set your initial position here
-                                    zoom: 12.0,
-                                  ),
-                                  gestureRecognizers: Set()
-                                    ..add(Factory<OneSequenceGestureRecognizer>(
-                                          () => EagerGestureRecognizer(),
-                                    )),
-                                  scrollGesturesEnabled: true,
-                                  mapToolbarEnabled: true,
-                                  mapType: _mapType,
-                                  markers: markers,
-                                  myLocationButtonEnabled: false,
-                                  myLocationEnabled: true,
-                                  zoomControlsEnabled: false,
-                                  compassEnabled: true,
-                                );
-                              },
-                            ),
-
-                          ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-
-
-                          Row(
-                            children: [
-                              Text("Nearby Similar Positions",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          addviewwarningmodal
-                              ?.nearbyPosts?.length==""||addviewwarningmodal
-                              ?.nearbyPosts?.length==0||addviewwarningmodal
-                              ?.nearbyPosts?.length==null?Container(height: 20.h,alignment: Alignment.center,child: Text("No Nearby Position Available", style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.black,
-                              fontWeight:
-                              FontWeight.w500,
-                              fontFamily:
-                              "volken",
-                              letterSpacing: 1), ),)
-                              :Container(
-                            height: 28.h,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: addviewwarningmodal?.nearbyPosts?.length,
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.zero,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(width: 1.sp, color: secondary),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
-                                            child: CachedNetworkImage(
-                                              height: 15.h,
-                                              width: 45.w,
-                                              imageUrl: addviewwarningmodal?.nearbyPosts?[index].thumbnail ?? "" ,
-                                              fit: BoxFit.cover,
-                                              progressIndicatorBuilder:
-                                                  (context, url, progress) => Container(
-                                                  alignment: Alignment.center,
-                                                  child: CircularProgressIndicator()),
-                                              errorWidget: (context, url, error) =>
-                                                  Image.asset(
-                                                    Default_Profile,
-                                                  ),
-                                            ),
-                                          ),
-                                          // loginmodal?.userId==""||loginmodal?.userId==null?Container():Positioned(
-                                          //   top: 0.2.h,
-                                          //   left: 34.w,
-                                          //   child: InkWell(
-                                          //     onTap: (){
-                                          //       print("datavalye${addviewwarningmodal?.nearbyPosts?[index].isFavorite}");
-                                          //       addfevorite( (addviewwarningmodal?.nearbyPosts?[index].isFavorite)!,(addviewwarningmodal
-                                          //           ?.nearbyPosts?[
-                                          //       index]
-                                          //           .id
-                                          //       )
-                                          //           ?.toString() ??
-                                          //           "");
-                                          //       print("abc");
-                                          //     },
-                                          //     child: Container(
-                                          //       height: 9.w,
-                                          //       width: 9.w,
-                                          //       alignment: Alignment.center,
-                                          //       padding: EdgeInsetsDirectional.all(2.2.w),
-                                          //       decoration: BoxDecoration(
-                                          //         color: blackback,
-                                          //         borderRadius: BorderRadius.circular(900),
-                                          //       ),
-                                          //       child: addviewwarningmodal?.nearbyPosts?[index].isFavorite==true?Icon(
-                                          //         CupertinoIcons.heart_fill,
-                                          //         color: Colors.white,
-                                          //         size: 15.sp,
-                                          //       ) :Icon(
-                                          //         Icons.favorite_border,
-                                          //         color: Colors.white,
-                                          //         size: 15.sp,
-                                          //       ),
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 1.h),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
                                           SizedBox(
-                                            width: 25.w,
-                                            child: Text(
-                                              addviewwarningmodal?.nearbyPosts?[index].title==""|| addviewwarningmodal?.nearbyPosts?[index].title==null?"N/A":(addviewwarningmodal?.nearbyPosts?[index].title).toString(),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontFamily: "Volkan",
-                                                letterSpacing: 1.2,
-                                                color: secondary,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15.sp,
-                                              ),
-                                            ),
+                                            height: 10.h,
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 2.h,
-                                      ),
-                                      batan(
-                                          title: "View Details",
-                                          route: () {
-
-                                            // if (addviewwarningmodal
-                                            //     ?.nearbyPosts?[index]
-                                            //     .postCategory ==
-                                            //     "Warning") {
-                                            //   Get.back();
-                                            //   Get.to(DetailsWarningDetailsScreen(
-                                            //     postid: (addviewwarningmodal
-                                            //         ?.nearbyPosts?[index]
-                                            //         .id)
-                                            //         ?.toString() ??
-                                            //         "",
-                                            //   ));
-                                            // } else if (addviewwarningmodal
-                                            //     ?.nearbyPosts?[index]
-                                            //     .postCategory ==
-                                            //     "Other") {
-                                            //   Get.back();
-                                            //   Get.to(ViewOterDetailsScreen(
-                                            //     postid: (addviewwarningmodal
-                                            //         ?.nearbyPosts?[index]
-                                            //         .id)
-                                            //         ?.toString() ??
-                                            //         "",
-                                            //   ));
-                                            // } else if (addviewwarningmodal
-                                            //     ?.nearbyPosts?[index]
-                                            //     .postCategory ==
-                                            //     "Anchorages") {
-                                            //   Get.back();
-                                            //   Get.to(CategoryWiseViewScreen(
-                                            //       postid: (addviewwarningmodal
-                                            //           ?.nearbyPosts?[
-                                            //       index]
-                                            //           .id)
-                                            //           ?.toString() ??
-                                            //           ""));
-                                            // }else if (addviewwarningmodal
-                                            //     ?.nearbyPosts?[index]
-                                            //     .postCategory ==
-                                            //     "Marina") {
-                                            //   Get.back();
-                                            //   Get.to(DetailsOtherScreen(
-                                            //       postid: (addviewwarningmodal
-                                            //           ?.nearbyPosts?[
-                                            //       index]
-                                            //           .id)
-                                            //           ?.toString() ??
-                                            //           ""));
-                                            // } else
-                                            //       () {
-                                            //     Get.back();
-                                            //     Get.to(ViewOterDetailsScreen(
-                                            //         postid: (addviewwarningmodal
-                                            //             ?.nearbyPosts?[
-                                            //         index]
-                                            //             .id)
-                                            //             ?.toString() ??
-                                            //             ""));
-                                            //   };
-                                            addviewwarningmodal
-                                                ?.nearbyPosts?[
-                                            index]
-                                                .postCategory ==
-                                                "Anchorage"
-                                                ? Get.to(
-                                                CategoryWiseViewScreen(
-                                                  postid: (addviewwarningmodal
-                                                      ?.nearbyPosts?[
-                                                  index]
-                                                      .id)
-                                                      ?.toString() ??
-                                                      "",
-                                                ))
-                                                : addviewwarningmodal
-                                                ?.nearbyPosts?[
-                                            index]
-                                                .postCategory ==
-                                                "Warning"
-                                                ? Get.to(
-                                                DetailsWarningDetailsScreen(
-                                                  postid: (addviewwarningmodal
-                                                      ?.nearbyPosts?[
-                                                  index]
-                                                      .id)
-                                                      ?.toString() ??
-                                                      "",
-                                                ))
-                                                : addviewwarningmodal
-                                                ?.nearbyPosts?[
-                                            index]
-                                                .postCategory ==
-                                                "Marina"
-                                                ? Get.to(
-                                                DetailsOtherScreen(
-                                                  postid: (addviewwarningmodal
-                                                      ?.nearbyPosts?[index]
-                                                      .id)
-                                                      ?.toString() ??
-                                                      "",
-                                                ))
-                                                : Get.to(ViewOterDetailsScreen(
-                                                postid: (addviewwarningmodal
-                                                    ?.nearbyPosts?[
-                                                index]
-                                                    .id)
-                                                    .toString()));
-                                          },
-                                          hight: 5.h,
-                                          width: 30.w,
-                                          txtsize: 12.sp)
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Review",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: blackback,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "volken")),
-                              loginmodal?.userId==""||loginmodal?.userId==null?buildErrorDialog1(
-                                context,
-                                "",
-                                "Please Login To Use This",
-                                buttonname: 'Login',
-                                    () {
-                                  Get.offAll(LoginScreen());
-                                },
-                              ):loginmodal?.userId == addviewwarningmodal?.data?.authorId ?Container():InkWell(
-                                onTap: () {
-
-                                  showratingpop1();
-                                },
-                                child: Text("Add Review",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: blackback,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "volken")),
+                                    ]),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                          addviewwarningmodal?.reviews?.length == null ||
-                              addviewwarningmodal?.reviews?.length == '' ||
-                              addviewwarningmodal?.reviews?.length == 0
-                              ?  Container(height: 20.h,alignment: Alignment.center,child: Text("No Review Available", style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.black,
-                              fontWeight:
-                              FontWeight.w500,
-                              fontFamily:
-                              "volken",
-                              letterSpacing: 1), ),)
-                              : Column(
-                           children: [
-                             for (int i = 0; i < (addviewwarningmodal?.reviews?.length ?? 0); i++) ...[
-                               Padding(
-                                 padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                 child: Container(
-                                   margin: EdgeInsets.symmetric(vertical: 0.5.h),
-                                   padding: EdgeInsets.symmetric(
-                                     vertical: 0.5.h,
-                                   ),
-                                   decoration: BoxDecoration(
-                                       border:
-                                       Border.all(color: Colors.grey.shade400, width: 0.5),
-                                       color: Colors.white,
-                                       borderRadius: BorderRadius.circular(10)),
-                                   child: Stack(
-                                     children: [
-                                       Column(children: [
-                                         Row(
-                                           children: [
-                                             Container(
-                                               height: 20.w,
-                                               width: 20.w,
-                                               padding: EdgeInsets.all(1.w),
-                                               child: ClipRRect(
-                                                 borderRadius: BorderRadius.circular(90),
-                                                 child: CachedNetworkImage(
-                                                     fit: BoxFit.cover,
-                                                     imageUrl:
-                                                     addviewwarningmodal?.reviews?[i].userImg ?? "",
-                                                     progressIndicatorBuilder:
-                                                         (context, url, progress) => Center(
-                                                         child:
-                                                         CircularProgressIndicator()),
-                                                     errorWidget: (context, url, error) =>
-                                                         Icon(
-                                                           Icons.person,
-                                                           size: 15.w,
-                                                           color: Colors.white,
-                                                         )),
-                                               ),
-                                             ),
-                                             SizedBox(
-                                               width: 2.w,
-                                             ),
-                                             Column(
-                                               mainAxisAlignment: MainAxisAlignment.start,
-                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                               children: [
-                                                 Row(
-                                                   mainAxisAlignment:
-                                                   MainAxisAlignment.spaceBetween,
-                                                   crossAxisAlignment:
-                                                   CrossAxisAlignment.start,
-                                                   children: [
-                                                     SizedBox(
-                                                       width: 60.w,
-                                                       child: Text(
-                                                         addviewwarningmodal?.reviews?[i].name==""||addviewwarningmodal?.reviews?[i].name==null?"N/A":(addviewwarningmodal?.reviews?[i].name).toString(),
-                                                         style: TextStyle(
-                                                           fontSize: 12.sp,
-                                                           fontFamily: "volken",
-                                                           fontWeight: FontWeight.bold,
-                                                           letterSpacing: 1,
-                                                           color: Colors.black,
-                                                         ),
-                                                       ),
-                                                     ),
-                                                   ],
-                                                 ),
-                                                 SizedBox(height: 0.5.h),
-                                                 Row(
-                                                   crossAxisAlignment:
-                                                   CrossAxisAlignment.center,
-                                                   mainAxisAlignment: MainAxisAlignment.center,
-                                                   children: [
-                                                     Icon(
-                                                       Icons.star,
-                                                       color: Colors.amber,
-                                                       size: 14.sp,
-                                                     ),
-                                                     Text(
-                                                       addviewwarningmodal?.reviews?[i].reviewerRating==""||addviewwarningmodal?.reviews?[i].reviewerRating==null?"0":(addviewwarningmodal?.reviews?[i].reviewerRating).toString(),
-                                                       style: TextStyle(
-                                                         fontFamily: "volken",
-                                                         fontWeight: FontWeight.bold,
-                                                         letterSpacing: 0.5,
-                                                         color: secondary.withOpacity(0.45),
-                                                       ),
-                                                     ),
-                                                   ],
-                                                 ),
-                                                 SizedBox(
-                                                   height: 0.5.h,
-                                                 ),
-                                                 SizedBox(
-                                                   width: 65.w,
-                                                   child: Text(
-                                                     addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery==""||addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery==null?"N/A":(addviewwarningmodal?.reviews?[i].reviewSummary?.xsReviwSummery).toString(),
-                                                     style: TextStyle(
-                                                       fontFamily: "volken",
-                                                       fontWeight: FontWeight.bold,
-                                                       letterSpacing: 0.5,
-                                                       color: secondary.withOpacity(0.45),
-                                                     ),
-                                                   ),
-                                                 ),
-                                               ],
-                                             ),
-                                             SizedBox(
-                                               height: 10.h,
-                                             ),
-                                           ],
-                                         ),
-                                       ]),
-                                     ],
-                                   ),
-                                 ),
-                               )
-                             ]
-                           ],
-                         )
-                        ]),
-                      ],
-                    ),
-                  ),
+                            )
+                          ]
+                        ],
+                      )
+                    ]),
+                  ],
+                ),
+              ),
 
-                ]))));
+            ])));
   }
 
 

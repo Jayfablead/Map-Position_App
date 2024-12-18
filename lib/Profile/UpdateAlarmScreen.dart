@@ -110,330 +110,324 @@ class _UpdateAlarmScreenState extends State<UpdateAlarmScreen> {
   }
 
   Widget build(BuildContext context) {
-    return commanScreen(
-
-      isLoading: isLoading,
-      scaffold: Scaffold(
-        bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 3),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.sp)
-          ),
-          onPressed: () {
-            Get.to(SubscriptionAlarmScreen());
-          },
-          child: Icon(
-            Icons.add,
-            size: 20.sp,
-            color: Colors.white,
-          ),
+    return Scaffold(
+      bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container():isLoading? Container(): Bottombar(select_tab: 3),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.sp)
         ),
-        extendBody: true,
-        // bottomNavigationBar:
-        //     loginmodal?.userId == "" || loginmodal?.userId == null
-        //         ? Container()
-        //         : isLoading
-        //             ? Container()
-        //             : Bottombar(select_tab: 0),
-        backgroundColor: bgcolor,
-        key: _scaffoldKeyProductlistpage1,
-        drawer: drawer1(),
-        body: isLoading
-            ? Container()
-            : SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      header(
-                          text: "Alert",
-                          callback1: () {
-                            _scaffoldKeyProductlistpage1.currentState
-                                ?.openDrawer();
-                          }),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Text("Location",
-                      //         style: TextStyle(
-                      //             letterSpacing: 1,
-                      //             color: Colors.black,
-                      //             fontSize: 17.sp,
-                      //             fontWeight: FontWeight.normal,
-                      //             fontFamily: "volken")),
-                      //   ],
-                      // ),
-                      // Container(
-                      //   width: MediaQuery.of(context).size.width,
-                      //   height: 40.h,
-                      //   child: GoogleMap(
-                      //     onMapCreated: _onMapCreated,
-                      //     initialCameraPosition: CameraPosition(
-                      //       target: _currentPosition1,
-                      //       // You can set your initial position here
-                      //       zoom: 12.0,
-                      //     ),
-                      //     mapType: _isSatellite ? MapType.satellite : MapType.normal,
-                      //     markers: _markers,
-                      //     myLocationButtonEnabled: false,
-                      //     myLocationEnabled: true,
-                      //     zoomControlsEnabled: true,
-                      //     compassEnabled: true,
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 2.h,
-                      // ),
-                      useralarammodal?.alarms?.length == null ||
-                              useralarammodal?.alarms?.length == 0
-                          ? Center(
-                              child: Container(
-                                height: 80.h,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "No Alert Available",
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "volken",
-                                      letterSpacing: 1),
-                                ),
-                              ),
-                            )
-                          : Column(
-                              children: [
-                                for (int index = 0;
-                                    index <
-                                        (useralarammodal?.alarms?.length ?? 0);
-                                    index++) ...[
-                                  Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 1.w),
-                                    margin: EdgeInsets.symmetric(vertical: 1.h),
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25),
-                                        border: Border.all(color: secondary)),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 1.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text("Title:-",
-                                                    style: TextStyle(
-                                                        letterSpacing: 1,
-                                                        color: blackback,
-                                                        fontSize: 15.sp,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontFamily: "volken")),
-                                                Text(
-                                                    useralarammodal
-                                                                    ?.alarms?[
-                                                                        index]
-                                                                    .location ==
-                                                                "" ||
-                                                            useralarammodal
-                                                                    ?.alarms?[
-                                                                        index]
-                                                                    .location ==
-                                                                null
-                                                        ? "N/A"
-                                                        : (useralarammodal
-                                                                ?.alarms?[index]
-                                                                .location)
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                        letterSpacing: 1,
-                                                        color: secondary,
-                                                        fontSize: 15.sp,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontFamily: "volken")
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    Get.to(UpdatealramScreenTwo(
-                                                      id: (useralarammodal
-                                                              ?.alarms?[index]
-                                                              .id)
-                                                          .toString(),
-                                                    ));
-                                                  },
-                                                  child: Icon(
-                                                    Icons.edit,
-                                                    color: Colors.black,
-                                                    size: 25.sp,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Divider(
-                                          color: secondary,
-                                          thickness: 0.1.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text("Status :- ",
-                                                    style: TextStyle(
-                                                        letterSpacing: 1,
-                                                        color: blackback,
-                                                        fontSize: 15.sp,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontFamily: "volken")),
-                                                useralarammodal?.alarms?[index]
-                                                            .status ==
-                                                        "1"
-                                                    ? Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    2.w),
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            color: Colors.green
-                                                                .shade100
-                                                        ),
-                                                        child: Text("Active",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                letterSpacing:
-                                                                    1,
-                                                                color: Colors
-                                                                    .green,
-                                                                fontSize: 15.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                fontFamily:
-                                                                    "volken")),
-                                                      )
-                                                    : Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    2.w),
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            color: Colors
-                                                                .red.shade100
-                                                        ),
-                                                        child: Text("InActive",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                letterSpacing:
-                                                                    1,
-                                                                color:
-                                                                    Colors.red,
-                                                                fontSize: 15.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                fontFamily:
-                                                                    "volken")),
-                                                      )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    deletealarama(
-                                                        useralarammodal
-                                                                ?.alarms?[index]
-                                                                .id ??
-                                                            "");
-                                                  },
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red.shade200,
-                                                    size: 25.sp,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 1.h,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text("Category :- ",
-                                                style: TextStyle(
-                                                    letterSpacing: 1,
-                                                    color: blackback,
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontFamily: "volken")
-                                            ),
-                                            Text(
-                                                useralarammodal?.alarms?[index]
-                                                                .name ==
-                                                            "" ||
-                                                        useralarammodal
-                                                                ?.alarms?[index]
-                                                                .name ==
-                                                            null
-                                                    ? "N/A"
-                                                    : useralarammodal
-                                                            ?.alarms?[index]
-                                                            .name ??
-                                                        "",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    letterSpacing: 1,
-                                                    color: secondary,
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontFamily: "volken")),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ]
-                              ],
-                            ),
-                    ],
+        onPressed: () {
+          Get.to(SubscriptionAlarmScreen());
+        },
+        child: Icon(
+          Icons.add,
+          size: 20.sp,
+          color: Colors.white,
+        ),
+      ),
+      extendBody: true,
+      // bottomNavigationBar:
+      //     loginmodal?.userId == "" || loginmodal?.userId == null
+      //         ? Container()
+      //         : isLoading
+      //             ? Container()
+      //             : Bottombar(select_tab: 0),
+      backgroundColor: bgcolor,
+      key: _scaffoldKeyProductlistpage1,
+      drawer: drawer1(),
+      body:isLoading ? Center(child: CircularProgressIndicator(),): SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 5.h,
+              ),
+              header(
+                  text: "Alert",
+                  callback1: () {
+                    _scaffoldKeyProductlistpage1.currentState
+                        ?.openDrawer();
+                  }),
+              SizedBox(
+                height: 2.h,
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     Text("Location",
+              //         style: TextStyle(
+              //             letterSpacing: 1,
+              //             color: Colors.black,
+              //             fontSize: 17.sp,
+              //             fontWeight: FontWeight.normal,
+              //             fontFamily: "volken")),
+              //   ],
+              // ),
+              // Container(
+              //   width: MediaQuery.of(context).size.width,
+              //   height: 40.h,
+              //   child: GoogleMap(
+              //     onMapCreated: _onMapCreated,
+              //     initialCameraPosition: CameraPosition(
+              //       target: _currentPosition1,
+              //       // You can set your initial position here
+              //       zoom: 12.0,
+              //     ),
+              //     mapType: _isSatellite ? MapType.satellite : MapType.normal,
+              //     markers: _markers,
+              //     myLocationButtonEnabled: false,
+              //     myLocationEnabled: true,
+              //     zoomControlsEnabled: true,
+              //     compassEnabled: true,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.h,
+              // ),
+              useralarammodal?.alarms?.length == null ||
+                  useralarammodal?.alarms?.length == 0
+                  ? Center(
+                child: Container(
+                  height: 80.h,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "No Alert Available",
+                    style: TextStyle(
+                        fontSize: 15.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "volken",
+                        letterSpacing: 1),
                   ),
                 ),
+              )
+                  : Column(
+                children: [
+                  for (int index = 0;
+                  index <
+                      (useralarammodal?.alarms?.length ?? 0);
+                  index++) ...[
+                    Container(
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 1.w),
+                      margin: EdgeInsets.symmetric(vertical: 1.h),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: secondary)),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text("Title:-",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: blackback,
+                                          fontSize: 15.sp,
+                                          fontWeight:
+                                          FontWeight.normal,
+                                          fontFamily: "volken")),
+                                  Text(
+                                      useralarammodal
+                                          ?.alarms?[
+                                      index]
+                                          .location ==
+                                          "" ||
+                                          useralarammodal
+                                              ?.alarms?[
+                                          index]
+                                              .location ==
+                                              null
+                                          ? "N/A"
+                                          : (useralarammodal
+                                          ?.alarms?[index]
+                                          .location)
+                                          .toString(),
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: secondary,
+                                          fontSize: 15.sp,
+                                          fontWeight:
+                                          FontWeight.normal,
+                                          fontFamily: "volken")
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(UpdatealramScreenTwo(
+                                        id: (useralarammodal
+                                            ?.alarms?[index]
+                                            .id)
+                                            .toString(),
+                                      ));
+                                    },
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: Colors.black,
+                                      size: 25.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: secondary,
+                            thickness: 0.1.h,
+                          ),
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text("Status :- ",
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          color: blackback,
+                                          fontSize: 15.sp,
+                                          fontWeight:
+                                          FontWeight.normal,
+                                          fontFamily: "volken")),
+                                  useralarammodal?.alarms?[index]
+                                      .status ==
+                                      "1"
+                                      ? Container(
+                                    padding: EdgeInsets
+                                        .symmetric(
+                                        horizontal:
+                                        2.w),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(
+                                            10),
+                                        color: Colors.green
+                                            .shade100
+                                    ),
+                                    child: Text("Active",
+                                        textAlign: TextAlign
+                                            .center,
+                                        style: TextStyle(
+                                            letterSpacing:
+                                            1,
+                                            color: Colors
+                                                .green,
+                                            fontSize: 15.sp,
+                                            fontWeight:
+                                            FontWeight
+                                                .normal,
+                                            fontFamily:
+                                            "volken")),
+                                  )
+                                      : Container(
+                                    padding: EdgeInsets
+                                        .symmetric(
+                                        horizontal:
+                                        2.w),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(
+                                            10),
+                                        color: Colors
+                                            .red.shade100
+                                    ),
+                                    child: Text("InActive",
+                                        textAlign: TextAlign
+                                            .center,
+                                        style: TextStyle(
+                                            letterSpacing:
+                                            1,
+                                            color:
+                                            Colors.red,
+                                            fontSize: 15.sp,
+                                            fontWeight:
+                                            FontWeight
+                                                .normal,
+                                            fontFamily:
+                                            "volken")),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      deletealarama(
+                                          useralarammodal
+                                              ?.alarms?[index]
+                                              .id ??
+                                              "");
+                                    },
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.red.shade200,
+                                      size: 25.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Row(
+                            children: [
+                              Text("Category :- ",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: blackback,
+                                      fontSize: 15.sp,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily: "volken")
+                              ),
+                              Text(
+                                  useralarammodal?.alarms?[index]
+                                      .name ==
+                                      "" ||
+                                      useralarammodal
+                                          ?.alarms?[index]
+                                          .name ==
+                                          null
+                                      ? "N/A"
+                                      : useralarammodal
+                                      ?.alarms?[index]
+                                      .name ??
+                                      "",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 15.sp,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily: "volken")),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]
+                ],
               ),
+            ],
+          ),
+        ),
       ),
     );
   }

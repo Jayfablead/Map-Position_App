@@ -53,22 +53,18 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
 
 
   Widget build(BuildContext context) {
-    return  commanScreen(
-        isLoading: isLoading,
-        scaffold:Scaffold(
+    return  Scaffold(
       backgroundColor: bgcolor,
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
-      body:  isLoading
-    ? Container()
-        :SingleChildScrollView(
+      body: isLoading ? Center(child: CircularProgressIndicator(),):SingleChildScrollView(
         child: Column(
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
 
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(25),
                   color: Colors.grey.shade200,
                   border: Border.all(
                     width: 1.sp,
@@ -373,7 +369,7 @@ class _ViewPRofileScreenState extends State<ViewPRofileScreen> {
           ],
         ),
       ),
-    ));
+    );
   }
   Viewprofile() {
     final Map<String, String> data = {};

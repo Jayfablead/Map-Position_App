@@ -118,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getLocation() async {
+    print("get location ave che ");
     LocationPermission permission;
     permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
@@ -125,11 +126,14 @@ class _HomeScreenState extends State<HomeScreen> {
     double lat = position.latitude;
     double long = position.longitude;
     LatLng location = LatLng(lat, long);
+    print("latlatlat${lat}");
+    print("latlatlat${long}");
     setState(() {
       _currentPosition1 = location;
       lat1 = lat;
       lng1 = long;
       isLoading = false;
+      print("isloding shu ave che ${_currentPosition1}");
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -139,9 +143,67 @@ class _HomeScreenState extends State<HomeScreen> {
       print("Time Avi gayo:-${time}");
       print("Date Avi gayo:-${storedPlanEndDate}");
     });
+    print("showmarker ma data ave che ");
     await showmarker();
     await storedPlanEndDate != time ? showmarker11() : showmarker();
   }
+//   getLocation() async {
+//     print("Fetching location...");
+//
+//     LocationPermission permission = await Geolocator.checkPermission();
+//     if (permission == LocationPermission.denied) {
+//       permission = await Geolocator.requestPermission();
+//       if (permission == LocationPermission.deniedForever) {
+//         print("Location permissions are permanently denied.");
+//         return;
+//       }
+//     }
+//
+//     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+//     if (!isLocationServiceEnabled) {
+//       print("Location services are disabled.");
+//       return;
+//     }
+//
+//     try {
+//       print("try ma ave che ");
+//       Position position = await Geolocator.getCurrentPosition(
+//           desiredAccuracy: LocationAccuracy.high);
+//       double lat = position.latitude;
+//       double long = position.longitude;
+//       LatLng location = LatLng(lat, long);
+// print(" a location ma ave che ${lat}");
+// print(" a location ma ave che ${long}");
+// print(" a location ma ave che ${position.latitude}");
+// print(" a location ma ave che ${position.longitude}");
+//       setState(() {
+//         _currentPosition1 = location;
+//         lat1 = lat;
+//         lng1 = long;
+//         isLoading = false;
+//       });
+//       await showmarker();
+//       print("Location: $lat, $long");
+//     } catch (e) {
+//       print("Error retrieving location: $e");
+//     }
+//
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     setState(() {
+//       storedPlanEndDate = prefs.getString('stripeSuccess');
+//       time = getCurrentDateTime();
+//     });
+//
+//     print("Plan End Date: $storedPlanEndDate");
+//     print("Current Time: $time");
+//
+//
+//     if (storedPlanEndDate != time) {
+//       await showmarker11();
+//     } else {
+//       await showmarker();
+//     }
+//   }
 
   MapType _mapType = MapType.normal;
 
@@ -220,13 +282,12 @@ class _HomeScreenState extends State<HomeScreen> {
     positionController?.filteredProducts;
     positionController?.fetchPositionData();
     getStoredPlanEndDate();
-    print("paymentsdate${storedPlanEndDate}");
+
     _timer = Timer.periodic(const Duration(minutes: 5), (timer) {
       stripepay();
     });
     super.initState();
-    print("livelocation:-${_currentPosition1}");
-    print("offlineimagestore:-${_currentPosition1}");
+
     _checkInternet();
   }
 
@@ -240,597 +301,593 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget build(BuildContext context) {
-    return commanScreen(
-        isLoading: isLoading,
-        scaffold: Scaffold(
-          resizeToAvoidBottomInset: false,
-          extendBody: true,
-          bottomNavigationBar:
-              loginmodal?.userId == "" || loginmodal?.userId == null
-                  ? Container()
-                  : isLoading
-                      ? Container()
-                      : Bottombar(select_tab: 2),
-          key: _scaffoldKeyProductlistpage,
-          drawer: drawer1(),
-          body: isLoading
-              ? Container()
-              : Stack(
-                  children: [
-                    Obx(() {
-                      if (positionController.isLoading.value) {
-                        return CustomGoogleMapMarkerBuilder(
-                          //screenshotDelay: const Duration(seconds: 4),
-                          customMarkers: _customMarkers,
-                          builder:
-                              (BuildContext context, Set<Marker>? markers) {
-                            if (markers == null) {
-                              print("online");
-                              return GoogleMap(
-                                onMapCreated: _onMapCreated,
-                                initialCameraPosition: CameraPosition(
-                                  target: _currentPosition1,
-                                  // You can set your initial position here
-                                  zoom: 5,
-                                ),
-                                gestureRecognizers: Set()
-                                  ..add(Factory<OneSequenceGestureRecognizer>(
-                                    () => EagerGestureRecognizer(),
-                                  )),
-                                mapType: _mapType,
-                                markers: _markers,
-                                myLocationButtonEnabled: false,
-                                myLocationEnabled: true,
-                                zoomControlsEnabled: true,
-                                compassEnabled: true,
-                                scrollGesturesEnabled: true,
-                              );
-                            }
-                            return GoogleMap(
-                              onMapCreated: _onMapCreated,
-                              initialCameraPosition: CameraPosition(
-                                target: _currentPosition1,
-                                // You can set your initial position here
-                                zoom: 5,
-                              ),
-                              gestureRecognizers: Set()
-                                ..add(Factory<OneSequenceGestureRecognizer>(
-                                  () => EagerGestureRecognizer(),
-                                )),
-                              scrollGesturesEnabled: true,
-                              mapToolbarEnabled: true,
-                              mapType: _mapType,
-                              markers: markers,
-                              myLocationButtonEnabled: false,
-                              myLocationEnabled: true,
-                              zoomControlsEnabled: false,
-                              compassEnabled: true,
-                            );
-                          },
-                        );
-                      } else {
-                        return GoogleMap(
-                          onMapCreated: _onMapCreated,
-                          initialCameraPosition: CameraPosition(
-                            target: _currentPosition1,
-                            // You can set your initial position here
-                            zoom: 5,
-                          ),
-                          gestureRecognizers: Set()
-                            ..add(Factory<OneSequenceGestureRecognizer>(
-                              () => EagerGestureRecognizer(),
-                            )),
-                          mapType: _mapType,
-                          markers: _markers,
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: true,
-                          zoomControlsEnabled: true,
-                          compassEnabled: true,
-                          scrollGesturesEnabled: true,
-                        );
-                      }
-                    }),
-                    Positioned(
-                      top: 4.h,
-                      left: 10,
-                      right: 10,
-                      child: SizedBox(
-                        width: 85.w,
-                        child: header(
-                            show: 1,
-                            text: "Navlex",
-                            callback1: () {
-                              _scaffoldKeyProductlistpage.currentState
-                                  ?.openDrawer();
-                            }),
-                      ),
-                    ),
-                    _isConnected
-                        ? Positioned(
-                            top: 10.h,
-                            left: 10,
-                            right: 10,
-                            child: Form(
-                              key: _formKey,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: searchController,
-                                      decoration: inputDecoration(
-                                          hintText: "Search Positions....",
-                                          icon: Icon(
-                                            Icons.search,
-                                            color: secondary,
-                                          )),
-                                      onChanged: (value) {
-                                        if (value.isEmpty) {
-                                          setState(() {
-                                            isLoading = true;
+    return  Scaffold(
+    resizeToAvoidBottomInset: false,
+    extendBody: true,
+    bottomNavigationBar:
+    loginmodal?.userId == "" || loginmodal?.userId == null
+    ? Container()
+        : isLoading
+    ? Container()
+        : Bottombar(select_tab: 2),
+    key: _scaffoldKeyProductlistpage,
+    drawer: drawer1(),
+    body:isLoading ? Center(child: CircularProgressIndicator(),):Stack(
+    children: [
+    Obx(() {
+    if (positionController.isLoading.value) {
+    return CustomGoogleMapMarkerBuilder(
+    //screenshotDelay: const Duration(seconds: 4),
+    customMarkers: _customMarkers,
+    builder:
+    (BuildContext context, Set<Marker>? markers) {
+    if (markers == null) {
+    print("online");
+    return GoogleMap(
+    onMapCreated: _onMapCreated,
+    initialCameraPosition: CameraPosition(
+    target: _currentPosition1,
+    // You can set your initial position here
+    zoom: 5,
+    ),
+    gestureRecognizers: Set()
+    ..add(Factory<OneSequenceGestureRecognizer>(
+    () => EagerGestureRecognizer(),
+    )),
+    mapType: _mapType,
+    markers: _markers,
+    myLocationButtonEnabled: false,
+    myLocationEnabled: true,
+    zoomControlsEnabled: true,
+    compassEnabled: true,
+    scrollGesturesEnabled: true,
+    );
+    }
+    return GoogleMap(
+    onMapCreated: _onMapCreated,
+    initialCameraPosition: CameraPosition(
+    target: _currentPosition1,
+    // You can set your initial position here
+    zoom: 5,
+    ),
+    gestureRecognizers: Set()
+    ..add(Factory<OneSequenceGestureRecognizer>(
+    () => EagerGestureRecognizer(),
+    )),
+    scrollGesturesEnabled: true,
+    mapToolbarEnabled: true,
+    mapType: _mapType,
+    markers: markers,
+    myLocationButtonEnabled: false,
+    myLocationEnabled: true,
+    zoomControlsEnabled: false,
+    compassEnabled: true,
+    );
+    },
+    );
+    } else {
+    return GoogleMap(
+    onMapCreated: _onMapCreated,
+    initialCameraPosition: CameraPosition(
+    target: _currentPosition1,
+    // You can set your initial position here
+    zoom: 5,
+    ),
+    gestureRecognizers: Set()
+    ..add(Factory<OneSequenceGestureRecognizer>(
+    () => EagerGestureRecognizer(),
+    )),
+    mapType: _mapType,
+    markers: _markers,
+    myLocationButtonEnabled: false,
+    myLocationEnabled: true,
+    zoomControlsEnabled: true,
+    compassEnabled: true,
+    scrollGesturesEnabled: true,
+    );
+    }
+    }),
+    Positioned(
+    top: 4.h,
+    left: 10,
+    right: 10,
+    child: SizedBox(
+    width: 85.w,
+    child: header(
+    show: 1,
+    text: "Navlex",
+    callback1: () {
+    _scaffoldKeyProductlistpage.currentState
+        ?.openDrawer();
+    }),
+    ),
+    ),
+    _isConnected
+    ? Positioned(
+    top: 10.h,
+    left: 10,
+    right: 10,
+    child: Form(
+    key: _formKey,
+    child: Row(
+    children: [
+    Expanded(
+    child: TextFormField(
+    controller: searchController,
+    decoration: inputDecoration(
+    hintText: "Search Positions....",
+    icon: Icon(
+    Icons.search,
+    color: secondary,
+    )),
+    onChanged: (value) {
+    if (value.isEmpty) {
+    setState(() {
+    isLoading = true;
 
-                                          });
-                                          showmarker();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 1.w,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors
-                                          .black, // Replace 'blackback' with a color
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.search,
-                                        color: Colors.white,
-                                        size: 20.sp,
-                                      ),
-                                      onPressed: () {
-                                        print(
-                                            'serch = ${searchController.text}');
-                                        if (searchController.text.isNotEmpty) {
-                                          print('Hello');
-                                          setState(() {
-                                            isLoading = true;
-                                          });
-                                          showmarker();
-                                        } else {
-                                          print('Hello bye');
-                                          Get.showSnackbar(
-                                            GetSnackBar(
-                                              message:
-                                                  'Please enter a search term',
-                                              isDismissible: true,
-                                              duration: Duration(
-                                                  seconds:
-                                                      3), // Set the duration to 3 seconds
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                            // Form(
-                            //   key: _formKey,
-                            //   child: Row(
-                            //     children: [
-                            //       Expanded(
-                            //         child: TextField(
-                            //           onChanged: (value) {
-                            //             if (value.isEmpty) {
-                            //               setState(() {
-                            //                 isLoading = true;
-                            //               });
-                            //               showmarker();
-                            //             }
-                            //           },
-                            //           controller: searchController,
-                            //           decoration: inputDecoration(
-                            //               hintText: "Search....",
-                            //               icon: Icon(
-                            //                 Icons.search,
-                            //                 color: secondary,
-                            //               )),
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         width: 1.w,
-                            //       ),
-                            //       Container(
-                            //         decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(10),
-                            //             color: blackback),
-                            //         child: IconButton(
-                            //           icon: Icon(Icons.search,
-                            //               color: Colors.white, size: 20.sp),
-                            //           onPressed: () {
-                            //             if (_formKey.currentState!.validate()){
-                            //               setState(() {
-                            //                 isLoading = true;
-                            //               });
-                            //               showmarker();
-                            //             }
-                            //
-                            //           },
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            )
-                        : Positioned(
-                            top: 10.h,
-                            left: 10,
-                            right: 10,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    onChanged:
-                                        positionController.updateSearchQuery,
-                                    controller: searchController,
-                                    decoration: inputDecoration(
-                                        hintText: "Search Positions....",
-                                        icon: Icon(
-                                          Icons.search,
-                                          color: secondary,
-                                        )),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 1.w,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: blackback),
-                                  child: IconButton(
-                                    icon: Icon(Icons.search,
-                                        color: Colors.white, size: 20.sp),
-                                    onPressed: () {
-                                      setState(() {
-                                        isLoading = true;
-                                      });
-                                      positionController.fetchPositionData();
-                                      positionController.printSearchResults();
+    });
+    showmarker();
+    }
+    },
+    ),
+    ),
+    SizedBox(
+    width: 1.w,
+    ),
+    Container(
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors
+        .black, // Replace 'blackback' with a color
+    ),
+    child: IconButton(
+    icon: Icon(
+    Icons.search,
+    color: Colors.white,
+    size: 20.sp,
+    ),
+    onPressed: () {
+    print(
+    'serch = ${searchController.text}');
+    if (searchController.text.isNotEmpty) {
+    print('Hello');
+    setState(() {
+    isLoading = true;
+    });
+    showmarker();
+    } else {
+    print('Hello bye');
+    Get.showSnackbar(
+    GetSnackBar(
+    message:
+    'Please enter a search term',
+    isDismissible: true,
+    duration: Duration(
+    seconds:
+    3), // Set the duration to 3 seconds
+    ),
+    );
+    }
+    },
+    ),
+    ),
+    ],
+    ),
+    )
+    // Form(
+    //   key: _formKey,
+    //   child: Row(
+    //     children: [
+    //       Expanded(
+    //         child: TextField(
+    //           onChanged: (value) {
+    //             if (value.isEmpty) {
+    //               setState(() {
+    //                 isLoading = true;
+    //               });
+    //               showmarker();
+    //             }
+    //           },
+    //           controller: searchController,
+    //           decoration: inputDecoration(
+    //               hintText: "Search....",
+    //               icon: Icon(
+    //                 Icons.search,
+    //                 color: secondary,
+    //               )),
+    //         ),
+    //       ),
+    //       SizedBox(
+    //         width: 1.w,
+    //       ),
+    //       Container(
+    //         decoration: BoxDecoration(
+    //             borderRadius: BorderRadius.circular(10),
+    //             color: blackback),
+    //         child: IconButton(
+    //           icon: Icon(Icons.search,
+    //               color: Colors.white, size: 20.sp),
+    //           onPressed: () {
+    //             if (_formKey.currentState!.validate()){
+    //               setState(() {
+    //                 isLoading = true;
+    //               });
+    //               showmarker();
+    //             }
+    //
+    //           },
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // ),
+    )
+        : Positioned(
+    top: 10.h,
+    left: 10,
+    right: 10,
+    child: Row(
+    children: [
+    Expanded(
+    child: TextField(
+    onChanged:
+    positionController.updateSearchQuery,
+    controller: searchController,
+    decoration: inputDecoration(
+    hintText: "Search Positions....",
+    icon: Icon(
+    Icons.search,
+    color: secondary,
+    )),
+    ),
+    ),
+    SizedBox(
+    width: 1.w,
+    ),
+    Container(
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: blackback),
+    child: IconButton(
+    icon: Icon(Icons.search,
+    color: Colors.white, size: 20.sp),
+    onPressed: () {
+    setState(() {
+    isLoading = true;
+    });
+    positionController.fetchPositionData();
+    positionController.printSearchResults();
 
-                                      offlineserach();
-                                      _focusOnLiveLocation();
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                    _isConnected
-                        ? Positioned(
-                            top: 20.h,
-                            left: 3.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                loginmodal?.userId == "" ||
-                                        loginmodal?.userId == null
-                                    ? batan(
-                                        title: "+ Add Alarm",
-                                        route: () {
-                                          buildErrorDialog1(
-                                            context,
-                                            "",
-                                            "Please Login To Use This",
-                                            buttonname: 'Login',
-                                            () {
-                                              Get.offAll(LoginScreen());
-                                            },
-                                          );
-                                        },
-                                        hight: 5.h,
-                                        width: 40.w,
-                                        txtsize: 10.sp)
-                                    : batan(
-                                        title: "+ Add Alarm",
-                                        route: () {
-                                          Get.to(SubscriptionAlarmScreen());
-                                        },
-                                        hight: 4.5.h,
-                                        width: 40.w,
-                                        txtsize: 10.sp),
-                                SizedBox(
-                                  width: 13.w,
-                                ),
-                                loginmodal?.userId == "" ||
-                                        loginmodal?.userId == null
-                                    ? batan(
-                                        title: "+ Add Position",
-                                        route: () {
-                                          buildErrorDialog1(
-                                            context,
-                                            "",
-                                            "Please Login To Use This",
-                                            buttonname: 'Login',
-                                            () {
-                                              Get.offAll(LoginScreen());
-                                            },
-                                          );
-                                        },
-                                        hight: 5.h,
-                                        width: 40.w,
-                                        txtsize: 10.sp)
-                                    : batan(
-                                        title: "+ Add Position",
-                                        route: () {
-                                          Get.to(AddMarinaScreen(
-                                            lat: lat1.toString(),
-                                            lng: lng1.toString(),
-                                          ));
-                                        },
-                                        hight: 4.5.h,
-                                        width: 40.w,
-                                        txtsize: 10.sp),
-                              ],
-                            )
-                            // PopupMenuButton(
-                            //     color: bgcolor,
-                            //     elevation: 00,
-                            //     shape: RoundedRectangleBorder(
-                            //         side: BorderSide(color: secondary),
-                            //         borderRadius: BorderRadius.circular(10)),
-                            //     child: Container(
-                            //         alignment: Alignment.center,
-                            //         width: 40.w,
-                            //         padding: EdgeInsets.symmetric(
-                            //             horizontal: 2.w, vertical: 1.h),
-                            //         decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(10),
-                            //             color: blackback),
-                            //         child: Text(
-                            //           "+ Add Position",
-                            //           style: TextStyle(
-                            //               letterSpacing: 1,
-                            //               color: Colors.white,
-                            //               fontSize: 12.sp,
-                            //               fontWeight: FontWeight.bold,
-                            //               fontFamily: "Volkan"),
-                            //         )),
-                            //     itemBuilder: (BuildContext context) {
-                            //       return <PopupMenuEntry>[
-                            //         PopupMenuItem(
-                            //           onTap: () {
-                            //             Get.back();
-                            //             Get.to(AddMarinaScreen(
-                            //               lat: lat1.toString(),
-                            //               lng: lng1.toString(),
-                            //             ));
-                            //           },
-                            //           child: Row(
-                            //             children: [
-                            //               Container(
-                            //                 width: 8.w,
-                            //                 height: 8.w,
-                            //                 alignment: Alignment.center,
-                            //                 decoration: BoxDecoration(
-                            //                   borderRadius:
-                            //                   BorderRadius.circular(100),
-                            //                   color: blackback,
-                            //                 ),
-                            //                 child: Image.asset(
-                            //                   "assets/lagan.png",
-                            //                   height: 25.w,
-                            //                   width: 25.w,
-                            //                   color: Colors.white,
-                            //                   fit: BoxFit.cover,
-                            //                 ),
-                            //               ),
-                            //               SizedBox(
-                            //                 width: 2.w,
-                            //               ),
-                            //               Text(
-                            //                 'Anchorage',
-                            //                 style: TextStyle(
-                            //                     letterSpacing: 1,
-                            //                     color: secondary,
-                            //                     fontSize: 12.sp,
-                            //                     fontWeight: FontWeight.normal,
-                            //                     fontFamily: "Volkan"),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //           value: 'Anchorage',
-                            //         ),
-                            //         PopupMenuDivider(),
-                            //         PopupMenuItem(
-                            //           onTap: () {
-                            //             Get.back();
-                            //             Get.to(AddMarinaScreen(
-                            //                 lat: lat1.toString(),
-                            //                 lng: lng1.toString()));
-                            //           },
-                            //           child: Row(
-                            //             children: [
-                            //               Container(
-                            //                   width: 8.w,
-                            //                   height: 8.w,
-                            //                   alignment: Alignment.center,
-                            //                   decoration: BoxDecoration(
-                            //                     borderRadius:
-                            //                     BorderRadius.circular(100),
-                            //                     color: blackback,
-                            //                   ),
-                            //                   child: Icon(
-                            //                     Icons.warning_amber_outlined,
-                            //                     color: Colors.white,
-                            //                   )),
-                            //               SizedBox(
-                            //                 width: 2.w,
-                            //               ),
-                            //               Text(
-                            //                 'Warning',
-                            //                 style: TextStyle(
-                            //                     letterSpacing: 1,
-                            //                     color: secondary,
-                            //                     fontSize: 12.sp,
-                            //                     fontWeight: FontWeight.normal,
-                            //                     fontFamily: "Volkan"),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //           value: 'Warning',
-                            //         ),
-                            //         PopupMenuDivider(),
-                            //         PopupMenuItem(
-                            //           onTap: () {
-                            //             Get.back();
-                            //             Get.to(AddMarinaScreen(
-                            //               lat: lat1.toString(),
-                            //               lng: lng1.toString(),
-                            //             ));
-                            //           },
-                            //           child: Row(
-                            //             children: [
-                            //               Container(
-                            //                   width: 8.w,
-                            //                   height: 8.w,
-                            //                   alignment: Alignment.center,
-                            //                   decoration: BoxDecoration(
-                            //                     borderRadius:
-                            //                     BorderRadius.circular(100),
-                            //                     color: blackback,
-                            //                   ),
-                            //                   child: Icon(
-                            //                     Icons.devices_other_sharp,
-                            //                     color: Colors.white,
-                            //                   )),
-                            //               SizedBox(
-                            //                 width: 2.w,
-                            //               ),
-                            //               Text(
-                            //                 'Other',
-                            //                 style: TextStyle(
-                            //                     letterSpacing: 1,
-                            //                     color: secondary,
-                            //                     fontSize: 12.sp,
-                            //                     fontWeight: FontWeight.normal,
-                            //                     fontFamily: "Volkan"),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //           value: 'Warning',
-                            //         ),
-                            //         // PopupMenuDivider(),
-                            //         // PopupMenuItem(
-                            //         //   onTap: () {
-                            //         //     Get.offAll(AddMarinaScreen(
-                            //         //       lat: lat1.toString(),
-                            //         //       lng: lng1.toString(),
-                            //         //     ));
-                            //         //   },
-                            //         //   child: Row(
-                            //         //     children: [
-                            //         //       Container(
-                            //         //           width: 8.w,
-                            //         //           height: 8.w,
-                            //         //           alignment: Alignment.center,
-                            //         //           decoration: BoxDecoration(
-                            //         //             borderRadius:
-                            //         //             BorderRadius.circular(100),
-                            //         //             color: blackback,
-                            //         //           ),
-                            //         //           child: Icon(Icons.directions_boat,
-                            //         //               color: Colors.white)),
-                            //         //       SizedBox(
-                            //         //         width: 2.w,
-                            //         //       ),
-                            //         //       Text(
-                            //         //         'Position',
-                            //         //         style: TextStyle(
-                            //         //             letterSpacing: 1,
-                            //         //             color: secondary,
-                            //         //             fontSize: 12.sp,
-                            //         //             fontWeight: FontWeight.normal,
-                            //         //             fontFamily: "Volkan"),
-                            //         //       ),
-                            //         //     ],
-                            //         //   ),
-                            //         //   value: 'Warning',
-                            //         // ),
-                            //       ];
-                            //     },
-                            //     onSelected: (value) {
-                            //       print('Selected: $value');
-                            //     }),
-                            )
-                        : Container(),
-                    Positioned(
-                      bottom: 250,
-                      right: 20,
-                      child: Container(
-                      width: 15.w,
-                      height: 7.h,
-                      child: FloatingActionButton(
-                        backgroundColor: blackback,
-                        onPressed: () {
-                          legend();
-                        },
-                        child: Icon(Icons.fmd_good, color: Colors.white),
-                      ),
-                                            ),
-                    ),
-                    Positioned(
-                      bottom: 180,
-                      right: 20,
-                      child: Container(
-                        width: 15.w,
-                        height: 7.h,
-                        child: FloatingActionButton(
-                          backgroundColor: blackback,
-                          onPressed: () {
-                            _focusOnLiveLocation();
-                          },
-                          child: Icon(Icons.my_location, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    _isConnected
-                        ? Positioned(
-                            bottom: 110,
-                            right: 20,
-                            child: Container(
-                              width: 15.w,
-                              height: 7.h,
-                              child: FloatingActionButton(
-                                onPressed: _toggleMapType,
-                                backgroundColor: blackback,
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _isSatellite = !_isSatellite;
-                                    });
-                                    setState(() {
-                                      _mapType = _isSatellite
-                                          ? MapType.satellite
-                                          : MapType.normal;
-                                    });
-                                  },
-                                  child: Icon(
-                                      _isSatellite
-                                          ? Icons.map_outlined
-                                          : Icons.map,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                  ],
-                ),
-        ));
+    offlineserach();
+    _focusOnLiveLocation();
+    },
+    ),
+    ),
+    ],
+    ),
+    ),
+    _isConnected
+    ? Positioned(
+    top: 20.h,
+    left: 3.w,
+    child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+    loginmodal?.userId == "" ||
+    loginmodal?.userId == null
+    ? batan(
+    title: "+ Add Alarm",
+    route: () {
+    buildErrorDialog1(
+    context,
+    "",
+    "Please Login To Use This",
+    buttonname: 'Login',
+    () {
+    Get.offAll(LoginScreen());
+    },
+    );
+    },
+    hight: 5.h,
+    width: 40.w,
+    txtsize: 10.sp)
+        : batan(
+    title: "+ Add Alarm",
+    route: () {
+    Get.to(SubscriptionAlarmScreen());
+    },
+    hight: 4.5.h,
+    width: 40.w,
+    txtsize: 10.sp),
+    SizedBox(
+    width: 13.w,
+    ),
+    loginmodal?.userId == "" ||
+    loginmodal?.userId == null
+    ? batan(
+    title: "+ Add Position",
+    route: () {
+    buildErrorDialog1(
+    context,
+    "",
+    "Please Login To Use This",
+    buttonname: 'Login',
+    () {
+    Get.offAll(LoginScreen());
+    },
+    );
+    },
+    hight: 5.h,
+    width: 40.w,
+    txtsize: 10.sp)
+        : batan(
+    title: "+ Add Position",
+    route: () {
+    Get.to(AddMarinaScreen(
+    lat: lat1.toString(),
+    lng: lng1.toString(),
+    ));
+    },
+    hight: 4.5.h,
+    width: 40.w,
+    txtsize: 10.sp),
+    ],
+    )
+    // PopupMenuButton(
+    //     color: bgcolor,
+    //     elevation: 00,
+    //     shape: RoundedRectangleBorder(
+    //         side: BorderSide(color: secondary),
+    //         borderRadius: BorderRadius.circular(10)),
+    //     child: Container(
+    //         alignment: Alignment.center,
+    //         width: 40.w,
+    //         padding: EdgeInsets.symmetric(
+    //             horizontal: 2.w, vertical: 1.h),
+    //         decoration: BoxDecoration(
+    //             borderRadius: BorderRadius.circular(10),
+    //             color: blackback),
+    //         child: Text(
+    //           "+ Add Position",
+    //           style: TextStyle(
+    //               letterSpacing: 1,
+    //               color: Colors.white,
+    //               fontSize: 12.sp,
+    //               fontWeight: FontWeight.bold,
+    //               fontFamily: "Volkan"),
+    //         )),
+    //     itemBuilder: (BuildContext context) {
+    //       return <PopupMenuEntry>[
+    //         PopupMenuItem(
+    //           onTap: () {
+    //             Get.back();
+    //             Get.to(AddMarinaScreen(
+    //               lat: lat1.toString(),
+    //               lng: lng1.toString(),
+    //             ));
+    //           },
+    //           child: Row(
+    //             children: [
+    //               Container(
+    //                 width: 8.w,
+    //                 height: 8.w,
+    //                 alignment: Alignment.center,
+    //                 decoration: BoxDecoration(
+    //                   borderRadius:
+    //                   BorderRadius.circular(100),
+    //                   color: blackback,
+    //                 ),
+    //                 child: Image.asset(
+    //                   "assets/lagan.png",
+    //                   height: 25.w,
+    //                   width: 25.w,
+    //                   color: Colors.white,
+    //                   fit: BoxFit.cover,
+    //                 ),
+    //               ),
+    //               SizedBox(
+    //                 width: 2.w,
+    //               ),
+    //               Text(
+    //                 'Anchorage',
+    //                 style: TextStyle(
+    //                     letterSpacing: 1,
+    //                     color: secondary,
+    //                     fontSize: 12.sp,
+    //                     fontWeight: FontWeight.normal,
+    //                     fontFamily: "Volkan"),
+    //               ),
+    //             ],
+    //           ),
+    //           value: 'Anchorage',
+    //         ),
+    //         PopupMenuDivider(),
+    //         PopupMenuItem(
+    //           onTap: () {
+    //             Get.back();
+    //             Get.to(AddMarinaScreen(
+    //                 lat: lat1.toString(),
+    //                 lng: lng1.toString()));
+    //           },
+    //           child: Row(
+    //             children: [
+    //               Container(
+    //                   width: 8.w,
+    //                   height: 8.w,
+    //                   alignment: Alignment.center,
+    //                   decoration: BoxDecoration(
+    //                     borderRadius:
+    //                     BorderRadius.circular(100),
+    //                     color: blackback,
+    //                   ),
+    //                   child: Icon(
+    //                     Icons.warning_amber_outlined,
+    //                     color: Colors.white,
+    //                   )),
+    //               SizedBox(
+    //                 width: 2.w,
+    //               ),
+    //               Text(
+    //                 'Warning',
+    //                 style: TextStyle(
+    //                     letterSpacing: 1,
+    //                     color: secondary,
+    //                     fontSize: 12.sp,
+    //                     fontWeight: FontWeight.normal,
+    //                     fontFamily: "Volkan"),
+    //               ),
+    //             ],
+    //           ),
+    //           value: 'Warning',
+    //         ),
+    //         PopupMenuDivider(),
+    //         PopupMenuItem(
+    //           onTap: () {
+    //             Get.back();
+    //             Get.to(AddMarinaScreen(
+    //               lat: lat1.toString(),
+    //               lng: lng1.toString(),
+    //             ));
+    //           },
+    //           child: Row(
+    //             children: [
+    //               Container(
+    //                   width: 8.w,
+    //                   height: 8.w,
+    //                   alignment: Alignment.center,
+    //                   decoration: BoxDecoration(
+    //                     borderRadius:
+    //                     BorderRadius.circular(100),
+    //                     color: blackback,
+    //                   ),
+    //                   child: Icon(
+    //                     Icons.devices_other_sharp,
+    //                     color: Colors.white,
+    //                   )),
+    //               SizedBox(
+    //                 width: 2.w,
+    //               ),
+    //               Text(
+    //                 'Other',
+    //                 style: TextStyle(
+    //                     letterSpacing: 1,
+    //                     color: secondary,
+    //                     fontSize: 12.sp,
+    //                     fontWeight: FontWeight.normal,
+    //                     fontFamily: "Volkan"),
+    //               ),
+    //             ],
+    //           ),
+    //           value: 'Warning',
+    //         ),
+    //         // PopupMenuDivider(),
+    //         // PopupMenuItem(
+    //         //   onTap: () {
+    //         //     Get.offAll(AddMarinaScreen(
+    //         //       lat: lat1.toString(),
+    //         //       lng: lng1.toString(),
+    //         //     ));
+    //         //   },
+    //         //   child: Row(
+    //         //     children: [
+    //         //       Container(
+    //         //           width: 8.w,
+    //         //           height: 8.w,
+    //         //           alignment: Alignment.center,
+    //         //           decoration: BoxDecoration(
+    //         //             borderRadius:
+    //         //             BorderRadius.circular(100),
+    //         //             color: blackback,
+    //         //           ),
+    //         //           child: Icon(Icons.directions_boat,
+    //         //               color: Colors.white)),
+    //         //       SizedBox(
+    //         //         width: 2.w,
+    //         //       ),
+    //         //       Text(
+    //         //         'Position',
+    //         //         style: TextStyle(
+    //         //             letterSpacing: 1,
+    //         //             color: secondary,
+    //         //             fontSize: 12.sp,
+    //         //             fontWeight: FontWeight.normal,
+    //         //             fontFamily: "Volkan"),
+    //         //       ),
+    //         //     ],
+    //         //   ),
+    //         //   value: 'Warning',
+    //         // ),
+    //       ];
+    //     },
+    //     onSelected: (value) {
+    //       print('Selected: $value');
+    //     }),
+    )
+        : Container(),
+    Positioned(
+    bottom: 250,
+    right: 20,
+    child: Container(
+    width: 15.w,
+    height: 7.h,
+    child: FloatingActionButton(
+    backgroundColor: blackback,
+    onPressed: () {
+    legend();
+    },
+    child: Icon(Icons.fmd_good, color: Colors.white),
+    ),
+    ),
+    ),
+    Positioned(
+    bottom: 180,
+    right: 20,
+    child: Container(
+    width: 15.w,
+    height: 7.h,
+    child: FloatingActionButton(
+    backgroundColor: blackback,
+    onPressed: () {
+    _focusOnLiveLocation();
+    },
+    child: Icon(Icons.my_location, color: Colors.white),
+    ),
+    ),
+    ),
+    _isConnected
+    ? Positioned(
+    bottom: 110,
+    right: 20,
+    child: Container(
+    width: 15.w,
+    height: 7.h,
+    child: FloatingActionButton(
+    onPressed: _toggleMapType,
+    backgroundColor: blackback,
+    child: InkWell(
+    onTap: () {
+    setState(() {
+    _isSatellite = !_isSatellite;
+    });
+    setState(() {
+    _mapType = _isSatellite
+    ? MapType.satellite
+        : MapType.normal;
+    });
+    },
+    child: Icon(
+    _isSatellite
+    ? Icons.map_outlined
+        : Icons.map,
+    color: Colors.white),
+    ),
+    ),
+    ),
+    )
+        : Container(),
+    ],
+    ),
+    );
   }
 
   void _focusOnLiveLocation() {
@@ -4685,6 +4742,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         searchController.text==""? _currentPosition1 = LatLng(double.parse(lat1.toString()), double.parse(lng1.toString())):_currentPosition1 = LatLng(latitude, longitude);
                       }
                     } catch (e) {
+
                       print("Error parsing coordinates: $e");
                     }
                   } else {

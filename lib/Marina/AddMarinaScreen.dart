@@ -338,2093 +338,2088 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   }
 
   Widget build(BuildContext context) {
-    return commanScreen(
-        isLoading: isloding,
-      scaffold: Scaffold(
-        backgroundColor: Colors.white,
-        key: _scaffoldKeyProductlistpage,
-        drawer: drawer1(),
-        body: isloding
-            ? Container()
-            : Form(
-                key: _formKey,
-                child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      key: _scaffoldKeyProductlistpage,
+      drawer: drawer1(),
+      body: isloding ? Center(child: CircularProgressIndicator(),): Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 5.h,
+                ),
+                header(
+                    text: "Add Position",
+                    callback1: () {
+                      _scaffoldKeyProductlistpage.currentState
+                          ?.openDrawer();
+                    }),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text("Select Position Type",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 5.h,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
                         ),
-                        header(
-                            text: "Add Position",
-                            callback1: () {
-                              _scaffoldKeyProductlistpage.currentState
-                                  ?.openDrawer();
-                            }),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Text("Select Position Type",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                              color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  CupertinoIcons.chevron_down,
-                                  size: 16.sp,
-                                  color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: selectedvalue1,
-                              iconSize: 24.sp,
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: selectedvalue1,
+                      iconSize: 24.sp,
 
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  selectedvalue1 = val as String?;
-                                  print("selectedvalue1selectedvalue1${selectedvalue1}");
-                                });
-                              },
-                              hint: Text(
-                                "Please Select Position Type",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                  value: "Anchorage",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Warning",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                  value: "Warning",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Marina",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                  value: "Marina",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                                  value: "Other",
-                                ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Text("Title",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _title,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please Enter Position Title";
-                              }
-                              return null;
-                            },
-                            decoration: inputDecoration(
-                              hintText: "Enter Position Title",
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Text("Description",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            maxLines: 5,
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _descripation,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Description";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                              hintText: "Enter Your Description",
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-
-                        selectedvalue1=="Marina"||selectedvalue1=="Warning"|| selectedvalue1=="Anchorage"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                Text("Select Category",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: Colors.black,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "volken")),
-                              ],
-                            ),
-                          ],
-                        ),
-
-                        selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Category",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-
-                        selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                            color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16.sp,
-                                    color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: selectedvalue,
-                              iconSize: 24.sp,
-
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  selectedvalue = val as String?;
-                                  print("selectedvalue1selectedvalue1${selectedvalue}");
-                                });
-                              },
-                              hint: Text(
-                                  "Please Select Position Category",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                // DropdownMenuItem(
-                                //   child: Text("Anchorages",
-                                //       style: TextStyle(
-                                //         color: Colors.black,
-                                //         fontWeight: FontWeight.normal,
-                                //         fontFamily: "volken",
-                                //       )),
-                                //   value: "Anchorages",
-                                // ),
-                                DropdownMenuItem(
-                                  child: Text("Bridges",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Bridges",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Ferries",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Ferries",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Harbors",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Harbors",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Inlets",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Inlets",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Landmarks",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Landmarks",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Lighthouses",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Lighthouses",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Locks",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Locks",
-                                ),
-                                // DropdownMenuItem(
-                                //   child: Text("Marinas",
-                                //       style: TextStyle(
-                                //         color: Colors.black,
-                                //         fontWeight: FontWeight.normal,
-                                //         fontFamily: "volken",
-                                //       )),
-                                //   value: "Marinas",
-                                // ),
-                                DropdownMenuItem(
-                                  child: Text("Other",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Other",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Sabah",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "SBH",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Ramps",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Ramps",
-                                ),
-                                // DropdownMenuItem(
-                                //   child: Text("Warning",
-                                //       style: TextStyle(
-                                //         color: Colors.black,
-                                //         fontWeight: FontWeight.normal,
-                                //         fontFamily: "volken",
-                                //       )),
-                                //   value: "Warning",
-                                // ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-
-
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedimage == null
-                            ? Container()
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                    height: 30.w,
-                                    width: 30.w,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        color: bgcolor, // Border color
-                                        width: 2.sp, // Border width
-                                      ),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: selectedimage != null
-                                          ? Image.file(
-                                              selectedimage!,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Container(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                        resultList1 == null || resultList1 == ""
-                            ? Container()
-                            : Column(
-                                children: [
-                                  //for first select
-                                  selectedImages.isEmpty
-                                      ? GridView.builder(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.zero,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3),
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () async {
-                                                resultList = await ImagePicker()
-                                                    .pickMultiImage();
-
-                                                if (resultList != null) {
-                                                  if (resultList!.length +
-                                                          selectedImages.length >
-                                                      maxImageLimit) {
-                                                    print(
-                                                        'Maximum image limit exceeded');
-                                                  } else {
-                                                    setState(() {
-                                                      selectedImages = resultList!
-                                                          .map((XFile file) =>
-                                                              File(file.path))
-                                                          .toList()!;
-                                                      imagePaths.addAll(
-                                                          resultList!
-                                                              .map((file) =>
-                                                                  file.path)
-                                                              .toList());
-                                                    });
-                                                  }
-                                                }
-                                              },
-                                              child: Container(
-                                                margin: EdgeInsets.all(3.w),
-                                                height: 60.h,
-                                                width: 70.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(15),
-                                                    border: Border.all(
-                                                        color: Colors.grey)),
-                                              ),
-                                            );
-                                          },
-                                          itemCount: 9,
-                                        )
-                                      : Container(),
-                                  selectedImages.isEmpty
-                                      ? Container()
-                                      :
-                                      //disply after first selection
-                                      GridView.builder(
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.zero,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3),
-                                          itemCount: 9,
-                                          itemBuilder: (context, index) {
-                                            if (index < selectedImages.length &&
-                                                selectedImages[index] != null) {
-                                              return Stack(
-                                                children: [
-                                                  Container(
-                                                      margin: EdgeInsets.all(3.w),
-                                                      height: 70.h,
-                                                      width: 70.w,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.grey)),
-                                                      child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          child: Image.file(
-                                                              selectedImages[
-                                                                  index],
-                                                              height: 60.h,
-                                                              width: 70.w,
-                                                              fit:
-                                                                  BoxFit.cover))),
-                                                  Positioned(
-                                                      left: 50.w,
-                                                      top: 10.h,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            selectedImages
-                                                                .removeAt(index);
-                                                            imagePaths
-                                                                .removeAt(index);
-                                                          });
-                                                        },
-                                                        child: Container(
-                                                            height: 15.w,
-                                                            width: 15.w,
-                                                            alignment:
-                                                                Alignment.center,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                    color: Colors
-                                                                        .white),
-                                                            child: Icon(
-                                                              Icons.close,
-                                                              size: 15.sp,
-                                                            )),
-                                                      ))
-                                                ],
-                                              );
-                                            } else {
-                                              //remaining container
-                                              return GestureDetector(
-                                                onTap: () async {
-                                                  resultList1 =
-                                                      await ImagePicker()
-                                                          .pickMultiImage();
-                                                  if (resultList1 != null) {
-                                                    if (resultList1!.length +
-                                                            selectedImages
-                                                                .length >
-                                                        maxImageLimit) {
-                                                      // Handle maximum image limit exceeded
-                                                      buildErrorDialog(
-                                                          context,
-                                                          "",
-                                                          "You selected more than 9 images");
-                                                    } else {
-                                                      setState(() {
-                                                        print(selectedImages);
-                                                        selectedImages.addAll(
-                                                            resultList1!
-                                                                .map((XFile
-                                                                        file) =>
-                                                                    File(file
-                                                                        .path))
-                                                                .toList());
-                                                        imagePaths = resultList1!
-                                                            .map((file) =>
-                                                                file.path)
-                                                            .toList();
-                                                      });
-                                                    }
-                                                  }
-                                                },
-                                                child: Container(
-                                                  margin: EdgeInsets.all(3.w),
-                                                  height: 60.h,
-                                                  width: 70.w,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      border: Border.all(
-                                                          color: Colors.grey)),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                        )
-                                ],
-                              ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            batan(
-                                title: "Select Photos",
-                                route: () async {
-                                  // final XFile? photo = await picker.pickImage(
-                                  //     source: ImageSource.gallery);
-                                  // setState(() {
-                                  //   selectedimage = File(photo!.path);
-                                  //   print(selectedimage);
-                                  // });
-                                  resultList1 =
-                                      await ImagePicker().pickMultiImage();
-                                  if (resultList1 != null) {
-                                    if (resultList1!.length +
-                                            selectedImages.length >
-                                        maxImageLimit) {
-                                      // Handle maximum image limit exceeded
-                                      buildErrorDialog(context, "",
-                                          "You selected more than 9 images");
-                                    } else {
-                                      setState(() {
-                                        print(selectedImages);
-                                        selectedImages.addAll(resultList1!
-                                            .map((XFile file) => File(file.path))
-                                            .toList());
-                                        List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
-                                        imagePaths = resultList1!
-                                            .map((file) => file.path)
-                                            .toList();
-                                      });
-                                    }
-                                  }
-                                },
-                                hight: 6.h,
-                                width: 55.w,
-                                txtsize: 16.sp),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Row(
-                          children: [
-                            Text("Position",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-
-                        Row(
-                          children: [
-                            Container(
-                              height: 45.h,
-                              width: MediaQuery.of(context).size.width * .95,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: Colors.black12, width: 1.sp),
-                              ),
-                              child: GoogleMap(
-                                onMapCreated: _onMapCreated,
-                                onTap: _onMapTapped,
-                                markers: _markers,
-                                myLocationButtonEnabled: false,
-                                myLocationEnabled: true,
-                                zoomControlsEnabled: true,
-                                compassEnabled: true,
-                                scrollGesturesEnabled: true,
-                                initialCameraPosition: CameraPosition(
-                                  target: LatLng(
-                                    double.tryParse(newupdatealarammodal
-                                                ?.alarm?.lattiude ??
-                                            '0.0') ??
-                                        0.0,
-                                    double.tryParse(newupdatealarammodal
-                                                ?.alarm?.longitude ??
-                                            '0.0') ??
-                                        0.0,
-                                  ),
-                                  zoom: 10,
-                                ),
-                                gestureRecognizers:
-                                    <Factory<OneSequenceGestureRecognizer>>{
-                                  Factory<OneSequenceGestureRecognizer>(
-                                      () => EagerGestureRecognizer()),
-                                }.toSet(),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 1.5.h,
-                            ),
-                            Text("Latitude",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(color: secondary),
-                                  controller: _latitude,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Please Enter Latitude";
-                                    }
-                                    return null;
-                                  },
-                                  decoration: inputDecoration(
-                                    hintText: "Latitude",
-                                    icon: Icon(
-                                      Icons.location_on,
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  onChanged: (value) {
-                                    _updateMarker(); // Update marker when latitude changes
-                                  },
-                                ))
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 2.h,
-                        ),
-
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 1.5.h,
-                            ),
-                            Text("Longitude",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(color: secondary),
-                                  controller: _latitude1,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Please Enter Longitude";
-                                    }
-                                    return null;
-                                  },
-                                  decoration: inputDecoration(
-                                    hintText: "Longitude",
-                                    icon: Icon(
-                                      Icons.location_on,
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  onChanged: (value) {
-                                    _updateMarker(); // Update marker when longitude changes
-                                  },
-                                ))
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 2.h,
-                        ),
-
-                      selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Berth Capacity",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _slips,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Slips";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Slips",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Approach",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                            selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
-                              height: 1.h,
-                            ),
-                          ],
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth( Meters )",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: secondary),
-                            controller: _minimumapproachdepth,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Minimum Approach Depth";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Minimum Approach Depth",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth( Meters )",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: secondary),
-                            controller: _meanlowwaterdockdepth,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Minimum Approach Depth";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Minimum Approach Depth",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth(Feet)",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _feet,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Minimum Channel Depth";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Minimum Channel Depth",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearanc(Feet)",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _meanhighwaterclearance,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Mean High Water Clearance";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Mean High Water Clearance",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                            selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                              height: 1.h,
-                            ),
-                          ],
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                            color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16.sp,
-                                    color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: services,
-                              iconSize: 24.sp,
-
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  services = val as String?;
-                                  print("selectedvalue1selectedvalue1${services}");
-                                });
-                              },
-                              hint: Text(
-                                  "Please Select Fuel Dock",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Yes",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Yes",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("No",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "No",
-                                ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                            color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16.sp,
-                                    color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: gas,
-                              iconSize: 24.sp,
-
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  gas = val as String?;
-                                  print("selectedvalue1selectedvalue1${gas}");
-                                });
-                              },
-                              hint: Text(
-                                  "Please Select Gas",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Yes",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Yes",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("No",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "No",
-                                ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                            color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16.sp,
-                                    color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: TransientStorage,
-                              iconSize: 24.sp,
-
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  TransientStorage = val as String?;
-                                  print("selectedvalue1selectedvalue1${TransientStorage}");
-                                });
-                              },
-                              hint: Text(
-                                  "Please Select Transient Storage",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Yes",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Yes",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("No",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "No",
-                                ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 6.h,
-                          decoration: BoxDecoration(
-                            color:  Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 1, color:secondary),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.0.w, vertical: 2.5.w),
-                            child: DropdownButton<String>(
-                              icon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                    CupertinoIcons.chevron_down,
-                                    size: 16.sp,
-                                    color: Colors.grey
-                                ),
-                              ),
-                              dropdownColor: Colors.white,
-                              padding: EdgeInsets.zero,
-                              value: longtermstorage,
-                              iconSize: 24.sp,
-
-                              isExpanded: true,
-                              borderRadius: BorderRadius.circular(16),
-                              onChanged: (val) {
-                                setState((){
-                                  longtermstorage = val as String?;
-                                  print("selectedvalue1selectedvalue1${longtermstorage}");
-                                });
-                              },
-                              hint: Text(
-                                  "Please Select Transient Storage",
-                                  style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                              ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Yes",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "Yes",
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("No",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken",
-                                      )),
-                                  value: "No",
-                                ),
-                              ],
-                              underline: Container(
-                                height: .8,
-                              ),
-                            ),
-                          ),
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||   selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                      selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _MaxVesselLOA,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Max. Vessel LOA";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Max. Vessel LOA",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||    selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _MaaSlipLength,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Max. Slip Length";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Max. Slip Length",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max.Slip Width",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(color: secondary),
-                            controller: _MaaSlipwidth,
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Please Enter Max. Slip Width";
-                            //   }
-                            //   return null;
-                            // },
-                            decoration: inputDecoration(
-                                hintText: "Enter Your Max. Slip Width",
-                                icon: Icon(
-                                  Icons.location_city_sharp,
-                                  color: secondary,
-                                )),
-                          ),
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():  Row(
-                          children: [
-                            Text("Protection",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken"))
-                          ],
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Column(
-                          children: [
-                            Container(
-                              height: 50.h,
-                              child: RadarChart.light(
-                                ticks: [2, 4, 6, 8, 10],
-                                features: [
-                                  "N",
-                                  "NE",
-                                  "E",
-                                  "SE",
-                                  "S",
-                                  "SW",
-                                  "W",
-                                  "NW"
-                                ],
-                                data: data,
-                                // graphColors: [Colors.blue, Colors.green],
-                                // featuresTextStyle: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            buildCheckboxRow('North (N)', [
-                              buildCheckbox('Some protection', N1, (val) {
-                                setState(() {
-                                  N1 = val;
-                                  N2 = false;
-                                  N3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', N2, (val) {
-                                setState(() {
-                                  N2 = val;
-                                  N1 = false;
-                                  N3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', N3, (val) {
-                                setState(() {
-                                  N3 = val;
-                                  N2 = false;
-                                  N1 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('Northeast (NE)', [
-                              buildCheckbox('Some protection', NE1, (val) {
-                                setState(() {
-                                  NE1 = val;
-                                  NE2 = false;
-                                  NE3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', NE2, (val) {
-                                setState(() {
-                                  NE2 = val;
-                                  NE1 = false;
-                                  NE3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', NE3, (val) {
-                                setState(() {
-                                  NE3 = val;
-                                  NE2 = false;
-                                  NE1 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('East (E)', [
-                              buildCheckbox('Some protection', E1, (val) {
-                                setState(() {
-                                  E1 = val;
-                                  E2 = false;
-                                  E3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', E2, (val) {
-                                setState(() {
-                                  E2 = val;
-                                  E3 = false;
-                                  E1 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', E3, (val) {
-                                setState(() {
-                                  E3 = val;
-                                  E2 = false;
-                                  E1 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('Southeast (SE)', [
-                              buildCheckbox('Some protection', SE1, (val) {
-                                setState(() {
-                                  SE1 = val;
-                                  SE3 = false;
-                                  SE2 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', SE2, (val) {
-                                setState(() {
-                                  SE2 = val;
-                                  SE1 = false;
-                                  SE3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', SE3, (val) {
-                                setState(() {
-                                  SE3 = val;
-                                  SE2 = false;
-                                  SE1 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('South (S)', [
-                              buildCheckbox('Some protection', S1, (val) {
-                                setState(() {
-                                  S1 = val;
-                                  S2 = false;
-                                  S3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', S2, (val) {
-                                setState(() {
-                                  S2 = val;
-                                  S1 = false;
-                                  S3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', S3, (val) {
-                                setState(() {
-                                  S3 = val;
-                                  S1 = false;
-                                  S2 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('Southwest (SW)', [
-                              buildCheckbox('Some protection', SW1, (val) {
-                                setState(() {
-                                  SW1 = val;
-                                  SW2 = false;
-                                  SW3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', SW2, (val) {
-                                setState(() {
-                                  SW2 = val;
-                                  SW1 = false;
-                                  SW3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', SW3, (val) {
-                                setState(() {
-                                  SW3 = val;
-                                  SW1 = false;
-                                  SW2 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('West (W)', [
-                              buildCheckbox('Some protection', W1, (val) {
-                                setState(() {
-                                  W1 = val;
-                                  W2 = false;
-                                  W3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', W2, (val) {
-                                setState(() {
-                                  W2 = val;
-                                  W1 = false;
-                                  W3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', W3, (val) {
-                                setState(() {
-                                  W3 = val;
-                                  W2 = false;
-                                  W1 = false;
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            buildCheckboxRow('West (NW)', [
-                              buildCheckbox('Some protection', NW1, (val) {
-                                setState(() {
-                                  NW1 = val;
-                                  NW2 = false;
-                                  NW3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Average protection', NW2, (val) {
-                                setState(() {
-                                  NW2 = val;
-                                  NW1 = false;
-                                  NW3 = false;
-                                  updateData();
-                                });
-                              }),
-                              buildCheckbox('Completely protected', NW3, (val) {
-                                setState(() {
-                                  NW3 = val;
-                                  NW2 = false;
-                                  NW1 = false;
-                                  print("NW2${NW2}");
-                                  updateData();
-                                });
-                              }),
-                            ]),
-                            // Repeat for other directions...
-                          ],
-                        ),
-
-                        selectedvalue1=="Other"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Features",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"||selectedvalue1=="Warning"?Container(): SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
-                          children: [
-                            Checkbox(
-                              value: Use,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  Use = value!;
-                                });
-                              },
-                            ),
-                            Text("Use own anchor's",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
-                          children: [
-                            Checkbox(
-                              value: Fixed,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  Fixed = value!;
-                                });
-                              },
-                            ),
-                            Text("Buoys available",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
-                          children: [
-                            Checkbox(
-                              value: mountain,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  mountain = value!;
-                                });
-                              },
-                            ),
-                            Text("Wedges available",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
-                          children: [
-                            Checkbox(
-                              value: ashore,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  ashore = value!;
-                                });
-                                print("dsdfsdf${ashore}");
-                              },
-
-                            ),
-                            Text("Use lines ashore",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: secondary,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Conditions",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
-                          height: 1.h,
-                        ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            selectedvalue1=="Other"?Container(): Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Sand,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Sand = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Sand",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                selectedvalue1=="Other"|| selectedvalue1=="Warning"?Container():SizedBox(
-                                  height: 1.h,
-                                ),
-                                selectedvalue1=="Other"||  selectedvalue1=="Warning"?Container():  Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Coral,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Coral = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Coral",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                selectedvalue1=="Warning"?Container(): Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Rocks,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Rocks = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Rocks",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Mud,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Mud = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Mud",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Clay,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Clay = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Clay",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Facilities",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    color: Colors.black,
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "volken")),
-                          ],
-                        ),
-                        selectedvalue1=="Other"?Container():  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():SizedBox(
-                          height: 2.h,
-                        ),
-                        selectedvalue1=="Other"?Container():   selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Groceries,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Groceries = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Groceries",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Pharmacy,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Pharmacy = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Pharmacy",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Water,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Water = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Water",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: shop,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          shop = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Shop",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Restaurant,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Restaurant = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Restaurant",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: Alcohol,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          Alcohol = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Alcohol",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: beach,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          beach = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text("Beach",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: pontoon,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          pontoon = value!;
-                                        });
-                                        print("fsdfsdfsdfsdf${pontoon}");
-                                      },
-                                    ),
-                                    Text("Pontoon",
-                                        style: TextStyle(
-                                            letterSpacing: 1,
-                                            color: secondary,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: "volken")),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            widget.postid == null || widget.postid == ""
-                                ? batan(
-                                    title: "Add Position",
-                                    route: () {
-                                      castommapposition();
-                                    },
-                                    hight: 6.h,
-                                    width: 70.w,
-                                    txtsize: 20.sp)
-                                : batan(
-                                    title: "Update Position",
-                                    route: () {
-                                      updatecasotammarina();
-                                    },
-                                    hight: 6.h,
-                                    width: 70.w,
-                                    txtsize: 20.sp),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          selectedvalue1 = val as String?;
+                          print("selectedvalue1selectedvalue1${selectedvalue1}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Position Type",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                          value: "Anchorage",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Warning",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                          value: "Warning",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Marina",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                          value: "Marina",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
+                          value: "Other",
                         ),
                       ],
+                      underline: Container(
+                        height: .8,
+                      ),
                     ),
                   ),
                 ),
-              ),
+
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text("Title",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _title,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter Position Title";
+                      }
+                      return null;
+                    },
+                    decoration: inputDecoration(
+                      hintText: "Enter Position Title",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text("Description",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    maxLines: 5,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _descripation,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Description";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                      hintText: "Enter Your Description",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                selectedvalue1=="Marina"||selectedvalue1=="Warning"|| selectedvalue1=="Anchorage"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Text("Select Category",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: Colors.black,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "volken")),
+                      ],
+                    ),
+                  ],
+                ),
+
+                selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Category",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+
+                selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: selectedvalue,
+                      iconSize: 24.sp,
+
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          selectedvalue = val as String?;
+                          print("selectedvalue1selectedvalue1${selectedvalue}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Position Category",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        // DropdownMenuItem(
+                        //   child: Text("Anchorages",
+                        //       style: TextStyle(
+                        //         color: Colors.black,
+                        //         fontWeight: FontWeight.normal,
+                        //         fontFamily: "volken",
+                        //       )),
+                        //   value: "Anchorages",
+                        // ),
+                        DropdownMenuItem(
+                          child: Text("Bridges",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Bridges",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Ferries",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Ferries",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Harbors",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Harbors",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Inlets",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Inlets",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Landmarks",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Landmarks",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Lighthouses",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Lighthouses",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Locks",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Locks",
+                        ),
+                        // DropdownMenuItem(
+                        //   child: Text("Marinas",
+                        //       style: TextStyle(
+                        //         color: Colors.black,
+                        //         fontWeight: FontWeight.normal,
+                        //         fontFamily: "volken",
+                        //       )),
+                        //   value: "Marinas",
+                        // ),
+                        DropdownMenuItem(
+                          child: Text("Other",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Other",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Sabah",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "SBH",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Ramps",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Ramps",
+                        ),
+                        // DropdownMenuItem(
+                        //   child: Text("Warning",
+                        //       style: TextStyle(
+                        //         color: Colors.black,
+                        //         fontWeight: FontWeight.normal,
+                        //         fontFamily: "volken",
+                        //       )),
+                        //   value: "Warning",
+                        // ),
+                      ],
+                      underline: Container(
+                        height: .8,
+                      ),
+                    ),
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: 2.h,
+                ),
+                selectedimage == null
+                    ? Container()
+                    : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                      height: 30.w,
+                      width: 30.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: bgcolor, // Border color
+                          width: 2.sp, // Border width
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: selectedimage != null
+                            ? Image.file(
+                          selectedimage!,
+                          fit: BoxFit.cover,
+                        )
+                            : Container(),
+                      ),
+                    ),
+                  ],
+                ),
+                resultList1 == null || resultList1 == ""
+                    ? Container()
+                    : Column(
+                  children: [
+                    //for first select
+                    selectedImages.isEmpty
+                        ? GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () async {
+                            resultList = await ImagePicker()
+                                .pickMultiImage();
+
+                            if (resultList != null) {
+                              if (resultList!.length +
+                                  selectedImages.length >
+                                  maxImageLimit) {
+                                print(
+                                    'Maximum image limit exceeded');
+                              } else {
+                                setState(() {
+                                  selectedImages = resultList!
+                                      .map((XFile file) =>
+                                      File(file.path))
+                                      .toList()!;
+                                  imagePaths.addAll(
+                                      resultList!
+                                          .map((file) =>
+                                      file.path)
+                                          .toList());
+                                });
+                              }
+                            }
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(3.w),
+                            height: 60.h,
+                            width: 70.w,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(15),
+                                border: Border.all(
+                                    color: Colors.grey)),
+                          ),
+                        );
+                      },
+                      itemCount: 9,
+                    )
+                        : Container(),
+                    selectedImages.isEmpty
+                        ? Container()
+                        :
+                    //disply after first selection
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      itemCount: 9,
+                      itemBuilder: (context, index) {
+                        if (index < selectedImages.length &&
+                            selectedImages[index] != null) {
+                          return Stack(
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.all(3.w),
+                                  height: 70.h,
+                                  width: 70.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(15),
+                                      border: Border.all(
+                                          color:
+                                          Colors.grey)),
+                                  child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(15),
+                                      child: Image.file(
+                                          selectedImages[
+                                          index],
+                                          height: 60.h,
+                                          width: 70.w,
+                                          fit:
+                                          BoxFit.cover))),
+                              Positioned(
+                                  left: 50.w,
+                                  top: 10.h,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedImages
+                                            .removeAt(index);
+                                        imagePaths
+                                            .removeAt(index);
+                                      });
+                                    },
+                                    child: Container(
+                                        height: 15.w,
+                                        width: 15.w,
+                                        alignment:
+                                        Alignment.center,
+                                        decoration:
+                                        BoxDecoration(
+                                            shape: BoxShape
+                                                .circle,
+                                            color: Colors
+                                                .white),
+                                        child: Icon(
+                                          Icons.close,
+                                          size: 15.sp,
+                                        )),
+                                  ))
+                            ],
+                          );
+                        } else {
+                          //remaining container
+                          return GestureDetector(
+                            onTap: () async {
+                              resultList1 =
+                              await ImagePicker()
+                                  .pickMultiImage();
+                              if (resultList1 != null) {
+                                if (resultList1!.length +
+                                    selectedImages
+                                        .length >
+                                    maxImageLimit) {
+                                  // Handle maximum image limit exceeded
+                                  buildErrorDialog(
+                                      context,
+                                      "",
+                                      "You selected more than 9 images");
+                                } else {
+                                  setState(() {
+                                    print(selectedImages);
+                                    selectedImages.addAll(
+                                        resultList1!
+                                            .map((XFile
+                                        file) =>
+                                            File(file
+                                                .path))
+                                            .toList());
+                                    imagePaths = resultList1!
+                                        .map((file) =>
+                                    file.path)
+                                        .toList();
+                                  });
+                                }
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(3.w),
+                              height: 60.h,
+                              width: 70.w,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      15),
+                                  border: Border.all(
+                                      color: Colors.grey)),
+                            ),
+                          );
+                        }
+                      },
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    batan(
+                        title: "Select Photos",
+                        route: () async {
+                          // final XFile? photo = await picker.pickImage(
+                          //     source: ImageSource.gallery);
+                          // setState(() {
+                          //   selectedimage = File(photo!.path);
+                          //   print(selectedimage);
+                          // });
+                          resultList1 =
+                          await ImagePicker().pickMultiImage();
+                          if (resultList1 != null) {
+                            if (resultList1!.length +
+                                selectedImages.length >
+                                maxImageLimit) {
+                              // Handle maximum image limit exceeded
+                              buildErrorDialog(context, "",
+                                  "You selected more than 9 images");
+                            } else {
+                              setState(() {
+                                print(selectedImages);
+                                selectedImages.addAll(resultList1!
+                                    .map((XFile file) => File(file.path))
+                                    .toList());
+                                List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
+                                imagePaths = resultList1!
+                                    .map((file) => file.path)
+                                    .toList();
+                              });
+                            }
+                          }
+                        },
+                        hight: 6.h,
+                        width: 55.w,
+                        txtsize: 16.sp),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text("Position",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                Row(
+                  children: [
+                    Container(
+                      height: 45.h,
+                      width: MediaQuery.of(context).size.width * .95,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: Colors.black12, width: 1.sp),
+                      ),
+                      child: GoogleMap(
+                        onMapCreated: _onMapCreated,
+                        onTap: _onMapTapped,
+                        markers: _markers,
+                        myLocationButtonEnabled: false,
+                        myLocationEnabled: true,
+                        zoomControlsEnabled: true,
+                        compassEnabled: true,
+                        scrollGesturesEnabled: true,
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            double.tryParse(newupdatealarammodal
+                                ?.alarm?.lattiude ??
+                                '0.0') ??
+                                0.0,
+                            double.tryParse(newupdatealarammodal
+                                ?.alarm?.longitude ??
+                                '0.0') ??
+                                0.0,
+                          ),
+                          zoom: 10,
+                        ),
+                        gestureRecognizers:
+                        <Factory<OneSequenceGestureRecognizer>>{
+                          Factory<OneSequenceGestureRecognizer>(
+                                  () => EagerGestureRecognizer()),
+                        }.toSet(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 1.5.h,
+                    ),
+                    Text("Latitude",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Latitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                            hintText: "Latitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when latitude changes
+                          },
+                        ))
+                  ],
+                ),
+
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 1.5.h,
+                    ),
+                    Text("Longitude",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: secondary),
+                          controller: _latitude1,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Longitude";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(
+                            hintText: "Longitude",
+                            icon: Icon(
+                              Icons.location_on,
+                              color: secondary,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateMarker(); // Update marker when longitude changes
+                          },
+                        ))
+                  ],
+                ),
+
+                SizedBox(
+                  height: 2.h,
+                ),
+
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Berth Capacity",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _slips,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Slips";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Slips",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Approach",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
+                      height: 1.h,
+                    ),
+                  ],
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth( Meters )",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: secondary),
+                    controller: _minimumapproachdepth,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Approach Depth";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Minimum Approach Depth",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth( Meters )",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: secondary),
+                    controller: _meanlowwaterdockdepth,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Approach Depth";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Minimum Approach Depth",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth(Feet)",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _feet,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Minimum Channel Depth";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Minimum Channel Depth",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearanc(Feet)",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _meanhighwaterclearance,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Mean High Water Clearance";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Mean High Water Clearance",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                    selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                      height: 1.h,
+                    ),
+                  ],
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: services,
+                      iconSize: 24.sp,
+
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          services = val as String?;
+                          print("selectedvalue1selectedvalue1${services}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Fuel Dock",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Yes",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Yes",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("No",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "No",
+                        ),
+                      ],
+                      underline: Container(
+                        height: .8,
+                      ),
+                    ),
+                  ),
+                ),
+
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: gas,
+                      iconSize: 24.sp,
+
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          gas = val as String?;
+                          print("selectedvalue1selectedvalue1${gas}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Gas",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Yes",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Yes",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("No",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "No",
+                        ),
+                      ],
+                      underline: Container(
+                        height: .8,
+                      ),
+                    ),
+                  ),
+                ),
+
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: TransientStorage,
+                      iconSize: 24.sp,
+
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          TransientStorage = val as String?;
+                          print("selectedvalue1selectedvalue1${TransientStorage}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Transient Storage",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Yes",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Yes",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("No",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "No",
+                        ),
+                      ],
+                      underline: Container(
+                        height: .8,
+                      ),
+                    ),
+                  ),
+                ),
+
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color:secondary),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 2.0.w, vertical: 2.5.w),
+                    child: DropdownButton<String>(
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16.sp,
+                            color: Colors.grey
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                      value: longtermstorage,
+                      iconSize: 24.sp,
+
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(16),
+                      onChanged: (val) {
+                        setState((){
+                          longtermstorage = val as String?;
+                          print("selectedvalue1selectedvalue1${longtermstorage}");
+                        });
+                      },
+                      hint: Text(
+                          "Please Select Transient Storage",
+                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Yes",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "Yes",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("No",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: "volken",
+                              )),
+                          value: "No",
+                        ),
+                      ],
+                      underline: Container(
+                        height: .8,
+                      ),
+                    ),
+                  ),
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||   selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _MaxVesselLOA,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Vessel LOA";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Max. Vessel LOA",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||    selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _MaaSlipLength,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Slip Length";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Max. Slip Length",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max.Slip Width",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        color: Colors.black,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "volken")),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: secondary),
+                    controller: _MaaSlipwidth,
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Please Enter Max. Slip Width";
+                    //   }
+                    //   return null;
+                    // },
+                    decoration: inputDecoration(
+                        hintText: "Enter Your Max. Slip Width",
+                        icon: Icon(
+                          Icons.location_city_sharp,
+                          color: secondary,
+                        )),
+                  ),
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                  height: 1.h,
+                ),
+
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():  Row(
+                  children: [
+                    Text("Protection",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken"))
+                  ],
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Column(
+                  children: [
+                    Container(
+                      height: 50.h,
+                      child: RadarChart.light(
+                        ticks: [2, 4, 6, 8, 10],
+                        features: [
+                          "N",
+                          "NE",
+                          "E",
+                          "SE",
+                          "S",
+                          "SW",
+                          "W",
+                          "NW"
+                        ],
+                        data: data,
+                        // graphColors: [Colors.blue, Colors.green],
+                        // featuresTextStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    buildCheckboxRow('North (N)', [
+                      buildCheckbox('Some protection', N1, (val) {
+                        setState(() {
+                          N1 = val;
+                          N2 = false;
+                          N3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', N2, (val) {
+                        setState(() {
+                          N2 = val;
+                          N1 = false;
+                          N3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', N3, (val) {
+                        setState(() {
+                          N3 = val;
+                          N2 = false;
+                          N1 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('Northeast (NE)', [
+                      buildCheckbox('Some protection', NE1, (val) {
+                        setState(() {
+                          NE1 = val;
+                          NE2 = false;
+                          NE3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', NE2, (val) {
+                        setState(() {
+                          NE2 = val;
+                          NE1 = false;
+                          NE3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', NE3, (val) {
+                        setState(() {
+                          NE3 = val;
+                          NE2 = false;
+                          NE1 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('East (E)', [
+                      buildCheckbox('Some protection', E1, (val) {
+                        setState(() {
+                          E1 = val;
+                          E2 = false;
+                          E3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', E2, (val) {
+                        setState(() {
+                          E2 = val;
+                          E3 = false;
+                          E1 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', E3, (val) {
+                        setState(() {
+                          E3 = val;
+                          E2 = false;
+                          E1 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('Southeast (SE)', [
+                      buildCheckbox('Some protection', SE1, (val) {
+                        setState(() {
+                          SE1 = val;
+                          SE3 = false;
+                          SE2 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', SE2, (val) {
+                        setState(() {
+                          SE2 = val;
+                          SE1 = false;
+                          SE3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', SE3, (val) {
+                        setState(() {
+                          SE3 = val;
+                          SE2 = false;
+                          SE1 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('South (S)', [
+                      buildCheckbox('Some protection', S1, (val) {
+                        setState(() {
+                          S1 = val;
+                          S2 = false;
+                          S3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', S2, (val) {
+                        setState(() {
+                          S2 = val;
+                          S1 = false;
+                          S3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', S3, (val) {
+                        setState(() {
+                          S3 = val;
+                          S1 = false;
+                          S2 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('Southwest (SW)', [
+                      buildCheckbox('Some protection', SW1, (val) {
+                        setState(() {
+                          SW1 = val;
+                          SW2 = false;
+                          SW3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', SW2, (val) {
+                        setState(() {
+                          SW2 = val;
+                          SW1 = false;
+                          SW3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', SW3, (val) {
+                        setState(() {
+                          SW3 = val;
+                          SW1 = false;
+                          SW2 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('West (W)', [
+                      buildCheckbox('Some protection', W1, (val) {
+                        setState(() {
+                          W1 = val;
+                          W2 = false;
+                          W3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', W2, (val) {
+                        setState(() {
+                          W2 = val;
+                          W1 = false;
+                          W3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', W3, (val) {
+                        setState(() {
+                          W3 = val;
+                          W2 = false;
+                          W1 = false;
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    buildCheckboxRow('West (NW)', [
+                      buildCheckbox('Some protection', NW1, (val) {
+                        setState(() {
+                          NW1 = val;
+                          NW2 = false;
+                          NW3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Average protection', NW2, (val) {
+                        setState(() {
+                          NW2 = val;
+                          NW1 = false;
+                          NW3 = false;
+                          updateData();
+                        });
+                      }),
+                      buildCheckbox('Completely protected', NW3, (val) {
+                        setState(() {
+                          NW3 = val;
+                          NW2 = false;
+                          NW1 = false;
+                          print("NW2${NW2}");
+                          updateData();
+                        });
+                      }),
+                    ]),
+                    // Repeat for other directions...
+                  ],
+                ),
+
+                selectedvalue1=="Other"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Features",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"||selectedvalue1=="Warning"?Container(): SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
+                  children: [
+                    Checkbox(
+                      value: Use,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          Use = value!;
+                        });
+                      },
+                    ),
+                    Text("Use own anchor's",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                  children: [
+                    Checkbox(
+                      value: Fixed,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          Fixed = value!;
+                        });
+                      },
+                    ),
+                    Text("Buoys available",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
+                  children: [
+                    Checkbox(
+                      value: mountain,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          mountain = value!;
+                        });
+                      },
+                    ),
+                    Text("Wedges available",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                  children: [
+                    Checkbox(
+                      value: ashore,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          ashore = value!;
+                        });
+                        print("dsdfsdf${ashore}");
+                      },
+
+                    ),
+                    Text("Use lines ashore",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Conditions",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
+                  height: 1.h,
+                ),
+                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    selectedvalue1=="Other"?Container(): Column(
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Sand,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Sand = value!;
+                                });
+                              },
+                            ),
+                            Text("Sand",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        selectedvalue1=="Other"|| selectedvalue1=="Warning"?Container():SizedBox(
+                          height: 1.h,
+                        ),
+                        selectedvalue1=="Other"||  selectedvalue1=="Warning"?Container():  Row(
+                          children: [
+                            Checkbox(
+                              value: Coral,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Coral = value!;
+                                });
+                              },
+                            ),
+                            Text("Coral",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        selectedvalue1=="Warning"?Container(): Row(
+                          children: [
+                            Checkbox(
+                              value: Rocks,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Rocks = value!;
+                                });
+                              },
+                            ),
+                            Text("Rocks",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Mud,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Mud = value!;
+                                });
+                              },
+                            ),
+                            Text("Mud",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Clay,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Clay = value!;
+                                });
+                              },
+                            ),
+                            Text("Clay",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Facilities",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken")),
+                  ],
+                ),
+                selectedvalue1=="Other"?Container():  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():SizedBox(
+                  height: 2.h,
+                ),
+                selectedvalue1=="Other"?Container():   selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Groceries,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Groceries = value!;
+                                });
+                              },
+                            ),
+                            Text("Groceries",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Pharmacy,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Pharmacy = value!;
+                                });
+                              },
+                            ),
+                            Text("Pharmacy",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Water,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Water = value!;
+                                });
+                              },
+                            ),
+                            Text("Water",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: shop,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  shop = value!;
+                                });
+                              },
+                            ),
+                            Text("Shop",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Restaurant,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Restaurant = value!;
+                                });
+                              },
+                            ),
+                            Text("Restaurant",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: Alcohol,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  Alcohol = value!;
+                                });
+                              },
+                            ),
+                            Text("Alcohol",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: beach,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  beach = value!;
+                                });
+                              },
+                            ),
+                            Text("Beach",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: pontoon,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  pontoon = value!;
+                                });
+                                print("fsdfsdfsdfsdf${pontoon}");
+                              },
+                            ),
+                            Text("Pontoon",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    widget.postid == null || widget.postid == ""
+                        ? batan(
+                        title: "Add Position",
+                        route: () {
+                          castommapposition();
+                        },
+                        hight: 6.h,
+                        width: 70.w,
+                        txtsize: 20.sp)
+                        : batan(
+                        title: "Update Position",
+                        route: () {
+                          updatecasotammarina();
+                        },
+                        hight: 6.h,
+                        width: 70.w,
+                        txtsize: 20.sp),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

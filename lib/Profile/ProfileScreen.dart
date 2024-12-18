@@ -42,29 +42,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Viewprofile();
   }
   Widget build(BuildContext context) {
-    return commanScreen(
-        isLoading: isLoading,
-        scaffold:Scaffold(
+    return Scaffold(
       extendBody: true,
 
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
       backgroundColor: bgcolor,
-      body: isLoading
-    ? Container()
-        : SingleChildScrollView(
+      body:  isLoading ? Center(child: CircularProgressIndicator(),):  SingleChildScrollView(
         child: Column(
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
               height: 45.h,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.grey.shade200,
-                border: Border.all(
-                  width: 1.sp,
-                  color: secondary,
-                )
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.grey.shade200,
+                  border: Border.all(
+                    width: 1.sp,
+                    color: secondary,
+                  )
               ),
               child: Column(
                 children: [
@@ -72,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 5.h,
                   ),
                   header(
-                    show: 1,
+                      show: 1,
                       text: "Profile",
                       callback1: () {
                         _scaffoldKeyProductlistpage.currentState?.openDrawer();
@@ -102,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fit: BoxFit.cover,
                             progressIndicatorBuilder:
                                 (context, url, progress) =>
-                                    Center(child: CircularProgressIndicator()),
+                                Center(child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 Image.asset(Default_Profile, fit: BoxFit.cover),
                           ),
@@ -117,12 +113,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(viewprofilemodal?.userDetails?.userLogin==""||viewprofilemodal?.userDetails?.userLogin==null?"N/A":viewprofilemodal?.userDetails?.userLogin ?? "",
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              color: secondary,
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: "volken"),
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: secondary,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "volken"),
                       ),
 
                     ],
@@ -145,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -547,55 +543,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //   height: 2.h,
                   // ),
                   InkWell(
-                      onTap: (){
-                        Get.to(ChangePasswordScreen());
-                      },
+                    onTap: (){
+                      Get.to(ChangePasswordScreen());
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: bgcolor,
                           border: Border.all(color: secondary, width:1.sp))
                       ,child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 10.w,
-                                height: 10.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: blackback,
-                                ),
-                                child: Icon(
-                                  Icons.password,
-                                  color: bgcolor,
-                                  size: 18.sp,
-                                ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 10.w,
+                              height: 10.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: blackback,
                               ),
-                              SizedBox(
-                                width: 5.w,
+                              child: Icon(
+                                Icons.password,
+                                color: bgcolor,
+                                size: 18.sp,
                               ),
-                              Text("ChangePassword",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken")),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: blackback,
-                            size: 18.sp,
-                          )
-                        ],
-                      ),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text("ChangePassword",
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    color: secondary,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "volken")),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: blackback,
+                          size: 18.sp,
+                        )
+                      ],
+                    ),
                     ),
                   ),
                   SizedBox(
@@ -608,7 +604,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -747,7 +743,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
 
-    ));
+    );
   } Viewprofile() {
     final Map<String, String> data = {};
     data['id'] = (loginmodal?.userId).toString();

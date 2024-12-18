@@ -246,15 +246,11 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
   }
 
   Widget build(BuildContext context) {
-    return commanScreen(
-      isLoading: isLoading,
-      scaffold: Scaffold(
+    return     Scaffold(
         key: _scaffoldKeyProductlistpage,
         drawer: drawer1(),
         backgroundColor: bgcolor,
-        body: isLoading
-            ? Container()
-            : SingleChildScrollView(
+        body:  isLoading ? Center(child: CircularProgressIndicator(),): SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
@@ -3976,8 +3972,8 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
+
   }
 
   report() {

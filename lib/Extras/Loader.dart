@@ -40,7 +40,7 @@ Widget spinKit = Container(
   ),
 );
 
-Widget commanScreen({required Scaffold scaffold, required bool isLoading}) {
+Widget londerScreen({required Scaffold scaffold, required bool isLoading}) {
   return KeyboardDismisser(
       gestures: [GestureType.onTap, GestureType.onPanUpdateDownDirection],
       child: ModalProgressHUD(

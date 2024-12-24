@@ -143,7 +143,7 @@ class _SubscriptionAlarmScreenState extends State<SubscriptionAlarmScreen> {
       Marker marker = Marker(
         markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
         position: LatLng(latitude, longitude),
-        infoWindow: InfoWindow(title: 'Alarm Location'),
+        // infoWindow: InfoWindow(title: 'Alarm Location'),
       );
 
       setState(() {

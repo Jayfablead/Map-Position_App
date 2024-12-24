@@ -778,6 +778,22 @@ class authprovider with ChangeNotifier {
     print(response.body);
     return responseJson;
   }
+  Future<http.Response> categoryapi() async {
+    String url = '${apiUrl}categories';
+    print("wedtherurl${url}");
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url),headers: headers)
+        .timeout(
+      const Duration(seconds: 120),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    print(response.body);
+    return responseJson;
+  }
 
 
   Future<http.Response> useralaramapi(Map<String, String> bodyData) async {

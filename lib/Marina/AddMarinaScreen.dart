@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -15,6 +16,7 @@ import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Drwer.dart';
 import 'package:mapposition/Extras/Loader.dart';
 import 'package:mapposition/HomeScreen/HomeScreen.dart';
+import 'package:mapposition/Modal/CategoryModal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Headerwidget.dart';
@@ -37,7 +39,7 @@ class AddMarinaScreen extends StatefulWidget {
 
 class _AddMarinaScreenState extends State<AddMarinaScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKeyProductlistpage =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
   TextEditingController _title = TextEditingController();
   TextEditingController _descripation = TextEditingController();
   TextEditingController _priceindoller = TextEditingController();
@@ -146,7 +148,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
 
       setState(() {
         _markers.removeWhere((m) =>
-            m.markerId.value ==
+        m.markerId.value ==
             'alarm_marker'); // Remove old marker if it exists
         _markers.add(marker); // Add new marker
       });
@@ -178,26 +180,27 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
   bool isloding = true;
   double lat = 0.0;
   double long = 0.0;
+
   void getLocation() async {
     LocationPermission permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
     lat = double.tryParse(
-            (viewcategorywisevieweetailmodal?.data?.latitude == "null" ||
-                    viewcategorywisevieweetailmodal?.data?.latitude == "" ||
-                    viewcategorywisevieweetailmodal?.data?.latitude == null)
-                ? position.latitude.toString()
-                : viewcategorywisevieweetailmodal?.data?.latitude ?? '1.0') ??
+        (viewcategorywisevieweetailmodal?.data?.latitude == "null" ||
+            viewcategorywisevieweetailmodal?.data?.latitude == "" ||
+            viewcategorywisevieweetailmodal?.data?.latitude == null)
+            ? position.latitude.toString()
+            : viewcategorywisevieweetailmodal?.data?.latitude ?? '1.0') ??
         0.0;
 
     long = double.tryParse(
-            viewcategorywisevieweetailmodal?.data?.longitude == "null" ||
-                    viewcategorywisevieweetailmodal?.data?.longitude == "" ||
-                    viewcategorywisevieweetailmodal?.data?.longitude == null
-                ? position.longitude.toString()
-                : viewcategorywisevieweetailmodal?.data?.longitude.toString() ??
-                    '0.0') ??
+        viewcategorywisevieweetailmodal?.data?.longitude == "null" ||
+            viewcategorywisevieweetailmodal?.data?.longitude == "" ||
+            viewcategorywisevieweetailmodal?.data?.longitude == null
+            ? position.longitude.toString()
+            : viewcategorywisevieweetailmodal?.data?.longitude.toString() ??
+            '0.0') ??
         1.0;
     LatLng location = LatLng(lat, long);
     print("latlatlatlat${lat}");
@@ -244,23 +247,23 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     if (newupdatealarammodal?.alarm?.lattiude != null &&
         newupdatealarammodal?.alarm?.longitude != null) {
       double latitude = double.tryParse(viewcategorywisevieweetailmodal
-                          ?.data?.latitude ==
-                      "null" ||
-                  viewcategorywisevieweetailmodal?.data?.latitude == "" ||
-                  viewcategorywisevieweetailmodal?.data?.latitude == "null" ||
-                  viewcategorywisevieweetailmodal?.data?.latitude == null
-              ? _latitude.text
-              : viewcategorywisevieweetailmodal?.data?.latitude.toString() ??
-                  '0.0') ??
+          ?.data?.latitude ==
+          "null" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == "" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == "null" ||
+          viewcategorywisevieweetailmodal?.data?.latitude == null
+          ? _latitude.text
+          : viewcategorywisevieweetailmodal?.data?.latitude.toString() ??
+          '0.0') ??
           0.0;
       double longitude = double.tryParse(viewcategorywisevieweetailmodal
-                          ?.data?.longitude ==
-                      "null" ||
-                  viewcategorywisevieweetailmodal?.data?.longitude == null ||
-                  viewcategorywisevieweetailmodal?.data?.longitude == ""
-              ? _latitude1.text
-              : viewcategorywisevieweetailmodal?.data?.longitude.toString() ??
-                  "0.0") ??
+          ?.data?.longitude ==
+          "null" ||
+          viewcategorywisevieweetailmodal?.data?.longitude == null ||
+          viewcategorywisevieweetailmodal?.data?.longitude == ""
+          ? _latitude1.text
+          : viewcategorywisevieweetailmodal?.data?.longitude.toString() ??
+          "0.0") ??
           0.0;
       initialPosition = LatLng(latitude, longitude);
 
@@ -316,7 +319,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         infoWindow: InfoWindow(
           title: 'New Marker',
           snippet:
-              'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
+          'This is a new marker at ${_lastLatitude}, ${_lastLongitude}',
         ),
       );
 
@@ -327,6 +330,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     });
   }
 
+  String? countryValue;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -335,6 +340,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     setState(() {
       isloding = true;
     });
+    premimum();
   }
 
   Widget build(BuildContext context) {
@@ -342,7 +348,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       backgroundColor: Colors.white,
       key: _scaffoldKeyProductlistpage,
       drawer: drawer1(),
-      body: isloding ? Center(child: CircularProgressIndicator(),): Form(
+      body: isloding ? Center(child: CircularProgressIndicator(),) : Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: Padding(
@@ -374,66 +380,144 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   height: 1.h,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color:  Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 2.0.w, vertical: 2.5.w),
-                    child: DropdownButton<String>(
-                      icon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                            CupertinoIcons.chevron_down,
-                            size: 16.sp,
-                            color: Colors.grey
-                        ),
-                      ),
-                      dropdownColor: Colors.white,
-                      padding: EdgeInsets.zero,
-                      value: selectedvalue1,
-                      iconSize: 24.sp,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                      isExpanded: true,
-                      borderRadius: BorderRadius.circular(16),
-                      onChanged: (val) {
-                        setState((){
-                          selectedvalue1 = val as String?;
-                          print("selectedvalue1selectedvalue1${selectedvalue1}");
-                        });
-                      },
-                      hint: Text(
-                          "Please Select Position Type",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+
+                      Container(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1, color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            hint: Text(
+                              'Select Category',
+                              style: TextStyle(
+                                  color:
+                                  Colors.black.withOpacity(0.4),
+                                  fontSize: 11.sp,
+                                  fontFamily: "task"),
+                            ),
+                            // Not necessary for Option 1
+                            value: selectedvalue1,
+                            onChanged: (newValue) {
+                              setState(() {
+                                // countryValue = newValue.toString();
+                                selectedvalue1=newValue.toString();
+                                print("countryValue${countryValue}");
+                                print("countryValue${selectedvalue1}");
+
+                              });
+                            },
+                            items: categorymodal?.categories
+                                ?.map((location) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  location.name ?? '',
+                                  style: TextStyle(
+                                      color: Colors.black87,
+                                      fontFamily: 'task',
+                                      fontSize: 14.sp),
+                                ),
+                                value: location.name,
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Anchorage",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "Anchorage",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Warning",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "Warning",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Marina",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "Marina",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Other",style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,  fontFamily: "volken",)),
-                          value: "Other",
-                        ),
-                      ],
-                      underline: Container(
-                        height: .8,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
+                // Container(
+                //   width: MediaQuery
+                //       .of(context)
+                //       .size
+                //       .width,
+                //   height: 6.h,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.circular(10),
+                //     border: Border.all(width: 1, color: secondary),
+                //   ),
+                //   child: Padding(
+                //     padding: EdgeInsets.symmetric(
+                //         horizontal: 2.0.w, vertical: 2.5.w),
+                //     child: DropdownButton<String>(
+                //       icon: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Icon(
+                //             CupertinoIcons.chevron_down,
+                //             size: 16.sp,
+                //             color: Colors.grey
+                //         ),
+                //       ),
+                //       dropdownColor: Colors.white,
+                //       padding: EdgeInsets.zero,
+                //       value: selectedvalue1,
+                //       iconSize: 24.sp,
+                //
+                //       isExpanded: true,
+                //       borderRadius: BorderRadius.circular(16),
+                //       onChanged: (val) {
+                //         setState(() {
+                //           selectedvalue1 = val as String?;
+                //           print(
+                //               "selectedvalue1selectedvalue1${selectedvalue1}");
+                //         });
+                //       },
+                //       hint: Text(
+                //           "Please Select Position Type",
+                //           style: TextStyle(color: Colors.black,
+                //             fontFamily: "volken",)
+                //       ),
+                //       items: [
+                //         DropdownMenuItem(
+                //           child: Text("Anchorage", style: TextStyle(
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.normal,
+                //             fontFamily: "volken",)),
+                //           value: "Anchorage",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Warning", style: TextStyle(
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.normal,
+                //             fontFamily: "volken",)),
+                //           value: "Warning",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Marina", style: TextStyle(
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.normal,
+                //             fontFamily: "volken",)),
+                //           value: "Marina",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Other", style: TextStyle(
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.normal,
+                //             fontFamily: "volken",)),
+                //           value: "Other",
+                //         ),
+                //       ],
+                //       underline: Container(
+                //         height: .8,
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 SizedBox(
                   height: 1.h,
@@ -449,7 +533,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   height: 1.h,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -479,7 +566,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   height: 1.h,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     maxLines: 5,
                     keyboardType: TextInputType.text,
@@ -500,199 +590,209 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   height: 2.h,
                 ),
 
-                selectedvalue1=="Marina"||selectedvalue1=="Warning"|| selectedvalue1=="Anchorage"?Container():Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text("Select Category",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: Colors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
-                      ],
-                    ),
-                  ],
-                ),
+                // selectedvalue1 == "Marina" || selectedvalue1 == "Warning" ||
+                //     selectedvalue1 == "Anchorage" ? Container() : Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Column(
+                //       children: [
+                //         Text("Select Category",
+                //             style: TextStyle(
+                //                 letterSpacing: 1,
+                //                 color: Colors.black,
+                //                 fontSize: 15.sp,
+                //                 fontWeight: FontWeight.bold,
+                //                 fontFamily: "volken")),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+                //
+                // selectedvalue1 == "Marina" || selectedvalue1 == "Warning" ||
+                //     selectedvalue1 == "Anchorage" ? Container() : SizedBox(
+                //   height: 2.h,
+                // ),
+                // selectedvalue1 == "Marina" || selectedvalue1 == "Warning" ||
+                //     selectedvalue1 == "Anchorage" ? Container() : Text(
+                //     "Category",
+                //     style: TextStyle(
+                //         letterSpacing: 1,
+                //         color: Colors.black,
+                //         fontSize: 15.sp,
+                //         fontWeight: FontWeight.bold,
+                //         fontFamily: "volken")),
 
-                selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                  height: 2.h,
-                ),
-                selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Category",
-                    style: TextStyle(
-                        letterSpacing: 1,
-                        color: Colors.black,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "volken")),
-
-                selectedvalue1=="Marina"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
-                  height: 1.h,
-                ),
-                selectedvalue1=="Marina"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color:  Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 2.0.w, vertical: 2.5.w),
-                    child: DropdownButton<String>(
-                      icon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                            CupertinoIcons.chevron_down,
-                            size: 16.sp,
-                            color: Colors.grey
-                        ),
-                      ),
-                      dropdownColor: Colors.white,
-                      padding: EdgeInsets.zero,
-                      value: selectedvalue,
-                      iconSize: 24.sp,
-
-                      isExpanded: true,
-                      borderRadius: BorderRadius.circular(16),
-                      onChanged: (val) {
-                        setState((){
-                          selectedvalue = val as String?;
-                          print("selectedvalue1selectedvalue1${selectedvalue}");
-                        });
-                      },
-                      hint: Text(
-                          "Please Select Position Category",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
-                      ),
-                      items: [
-                        // DropdownMenuItem(
-                        //   child: Text("Anchorages",
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //         fontWeight: FontWeight.normal,
-                        //         fontFamily: "volken",
-                        //       )),
-                        //   value: "Anchorages",
-                        // ),
-                        DropdownMenuItem(
-                          child: Text("Bridges",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Bridges",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Ferries",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Ferries",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Harbors",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Harbors",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Inlets",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Inlets",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Landmarks",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Landmarks",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Lighthouses",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Lighthouses",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Locks",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Locks",
-                        ),
-                        // DropdownMenuItem(
-                        //   child: Text("Marinas",
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //         fontWeight: FontWeight.normal,
-                        //         fontFamily: "volken",
-                        //       )),
-                        //   value: "Marinas",
-                        // ),
-                        DropdownMenuItem(
-                          child: Text("Other",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Other",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Sabah",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "SBH",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Ramps",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: "volken",
-                              )),
-                          value: "Ramps",
-                        ),
-                        // DropdownMenuItem(
-                        //   child: Text("Warning",
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //         fontWeight: FontWeight.normal,
-                        //         fontFamily: "volken",
-                        //       )),
-                        //   value: "Warning",
-                        // ),
-                      ],
-                      underline: Container(
-                        height: .8,
-                      ),
-                    ),
-                  ),
-                ),
+                // selectedvalue1 == "Marina" || selectedvalue1 == "Warning" ||
+                //     selectedvalue1 == "Anchorage" ? Container() : SizedBox(
+                //   height: 1.h,
+                // ),
+                // selectedvalue1 == "Marina" || selectedvalue1 == "Warning" ||
+                //     selectedvalue1 == "Anchorage" ? Container() : Container(
+                //   width: MediaQuery
+                //       .of(context)
+                //       .size
+                //       .width,
+                //   height: 6.h,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.circular(10),
+                //     border: Border.all(width: 1, color: secondary),
+                //   ),
+                //   child: Padding(
+                //     padding: EdgeInsets.symmetric(
+                //         horizontal: 2.0.w, vertical: 2.5.w),
+                //     child: DropdownButton<String>(
+                //       icon: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Icon(
+                //             CupertinoIcons.chevron_down,
+                //             size: 16.sp,
+                //             color: Colors.grey
+                //         ),
+                //       ),
+                //       dropdownColor: Colors.white,
+                //       padding: EdgeInsets.zero,
+                //       value: selectedvalue,
+                //       iconSize: 24.sp,
+                //
+                //       isExpanded: true,
+                //       borderRadius: BorderRadius.circular(16),
+                //       onChanged: (val) {
+                //         setState(() {
+                //           selectedvalue = val as String?;
+                //           print("selectedvalue1selectedvalue1${selectedvalue}");
+                //         });
+                //       },
+                //       hint: Text(
+                //           "Please Select Position Category",
+                //           style: TextStyle(color: Colors.black,
+                //             fontFamily: "volken",)
+                //       ),
+                //       items: [
+                //         // DropdownMenuItem(
+                //         //   child: Text("Anchorages",
+                //         //       style: TextStyle(
+                //         //         color: Colors.black,
+                //         //         fontWeight: FontWeight.normal,
+                //         //         fontFamily: "volken",
+                //         //       )),
+                //         //   value: "Anchorages",
+                //         // ),
+                //         DropdownMenuItem(
+                //           child: Text("Bridges",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Bridges",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Ferries",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Ferries",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Harbors",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Harbors",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Inlets",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Inlets",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Landmarks",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Landmarks",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Lighthouses",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Lighthouses",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Locks",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Locks",
+                //         ),
+                //         // DropdownMenuItem(
+                //         //   child: Text("Marinas",
+                //         //       style: TextStyle(
+                //         //         color: Colors.black,
+                //         //         fontWeight: FontWeight.normal,
+                //         //         fontFamily: "volken",
+                //         //       )),
+                //         //   value: "Marinas",
+                //         // ),
+                //         DropdownMenuItem(
+                //           child: Text("Other",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Other",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Sabah",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "SBH",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Ramps",
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontFamily: "volken",
+                //               )),
+                //           value: "Ramps",
+                //         ),
+                //         // DropdownMenuItem(
+                //         //   child: Text("Warning",
+                //         //       style: TextStyle(
+                //         //         color: Colors.black,
+                //         //         fontWeight: FontWeight.normal,
+                //         //         fontFamily: "volken",
+                //         //       )),
+                //         //   value: "Warning",
+                //         // ),
+                //       ],
+                //       underline: Container(
+                //         height: .8,
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
 
                 SizedBox(
@@ -929,7 +1029,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                 selectedImages.addAll(resultList1!
                                     .map((XFile file) => File(file.path))
                                     .toList());
-                                List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
+                                List<File> imageFiles = resultList1!.map((
+                                    file) => File(file.path)).toList();
                                 imagePaths = resultList1!
                                     .map((file) => file.path)
                                     .toList();
@@ -947,7 +1048,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 ),
                 Row(
                   children: [
-                    Text("Position",
+                    Text("Position(click to move)",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -964,7 +1065,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   children: [
                     Container(
                       height: 45.h,
-                      width: MediaQuery.of(context).size.width * .95,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * .95,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
@@ -1019,7 +1123,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           style: TextStyle(color: secondary),
@@ -1065,7 +1172,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       height: 1.h,
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           style: TextStyle(color: secondary),
@@ -1094,10 +1204,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   height: 2.h,
                 ),
 
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Berth Capacity",
@@ -1109,18 +1221,24 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Slips",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text("Slips",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1139,10 +1257,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Approach",
@@ -1152,27 +1272,37 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: "volken")),
-                    selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
+                    selectedvalue1 == "Other" || selectedvalue1 == "Anchorage"
+                        ? Container()
+                        : SizedBox(
                       height: 1.h,
                     ),
                   ],
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Approach Depth( Meters )",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Minimum Approach Depth( Meters )",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
 
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
@@ -1191,21 +1321,29 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Mean Low Water Dock Depth( Meters )",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Mean Low Water Dock Depth( Meters )",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: secondary),
@@ -1224,21 +1362,29 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Minimum Channel Depth(Feet)",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Minimum Channel Depth(Feet)",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1257,21 +1403,29 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Text("Mean High Water Clearanc(Feet)",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Mean High Water Clearanc(Feet)",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1290,44 +1444,57 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():  SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Services & Amenities",
+                    selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                        selectedvalue1 == "Anchorage" ? Container() : Text(
+                        "Services & Amenities",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: "volken")),
-                    selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                    selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                        selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                       height: 1.h,
                     ),
                   ],
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Text("Fuel Dock",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Fuel Dock",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   height: 6.h,
                   decoration: BoxDecoration(
-                    color:  Colors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
+                    border: Border.all(width: 1, color: secondary),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -1349,14 +1516,15 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       isExpanded: true,
                       borderRadius: BorderRadius.circular(16),
                       onChanged: (val) {
-                        setState((){
+                        setState(() {
                           services = val as String?;
                           print("selectedvalue1selectedvalue1${services}");
                         });
                       },
                       hint: Text(
                           "Please Select Fuel Dock",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                          style: TextStyle(color: Colors.black,
+                            fontFamily: "volken",)
                       ),
                       items: [
                         DropdownMenuItem(
@@ -1385,26 +1553,33 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ),
                 ),
 
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Gas",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text("Gas",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   height: 6.h,
                   decoration: BoxDecoration(
-                    color:  Colors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
+                    border: Border.all(width: 1, color: secondary),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -1426,14 +1601,15 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       isExpanded: true,
                       borderRadius: BorderRadius.circular(16),
                       onChanged: (val) {
-                        setState((){
+                        setState(() {
                           gas = val as String?;
                           print("selectedvalue1selectedvalue1${gas}");
                         });
                       },
                       hint: Text(
                           "Please Select Gas",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                          style: TextStyle(color: Colors.black,
+                            fontFamily: "volken",)
                       ),
                       items: [
                         DropdownMenuItem(
@@ -1462,26 +1638,34 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ),
                 ),
 
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Transient Storage",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Transient Storage",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   height: 6.h,
                   decoration: BoxDecoration(
-                    color:  Colors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
+                    border: Border.all(width: 1, color: secondary),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -1503,14 +1687,16 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       isExpanded: true,
                       borderRadius: BorderRadius.circular(16),
                       onChanged: (val) {
-                        setState((){
+                        setState(() {
                           TransientStorage = val as String?;
-                          print("selectedvalue1selectedvalue1${TransientStorage}");
+                          print(
+                              "selectedvalue1selectedvalue1${TransientStorage}");
                         });
                       },
                       hint: Text(
                           "Please Select Transient Storage",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                          style: TextStyle(color: Colors.black,
+                            fontFamily: "volken",)
                       ),
                       items: [
                         DropdownMenuItem(
@@ -1539,26 +1725,34 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ),
                 ),
 
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Text("Long Term Storage",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Long Term Storage",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   height: 6.h,
                   decoration: BoxDecoration(
-                    color:  Colors.white,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color:secondary),
+                    border: Border.all(width: 1, color: secondary),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -1580,14 +1774,16 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                       isExpanded: true,
                       borderRadius: BorderRadius.circular(16),
                       onChanged: (val) {
-                        setState((){
+                        setState(() {
                           longtermstorage = val as String?;
-                          print("selectedvalue1selectedvalue1${longtermstorage}");
+                          print(
+                              "selectedvalue1selectedvalue1${longtermstorage}");
                         });
                       },
                       hint: Text(
                           "Please Select Transient Storage",
-                          style: TextStyle(color: Colors.black,  fontFamily: "volken",)
+                          style: TextStyle(color: Colors.black,
+                            fontFamily: "volken",)
                       ),
                       items: [
                         DropdownMenuItem(
@@ -1615,21 +1811,30 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     ),
                   ),
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||   selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Text("Max. Vessel LOA",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Max. Vessel LOA",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Warning" || selectedvalue1 == "Anchorage"
+                    ? Container()
+                    : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1648,21 +1853,30 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Anchorage"
+                    ? Container()
+                    : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||    selectedvalue1=="Warning"||selectedvalue1=="Anchorage"?Container():Text("Max. Slip Length",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Max. Slip Length",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container():Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1681,21 +1895,29 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||  selectedvalue1=="Anchorage"?Container():Text("Max.Slip Width",
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Text(
+                    "Max.Slip Width",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "volken")),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" || selectedvalue1=="Anchorage"?Container(): Container(
-                  width: MediaQuery.of(context).size.width,
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     style: TextStyle(color: secondary),
@@ -1714,11 +1936,13 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                         )),
                   ),
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 1.h,
                 ),
 
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():  Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   children: [
                     Text("Protection",
                         style: TextStyle(
@@ -1729,10 +1953,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken"))
                   ],
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Warning" ||selectedvalue1=="Anchorage"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
+                    selectedvalue1 == "Anchorage" ? Container() : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Column(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Column(
                   children: [
                     Container(
                       height: 50.h,
@@ -1966,10 +2192,11 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                   ],
                 ),
 
-                selectedvalue1=="Other"?Container():SizedBox(
+                selectedvalue1 == "Other" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Features",
@@ -1981,10 +2208,13 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"||selectedvalue1=="Warning"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Warning"
+                    ? Container()
+                    : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   children: [
                     Checkbox(
                       value: Use,
@@ -2003,7 +2233,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   children: [
                     Checkbox(
                       value: Fixed,
@@ -2022,7 +2253,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container(): Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   children: [
                     Checkbox(
                       value: mountain,
@@ -2041,7 +2273,8 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   children: [
                     Checkbox(
                       value: ashore,
@@ -2062,10 +2295,12 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Conditions",
@@ -2077,14 +2312,16 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"||  selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : SizedBox(
                   height: 1.h,
                 ),
-                selectedvalue1=="Other"|| selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():Row(
+                selectedvalue1 == "Other" || selectedvalue1 == "Marina" ||
+                    selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    selectedvalue1=="Other"?Container(): Column(
+                    selectedvalue1 == "Other" ? Container() : Column(
                       children: [
                         Row(
                           children: [
@@ -2105,10 +2342,14 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Other"|| selectedvalue1=="Warning"?Container():SizedBox(
+                        selectedvalue1 == "Other" || selectedvalue1 == "Warning"
+                            ? Container()
+                            : SizedBox(
                           height: 1.h,
                         ),
-                        selectedvalue1=="Other"||  selectedvalue1=="Warning"?Container():  Row(
+                        selectedvalue1 == "Other" || selectedvalue1 == "Warning"
+                            ? Container()
+                            : Row(
                           children: [
                             Checkbox(
                               value: Coral,
@@ -2127,7 +2368,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                                     fontFamily: "volken")),
                           ],
                         ),
-                        selectedvalue1=="Warning"?Container(): Row(
+                        selectedvalue1 == "Warning" ? Container() : Row(
                           children: [
                             Checkbox(
                               value: Rocks,
@@ -2195,10 +2436,14 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     ),
                   ],
                 ),
-                selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():SizedBox(
+                selectedvalue1 == "Other" ? Container() : selectedvalue1 ==
+                    "Marina" || selectedvalue1 == "Warning"
+                    ? Container()
+                    : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"?Container(): selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container():Row(
+                selectedvalue1 == "Other" ? Container() : selectedvalue1 ==
+                    "Marina" || selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Facilities",
@@ -2210,10 +2455,14 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                             fontFamily: "volken")),
                   ],
                 ),
-                selectedvalue1=="Other"?Container():  selectedvalue1=="Marina"|| selectedvalue1=="Warning"?Container():SizedBox(
+                selectedvalue1 == "Other" ? Container() : selectedvalue1 ==
+                    "Marina" || selectedvalue1 == "Warning"
+                    ? Container()
+                    : SizedBox(
                   height: 2.h,
                 ),
-                selectedvalue1=="Other"?Container():   selectedvalue1=="Marina"||selectedvalue1=="Warning"?Container(): Row(
+                selectedvalue1 == "Other" ? Container() : selectedvalue1 ==
+                    "Marina" || selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -2424,6 +2673,30 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
     );
   }
 
+  premimum() {
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().categoryapi().then((response) async {
+          categorymodal = CategoryModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && categorymodal?.success == true) {
+            setState(() {
+              isloding = false;
+            });
+          } else {
+            setState(() {
+              isloding = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloding = false;
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
+
   //AddNewPositionapifuncation
   castommapposition() async {
     if (_formKey.currentState!.validate()) {
@@ -2449,13 +2722,13 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
         "pontoon": pontoon,
         "shop": shop,
         "property_address":
-            _address.text == null ? "" : _address.text.trim().toString(),
+        _address.text == null ? "" : _address.text.trim().toString(),
         "property_city": _city.text == null ? "" : _city.text.trim().toString(),
         "property_area": _neighborthood.text.trim().toString(),
         "property_zip":
-            _zipcode.text == null ? "" : _zipcode.text.trim().toString(),
+        _zipcode.text == null ? "" : _zipcode.text.trim().toString(),
         "property_country":
-            _country.text == null ? "" : _country.text.trim().toString(),
+        _country.text == null ? "" : _country.text.trim().toString(),
         "property_latitude": _latitude.text.toString(),
         "property_longitude": _latitude1.text.toString(),
         "text_slips": _slips.text.trim().toString(),
@@ -2466,7 +2739,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
             ? ""
             : _meanlowwaterdockdepth.text.trim().toString(),
         "text_minimumchanneldepth":
-            _feet.text == null ? "" : _feet.text.trim().toString(),
+        _feet.text == null ? "" : _feet.text.trim().toString(),
         "text_meanhighwaterclearance": _meanhighwaterclearance.text == null
             ? ""
             : _meanhighwaterclearance.text.trim().toString(),
@@ -2510,11 +2783,16 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       };
       meta.forEach((key, value) {
         data['meta[$key]'] = value.toString();
-      });      List<File> imageFiles = resultList1!.map((file) => File(file.path)).toList();
+      });
+      List<File> imageFiles = resultList1!.map((file) => File(file.path))
+          .toList();
       data['user_id'] = (loginmodal?.userId).toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
-      data['post_category'] = selectedvalue1=="Marina"?"Marina":selectedvalue1=="Anchorage"?"Anchorage":selectedvalue1=="Warning"?"Warning":"Other";
+      data['post_category'] =
+      selectedvalue1 == "Marina" ? "Marina" : selectedvalue1 == "Anchorage"
+          ? "Anchorage"
+          : selectedvalue1 == "Warning" ? "Warning" : "Other";
 
       // data['meta'] = meta.toString();
       print("Printapivalue $data");
@@ -2552,13 +2830,13 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       final Map<String, String> data = {};
       var meta = {
         "property_address":
-            _address.text == null ? "" : _address.text.trim().toString(),
+        _address.text == null ? "" : _address.text.trim().toString(),
         "property_city": _city.text == null ? "" : _city.text.trim().toString(),
         "property_area": _neighborthood.text.trim().toString(),
         "property_zip":
-            _zipcode.text == null ? "" : _zipcode.text.trim().toString(),
+        _zipcode.text == null ? "" : _zipcode.text.trim().toString(),
         "property_country":
-            _country.text == null ? "" : _country.text.trim().toString(),
+        _country.text == null ? "" : _country.text.trim().toString(),
         "property_latitude": _latitude.text.toString(),
         "property_longitude": _latitude1.text.toString(),
         "text_slips": _slips.text.trim().toString(),
@@ -2569,7 +2847,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
             ? ""
             : _meanlowwaterdockdepth.text.trim().toString(),
         "text_minimumchanneldepth":
-            _feet.text == null ? "" : _feet.text.trim().toString(),
+        _feet.text == null ? "" : _feet.text.trim().toString(),
         "text_meanhighwaterclearance": _meanhighwaterclearance.text == null
             ? ""
             : _meanhighwaterclearance.text.trim().toString(),
@@ -2633,7 +2911,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       data['post_id'] = widget.postid.toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();
-      data['post_category'] = selectedvalue1=="Warning"?"Warning":selectedvalue1=="Anchorage"?"Anchorage":selectedvalue.toString();
+      data['post_category'] =
+      selectedvalue1 == "Warning" ? "Warning" : selectedvalue1 == "Anchorage"
+          ? "Anchorage"
+          : selectedvalue.toString();
       data['post_images[]'] = jsonEncode(imagePaths);
       print("Printapivalue $data");
       checkInternet().then((internet) async {
@@ -2682,192 +2963,199 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
             print("response.body${response.body}");
             setState(() {
               _title.text = viewcategorywisevieweetailmodal?.data?.title ==
-                          "" ||
-                      viewcategorywisevieweetailmodal?.data?.title == null
+                  "" ||
+                  viewcategorywisevieweetailmodal?.data?.title == null
                   ? ""
                   : (viewcategorywisevieweetailmodal?.data?.title).toString();
               _descripation.text =
-                  viewcategorywisevieweetailmodal?.data?.content == "" ||
-                          viewcategorywisevieweetailmodal?.data?.content == null
-                      ? ""
-                      : (viewcategorywisevieweetailmodal?.data?.content)
-                          .toString();
+              viewcategorywisevieweetailmodal?.data?.content == "" ||
+                  viewcategorywisevieweetailmodal?.data?.content == null
+                  ? ""
+                  : (viewcategorywisevieweetailmodal?.data?.content)
+                  .toString();
               _address.text = viewcategorywisevieweetailmodal?.data?.content ==
-                          "" ||
-                      viewcategorywisevieweetailmodal?.data?.content == null
+                  "" ||
+                  viewcategorywisevieweetailmodal?.data?.content == null
                   ? ""
                   : (viewcategorywisevieweetailmodal?.data?.content).toString();
 
               _city.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCity ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCity ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCity ==
-                          null
+                  ?.data?.metaFields?.propertyCity ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyCity ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyCity ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.propertyCity)
-                      .toString();
+                  ?.data?.metaFields?.propertyCity)
+                  .toString();
               _neighborthood.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyArea ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyArea ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyArea ==
-                          null
+                  ?.data?.metaFields?.propertyArea ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyArea ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyArea ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.propertyArea)
-                      .toString();
+                  ?.data?.metaFields?.propertyArea)
+                  .toString();
               _zipcode.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyZip ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyZip ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyZip ==
-                          null
+                  ?.data?.metaFields?.propertyZip ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyZip ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyZip ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.propertyZip)
-                      .toString();
+                  ?.data?.metaFields?.propertyZip)
+                  .toString();
               _country.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCountry ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCountry ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.propertyCountry ==
-                          null
+                  ?.data?.metaFields?.propertyCountry ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyCountry ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.propertyCountry ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.propertyCountry)
-                      .toString();
+                  ?.data?.metaFields?.propertyCountry)
+                  .toString();
               _slips.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textSlips ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textSlips ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textSlips ==
-                          null
+                  ?.data?.metaFields?.textSlips ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textSlips ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textSlips ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textSlips)
-                      .toString();
+                  ?.data?.metaFields?.textSlips)
+                  .toString();
               _minimumapproachdepth.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMinimumapproachdepth ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMinimumapproachdepth ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMinimumapproachdepth ==
-                          null
+                  ?.data?.metaFields?.textMinimumapproachdepth ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMinimumapproachdepth ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMinimumapproachdepth ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMinimumapproachdepth)
-                      .toString();
+                  ?.data?.metaFields?.textMinimumapproachdepth)
+                  .toString();
               _meanlowwaterdockdepth.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanlowwaterdockdepth ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanlowwaterdockdepth ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanlowwaterdockdepth ==
-                          null
+                  ?.data?.metaFields?.textMeanlowwaterdockdepth ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMeanlowwaterdockdepth ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMeanlowwaterdockdepth ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMeanlowwaterdockdepth)
-                      .toString();
+                  ?.data?.metaFields?.textMeanlowwaterdockdepth)
+                  .toString();
               _meanhighwaterclearance.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanhighwaterclearance ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanhighwaterclearance ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMeanhighwaterclearance ==
-                          null
+                  ?.data?.metaFields?.textMeanhighwaterclearance ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMeanhighwaterclearance ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMeanhighwaterclearance ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMeanhighwaterclearance)
-                      .toString();
+                  ?.data?.metaFields?.textMeanhighwaterclearance)
+                  .toString();
               // services=viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textFueldock).toString();
               // gas=viewcategorywisevieweetailmodal?.data?.metaFields?.textGas=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textGas==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textGas==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textGas).toString();
               // TransientStorage=viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textTransientstorage).toString();
               // longtermstorage=viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage=="null"||viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage==""||viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage==null?"":(viewcategorywisevieweetailmodal?.data?.metaFields?.textLongtermstorage).toString();
               _MaxVesselLOA.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxvesselloa ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxvesselloa ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxvesselloa ==
-                          null
+                  ?.data?.metaFields?.textMaxvesselloa ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxvesselloa ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxvesselloa ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMaxvesselloa)
-                      .toString();
+                  ?.data?.metaFields?.textMaxvesselloa)
+                  .toString();
               _MaaSlipLength.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxsliplength ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxsliplength ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxsliplength ==
-                          null
+                  ?.data?.metaFields?.textMaxsliplength ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxsliplength ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxsliplength ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMaxsliplength)
-                      .toString();
+                  ?.data?.metaFields?.textMaxsliplength)
+                  .toString();
               _MaaSlipwidth.text = viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxslipwidth ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxslipwidth ==
-                          "" ||
-                      viewcategorywisevieweetailmodal
-                              ?.data?.metaFields?.textMaxslipwidth ==
-                          null
+                  ?.data?.metaFields?.textMaxslipwidth ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxslipwidth ==
+                      "" ||
+                  viewcategorywisevieweetailmodal
+                      ?.data?.metaFields?.textMaxslipwidth ==
+                      null
                   ? ""
                   : (viewcategorywisevieweetailmodal
-                          ?.data?.metaFields?.textMaxslipwidth)
-                      .toString();
+                  ?.data?.metaFields?.textMaxslipwidth)
+                  .toString();
               _latitude.text = viewcategorywisevieweetailmodal
-                              ?.data?.latitude ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal?.data?.latitude == "" ||
-                      viewcategorywisevieweetailmodal?.data?.latitude == null
+                  ?.data?.latitude ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal?.data?.latitude == "" ||
+                  viewcategorywisevieweetailmodal?.data?.latitude == null
                   ? ""
                   : (viewcategorywisevieweetailmodal?.data?.latitude)
-                      .toString();
+                  .toString();
               _latitude1.text = viewcategorywisevieweetailmodal
-                              ?.data?.longitude ==
-                          "null" ||
-                      viewcategorywisevieweetailmodal?.data?.longitude == "" ||
-                      viewcategorywisevieweetailmodal?.data?.longitude == null
+                  ?.data?.longitude ==
+                  "null" ||
+                  viewcategorywisevieweetailmodal?.data?.longitude == "" ||
+                  viewcategorywisevieweetailmodal?.data?.longitude == null
                   ? ""
                   : (viewcategorywisevieweetailmodal?.data?.longitude)
-                      .toString();
-              selectedvalue1=viewcategorywisevieweetailmodal?.data?.postCategory=="Marina"?"Marina":viewcategorywisevieweetailmodal?.data?.postCategory=="Warning"?"Warning":viewcategorywisevieweetailmodal?.data?.postCategory=="Anchorage"?"Anchorage":"Other";
+                  .toString();
+              selectedvalue1 =
+              viewcategorywisevieweetailmodal?.data?.postCategory == "Marina"
+                  ? "Marina"
+                  : viewcategorywisevieweetailmodal?.data?.postCategory ==
+                  "Warning" ? "Warning" : viewcategorywisevieweetailmodal?.data
+                  ?.postCategory == "Anchorage" ? "Anchorage" : "Other";
 
               getLocation();
               print(
-                  "viewcategorywisevieweetailmodal?.data?.longitude${viewcategorywisevieweetailmodal?.data?.latitude ?? ""}");
+                  "viewcategorywisevieweetailmodal?.data?.longitude${viewcategorywisevieweetailmodal
+                      ?.data?.latitude ?? ""}");
               print(
-                  "viewcategorywisevieweetailmodal?.data?.longitude${_latitude.text}");
+                  "viewcategorywisevieweetailmodal?.data?.longitude${_latitude
+                      .text}");
               dynamic waterValue =
                   viewcategorywisevieweetailmodal?.data?.metaFields?.water;
               if (waterValue != null && waterValue is bool) {

@@ -70,6 +70,7 @@ dependencies:
   syncfusion_flutter_charts:
   fl_chart:
   flutter_radar_chart: ^0.2.1
+  dropdown_button2: ^2.3.9
 
 
 

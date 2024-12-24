@@ -408,7 +408,7 @@ SizedBox(
                       return null;
                     },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Title of Alert",
+                        hintText: "Enter Title of Alert",
                         icon: Icon(
                           Icons.map,
                           color: secondary,
@@ -573,12 +573,12 @@ SizedBox(
                     controller: _position,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Your Alert radius from position";
+                        return "Alert Radius in km";
                       }
                       return null;
                     },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Alert radius from position",
+                        hintText: "Alert Radius in km",
                         icon: Icon(
                           Icons.map,
                           color: secondary,

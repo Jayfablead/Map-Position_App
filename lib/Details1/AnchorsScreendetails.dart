@@ -20,6 +20,7 @@ import 'package:mapposition/Detail/CategorywiseViewScreen.dart';
 import 'package:mapposition/Detail/DetailsOtherScreen.dart';
 import 'package:mapposition/Detail/OtherWarningDetailsScreen.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
+import 'package:mapposition/Details1/AnchorsScreendetails.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -762,7 +763,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                       child: Icon(
                         Icons.flag_outlined,
                         color: Colors.black,
-                        size: 23.sp,
+                        size: 17.sp,
                       ),
                     ),
                     SizedBox(
@@ -777,7 +778,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                               letterSpacing: 1,
                               decoration: TextDecoration.underline,
                               color: Colors.black,
-                              fontSize: 17.sp,
+                              fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
                     ),
@@ -838,7 +839,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-groceries-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.groceriesIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -947,7 +948,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.pharmacyIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1056,7 +1057,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-alcohol-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.alcoholIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1174,7 +1175,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-restaurant-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.restaurantIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1283,7 +1284,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-water-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.waterIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1392,7 +1393,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-beach-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.beachIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1510,7 +1511,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-pontoon-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.pontoonIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1619,7 +1620,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-shop-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.shopIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -2028,7 +2029,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.ownAnchorIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2113,7 +2114,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/buoys.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.buoysIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2198,7 +2199,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/mountain.png',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.mountainWedgesIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2283,7 +2284,8 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/ashore.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.ownLinesIcon ?? "",
+
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2439,7 +2441,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.sandIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2552,7 +2554,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.mudIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2665,8 +2667,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                                   child:
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                    imageUrl:viewcategorywisevieweetailmodal?.data?.metaFields?.clayIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2786,7 +2787,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.coralIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2902,7 +2903,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.rocksIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -3622,7 +3623,17 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                             batan(
                                 title: "View Details",
                                 route: () {
-                                  Get.to(CategoryWiseViewScreen(postid: (viewcategorywisevieweetailmodal?.nearbyPosts?[index].id ).toString()));
+                                  Get.to(
+                                      CategoryWiseViewScreen(
+                                        postid: (viewcategorywisevieweetailmodal
+                                            ?.nearbyPosts?[
+                                        index]
+                                            .id)
+                                            ?.toString() ??
+                                            "",
+                                      )
+                                  );
+
                                 },
                                 hight: 5.h,
                                 width: 30.w,
@@ -3660,10 +3671,10 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                         Get.offAll(LoginScreen());
                       },
                     )
-                        // : loginmodal?.userId ==
-                        // viewcategorywisevieweetailmodal
-                        //     ?.data?.authorId
-                        // ? Container()
+                    // : loginmodal?.userId ==
+                    // viewcategorywisevieweetailmodal
+                    //     ?.data?.authorId
+                    // ? Container()
                         : InkWell(
                       onTap: () {
                         showratingpop1();

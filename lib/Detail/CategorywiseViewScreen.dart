@@ -838,7 +838,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-groceries-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.groceriesIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -947,7 +947,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-pharmacy-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.pharmacyIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1056,7 +1056,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-alcohol-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.alcoholIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1174,7 +1174,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-restaurant-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.restaurantIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1283,7 +1283,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/03/icons8-water-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.waterIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1392,7 +1392,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-beach-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.beachIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1510,7 +1510,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-pontoon-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.pontoonIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -1619,7 +1619,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
                                               imageUrl:
-                                              "https://www.navlex.net/wp-content/uploads/2024/04/icons8-shop-100.png",
+                                              viewcategorywisevieweetailmodal?.data?.metaFields?.shopIcon ?? "",
                                               progressIndicatorBuilder:
                                                   (context, url,
                                                   progress) =>
@@ -2028,7 +2028,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/anchor.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.ownAnchorIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2113,7 +2113,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/buoys.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.buoysIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2198,7 +2198,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/mountain.png',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.mountainWedgesIcon ?? "",
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2283,7 +2283,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                         BorderRadius.circular(15),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://www.navlex.net/wp-content/uploads/2024/03/ashore.jpg',
+                                          viewcategorywisevieweetailmodal?.data?.metaFields?.ownLinesIcon ?? "",
+
                                           progressIndicatorBuilder:
                                               (context, url,
                                               progress) =>
@@ -2439,7 +2440,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Sand.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.sandIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2552,7 +2553,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Mud.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.mudIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2665,8 +2666,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   child:
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Clay.jpg",
+                                                    imageUrl:viewcategorywisevieweetailmodal?.data?.metaFields?.clayIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2786,7 +2786,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Coral.png",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.coralIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>
@@ -2902,7 +2902,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
                                                     imageUrl:
-                                                    "https://www.navlex.net/wp-content/themes/wpstate-child/img/conditions/Rocks.jpg",
+                                                    viewcategorywisevieweetailmodal?.data?.metaFields?.rocksIcon ?? "",
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                         progress) =>

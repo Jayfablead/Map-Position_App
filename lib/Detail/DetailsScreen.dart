@@ -692,7 +692,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           child: Icon(
                             Icons.flag_outlined,
                             color: Colors.black,
-                            size: 23.sp,
+                            size: 17.sp,
                           ),
                         ),
                         SizedBox(
@@ -708,7 +708,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   letterSpacing: 1,
                                   decoration: TextDecoration.underline,
                                   color: Colors.black,
-                                  fontSize: 17.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "volken")),
                         ),
@@ -2666,7 +2666,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "volken")),
-                        ):loginmodal?.userId == onwViewpostionmodal?.data?.authorId ?Container():InkWell(
+                        )
+                            // :loginmodal?.userId == onwViewpostionmodal?.data?.authorId ?Container()
+                            :
+                        InkWell(
                           onTap: () {
                             showratingpop1();
                           },
@@ -3686,7 +3689,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

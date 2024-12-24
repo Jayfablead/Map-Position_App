@@ -1181,7 +1181,9 @@ class _WarningDetilsScreenState extends State<WarningDetilsScreen> {
                                 () {
                               Get.offAll(LoginScreen());
                             },
-                          ):loginmodal?.userId == addviewwarningmodal?.data?.authorId ?Container():InkWell(
+                          ):
+                          // loginmodal?.userId == addviewwarningmodal?.data?.authorId ?Container():
+                          InkWell(
                             onTap: () {
 
                               showratingpop1();
@@ -1802,7 +1804,7 @@ class _WarningDetilsScreenState extends State<WarningDetilsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

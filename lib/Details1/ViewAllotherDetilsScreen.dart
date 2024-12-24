@@ -3611,10 +3611,10 @@ class _ViewAllOtherDetilsScreenState extends State<ViewAllOtherDetilsScreen> {
                         Get.offAll(LoginScreen());
                       },
                     )
-                        : loginmodal?.userId ==
-                        viewcategorywisevieweetailmodal
-                            ?.data?.authorId
-                        ? Container()
+                        // : loginmodal?.userId ==
+                        // viewcategorywisevieweetailmodal
+                        //     ?.data?.authorId
+                        // ? Container()
                         : InkWell(
                       onTap: () {
                         showratingpop1();
@@ -3935,7 +3935,7 @@ class _ViewAllOtherDetilsScreenState extends State<ViewAllOtherDetilsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

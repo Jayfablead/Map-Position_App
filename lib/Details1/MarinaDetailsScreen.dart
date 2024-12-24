@@ -19,6 +19,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mapposition/Detail/DetailsOtherScreen.dart';
 import 'package:mapposition/Detail/ViewAllPositionDetailsScreen.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
+import 'package:mapposition/Details1/MarinaDetailsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
@@ -477,7 +478,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                       Row(
                         children: [
                           Text(
-                            " ⭐️${addviewothermodal?.averageRating==0||addviewothermodal?.averageRating==""||addviewothermodal?.averageRating==null?"4.8":addviewothermodal?.averageRating ?? ""}[${addviewothermodal?.reviews?.length==0||addviewothermodal?.reviews?.length==""||addviewothermodal?.reviews?.length==null?"0":addviewothermodal?.reviews?.length} reviews]",
+                            " ⭐️${addviewothermodal?.averageRating==0||addviewothermodal?.averageRating==""||addviewothermodal?.averageRating==null?"0":addviewothermodal?.averageRating ?? ""}[${addviewothermodal?.reviews?.length==0||addviewothermodal?.reviews?.length==""||addviewothermodal?.reviews?.length==null?"0":addviewothermodal?.reviews?.length} reviews]",
                             style: TextStyle(
                                 letterSpacing: 1,
                                 color: secondary,
@@ -520,7 +521,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                     letterSpacing: 1,
                                     decoration: TextDecoration.underline,
                                     color: Colors.black,
-                                    fontSize: 17.sp,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
                           ),
@@ -667,14 +668,22 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Minimum Approach Depth : ",
+                                Text("Mini Approach Depth : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumapproachdepth ?? ""}' + " Meters",
+                                Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"N/A":addviewothermodal?.data?.metaFields?.textMinimumapproachdepth ?? ""}',
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"":" Meters"}',
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -686,14 +695,22 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Mean Low Water Dock Depth : ",
+                                Text("Low Water Dock Depth : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"0":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? ""}" + " Meters",
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"N/A":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? "" + " Meters"}" ,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"":" Meters"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -705,14 +722,22 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Minimum Channel Depth : ",
+                                Text("Mini Channel Depth : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"0":addviewothermodal?.data?.metaFields?.textMinimumchanneldepth ?? ""}" + " Feet",
+                                Text("${addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"N/A":addviewothermodal?.data?.metaFields?.textMinimumchanneldepth ?? "" +" Feet"}" ,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==""||addviewothermodal?.data?.metaFields?.textMinimumchanneldepth==null?"":" Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -724,14 +749,22 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Mean High Water Clearance : ",
+                                Text("High Water Clearance : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"0":addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance ?? ""}" + " Feet",
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"N/A":addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance ?? "" + "Feet"}",
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==""||addviewothermodal?.data?.metaFields?.textMeanhighwaterclearance==null?"": "Feet"}",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -781,7 +814,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text(addviewothermodal?.data?.metaFields?.textFueldock==""||addviewothermodal?.data?.metaFields?.textFueldock==null?"0":addviewothermodal?.data?.metaFields?.textFueldock ?? "",
+                                Text(addviewothermodal?.data?.metaFields?.textFueldock==""||addviewothermodal?.data?.metaFields?.textFueldock==null?"N/A":addviewothermodal?.data?.metaFields?.textFueldock ?? "",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -800,7 +833,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text(addviewothermodal?.data?.metaFields?.textGas==""||addviewothermodal?.data?.metaFields?.textGas==null?"0":addviewothermodal?.data?.metaFields?.textGas ?? "",
+                                Text(addviewothermodal?.data?.metaFields?.textGas==""||addviewothermodal?.data?.metaFields?.textGas==null?"N/A":addviewothermodal?.data?.metaFields?.textGas ?? "",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -819,7 +852,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"0":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
+                                Text(addviewothermodal?.data?.metaFields?.textTransientstorage==""||addviewothermodal?.data?.metaFields?.textTransientstorage==null?"N/A":addviewothermodal?.data?.metaFields?.textTransientstorage ?? "",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -857,7 +890,15 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxvesselloa ?? ""}" + " Feet",
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxvesselloa ?? "" + " Feet"}" ,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxvesselloa=="null"||addviewothermodal?.data?.metaFields?.textMaxvesselloa==""||addviewothermodal?.data?.metaFields?.textMaxvesselloa==null?"":" Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -878,7 +919,15 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? ""}" + " Meters",
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? "" + " Meters"}" ,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"": " Meters"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -898,7 +947,15 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"0":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? ""}" + " Meters",
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? "" + " Meters"}" ,
+                                  style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: secondary,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "volken"),
+                                ),
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"":" Meters"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -925,20 +982,20 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                         ),
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                Text("Details",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: blackback,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "volken")),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
+                            // Row(
+                            //   children: [
+                            //     Text("Details",
+                            //         style: TextStyle(
+                            //             letterSpacing: 1,
+                            //             color: blackback,
+                            //             fontSize: 15.sp,
+                            //             fontWeight: FontWeight.bold,
+                            //             fontFamily: "volken")),
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: 1.h,
+                            // ),
                             Row(
                               children: [
                                 Text("Marina Id : ",
@@ -1628,7 +1685,9 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                 () {
                               Get.offAll(LoginScreen());
                             },
-                          ): loginmodal?.userId == addviewothermodal?.data?.authorId?Container(): InkWell(
+                          ):
+                          // : loginmodal?.userId == addviewothermodal?.data?.authorId?Container():
+                          InkWell(
                             onTap: () {
 
                               showratingpop1();
@@ -2236,7 +2295,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

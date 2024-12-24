@@ -702,7 +702,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                       child: Icon(
                         Icons.flag_outlined,
                         color: Colors.black,
-                        size: 23.sp,
+                        size: 17.sp,
                       ),
                     ),
                     SizedBox(
@@ -717,7 +717,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                               letterSpacing: 1,
                               decoration: TextDecoration.underline,
                               color: Colors.black,
-                              fontSize: 17.sp,
+                              fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "volken")),
                     ),
@@ -3715,10 +3715,10 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                         Get.offAll(LoginScreen());
                       },
                     )
-                        : loginmodal?.userId ==
-                        viewcategorywisevieweetailmodal
-                            ?.data?.authorId
-                        ? Container()
+                        // : loginmodal?.userId ==
+                        // viewcategorywisevieweetailmodal
+                        //     ?.data?.authorId
+                        // ? Container()
                         : InkWell(
                       onTap: () {
                         showratingpop1();
@@ -4038,7 +4038,7 @@ class _ViewAllPositionDetailsScreenState extends State<ViewAllPositionDetailsScr
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

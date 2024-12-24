@@ -3660,10 +3660,10 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                         Get.offAll(LoginScreen());
                       },
                     )
-                        : loginmodal?.userId ==
-                        viewcategorywisevieweetailmodal
-                            ?.data?.authorId
-                        ? Container()
+                        // : loginmodal?.userId ==
+                        // viewcategorywisevieweetailmodal
+                        //     ?.data?.authorId
+                        // ? Container()
                         : InkWell(
                       onTap: () {
                         showratingpop1();
@@ -3984,7 +3984,7 @@ class _AnchorgeDetilsScreenState extends State<AnchorgeDetilsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Report Property",
+                                    "Report Position",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.black,

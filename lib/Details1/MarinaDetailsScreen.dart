@@ -23,6 +23,7 @@ import 'package:mapposition/Details1/MarinaDetailsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
+import 'package:mapposition/Modal/ClimPositionModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
@@ -505,7 +506,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                             child: Icon(
                               Icons.flag_outlined,
                               color: Colors.black,
-                              size: 23.sp,
+                              size: 17.sp,
                             ),
                           ),
                           SizedBox(
@@ -524,6 +525,37 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          loginmodal?.userId==""||loginmodal?.userId==null?buildErrorDialog1(
+                            context,
+                            "",
+                            "Please Login To Use This",
+                            buttonname: 'Login',
+                                () {
+                              Get.offAll(LoginScreen());
+                            },
+                          ):loginmodal?.userId == addviewothermodal?.data?.authorId?Container():InkWell(
+                            onTap: (){
+                              climposition();
+                            },
+                            child: Container(
+
+                                padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.black
+                                ),
+                                child:  Text("Claim",
+                                    style: TextStyle(
+                                        letterSpacing: 1,
+                                        color: Colors.white,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "volken"))
+                            ),
                           ),
                         ],
                       ),
@@ -584,6 +616,7 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
                               ),
                             ),
                           ),
+
                         ],
                       ),
                       SizedBox(
@@ -2532,6 +2565,33 @@ class _MarinaDetilsScreenState extends State<MarinaDetilsScreen> {
         }
       });
     }
+  }
+  climposition() {
+    EasyLoading.show(status: 'Please Wait ...');
+    final Map<String, String> data = {};
+    data['post_id'] = widget.postid.toString();
+    data['user_id'] = loginmodal?.userId ?? "";
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().climpositiomnapi(data).then((response) async {
+          climpositionmodal =
+              ClimPositionModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && climpositionmodal?.success == true) {
+            EasyLoading.showSuccess(climpositionmodal?.message ?? '');
+            Get.back();
+            setState(() {});
+          } else {
+            EasyLoading.showError(climpositionmodal?.message ?? '');
+            setState(() {});
+          }
+        });
+      } else {
+        EasyLoading.showError(climpositionmodal?.message ?? '');
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
   }
 
 

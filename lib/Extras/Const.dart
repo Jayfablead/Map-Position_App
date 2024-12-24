@@ -2,6 +2,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
+import 'package:mapposition/Modal/ClimPositionModal.dart';
+import 'package:mapposition/Modal/PremiumModal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Modal/AddAlaramModal.dart';
@@ -105,7 +107,8 @@ AddAlaramModal? addalarammodal;
 NewUpdatealaramModal? newupdatealarammodal;
 UpdatealramModalscreen? updatealrammodalscreen;
 ReportModal? reportmodal;
-
+ClimPositionModal? climpositionmodal;
+PremiumModal? premiummodal;
 
 AddNewPositionImageModal? addNewPositionimageModal;
 

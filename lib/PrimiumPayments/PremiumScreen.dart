@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:mapposition/Extras/Const.dart';
+import 'package:mapposition/Extras/Drwer.dart';
+import 'package:mapposition/Extras/Headerwidget.dart';
+import 'package:mapposition/Extras/buildErrorDialog.dart';
+import 'package:mapposition/Modal/PremiumModal.dart';
+import 'package:mapposition/Provider/Authprovider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/bottombar.dart';
@@ -18,36 +23,38 @@ class PremiumScreen extends StatefulWidget {
 
 class _PremiumScreenState extends State<PremiumScreen> {
   Map<String, dynamic>? paymentIntentData;
+  final GlobalKey<ScaffoldState> _scaffoldKeyprmiyam =
+  GlobalKey<ScaffoldState>();
+bool isLoading=true;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      isLoading=true;
+    });
+    premimum();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
+      drawer: drawer1(),
+      key: _scaffoldKeyprmiyam,
       bottomNavigationBar:loginmodal?.userId==""||loginmodal?.userId==null? Container(): Bottombar(select_tab: 1),
-      body: SingleChildScrollView(
+      body:isLoading ?Center(child: CircularProgressIndicator()):SingleChildScrollView(
         child: Padding(
           padding:EdgeInsets.symmetric(horizontal: 2.w),
           child: Column(
             children: [
               SizedBox(height: 5.h,),
-              SizedBox(  width: 100.w, child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // InkWell(
-                  //     onTap: (){
-                  //       Get.back();
-                  //     },child: Icon(Icons.arrow_back_ios,color: blackback,size: 20.sp,)),
-                  InkWell(
-                    onTap: (){},
-                    child: Text("Need Help?",style: TextStyle(
-                        letterSpacing: 1,
-                        color:blackback,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: "volken")),
-                  ),
-                ],
-              ),),
+              header(
+                  show: 1,
+                  text: "Premium",
+                  callback1: () {
+                    _scaffoldKeyprmiyam.currentState
+                        ?.openDrawer();
+                  }),
               SizedBox(height: 5.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +85,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               fontWeight: FontWeight.normal,
                               fontFamily: "volken")),
                           SizedBox(height: 1.h,),
-                          Text("\$200.00/Year",style: TextStyle(
+                          Text("\$${premiummodal?.plan?.subscriptionAmount}/Year",style: TextStyle(
                               letterSpacing: 1,
                               color:Colors.white,
                               fontSize: 25.sp,
@@ -174,7 +181,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               SizedBox(height: 5.h,),
              loginmodal?.paymentStatus=="succeeded"?Container():
              batan(title: "Subscribe for \$200.00", route: (){
-               Get.to(PaymentsScreen());
+               Get.to(PaymentsScreen(amont: premiummodal?.plan?.subscriptionAmount,));
               }, hight: 6.h, width: 85.w, txtsize: 20.sp),
             ],
           ),
@@ -182,7 +189,29 @@ class _PremiumScreenState extends State<PremiumScreen> {
       ),
     );
   }
-
+  premimum() {
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().subscriptionplanapi().then((response) async {
+          premiummodal = PremiumModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200&& premiummodal?.success == true ) {
+            setState(() {
+              isLoading = false;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internet Required");
+      }
+    });
+  }
 }
 
 

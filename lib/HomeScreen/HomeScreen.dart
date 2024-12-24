@@ -15,6 +15,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
+import 'package:mapposition/Details1/MarinaDetailsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/bottombar.dart';
 import 'package:mapposition/LoginSinupScreen/LoginScreen.dart';
@@ -4586,15 +4587,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   title:
                                                                       "View Details",
                                                                   route: () {
-                                                                    Get.back();
-                                                                    shoallmarkermodal?.positions?[index].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Marina"?Get.to(DetailsOtherScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
-                                                                        postid: (shoallmarkermodal
-                                                                            ?.positions?[
-                                                                        index]
-                                                                            .properties
-                                                                            ?.postId)
-                                                                            ?.toString() ??
-                                                                            ""));
+                                                                    // Get.back();
+                                                                    // Get.back();
+
+                                                                    // Navigator action with WidgetsBinding to avoid build issues
+                                                                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                                                                      final termName = shoallmarkermodal?.positions?[index].properties?.termName;
+
+                                                                      if (termName == "Anchorage") {
+                                                                        Get.to(CategoryWiseViewScreen(
+                                                                          postid: (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ));
+                                                                      } else if (termName == "Warning") {
+                                                                        Get.to(DetailsWarningDetailsScreen(
+                                                                          postid: (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ));
+                                                                      } else if (termName == "Marina") {
+                                                                        Get.to(DetailsOtherScreen(
+                                                                          postid: (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ));
+                                                                      } else {
+                                                                        Get.to(ViewOterDetailsScreen(
+                                                                          postid: (shoallmarkermodal?.positions?[index].properties?.postId)?.toString() ?? "",
+                                                                        ));
+                                                                      }
+                                                                    });
+                                                                    // shoallmarkermodal?.positions?[index].properties?.termName=="Anchorage"?Get.to(CategoryWiseViewScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Warning"?Get.to(DetailsWarningDetailsScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):shoallmarkermodal?.positions?[index].properties?.termName=="Marina"?Get.to(MarinaDetilsScreen(postid:(shoallmarkermodal?.positions?[index].properties ?.postId)?.toString() ?? "" ,)):Get.to(ViewOterDetailsScreen(
+                                                                    //     postid: (shoallmarkermodal
+                                                                    //         ?.positions?[
+                                                                    //     index]
+                                                                    //         .properties
+                                                                    //         ?.postId)
+                                                                    //         ?.toString() ??
+                                                                    //         ""));
                                                                   },
                                                                   hight: 6.h,
                                                                   width: 40.w,

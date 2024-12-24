@@ -18,7 +18,8 @@ import '../Modal/StripePaymentsModal.dart';
 import '../Provider/Authprovider.dart';
 String? storedPlanEndDate;
 class PaymentsScreen extends StatefulWidget {
-  const PaymentsScreen({super.key});
+  String? amont;
+  PaymentsScreen({super.key,required this.amont});
 
   @override
   State<PaymentsScreen> createState() => _PaymentsScreenState();
@@ -248,7 +249,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       data['expiry_month'] = _ed.text.trim().toString();
       data['expiry_year'] = _ey.text.trim().toString();
       data['cvv'] = _cvv.text.trim().toString();
-      data['amount'] = "200";
+      data['amount'] = widget.amont ?? "";
       print(data);
       checkInternet().then((internet) async {
         if (internet) {

@@ -1702,15 +1702,15 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                         height: 1.h,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Review",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: blackback,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "volken")),
+                          // Text("Review",
+                          //     style: TextStyle(
+                          //         letterSpacing: 1,
+                          //         color: blackback,
+                          //         fontSize: 15.sp,
+                          //         fontWeight: FontWeight.bold,
+                          //         fontFamily: "volken")),
                           loginmodal?.userId==""||loginmodal?.userId==null?buildErrorDialog1(
                             context,
                             "",
@@ -1726,11 +1726,11 @@ InkWell(
 
                               showratingpop1();
                             },
-                            child: Text("Add Review",
+                            child: Text("Write a Review/Add more info",
                                 style: TextStyle(
                                     letterSpacing: 1,
                                     color: blackback,
-                                    fontSize: 15.sp,
+                                    fontSize: 13.sp,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "volken")),
                           ),

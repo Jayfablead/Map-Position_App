@@ -2637,15 +2637,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Review",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                color: blackback,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "volken")),
+                        // Text("Review",
+                        //     style: TextStyle(
+                        //         letterSpacing: 1,
+                        //         color: blackback,
+                        //         fontSize: 15.sp,
+                        //         fontWeight: FontWeight.bold,
+                        //         fontFamily: "volken")),
                         loginmodal?.userId==""||loginmodal?.userId==null?InkWell(
                           onTap: () {
 
@@ -2659,11 +2659,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               },
                             );
                           },
-                          child: Text("Add Review",
+                          child: Text("Write a Review/Add more info",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: blackback,
-                                  fontSize: 15.sp,
+                                  fontSize: 13.sp,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "volken")),
                         )
@@ -2673,7 +2673,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           onTap: () {
                             showratingpop1();
                           },
-                          child: Text("Add Review",
+                          child: Text("Write a Review/Add more info",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: blackback,

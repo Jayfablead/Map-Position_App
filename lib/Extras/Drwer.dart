@@ -449,7 +449,7 @@ class _drawer1State extends State<drawer1> {
                                   SizedBox(
                                     width: 2.w,
                                   ),
-                                  Text("Premium",
+                                  Text("Get Premium",
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,

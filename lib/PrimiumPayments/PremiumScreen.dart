@@ -78,7 +78,7 @@ bool isLoading=true;
                       ),
                       child: Column(
                         children: [
-                          Text("Premium",style: TextStyle(
+                          Text("Get Premium",style: TextStyle(
                               letterSpacing: 1,
                               color:Colors.white,
                               fontSize: 15.sp,
@@ -106,7 +106,7 @@ bool isLoading=true;
                   color:blackback,
                   fontSize: 15.sp,
                   fontWeight: FontWeight.normal,
-                  fontFamily: "volken")):Text("Subscribe To Premium,Unlock",style: TextStyle(
+                  fontFamily: "volken")):Text("Unlock Offline Mode",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,
@@ -124,7 +124,7 @@ bool isLoading=true;
                   color:blackback,
                   fontSize: 15.sp,
                   fontWeight: FontWeight.normal,
-                  fontFamily: "volken")):Text("More features and support Marina!",style: TextStyle(
+                  fontFamily: "volken")):Text("And support our work",style: TextStyle(
                       letterSpacing: 1,
                       color:blackback,
                       fontSize: 15.sp,
@@ -133,7 +133,7 @@ bool isLoading=true;
                 ],
               ),
               SizedBox(
-                height: 8.h,
+                height: 5.h,
               ),
               Container(
                 alignment: Alignment.center,
@@ -180,9 +180,10 @@ bool isLoading=true;
               ),
               SizedBox(height: 5.h,),
              loginmodal?.paymentStatus=="succeeded"?Container():
-             batan(title: "Subscribe for \$200.00", route: (){
+             batan(title: "Subscribe for \$${premiummodal?.plan?.subscriptionAmount}", route: (){
                Get.to(PaymentsScreen(amont: premiummodal?.plan?.subscriptionAmount,));
               }, hight: 6.h, width: 85.w, txtsize: 20.sp),
+              SizedBox(height:10.h ,),
             ],
           ),
         ),

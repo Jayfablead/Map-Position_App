@@ -2199,7 +2199,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Features",
+                    Text("Mooring Options",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -2303,7 +2303,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     selectedvalue1 == "Warning" ? Container() : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Conditions",
+                    Text("Seabed Types",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: Colors.black,
@@ -2784,8 +2784,10 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       meta.forEach((key, value) {
         data['meta[$key]'] = value.toString();
       });
-      List<File> imageFiles = resultList1!.map((file) => File(file.path))
-          .toList();
+      List<File> imageFiles = resultList1 != null
+          ? resultList1!.map((file) => File(file.path)).toList()
+          : [];
+
       data['user_id'] = (loginmodal?.userId).toString();
       data['title'] = _title.text.trim().toString();
       data['content'] = _descripation.text.trim().toString();

@@ -2,7 +2,7 @@ class ViewCategoryWiseviewDetailModal {
   bool? success;
   String? message;
   Data? data;
-  int? averageRating;
+  String? averageRating;
   List<NearbyPosts>? nearbyPosts;
   List<Reviews>? reviews;
 

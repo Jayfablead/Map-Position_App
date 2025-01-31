@@ -385,7 +385,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                                           height: 60.h,
                                                           width: 70.w,
                                                           decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(15),
+                                                               borderRadius: BorderRadius.circular(15),
                                                             border: Border.all(color: Colors.grey),
                                                           ),
                                                         ),
@@ -702,7 +702,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Mini Approach Depth : ",
+                                Text("Min. Approach Depth : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
@@ -717,7 +717,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       fontWeight: FontWeight.normal,
                                       fontFamily: "volken"),
                                 ),
-                                Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"":" Meters"}',
+                                Text('${addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==""||addviewothermodal?.data?.metaFields?.textMinimumapproachdepth==null?"":" Feet"}',
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -736,7 +736,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"N/A":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? "" + " Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"N/A":addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth ?? "" + " Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -744,7 +744,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       fontWeight: FontWeight.normal,
                                       fontFamily: "volken"),
                                 ),
-                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"":" Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==""||addviewothermodal?.data?.metaFields?.textMeanlowwaterdockdepth==null?"":" Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -756,7 +756,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                             ),
                             Row(
                               children: [
-                                Text("Mini Channel Depth : ",
+                                Text("Min. Channel Depth : ",
                                     style: TextStyle(
                                         letterSpacing: 1,
                                         color: blackback,
@@ -953,7 +953,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? "" + " Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxsliplength ?? "" + " Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -961,7 +961,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       fontWeight: FontWeight.normal,
                                       fontFamily: "volken"),
                                 ),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"": " Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxsliplength=="null"||addviewothermodal?.data?.metaFields?.textMaxsliplength==""||addviewothermodal?.data?.metaFields?.textMaxsliplength==null?"": " Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -981,7 +981,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         fontFamily: "volken")),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? "" + " Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"N/A":addviewothermodal?.data?.metaFields?.textMaxslipwidth ?? "" + " Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,
@@ -989,7 +989,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                       fontWeight: FontWeight.normal,
                                       fontFamily: "volken"),
                                 ),
-                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"":" Meters"}" ,
+                                Text("${addviewothermodal?.data?.metaFields?.textMaxslipwidth==""||addviewothermodal?.data?.metaFields?.textMaxslipwidth==null?"":" Feet"}" ,
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       color: secondary,

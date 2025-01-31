@@ -143,7 +143,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
       Marker marker = Marker(
         markerId: MarkerId('alarm_marker'), // Ensure this ID is unique
         position: LatLng(latitude, longitude),
-        infoWindow: InfoWindow(title: 'Alarm Location'),
+        infoWindow: InfoWindow(title: 'Position'),
       );
 
       setState(() {
@@ -1250,7 +1250,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     //   return null;
                     // },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Slips",
+                        hintText: "Enter number of slips",
                         icon: Icon(
                           Icons.location_city_sharp,
                           color: secondary,
@@ -1285,7 +1285,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 ),
                 selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
                     selectedvalue1 == "Anchorage" ? Container() : Text(
-                    "Minimum Approach Depth( Meters )",
+                    "Minimum Approach Depth( Feet )",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
@@ -1314,7 +1314,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     //   return null;
                     // },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Minimum Approach Depth",
+                        hintText: "Enter minimum ft",
                         icon: Icon(
                           Icons.location_city_sharp,
                           color: secondary,
@@ -1327,7 +1327,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                 ),
                 selectedvalue1 == "Other" || selectedvalue1 == "Warning" ||
                     selectedvalue1 == "Anchorage" ? Container() : Text(
-                    "Mean Low Water Dock Depth( Meters )",
+                    "Mean Low Water Dock Depth( Feet )",
                     style: TextStyle(
                         letterSpacing: 1,
                         color: Colors.black,
@@ -1355,7 +1355,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     //   return null;
                     // },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Minimum Approach Depth",
+                        hintText: "Enter minimum ft",
                         icon: Icon(
                           Icons.location_city_sharp,
                           color: secondary,
@@ -1396,7 +1396,7 @@ class _AddMarinaScreenState extends State<AddMarinaScreen> {
                     //   return null;
                     // },
                     decoration: inputDecoration(
-                        hintText: "Enter Your Minimum Channel Depth",
+                        hintText: "Enter minimum ft",
                         icon: Icon(
                           Icons.location_city_sharp,
                           color: secondary,

@@ -3082,7 +3082,7 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                                       Container(
                                         height: 20.w,
                                         width: 20.w,
-                                        child: ClipRRect(
+                                        child:ClipRRect(
                                           borderRadius:
                                           BorderRadius.circular(00),
                                           child: CachedNetworkImage(
@@ -3105,93 +3105,32 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Column(
-                                        children: [
-                                          SizedBox(
-                                            width: 25.w,
-                                            child: Text(
-                                              "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
-                                              style: TextStyle(
-                                                overflow:
-                                                TextOverflow.ellipsis,
-                                                fontSize: 13.sp,
-                                                color: secondary,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "volken",
-                                              ),
-                                            ),
-                                          ),
-
-                                          Text(
-                                            "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
-                                            style: TextStyle(
-                                              overflow:
-                                              TextOverflow.ellipsis,
-                                              fontSize: 13.sp,
-                                              color: secondary,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: "volken",
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                        style: TextStyle(
+                                          overflow:
+                                          TextOverflow.ellipsis,
+                                          fontSize: 13.sp,
+                                          color: secondary,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "volken",
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 1.w,
-                                            vertical: 1.h),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              height: 20.w,
-                                              width: 20.w,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    00),
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl:
-                                                  "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                      progress) =>
-                                                      Center(
-                                                          child:
-                                                          CircularProgressIndicator()),
-                                                  errorWidget: (context,
-                                                      url, error) =>
-                                                      Image.asset(
-                                                        "assets/Mud.jpg",
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 1.h,
-                                            ),
-                                            Text(
-                                              "Height",
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                overflow:
-                                                TextOverflow.ellipsis,
-                                                fontSize: 13.sp,
-                                                color: secondary,
-                                                fontWeight:
-                                                FontWeight.w500,
-                                                fontFamily: "volken",
-                                                letterSpacing: 1,
-                                              ),
-                                            ),
-                                          ],
+
+                                      Text(
+                                        "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                        style: TextStyle(
+                                          overflow:
+                                          TextOverflow.ellipsis,
+                                          fontSize: 13.sp,
+                                          color: secondary,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "volken",
                                         ),
                                       ),
                                     ],
                                   ),
+
                                 ],
                               ),
                               SizedBox(
@@ -3364,6 +3303,61 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                                             fontWeight: FontWeight.w500,
                                             fontFamily: "volken",
                                           ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w,
+                                            vertical: 1.h),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 20.w,
+                                              width: 20.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    00),
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl:
+                                                  "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                      progress) =>
+                                                      Center(
+                                                          child:
+                                                          CircularProgressIndicator()),
+                                                  errorWidget: (context,
+                                                      url, error) =>
+                                                      Image.asset(
+                                                        "assets/Mud.jpg",
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            Text(
+                                              "Height",
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                                fontSize: 13.sp,
+                                                color: secondary,
+                                                fontWeight:
+                                                FontWeight.w500,
+                                                fontFamily: "volken",
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

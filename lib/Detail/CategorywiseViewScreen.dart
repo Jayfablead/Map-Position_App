@@ -16,9 +16,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mapposition/Detail/DetailsOtherScreen.dart';
-import 'package:mapposition/Detail/OtherWarningDetailsScreen.dart';
-import 'package:mapposition/Detail/ViewOtherDetailsScreeen.dart';
 import 'package:mapposition/Details1/AnchorsScreendetails.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
@@ -27,7 +24,7 @@ import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Extras/Drwer.dart';
-import '../Extras/Loader.dart';
+
 import '../Extras/buildErrorDialog.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
@@ -784,6 +781,66 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   ],
                 ),
                 SizedBox(
+                  height: 1.8.h,
+                ),
+                Row(
+                  children: [
+                    Text("Description",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: blackback,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken"))
+                  ],
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 95.w,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 3.w, vertical: 1.h),
+                      decoration: BoxDecoration(
+                        border:
+                        Border.all(color: secondary, width: 1.sp),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ReadMoreText(
+                        '${viewcategorywisevieweetailmodal?.data?.content == "" || viewcategorywisevieweetailmodal?.data?.content == null ? "N/A" : viewcategorywisevieweetailmodal?.data?.content ?? ""}',
+                        trimLines: 4,
+                        trimLength: 146,
+                        colorClickableText: Colors.blue,
+                        trimMode: TrimMode.Length,
+                        trimCollapsedText: ' Show more',
+                        trimExpandedText: ' Show less',
+                        moreStyle: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "volken",
+                            letterSpacing: 1,
+                            color: blackback),
+                        lessStyle: TextStyle(
+                            fontSize: 11.sp,
+                            fontFamily: "volken",
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
+                            color: blackback),
+                        style: TextStyle(
+                          height: 1.5,
+                          color: secondary,
+                          fontFamily: "volken",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.sp,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
                   height: 1.h,
                 ),
                 Row(
@@ -1079,8 +1136,10 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                               ?.alcohol ==
                                               false
                                               ? Container(
+
                                               decoration:
                                               BoxDecoration(
+                                                  color: Colors.white30,
                                                 borderRadius:
                                                 BorderRadius
                                                     .circular(
@@ -1710,63 +1769,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                 SizedBox(
                   height: 1.h,
                 ),
-                Row(
-                  children: [
-                    Text("Description",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            color: blackback,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken"))
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 95.w,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 3.w, vertical: 1.h),
-                      decoration: BoxDecoration(
-                        border:
-                        Border.all(color: secondary, width: 1.sp),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ReadMoreText(
-                        '${viewcategorywisevieweetailmodal?.data?.content == "" || viewcategorywisevieweetailmodal?.data?.content == null ? "N/A" : viewcategorywisevieweetailmodal?.data?.content ?? ""}',
-                        trimLines: 4,
-                        trimLength: 146,
-                        colorClickableText: Colors.blue,
-                        trimMode: TrimMode.Length,
-                        trimCollapsedText: ' Show more',
-                        trimExpandedText: ' Show less',
-                        moreStyle: TextStyle(
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "volken",
-                            letterSpacing: 1,
-                            color: blackback),
-                        lessStyle: TextStyle(
-                            fontSize: 11.sp,
-                            fontFamily: "volken",
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                            color: blackback),
-                        style: TextStyle(
-                          height: 1.5,
-                          color: secondary,
-                          fontFamily: "volken",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.sp,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(
                   height: 2.h,
                 ),
@@ -3162,27 +3165,31 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                     SizedBox(
                                       width: 2.w,
                                     ),
-                                    Text(
-                                      "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
-                                      style: TextStyle(
-                                        overflow:
-                                        TextOverflow.ellipsis,
-                                        fontSize: 13.sp,
-                                        color: secondary,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "volken",
-                                      ),
-                                    ),
-                                    Text(
-                                      "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
-                                      style: TextStyle(
-                                        overflow:
-                                        TextOverflow.ellipsis,
-                                        fontSize: 13.sp,
-                                        color: secondary,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "volken",
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                          style: TextStyle(
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                            fontSize: 13.sp,
+                                            color: secondary,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "volken",
+                                          ),
+                                        ),
+                                        Text(
+                                          "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                          style: TextStyle(
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                            fontSize: 13.sp,
+                                            color: secondary,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "volken",
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

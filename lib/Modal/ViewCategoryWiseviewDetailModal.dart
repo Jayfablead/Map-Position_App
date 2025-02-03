@@ -203,13 +203,13 @@ class MetaFields {
   String? shopIcon;
   bool? propertyAddress;
   String? propertyAddressIcon;
-  Null? propertyCity;
+  String? propertyCity;
   String? propertyCityIcon;
-  Null? propertyArea;
+  String? propertyArea;
   String? propertyAreaIcon;
-  Null? propertyZip;
+  String? propertyZip;
   String? propertyZipIcon;
-  Null? propertyCountry;
+  String? propertyCountry;
   String? propertyCountryIcon;
   bool? propertyLatitude;
   String? propertyLatitudeIcon;
@@ -241,54 +241,6 @@ class MetaFields {
   String? textMaxslipwidthIcon;
   bool? bThumbnailId;
   String? sThumbnailIdIcon;
-  bool? propertyPrice;
-  String? propertyPriceIcon;
-  bool? propertyLabel;
-  String? propertyLabelIcon;
-  bool? propertyLabelBefore;
-  String? propertyLabelBeforeIcon;
-  bool? localPgprSliderType;
-  String? localPgprSliderTypeIcon;
-  bool? localPgprContentType;
-  String? localPgprContentTypeIcon;
-  bool? propFeatured;
-  String? propFeaturedIcon;
-  bool? propertyCounty;
-  String? propertyCountyIcon;
-  bool? propertySize;
-  String? propertySizeIcon;
-  bool? ownerNotes;
-  String? ownerNotesIcon;
-  bool? propertyLotSize;
-  String? propertyLotSizeIcon;
-  bool? propertyRooms;
-  String? propertyRoomsIcon;
-  bool? propertyHasSubunits;
-  String? propertyHasSubunitsIcon;
-  bool? propertySubunitsList;
-  String? propertySubunitsListIcon;
-  bool? propertyBedrooms;
-  String? propertyBedroomsIcon;
-  bool? propertyBathrooms;
-  String? propertyBathroomsIcon;
-  bool? propertyStatus;
-  String? propertyStatusIcon;
-  bool? embedVideoType;
-  String? embedVideoTypeIcon;
-  bool? embedVideoId;
-  String? embedVideoIdIcon;
-  bool? virtualTour;
-  String? virtualTourIcon;
-  bool? propertyGoogleView;
-  String? propertyGoogleViewIcon;
-  bool? googleCameraAngle;
-  String? googleCameraAngleIcon;
-  bool? payStatus;
-  String? payStatusIcon;
-  bool? pageCustomZoom;
-  String? pageCustomZoomIcon;
-  bool? hiddenAddress;
-  String? hiddenAddressIcon;
   bool? wpestateTotalViews;
   String? wpestateTotalViewsIcon;
   bool? wpestateDetailedViews;
@@ -333,14 +285,46 @@ class MetaFields {
   String? equipmentAvailabilityIcon;
   bool? mooringTypes;
   String? mooringTypesIcon;
+  bool? propertyPrice;
+  String? propertyPriceIcon;
+  bool? propertyLabel;
+  String? propertyLabelIcon;
+  bool? propertyLabelBefore;
+  String? propertyLabelBeforeIcon;
+  bool? propertySize;
+  String? propertySizeIcon;
+  bool? propertyLotSize;
+  String? propertyLotSizeIcon;
+  bool? propertyRooms;
+  String? propertyRoomsIcon;
+  bool? propertyBedrooms;
+  String? propertyBedroomsIcon;
+  bool? propertyBathrooms;
+  String? propertyBathroomsIcon;
+  bool? ownerNotes;
+  String? ownerNotesIcon;
+  bool? propertyStatus;
+  String? propertyStatusIcon;
+  bool? propFeatured;
+  String? propFeaturedIcon;
   bool? propertyThemeSlider;
   String? propertyThemeSliderIcon;
   bool? imageToAttach;
   String? imageToAttachIcon;
+  bool? embedVideoType;
+  String? embedVideoTypeIcon;
+  bool? embedVideoId;
+  String? embedVideoIdIcon;
   bool? embedVirtualTour;
   String? embedVirtualTourIcon;
   bool? mls;
   String? mlsIcon;
+  bool? pageCustomZoom;
+  String? pageCustomZoomIcon;
+  bool? propertyGoogleView;
+  String? propertyGoogleViewIcon;
+  bool? googleCameraAngle;
+  String? googleCameraAngleIcon;
   bool? attic;
   String? atticIcon;
   bool? gasHeat;
@@ -395,6 +379,8 @@ class MetaFields {
   String? propertyUserIcon;
   bool? useFloorPlans;
   String? useFloorPlansIcon;
+  bool? propertyHasSubunits;
+  String? propertyHasSubunitsIcon;
   bool? propertySubunitsListManual;
   String? propertySubunitsListManualIcon;
   bool? postShowTitle;
@@ -413,6 +399,10 @@ class MetaFields {
   String? pageCustomImageIcon;
   bool? revSlider;
   String? revSliderIcon;
+  bool? localPgprSliderType;
+  String? localPgprSliderTypeIcon;
+  bool? localPgprContentType;
+  String? localPgprContentTypeIcon;
   bool? sidebarOption;
   String? sidebarOptionIcon;
   bool? sidebarSelect;
@@ -441,10 +431,16 @@ class MetaFields {
   String? currentAdvFilterCityIcon;
   bool? currentAdvFilterArea;
   String? currentAdvFilterAreaIcon;
+  bool? hiddenAddress;
+  String? hiddenAddressIcon;
   bool? hasHawser;
   String? hasHawserIcon;
   bool? bWpOldSlug;
   String? sWpOldSlugIcon;
+  bool? propertyCounty;
+  String? propertyCountyIcon;
+  bool? propertySubunitsList;
+  String? propertySubunitsListIcon;
   bool? hasDock;
   String? hasDockIcon;
 
@@ -573,54 +569,6 @@ class MetaFields {
         this.textMaxslipwidthIcon,
         this.bThumbnailId,
         this.sThumbnailIdIcon,
-        this.propertyPrice,
-        this.propertyPriceIcon,
-        this.propertyLabel,
-        this.propertyLabelIcon,
-        this.propertyLabelBefore,
-        this.propertyLabelBeforeIcon,
-        this.localPgprSliderType,
-        this.localPgprSliderTypeIcon,
-        this.localPgprContentType,
-        this.localPgprContentTypeIcon,
-        this.propFeatured,
-        this.propFeaturedIcon,
-        this.propertyCounty,
-        this.propertyCountyIcon,
-        this.propertySize,
-        this.propertySizeIcon,
-        this.ownerNotes,
-        this.ownerNotesIcon,
-        this.propertyLotSize,
-        this.propertyLotSizeIcon,
-        this.propertyRooms,
-        this.propertyRoomsIcon,
-        this.propertyHasSubunits,
-        this.propertyHasSubunitsIcon,
-        this.propertySubunitsList,
-        this.propertySubunitsListIcon,
-        this.propertyBedrooms,
-        this.propertyBedroomsIcon,
-        this.propertyBathrooms,
-        this.propertyBathroomsIcon,
-        this.propertyStatus,
-        this.propertyStatusIcon,
-        this.embedVideoType,
-        this.embedVideoTypeIcon,
-        this.embedVideoId,
-        this.embedVideoIdIcon,
-        this.virtualTour,
-        this.virtualTourIcon,
-        this.propertyGoogleView,
-        this.propertyGoogleViewIcon,
-        this.googleCameraAngle,
-        this.googleCameraAngleIcon,
-        this.payStatus,
-        this.payStatusIcon,
-        this.pageCustomZoom,
-        this.pageCustomZoomIcon,
-        this.hiddenAddress,
-        this.hiddenAddressIcon,
         this.wpestateTotalViews,
         this.wpestateTotalViewsIcon,
         this.wpestateDetailedViews,
@@ -665,14 +613,46 @@ class MetaFields {
         this.equipmentAvailabilityIcon,
         this.mooringTypes,
         this.mooringTypesIcon,
+        this.propertyPrice,
+        this.propertyPriceIcon,
+        this.propertyLabel,
+        this.propertyLabelIcon,
+        this.propertyLabelBefore,
+        this.propertyLabelBeforeIcon,
+        this.propertySize,
+        this.propertySizeIcon,
+        this.propertyLotSize,
+        this.propertyLotSizeIcon,
+        this.propertyRooms,
+        this.propertyRoomsIcon,
+        this.propertyBedrooms,
+        this.propertyBedroomsIcon,
+        this.propertyBathrooms,
+        this.propertyBathroomsIcon,
+        this.ownerNotes,
+        this.ownerNotesIcon,
+        this.propertyStatus,
+        this.propertyStatusIcon,
+        this.propFeatured,
+        this.propFeaturedIcon,
         this.propertyThemeSlider,
         this.propertyThemeSliderIcon,
         this.imageToAttach,
         this.imageToAttachIcon,
+        this.embedVideoType,
+        this.embedVideoTypeIcon,
+        this.embedVideoId,
+        this.embedVideoIdIcon,
         this.embedVirtualTour,
         this.embedVirtualTourIcon,
         this.mls,
         this.mlsIcon,
+        this.pageCustomZoom,
+        this.pageCustomZoomIcon,
+        this.propertyGoogleView,
+        this.propertyGoogleViewIcon,
+        this.googleCameraAngle,
+        this.googleCameraAngleIcon,
         this.attic,
         this.atticIcon,
         this.gasHeat,
@@ -727,6 +707,8 @@ class MetaFields {
         this.propertyUserIcon,
         this.useFloorPlans,
         this.useFloorPlansIcon,
+        this.propertyHasSubunits,
+        this.propertyHasSubunitsIcon,
         this.propertySubunitsListManual,
         this.propertySubunitsListManualIcon,
         this.postShowTitle,
@@ -745,6 +727,10 @@ class MetaFields {
         this.pageCustomImageIcon,
         this.revSlider,
         this.revSliderIcon,
+        this.localPgprSliderType,
+        this.localPgprSliderTypeIcon,
+        this.localPgprContentType,
+        this.localPgprContentTypeIcon,
         this.sidebarOption,
         this.sidebarOptionIcon,
         this.sidebarSelect,
@@ -773,10 +759,16 @@ class MetaFields {
         this.currentAdvFilterCityIcon,
         this.currentAdvFilterArea,
         this.currentAdvFilterAreaIcon,
+        this.hiddenAddress,
+        this.hiddenAddressIcon,
         this.hasHawser,
         this.hasHawserIcon,
         this.bWpOldSlug,
         this.sWpOldSlugIcon,
+        this.propertyCounty,
+        this.propertyCountyIcon,
+        this.propertySubunitsList,
+        this.propertySubunitsListIcon,
         this.hasDock,
         this.hasDockIcon});
 
@@ -905,54 +897,6 @@ class MetaFields {
     textMaxslipwidthIcon = json['text_maxslipwidth_icon'];
     bThumbnailId = json['_thumbnail_id'];
     sThumbnailIdIcon = json['_thumbnail_id_icon'];
-    propertyPrice = json['property_price'];
-    propertyPriceIcon = json['property_price_icon'];
-    propertyLabel = json['property_label'];
-    propertyLabelIcon = json['property_label_icon'];
-    propertyLabelBefore = json['property_label_before'];
-    propertyLabelBeforeIcon = json['property_label_before_icon'];
-    localPgprSliderType = json['local_pgpr_slider_type'];
-    localPgprSliderTypeIcon = json['local_pgpr_slider_type_icon'];
-    localPgprContentType = json['local_pgpr_content_type'];
-    localPgprContentTypeIcon = json['local_pgpr_content_type_icon'];
-    propFeatured = json['prop_featured'];
-    propFeaturedIcon = json['prop_featured_icon'];
-    propertyCounty = json['property_county'];
-    propertyCountyIcon = json['property_county_icon'];
-    propertySize = json['property_size'];
-    propertySizeIcon = json['property_size_icon'];
-    ownerNotes = json['owner_notes'];
-    ownerNotesIcon = json['owner_notes_icon'];
-    propertyLotSize = json['property_lot_size'];
-    propertyLotSizeIcon = json['property_lot_size_icon'];
-    propertyRooms = json['property_rooms'];
-    propertyRoomsIcon = json['property_rooms_icon'];
-    propertyHasSubunits = json['property_has_subunits'];
-    propertyHasSubunitsIcon = json['property_has_subunits_icon'];
-    propertySubunitsList = json['property_subunits_list'];
-    propertySubunitsListIcon = json['property_subunits_list_icon'];
-    propertyBedrooms = json['property_bedrooms'];
-    propertyBedroomsIcon = json['property_bedrooms_icon'];
-    propertyBathrooms = json['property_bathrooms'];
-    propertyBathroomsIcon = json['property_bathrooms_icon'];
-    propertyStatus = json['property_status'];
-    propertyStatusIcon = json['property_status_icon'];
-    embedVideoType = json['embed_video_type'];
-    embedVideoTypeIcon = json['embed_video_type_icon'];
-    embedVideoId = json['embed_video_id'];
-    embedVideoIdIcon = json['embed_video_id_icon'];
-    virtualTour = json['virtual_tour'];
-    virtualTourIcon = json['virtual_tour_icon'];
-    propertyGoogleView = json['property_google_view'];
-    propertyGoogleViewIcon = json['property_google_view_icon'];
-    googleCameraAngle = json['google_camera_angle'];
-    googleCameraAngleIcon = json['google_camera_angle_icon'];
-    payStatus = json['pay_status'];
-    payStatusIcon = json['pay_status_icon'];
-    pageCustomZoom = json['page_custom_zoom'];
-    pageCustomZoomIcon = json['page_custom_zoom_icon'];
-    hiddenAddress = json['hidden_address'];
-    hiddenAddressIcon = json['hidden_address_icon'];
     wpestateTotalViews = json['wpestate_total_views'];
     wpestateTotalViewsIcon = json['wpestate_total_views_icon'];
     wpestateDetailedViews = json['wpestate_detailed_views'];
@@ -997,14 +941,46 @@ class MetaFields {
     equipmentAvailabilityIcon = json['equipmentAvailability_icon'];
     mooringTypes = json['mooringTypes'];
     mooringTypesIcon = json['mooringTypes_icon'];
+    propertyPrice = json['property_price'];
+    propertyPriceIcon = json['property_price_icon'];
+    propertyLabel = json['property_label'];
+    propertyLabelIcon = json['property_label_icon'];
+    propertyLabelBefore = json['property_label_before'];
+    propertyLabelBeforeIcon = json['property_label_before_icon'];
+    propertySize = json['property_size'];
+    propertySizeIcon = json['property_size_icon'];
+    propertyLotSize = json['property_lot_size'];
+    propertyLotSizeIcon = json['property_lot_size_icon'];
+    propertyRooms = json['property_rooms'];
+    propertyRoomsIcon = json['property_rooms_icon'];
+    propertyBedrooms = json['property_bedrooms'];
+    propertyBedroomsIcon = json['property_bedrooms_icon'];
+    propertyBathrooms = json['property_bathrooms'];
+    propertyBathroomsIcon = json['property_bathrooms_icon'];
+    ownerNotes = json['owner_notes'];
+    ownerNotesIcon = json['owner_notes_icon'];
+    propertyStatus = json['property_status'];
+    propertyStatusIcon = json['property_status_icon'];
+    propFeatured = json['prop_featured'];
+    propFeaturedIcon = json['prop_featured_icon'];
     propertyThemeSlider = json['property_theme_slider'];
     propertyThemeSliderIcon = json['property_theme_slider_icon'];
     imageToAttach = json['image_to_attach'];
     imageToAttachIcon = json['image_to_attach_icon'];
+    embedVideoType = json['embed_video_type'];
+    embedVideoTypeIcon = json['embed_video_type_icon'];
+    embedVideoId = json['embed_video_id'];
+    embedVideoIdIcon = json['embed_video_id_icon'];
     embedVirtualTour = json['embed_virtual_tour'];
     embedVirtualTourIcon = json['embed_virtual_tour_icon'];
     mls = json['mls'];
     mlsIcon = json['mls_icon'];
+    pageCustomZoom = json['page_custom_zoom'];
+    pageCustomZoomIcon = json['page_custom_zoom_icon'];
+    propertyGoogleView = json['property_google_view'];
+    propertyGoogleViewIcon = json['property_google_view_icon'];
+    googleCameraAngle = json['google_camera_angle'];
+    googleCameraAngleIcon = json['google_camera_angle_icon'];
     attic = json['attic'];
     atticIcon = json['attic_icon'];
     gasHeat = json['gas_heat'];
@@ -1059,6 +1035,8 @@ class MetaFields {
     propertyUserIcon = json['property_user_icon'];
     useFloorPlans = json['use_floor_plans'];
     useFloorPlansIcon = json['use_floor_plans_icon'];
+    propertyHasSubunits = json['property_has_subunits'];
+    propertyHasSubunitsIcon = json['property_has_subunits_icon'];
     propertySubunitsListManual = json['property_subunits_list_manual'];
     propertySubunitsListManualIcon = json['property_subunits_list_manual_icon'];
     postShowTitle = json['post_show_title'];
@@ -1078,6 +1056,10 @@ class MetaFields {
     pageCustomImageIcon = json['page_custom_image_icon'];
     revSlider = json['rev_slider'];
     revSliderIcon = json['rev_slider_icon'];
+    localPgprSliderType = json['local_pgpr_slider_type'];
+    localPgprSliderTypeIcon = json['local_pgpr_slider_type_icon'];
+    localPgprContentType = json['local_pgpr_content_type'];
+    localPgprContentTypeIcon = json['local_pgpr_content_type_icon'];
     sidebarOption = json['sidebar_option'];
     sidebarOptionIcon = json['sidebar_option_icon'];
     sidebarSelect = json['sidebar_select'];
@@ -1106,10 +1088,16 @@ class MetaFields {
     currentAdvFilterCityIcon = json['current_adv_filter_city_icon'];
     currentAdvFilterArea = json['current_adv_filter_area'];
     currentAdvFilterAreaIcon = json['current_adv_filter_area_icon'];
+    hiddenAddress = json['hidden_address'];
+    hiddenAddressIcon = json['hidden_address_icon'];
     hasHawser = json['hasHawser'];
     hasHawserIcon = json['hasHawser_icon'];
     bWpOldSlug = json['_wp_old_slug'];
     sWpOldSlugIcon = json['_wp_old_slug_icon'];
+    propertyCounty = json['property_county'];
+    propertyCountyIcon = json['property_county_icon'];
+    propertySubunitsList = json['property_subunits_list'];
+    propertySubunitsListIcon = json['property_subunits_list_icon'];
     hasDock = json['hasDock'];
     hasDockIcon = json['hasDock_icon'];
   }
@@ -1242,54 +1230,6 @@ class MetaFields {
     data['text_maxslipwidth_icon'] = this.textMaxslipwidthIcon;
     data['_thumbnail_id'] = this.bThumbnailId;
     data['_thumbnail_id_icon'] = this.sThumbnailIdIcon;
-    data['property_price'] = this.propertyPrice;
-    data['property_price_icon'] = this.propertyPriceIcon;
-    data['property_label'] = this.propertyLabel;
-    data['property_label_icon'] = this.propertyLabelIcon;
-    data['property_label_before'] = this.propertyLabelBefore;
-    data['property_label_before_icon'] = this.propertyLabelBeforeIcon;
-    data['local_pgpr_slider_type'] = this.localPgprSliderType;
-    data['local_pgpr_slider_type_icon'] = this.localPgprSliderTypeIcon;
-    data['local_pgpr_content_type'] = this.localPgprContentType;
-    data['local_pgpr_content_type_icon'] = this.localPgprContentTypeIcon;
-    data['prop_featured'] = this.propFeatured;
-    data['prop_featured_icon'] = this.propFeaturedIcon;
-    data['property_county'] = this.propertyCounty;
-    data['property_county_icon'] = this.propertyCountyIcon;
-    data['property_size'] = this.propertySize;
-    data['property_size_icon'] = this.propertySizeIcon;
-    data['owner_notes'] = this.ownerNotes;
-    data['owner_notes_icon'] = this.ownerNotesIcon;
-    data['property_lot_size'] = this.propertyLotSize;
-    data['property_lot_size_icon'] = this.propertyLotSizeIcon;
-    data['property_rooms'] = this.propertyRooms;
-    data['property_rooms_icon'] = this.propertyRoomsIcon;
-    data['property_has_subunits'] = this.propertyHasSubunits;
-    data['property_has_subunits_icon'] = this.propertyHasSubunitsIcon;
-    data['property_subunits_list'] = this.propertySubunitsList;
-    data['property_subunits_list_icon'] = this.propertySubunitsListIcon;
-    data['property_bedrooms'] = this.propertyBedrooms;
-    data['property_bedrooms_icon'] = this.propertyBedroomsIcon;
-    data['property_bathrooms'] = this.propertyBathrooms;
-    data['property_bathrooms_icon'] = this.propertyBathroomsIcon;
-    data['property_status'] = this.propertyStatus;
-    data['property_status_icon'] = this.propertyStatusIcon;
-    data['embed_video_type'] = this.embedVideoType;
-    data['embed_video_type_icon'] = this.embedVideoTypeIcon;
-    data['embed_video_id'] = this.embedVideoId;
-    data['embed_video_id_icon'] = this.embedVideoIdIcon;
-    data['virtual_tour'] = this.virtualTour;
-    data['virtual_tour_icon'] = this.virtualTourIcon;
-    data['property_google_view'] = this.propertyGoogleView;
-    data['property_google_view_icon'] = this.propertyGoogleViewIcon;
-    data['google_camera_angle'] = this.googleCameraAngle;
-    data['google_camera_angle_icon'] = this.googleCameraAngleIcon;
-    data['pay_status'] = this.payStatus;
-    data['pay_status_icon'] = this.payStatusIcon;
-    data['page_custom_zoom'] = this.pageCustomZoom;
-    data['page_custom_zoom_icon'] = this.pageCustomZoomIcon;
-    data['hidden_address'] = this.hiddenAddress;
-    data['hidden_address_icon'] = this.hiddenAddressIcon;
     data['wpestate_total_views'] = this.wpestateTotalViews;
     data['wpestate_total_views_icon'] = this.wpestateTotalViewsIcon;
     data['wpestate_detailed_views'] = this.wpestateDetailedViews;
@@ -1334,14 +1274,46 @@ class MetaFields {
     data['equipmentAvailability_icon'] = this.equipmentAvailabilityIcon;
     data['mooringTypes'] = this.mooringTypes;
     data['mooringTypes_icon'] = this.mooringTypesIcon;
+    data['property_price'] = this.propertyPrice;
+    data['property_price_icon'] = this.propertyPriceIcon;
+    data['property_label'] = this.propertyLabel;
+    data['property_label_icon'] = this.propertyLabelIcon;
+    data['property_label_before'] = this.propertyLabelBefore;
+    data['property_label_before_icon'] = this.propertyLabelBeforeIcon;
+    data['property_size'] = this.propertySize;
+    data['property_size_icon'] = this.propertySizeIcon;
+    data['property_lot_size'] = this.propertyLotSize;
+    data['property_lot_size_icon'] = this.propertyLotSizeIcon;
+    data['property_rooms'] = this.propertyRooms;
+    data['property_rooms_icon'] = this.propertyRoomsIcon;
+    data['property_bedrooms'] = this.propertyBedrooms;
+    data['property_bedrooms_icon'] = this.propertyBedroomsIcon;
+    data['property_bathrooms'] = this.propertyBathrooms;
+    data['property_bathrooms_icon'] = this.propertyBathroomsIcon;
+    data['owner_notes'] = this.ownerNotes;
+    data['owner_notes_icon'] = this.ownerNotesIcon;
+    data['property_status'] = this.propertyStatus;
+    data['property_status_icon'] = this.propertyStatusIcon;
+    data['prop_featured'] = this.propFeatured;
+    data['prop_featured_icon'] = this.propFeaturedIcon;
     data['property_theme_slider'] = this.propertyThemeSlider;
     data['property_theme_slider_icon'] = this.propertyThemeSliderIcon;
     data['image_to_attach'] = this.imageToAttach;
     data['image_to_attach_icon'] = this.imageToAttachIcon;
+    data['embed_video_type'] = this.embedVideoType;
+    data['embed_video_type_icon'] = this.embedVideoTypeIcon;
+    data['embed_video_id'] = this.embedVideoId;
+    data['embed_video_id_icon'] = this.embedVideoIdIcon;
     data['embed_virtual_tour'] = this.embedVirtualTour;
     data['embed_virtual_tour_icon'] = this.embedVirtualTourIcon;
     data['mls'] = this.mls;
     data['mls_icon'] = this.mlsIcon;
+    data['page_custom_zoom'] = this.pageCustomZoom;
+    data['page_custom_zoom_icon'] = this.pageCustomZoomIcon;
+    data['property_google_view'] = this.propertyGoogleView;
+    data['property_google_view_icon'] = this.propertyGoogleViewIcon;
+    data['google_camera_angle'] = this.googleCameraAngle;
+    data['google_camera_angle_icon'] = this.googleCameraAngleIcon;
     data['attic'] = this.attic;
     data['attic_icon'] = this.atticIcon;
     data['gas_heat'] = this.gasHeat;
@@ -1396,6 +1368,8 @@ class MetaFields {
     data['property_user_icon'] = this.propertyUserIcon;
     data['use_floor_plans'] = this.useFloorPlans;
     data['use_floor_plans_icon'] = this.useFloorPlansIcon;
+    data['property_has_subunits'] = this.propertyHasSubunits;
+    data['property_has_subunits_icon'] = this.propertyHasSubunitsIcon;
     data['property_subunits_list_manual'] = this.propertySubunitsListManual;
     data['property_subunits_list_manual_icon'] =
         this.propertySubunitsListManualIcon;
@@ -1416,6 +1390,10 @@ class MetaFields {
     data['page_custom_image_icon'] = this.pageCustomImageIcon;
     data['rev_slider'] = this.revSlider;
     data['rev_slider_icon'] = this.revSliderIcon;
+    data['local_pgpr_slider_type'] = this.localPgprSliderType;
+    data['local_pgpr_slider_type_icon'] = this.localPgprSliderTypeIcon;
+    data['local_pgpr_content_type'] = this.localPgprContentType;
+    data['local_pgpr_content_type_icon'] = this.localPgprContentTypeIcon;
     data['sidebar_option'] = this.sidebarOption;
     data['sidebar_option_icon'] = this.sidebarOptionIcon;
     data['sidebar_select'] = this.sidebarSelect;
@@ -1444,10 +1422,16 @@ class MetaFields {
     data['current_adv_filter_city_icon'] = this.currentAdvFilterCityIcon;
     data['current_adv_filter_area'] = this.currentAdvFilterArea;
     data['current_adv_filter_area_icon'] = this.currentAdvFilterAreaIcon;
+    data['hidden_address'] = this.hiddenAddress;
+    data['hidden_address_icon'] = this.hiddenAddressIcon;
     data['hasHawser'] = this.hasHawser;
     data['hasHawser_icon'] = this.hasHawserIcon;
     data['_wp_old_slug'] = this.bWpOldSlug;
     data['_wp_old_slug_icon'] = this.sWpOldSlugIcon;
+    data['property_county'] = this.propertyCounty;
+    data['property_county_icon'] = this.propertyCountyIcon;
+    data['property_subunits_list'] = this.propertySubunitsList;
+    data['property_subunits_list_icon'] = this.propertySubunitsListIcon;
     data['hasDock'] = this.hasDock;
     data['hasDock_icon'] = this.hasDockIcon;
     return data;

@@ -166,7 +166,8 @@ bool isLoading=true;
                         SizedBox(height: 1.h,),
                         SizedBox(
                           width: 73.w,
-                          child: Text("Save entire areas to have access to the map and information on anchorages and marinas even without an internet connecation",style: TextStyle(
+                          child: Text("Save entire areas to have access to the map and information on anchorages and marinas, warnings, etc. even without an internet"
+                              ,style: TextStyle(
                               letterSpacing: 1,
                               color:secondary,
                               fontSize: 15.sp,

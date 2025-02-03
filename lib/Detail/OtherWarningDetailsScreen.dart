@@ -727,21 +727,18 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                             ),
                                           ),
                                           SizedBox(width: 2.w,),
-                                          Column(
+                                          Row(
                                             children: [
-                                              SizedBox(
-                                                width: 25.w,
-                                                child: Text(
-                                                  "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
-                                                  style:
-                                                  TextStyle(
-                                                    overflow: TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
-
-                                                  ),
+                                              Text(
+                                                "Speed :${daywisewedhtermodal?.days?[0].hours?[0].windspeed==""||daywisewedhtermodal?.days?[0].hours?[0].windspeed==null?"N/A":(daywisewedhtermodal?.days?[0].hours?[0].windspeed).toString()}",
+                                                style:
+                                                TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                  fontSize: 13.sp,
+                                                  color: secondary,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "volken",
+                                              
                                                 ),
                                               ),
                                               Text(
@@ -759,50 +756,7 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                           ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
-                                            child:
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height:
-                                                  20.w,
-                                                  width:
-                                                  20.w,
 
-                                                  child:
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(0),
-                                                    child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
-                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
-                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 1.h,),
-                                                Text(
-                                                  "Height",
-                                                  maxLines:
-                                                  1,
-                                                  style:
-                                                  TextStyle(
-                                                    overflow: TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
-                                                    letterSpacing: 1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -941,15 +895,57 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                           ),
                                         ],
                                       ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                                            child:
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height:
+                                                  20.w,
+                                                  width:
+                                                  20.w,
+
+                                                  child:
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(0),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator()),
+                                                      errorWidget: (context, url, error) => Image.asset("assets/Mud.jpg",),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 1.h,),
+                                                Text(
+                                                  "Height",
+                                                  maxLines:
+                                                  1,
+                                                  style:
+                                                  TextStyle(
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
 
                                     ],
                                   ),
-
                                 ],
                               )),
                         ],
                       ),
-
                       SizedBox(
                         height: 2.h,
                       ),
@@ -960,7 +956,8 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                                 color: Colors.black12,
-                                width: 1.sp)
+                                width: 1.sp
+                            )
                         ),
                         child: CustomGoogleMapMarkerBuilder(
                           //screenshotDelay: const Duration(seconds: 4),
@@ -1925,7 +1922,6 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                   Container(
                                     width: 85.w,
                                     child: TextFormField(
-
                                       keyboardType: TextInputType.text,
                                       style: TextStyle(color: Colors.black),
                                       controller: _name,
@@ -1948,8 +1944,6 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                               SizedBox(
                                 height: 1.h,
                               ),
-
-
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

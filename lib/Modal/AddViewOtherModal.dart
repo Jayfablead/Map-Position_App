@@ -209,7 +209,8 @@ class MetaFields {
   String? propertyAreaIcon;
   String? propertyZip;
   String? propertyZipIcon;
-  String? propertyCountry;
+  String
+  ? propertyCountry;
   String? propertyCountryIcon;
   bool? propertyLatitude;
   String? propertyLatitudeIcon;

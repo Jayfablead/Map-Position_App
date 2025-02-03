@@ -9,25 +9,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mapposition/Detail/CategorywiseViewScreen.dart';
-import 'package:mapposition/Detail/DetailsOtherScreen.dart';
-import 'package:mapposition/Detail/OtherWarningDetailsScreen.dart';
 import 'package:mapposition/Details1/ViewAllotherDetilsScreen.dart';
 import 'package:mapposition/Extras/Const.dart';
 import 'package:mapposition/Extras/Headerwidget.dart';
 import 'package:mapposition/Modal/AddNewPositionImageModal.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
-
 import '../Extras/Drwer.dart';
-import '../Extras/Loader.dart';
 import '../Extras/buildErrorDialog.dart';
 import '../LoginSinupScreen/LoginScreen.dart';
 import '../Modal/AddFavouritePositionModal.dart';
@@ -37,7 +31,6 @@ import '../Modal/ReportModal.dart';
 import '../Modal/ViewCategoryWiseviewDetailModal.dart';
 import '../PrimiumPayments/positionController.dart';
 import '../Provider/Authprovider.dart';
-import 'ViewAllPositionDetailsScreen.dart';
 
 class ViewOterDetailsScreen extends StatefulWidget {
   String? postid;
@@ -243,11 +236,11 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
     });
 
     print("Postidavigayache:-${widget.postid.toString()}");
-    print("loda vi yo ja:-${widget.postid.toString()}");
+    print("heloo vi yo ja:-${widget.postid.toString()}");
   }
 
   Widget build(BuildContext context) {
-    return     Scaffold(
+    return Scaffold(
         key: _scaffoldKeyProductlistpage,
         drawer: drawer1(),
         backgroundColor: bgcolor,
@@ -280,7 +273,6 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                   items: (viewcategorywisevieweetailmodal
                       ?.data?.thumbnails ??
                       [])
-
                       .map((imagePath) {
                     return Builder(
                       builder: (BuildContext context) {
@@ -582,7 +574,7 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                   Row(
                     children: [
                       Text(
-                        " ⭐️ ${viewcategorywisevieweetailmodal?.averageRating == "" || viewcategorywisevieweetailmodal?.averageRating == null ? "4.5" : viewcategorywisevieweetailmodal?.averageRating ?? ""} [${viewcategorywisevieweetailmodal?.reviews?.length == null || viewcategorywisevieweetailmodal?.reviews?.length == "" || viewcategorywisevieweetailmodal?.reviews?.length == 0 ? "0" : viewcategorywisevieweetailmodal?.reviews?.length} reviews]",
+                        " ⭐️${viewcategorywisevieweetailmodal?.averageRating == "" || viewcategorywisevieweetailmodal?.averageRating == null ? "4.5" : viewcategorywisevieweetailmodal?.averageRating ?? ""} [${viewcategorywisevieweetailmodal?.reviews?.length == null || viewcategorywisevieweetailmodal?.reviews?.length == "" || viewcategorywisevieweetailmodal?.reviews?.length == 0 ? "0" : viewcategorywisevieweetailmodal?.reviews?.length} reviews]",
                         style: TextStyle(
                             letterSpacing: 1,
                             color: secondary,

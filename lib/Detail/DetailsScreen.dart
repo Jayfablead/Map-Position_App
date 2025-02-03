@@ -2527,7 +2527,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   .id)
                                                   ?.toString() ??
                                                   "",
-                                            ))
+                                        ))
                                             : onwViewpostionmodal
                                             ?.nearbyPosts?[
                                         index]

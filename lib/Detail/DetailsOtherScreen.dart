@@ -1005,53 +1005,56 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                       SizedBox(
                         height: 1.h,
                       ),
-                      Container(
-                        width: 95.w,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
-                        decoration: BoxDecoration(
-                          border:
-                          Border.all(color: secondary, width: 1.sp),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            // Row(
-                            //   children: [
-                            //     Text("Details",
-                            //         style: TextStyle(
-                            //             letterSpacing: 1,
-                            //             color: blackback,
-                            //             fontSize: 15.sp,
-                            //             fontWeight: FontWeight.bold,
-                            //             fontFamily: "volken")),
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 1.h,
-                            // ),
-                            Row(
-                              children: [
-                                Text("Marina Id : ",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: blackback,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: "volken")),
-                                Text(widget.postid ?? "",
-                                  style: TextStyle(
-                                      letterSpacing: 1,
-                                      color: secondary,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "volken"),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   width: 95.w,
+                      //   padding: EdgeInsets.symmetric(
+                      //       horizontal: 3.w, vertical: 1.h),
+                      //   decoration: BoxDecoration(
+                      //     border:
+                      //     Border.all(color: secondary, width: 1.sp),
+                      //     borderRadius: BorderRadius.circular(10),
+                      //   ),
+                      //   child: Column(
+                      //     children: [
+                      //       // Row(
+                      //       //   children: [
+                      //       //     Text("Details",
+                      //       //         style: TextStyle(
+                      //       //             letterSpacing: 1,
+                      //       //             color: blackback,
+                      //       //             fontSize: 15.sp,
+                      //       //             fontWeight: FontWeight.bold,
+                      //       //             fontFamily: "volken")),
+                      //       //   ],
+                      //       // ),
+                      //       // SizedBox(
+                      //       //   height: 1.h,
+                      //       // ),
+                      //      
+                      //      
+                      //      
+                      //       // Row(
+                      //       //   children: [
+                      //       //     Text("Marina Id : ",
+                      //       //         style: TextStyle(
+                      //       //             letterSpacing: 1,
+                      //       //             color: blackback,
+                      //       //             fontSize: 12.sp,
+                      //       //             fontWeight: FontWeight.normal,
+                      //       //             fontFamily: "volken")),
+                      //       //     Text(widget.postid ?? "",
+                      //       //       style: TextStyle(
+                      //       //           letterSpacing: 1,
+                      //       //           color: secondary,
+                      //       //           fontSize: 12.sp,
+                      //       //           fontWeight: FontWeight.normal,
+                      //       //           fontFamily: "volken"),
+                      //       //     ),
+                      //       //   ],
+                      //       // ),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 1.h,
                       ),
@@ -1070,13 +1073,15 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text("Weather",
+                                      Text(
+                                          "Weather",
                                           style: TextStyle(
                                               letterSpacing: 1,
                                               color: blackback,
                                               fontSize: 15.sp,
                                               fontWeight: FontWeight.bold,
-                                              fontFamily: "volken")),
+                                              fontFamily: "volken")
+                                              ),
                                     ],
                                   ),
                                   SizedBox(
@@ -1220,22 +1225,18 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                           SizedBox(
                                             width: 2.w,
                                           ),
-                                          Column(
+                                          Row(
                                             children: [
-                                              SizedBox(
-                                                width: 25.w,
-                                                child: Text(
-                                                  "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
-                                                  style: TextStyle(
-                                                    overflow:
-                                                    TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: "volken",
-                                                  ),
+                                              Text(
+                                                "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                                style: TextStyle(
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+                                                  fontSize: 13.sp,
+                                                  color: secondary,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "volken",
                                                 ),
-
                                               ),
                                               Text(
                                                 "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
@@ -1252,61 +1253,7 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                           ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 1.w,
-                                                vertical: 1.h),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 20.w,
-                                                  width: 20.w,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        00),
-                                                    child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl:
-                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                          progress) =>
-                                                          Center(
-                                                              child:
-                                                              CircularProgressIndicator()),
-                                                      errorWidget: (context,
-                                                          url, error) =>
-                                                          Image.asset(
-                                                            "assets/Mud.jpg",
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 1.h,
-                                                ),
-                                                Text(
-                                                  "Height",
-                                                  maxLines: 1,
-                                                  style: TextStyle(
-                                                    overflow:
-                                                    TextOverflow.ellipsis,
-                                                    fontSize: 13.sp,
-                                                    color: secondary,
-                                                    fontWeight:
-                                                    FontWeight.w500,
-                                                    fontFamily: "volken",
-                                                    letterSpacing: 1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+
                                     ],
                                   ),
                                   SizedBox(
@@ -1479,6 +1426,61 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily: "volken",
                                               ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 1.w,
+                                                vertical: 1.h),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 20.w,
+                                                  width: 20.w,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        00),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl:
+                                                      "https://www.navlex.net/wp-content/themes/wpstate-child/img/weather/height.png",
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                          progress) =>
+                                                          Center(
+                                                              child:
+                                                              CircularProgressIndicator()),
+                                                      errorWidget: (context,
+                                                          url, error) =>
+                                                          Image.asset(
+                                                            "assets/Mud.jpg",
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 1.h,
+                                                ),
+                                                Text(
+                                                  "Height",
+                                                  maxLines: 1,
+                                                  style: TextStyle(
+                                                    overflow:
+                                                    TextOverflow.ellipsis,
+                                                    fontSize: 13.sp,
+                                                    color: secondary,
+                                                    fontWeight:
+                                                    FontWeight.w500,
+                                                    fontFamily: "volken",
+                                                    letterSpacing: 1,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],

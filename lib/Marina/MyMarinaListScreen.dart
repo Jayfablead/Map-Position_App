@@ -369,8 +369,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                                     .ellipsis,
                                                             fontSize: 13.sp,
                                                             color: secondary,
-                                                            fontWeight:
-                                                                FontWeight.w500,
+                                                            fontWeight: FontWeight.w500,
                                                             fontFamily: "",
                                                             letterSpacing: 1,
                                                           ),
@@ -428,7 +427,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                                           (mymarinaviewmodal?.positions?[i].properties?.postId)?.toString() ??
                                                                               "",
                                                                     ))
-                                                                  : mymarinaviewmodal
+                                                                  :mymarinaviewmodal
                                                                               ?.positions?[
                                                                                   i]
                                                                               .properties

@@ -1687,9 +1687,6 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                                   ?.toString() ??
                                                   "",
                                             ));
-
-
-
                                       },
                                       hight: 5.h,
                                       width: 30.w,
@@ -1884,6 +1881,7 @@ InkWell(
     final RegExp regex = RegExp(r'^-?[\d.]+$');
     return regex.hasMatch(value);
   }
+
   viewposition() {
     final Map<String, String> data = {};
     data['post_id'] =widget.postid.toString();
@@ -1973,6 +1971,7 @@ InkWell(
       }
     });
   }
+
   addreview() {
     if (_formKey.currentState!.validate()){
       EasyLoading.show(status: 'Please Wait ...');
@@ -2009,6 +2008,7 @@ InkWell(
       });
     }
   }
+
   showratingpop1() {
     setState(() {
       _review.clear();
@@ -2211,6 +2211,7 @@ InkWell(
       },
     );
   }
+
   addfevorite(bool value,id) {
 
     EasyLoading.show(status: 'Please Wait ...');
@@ -2242,6 +2243,7 @@ InkWell(
       }
     });
   }
+
   wedther() {
     checkInternet().then((internet) async {
       if (internet) {
@@ -2265,6 +2267,7 @@ InkWell(
       }
     });
   }
+
   report() {
     showDialog(
       context: context,
@@ -2539,6 +2542,7 @@ InkWell(
       },
     );
   }
+
   reportapifun() {
     if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please Wait ...');
@@ -2569,6 +2573,7 @@ InkWell(
       });
     }
   }
+
   climposition() {
     EasyLoading.show(status: 'Please Wait ...');
     final Map<String, String> data = {};
@@ -2596,7 +2601,6 @@ InkWell(
       }
     });
   }
-
 
   addnewimageapi() async {
     print(selectedimage?.path);
@@ -2628,4 +2632,5 @@ InkWell(
       }
     });
   }
+
 }

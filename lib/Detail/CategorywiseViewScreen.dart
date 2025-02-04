@@ -645,7 +645,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                     SizedBox(
                       width: 3.w,
                     ),
-
                     // Icon(
                     //   Icons.add_location,
                     //   color: Colors.black,
@@ -900,7 +899,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   (context, url,
                                                   progress) =>
                                                   Center(
-                                                      child:
+                                                           child:
                                                       CircularProgressIndicator()),
                                               errorWidget: (context,
                                                   url, error) =>
@@ -931,13 +930,13 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     1.sp),
                                               ),
                                               child: Icon(
-                                                Icons.close,
+                                                   Icons.close,
                                                 color:
                                                 Colors.red,
                                                 size: 18.sp,
                                               ))
-                                              : Container(
-                                              decoration:
+                                              :Container(
+                                                 decoration:
                                               BoxDecoration(
                                                 borderRadius:
                                                 BorderRadius
@@ -1014,7 +1013,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                               errorWidget: (context,
                                                   url, error) =>
                                                   Image.asset(
-                                                      "assets/icons8-pharmacy-100.png"),
+                                                      "assets/icons8-pharmacy-100.png"
+                                                  ),
                                             ),
                                           ),
                                         ),
@@ -1045,7 +1045,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                 Colors.red,
                                                 size: 18.sp,
                                               ))
-                                              : Container(
+                                               : Container(
                                               decoration:
                                               BoxDecoration(
                                                 borderRadius:
@@ -1136,7 +1136,6 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                               ?.alcohol ==
                                               false
                                               ? Container(
-
                                               decoration:
                                               BoxDecoration(
                                                   color: Colors.white30,
@@ -1185,7 +1184,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       "Alcohol",
                                       maxLines: 1,
                                       style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
+                                      overflow: TextOverflow.ellipsis,
                                         fontSize: 13.sp,
                                         color: secondary,
                                         fontWeight: FontWeight.w500,
@@ -1208,7 +1207,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                         MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
-                            children: [
+                               children: [
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 1.w, vertical: 1.h),
@@ -1288,8 +1287,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                     1.sp),
                                               ),
                                               child: Icon(
-                                                Icons.check,
-                                                color: Colors
+                                                   Icons.check,
+                                                color:Colors
                                                     .green,
                                                 size: 18.sp,
                                               )),
@@ -1347,8 +1346,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                                   (context, url,
                                                   progress) =>
                                                   Center(
-                                                      child:
-                                                      CircularProgressIndicator()),
+                                                      child:CircularProgressIndicator()),
                                               errorWidget: (context,
                                                   url, error) =>
                                                   Image.asset(

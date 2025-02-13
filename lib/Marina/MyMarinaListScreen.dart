@@ -233,8 +233,7 @@ class _MyMarinaListScreenState extends State<MyMarinaListScreen> {
                                                                       CircularProgressIndicator())),
                                                       errorWidget: (context,
                                                               url, error) =>
-                                                          Image.asset(
-                                                              Default_Profile),
+                                                          Image.asset(Default_Profile),
                                                     ),
                                                   ),
                                                 ),

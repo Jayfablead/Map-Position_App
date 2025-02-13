@@ -1441,7 +1441,7 @@ class MetaFields {
 
 class NearbyPosts {
   String? postCategory;
-  int? id;
+  String? id;
   String? title;
   String? latitude;
   String? longitude;

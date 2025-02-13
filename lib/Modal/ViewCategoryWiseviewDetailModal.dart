@@ -1440,7 +1440,7 @@ class MetaFields {
 
 class NearbyPosts {
   String? postCategory;
-  int? id;
+  String? id;
   String? title;
   String? latitude;
   String? longitude;
@@ -1482,7 +1482,7 @@ class NearbyPosts {
 class Reviews {
   String? name;
   String? userImg;
-  int? reviewerRating;
+  String? reviewerRating;
   ReviewSummary? reviewSummary;
 
   Reviews({this.name, this.userImg, this.reviewerRating, this.reviewSummary});
@@ -1509,11 +1509,11 @@ class Reviews {
 }
 
 class ReviewSummary {
-  int? xsReviwerRatting;
+  String? xsReviwerRatting;
   String? xsReviwSummery;
-  int? xsPostId;
+  String? xsPostId;
   String? xsPostType;
-  int? xsPostAuthor;
+  String? xsPostAuthor;
   String? reviewScoreStyle;
   String? reviewScoreLimit;
   String? reviewScoreInput;

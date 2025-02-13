@@ -294,7 +294,8 @@ class _ViewOterDetailsScreenState extends State<ViewOterDetailsScreen> {
                                   (context, url, progress) => Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  Image.asset(""),
+                                  Image.network((viewcategorywisevieweetailmodal
+                                      ?.data?.thumbnail).toString()),
                             ),
                           ),
                         );

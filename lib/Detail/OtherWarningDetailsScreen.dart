@@ -188,7 +188,8 @@ class _DetailsWarningDetailsScreenState extends State<DetailsWarningDetailsScree
                                   (context, url, progress) => Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  Image.asset(""),
+                                  Image.network((viewcategorywisevieweetailmodal
+                                      ?.data?.thumbnail).toString(),fit: BoxFit.cover,),
                             ),
                           ),
                         );

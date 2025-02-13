@@ -246,7 +246,7 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                   _scaffoldKeyProductlistpage.currentState
                       ?.openDrawer();
                 }),
-            Container(
+       Container(
               height: 30.h,
               child: CarouselSlider(
                 options: CarouselOptions(
@@ -284,7 +284,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                 (context, url, progress) => Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
-                                Image.asset(""),
+                                Image.network((viewcategorywisevieweetailmodal
+                                    ?.data?.thumbnail).toString(),fit: BoxFit.cover,),
                           ),
                         ),
                       );
@@ -3167,6 +3168,8 @@ class _CategoryWiseViewScreenState extends State<CategoryWiseViewScreen> {
                                       children: [
                                         Text(
                                           "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+
+
                                           style: TextStyle(
                                             overflow:
                                             TextOverflow.ellipsis,

@@ -210,7 +210,8 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                   (context, url, progress) => Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  Image.asset(Default_Profile),
+                                  Image.network((viewcategorywisevieweetailmodal
+                                      ?.data?.thumbnail).toString()),
                             ),
                           ),
                         );
@@ -1229,6 +1230,9 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                             children: [
                                               Text(
                                                 "Speed :${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null ? "N/A" : (daywisewedhtermodal?.days?[0].windspeed).toString()}",
+                                                // "Speed : ${daywisewedhtermodal?.days?[0].windspeed == "" || daywisewedhtermodal?.days?[0].windspeed == null
+                                                //     ? "N/A"
+                                                //     : "${daywisewedhtermodal!.days![0].windspeed} km/h"}",
                                                 style: TextStyle(
                                                   overflow:
                                                   TextOverflow.ellipsis,
@@ -1238,17 +1242,17 @@ class _DetailsOtherScreenState extends State<DetailsOtherScreen> {
                                                   fontFamily: "volken",
                                                 ),
                                               ),
-                                              Text(
-                                                "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
-                                                style: TextStyle(
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                  fontSize: 13.sp,
-                                                  color: secondary,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: "volken",
-                                                ),
-                                              ),
+                                              // Text(
+                                              //   "SE(${daywisewedhtermodal?.days?[0].winddir==""||daywisewedhtermodal?.days?[0].winddir==null?"N/A":daywisewedhtermodal?.days?[0].winddir})",
+                                              //   style: TextStyle(
+                                              //     overflow:
+                                              //     TextOverflow.ellipsis,
+                                              //     fontSize: 13.sp,
+                                              //     color: secondary,
+                                              //     fontWeight: FontWeight.w500,
+                                              //     fontFamily: "volken",
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         ],
